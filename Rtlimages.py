@@ -65,7 +65,7 @@ def down(rtl, isSpecial):
 		upb = upb + pushRaw + "\n"; exce = exce + rtl + ", "; print pushRaw
 		tellRaw = "零售店编号 R" + rtl + "，新图片的大小是 " + str(newsize / 1024) + " KB。" + rnso
 		imageURL = dieter + spr + "?output-format=jpg"
-		IFTTT.pushbots(tellRaw, rflag + "Apple " + rname + " 图片更新", imageURL, raw, masterKey)
+		IFTTT.pushbots(tellRaw, rflag + "Apple " + rname + " 图片更新", imageURL, "raw", masterKey)
 	elif isSpecial:
 			try: pname = "R" + rtl + ": " + storejson['name'][rtl]
 			except KeyError: pname = "R" + rtl
