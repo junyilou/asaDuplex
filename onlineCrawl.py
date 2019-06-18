@@ -2,11 +2,12 @@
 import urllib2, os, sys, time, ssl, IFTTT
 from BeautifulSoup import BeautifulSoup
 
-alphabet = ([chr(i) for i in range(65, 73)] + [chr(i) for i in range(74, 79)] + 
-			[chr(i) for i in range(80, 83)] + [chr(i) for i in range(84, 90)]) #I, O, S, Z
+alphabet = [chr(i) for i in range(65, 90)]
+removeList = ['B', 'I', 'O', 'S']
+alphabet = [t for t in alphabet if t not in removeList]
 numlist = [chr(i) for i in range(48, 58)]
 flist = numlist + alphabet
-psbhd = ['V', 'W']
+psbhd = ['U', 'V', 'W']
 global ans; ans = list()
 
 def title(partno):
