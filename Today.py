@@ -47,7 +47,7 @@ def home():
 				pushAns = pushAns.replace('"', "").replace("'", "").replace("：", " - ")
 				print pushAns
 				pictureURL = rCourse["backgroundMedia"]["images"][0]["landscape"]["source"] + "?output-format=jpg"
-				IFTTT.pushbots(pushAns, "Today at Apple 新活动", pictureURL, "raw", masterKey)
+				IFTTT.pushbots(pushAns, "Today at Apple 新活动", pictureURL, "raw", masterKey, 0)
 		print "Compare in Progress: " + str((i + 1) * 100 / num) + "%\r",
 		sys.stdout.flush()
 	mWrite = open(rpath + "savedEvent.txt", "w"); mWrite.write(mark + wAns); mWrite.close(); print

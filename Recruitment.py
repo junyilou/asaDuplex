@@ -44,7 +44,7 @@ while True:
 					wAns += stateEmoji[adpre] + rolloutCode + ", "
 					pushAns = "新店新机遇: " + stateEmoji[adpre] + stateCHN[adpre] + "新增招聘地点 " + cityJSON[c]["name"]
 					pushAns += ", 代号 " + rolloutCode + ", 文件名 " + oID.replace("postLocation-", "") + ".json"
-					IFTTT.pushbots(pushAns, "Apple 招贤纳才", imageURL, "raw", masterKey)
+					IFTTT.pushbots(pushAns, "Apple 招贤纳才", imageURL, "raw", masterKey, 0)
 	mWrite = open(rpath + "savedJobs", "w"); mWrite.write(mark + wAns); mWrite.close(); print 
 	print time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 	time.sleep(43200)

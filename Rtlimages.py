@@ -37,7 +37,7 @@ def asa(et):
 			IFTTT.pushbots(
 				"Apple Store app 的列表更新了：文件时间戳 " + oldTime + "，文件大小差异为 " + str(deltaListSize) + " 字节。",
 				"https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_small_2x.jpg",
-				compareAns, "linkraw", masterKey[:1])
+				compareAns, "linkraw", masterKey[:1], 0)
 		else:
 			os.system("mv " + listLoc.replace(".json", "_old.json") + " " + listLoc)
 			et += 1; print "Found an eighty-three update, all " + str(et) + ", ignore."; 
@@ -65,7 +65,7 @@ def down(rtl, isSpecial):
 		upb = upb + pushRaw + "\n"; exce = exce + rtl + ", "; print pushRaw
 		tellRaw = "零售店编号 R" + rtl + "，新图片的大小是 " + str(newsize / 1024) + " KB。" + rnso
 		imageURL = dieter + spr + "?output-format=jpg"
-		IFTTT.pushbots(tellRaw, rflag + "Apple " + rname + " 图片更新", imageURL, "raw", masterKey)
+		IFTTT.pushbots(tellRaw, rflag + "Apple " + rname + " 图片更新", imageURL, "raw", masterKey, 0)
 	elif isSpecial:
 			try: pname = "R" + rtl + ": " + storejson['name'][rtl]
 			except KeyError: pname = "R" + rtl

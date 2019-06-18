@@ -70,7 +70,7 @@ while True:
 			upb += "New result for " + checkProduct[o] + ",\n" + singleProductOutput[checkProduct[o]] + "\n"
 			IFTTT.pushbots(
 				"到货零售店: " + singleProductOutput[checkProduct[o]], singleTitle + "新到货", 
-				productImage(productBasename), "raw", masterKey)
+				productImage(productBasename), "raw", masterKey, 0)
 		else: print "No new stores detected for product " + checkProduct[o]
 		singleProductOutput[checkProduct[o]] = ""
 	print upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n"

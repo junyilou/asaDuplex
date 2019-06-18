@@ -62,15 +62,14 @@ def home(setans = list()):
 				for e in range(0, len(newList)):
 					IFTTT.pushbots(
 						"Apple Online Store 更新了新产品：" + title(newList[e]) + "，产品部件号：" + newList[e] + "。", 
-						productImage(newList[e]), url.replace(ans[a], newList[e]), 
-						"linkraw", masterKey[0])
+						productImage(newList[e]), url.replace(ans[a], newList[e]), "linkraw", masterKey[0], 0)
 			else:
 				for nt in range(0, len(newList)): 
 					print "Fetching product name for output... [" + str(nt + 1) + "/" + str(len(newList)) + "]\r",
 					sys.stdout.flush(); newTitle.append("[" + newList[nt] + "] " + title(newList[nt]))
 				IFTTT.pushbots(
-					"".join(newTitle), "Apple Online Store 更新了多个商品", productImage(newList[0]),
-					"raw", masterKey[0])
+					"".join(newTitle), "Apple Online Store 更新了多个商品", 
+					productImage(newList[0]), "raw", masterKey[0], 0)
 			newList = list(); newTitle = list()
 	if outPlus != "":
 		mOpen = open(os.path.expanduser('~') + "/savedProduct")
