@@ -57,7 +57,7 @@ while True:
 			if len(availableStore)!= 0: 
 				singleAdd = "【" + stateName + "】" + ", ".join(availableStore)
 				singleProductOutput[checkProduct[p]] += singleAdd
-		singleProductOutput[checkProduct[p]] = singleProductOutput[checkProduct[p]].replace(stateStore, "】所有零售店")
+			singleProductOutput[checkProduct[p]] = singleProductOutput[checkProduct[p]].replace(stateStore, "】所有零售店")
 	for o in range(0, len(checkProduct)):
 		if len(singleProductOutput[checkProduct[o]]) > 0:
 			productBasename = checkProduct[o][:-4]
@@ -66,7 +66,7 @@ while True:
 					del savedName[productBasename]
 			except KeyError: 
 				print "Fetching product name for output..."; title(productBasename)
-			singleTitle = savedName[productBasename].replace(" - ", "-").split("-")[0]
+			singleTitle = savedName[productBasename].replace(" - ", "-").replace("USB-C", "USB C").split("-")[0]
 			upb += "New result for " + checkProduct[o] + ",\n" + singleProductOutput[checkProduct[o]] + "\n"
 			IFTTT.pushbots(
 				"到货零售店: " + singleProductOutput[checkProduct[o]], singleTitle + "新到货", 
