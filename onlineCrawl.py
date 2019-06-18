@@ -7,7 +7,7 @@ removeList = ['B', 'I', 'O', 'S']
 alphabet = [t for t in alphabet if t not in removeList]
 numlist = [chr(i) for i in range(48, 58)]
 flist = numlist + alphabet
-psbhd = ['U', 'V', 'W']
+psbhd = ['V', 'W', 'X']
 global ans; ans = list()
 
 def title(partno):
@@ -27,7 +27,7 @@ for k in range(0, len(psbhd)):
 			slct = psbhd[k] + flist[i] + flist[j]
 			ans.append('M' + slct + '2')
 
-mOpen = open(os.path.expanduser('~') + "/savedProduct")
+mOpen = open(os.path.expanduser('~') + "/savedProduct.txt")
 mRead = mOpen.read(); mOpen.close(); mSplit = mRead.split(", ")
 for r in range(0, len(mSplit)): 
 	mSplit[r] = mSplit[r].replace("\n", "")
@@ -56,7 +56,7 @@ def home(setans = list()):
 		else: 
 			newList.append(ans[a]); rmList.append(ans[a])
 			uOut = "New Product Found: " + ans[a] + " at " + str(a + 1) + "/" + str(len(ans)) + "\n"
-			if len(setans) == 0: print uOut; upb += uOut; outPlus += ans[a] + ", "
+			if len(setans) == 0: print uOut; upb += uOut; outPlus += ", " + ans[a]
 		if len(setans) != 0 and len(newList) > 0: print setans[a], title(setans[a])
 		elif a + 1 == len(ans) or ans[a][2] != ans[a + 1][2]:
 			if len(newList) < 4:
@@ -73,10 +73,11 @@ def home(setans = list()):
 					productImage(newList[0]), "raw", masterKey[0], 0)
 			newList = list(); newTitle = list()
 	if outPlus != "":
-		mOpen = open(os.path.expanduser('~') + "/savedProduct")
-		mRead = mOpen.read(); mOpen.close()
-		mWrite = open(os.path.expanduser('~') + "/savedProduct", "w")
-		mWrite.write(mRead + outPlus); mWrite.close()
+		mOpen = open(os.path.expanduser('~') + "/savedProduct.txt")
+		mRead = mOpen.read(); mOpen.close(); mSort = mRead + outPlus
+		mSort = mSort.split(", "); mSort.sort(); mSort = ", ".join(mSort)
+		mWrite = open(os.path.expanduser('~') + "/savedProduct.txt", "w")
+		mWrite.write(mSort); mWrite.close()
 	if len(setans) == 0: print "\n" + upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n"
 	for rm in range(0, len(rmList)): ans.remove(rmList[rm])
 	rmList = list()
