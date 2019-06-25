@@ -23,18 +23,18 @@ reload(sys); sys.setdefaultencoding('utf-8')
 rpath = os.path.expanduser('~') + "/Retail/"
 masterKey = IFTTT.getkey()
 
-checkProduct = sys.argv[1:]; combProduct = ",".join(checkProduct)
+checkProduct = sys.argv[1:]; combProduct = ",".join(checkProduct); 
 alreadyAvailable = {}; singleProductOutput = {}; upb = ""; global savedName; savedName = {}
 statesJSON = json.loads(fileOpen(rpath + "storeList.json"))["countryStateMapping"][0]["states"]
-for j in range(0, len(checkProduct)): 
-	alreadyAvailable[checkProduct[j]] = []; singleProductOutput[checkProduct[j]] = ""
+for j in range(len(checkProduct)): alreadyAvailable[checkProduct[j]] = []; singleProductOutput[checkProduct[j]] = ""
 
 while True:
-	for s in range(0, len(statesJSON)):
-		stateName = statesJSON[s]["stateName"]; storeJSON = statesJSON[s]["stores"]; stateStore = ""
-		for t in range(0, len(storeJSON)):
+	stateStore = ""
+	for s in range(len(statesJSON)):
+		stateName = statesJSON[s]["stateName"]; storeJSON = statesJSON[s]["stores"]; stateStore += "【" + stateName + "】"
+		for t in range(len(storeJSON)):
 			passCheck = 0; stateStore += storeJSON[t]["storeName"] + ", "
-			for c in range(0, len(checkProduct)): 
+			for c in range(len(checkProduct)): 
 				if storeJSON[t]["storeNumber"] in alreadyAvailable[checkProduct[c]]: passCheck += 1
 			if passCheck == len(checkProduct): continue
 			dLoc = rpath + "stock" + storeJSON[t]["storeNumber"]
@@ -44,34 +44,36 @@ while True:
 				combProduct + "&storeNumber=" + storeJSON[t]["storeNumber"] + "'")
 			print "[" + str(s + 1) + "/" + str(len(statesJSON)) + "] Download in Progress: " + str((t + 1) * 100 / len(storeJSON)) + "%\r",
 			sys.stdout.flush()
-		print; stateStore = "】" + stateStore[:-2]
-		for p in range(0, len(checkProduct)):
+		stateStore = stateStore[:-2]; print
+		for p in checkProduct:
 			availableStore = []
-			for f in range(0, len(storeJSON)):
+			for f in storeJSON:
 				try:
-					stockJSON = json.loads(fileOpen(rpath + "stock" + storeJSON[f]["storeNumber"]))["availability"]
-					if stockJSON[checkProduct[p]] and storeJSON[f]["storeNumber"] not in alreadyAvailable[checkProduct[p]]: 
-						availableStore.append(storeJSON[f]["storeName"])
-						alreadyAvailable[checkProduct[p]].append(storeJSON[f]["storeNumber"])
+					stockJSON = json.loads(fileOpen(rpath + "stock" + f["storeNumber"]))["availability"]
+					if stockJSON[p] and f["storeNumber"] not in alreadyAvailable[p]: 
+						availableStore.append(f["storeName"])
+						alreadyAvailable[p].append(f["storeNumber"])
 				except: pass
-			if len(availableStore)!= 0: 
+			if len(availableStore): 
 				singleAdd = "【" + stateName + "】" + ", ".join(availableStore)
-				singleProductOutput[checkProduct[p]] += singleAdd
-			singleProductOutput[checkProduct[p]] = singleProductOutput[checkProduct[p]].replace(stateStore, "】所有零售店")
-	for o in range(0, len(checkProduct)):
-		if len(singleProductOutput[checkProduct[o]]) > 0:
-			productBasename = checkProduct[o][:-4]
+				singleProductOutput[p] += singleAdd
+	singleProductOutput[p] = singleProductOutput[p].replace(stateStore, "all across Mainland China")
+	for o in checkProduct:
+		if len(singleProductOutput[o]) > 0:
+			productBasename = o[:-4]
 			try:
 				if savedName[productBasename] == "[获取产品名称出现错误]": 
 					del savedName[productBasename]
 			except KeyError: 
 				print "Fetching product name for output..."; title(productBasename)
 			singleTitle = savedName[productBasename].replace(" - ", "-").replace("USB-C", "USB C").split("-")[0]
-			upb += "New result for " + checkProduct[o] + ",\n" + singleProductOutput[checkProduct[o]] + "\n"
+			upb += "New result for " + o + ",\n" + singleProductOutput[o] + "\n"
+			pushOut = "到货零售店: " + singleProductOutput[o]
+			pushOut = pushOut.replace("到货零售店: all across Mainland China", "全中国大陆 Apple Store 零售店均已到货该产品")
 			IFTTT.pushbots(
-				"到货零售店: " + singleProductOutput[checkProduct[o]], singleTitle + "新到货", 
+				pushOut, singleTitle + "新到货", 
 				productImage(productBasename), "raw", masterKey, 0)
-		else: print "No new stores detected for product " + checkProduct[o]
-		singleProductOutput[checkProduct[o]] = ""
+		else: print "No new stores detected for product " + o
+		singleProductOutput[o] = ""
 	print upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n"
 	os.system("rm -f " + rpath + "stockR*"); time.sleep(43200)
