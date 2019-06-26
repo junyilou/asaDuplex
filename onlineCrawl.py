@@ -8,7 +8,7 @@ alphabet = [t for t in alphabet if t not in removeList]
 numlist = [chr(i) for i in range(48, 58)]
 flist = numlist + alphabet
 psbhd = ['V', 'W', 'X']
-global ans; ans = list()
+ans = list()
 
 def title(partno):
 	reload(sys); sys.setdefaultencoding('utf-8')
@@ -35,9 +35,10 @@ for r in range(0, len(mSplit)):
 	except ValueError: pass
 masterKey = IFTTT.getkey()
 
-def home(setans = list()):
-	global runtim, upb, ans
-	if len(setans) != 0: ans = setans
+runtim = 0; upb = ""
+while True:
+	setans = sys.argv[1:]
+	if len(setans) != 0: ans = sys.argv[1:]
 	runtim += 1; runnot = "[" + str(runtim) + "] "; outPlus = ""
 	newList = list(); newTitle = list(); rmList = list()
 	for a in range(0, len(ans)):
@@ -63,15 +64,16 @@ def home(setans = list()):
 				for e in range(0, len(newList)):
 					IFTTT.pushbots(
 						"Apple Online Store 更新了新产品：" + title(newList[e]) + "，产品部件号：" + newList[e] + "。", 
-						productImage(newList[e]), url.replace(ans[a], newList[e]), "linkraw", masterKey[0], 0)
+						productImage(newList[e]), url.replace(ans[a], newList[e]), "linkraw", masterKey[0].split(), 0)
 			else:
 				for nt in range(0, len(newList)): 
 					print "Fetching product name for output... [" + str(nt + 1) + "/" + str(len(newList)) + "]\r",
 					sys.stdout.flush(); newTitle.append("[" + newList[nt] + "] " + title(newList[nt]))
 				IFTTT.pushbots(
 					"".join(newTitle), "Apple Online Store 更新了多个商品", 
-					productImage(newList[0]), "raw", masterKey[0], 0)
+					productImage(newList[0]), "raw", masterKey[0].split(), 0)
 			newList = list(); newTitle = list()
+	if len(setans) != 0: exit()
 	if outPlus != "":
 		mOpen = open(os.path.expanduser('~') + "/savedProduct.txt")
 		mRead = mOpen.read(); mOpen.close(); mSort = mRead + outPlus
@@ -80,10 +82,4 @@ def home(setans = list()):
 		mWrite.write(mSort); mWrite.close()
 	if len(setans) == 0: print "\n" + upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n"
 	for rm in range(0, len(rmList)): ans.remove(rmList[rm])
-	rmList = list()
-
-arg = 0; global runtim, upb; runtim = 0; upb = ""
-for m in sys.argv[1:]: arg += 1
-while True:
-	if arg > 0: home(sys.argv[1:]); exit()
-	home(); time.sleep(3600)
+	rmList = list(); time.sleep(43200)
