@@ -23,7 +23,7 @@ reload(sys); sys.setdefaultencoding('utf-8')
 rpath = os.path.expanduser('~') + "/Retail/"
 masterKey = IFTTT.getkey()
 
-checkProduct = sys.argv[1:]; combProduct = ",".join(checkProduct); 
+checkProduct = sys.argv[1:]; combProduct = ",".join(checkProduct)
 alreadyAvailable = {}; singleProductOutput = {}; upb = ""; global savedName; savedName = {}
 statesJSON = json.loads(fileOpen(rpath + "storeList.json"))["countryStateMapping"][0]["states"]
 for j in range(len(checkProduct)): alreadyAvailable[checkProduct[j]] = []; singleProductOutput[checkProduct[j]] = ""
@@ -66,12 +66,16 @@ while True:
 					del savedName[productBasename]
 			except KeyError: 
 				print "Fetching product name for output..."; title(productBasename)
-			singleTitle = savedName[productBasename].replace(" - ", "-").replace("USB-C", "USB C").split("-")[0]
+			singleTitle = savedName[productBasename].replace(" - ", "-").decode("utf-8")
+			if len(singleTitle) > 22:
+				while len(singleTitle) > 22: singleTitle = singleTitle[:-1]
+				singleTitle += "..."
+			singleTitle.rstrip()
 			upb += "New result for " + o + ",\n" + singleProductOutput[o] + "\n"
 			pushOut = "到货零售店: " + singleProductOutput[o]
 			pushOut = pushOut.replace("到货零售店: all across Mainland China", "全中国大陆 Apple Store 零售店均已到货该产品")
 			IFTTT.pushbots(
-				pushOut, singleTitle + "新到货", 
+				pushOut, singleTitle + " 新到货", 
 				productImage(productBasename), "raw", masterKey, 0)
 		else: print "No new stores detected for product " + o
 		singleProductOutput[o] = ""

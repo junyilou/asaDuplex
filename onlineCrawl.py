@@ -21,27 +21,27 @@ def productImage(partno):
 	return ("https://as-images.apple.com/is/image/AppleInc/aos/published/images" 
 		+ partno[0] + partno[:2] + "/" + partno + "/" + partno + "?fmt=png")
 
-for k in range(0, len(psbhd)):
-	for i in range(0, len(flist)):
-		for j in range(0, len(flist)):
+for k in range(len(psbhd)):
+	for i in range(len(flist)):
+		for j in range(len(flist)):
 			slct = psbhd[k] + flist[i] + flist[j]
 			ans.append('M' + slct + '2')
 
 mOpen = open(os.path.expanduser('~') + "/savedProduct.txt")
 mRead = mOpen.read(); mOpen.close(); mSplit = mRead.split(", ")
-for r in range(0, len(mSplit)): 
+for r in range(len(mSplit)): 
 	mSplit[r] = mSplit[r].replace("\n", "")
 	try: ans.remove(mSplit[r])
 	except ValueError: pass
 masterKey = IFTTT.getkey()
 
-runtim = 0; upb = ""
+runtim, upb = 0, ""
 while True:
 	setans = sys.argv[1:]
 	if len(setans) != 0: ans = sys.argv[1:]
 	runtim += 1; runnot = "[" + str(runtim) + "] "; outPlus = ""
 	newList = list(); newTitle = list(); rmList = list()
-	for a in range(0, len(ans)):
+	for a in range(len(ans)):
 		url = 'https://www.apple.com/cn/shop/product/' + ans[a]
 		try: p = urllib2.urlopen(url, timeout = 20)
 		except ssl.SSLError: 
@@ -61,12 +61,12 @@ while True:
 		if len(setans) != 0 and len(newList) > 0: print setans[a], title(setans[a])
 		elif a + 1 == len(ans) or ans[a][2] != ans[a + 1][2]:
 			if len(newList) < 4:
-				for e in range(0, len(newList)):
+				for e in range(len(newList)):
 					IFTTT.pushbots(
 						"Apple Online Store 更新了新产品：" + title(newList[e]) + "，产品部件号：" + newList[e] + "。", 
 						productImage(newList[e]), url.replace(ans[a], newList[e]), "linkraw", masterKey[0].split(), 0)
 			else:
-				for nt in range(0, len(newList)): 
+				for nt in range(len(newList)): 
 					print "Fetching product name for output... [" + str(nt + 1) + "/" + str(len(newList)) + "]\r",
 					sys.stdout.flush(); newTitle.append("[" + newList[nt] + "] " + title(newList[nt]))
 				IFTTT.pushbots(
@@ -81,5 +81,5 @@ while True:
 		mWrite = open(os.path.expanduser('~') + "/savedProduct.txt", "w")
 		mWrite.write(mSort); mWrite.close()
 	if len(setans) == 0: print "\n" + upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n"
-	for rm in range(0, len(rmList)): ans.remove(rmList[rm])
+	for rm in range(len(rmList)): ans.remove(rmList[rm])
 	rmList = list(); time.sleep(43200)

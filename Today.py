@@ -1,10 +1,10 @@
 #-*- coding:utf-8 -*-
 import os, urllib2, sys, json, time, IFTTT, retailData
 
-filename = retailData.filename; cityname = retailData.cityname
-#filename = ['qibao', 'apmhongkong', 'xinyia13']; cityname = ['@上海', '#香港', '&台湾'] #Debug
-num = len(filename); allMainlandChina = ""
-for rep in range(0, num): 
+filename, cityname = retailData.filename, retailData.cityname
+#filename, cityname = ['qibao', 'apmhongkong', 'xinyia13'], ['@上海', '#香港', '&台湾'] #Debug
+num, allMainlandChina = len(filename), ""
+for rep in range(num): 
 	cityname[rep] = cityname[rep].replace("@", "🇨🇳").replace("#", "🇭🇰").replace("$", "🇲🇴").replace("&", "🇹🇼")
 allMainlandChina = "、".join(cityname[:42])
 
@@ -13,7 +13,7 @@ def down(fname, region):
 	"'https://www.apple.com/today-bff/landing/store?stageRootPath=%2F"+ region + "&storeSlug=" + fname + "'")
 def home():
 	wAns = ""; mOpen = open(rpath + "savedEvent.txt"); mark = mOpen.read(); mOpen.close()
-	for d in range(0, num):
+	for d in range(num):
 		cdsize = 0
 		while cdsize == 0:
 			if cityname[d][:8] == "🇨🇳": down(filename[d], "cn")
@@ -24,7 +24,7 @@ def home():
 		print "Download in Progress: " + str((d + 1) * 100 / num) + "%\r",
 		sys.stdout.flush()
 	print
-	for i in range(0, num):
+	for i in range(num):
 		rOpen = open(rpath + filename[i] + ".json"); isMulti = False
 		raw = rOpen.read(); rJson = json.loads(json.dumps(json.loads(raw)).replace("\u2060", ""))
 		rJson = rJson["courses"]; rOpen.close()
@@ -57,6 +57,6 @@ rpath = os.path.expanduser('~') + "/Retail/"
 
 while True:
 	reload(sys); sys.setdefaultencoding('utf-8'); home()
-	for rm in range(0, num): os.system("rm " + rpath + filename[rm] + ".json")
+	for rm in range(num): os.system("rm " + rpath + filename[rm] + ".json")
 	print time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 	time.sleep(10800)

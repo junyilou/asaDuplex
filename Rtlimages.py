@@ -7,14 +7,14 @@ def fileOpen(fileloc):
 	except IOError: return "No such file or directory."
 	else: return defReturn
 
-def pastebin(cin, cout, dev = "47477216df13753adb7dcbd2600fc225", 
-	usr = "68978343239b4f6189909e34e5e8b0a3"):
+def pastebin(cin, cout):
 	print "Querying Pastebin API..."
 	cin = cin.replace("'", '|').replace('"', '|')
-	os.system("wget -q -t 100 -T 5 --no-check-certificate --post-data 'api_dev_key="
-		+ dev + "&api_user_key=" + usr + "&api_paste_code=" + cin + "&api_paste_name="
-		+ cout + "&api_paste_expire_date=1W&api_option=paste&api_paste_format=json' "
-		+ "-O " + rpath + "pasteTemp https://pastebin.com/api/api_post.php")
+	os.system("wget -q -t 100 -T 5 --no-check-certificate --post-data 'api_dev_key=\
+47477216df13753adb7dcbd2600fc225&api_user_key=68978343239b4f6189909e34e5e8b0a3\
+&api_paste_code=" + cin + "&api_paste_name=" + cout + "&api_paste_expire_date=\
+1W&api_option=paste&api_paste_format=json' -O " + rpath + "pasteTemp https://\
+pastebin.com/api/api_post.php")
 	pasteURL = fileOpen(rpath + "pasteTemp")
 	os.system("rm " + rpath + "pasteTemp"); return pasteURL
 
