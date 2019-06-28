@@ -2536,22 +2536,6 @@
 				"storeAddress": "10600 North Tantau Avenue\nCupertino,CA 95014 ",
 				"phoneNumber": "(408) 961-1560"
 			}, {
-				"storeNumber": "R825",
-				"countryCode": "US",
-				"storeName": "WWDC Store",
-				"latitude": "37.329802",
-				"longitude": "-121.889815",
-				"storeRadius": "70",
-				"accuracyThreshold": "500",
-				"imageURL": ["https://rtlimages.apple.com/cmc/dieter/store/16_9/R825.png"],
-				"secureImageURL": [],
-				"locationText": "Cupertino, CA",
-				"timeZone": "America/Los_Angeles",
-				"scanAndBuy": "OFF",
-				"enableInStoreMode": false,
-				"storeAddress": "One Apple Parkway\nCupertino,CA 95014 ",
-				"phoneNumber": "(800) 692-7753"
-			}, {
 				"storeNumber": "R305",
 				"countryCode": "US",
 				"storeName": "Del Monte",
@@ -8734,6 +8718,22 @@
 		"states": [{
 			"stateName": "",
 			"stores": [{
+				"storeNumber": "R736",
+				"countryCode": "SG",
+				"storeName": "Jewel Changi Airport",
+				"latitude": "1.36059",
+				"longitude": "103.989579",
+				"storeRadius": "70",
+				"accuracyThreshold": "500",
+				"imageURL": ["https://rtlimages.apple.com/cmc/dieter/store/16_9/R736.png"],
+				"secureImageURL": [],
+				"locationText": "Singapore",
+				"timeZone": "Asia/Singapore",
+				"scanAndBuy": "SNB",
+				"enableInStoreMode": true,
+				"storeAddress": "78 Airport Boulevard\nSingapore,819666",
+				"phoneNumber": "1800 407 4948"
+			}, {
 				"storeNumber": "R669",
 				"countryCode": "SG",
 				"storeName": "Orchard Road",
