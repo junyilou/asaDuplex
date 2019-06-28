@@ -10,7 +10,7 @@ allMainlandChina = "、".join(cityname[:42])
 
 def down(fname, region): 
 	os.system("wget -q -t 100 -T 3 -O " + rpath + fname + ".json --no-check-certificate " +
-	"'https://www.apple.com/today-bff/landing/store?stageRootPath=%2F"+ region + "&storeSlug=" + fname + "'")
+	"'https://www.apple.com/today-bff/landing/store?stageRootPath=/"+ region + "&storeSlug=" + fname + "'")
 def home():
 	wAns = ""; mOpen = open(rpath + "savedEvent.txt"); mark = mOpen.read(); mOpen.close()
 	for d in range(num):
@@ -31,7 +31,7 @@ def home():
 		for rTitle in rJson:
 			rCourse = rJson[rTitle]; singleName = rCourse["name"]
 			if not singleName in mark and not singleName in wAns: 
-				wAns = wAns + singleName + ",\n"; citAns = cityname[i]
+				wAns += singleName + ",\n"; citAns = cityname[i]
 				for r in range(i, num):
 					eOpen = open(rpath + filename[r] + ".json"); eAns = eOpen.read()
 					eJson = json.loads(json.dumps(json.loads(eAns)).replace("\u2060", ""))

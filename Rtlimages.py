@@ -86,8 +86,8 @@ while True:
 	sTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()); eCount = exce.count(", ")
 	if arg - eCount:
 		print "Refreshing special stores: " + str(rTime % 18 + 1) + "/18"
-		for s in range(1, arg + 1): 
-			if not sys.argv[s] in exce: down(sys.argv[s], True)
+		for s in sys.argv[1:]: 
+			if not s in exce: down(s, True)
 	else: print "No store was asked to watch: " + str(rTime % 18 + 1) + "/18"
 	if not (rTime % 18):
 		for j in range(1, totalStore): 
