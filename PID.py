@@ -28,8 +28,8 @@ def checkAll():
 			print "PID " + str(cValue) + " [" + cKey + "] exit."
 			IFTTT.pushbots(
 				"Detected PID " + str(cValue) + ", refrenced to " + cKey + " exit.",
-				"Python Runtime Error", "", "raw", IFTTT.getkey(), 0)
+				"Python Runtime Error", "", "raw", IFTTT.getkey()[0].split(), 0)
 			remCurrent(cKey)
 
 if __name__ == "__main__":
-	while True: checkAll(); time.sleep(600)
+	while True: checkAll(); print time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()); time.sleep(600)
