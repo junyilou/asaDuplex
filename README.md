@@ -1,6 +1,6 @@
-####This is a private repository.
+#### This is a private repository.
 
-###Module
+### Module
 * IFTTT.py
     *  Get API key from ~/key.txt
     *  Push notification with up to three values
