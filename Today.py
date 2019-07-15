@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-import os, urllib2, sys, json, time, IFTTT, retailData
+import os, urllib2, sys, json, time, IFTTT, retailData, PID
 
 filename, cityname = retailData.filename, retailData.cityname
 #filename, cityname = ['qibao', 'apmhongkong', 'xinyia13'], ['@上海', '#香港', '&台湾'] #Debug
@@ -47,12 +47,12 @@ def home():
 				pushAns = pushAns.replace('"', "").replace("'", "").replace("：", " - ")
 				print pushAns
 				pictureURL = rCourse["backgroundMedia"]["images"][0]["landscape"]["source"] + "?output-format=jpg"
-				IFTTT.pushbots(pushAns, "Today at Apple 新活动", pictureURL, "raw", masterKey, 0)
+				IFTTT.pushbots(pushAns, "Today at Apple 新活动", pictureURL, "raw", IFTTT.getkey(), 0)
 		print "Compare in Progress: " + str((i + 1) * 100 / num) + "%\r",
 		sys.stdout.flush()
 	mWrite = open(rpath + "savedEvent.txt", "w"); mWrite.write(mark + wAns); mWrite.close(); print
 
-masterKey = IFTTT.getkey()
+PID.addCurrent(os.path.basename(__file__), os.getpid())
 rpath = os.path.expanduser('~') + "/Retail/"
 
 while True:

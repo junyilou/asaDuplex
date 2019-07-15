@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-import os, sys, json, time, IFTTT
+import os, sys, json, time, IFTTT, PID
 import json_tools # 'json_tools' required
 
 def fileOpen(fileloc):
@@ -77,6 +77,7 @@ global upb; arg = 0; pid = str(os.getpid()); upb = exce = ""; rTime = et = 0
 for m in sys.argv[1:]: arg += 1
 rpath = os.path.expanduser('~') + "/Retail/"; masterKey = IFTTT.getkey()
 sbn = rpath + "Pictures/R"; storejson = json.loads(fileOpen(rpath + "storeInfo.json"))
+PID.addCurrent(os.path.basename(__file__), os.getpid())
 dieter = "https://rtlimages.apple.com/cmc/dieter/store/16_9/"
 
 if arg == 1 and sys.argv[1] == "0": asa(0); exit()

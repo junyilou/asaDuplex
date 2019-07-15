@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-import os, json, sys, urllib2, time, IFTTT
+import os, json, sys, urllib2, time, IFTTT, PID
 from BeautifulSoup import BeautifulSoup
 
 def title(partno):
@@ -20,8 +20,8 @@ def fileOpen(fileloc):
 
 asaVersion = "5.4.1"
 reload(sys); sys.setdefaultencoding('utf-8')
+PID.addCurrent(os.path.basename(__file__), os.getpid())
 rpath = os.path.expanduser('~') + "/Retail/"
-masterKey = IFTTT.getkey()
 
 checkProduct = sys.argv[1:]; combProduct = ",".join(checkProduct)
 alreadyAvailable = {}; singleProductOutput = {}; upb = ""; global savedName; savedName = {}
@@ -76,7 +76,7 @@ while True:
 			pushOut = pushOut.replace("到货零售店: all across Mainland China", "全中国大陆 Apple Store 零售店均已到货该产品")
 			IFTTT.pushbots(
 				pushOut, singleTitle + " 新到货", 
-				productImage(productBasename), "raw", masterKey, 0)
+				productImage(productBasename), "raw", IFTTT.getkey(), 0)
 		else: print "No new stores detected for product " + o
 		singleProductOutput[o] = ""
 	print upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n"

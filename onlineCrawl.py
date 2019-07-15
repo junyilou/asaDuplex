@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-import urllib2, os, sys, time, ssl, IFTTT
+import urllib2, os, sys, time, ssl, IFTTT, PID
 from BeautifulSoup import BeautifulSoup
 
 alphabet = [chr(i) for i in range(65, 90)]
@@ -34,6 +34,7 @@ for r in range(len(mSplit)):
 	try: ans.remove(mSplit[r])
 	except ValueError: pass
 masterKey = IFTTT.getkey()
+PID.addCurrent(os.path.basename(__file__), os.getpid())
 
 runtim, upb = 0, ""
 while True:

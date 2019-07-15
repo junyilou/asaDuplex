@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-import json, os, sys, time, IFTTT, retailData
+import json, os, sys, time, IFTTT, retailData, PID
 
 rpath, wAns = os.path.expanduser('~') + "/Retail/Jobs/", ""
 imageURL = "https://www.apple.com/jobs/images/retail/hero/desktop.jpg"
@@ -8,7 +8,7 @@ stateCHN, stateCode = retailData.stateCHN, retailData.stateCode
 stateEmoji, specialistCode = retailData.stateEmoji, retailData.specialistCode
 #stateCHN, stateCode, stateEmoji, specialistCode = ["澳大利亚"], ["AU"], ["🇦🇺"], [7991] #Debug
 
-masterKey = IFTTT.getkey()
+PID.addCurrent(os.path.basename(__file__), os.getpid())
 
 while True:
 	wAns = ""; mOpen = open(rpath + "savedJobs"); mark = mOpen.read(); mOpen.close()
@@ -44,7 +44,7 @@ while True:
 					wAns += stateEmoji[adpre] + rolloutCode + ", "
 					pushAns = ("新店新机遇: " + stateEmoji[adpre] + stateCHN[adpre] + "新增招聘地点 " + cityJSON[c]["name"]
 					+ ", 代号 " + rolloutCode + ", 文件名 " + oID.replace("postLocation-", "") + ".json")
-					IFTTT.pushbots(pushAns, "Apple 招贤纳才", imageURL, "raw", masterKey, 0)
+					IFTTT.pushbots(pushAns, "Apple 招贤纳才", imageURL, "raw", IFTTT.getkey(), 0)
 	mWrite = open(rpath + "savedJobs", "w"); mWrite.write(mark + wAns); mWrite.close(); print 
 	print time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 	time.sleep(43200)
