@@ -1,7 +1,7 @@
 import os, json, time, IFTTT
 
 def checkPID(pid):
-	try: os.kill(pid,0)
+	try: os.kill(pid, 0)
 	except OSError: return False
 	else: return True
 
@@ -11,9 +11,6 @@ def openFile():
 	except ValueError: h = json.loads("{}")
 	return h
 
-def updtFile(v): 
-	u = open(os.path.expanduser("~") + "/pid.txt", "w"); u.write(v); u.close()
-
 def remCurrent(fname):
 	cList = openFile()
 	try: cList.pop(fname)
@@ -21,7 +18,8 @@ def remCurrent(fname):
 	else: updtFile(json.dumps(cList))
 
 def addCurrent(fname, fnum): 
-	remCurrent(fname); updtFile(json.dumps(dict(openFile().items() + {fname: fnum}.items())))
+	remCurrent(fname); u = open(os.path.expanduser("~") + "/pid.txt", "w")
+	u.write(json.dumps(dict(openFile().items() + {fname: fnum}.items()))); u.close()
 
 if __name__ == "__main__":
 	while True:
