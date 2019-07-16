@@ -6,7 +6,10 @@ def checkPID(pid):
 	else: return True
 
 def openFile(): 
-	f = open(os.path.expanduser("~") + "/pid.txt"); g = f.read(); f.close(); return json.loads(g)
+	f = open(os.path.expanduser("~") + "/pid.txt"); g = f.read(); f.close()
+	try: h = json.loads(g)
+	except ValueError: h = json.loads("{}")
+	return h
 
 def updtFile(v): 
 	u = open(os.path.expanduser("~") + "/pid.txt", "w"); u.write(v); u.close()
@@ -22,16 +25,13 @@ def addCurrent(fname, fnum):
 
 if __name__ == "__main__":
 	while True:
-		cList = openFile(); keyList, valueList = list(), list()
+		cList = openFile()
 		if not len(cList): exit()
 		for key, value in cList.items():
-			keyList.append(key); valueList.append(value)
-		for k in range(0, len(keyList)):
-			cKey = keyList[k]; cValue = valueList[k]
-			if not checkPID(cValue):
-				print "PID " + str(cValue) + " [" + cKey + "] exit."
+			if not checkPID(value):
+				print "PID " + str(value) + " [" + key + "] exit."
 				IFTTT.pushbots(
-					"Detected PID " + str(cValue) + ", refrenced to " + cKey + " exit.",
+					"Detected PID " + str(value) + ", refrenced to " + key + " exit.",
 					"Python Runtime Error", "", "raw", IFTTT.getkey()[0].split(), 0)
-				remCurrent(cKey)
+				remCurrent(key)
 		print time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()); time.sleep(600)
