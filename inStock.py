@@ -39,7 +39,7 @@ while True:
 			if passCheck == len(checkProduct): continue
 			dLoc = rpath + "stock" + storeJSON[t]["storeNumber"]
 			os.system("wget -t 100 -T 5 -q -O " + dLoc + " --header 'x-ma-pcmh: REL-" + asaVersion + 
-				"' --header 'X-DeviceConfiguration: ss=2.00;vv=5.4.1;sv=12.3.1' " + 
+				"' --header 'X-DeviceConfiguration: ss=2.00;vv=" + asaVersion + ";sv=12.3.1' " + 
 				"'https://mobileapp.apple.com/mnr/p/cn/rci/rciCheckForPart?partNumber=" +
 				combProduct + "&storeNumber=" + storeJSON[t]["storeNumber"] + "'")
 			print "[" + str(s + 1) + "/" + str(len(statesJSON)) + "] Download in Progress: " + str((t + 1) * 100 / len(storeJSON)) + "%\r",
