@@ -7,12 +7,12 @@ def fileOpen(fileloc):
 	except IOError: return "No such file or directory."
 	else: return defReturn
 
-def pastebin(cin, cout):
+def pastebin(pin):
 	print "Querying Pastebin API..."
-	cin = cin.replace("'", '|').replace('"', '|')
+	pin = pin.replace("'", '|').replace('"', '|')
 	os.system("wget -q -t 100 -T 5 --no-check-certificate --post-data 'api_dev_key=\
 47477216df13753adb7dcbd2600fc225&api_user_key=68978343239b4f6189909e34e5e8b0a3\
-&api_paste_code=" + cin + "&api_paste_name=" + cout + "&api_paste_expire_date=\
+&api_paste_code=" + pin + "&api_paste_name=storeList changelog&api_paste_expire_date=\
 1W&api_option=paste&api_paste_format=json' -O " + rpath + "pasteTemp https://\
 pastebin.com/api/api_post.php")
 	pasteURL = fileOpen(rpath + "pasteTemp")
@@ -33,7 +33,7 @@ def asa(et):
 			oldLocation = listLoc.replace(".json", "_" + oldTime + ".json")
 			os.system("mv " + newLocation + " " + oldLocation)
 			newJSON = json.loads(fileOpen(listLoc)); oldJSON = json.loads(fileOpen(oldLocation))
-			compareAns = pastebin(str(json.dumps(json_tools.diff(newJSON, oldJSON))), "storeList changelog")
+			compareAns = pastebin(str(json.dumps(json_tools.diff(newJSON, oldJSON))))
 			IFTTT.pushbots(
 				"Apple Store app 的列表更新了：文件时间戳 " + oldTime + "，文件大小差异为 " + str(deltaListSize) + " 字节。",
 				"https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_small_2x.jpg",
