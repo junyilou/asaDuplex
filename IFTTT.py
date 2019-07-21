@@ -17,6 +17,7 @@ def getkey():
 
 def pushbots(value1, value2, value3, trigger, keylist, debugMode):
 	reload(sys); sys.setdefaultencoding('utf-8')
+	if type(keylist) == str: keylist = keylist.split()
 	for msk in range(0, len(keylist)):
 		checkLoc = os.path.expanduser('~') + "/" + keylist[msk]
 		os.system("rm -f " + checkLoc + "*")

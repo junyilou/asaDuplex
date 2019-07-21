@@ -32,6 +32,6 @@ if __name__ == "__main__":
 				print "PID " + str(value) + " [" + key + "] exit."
 				IFTTT.pushbots(
 					"Detected PID " + str(value) + ", refrenced to " + key + " exit.",
-					"Python Runtime Error", "", "raw", IFTTT.getkey()[0].split(), 0)
+					"Python Runtime Error", "", "raw", IFTTT.getkey(), 0)
 				remCurrent(key)
 		print time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()); time.sleep(600)

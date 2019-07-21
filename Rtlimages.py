@@ -37,7 +37,7 @@ def asa(et):
 			IFTTT.pushbots(
 				"Apple Store app 的列表更新了：文件时间戳 " + oldTime + "，文件大小差异为 " + str(deltaListSize) + " 字节。",
 				"https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_small_2x.jpg",
-				compareAns, "linkraw", masterKey[0].split(), 0)
+				compareAns, "linkraw", masterKey[0], 0)
 		else:
 			os.system("mv " + listLoc.replace(".json", "_old.json") + " " + listLoc)
 			et += 1; print "Found an eighty-three update, all " + str(et) + ", ignore."; 
