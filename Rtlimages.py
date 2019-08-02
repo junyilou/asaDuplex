@@ -1,6 +1,6 @@
 #-*- coding:utf-8 -*-
 import os, sys, json, time, IFTTT, PID
-import json_tools # 'json_tools' required
+import json_tools
 
 def fileOpen(fileloc):
 	try: defOpen = open(fileloc); defReturn = defOpen.read(); defOpen.close()
@@ -9,16 +9,25 @@ def fileOpen(fileloc):
 
 def pastebin(pin):
 	print "Querying Pastebin API..."
-	pin = pin.replace("'", '|').replace('"', '|')
 	os.system("wget -q -t 100 -T 5 --no-check-certificate --post-data 'api_dev_key=\
 47477216df13753adb7dcbd2600fc225&api_user_key=68978343239b4f6189909e34e5e8b0a3\
-&api_paste_code=" + pin + "&api_paste_name=storeList changelog&api_paste_expire_date=\
-1W&api_option=paste&api_paste_format=json' -O " + rpath + "pasteTemp https://\
-pastebin.com/api/api_post.php")
+&api_paste_code=" + pin.replace("'", '|').replace('"', '|') + "&api_paste_name=\
+storeList changelog&api_paste_expire_date=1W&api_option=paste&api_paste_format=\
+json' -O " + rpath + "pasteTemp https://pastebin.com/api/api_post.php")
 	pasteURL = fileOpen(rpath + "pasteTemp")
 	os.system("rm " + rpath + "pasteTemp"); return pasteURL
 
-def asa(et):
+def asa():
+	global upb, asaVersion
+	formatAsaVersion = int("".join(asaVersion.split("."))); print "Comparing ASA remote version..."
+	os.system("wget -t 100 -T 5 -q -O " + rpath + "iTunesLookup https://itunes.apple.com/cn/lookup?id=375380948")
+	try: remoteAsaVersion = int("".join(json.loads(fileOpen(rpath + "iTunesLookup"))["results"][0]["version"].split(".")))
+	except: remoteAsaVersion = 0
+	if remoteAsaVersion > 0 and remoteAsaVersion < 100: remoteAsaVersion *= 10
+	if remoteAsaVersion > formatAsaVersion:
+		asaVersion = ".".join(list(str(remoteAsaVersion)))
+		asaupd = "Found newer ASA version " + asaVersion + ",\nreplaced older version " + asaVersion + "."
+		upb += asaupd + "\n"; print asaupd
 	print "Comparing ASA remote file..."
 	listLoc = rpath + "storeList.json"
 	orgListSize = os.path.getsize(listLoc)
@@ -38,14 +47,11 @@ def asa(et):
 				"Apple Store app 的列表更新了：文件时间戳 " + oldTime + "，文件大小差异为 " + str(deltaListSize) + " 字节。",
 				"https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_small_2x.jpg",
 				compareAns, "linkraw", masterKey[0], 0)
-		else:
-			os.system("mv " + listLoc.replace(".json", "_old.json") + " " + listLoc)
-			et += 1; print "Found an eighty-three update, all " + str(et) + ", ignore."; 
+		else: os.system("mv " + listLoc.replace(".json", "_old.json") + " " + listLoc)
 	else: 
 		os.system("mv " + listLoc.replace(".json", "_old.json") + " " + listLoc)
 		print "No changes found."
 	if newListSize == 0: print "ASA file download failed\nIs the current REL still signing?"
-	return et
 
 def down(rtl, isSpecial):
 	global upb, exce; spr = "R" + rtl + ".png"; sx = sbn + rtl + ".png"
@@ -62,7 +68,7 @@ def down(rtl, isSpecial):
 			reload(sys); sys.setdefaultencoding('utf-8'); rnso = "这家零售店最早开幕于 " + rnso + "。"
 		pushRaw = ("Apple " + rname + " (R" + rtl + ") just updated,\n" + 
 			"the size of the picture is " + str(newsize / 1024) + " KB.")
-		upb = upb + pushRaw + "\n"; exce = exce + rtl + ", "; print pushRaw
+		upb += pushRaw + "\n"; exce += rtl + ", "; print pushRaw
 		tellRaw = "零售店编号 R" + rtl + "，新图片的大小是 " + str(newsize / 1024) + " KB。" + rnso
 		imageURL = dieter + spr + "?output-format=jpg"
 		IFTTT.pushbots(tellRaw, rflag + "Apple " + rname + " 图片更新", imageURL, "raw", masterKey, 0)
@@ -72,15 +78,16 @@ def down(rtl, isSpecial):
 			if newsize == 0: print pid + " Checked " + pname + " does not exist, ignore."
 			else: print pid + " Checked "+ pname + " has no update, ignore."
 
+global upb, asaVersion;
 totalStore = 901; asaVersion = "5.5.0"
-global upb; arg = 0; pid = str(os.getpid()); upb = exce = ""; rTime = et = 0
+pid = str(os.getpid()); upb = exce = ""; arg = rTime = 0
 for m in sys.argv[1:]: arg += 1
 rpath = os.path.expanduser('~') + "/Retail/"; masterKey = IFTTT.getkey()
 sbn = rpath + "Pictures/R"; storejson = json.loads(fileOpen(rpath + "storeInfo.json"))
 PID.addCurrent(os.path.basename(__file__), os.getpid())
 dieter = "https://rtlimages.apple.com/cmc/dieter/store/16_9/"
 
-if arg == 1 and sys.argv[1] == "0": asa(0); exit()
+if arg == 1 and sys.argv[1] == "0": asa(); exit()
 
 while True:
 	reload(sys); sys.setdefaultencoding('utf-8')
@@ -95,7 +102,6 @@ while True:
 			down("%03d" % j, False)
 			print pid + " Compare in Progress: " + str((j + 1) * 100 / totalStore) + "% on R" + "%03d" % j + "\r",
 			sys.stdout.flush()
-	print; et = asa(et)
-	rTime += 1
+	print; asa(); rTime += 1
 	print upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n"
 	time.sleep(1200)
