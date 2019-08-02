@@ -18,7 +18,7 @@ def fileOpen(fileloc):
 	except IOError: return "No such file or directory."
 	else: return defReturn
 
-asaVersion = "5.4.1"
+asaVersion = "5.5.0"
 reload(sys); sys.setdefaultencoding('utf-8')
 PID.addCurrent(os.path.basename(__file__), os.getpid())
 rpath = os.path.expanduser('~') + "/Retail/"

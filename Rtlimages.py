@@ -72,7 +72,7 @@ def down(rtl, isSpecial):
 			if newsize == 0: print pid + " Checked " + pname + " does not exist, ignore."
 			else: print pid + " Checked "+ pname + " has no update, ignore."
 
-totalStore = 901; asaVersion = "5.4.1"
+totalStore = 901; asaVersion = "5.5.0"
 global upb; arg = 0; pid = str(os.getpid()); upb = exce = ""; rTime = et = 0
 for m in sys.argv[1:]: arg += 1
 rpath = os.path.expanduser('~') + "/Retail/"; masterKey = IFTTT.getkey()
