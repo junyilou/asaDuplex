@@ -68,7 +68,8 @@ def down(rtl, isSpecial):
 			reload(sys); sys.setdefaultencoding('utf-8'); rnso = "这家零售店最早开幕于 " + rnso + "。"
 		pushRaw = ("Apple " + rname + " (R" + rtl + ") just updated,\n" + 
 			"the size of the picture is " + str(newsize / 1024) + " KB.")
-		upb += pushRaw + "\n"; exce += rtl + ", "; print pushRaw
+		upb += pushRaw + "\n"; print pushRaw
+		if isSpecial: exce += rtl + ", "
 		tellRaw = "零售店编号 R" + rtl + "，新图片的大小是 " + str(newsize / 1024) + " KB。" + rnso
 		imageURL = dieter + spr + "?output-format=jpg"
 		IFTTT.pushbots(tellRaw, rflag + "Apple " + rname + " 图片更新", imageURL, "raw", masterKey, 0)

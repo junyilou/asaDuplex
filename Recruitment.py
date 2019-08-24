@@ -20,7 +20,10 @@ while True:
 			os.system("wget -q -t 100 -T 5 -O " + savename + " https://jobs.apple.com/api" + 
 			"/v1/jobDetails/PIPE-" + realCode + "/stateProvinceList")
 			if os.path.getsize(savename) > 0: break
-		jOpen = open(savename); stateJSON = json.loads(jOpen.read())["searchResults"]; jOpen.close()
+		jOpen = open(savename)
+		try: stateJSON = json.loads(jOpen.read())["searchResults"]; 
+		except: print "A problem happened when reading stateJSON.\nPlease check apple.com/jobs or try later.\n"; exit()
+		jOpen.close()
 		print "                                                  \r", #Pre Scheme
 		sys.stdout.flush()
 		for i in range(len(stateJSON)): 
