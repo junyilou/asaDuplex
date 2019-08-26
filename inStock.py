@@ -58,14 +58,10 @@ while True:
 	singleProductOutput[p] = singleProductOutput[p].replace(stateStore, "all across Mainland China")
 	for o in checkProduct:
 		if len(singleProductOutput[o]) > 0:
-			productBasename = o[:-4]; ttt = 0
-			while ttt < 3:
-				if savedName[productBasename] == "[获取产品名称出现错误]": del savedName[productBasename]
-				try: 
-					singleTitle = savedName[productBasename].replace(" - ", "-").decode("utf-8")
-				except KeyError: 
-					print "Fetching product name for output..."; title(productBasename); ttt += 1
-				else: break
+			productBasename = o[:-4]
+			try: keyTest = savedName[productBasename]
+			except KeyError: print "Fetching product name for output..."; title(productBasename)
+			singleTitle = savedName[productBasename].replace(" - ", "-").decode("utf-8")
 			if len(singleTitle) > 22:
 				while len(singleTitle) > 22: singleTitle = singleTitle[:-1]
 				singleTitle += "..."
