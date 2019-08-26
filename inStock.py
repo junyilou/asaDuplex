@@ -9,9 +9,7 @@ def title(partno):
 	except: savedName[partno] = "[获取产品名称出现错误]"
 	else: savedName[partno] = soup.title.string.replace(" - Apple (中国大陆)", "").replace(" - Apple", "").replace("购买 ", "")
 
-def productImage(partno):
-	return ("https://as-images.apple.com/is/image/AppleInc/aos/published/images" 
-		+ partno[0] + partno[:2] + "/" + partno + "/" + partno + "?fmt=png")
+def productImage(partno): return ("https://as-images.apple.com/is/" + partno + "?wid=1280")
 
 def fileOpen(fileloc):
 	try: defOpen = open(fileloc); defReturn = defOpen.read(); defOpen.close()
