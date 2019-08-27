@@ -1,11 +1,10 @@
-#-*- coding:utf-8 -*-
-import os, json, sys, urllib2, time, IFTTT, PID
-from BeautifulSoup import BeautifulSoup
+import os, json, sys, urllib.request, time, IFTTT, PID
+from bs4 import BeautifulSoup
 
 def title(partno):
 	global savedName
 	url = "https://www.apple.com/cn/shop/product/" + partno
-	try: soup = BeautifulSoup(urllib2.urlopen(url, timeout = 20))
+	try: soup = BeautifulSoup(urllib.request.urlopen(url, timeout = 20), features = "html.parser")
 	except: savedName[partno] = "[获取产品名称出现错误]"
 	else: savedName[partno] = soup.title.string.replace(" - Apple (中国大陆)", "").replace(" - Apple", "").replace("购买 ", "")
 
@@ -17,7 +16,6 @@ def fileOpen(fileloc):
 	else: return defReturn
 
 asaVersion = "5.5.0"
-reload(sys); sys.setdefaultencoding('utf-8')
 PID.addCurrent(os.path.basename(__file__), os.getpid())
 rpath = os.path.expanduser('~') + "/Retail/"
 
@@ -40,9 +38,10 @@ while True:
 				"' --header 'X-DeviceConfiguration: ss=2.00;vv=" + asaVersion + ";sv=12.3.1' " + 
 				"'https://mobileapp.apple.com/mnr/p/cn/rci/rciCheckForPart?partNumber=" +
 				combProduct + "&storeNumber=" + storeJSON[t]["storeNumber"] + "'")
-			print "[" + str(s + 1) + "/" + str(len(statesJSON)) + "] Download in Progress: " + str((t + 1) * 100 / len(storeJSON)) + "%\r",
+			print("[" + str(s + 1) + "/" + str(len(statesJSON)) + "] Download in Progress: " + 
+				str(int((t + 1) * 100 / len(storeJSON))) + "%\r", end = "")
 			sys.stdout.flush()
-		stateStore = stateStore[:-2]; print
+		stateStore = stateStore[:-2]; print()
 		for p in checkProduct:
 			availableStore = []
 			for f in storeJSON:
@@ -60,8 +59,9 @@ while True:
 		if len(singleProductOutput[o]) > 0:
 			productBasename = o[:-4]
 			try: keyTest = savedName[productBasename]
-			except KeyError: print "Fetching product name for output..."; title(productBasename)
-			singleTitle = savedName[productBasename].replace(" - ", "-").decode("utf-8")
+			except KeyError: print("Fetching product name for output..."); title(productBasename)
+			singleTitle = savedName[productBasename].replace(" - ", "-")
+			if savedName[productBasename] == "[获取产品名称出现错误]": del savedName[productBasename]
 			if len(singleTitle) > 22:
 				while len(singleTitle) > 22: singleTitle = singleTitle[:-1]
 				singleTitle += "..."
@@ -72,7 +72,7 @@ while True:
 			IFTTT.pushbots(
 				pushOut, singleTitle + " 新到货", 
 				productImage(productBasename), "raw", IFTTT.getkey(), 0)
-		else: print "No new stores detected for product " + o
+		else: print("No new stores detected for product " + o)
 		singleProductOutput[o] = ""
-	print upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n"
+	print(upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n")
 	os.system("rm -f " + rpath + "stockR*"); time.sleep(43200)

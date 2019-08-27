@@ -17,11 +17,14 @@ def updtFile(v):
 def remCurrent(fname):
 	cList = openFile()
 	try: cList.pop(fname)
-	except KeyError: pass
+	except: pass
 	else: updtFile(json.dumps(cList))
 
 def addCurrent(fname, fnum): 
-	remCurrent(fname); updtFile(json.dumps(dict(openFile().items() + {fname: fnum}.items())))
+	remCurrent(fname)
+	oList = openFile()
+	oList.update({fname: fnum})
+	updtFile(json.dumps(oList))
 
 if __name__ == "__main__":
 	while True:
@@ -29,9 +32,9 @@ if __name__ == "__main__":
 		if not len(cList): exit()
 		for key, value in cList.items():
 			if not checkPID(value):
-				print "PID " + str(value) + " [" + key + "] exit."
+				print("PID " + str(value) + " [" + key + "] exit.")
 				IFTTT.pushbots(
 					"Detected PID " + str(value) + ", refrenced to " + key + " exit.",
 					"Python Runtime Error", "", "raw", IFTTT.getkey(), 0)
 				remCurrent(key)
-		print time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()); time.sleep(600)
+		print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())); time.sleep(600)

@@ -1,4 +1,3 @@
-#-*- coding:utf-8 -*-
 filename = ['qibao', 'shanghaiiapm', 'wujiaochang', 'nanjingeast', 'pudong', 'globalharbor',
 'hongkongplaza', 'kunming', 'sanlitun', 'chinacentralmall', 'chaoyangjoycity', 
 'wangfujing', 'xidanjoycity', 'mixcchengdu', 'taikoolichengdu', 'tianjinjoycity',

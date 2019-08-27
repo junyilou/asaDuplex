@@ -1,19 +1,18 @@
-#-*- coding:utf-8 -*-
-import urllib2, os, sys, time, ssl, IFTTT, PID
-from BeautifulSoup import BeautifulSoup
+import urllib.request, urllib.error, os, sys, time, ssl, IFTTT, PID
+from bs4 import BeautifulSoup
+from socket import timeout
 
 alphabet = [chr(i) for i in range(65, 90)]
 removeList = ['B', 'I', 'O', 'S']
 alphabet = [t for t in alphabet if t not in removeList]
 numlist = [chr(i) for i in range(48, 58)]
 flist = numlist + alphabet
-psbhd = ['V', 'W']
+psbhd = ['W']
 ans = list()
 
 def title(partno):
-	reload(sys); sys.setdefaultencoding('utf-8')
 	url = "https://www.apple.com/cn/shop/product/" + partno
-	try: soup = BeautifulSoup(urllib2.urlopen(url, timeout = 20))
+	try: soup = BeautifulSoup(urllib.request.urlopen(url, timeout = 20), features = "html.parser")
 	except: return "[获取产品名称出现错误]"
 	else: return soup.title.string.replace(" - Apple (中国大陆)", "").replace(" - Apple", "").replace("购买 ", "")
 
@@ -42,22 +41,17 @@ while True:
 	newList = list(); newTitle = list(); rmList = list()
 	for a in range(len(ans)):
 		url = 'https://www.apple.com/cn/shop/product/' + ans[a]
-		try: p = urllib2.urlopen(url, timeout = 20)
-		except ssl.SSLError: 
-			print runnot + ans[a] + " 500 [" + str(a + 1) + "/" + str(len(ans)) + "]\r",
-			sys.stdout.flush()
-		except urllib2.URLError, e:
+		try: p = urllib.request.urlopen(url, timeout = 20)
+		except urllib.error.URLError as e:
 			if hasattr(e, "code"):
-				print runnot + ans[a] + " " + str(e.code) + " [" + str(a + 1) + "/" + str(len(ans)) + "]\r",
+				print(runnot + ans[a] + " " + str(e.code) + " [" + str(a + 1) + "/" + str(len(ans)) + "]\r", end = "")
 				sys.stdout.flush()
-			else:
-				print runnot + ans[a] + " 400 [" + str(a + 1) + "/" + str(len(ans)) + "]\r",
-				sys.stdout.flush()
+		except timeout: pass
 		else: 
 			newList.append(ans[a]); rmList.append(ans[a])
-			uOut = "New Product Found: " + ans[a] + " at " + str(a + 1) + "/" + str(len(ans)) + "\n"
-			if len(setans) == 0: print uOut; upb += uOut; outPlus += ", " + ans[a]
-		if len(setans) != 0 and len(newList) > 0: print setans[a], title(setans[a])
+			uOut = "在第 " + str(a + 1) + "/" + str(len(ans)) + " 个找到了新产品 " + ans[a] + "\n"
+			if len(setans) == 0: print(uOut); upb += uOut; outPlus += ", " + ans[a]
+		if len(setans) != 0 and len(newList) > 0: print(setans[a], title(setans[a]))
 		elif a + 1 == len(ans) or ans[a][2] != ans[a + 1][2]:
 			if len(newList) < 4:
 				for e in range(len(newList)):
@@ -66,7 +60,7 @@ while True:
 						productImage(newList[e]), url.replace(ans[a], newList[e]), "linkraw", masterKey[0], 0)
 			else:
 				for nt in range(len(newList)): 
-					print "Fetching product name for output... [" + str(nt + 1) + "/" + str(len(newList)) + "]\r",
+					print("正在从远端取得商品名称... [" + str(nt + 1) + "/" + str(len(newList)) + "]\r", end = "")
 					sys.stdout.flush(); newTitle.append("[" + newList[nt] + "] " + title(newList[nt]))
 				IFTTT.pushbots(
 					"".join(newTitle), "Apple Online Store 更新了多个商品", 
@@ -79,6 +73,6 @@ while True:
 		mSort = mSort.split(", "); mSort.sort(); mSort = ", ".join(mSort)
 		mWrite = open(os.path.expanduser('~') + "/savedProduct.txt", "w")
 		mWrite.write(mSort); mWrite.close()
-	if len(setans) == 0: print "\n" + upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n"
+	if len(setans) == 0: print("\n" + upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n")
 	for rm in range(len(rmList)): ans.remove(rmList[rm])
 	rmList = list(); time.sleep(43200)

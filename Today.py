@@ -1,12 +1,10 @@
-#-*- coding:utf-8 -*-
-import os, urllib2, sys, json, time, IFTTT, retailData, PID
+import os, sys, json, time, IFTTT, retailData, PID
 
 filename, cityname = retailData.filename, retailData.cityname
 #filename, cityname = ['qibao', 'apmhongkong', 'xinyia13'], ['@上海', '#香港', '&台湾'] #Debug
 num, allMainlandChina = len(filename), ""
 for rep in range(num): 
 	cityname[rep] = cityname[rep].replace("@", "🇨🇳").replace("#", "🇭🇰").replace("$", "🇲🇴").replace("&", "🇹🇼")
-allMainlandChina = "、".join(cityname[:42])
 
 def down(fname, region): 
 	os.system("wget -q -t 100 -T 3 -O " + rpath + fname + ".json --no-check-certificate " +
@@ -16,17 +14,17 @@ def home():
 	for d in range(num):
 		cdsize = 0
 		while cdsize == 0:
-			if cityname[d][:8] == "🇨🇳": down(filename[d], "cn")
-			if cityname[d][:8] == "🇭🇰": down(filename[d], "hk")
-			if cityname[d][:8] == "🇲🇴": down(filename[d], "mo")
-			if cityname[d][:8] == "🇹🇼": down(filename[d], "tw")
+			if "🇨🇳" in cityname[d]: down(filename[d], "cn")
+			if "🇭🇰" in cityname[d]: down(filename[d], "hk")
+			if "🇲🇴" in cityname[d]: down(filename[d], "mo")
+			if "🇹🇼" in cityname[d]: down(filename[d], "tw")
 			cdsize = os.path.getsize(rpath + filename[d] + ".json")
-		print "Download in Progress: " + str((d + 1) * 100 / num) + "%\r",
+		print("正在下载 已完成 " + str(int((d + 1) * 100 / num)) + "%\r", end = "")
 		sys.stdout.flush()
-	print
+	print()
 	for i in range(num):
 		rOpen = open(rpath + filename[i] + ".json"); isMulti = False
-		raw = rOpen.read(); rJson = json.loads(json.dumps(json.loads(raw)).replace("\u2060", ""))
+		raw = rOpen.read(); rJson = json.loads(raw.replace("\u2060", ""))
 		rJson = rJson["courses"]; rOpen.close()
 		for rTitle in rJson:
 			rCourse = rJson[rTitle]; singleName = rCourse["name"]
@@ -34,29 +32,28 @@ def home():
 				wAns += singleName + ",\n"; citAns = cityname[i]
 				for r in range(i, num):
 					eOpen = open(rpath + filename[r] + ".json"); eAns = eOpen.read()
-					eJson = json.loads(json.dumps(json.loads(eAns)).replace("\u2060", ""))
+					eJson = json.loads(eAns.replace("\u2060", ""))
 					eJson = eJson["courses"]; eOpen.close()
 					for eTitle in eJson:
 						eCourse = eJson[eTitle]; checkAns = cityname[r].replace("🇨🇳", "").replace("🇭🇰", "")
 						checkAns = checkAns.replace("🇲🇴", "").replace("🇹🇼", "")
 						if eCourse["name"] == singleName and not checkAns in citAns:
 							citAns += "、" + cityname[r]
-				citAns = citAns.replace(allMainlandChina, "🇨🇳中国大陆")
 				pushAns = "#TodayatApple " + citAns + "有新活动: " + singleName
 				if citAns.count("🇨🇳") > 1: pushAns = pushAns.replace("🇨🇳", "").replace("#TodayatApple ", "#TodayatApple 🇨🇳")
 				pushAns = pushAns.replace('"', "").replace("'", "").replace("：", " - ")
-				print pushAns
+				print(pushAns)
 				pictureURL = rCourse["backgroundMedia"]["images"][0]["landscape"]["source"] + "?output-format=jpg"
-				IFTTT.pushbots(pushAns, "Today at Apple 新活动", pictureURL, "raw", IFTTT.getkey(), 0)
-		print "Compare in Progress: " + str((i + 1) * 100 / num) + "%\r",
+				IFTTT.pushbots(pushAns, "Today at Apple 新活动", pictureURL, "raw", IFTTT.getkey(), 1)
+		print("正在比较 已完成 " + str(int((i + 1) * 100 / num)) + "%\r", end = "")
 		sys.stdout.flush()
-	mWrite = open(rpath + "savedEvent.txt", "w"); mWrite.write(mark + wAns); mWrite.close(); print
+	mWrite = open(rpath + "savedEvent.txt", "w"); mWrite.write(mark + wAns); mWrite.close(); print()
 
 PID.addCurrent(os.path.basename(__file__), os.getpid())
 rpath = os.path.expanduser('~') + "/Retail/"
 
 while True:
-	reload(sys); sys.setdefaultencoding('utf-8'); home()
+	home()
 	for rm in range(num): os.system("rm " + rpath + filename[rm] + ".json")
-	print time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+	print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 	time.sleep(10800)
