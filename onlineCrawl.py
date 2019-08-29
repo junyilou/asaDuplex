@@ -37,14 +37,14 @@ runtim, upb = 0, ""
 while True:
 	setans = sys.argv[1:]
 	if len(setans) != 0: ans = sys.argv[1:]
-	runtim += 1; runnot = "[" + str(runtim) + "] "; outPlus = ""
+	runtim += 1; outPlus = ""
 	newList = list(); newTitle = list(); rmList = list()
 	for a in range(len(ans)):
 		url = 'https://www.apple.com/cn/shop/product/' + ans[a]
 		try: p = urllib.request.urlopen(url, timeout = 20)
 		except urllib.error.URLError as e:
 			if hasattr(e, "code"):
-				print(runnot + ans[a] + " " + str(e.code) + " [" + str(a + 1) + "/" + str(len(ans)) + "]\r", end = "")
+				print("[" + str(runtim) + "] " + ans[a] + " " + str(e.code) + " [" + str(a + 1) + "/" + str(len(ans)) + "]\r", end = "")
 				sys.stdout.flush()
 		except timeout: pass
 		else: 

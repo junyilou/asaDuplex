@@ -8,8 +8,6 @@ def title(partno):
 	except: savedName[partno] = "[获取产品名称出现错误]"
 	else: savedName[partno] = soup.title.string.replace(" - Apple (中国大陆)", "").replace(" - Apple", "").replace("购买 ", "")
 
-def productImage(partno): return ("https://as-images.apple.com/is/" + partno + "?wid=1280")
-
 def fileOpen(fileloc):
 	try: defOpen = open(fileloc); defReturn = defOpen.read(); defOpen.close()
 	except IOError: return "No such file or directory."
@@ -38,7 +36,7 @@ while True:
 				"' --header 'X-DeviceConfiguration: ss=2.00;vv=" + asaVersion + ";sv=12.3.1' " + 
 				"'https://mobileapp.apple.com/mnr/p/cn/rci/rciCheckForPart?partNumber=" +
 				combProduct + "&storeNumber=" + storeJSON[t]["storeNumber"] + "'")
-			print("[" + str(s + 1) + "/" + str(len(statesJSON)) + "] Download in Progress: " + 
+			print("[" + str(s + 1) + "/" + str(len(statesJSON)) + "] " + stateName + "正在下载 已完成 " + 
 				str(int((t + 1) * 100 / len(storeJSON))) + "%\r", end = "")
 			sys.stdout.flush()
 		stateStore = stateStore[:-2]; print()
@@ -59,20 +57,20 @@ while True:
 		if len(singleProductOutput[o]) > 0:
 			productBasename = o[:-4]
 			try: keyTest = savedName[productBasename]
-			except KeyError: print("Fetching product name for output..."); title(productBasename)
+			except KeyError: print("正在从远端取得商品名称..."); title(productBasename)
 			singleTitle = savedName[productBasename].replace(" - ", "-")
 			if savedName[productBasename] == "[获取产品名称出现错误]": del savedName[productBasename]
 			if len(singleTitle) > 22:
 				while len(singleTitle) > 22: singleTitle = singleTitle[:-1]
 				singleTitle += "..."
 			singleTitle.rstrip()
-			upb += "New result for " + o + ",\n" + singleProductOutput[o] + "\n"
 			pushOut = "到货零售店: " + singleProductOutput[o]
 			pushOut = pushOut.replace("到货零售店: all across Mainland China", "全中国大陆 Apple Store 零售店均已到货该产品")
+			upb += o + " " + pushOut + "\n"
 			IFTTT.pushbots(
-				pushOut, singleTitle + " 新到货", 
-				productImage(productBasename), "raw", IFTTT.getkey(), 0)
-		else: print("No new stores detected for product " + o)
+				pushOut, singleTitle + " 新到货", "https://as-images.apple.com/is/" 
+				+ productBasename + "?wid=1280", "raw", IFTTT.getkey(), 0)
+		else: print(o + " 产品没有检测到零售店新到货")
 		singleProductOutput[o] = ""
 	print(upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n")
 	os.system("rm -f " + rpath + "stockR*"); time.sleep(43200)
