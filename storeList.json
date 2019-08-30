@@ -7831,7 +7831,7 @@
 			"stores": [{
 				"storeNumber": "R159",
 				"countryCode": "CH",
-				"storeName": "Bahnhofstrasse",
+				"storeName": "Rennweg",
 				"latitude": "47.37499",
 				"longitude": "8.53864",
 				"storeRadius": "70",
@@ -7842,7 +7842,7 @@
 				"timeZone": "Europe/Zurich",
 				"scanAndBuy": "SNB",
 				"enableInStoreMode": true,
-				"storeAddress": "Bahnhofstrasse 77\n8001 Zürich",
+				"storeAddress": "Rennweg 43\n8001 Zürich",
 				"phoneNumber": "044 213 18 00"
 			}, {
 				"storeNumber": "R309",
