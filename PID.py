@@ -34,7 +34,7 @@ if __name__ == "__main__":
 			if not checkPID(value):
 				print("PID " + str(value) + " [" + key + "] exit.")
 				IFTTT.pushbots(
-					"Detected PID " + str(value) + ", refrenced to " + key + " exit.",
-					"Python Runtime Error", "", "raw", IFTTT.getkey(), 0)
+					"监测到 " + key + " 对应的 PID " + str(value) + " 已停止工作",
+					"Python 3 运行时错误", "", "raw", IFTTT.getkey()[0], 0)
 				remCurrent(key)
 		print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())); time.sleep(600)

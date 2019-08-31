@@ -9,7 +9,22 @@ stateEmoji, specialistCode = retailData.stateEmoji, retailData.specialistCode
 
 PID.addCurrent(os.path.basename(__file__), os.getpid())
 
-while True:
+def jobsMaintenance():
+	print("于 " + time.strftime("%m-%d %H:%M", time.localtime()) + " 遇到页面维护"); temper = 1
+	while True:
+		tempMain = rpath + "maintenance"
+		print(str(os.getpid()) + " 第 " + str(temper) + " 次尝试重新连接...\r", end = ""); sys.stdout.flush()
+		while True:
+			os.system("wget -q -t 10 -T 5 -O " + tempMain + " https://jobs.apple.com/api" + 
+			"/v1/jobDetails/PIPE-114437991/stateProvinceList")
+			if os.path.getsize(tempMain) > 0: break
+		tOpen = open(tempMain); tRead = tOpen.read(); tOpen.close()
+		if not "Maintenance" in tRead: break
+		print(str(os.getpid()) + " 第 " + str(temper) + " 次尝试重新连接失败\r", end = ""); sys.stdout.flush()
+		temper += 1; time.sleep(3600)
+	print("连接成功, 将在下一次运行时继续检查招聘信息")
+
+def home():
 	wAns = ""; mOpen = open(rpath + "savedJobs"); mark = mOpen.read(); mOpen.close()
 	for adpre in range(len(specialistCode)):
 		realCode = "11443" + str(specialistCode[adpre])
@@ -18,10 +33,9 @@ while True:
 			os.system("wget -q -t 100 -T 5 -O " + savename + " https://jobs.apple.com/api" + 
 			"/v1/jobDetails/PIPE-" + realCode + "/stateProvinceList")
 			if os.path.getsize(savename) > 0: break
-		jOpen = open(savename)
-		try: stateJSON = json.loads(jOpen.read())["searchResults"]; 
-		except: print("在读取 stateJSON 的时候遇到了一些问题\n请尝试检查 Apple 官网服务状态或稍后再试\n"); exit()
-		jOpen.close()
+		jOpen = open(savename); jRead = jOpen.read(); jOpen.close()
+		if "Maintenance" in jRead: jobsMaintenance(); return
+		stateJSON = json.loads(jRead)["searchResults"]
 		print("                                                  \r", end = "") #Pre Scheme
 		sys.stdout.flush()
 		for i in range(len(stateJSON)): 
@@ -38,7 +52,9 @@ while True:
 		for j in range(len(stateJSON)): 
 			oID = stateJSON[j]["id"]
 			savename = rpath + stateCode[adpre] + "/location_" + oID.replace("postLocation-", "") + ".json"
-			cityJSON = json.loads(open(savename).read())
+			jOpen = open(savename); jRead = jOpen.read(); jOpen.close()
+			if "Maintenance" in jRead: jobsMaintenance(); return
+			cityJSON = json.loads(jRead)
 			for c in range(len(cityJSON)):
 				rolloutCode = cityJSON[c]["code"]
 				if not rolloutCode in mark:
@@ -47,5 +63,8 @@ while True:
 					+ ", 代号 " + rolloutCode + ", 文件名 " + oID.replace("postLocation-", "") + ".json")
 					IFTTT.pushbots(pushAns, "Apple 招贤纳才", imageURL, "raw", IFTTT.getkey(), 0)
 	mWrite = open(rpath + "savedJobs", "w"); mWrite.write(mark + wAns); mWrite.close(); print()
+
+while True:
+	home()
 	print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 	time.sleep(43200)
