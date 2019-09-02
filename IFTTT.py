@@ -10,6 +10,7 @@ def getkey():
 		masterKey = list()
 		for line in open(os.path.expanduser('~') + "/key.txt"):
 			line = kOpen.readline().replace("\n", "")
+			if line == "": break
 			masterKey.append(line)
 		kOpen.close()
 	return masterKey
