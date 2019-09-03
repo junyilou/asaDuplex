@@ -1,20 +1,9 @@
-import os, sys, json, time, IFTTT, PID
-import json_tools
+import os, sys, json, time, IFTTT, PID, filecmp
 
 def fileOpen(fileloc):
 	try: defOpen = open(fileloc); defReturn = defOpen.read(); defOpen.close()
 	except IOError: return "No such file or directory."
 	else: return defReturn
-
-def pastebin(pin):
-	print("正在请求 Pastebin 剪切板 API...")
-	os.system("wget -q -t 100 -T 5 --no-check-certificate --post-data 'api_dev_key=\
-47477216df13753adb7dcbd2600fc225&api_user_key=68978343239b4f6189909e34e5e8b0a3\
-&api_paste_code=" + pin.replace("'", '|').replace('"', '|') + "&api_paste_name=\
-storeList changelog&api_paste_expire_date=1W&api_option=paste&api_paste_format=\
-json' -O " + rpath + "pasteTemp https://pastebin.com/api/api_post.php")
-	pasteURL = fileOpen(rpath + "pasteTemp")
-	os.system("rm " + rpath + "pasteTemp"); return pasteURL
 
 def asa():
 	global upb, asaVersion
@@ -30,27 +19,27 @@ def asa():
 	print("正在确认远程 Apple Store app 文件...")
 	listLoc = rpath + "storeList.json"
 	orgListSize = os.path.getsize(listLoc)
-	os.system("mv " + listLoc + " " + listLoc.replace(".json", "_old.json"))
+	os.system("mv " + listLoc + " " + listLoc.replace(".json", "-old.json"))
+	newLocation = listLoc.replace(".json", "-old.json")
 	os.system("wget -t 100 -T 5 -q -U ASA/" + asaVersion + " -O " + listLoc + " --header 'x-ma-pcmh: REL-" + 
 		asaVersion + "' https://mobileapp.apple.com/mnr/p/cn/retail/allStoresInfoLite")
 	newListSize = os.path.getsize(listLoc)
-	if orgListSize != newListSize and orgListSize > 1024 and newListSize > 1024 :
+	if not filecmp.cmp(newLocation, listLoc) and orgListSize > 1024 and newListSize > 1024 :
 		deltaListSize = newListSize - orgListSize
 		if deltaListSize % 83:
-			newLocation = listLoc.replace(".json", "_old.json"); oldTime = str(int(time.time()))
-			oldLocation = listLoc.replace(".json", "_" + oldTime + ".json")
+			oldLocation = listLoc.replace(".json", "" + time.strftime("-%Y%m%d-%H%M%S", time.localtime()) + ".json")
 			os.system("mv " + newLocation + " " + oldLocation)
-			newJSON = json.loads(fileOpen(listLoc)); oldJSON = json.loads(fileOpen(oldLocation))
-			compareAns = pastebin(str(json.dumps(json_tools.diff(newJSON, oldJSON))))
-			IFTTT.pushbots(
-				"Apple Store app 的列表更新了：文件时间戳 " + oldTime + "，文件大小差异为 " + str(deltaListSize) + " 字节。",
-				"https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_small_2x.jpg",
-				compareAns, "linkraw", masterKey[0], 0)
-		else: os.system("mv " + listLoc.replace(".json", "_old.json") + " " + listLoc)
+			formatJSON = json.dumps(json.loads(listLoc), ensure_ascii = False, indent = 2)
+			formatOut = open(listLoc.replace(".json", "-format.json"), "w")
+			formatOut.write(formatJSON); formatOut.close()
+			if deltaListSize > 0: deltaListSize = "+" + str(deltaListSize)
+			else: deltaListSize = str(deltaListSize)
+			IFTTT.pushbots("Apple Store app 文件更新", "与上次存储的文件大小差异为 " + deltaListSize + " 字节。", "", "raw", masterKey[0], 0)
+		else: os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
 	else: 
-		os.system("mv " + listLoc.replace(".json", "_old.json") + " " + listLoc)
+		os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
 		print("没有发现 storeList 文件更新")
-	if newListSize == 0: print("无法下载 allStoresInfoLite 文件\n当前的 REL 验证版本是否不被远端服务器接受？")
+	if newListSize == 0: print("无法下载 allStoresInfoLite 文件\n当前的 REL 验证版本是否不被远程服务器接受？")
 
 def down(rtl, isSpecial):
 	global upb, exce; spr = "R" + rtl + ".png"; sx = sbn + rtl + ".png"
@@ -72,7 +61,7 @@ def down(rtl, isSpecial):
 	elif isSpecial:
 			try: pname = "Apple " + storejson['name'][rtl] + " (R" + rtl + ")"
 			except KeyError: pname = "Apple Store (R" + rtl + ")"  
-			if newsize == 0: print(pid + " 检查到 " + pname + " 的图片在远端不存在")
+			if newsize == 0: print(pid + " 检查到 " + pname + " 的图片服务器中不存在")
 			else: print(pid + " 检查到 "+ pname + " 的图片没有更新")
 
 global upb, asaVersion;
