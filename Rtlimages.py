@@ -29,12 +29,13 @@ def asa():
 		if deltaListSize % 83:
 			oldLocation = listLoc.replace(".json", "" + time.strftime("-%Y%m%d-%H%M%S", time.localtime()) + ".json")
 			os.system("mv " + newLocation + " " + oldLocation)
-			formatJSON = json.dumps(json.loads(listLoc), ensure_ascii = False, indent = 2)
+			formatJSON = json.dumps(json.loads(fileOpen(listLoc)), ensure_ascii = False, indent = 2)
 			formatOut = open(listLoc.replace(".json", "-format.json"), "w")
 			formatOut.write(formatJSON); formatOut.close()
-			if deltaListSize > 0: deltaListSize = "+" + str(deltaListSize)
-			else: deltaListSize = str(deltaListSize)
-			IFTTT.pushbots("Apple Store app 文件更新", "与上次存储的文件大小差异为 " + deltaListSize + " 字节。", "", "raw", masterKey[0], 0)
+			IFTTT.pushbots("于 " + time.strftime("%Y 年 %-m 月 %-d 日 %-H:%M ", time.localtime()) 
+				+ "检测到新文件，与上次存储的文件大小差异为 " + str(deltaListSize) + " 字节。", "Apple Store app 文件更新", 
+				"https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_small_2x.jpg", 
+				"raw", masterKey[0], 0)
 		else: os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
 	else: 
 		os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
@@ -76,7 +77,7 @@ dieter = "https://rtlimages.apple.com/cmc/dieter/store/16_9/"
 if arg == 1 and sys.argv[1] == "0": asa(); exit()
 
 while True:
-	sTime = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()); eCount = exce.count(", ")
+	eCount = exce.count(", ")
 	if arg - eCount:
 		print("正在刷新特别零售店 [第 " + str(rTime % 18 + 1) + " 次, 共 18 次]")
 		for s in sys.argv[1:]: 
@@ -88,5 +89,5 @@ while True:
 			print(pid + " 已完成 " + str(int((j + 1) * 100 / totalStore)) + "%, 目前 R" + "%03d" % j + "\r", end = "")
 			sys.stdout.flush()
 	print(); asa(); rTime += 1
-	print(upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n")
+	print(upb + time.strftime("%F %T", time.localtime()) + "\n")
 	time.sleep(1200)
