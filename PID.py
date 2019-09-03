@@ -37,4 +37,4 @@ if __name__ == "__main__":
 					"监测到 " + key + " 对应的 PID " + str(value) + " 已停止工作",
 					"Python 3 运行时错误", "", "raw", IFTTT.getkey()[0], 0)
 				remCurrent(key)
-		print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())); time.sleep(600)
+		print(time.strftime("%F %T", time.localtime())); time.sleep(600)

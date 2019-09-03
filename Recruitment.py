@@ -10,7 +10,7 @@ stateEmoji, specialistCode = retailData.stateEmoji, retailData.specialistCode
 PID.addCurrent(os.path.basename(__file__), os.getpid())
 
 def jobsMaintenance():
-	print("于 " + time.strftime("%m-%d %H:%M", time.localtime()) + " 遇到页面维护"); temper = 1
+	print("于 " + time.strftime("%-m 月 %-d 日 %-H:%M", time.localtime()) + " 遇到页面维护"); temper = 1
 	while True:
 		tempMain = rpath + "maintenance"
 		print(str(os.getpid()) + " 第 " + str(temper) + " 次尝试重新连接...\r", end = ""); sys.stdout.flush()
@@ -66,5 +66,5 @@ def home():
 
 while True:
 	home()
-	print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+	print(time.strftime("%F %T", time.localtime()))
 	time.sleep(43200)

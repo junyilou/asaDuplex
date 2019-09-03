@@ -72,5 +72,5 @@ while True:
 				+ productBasename + "?wid=1280", "raw", IFTTT.getkey(), 0)
 		else: print(o + " 产品没有检测到零售店新到货")
 		singleProductOutput[o] = ""
-	print(upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n")
+	print(upb + time.strftime("%F %T", time.localtime()) + "\n")
 	os.system("rm -f " + rpath + "stockR*"); time.sleep(43200)

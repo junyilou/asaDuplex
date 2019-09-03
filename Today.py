@@ -55,5 +55,5 @@ rpath = os.path.expanduser('~') + "/Retail/"
 while True:
 	home()
 	for rm in range(num): os.system("rm " + rpath + filename[rm] + ".json")
-	print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+	print(time.strftime("%F %T", time.localtime()))
 	time.sleep(10800)

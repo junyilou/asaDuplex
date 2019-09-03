@@ -73,6 +73,6 @@ while True:
 		mSort = mSort.split(", "); mSort.sort(); mSort = ", ".join(mSort)
 		mWrite = open(os.path.expanduser('~') + "/savedProduct.txt", "w")
 		mWrite.write(mSort); mWrite.close()
-	if len(setans) == 0: print("\n" + upb + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + "\n")
+	if len(setans) == 0: print("\n" + upb + time.strftime("%F %T", time.localtime()) + "\n")
 	for rm in range(len(rmList)): ans.remove(rmList[rm])
 	rmList = list(); time.sleep(43200)

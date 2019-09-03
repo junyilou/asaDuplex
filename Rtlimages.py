@@ -90,4 +90,4 @@ while True:
 			sys.stdout.flush()
 	print(); asa(); rTime += 1
 	print(upb + time.strftime("%F %T", time.localtime()) + "\n")
-	time.sleep(1200)
+	time.sleep(600)
