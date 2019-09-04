@@ -16,7 +16,7 @@ def title(partno):
 	except: return "[获取产品名称出现错误]"
 	else: return soup.title.string.replace(" - Apple (中国大陆)", "").replace(" - Apple", "").replace("购买 ", "")
 
-def productImage(partno): return ("https://as-images.apple.com/is/" + partno + "?wid=1280")
+def productImage(partno): return "https://as-images.apple.com/is/" + partno + "?wid=1280"
 
 for k in range(len(psbhd)):
 	for i in range(len(flist)):
@@ -62,9 +62,15 @@ while True:
 				for nt in range(len(newList)): 
 					print("正在从远端取得商品名称... [" + str(nt + 1) + "/" + str(len(newList)) + "]\r", end = "")
 					sys.stdout.flush(); newTitle.append("[" + newList[nt] + "] " + title(newList[nt]))
-				IFTTT.pushbots(
-					"".join(newTitle), "Apple Online Store 更新了多个商品", 
-					productImage(newList[0]), "raw", masterKey[0], 0)
+				existProduct = -1; print()
+				for imt in range(len(newList)):
+					print("正在确定远端产品图片... [" + str(imt + 1) + "/" + str(len(newList)) + "]\r", end = "")
+					try: imo = urllib.request.urlopen(productImage(newList[imt]), timeout = 20)
+					except urllib.error.URLError: pass
+					else: existProduct = imt; break
+				if existProduct == -1: outputImage = ""
+				else: outputImage = productImage(newList[existProduct]) 
+				IFTTT.pushbots("".join(newTitle), "Apple Online Store 更新了多个商品", outputImage, "raw", masterKey[0], 0)
 			newList = list(); newTitle = list()
 	if len(setans) != 0: exit()
 	if outPlus != "":
