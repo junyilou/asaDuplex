@@ -8311,8 +8311,8 @@
 				"storeNumber": "R718",
 				"countryCode": "JP",
 				"storeName": "丸の内",
-				"latitude": "35.680278",
-				"longitude": "139.763935",
+				"latitude": "35.680225",
+				"longitude": "139.763906",
 				"storeRadius": "70",
 				"accuracyThreshold": "500",
 				"imageURL": ["https://rtlimages.apple.com/cmc/dieter/store/16_9/R718.png"],
@@ -8320,7 +8320,7 @@
 				"locationText": "千代田区",
 				"timeZone": "Asia/Tokyo",
 				"scanAndBuy": "SNB",
-				"enableInStoreMode": false,
+				"enableInStoreMode": true,
 				"storeAddress": "丸の内2-5-2\n三菱ビル\n千代田区,100-0005",
 				"phoneNumber": "03-4213-0500"
 			}]
