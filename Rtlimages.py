@@ -1,9 +1,11 @@
-import os, sys, json, time, IFTTT, PID, filecmp
+import os, sys, json, time, IFTTT, PID, filecmp, difflib
 
 def fileOpen(fileloc):
 	try: defOpen = open(fileloc); defReturn = defOpen.read(); defOpen.close()
 	except IOError: return "No such file or directory."
 	else: return defReturn
+
+def fileWrite(fileloc, writer): defWrite = open(fileloc, "w"); defWrite.write(writer); defWrite.close()
 
 def asa():
 	global upb, asaVersion
@@ -27,20 +29,25 @@ def asa():
 	if not filecmp.cmp(newLocation, listLoc) and orgListSize > 1024 and newListSize > 1024 :
 		deltaListSize = newListSize - orgListSize
 		if deltaListSize % 83:
-			oldLocation = listLoc.replace(".json", "" + time.strftime("-%Y%m%d-%H%M%S", time.localtime()) + ".json")
-			os.system("mv " + newLocation + " " + oldLocation)
-			formatJSON = json.dumps(json.loads(fileOpen(listLoc)), ensure_ascii = False, indent = 2)
-			formatOut = open(listLoc.replace(".json", "-format.json"), "w")
-			formatOut.write(formatJSON); formatOut.close()
+			fileLines = []; fileDiff = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><pre>'
+			for formatFile in [newLocation, listLoc]:
+				formatJSON = json.dumps(json.loads(fileOpen(formatFile)), ensure_ascii = False, indent = 2)
+				fileLines.append(formatJSON.split("\n"))
+				if formatFile == listLoc: fileWrite(listLoc.replace(".json", "-format.json"), formatJSON)
+			for line in difflib.unified_diff(fileLines[0], fileLines[1]): fileDiff += line + "\n"
+			changeTime = time.strftime("%Y%m%d-%H%M%S", time.localtime())
+			fileWrite(rpath + "changeLog-" + changeTime + ".html", fileDiff + "</pre>")
+			os.system("mv " + newLocation + " " + listLoc.replace(".json", "-" + changeTime + ".json"))
+			os.system("mv " + rpath + "changeLog-" + changeTime + ".html /root/www/")
 			IFTTT.pushbots("于 " + time.strftime("%Y 年 %-m 月 %-d 日 %-H:%M ", time.localtime()) 
-				+ "检测到新文件，与上次存储的文件大小差异为 " + str(deltaListSize) + " 字节。", "Apple Store app 文件更新", 
+				+ "检测到新文件，大小差异 " + str(deltaListSize) + " 字节，编号 changeLog-" + changeTime, "Apple Store app 文件更新", 
 				"https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_small_2x.jpg", 
 				"raw", masterKey[0], 0)
 		else: os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
 	else: 
 		os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
 		print("没有发现 storeList 文件更新")
-	if newListSize == 0: print("无法下载 allStoresInfoLite 文件\n当前的 REL 验证版本是否不被远程服务器接受？")
+	if newListSize == 0: print("未能下载 allStoresInfoLite 文件\n当前的 REL 验证版本是否不被远程服务器接受？")
 
 def down(rtl, isSpecial):
 	global upb, exce; spr = "R" + rtl + ".png"; sx = sbn + rtl + ".png"
