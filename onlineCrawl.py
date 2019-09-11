@@ -7,7 +7,7 @@ removeList = ['B', 'I', 'O', 'S']
 alphabet = [t for t in alphabet if t not in removeList]
 numlist = [chr(i) for i in range(48, 58)]
 flist = numlist + alphabet
-psbhd = ['V', 'X', 'Y']
+psbhd = ['W', 'X', 'Y']
 ans = list()
 
 def title(partno):
