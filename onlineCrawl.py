@@ -7,7 +7,7 @@ removeList = ['B', 'I', 'O', 'S']
 alphabet = [t for t in alphabet if t not in removeList]
 numlist = [chr(i) for i in range(48, 58)]
 flist = numlist + alphabet
-psbhd = ['W']
+psbhd = ['V', 'X', 'Y']
 ans = list()
 
 def title(partno):
@@ -52,7 +52,7 @@ while True:
 			uOut = "在第 " + str(a + 1) + "/" + str(len(ans)) + " 个找到了新产品 " + ans[a] + "\n"
 			if len(setans) == 0: print(uOut); upb += uOut; outPlus += ", " + ans[a]
 		if len(setans) != 0 and len(newList) > 0: print(setans[a], title(setans[a]))
-		elif a + 1 == len(ans) or ans[a][2] != ans[a + 1][2]:
+		elif a + 1 == len(ans) or len(newList) > 10:
 			if len(newList) < 4:
 				for e in range(len(newList)):
 					IFTTT.pushbots(
@@ -61,12 +61,12 @@ while True:
 			else:
 				for nt in range(len(newList)): 
 					print("正在从远端取得商品名称... [" + str(nt + 1) + "/" + str(len(newList)) + "]\r", end = "")
-					sys.stdout.flush(); newTitle.append("[" + newList[nt] + "] " + title(newList[nt]))
+					sys.stdout.flush(); newTitle.append("[" + newList[nt] + "] " + title(newList[nt]) + " ")
 				existProduct = -1; print()
 				for imt in range(len(newList)):
-					print("正在确定远端产品图片... [" + str(imt + 1) + "/" + str(len(newList)) + "]\r", end = "")
+					print("正在检查产品图片存在性... [" + str(imt + 1) + "/" + str(len(newList)) + "]\r", end = "")
 					try: imo = urllib.request.urlopen(productImage(newList[imt]), timeout = 20)
-					except urllib.error.URLError: pass
+					except (timeout, urllib.error.URLError): pass
 					else: existProduct = imt; break
 				if existProduct == -1: outputImage = ""
 				else: outputImage = productImage(newList[existProduct]) 
