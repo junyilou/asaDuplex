@@ -29,18 +29,20 @@ def asa():
 	if not filecmp.cmp(newLocation, listLoc) and orgListSize > 1024 and newListSize > 1024 :
 		deltaListSize = newListSize - orgListSize
 		if deltaListSize % 83:
-			fileLines = []; fileDiff = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><pre>'
+			fileLines = []; changeTime = time.strftime("%Y%m%d-%H%M%S", time.localtime())
+			fileDiff = '<!DOCTYPE html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>'
+			fileDiff += "storeList changeLog " + changeTime + "</title></head><body><pre><code>"
+			fileDiff += "Generated at " + changeTime + " GMT+8\n"
 			for formatFile in [newLocation, listLoc]:
 				formatJSON = json.dumps(json.loads(fileOpen(formatFile)), ensure_ascii = False, indent = 2)
 				fileLines.append(formatJSON.split("\n"))
 				if formatFile == listLoc: fileWrite(listLoc.replace(".json", "-format.json"), formatJSON)
 			for line in difflib.unified_diff(fileLines[0], fileLines[1]): fileDiff += line + "\n"
-			changeTime = time.strftime("%Y%m%d-%H%M%S", time.localtime())
-			fileWrite(rpath + "changeLog-" + changeTime + ".html", fileDiff + "</pre>")
+			fileWrite(rpath + "changeLog-" + changeTime + ".html", fileDiff + "</code></pre></body></html>")
 			os.system("mv " + newLocation + " " + listLoc.replace(".json", "-" + changeTime + ".json"))
-			os.system("mv " + rpath + "changeLog-" + changeTime + ".html /root/www/")
+			os.system("mv " + rpath + "changeLog-" + changeTime + ".html /root/www/changeLog-latest.html")
 			IFTTT.pushbots("于 " + time.strftime("%Y 年 %-m 月 %-d 日 %-H:%M ", time.localtime()) 
-				+ "检测到新文件，大小差异 " + str(deltaListSize) + " 字节，编号 changeLog-" + changeTime, "Apple Store app 文件更新", 
+				+ "检测到更新，大小差异 " + str(deltaListSize) + " 字节，编号 changeLog-" + changeTime, "Apple Store app 文件更新", 
 				"https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_small_2x.jpg", 
 				"raw", masterKey[0], 0)
 		else: os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
