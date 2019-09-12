@@ -1793,8 +1793,8 @@
               "storeNumber": "R126",
               "countryCode": "US",
               "storeName": "The Woodlands",
-              "latitude": "30.16456574",
-              "longitude": "-95.45586294",
+              "latitude": "30.1645",
+              "longitude": "-95.4555",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -5202,7 +5202,7 @@
               "timeZone": "America/Chicago",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "132 South Avenue\nBloomington,MN 55425 ",
+              "storeAddress": "114 West Market\nBloomington,MN 55425 ",
               "phoneNumber": "(952) 229-5630"
             },
             {
