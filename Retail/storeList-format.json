@@ -10588,6 +10588,25 @@
               "enableInStoreMode": true,
               "storeAddress": "Avenida Vasco de Quiroga 3800\nLomas de Santa Fe, Antigua Mina de Totolapa;Del. Cuajimalpa,CP 05109",
               "phoneNumber": "01 55 1037 6400"
+            },
+            {
+              "storeNumber": "R740",
+              "countryCode": "MX",
+              "storeName": "Antara",
+              "latitude": "19.4326",
+              "longitude": "-99.1332",
+              "storeRadius": "70",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R740.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Mexico City",
+              "timeZone": "Mexico/General",
+              "scanAndBuy": "SCAN",
+              "enableInStoreMode": true,
+              "storeAddress": "Av. Ejército Nacional #843-B\nCentro Comercial Antara Fashion Mall, Miguel Hidalgo;Mexico City,11520",
+              "phoneNumber": "01 55 4739 7890"
             }
           ]
         }
