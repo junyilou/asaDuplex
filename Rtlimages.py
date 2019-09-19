@@ -43,7 +43,7 @@ def asa():
 			os.system("mv " + rpath + "changeLog-" + changeTime + ".html /root/www/changeLog-latest.html")
 			IFTTT.pushbots("于 " + time.strftime("%Y 年 %-m 月 %-d 日 %-H:%M ", time.localtime()) 
 				+ "检测到更新，大小差异 " + str(deltaListSize) + " 字节，编号 changeLog-" + changeTime, "Apple Store app 文件更新", 
-				"https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_small_2x.jpg", 
+				"https://www.apple.com/jp/retail/store/includes/marunouchi/drawer/images/store-drawer-tile-1_small_2x.jpg", 
 				"raw", masterKey[0], 0)
 		else: os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
 	else: 
