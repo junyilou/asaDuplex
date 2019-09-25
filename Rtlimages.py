@@ -100,5 +100,5 @@ while True:
 			print(pid + " 已完成 " + str(int((j + 1) * 100 / totalStore)) + "%, 目前 R" + "%03d" % j + "\r", end = "")
 			sys.stdout.flush()
 	print(); asa(); rTime += 1
-	print("\n控制台 " + time.strftime("%F %T", time.localtime()) + "\n" + logTable.get_string())
+	print(logTable.get_string(title = "控制台 " + time.strftime("%F %T", time.localtime())), "\n")
 	time.sleep(600)
