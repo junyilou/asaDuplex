@@ -1,4 +1,4 @@
-import os, sys, json, time, IFTTT, PID, filecmp, difflib
+import os, sys, json, time, IFTTT, PID, filecmp, difflib, prettytable
 
 def fileOpen(fileloc):
 	try: defOpen = open(fileloc); defReturn = defOpen.read(); defOpen.close()
@@ -8,7 +8,7 @@ def fileOpen(fileloc):
 def fileWrite(fileloc, writer): defWrite = open(fileloc, "w"); defWrite.write(writer); defWrite.close()
 
 def asa():
-	global upb, asaVersion
+	global logTable, asaVersion
 	formatAsaVersion = int("".join(asaVersion.split("."))); print("正在确认远程 Apple Store app 版本...")
 	os.system("wget -t 100 -T 5 -q -O " + rpath + "iTunesLookup https://itunes.apple.com/cn/lookup?id=375380948")
 	try: remoteAsaVersion = int("".join(json.loads(fileOpen(rpath + "iTunesLookup"))["results"][0]["version"].split(".")))
@@ -16,8 +16,8 @@ def asa():
 	if remoteAsaVersion > 0 and remoteAsaVersion < 100: remoteAsaVersion *= 10
 	if remoteAsaVersion > formatAsaVersion:
 		asaVersion = ".".join(list(str(remoteAsaVersion)))
-		asaupd = "从远程获得了新的 Apple Store app 版本 " + asaVersion
-		upb += asaupd + "\n"; print(asaupd)
+		logTable.add_row(["000", "appVersion", time.strftime("%F %T", time.localtime()), asaVersion])
+		print("从远程获得了新的 Apple Store app 版本 " + asaVersion)
 	print("正在确认远程 Apple Store app 文件...")
 	listLoc = rpath + "storeList.json"
 	orgListSize = os.path.getsize(listLoc)
@@ -41,6 +41,7 @@ def asa():
 			fileWrite(rpath + "changeLog-" + changeTime + ".html", fileDiff + "</code></pre></body></html>")
 			os.system("mv " + newLocation + " " + listLoc.replace(".json", "-" + changeTime + ".json"))
 			os.system("mv " + rpath + "changeLog-" + changeTime + ".html /root/www/changeLog-latest.html")
+			logTable.add_row(["000", "storeList", time.strftime("%F %T", time.localtime()), str(deltaListSize)])
 			IFTTT.pushbots("于 " + time.strftime("%Y 年 %-m 月 %-d 日 %-H:%M ", time.localtime()) 
 				+ "检测到更新，大小差异 " + str(deltaListSize) + " 字节，编号 changeLog-" + changeTime, "Apple Store app 文件更新", 
 				"https://www.apple.com/jp/retail/store/includes/marunouchi/drawer/images/store-drawer-tile-1_small_2x.jpg", 
@@ -52,7 +53,7 @@ def asa():
 	if newListSize == 0: print("未能下载 allStoresInfoLite 文件\n当前的 REL 验证版本是否不被远程服务器接受？")
 
 def down(rtl, isSpecial):
-	global upb, exce; spr = "R" + rtl + ".png"; sx = sbn + rtl + ".png"
+	global logTable, exce; spr = "R" + rtl + ".png"; sx = sbn + rtl + ".png"
 	if os.path.isfile(sx): oldsize = os.path.getsize(sx)
 	else: oldsize = 0
 	os.system("wget -U ASA/" + asaVersion + " -t 100 -T 5 -q -N -P " + rpath + "Pictures/ " + dieter + spr)
@@ -62,8 +63,7 @@ def down(rtl, isSpecial):
 		try: rname = storejson['name'][rtl]; rflag = storejson['flag'][rtl]; rnso = storejson['nso'][rtl]
 		except KeyError: rname = "Store"; rflag = ""; rnso = ""
 		if rnso != "" and rnso != "TBC": rnso = "这家零售店最早开幕于 " + time.strftime("%Y 年 %-m 月 %-d 日", time.strptime(rnso, "%Y-%m-%d")) + "。"
-		pushRaw = "Apple " + rname + " (R" + rtl + ") 的图片更新，大小为 " + str(int(newsize / 1024)) + " KB"
-		upb += pushRaw + "\n"; print(pushRaw)
+		logTable.add_row([rtl, rname, time.strftime("%F %T", time.localtime()), str(int(newsize / 1024)) + " KB"])
 		if isSpecial: exce += rtl + ", "
 		tellRaw = "零售店编号 R" + rtl + "，新图片的大小是 " + str(int(newsize / 1024)) + " KB。" + rnso
 		imageURL = dieter + spr + "?output-format=jpg"
@@ -74,14 +74,16 @@ def down(rtl, isSpecial):
 			if newsize == 0: print(pid + " 检查到 " + pname + " 的图片服务器中不存在")
 			else: print(pid + " 检查到 "+ pname + " 的图片没有更新")
 
-global upb, asaVersion;
+global logTable, asaVersion;
 totalStore = 901; asaVersion = "5.5.0"
-pid = str(os.getpid()); upb = exce = ""; arg = rTime = 0
+pid = str(os.getpid()); exce = ""; arg = rTime = 0
 for m in sys.argv[1:]: arg += 1
 rpath = os.path.expanduser('~') + "/Retail/"; masterKey = IFTTT.getkey()
 sbn = rpath + "Pictures/R"; storejson = json.loads(fileOpen(rpath + "storeInfo.json"))
 PID.addCurrent(os.path.basename(__file__), os.getpid())
 dieter = "https://rtlimages.apple.com/cmc/dieter/store/16_9/"
+logTable = prettytable.PrettyTable()
+logTable.field_names = ["ID", "Name", "Time", "Note"]; logTable.sortby = "ID"
 
 if arg == 1 and sys.argv[1] == "0": asa(); exit()
 
@@ -98,5 +100,5 @@ while True:
 			print(pid + " 已完成 " + str(int((j + 1) * 100 / totalStore)) + "%, 目前 R" + "%03d" % j + "\r", end = "")
 			sys.stdout.flush()
 	print(); asa(); rTime += 1
-	print(upb + time.strftime("%F %T", time.localtime()) + "\n")
+	print("\n控制台 " + time.strftime("%F %T", time.localtime()) + "\n" + logTable.get_string())
 	time.sleep(600)
