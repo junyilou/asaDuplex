@@ -1227,8 +1227,8 @@
               "storeNumber": "R095",
               "countryCode": "US",
               "storeName": "Fifth Avenue",
-              "latitude": "40.7635",
-              "longitude": "-73.9728",
+              "latitude": "40.764479",
+              "longitude": "-73.973211",
               "storeRadius": "40",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -5190,8 +5190,8 @@
               "storeNumber": "R007",
               "countryCode": "US",
               "storeName": "Mall of America",
-              "latitude": "44.85343",
-              "longitude": "-93.24265",
+              "latitude": "44.8543",
+              "longitude": "-93.244386",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -5595,8 +5595,8 @@
               "storeNumber": "R168",
               "countryCode": "US",
               "storeName": "Columbia",
-              "latitude": "39.216300074022",
-              "longitude": "-76.8597116801445",
+              "latitude": "39.216",
+              "longitude": "-76.85995",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -6000,8 +6000,8 @@
               "storeNumber": "R264",
               "countryCode": "US",
               "storeName": "Oxmoor",
-              "latitude": "38.24713",
-              "longitude": "-85.60974",
+              "latitude": "38.247278",
+              "longitude": "-85.609467",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -10141,14 +10141,14 @@
           ]
         },
         {
-          "stateName": "福岡県",
+          "stateName": "",
           "stores": [
             {
               "storeNumber": "R048",
               "countryCode": "JP",
-              "storeName": "福岡天神",
-              "latitude": "33.58667",
-              "longitude": "130.39752",
+              "storeName": "福岡",
+              "latitude": "33.587908",
+              "longitude": "130.397033",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -10159,8 +10159,8 @@
               "timeZone": "Asia/Tokyo",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "中央区天神2-3-24\n天神ルーチェ\n福岡市,810-0001",
-              "phoneNumber": "092-736-6800"
+              "storeAddress": "中央区天神2-5-19\n福岡市,810-0001",
+              "phoneNumber": "092-778-0200"
             }
           ]
         },
@@ -10593,20 +10593,20 @@
               "storeNumber": "R740",
               "countryCode": "MX",
               "storeName": "Antara",
-              "latitude": "19.4326",
-              "longitude": "-99.1332",
+              "latitude": "19.439993",
+              "longitude": "-99.203144",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R740.png"
               ],
               "secureImageURL": [],
-              "locationText": "Mexico City",
+              "locationText": "Ciudad de México",
               "timeZone": "Mexico/General",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "Av. Ejército Nacional #843-B\nCentro Comercial Antara Fashion Mall, Miguel Hidalgo;Mexico City,11520",
-              "phoneNumber": "01 55 4739 7890"
+              "storeAddress": "Av. Ejército Nacional #843-B\nCentro Comercial Antara Fashion Hall, Miguel Hidalgo;Ciudad de México,11520",
+              "phoneNumber": "01 55 4739 3890"
             }
           ]
         }
