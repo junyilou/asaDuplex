@@ -18,11 +18,10 @@ def title(partno):
 
 def productImage(partno): return "https://as-images.apple.com/is/" + partno + "?wid=1280"
 
-for k in range(len(psbhd)):
-	for i in range(len(flist)):
-		for j in range(len(flist)):
-			slct = psbhd[k] + flist[i] + flist[j]
-			ans.append('M' + slct + '2')
+for k in psbhd:
+	for i in flist:
+		for j in flist:
+			ans.append('M' + k + i + j + '2')
 
 mOpen = open(os.path.expanduser('~') + "/savedProduct.txt")
 mRead = mOpen.read(); mOpen.close(); mSplit = mRead.split(", ")
