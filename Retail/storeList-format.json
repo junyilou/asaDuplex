@@ -7113,8 +7113,8 @@
               "storeNumber": "R308",
               "countryCode": "GB",
               "storeName": "Highcross",
-              "latitude": "52.63711",
-              "longitude": "-1.13794",
+              "latitude": "52.637029",
+              "longitude": "-1.137136",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -10667,7 +10667,7 @@
               "timeZone": "Asia/Singapore",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "78 Airport Boulevard\nSingapore,819666",
+              "storeAddress": "78 Airport Boulevard\n#02-234\nSingapore,819666",
               "phoneNumber": "1800 407 4948"
             },
             {
