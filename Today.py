@@ -1,6 +1,6 @@
-import os, sys, json, time, IFTTT, retailData, PID
+import os, sys, json, time, IFTTT, PID
+from retailData import filename, cityname
 
-filename, cityname = retailData.filename, retailData.cityname
 #filename, cityname = ['qibao', 'apmhongkong', 'xinyia13'], ['@上海', '#香港', '&台湾'] #Debug
 num, allMainlandChina = len(filename), ""
 for rep in range(num): 

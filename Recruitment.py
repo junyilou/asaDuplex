@@ -1,10 +1,8 @@
-import json, os, sys, time, IFTTT, retailData, PID
+import json, os, sys, time, IFTTT, PID
+from retailData import stateCHN, stateCode, stateEmoji, specialistCode
 
 rpath, wAns = os.path.expanduser('~') + "/Retail/Jobs/", ""
 imageURL = "https://www.apple.com/jobs/images/retail/hero/desktop.jpg"
-
-stateCHN, stateCode = retailData.stateCHN, retailData.stateCode
-stateEmoji, specialistCode = retailData.stateEmoji, retailData.specialistCode
 #stateCHN, stateCode, stateEmoji, specialistCode = ["澳大利亚"], ["AU"], ["🇦🇺"], [7991] #Debug
 
 PID.addCurrent(os.path.basename(__file__), os.getpid())
