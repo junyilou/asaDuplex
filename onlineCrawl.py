@@ -51,7 +51,7 @@ while True:
 			uOut = "在第 " + str(a + 1) + "/" + str(len(ans)) + " 个找到了新产品 " + ans[a] + "\n"
 			if len(setans) == 0: print(uOut); upb += uOut; outPlus += ", " + ans[a]
 		if len(setans) != 0 and len(newList) > 0: print(setans[a], title(setans[a]))
-		elif a + 1 == len(ans) or len(newList) > 10:
+		elif a + 1 == len(ans) or len(newList) > 9:
 			if len(newList) < 4:
 				for e in range(len(newList)):
 					IFTTT.pushbots(
