@@ -2,17 +2,20 @@ import urllib.request, urllib.error, os, sys, time, ssl, IFTTT, PID
 from bs4 import BeautifulSoup
 from socket import timeout
 
+userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) \
+AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"
 alphabet = [chr(i) for i in range(65, 90)]
 removeList = ['B', 'I', 'O', 'S']
 alphabet = [t for t in alphabet if t not in removeList]
 numlist = [chr(i) for i in range(48, 58)]
 flist = numlist + alphabet
-psbhd = ['W', 'X', 'Y']
+psbhd = ['W', 'X']
 ans = list()
 
 def title(partno):
-	url = "https://www.apple.com/cn/shop/product/" + partno
-	try: soup = BeautifulSoup(urllib.request.urlopen(url, timeout = 20), features = "html.parser")
+	url = "https://www.apple.com.cn/shop/product/" + partno
+	req = urllib.request.Request(url, headers={'User-Agent': userAgent})
+	try: soup = BeautifulSoup(urllib.request.urlopen(req, timeout = 20), features = "html.parser")
 	except: return "[获取产品名称出现错误]"
 	else: return soup.title.string.replace(" - Apple (中国大陆)", "").replace(" - Apple", "").replace("购买 ", "")
 
@@ -39,8 +42,9 @@ while True:
 	runtim += 1; outPlus = ""
 	newList = list(); newTitle = list(); rmList = list()
 	for a in range(len(ans)):
-		url = 'https://www.apple.com/cn/shop/product/' + ans[a]
-		try: p = urllib.request.urlopen(url, timeout = 20)
+		url = 'https://www.apple.com.cn/shop/product/' + ans[a]
+		req = urllib.request.Request(url, headers={'User-Agent': userAgent})
+		try: p = urllib.request.urlopen(req, timeout = 20)
 		except urllib.error.URLError as e:
 			if hasattr(e, "code"):
 				print("[" + str(runtim) + "] " + ans[a] + " " + str(e.code) + " [" + str(a + 1) + "/" + str(len(ans)) + "]\r", end = "")
