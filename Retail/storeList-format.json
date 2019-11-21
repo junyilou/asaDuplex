@@ -2966,7 +2966,7 @@
             {
               "storeNumber": "R099",
               "countryCode": "US",
-              "storeName": "Stanford",
+              "storeName": "Stanford Shopping Center",
               "latitude": "37.44177",
               "longitude": "-122.172489",
               "storeRadius": "70",
@@ -3376,8 +3376,8 @@
               "storeNumber": "R289",
               "countryCode": "US",
               "storeName": "Brandon",
-              "latitude": "27.93297",
-              "longitude": "-82.32677",
+              "latitude": "27.9328",
+              "longitude": "-82.3264",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -4221,7 +4221,7 @@
               "timeZone": "America/New_York",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "94 Derby Street\nHingham,MA 02043 ",
+              "storeAddress": "94 Derby Street\nSuite #271\nHingham,MA 02043 ",
               "phoneNumber": "(781) 556-0400"
             },
             {
