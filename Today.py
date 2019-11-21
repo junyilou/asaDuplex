@@ -1,4 +1,4 @@
-import os, json, time, IFTTT, PID
+import os, json, time, IFTTT
 from retailData import filename, cityname
 
 #filename, cityname = ['qibao', 'apmhongkong', 'xinyia13'], ['@上海', '#香港', '&台湾'] #Debug

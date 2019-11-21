@@ -1,4 +1,4 @@
-import os, time, json, filecmp, difflib, IFTTT
+import os, time, json, filecmp, difflib, IFTTT, PID
 
 asaVersion = "5.6.0"
 rpath = os.path.expanduser('~') + "/Retail/"
