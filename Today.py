@@ -1,4 +1,4 @@
-import os, sys, json, time, IFTTT, PID
+import os, json, time, IFTTT, PID
 from retailData import filename, cityname
 
 #filename, cityname = ['qibao', 'apmhongkong', 'xinyia13'], ['@上海', '#香港', '&台湾'] #Debug
@@ -6,9 +6,12 @@ num, allMainlandChina = len(filename), ""
 for rep in range(num): 
 	cityname[rep] = cityname[rep].replace("@", "🇨🇳").replace("#", "🇭🇰").replace("$", "🇲🇴").replace("&", "🇹🇼")
 
+rpath = os.path.expanduser('~') + "/Retail/"
+
 def down(fname, region): 
 	os.system("wget -q -t 100 -T 3 -O " + rpath + fname + ".json --no-check-certificate " +
 	"'https://www.apple.com/today-bff/landing/store?stageRootPath=/"+ region + "&storeSlug=" + fname + "'")
+
 def home():
 	wAns = ""; mOpen = open(rpath + "savedEvent.txt"); mark = mOpen.read(); mOpen.close()
 	for d in range(num):
@@ -19,9 +22,7 @@ def home():
 			if "🇲🇴" in cityname[d]: down(filename[d], "mo")
 			if "🇹🇼" in cityname[d]: down(filename[d], "tw")
 			cdsize = os.path.getsize(rpath + filename[d] + ".json")
-		print("正在下载 已完成 " + str(int((d + 1) * 100 / num)) + "%\r", end = "")
-		sys.stdout.flush()
-	print()
+		print("正在下载" + cityname[d] + "的活动时间表...")
 	for i in range(num):
 		rOpen = open(rpath + filename[i] + ".json"); isMulti = False
 		raw = rOpen.read(); rJson = json.loads(raw.replace("\u2060", ""))
@@ -44,16 +45,9 @@ def home():
 				pushAns = pushAns.replace('"', "").replace("'", "").replace("：", " - ")
 				print(pushAns)
 				pictureURL = rCourse["backgroundMedia"]["images"][0]["landscape"]["source"] + "?output-format=jpg"
-				IFTTT.pushbots(pushAns, "", pictureURL, "tech", IFTTT.getkey(), 0)
-		print("正在比较 已完成 " + str(int((i + 1) * 100 / num)) + "%\r", end = "")
-		sys.stdout.flush()
-	mWrite = open(rpath + "savedEvent.txt", "w"); mWrite.write(mark + wAns); mWrite.close(); print()
-
-PID.addCurrent(os.path.basename(__file__), os.getpid())
-rpath = os.path.expanduser('~') + "/Retail/"
-
-while True:
-	home()
+				IFTTT.pushbots(pushAns, "", pictureURL, "tech", IFTTT.getkey()[0], 0)
+	mWrite = open(rpath + "savedEvent.txt", "w"); mWrite.write(mark + wAns); mWrite.close()
 	for rm in range(num): os.system("rm " + rpath + filename[rm] + ".json")
-	print(time.strftime("%F %T", time.localtime()))
-	time.sleep(10800)
+
+home()
+print(time.strftime("%F %T", time.localtime()))
