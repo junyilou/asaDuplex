@@ -15,7 +15,6 @@
 * retailData.py 是 Recruitment.py 和 Today.py 的依赖文件
 
 ### Code
-* inStock.py: 通过产品部件号码检查 Apple Store 店内库存状况
 * onlineCrawl.py: 刷新 Apple Online Store 新上架的 Apple 自家产品
 * Recruitment.py: 刷新全球招聘 Specialist 职位的新零售店
 * Rtlimages.py: 从 rtlimages.apple.com 刷新最新 Apple Store 零售店图片
