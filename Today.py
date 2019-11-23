@@ -1,13 +1,19 @@
-import os, json, time, IFTTT
+import os, json, time, logging, IFTTT
 from retailData import filename, cityname
 
 rpath = os.path.expanduser('~') + "/Retail/"; allChina = len(filename)
 wAns = ""; mOpen = open(rpath + "savedEvent.txt"); mark = mOpen.read(); mOpen.close()
 
+logging.basicConfig(
+	filename = os.path.expanduser('~') + "/logs/" + os.path.basename(__file__) + ".log",
+	format = '[%(asctime)s %(levelname)s] %(message)s',
+	level = logging.DEBUG, filemode = 'a', datefmt = '%F %T %p')
+logging.info("程序启动")
+
 for fn in filename:
-	os.system("wget -q -t 20 -T 3 -O " + rpath + fn + ".json --no-check-certificate " +
+	logging.info("正在下载活动时间表文件: " + fn)
+	os.system("wget -t 20 -T 3 -O " + rpath + fn + ".json --no-check-certificate " +
 		"'https://www.apple.com/today-bff/landing/store?stageRootPath=/cn&storeSlug=" + fn + "'")
-	print("Downloading schedule file: " + fn + ".json")
 
 for fn, cyn in zip(filename, cityname):
 	rOpen = open(rpath + fn + ".json")
@@ -16,20 +22,26 @@ for fn, cyn in zip(filename, cityname):
 	for rTitle in rJson:
 		rCourse = rJson[rTitle]; singleName = rCourse["name"]
 		if not singleName in mark and not singleName in wAns: 
+			logging.info("在" + cyn + "找到了新活动: " + singleName)
 			wAns += singleName + ",\n"; citAns = cyn
 			for sn, csn in zip(filename, cityname):
+				logging.info("正在文件 " + sn + ".json 中寻找是否有相同的活动")
 				eOpen = open(rpath + sn + ".json"); eAns = eOpen.read()
 				eJson = json.loads(eAns.replace("\u2060", ""))
 				eJson = eJson["courses"]; eOpen.close()
 				for eTitle in eJson:
 					eCourse = eJson[eTitle]
 					if eCourse["name"] == singleName and not csn in citAns:
+						logging.info("找到文件 " + sn + ".json 中有相同的活动")
 						citAns += "、" + csn
 			pushAns = "#TodayatApple " + citAns + "有新活动: " + singleName
 			pushAns = pushAns.replace('"', "").replace("'", "").replace("：", " - ")
-			print(pushAns)
+			logging.info("[运行结果] " + pushAns)
 			pictureURL = rCourse["backgroundMedia"]["images"][0]["landscape"]["source"]
 			IFTTT.pushbots(pushAns, "", pictureURL, "tech", IFTTT.getkey()[0], 0)
-mWrite = open(rpath + "savedEvent.txt", "w"); mWrite.write(mark + wAns); mWrite.close()
+if wAns != "":
+	logging.info("正在更新 savedEvent 文件")
+	mWrite = open(rpath + "savedEvent.txt", "w"); mWrite.write(mark + wAns); mWrite.close()
+
 for rm in filename: os.system("rm " + rpath + rm + ".json")
-print(time.strftime("%F %T", time.localtime()))
+logging.info("程序结束")
