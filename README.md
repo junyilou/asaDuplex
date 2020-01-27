@@ -23,6 +23,7 @@
 * allStoresInfoLite.py: 从 mobileapps.apple.com 刷新 Apple Store 零售店信息
 * storeDistance.py: 通过 storeList.json 中的坐标计算全球零售店距离并排序
 * Today.py: 取得中国内地最新 Today at Apple 活动数据
+* specialHours: 获得中国内地零售店的特别营业时间动态更新
 
 
 ### Text
