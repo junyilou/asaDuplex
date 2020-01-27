@@ -129,7 +129,7 @@ if not filecmp.cmp(rpath + "storeHours-new.json", rpath + "storeHours.json"):
 	for ftext in [fileOpen(newLocation), fileOpen(listLoc)]:
 		fileLines.append(ftext.split("\n"))
 	for line in difflib.unified_diff(fileLines[1], fileLines[0]): fileDiff += line + "\n"
-	fileWrite("/Users/Junyi_Lou/Desktop/storeHours.html", fileDiff + "</code></pre></body></html>")
+	fileWrite("/root/www/storeHours.html", fileDiff + "</code></pre></body></html>")
 	os.system("mv " + listLoc + " " + listLoc.replace(".json", "-" + runtime + ".json"))
 	os.system("mv " + newLocation + " " + listLoc)
 	logging.info("文件生成完成，上一版本已保存至 storeHours-" + runtime + ".json")
