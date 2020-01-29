@@ -107,9 +107,16 @@ for sn, sid in zip(storename, storeID):
 newLocation = rpath + "storeHours-new.txt"
 listLoc = rpath + "storeHours.txt"
 
-fileWrite(rpath + "storeHours-new.txt", specialist)
+fileWrite(newLocation, specialist)
 
-if not filecmp.cmp(rpath + "storeHours-new.txt", rpath + "storeHours.txt"):
+orgf = fileOpen(listLoc).split("\n"); rem = orgf[2:-1]; cor = orgf[:2]
+for m in rem:
+	mDate = datetime.datetime.strptime(m.split(") 在 ")[1].split("(周")[0], '%Y年%m月%d日')
+	if datetime.datetime.now() - mDate > datetime.timedelta(days = 1): cor.append(m)
+fileWrite(listLoc, "\n".join(cor) + "\n")
+
+
+if not filecmp.cmp(newLocation, listLoc):
 	logging.info("检测到有文件变化，正在生成 changeLog")
 	fileLines = []
 	fileDiff = '<!DOCTYPE html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>'
@@ -117,7 +124,7 @@ if not filecmp.cmp(rpath + "storeHours-new.txt", rpath + "storeHours.txt"):
 	fileDiff += "Generated at " + runtime + " GMT+8\n"
 	for ftext in [fileOpen(newLocation), fileOpen(listLoc)]:
 		fileLines.append(ftext.split("\n"))
-	for line in difflib.unified_diff(fileLines[0], fileLines[1]): fileDiff += line + "\n"
+	for line in difflib.unified_diff(fileLines[1], fileLines[0]): fileDiff += line + "\n"
 	fileWrite("/root/www/storeHours.html", fileDiff + "</code></pre></body></html>")
 	os.system("mv " + listLoc + " " + listLoc.replace(".txt", "-" + runtime + ".txt"))
 	os.system("mv " + newLocation + " " + listLoc)
