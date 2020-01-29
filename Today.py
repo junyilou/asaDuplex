@@ -1,8 +1,8 @@
 import os, json, time, logging, IFTTT
 from retailData import filename, storename
 
-rpath = os.path.expanduser('~') + "/Retail/"; allChina = len(filename)
-wAns = ""; mOpen = open(rpath + "savedEvent.txt"); mark = mOpen.read(); mOpen.close()
+rpath, wAns, allChina = os.path.expanduser('~') + "/Retail/", "", len(filename)
+with open(rpath + "savedEvent.txt") as m: mark = m.read()
 
 logging.basicConfig(
 	filename = os.path.expanduser('~') + "/logs/" + os.path.basename(__file__) + ".log",
@@ -16,9 +16,8 @@ for fn in filename:
 		"'https://www.apple.com/today-bff/landing/store?stageRootPath=/cn&storeSlug=" + fn + "'")
 
 for fn, cyn in zip(filename, storename):
-	rOpen = open(rpath + fn + ".json")
-	raw = rOpen.read(); rJson = json.loads(raw.replace("\u2060", ""))
-	rJson = rJson["courses"]; rOpen.close()
+	with open(rpath + fn + ".json") as r:
+		raw = r.read(); rJson = json.loads(raw.replace("\u2060", ""))["courses"]
 	for rTitle in rJson:
 		rCourse = rJson[rTitle]; singleName = rCourse["name"]
 		if not singleName in mark and not singleName in wAns: 
@@ -26,9 +25,9 @@ for fn, cyn in zip(filename, storename):
 			wAns += singleName + ",\n"; citAns = cyn
 			for sn, csn in zip(filename, storename):
 				logging.info("正在寻找 Apple " + csn + " 有没有相同的活动")
-				eOpen = open(rpath + sn + ".json"); eAns = eOpen.read()
-				eJson = json.loads(eAns.replace("\u2060", ""))
-				eJson = eJson["courses"]; eOpen.close()
+				with open(rpath + sn + ".json") as e: 
+					eAns = e.read()
+					eJson = json.loads(eAns.replace("\u2060", ""))["courses"]
 				for eTitle in eJson:
 					eCourse = eJson[eTitle]
 					if eCourse["name"] == singleName and not csn in citAns:
@@ -41,7 +40,8 @@ for fn, cyn in zip(filename, storename):
 			IFTTT.pushbots(pushAns, "Today at Apple 新活动", pictureURL, "raw", IFTTT.getkey()[0], 0)
 if wAns != "":
 	logging.info("正在更新 savedEvent 文件")
-	mWrite = open(rpath + "savedEvent.txt", "w"); mWrite.write(mark + wAns); mWrite.close()
+	with open(rpath + "savedEvent.txt", "w") as m:
+		m.write(mark + wAns)
 
 for rm in filename: os.system("rm " + rpath + rm + ".json")
 logging.info("程序结束")

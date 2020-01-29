@@ -26,8 +26,10 @@ for k in psbhd:
 		for j in flist:
 			ans.append('M' + k + i + j + '2')
 
-mOpen = open(os.path.expanduser('~') + "/savedProduct.txt")
-mRead = mOpen.read(); mOpen.close(); mSplit = mRead.split(", ")
+savedProduct = os.path.expanduser('~') + "/savedProduct.txt"
+with open(savedProduct) as fin:
+	mSplit = fin.read().split(", ")
+
 for r in range(len(mSplit)): 
 	mSplit[r] = mSplit[r].replace("\n", "")
 	try: ans.remove(mSplit[r])
@@ -77,11 +79,11 @@ while True:
 			newList = list(); newTitle = list()
 	if len(setans) != 0: exit()
 	if outPlus != "":
-		mOpen = open(os.path.expanduser('~') + "/savedProduct.txt")
-		mRead = mOpen.read(); mOpen.close(); mSort = mRead + outPlus
-		mSort = mSort.split(", "); mSort.sort(); mSort = ", ".join(mSort)
-		mWrite = open(os.path.expanduser('~') + "/savedProduct.txt", "w")
-		mWrite.write(mSort); mWrite.close()
+		with open(savedProduct) as fin:
+			mSort = (fin.read() + outPlus).split(", ")
+		mSort.sort(); mSort = ", ".join(mSort)
+		with open(savedProduct, "w") as fout:
+			fout.write(mSort)
 	if len(setans) == 0: print("\n" + upb + time.strftime("%F %T", time.localtime()) + "\n")
 	for rm in range(len(rmList)): ans.remove(rmList[rm])
 	rmList = list(); time.sleep(43200)

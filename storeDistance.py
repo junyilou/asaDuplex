@@ -10,8 +10,9 @@ def haversine(lon1, lat1, lon2, lat2):
 	return c * r
 
 rpath = os.path.expanduser('~') + "/Retail/"
-jOpen = open(rpath + "storeList.json"); jRead = json.loads(jOpen.read())
-jOpen.close(); countryState = jRead["countryStateMapping"]
+with open(rpath + "storeList.json") as j:
+	jRead = json.loads(j.read())
+countryState = jRead["countryStateMapping"]
 
 outList = list(); singleOut = ""
 
@@ -34,5 +35,5 @@ for j in sorted(outList, key = lambda short: short[0]):
 	if j[0] >= 1: singleOut += j[1] + str(round(j[0], 2)) + " km.\n"
 	else: singleOut += j[1] + str(round(j[0] * 1000, 2)) + " m.\n"
 
-ansWrite = open(rpath + "storeAns.txt", "w")
-ansWrite.write(singleOut); ansWrite.close()
+with open(rpath + "storeAns.txt", "w") as a:
+	a.write(singleOut)

@@ -11,13 +11,15 @@ def checkPID(pid):
 	else: return True
 
 def openFile(): 
-	f = open(os.path.expanduser("~") + "/pid.txt"); g = f.read(); f.close()
+	with open(os.path.expanduser("~") + "/pid.txt") as f:
+		g = f.read()
 	try: h = json.loads(g)
 	except ValueError: h = json.loads("{}")
 	return h
 
 def updtFile(v): 
-	u = open(os.path.expanduser("~") + "/pid.txt", "w"); u.write(v); u.close()
+	with open(os.path.expanduser("~") + "/pid.txt", "w") as u:
+		u.write(v)
 
 def remCurrent(fname):
 	cList = openFile()

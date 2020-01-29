@@ -11,13 +11,16 @@ logging.basicConfig(
 logging.info("程序启动")
 
 def fileOpen(fileloc):
-	try: defOpen = open(fileloc); defReturn = defOpen.read(); defOpen.close()
-	except IOError: 
+	try: 
+		with open(fileloc) as fin:
+			return fin.read()
+	except FileNotFoundError:
 		logging.error(fileloc + " 文件不存在")
 		return None
-	else: return defReturn
 
-def fileWrite(fileloc, writer): defWrite = open(fileloc, "w"); defWrite.write(writer); defWrite.close()
+def fileWrite(fileloc, writer): 
+	with open(fileloc, "w") as fout:
+		fout.write(writer)
 
 logging.info("正在确认远程 Apple Store app 版本...")
 os.system("wget -t 20 -T 5 -O " + rpath + "iTunesLookup https://itunes.apple.com/cn/lookup?id=375380948")

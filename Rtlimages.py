@@ -38,8 +38,8 @@ exce = ""; arg = rTime = 0
 masterKey = IFTTT.getkey()
 for m in sys.argv[1:]: arg += 1
 rpath = os.path.expanduser('~') + "/Retail/"
-sOpen = open(rpath + "storeInfo.json")
-storejson = json.loads(sOpen.read()); sOpen.close()
+with open(rpath + "storeInfo.json") as s:
+	storejson = json.loads(s.read())
 PID.addCurrent(os.path.basename(__file__), os.getpid())
 dieter = "https://rtlimages.apple.com/cmc/dieter/store/16_9/"
 

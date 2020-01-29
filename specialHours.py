@@ -37,13 +37,16 @@ def tdet(a, b):
 	else: return ftup(det)[0] + "小时 " + ftup(det)[1] + "分钟"
 
 def fileOpen(fileloc):
-	try: defOpen = open(fileloc); defReturn = defOpen.read(); defOpen.close()
-	except IOError: 
+	try: 
+		with open(fileloc) as fin:
+			return fin.read()
+	except FileNotFoundError:
 		logging.error(fileloc + " 文件不存在")
 		return None
-	else: return defReturn
 
-def fileWrite(fileloc, writer): defWrite = open(fileloc, "w"); defWrite.write(writer); defWrite.close()
+def fileWrite(fileloc, writer): 
+	with open(fileloc, "w") as fout:
+		fout.write(writer)
 
 transdict = {"周一": 0, "周二": 1, "周三": 2, "周四": 3, "周五": 4, "周六": 5, "周日": 6}
 revtrans = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]

@@ -6,13 +6,8 @@ def getkey():
 		print("请把 IFTTT Maker 的 Query Key 放在 ~/key.txt 中\n" +
 		"该文本文档的位置可以通过修改 IFTTT.py 的源代码来调整"); exit()
 	else: 
-		kOpen = open(os.path.expanduser('~') + "/key.txt")
-		masterKey = list()
-		for line in open(os.path.expanduser('~') + "/key.txt"):
-			line = kOpen.readline().replace("\n", "")
-			if line == "": break
-			masterKey.append(line)
-		kOpen.close()
+		with open (os.path.expanduser('~') + "/key.txt") as fin:
+			masterKey = [i for i in fin.read().split("\n") if i != ""]
 	return masterKey
 
 def pushbots(value1, value2, value3, trigger, keylist, debugMode):
