@@ -1,13 +1,13 @@
 import os, time, json, filecmp, difflib, logging, IFTTT
 
-asaVersion = "5.6.0"
+asaVersion = "5.7.0"
 rpath = os.path.expanduser('~') + "/Retail/"
 formatAsaVersion = int("".join(asaVersion.split(".")))
 
 logging.basicConfig(
 	filename = os.path.expanduser('~') + "/logs/" + os.path.basename(__file__) + ".log",
 	format = '[%(asctime)s %(levelname)s] %(message)s',
-	level = logging.DEBUG, filemode = 'a', datefmt = '%F %T %p')
+	level = logging.DEBUG, filemode = 'w', datefmt = '%F %T %p')
 logging.info("程序启动")
 
 def fileOpen(fileloc):
