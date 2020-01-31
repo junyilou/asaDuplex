@@ -38,12 +38,12 @@ os.system("mv " + listLoc + " " + listLoc.replace(".json", "-old.json"))
 newLocation = listLoc.replace(".json", "-old.json")
 os.system("wget -t 20 -T 5 -U ASA/" + asaVersion + " -O " + listLoc + " --header 'x-ma-pcmh: REL-" + 
 	asaVersion + "' https://mobileapp.apple.com/mnr/p/cn/retail/allStoresInfoLite")
-newListSize = os.path.getsize(listLoc)
-fileWrite(listLoc, fileOpen(listLoc).replace('?interpolation=progressive-bicubic&output-quality=85&output-format=jpg&resize=312:*', ''))
+newListSize = os.path.getsize(listLoc); dlc = fileOpen(listLoc)
+fileWrite(listLoc, dlc.replace('?interpolation=progressive-bicubic&output-quality=85&output-format=jpg&resize=312:*', ''))
 
 runTime = time.strftime("%F %T", time.localtime())
 
-if not filecmp.cmp(newLocation, listLoc) and orgListSize > 1024 and newListSize > 1024:
+if filecmp.cmp(newLocation, listLoc) == False and orgListSize and newListSize and "解放碑" in dlc:
 	logging.info("检测到有文件变化，正在生成 changeLog")
 	deltaListSize = newListSize - orgListSize
 	fileLines = []; changeTime = time.strftime("%Y%m%d-%H%M%S", time.localtime())
@@ -63,7 +63,9 @@ if not filecmp.cmp(newLocation, listLoc) and orgListSize > 1024 and newListSize 
 	IFTTT.pushbots(pushAns, "https://www.apple.com/jp/retail/store/includes/marunouchi/drawer/images/store-drawer-tile-1_small_2x.jpg",
 		"http://myv.ps/changeLog-latest.html", "linkraw", IFTTT.getkey()[0], 0)
 elif newListSize == 0: 
-	logging.error("未能下载 allStoresInfoLite 文件 " + runTime)
+	logging.error("未能成功下载 allStoresInfoLite 文件")
+elif dlc.count("解放碑") == 0:
+	logging.error("所下载的 allStoresInfoLite 文件似乎不是中文版本")
 else: 
 	os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
 	logging.info("没有发现 storeList 文件更新")
