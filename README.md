@@ -9,12 +9,6 @@
     *  通过 key.txt 获得 API Key
     *  最大支持 3 个自定义参数推送
     *  Debug Mode 供查错和修正
-* PID.py
-    *  通过保存在 pid.txt 中的 PID 检查进程是否退出
-    *  只需一行代码即可在其他代码中自动添加当前进程
-    *  在监测到进程已经退出后自动推送通知给用户
-
-* retailData.py 是 Recruitment.py 和 Today.py 的依赖文件
 
 ### Code
 * onlineCrawl.py: 刷新 Apple Online Store 新上架的 Apple 自家产品
