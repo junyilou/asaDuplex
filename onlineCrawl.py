@@ -78,8 +78,8 @@ for a in range(amount):
 		newList.append(ans[a]); outPlus += ", " + ans[a]
 
 	if a + 1 == amount or len(newList) > 9:
-		if len(newList) < 4:
-			logging.info("累计新产品不超过 4 个，准备逐个输出")
+		if len(newList) > 0 and len(newList) < 4:
+			logging.info("累计新产品不超过 3 个，准备逐个输出")
 			for e in range(len(newList)):
 				pushAns = "Apple Online Store 更新了新产品：" + title(newList[e]) + "，产品部件号：" + newList[e] + "。"
 				logging.info("[运行结果] " + pushAns)
