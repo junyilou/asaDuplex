@@ -55,7 +55,7 @@ if sys.argv[1] == "normal":
 	for j in range(1, totalStore):
 		down("%03d" % j, False)
 		if j == a:
-			logging.info("已完成 " + str(a / 100) + "/9")
+			logging.info("已完成 " + str(int(a / 100)) + "/9")
 			a += 100
 	logging.info("程序结束")
 

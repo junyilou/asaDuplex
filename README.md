@@ -2,7 +2,7 @@
 
 所有 Python 代码要求使用 Python 3, 并不向下兼容 Python 2
 
-起初，这些代码大多通过 while True 和 time.sleep 自带计划任务，但现在正在逐渐改为一次执行代码，并要求用户在服务器配合 crontab 等计划命令使用。
+起初，这些代码大多通过 while True 和 time.sleep 自带计划任务，但现在均改为一次执行代码，并要求用户在服务器配合 crontab 等计划命令使用。
 
 ### 模块
 * IFTTT.py
@@ -23,5 +23,5 @@
 ### Text
 * savedEvent.txt: 由 Today.py 生成的，已经检测到并保存的 Today at Apple 活动列表
 * savedProduct.txt: 由 onlineCrawl.py 生成的，从 MT 开始的已知产品部件号列表
-* storeInfo.json: Apple Store 名称、ID 和所属国家或区域 emoji 旗帜
+* storeInfo.json: 部分 Apple Store 名称、店号和所属国家或区域 emoji 旗帜
 * storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的结果
