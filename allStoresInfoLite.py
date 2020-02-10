@@ -7,7 +7,7 @@ formatAsaVersion = int("".join(asaVersion.split(".")))
 logging.basicConfig(
 	filename = os.path.expanduser('~') + "/logs/" + os.path.basename(__file__) + ".log",
 	format = '[%(asctime)s %(levelname)s] %(message)s',
-	level = logging.DEBUG, filemode = 'w', datefmt = '%F %T %p')
+	level = logging.DEBUG, filemode = 'a', datefmt = '%F %T %p')
 logging.info("程序启动")
 
 def fileOpen(fileloc):
@@ -43,7 +43,7 @@ fileWrite(listLoc, dlc.replace('?interpolation=progressive-bicubic&output-qualit
 
 runTime = time.strftime("%F %T", time.localtime())
 
-if filecmp.cmp(newLocation, listLoc) == False and orgListSize and newListSize and "解放碑" in dlc:
+if filecmp.cmp(newLocation, listLoc) == False and orgListSize and newListSize and "Jiefangbei" in dlc:
 	logging.info("检测到有文件变化，正在生成 changeLog")
 	deltaListSize = newListSize - orgListSize
 	fileLines = []; changeTime = time.strftime("%Y%m%d-%H%M%S", time.localtime())
@@ -64,8 +64,9 @@ if filecmp.cmp(newLocation, listLoc) == False and orgListSize and newListSize an
 		"http://myv.ps/changeLog-latest.html", "linkraw", IFTTT.getkey()[0], 0)
 elif newListSize == 0: 
 	logging.error("未能成功下载 allStoresInfoLite 文件")
-elif dlc.count("解放碑") == 0:
-	logging.error("所下载的 allStoresInfoLite 文件似乎不是中文版本")
+elif dlc.count("Jiefangbei") == 0:
+	os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
+	logging.error("所下载的 allStoresInfoLite 文件似乎不是英语版本")
 else: 
 	os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
 	logging.info("没有发现 storeList 文件更新")
