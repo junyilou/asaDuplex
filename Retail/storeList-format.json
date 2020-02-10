@@ -5404,12 +5404,12 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/CN",
       "states": [
         {
-          "stateName": "北京",
+          "stateName": "Beijing",
           "stores": [
             {
               "storeNumber": "R448",
               "countryCode": "CN",
-              "storeName": "王府井",
+              "storeName": "Wangfujing",
               "latitude": "39.913621",
               "longitude": "116.405781",
               "storeRadius": "70",
@@ -5418,17 +5418,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R448.png"
               ],
               "secureImageURL": [],
-              "locationText": "北京",
+              "locationText": "Beijing",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "北京市东城区王府井大街 138 号北京 apm\n100006",
+              "storeAddress": "Beijing apm, No. 138 Wangfujing Street\nDongcheng District\n100006",
               "phoneNumber": "400 617 1205"
             },
             {
               "storeNumber": "R320",
               "countryCode": "CN",
-              "storeName": "三里屯",
+              "storeName": "Sanlitun",
               "latitude": "39.93367",
               "longitude": "116.44792",
               "storeRadius": "100",
@@ -5437,17 +5437,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R320.png"
               ],
               "secureImageURL": [],
-              "locationText": "北京",
+              "locationText": "Beijing",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "北京市朝阳区三里屯路 19 号院\n三里屯太古里 6 号楼\n100027",
+              "storeAddress": "Building 6, No. 19, Sanlitun Road\nTaikoo Li Sanlitun, Chaoyang District\n100027",
               "phoneNumber": "400 617 1363"
             },
             {
               "storeNumber": "R479",
               "countryCode": "CN",
-              "storeName": "华贸购物中心",
+              "storeName": "China Central Mall",
               "latitude": "39.90804",
               "longitude": "116.47316",
               "storeRadius": "70",
@@ -5456,17 +5456,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R479.png"
               ],
               "secureImageURL": [],
-              "locationText": "北京",
+              "locationText": "Beijing",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "北京市朝阳区建国路 81 号华贸购物中心\n100025",
+              "storeAddress": "China Central Mall\n81 Jianguo Road, Chaoyang District\n",
               "phoneNumber": "400 617 1210"
             },
             {
               "storeNumber": "R388",
               "countryCode": "CN",
-              "storeName": "西单大悦城",
+              "storeName": "Xidan Joy City",
               "latitude": "39.90917",
               "longitude": "116.36727",
               "storeRadius": "70",
@@ -5475,17 +5475,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R388.png"
               ],
               "secureImageURL": [],
-              "locationText": "北京",
+              "locationText": "Beijing",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "北京市西城区西单北大街 131 号大悦城\n100032",
+              "storeAddress": "131 North Xidan Avenue, Joy City\nXicheng District\n100032",
               "phoneNumber": "400 617 1204"
             },
             {
               "storeNumber": "R645",
               "countryCode": "CN",
-              "storeName": "朝阳大悦城",
+              "storeName": "Chaoyang Joy City",
               "latitude": "39.923571285",
               "longitude": "116.511624104",
               "storeRadius": "70",
@@ -5494,22 +5494,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R645.png"
               ],
               "secureImageURL": [],
-              "locationText": "北京",
+              "locationText": "Beijing",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "北京市朝阳区朝阳北路 101 号\n100000",
+              "storeAddress": "101 Chaoyang North Road\nChaoyang District\n100000",
               "phoneNumber": "400 617 1284"
             }
           ]
         },
         {
-          "stateName": "江苏",
+          "stateName": "Jiangsu",
           "stores": [
             {
               "storeNumber": "R688",
               "countryCode": "CN",
-              "storeName": "苏州",
+              "storeName": "Suzhou",
               "latitude": "31.318124",
               "longitude": "120.672737",
               "storeRadius": "70",
@@ -5518,17 +5518,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R688.png"
               ],
               "secureImageURL": [],
-              "locationText": "苏州",
+              "locationText": "Suzhou",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "苏州市苏州工业园区\n苏州中心商场\n215021",
+              "storeAddress": "Suzhou Center Mall\nSuzhou Industrial Park\n215021",
               "phoneNumber": "400 613 9775"
             },
             {
               "storeNumber": "R574",
               "countryCode": "CN",
-              "storeName": "无锡恒隆广场",
+              "storeName": "Center 66 Wuxi",
               "latitude": "31.576872",
               "longitude": "120.29362",
               "storeRadius": "1000",
@@ -5537,17 +5537,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R574.png"
               ],
               "secureImageURL": [],
-              "locationText": "无锡",
+              "locationText": "Wuxi",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "无锡市梁溪区\n人民中路 139 号\n214000",
+              "storeAddress": "139 Renmin Middle Road\nLiangxi District\n214000",
               "phoneNumber": "400 617 1325"
             },
             {
               "storeNumber": "R493",
               "countryCode": "CN",
-              "storeName": "南京艾尚天地",
+              "storeName": "Nanjing IST",
               "latitude": "32.048234",
               "longitude": "118.779405",
               "storeRadius": "70",
@@ -5556,17 +5556,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R493.png"
               ],
               "secureImageURL": [],
-              "locationText": "南京",
+              "locationText": "Nanjing",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "南京市玄武区中山路 100 号\n210008",
+              "storeAddress": "100 Zhongshan Road\nXuanwu District\n210008",
               "phoneNumber": "400 617 1334"
             },
             {
               "storeNumber": "R703",
               "countryCode": "CN",
-              "storeName": "南京金茂汇",
+              "storeName": "Nanjing Jinmao Place",
               "latitude": "32.074006",
               "longitude": "118.778214",
               "storeRadius": "70",
@@ -5575,17 +5575,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R703.png"
               ],
               "secureImageURL": [],
-              "locationText": "南京",
+              "locationText": "Nanjing",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "南京市鼓楼区中央路 201 号\n210009",
+              "storeAddress": "No.201 Zhongyang Road\nGulou District\n210009",
               "phoneNumber": "400 613 9772"
             },
             {
               "storeNumber": "R643",
               "countryCode": "CN",
-              "storeName": "虹悦城",
+              "storeName": "Wonder City",
               "latitude": "32.011387",
               "longitude": "118.759761",
               "storeRadius": "70",
@@ -5594,22 +5594,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R643.png"
               ],
               "secureImageURL": [],
-              "locationText": "南京",
+              "locationText": "Nanjing",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "南京市雨花台区应天大街 619 号\n210000",
+              "storeAddress": "619 Yingtian Road \nYuhuatai District\n210000",
               "phoneNumber": "400 617 1332"
             }
           ]
         },
         {
-          "stateName": "河南",
+          "stateName": "Henan",
           "stores": [
             {
               "storeNumber": "R572",
               "countryCode": "CN",
-              "storeName": "郑州万象城",
+              "storeName": "MixC Zhengzhou",
               "latitude": "34.755756",
               "longitude": "113.656689",
               "storeRadius": "70",
@@ -5618,22 +5618,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R572.png"
               ],
               "secureImageURL": [],
-              "locationText": "郑州",
+              "locationText": "Zhengzhou",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "郑州市二七区民主路 10 号\n450000",
+              "storeAddress": "10 Minzhu Road, \nErqi District\n450099",
               "phoneNumber": "400 617 1264"
             }
           ]
         },
         {
-          "stateName": "重庆",
+          "stateName": "Chongqing",
           "stores": [
             {
               "storeNumber": "R573",
               "countryCode": "CN",
-              "storeName": "重庆万象城",
+              "storeName": "MixC Chongqing",
               "latitude": "29.518192",
               "longitude": "106.514417",
               "storeRadius": "70",
@@ -5642,17 +5642,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R573.png"
               ],
               "secureImageURL": [],
-              "locationText": "重庆",
+              "locationText": "Chongqing",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "重庆市九龙坡区谢家湾正街 55 号\n400050",
+              "storeAddress": "55 Xiejiawan Street\nJiulongpo District\n400050",
               "phoneNumber": "400 617 1215"
             },
             {
               "storeNumber": "R476",
               "countryCode": "CN",
-              "storeName": "重庆北城天街",
+              "storeName": "Paradise Walk Chongqing",
               "latitude": "29.580283",
               "longitude": "106.529328",
               "storeRadius": "3000",
@@ -5661,17 +5661,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R476.png"
               ],
               "secureImageURL": [],
-              "locationText": "重庆",
+              "locationText": "Chongqing",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "重庆市江北区北城天街 8 号\n400020",
+              "storeAddress": "8 Paradise Walk\nJiangbei District\n400020",
               "phoneNumber": "400 617 1240"
             },
             {
               "storeNumber": "R480",
               "countryCode": "CN",
-              "storeName": "解放碑",
+              "storeName": "Jiefangbei",
               "latitude": "29.560981",
               "longitude": "106.572272",
               "storeRadius": "70",
@@ -5680,22 +5680,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R480.png"
               ],
               "secureImageURL": [],
-              "locationText": "重庆",
+              "locationText": "Chongqing",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "重庆市渝中区邹容路 108 号\n400010",
+              "storeAddress": "108 Zourong Road\nYuzhong District\n400010",
               "phoneNumber": "400 617 1224"
             }
           ]
         },
         {
-          "stateName": "广西",
+          "stateName": "Guangxi",
           "stores": [
             {
               "storeNumber": "R571",
               "countryCode": "CN",
-              "storeName": "南宁万象城",
+              "storeName": "MixC Nanning",
               "latitude": "22.814123",
               "longitude": "108.388345",
               "storeRadius": "70",
@@ -5704,22 +5704,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R571.png"
               ],
               "secureImageURL": [],
-              "locationText": "南宁",
+              "locationText": "Nanning",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "南宁市青秀区民族大道 136 号\n530022",
+              "storeAddress": "136 Minzu Avenue\nQingxiu District\n530000",
               "phoneNumber": "400 617 1265"
             }
           ]
         },
         {
-          "stateName": "山东",
+          "stateName": "Shandong",
           "stores": [
             {
               "storeNumber": "R557",
               "countryCode": "CN",
-              "storeName": "青岛万象城",
+              "storeName": "MixC Qingdao",
               "latitude": "36.06571",
               "longitude": "120.3746",
               "storeRadius": "70",
@@ -5728,17 +5728,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R557.png"
               ],
               "secureImageURL": [],
-              "locationText": "青岛",
+              "locationText": "Qingdao",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "青岛市市南区山东路 6A 号\n266000",
+              "storeAddress": "6A Shandong Road\nShinan District\n266000",
               "phoneNumber": "400 617 1285"
             },
             {
               "storeNumber": "R648",
               "countryCode": "CN",
-              "storeName": "济南恒隆广场",
+              "storeName": "Parc 66 Jinan",
               "latitude": "36.664099",
               "longitude": "117.018213",
               "storeRadius": "70",
@@ -5747,22 +5747,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R648.png"
               ],
               "secureImageURL": [],
-              "locationText": "济南",
+              "locationText": "Jinan",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "济南市历下区泉城路 188 号\n250011",
+              "storeAddress": "No. 188 Quancheng Road\n Lixia District\n250011",
               "phoneNumber": "400 613 9743"
             }
           ]
         },
         {
-          "stateName": "上海",
+          "stateName": "Shanghai",
           "stores": [
             {
               "storeNumber": "R683",
               "countryCode": "CN",
-              "storeName": "环球港",
+              "storeName": "Global Harbor",
               "latitude": "31.23361111111111",
               "longitude": "121.40722222222222",
               "storeRadius": "70",
@@ -5771,17 +5771,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R683.png"
               ],
               "secureImageURL": [],
-              "locationText": "上海",
+              "locationText": "Shanghai",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "上海市普陀区中山北路 3300 号\n200062",
+              "storeAddress": "3300 North Zhongshan Road\n Putuo District\n200062",
               "phoneNumber": "400 617 1335"
             },
             {
               "storeNumber": "R581",
               "countryCode": "CN",
-              "storeName": "五角场",
+              "storeName": "Wujiaochang",
               "latitude": "31.3016666666666",
               "longitude": "121.514166666",
               "storeRadius": "70",
@@ -5790,17 +5790,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R581.png"
               ],
               "secureImageURL": [],
-              "locationText": "上海",
+              "locationText": "Shanghai",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "上海市杨浦区翔殷路 1099 号\n上海合生汇\n200433",
+              "storeAddress": "Hopson One\nNo. 1099 Xiangyin Road, Yangpu District\n200433",
               "phoneNumber": "400 613 9771"
             },
             {
               "storeNumber": "R359",
               "countryCode": "CN",
-              "storeName": "南京东路",
+              "storeName": "Nanjing East",
               "latitude": "31.23943",
               "longitude": "121.47954",
               "storeRadius": "70",
@@ -5809,17 +5809,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R359.png"
               ],
               "secureImageURL": [],
-              "locationText": "上海",
+              "locationText": "Shanghai",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "上海市黄浦区南京东路 300 号\n200001",
+              "storeAddress": "No. 300 East Nanjing Road\nHuangPu District\n200001",
               "phoneNumber": "400 663 9988"
             },
             {
               "storeNumber": "R389",
               "countryCode": "CN",
-              "storeName": "浦东",
+              "storeName": "Pudong",
               "latitude": "31.23937",
               "longitude": "121.49695",
               "storeRadius": "300",
@@ -5828,17 +5828,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R389.png"
               ],
               "secureImageURL": [],
-              "locationText": "上海",
+              "locationText": "Shanghai",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "上海市浦东新区陆家嘴世纪大道 8 号\n上海国金中心 IFC 商场 LG2－27 号店铺\n200120",
+              "storeAddress": "No.8 Century Avenue IFC Mall\nShop LG2-27, Lujiazui, Pudong District\n200120",
               "phoneNumber": "400 617 1305"
             },
             {
               "storeNumber": "R390",
               "countryCode": "CN",
-              "storeName": "香港广场",
+              "storeName": "Hong Kong Plaza",
               "latitude": "31.22555",
               "longitude": "121.46994",
               "storeRadius": "70",
@@ -5847,17 +5847,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R390.png"
               ],
               "secureImageURL": [],
-              "locationText": "上海",
+              "locationText": "Shanghai",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "上海市黄浦区淮海中路 282 号\n香港广场北座\n200021",
+              "storeAddress": "282 Middle Huaihai Road\nHuangpu District\n200021",
               "phoneNumber": "400 617 1312"
             },
             {
               "storeNumber": "R705",
               "countryCode": "CN",
-              "storeName": "七宝",
+              "storeName": "Qibao",
               "latitude": "31.156105",
               "longitude": "121.345228",
               "storeRadius": "70",
@@ -5866,17 +5866,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R705.png"
               ],
               "secureImageURL": [],
-              "locationText": "上海",
+              "locationText": "Shanghai",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "上海市闵行区漕宝路 3366 号 \n七宝万科广场\n201101",
+              "storeAddress": "Shanghai Qibao Vanke Mall \nNo. 3366 Caobao Road, Minhang District\n201101",
               "phoneNumber": "400 613 9773"
             },
             {
               "storeNumber": "R401",
               "countryCode": "CN",
-              "storeName": "上海环贸 iapm ",
+              "storeName": "Shanghai iapm",
               "latitude": "31.217679",
               "longitude": "121.453441",
               "storeRadius": "70",
@@ -5885,22 +5885,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R401.png"
               ],
               "secureImageURL": [],
-              "locationText": "上海",
+              "locationText": "Shanghai",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "上海市徐汇区淮海中路 999 号\n环贸 iapm 商场\n200031",
+              "storeAddress": "999 Middle Huaihai Road\nXuhui District\n200031",
               "phoneNumber": "400 617 1324"
             }
           ]
         },
         {
-          "stateName": "浙江",
+          "stateName": "Zhejiang",
           "stores": [
             {
               "storeNumber": "R471",
               "countryCode": "CN",
-              "storeName": "西湖",
+              "storeName": "West Lake",
               "latitude": "30.256553",
               "longitude": "120.158777",
               "storeRadius": "70",
@@ -5909,17 +5909,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R471.png"
               ],
               "secureImageURL": [],
-              "locationText": "杭州",
+              "locationText": "Hangzhou",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "杭州市上城区平海路 100 号\n310006",
+              "storeAddress": "100 Pinghai Road\nShangcheng District\n310006",
               "phoneNumber": "400 617 1302"
             },
             {
               "storeNumber": "R532",
               "countryCode": "CN",
-              "storeName": "杭州万象城",
+              "storeName": "MixC Hangzhou",
               "latitude": "30.254012",
               "longitude": "120.210154",
               "storeRadius": "70",
@@ -5928,17 +5928,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R532.png"
               ],
               "secureImageURL": [],
-              "locationText": "杭州",
+              "locationText": "Hangzhou",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "杭州市江干区富春路 701 号\n310000",
+              "storeAddress": "701 Fuchun Road\nJianggan District \n310000",
               "phoneNumber": "400 617 1304"
             },
             {
               "storeNumber": "R531",
               "countryCode": "CN",
-              "storeName": "天一广场",
+              "storeName": "Tianyi Square",
               "latitude": "29.872722",
               "longitude": "121.549272",
               "storeRadius": "70",
@@ -5947,22 +5947,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R531.png"
               ],
               "secureImageURL": [],
-              "locationText": "宁波",
+              "locationText": "Ningbo",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "宁波市海曙区碶闸街 155 号\n天一广场\n315000",
+              "storeAddress": "Tianyi Square  No.155\nQizha Street Haishu District\n315000",
               "phoneNumber": "400 613 9774"
             }
           ]
         },
         {
-          "stateName": "天津",
+          "stateName": "Tianjin",
           "stores": [
             {
               "storeNumber": "R579",
               "countryCode": "CN",
-              "storeName": "天津恒隆广场",
+              "storeName": "Riverside 66 Tianjin",
               "latitude": "39.12662",
               "longitude": "117.19388",
               "storeRadius": "70",
@@ -5971,17 +5971,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R579.png"
               ],
               "secureImageURL": [],
-              "locationText": "天津",
+              "locationText": "Tianjin",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "天津市和平区兴安路 166 号\n300041",
+              "storeAddress": "166 Xing‘an Road \nHeping District\n300041",
               "phoneNumber": "400 613 9744"
             },
             {
               "storeNumber": "R637",
               "countryCode": "CN",
-              "storeName": "天津大悦城",
+              "storeName": "Tianjin Joy City",
               "latitude": "39.134588",
               "longitude": "117.173993",
               "storeRadius": "70",
@@ -5990,17 +5990,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R637.png"
               ],
               "secureImageURL": [],
-              "locationText": "天津",
+              "locationText": "Tianjin",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "天津市南开区南门外大街 2 号\n300199",
+              "storeAddress": "2 Nanmenwai Street\nNankai District\n300199",
               "phoneNumber": "400 617 1262"
             },
             {
               "storeNumber": "R638",
               "countryCode": "CN",
-              "storeName": "天津万象城",
+              "storeName": "MixC Tianjin",
               "latitude": "39.08892",
               "longitude": "117.20707",
               "storeRadius": "70",
@@ -6009,22 +6009,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R638.png"
               ],
               "secureImageURL": [],
-              "locationText": "天津",
+              "locationText": "Tianjin",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "天津市河西区乐园道 9 号\n300201",
+              "storeAddress": "9 Le Yuan Road\nHexi District\n300201",
               "phoneNumber": "400 613 9745"
             }
           ]
         },
         {
-          "stateName": "辽宁",
+          "stateName": "Liaoning",
           "stores": [
             {
               "storeNumber": "R576",
               "countryCode": "CN",
-              "storeName": "沈阳万象城",
+              "storeName": "MixC Shenyang",
               "latitude": "41.77235",
               "longitude": "123.42897",
               "storeRadius": "70",
@@ -6033,17 +6033,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R576.png"
               ],
               "secureImageURL": [],
-              "locationText": "沈阳",
+              "locationText": "Shenyang",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "沈阳市和平区青年大街 288 号\n110000",
+              "storeAddress": "288 Qingnian Street\nHeping District\n110000",
               "phoneNumber": "400 617 1274"
             },
             {
               "storeNumber": "R478",
               "countryCode": "CN",
-              "storeName": "百年城",
+              "storeName": "Parkland",
               "latitude": "38.91494",
               "longitude": "121.631667",
               "storeRadius": "70",
@@ -6052,17 +6052,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R478.png"
               ],
               "secureImageURL": [],
-              "locationText": "大连",
+              "locationText": "Dalian",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "大连市中山区解放路 19 号\n116000",
+              "storeAddress": "19 Jiefang Road\nZhongshan District\n116000",
               "phoneNumber": "400 056 0921"
             },
             {
               "storeNumber": "R609",
               "countryCode": "CN",
-              "storeName": "大连恒隆广场",
+              "storeName": "Olympia 66 Dalian",
               "latitude": "38.90586527241653",
               "longitude": "121.6053125334242",
               "storeRadius": "70",
@@ -6071,17 +6071,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R609.png"
               ],
               "secureImageURL": [],
-              "locationText": "大连",
+              "locationText": "Dalian",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "大连市西岗区五四路 66 号\n116000",
+              "storeAddress": "No.66 Wusi Road\nXigang District\n116000",
               "phoneNumber": "400 613 9741"
             },
             {
               "storeNumber": "R534",
               "countryCode": "CN",
-              "storeName": "中街大悦城",
+              "storeName": "Zhongjie Joy City",
               "latitude": "41.800213",
               "longitude": "123.462022",
               "storeRadius": "70",
@@ -6090,22 +6090,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R534.png"
               ],
               "secureImageURL": [],
-              "locationText": "沈阳",
+              "locationText": "Shenyang",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "沈阳市大东区小东路 5 号\n110042",
+              "storeAddress": "5 Xiaodong Road\nDadong District\n110042",
               "phoneNumber": "400 617 1252"
             }
           ]
         },
         {
-          "stateName": "广东",
+          "stateName": "Guangdong",
           "stores": [
             {
               "storeNumber": "R577",
               "countryCode": "CN",
-              "storeName": "天环广场 ",
+              "storeName": "Parc Central",
               "latitude": "23.135",
               "longitude": "113.31916",
               "storeRadius": "70",
@@ -6114,17 +6114,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R577.png"
               ],
               "secureImageURL": [],
-              "locationText": "广州",
+              "locationText": "Guangzhou",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "广州市天河区天河路 218 号\n510000",
+              "storeAddress": "No. 218, Tianhe Road\n Tianhe District\n510000",
               "phoneNumber": "400 613 9742"
             },
             {
               "storeNumber": "R484",
               "countryCode": "CN",
-              "storeName": "深圳益田假日广场",
+              "storeName": "Holiday Plaza Shenzhen",
               "latitude": "22.53986",
               "longitude": "113.97079",
               "storeRadius": "70",
@@ -6133,17 +6133,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R484.png"
               ],
               "secureImageURL": [],
-              "locationText": "深圳",
+              "locationText": "Shenzhen",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "深圳市南山区深南大道 9028 号益田假日广场\n518000",
+              "storeAddress": "No. 9028 Shennan Avenue\n518000",
               "phoneNumber": "400 617 1254"
             },
             {
               "storeNumber": "R639",
               "countryCode": "CN",
-              "storeName": "珠江新城",
+              "storeName": "Zhujiang New Town",
               "latitude": "23.11843672960212",
               "longitude": "113.32728981971741",
               "storeRadius": "70",
@@ -6152,22 +6152,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R639.png"
               ],
               "secureImageURL": [],
-              "locationText": "广州",
+              "locationText": "Guangzhou",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "广州珠江新城兴民路 222 号\n天汇广场 1 层\n510623",
+              "storeAddress": "International Grand City  L1\n222 Xingmin Road, Zhujiang New Town\n510623",
               "phoneNumber": "400 639 3601"
             }
           ]
         },
         {
-          "stateName": "四川",
+          "stateName": "Sichuan",
           "stores": [
             {
               "storeNumber": "R580",
               "countryCode": "CN",
-              "storeName": "成都太古里",
+              "storeName": "Taikoo Li Chengdu",
               "latitude": "30.653748",
               "longitude": "104.080782",
               "storeRadius": "70",
@@ -6176,17 +6176,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R580.png"
               ],
               "secureImageURL": [],
-              "locationText": "成都",
+              "locationText": "Chengdu",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "成都市锦江区中纱帽街 8 号\n610000",
+              "storeAddress": "8 Middle Shamao Street\nJinjiang District\n610000",
               "phoneNumber": "400 617 1275"
             },
             {
               "storeNumber": "R502",
               "countryCode": "CN",
-              "storeName": "成都万象城",
+              "storeName": "MixC Chengdu",
               "latitude": "30.652387",
               "longitude": "104.112546",
               "storeRadius": "70",
@@ -6195,22 +6195,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R502.png"
               ],
               "secureImageURL": [],
-              "locationText": "成都",
+              "locationText": "Chengdu",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "成都市成华区双庆路 8 号万象城\n610000",
+              "storeAddress": "No. 8 Shuangqing Road, Chenghua District\n610000",
               "phoneNumber": "400 617 1214"
             }
           ]
         },
         {
-          "stateName": "福建",
+          "stateName": "Fujian",
           "stores": [
             {
               "storeNumber": "R646",
               "countryCode": "CN",
-              "storeName": "泰禾广场",
+              "storeName": "Tahoe Plaza",
               "latitude": "26.09336",
               "longitude": "119.331828",
               "storeRadius": "70",
@@ -6219,17 +6219,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R646.png"
               ],
               "secureImageURL": [],
-              "locationText": "福州",
+              "locationText": "Fuzhou",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "福州市晋安区竹屿路 6 号\n 东二环泰禾城市广场\n350000",
+              "storeAddress": "Tahoe Plaza\n6 Zhuyu Road, Jin’an District\n350000",
               "phoneNumber": "400 617 1354"
             },
             {
               "storeNumber": "R644",
               "countryCode": "CN",
-              "storeName": "厦门新生活广场",
+              "storeName": "Xiamen Lifestyle Center",
               "latitude": "24.5024",
               "longitude": "118.1204",
               "storeRadius": "70",
@@ -6238,22 +6238,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R644.png"
               ],
               "secureImageURL": [],
-              "locationText": "厦门",
+              "locationText": "Xiamen",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "厦门市思明区嘉禾路 399 号\nSM 新生活广场\n361012",
+              "storeAddress": " SM Lifestyle Center\nNo.399 Jiahe Road, Siming District\n",
               "phoneNumber": "400 617 1383"
             }
           ]
         },
         {
-          "stateName": "云南",
+          "stateName": "Yunnan",
           "stores": [
             {
               "storeNumber": "R670",
               "countryCode": "CN",
-              "storeName": "昆明",
+              "storeName": "Kunming",
               "latitude": "25.0391666",
               "longitude": "102.706111",
               "storeRadius": "70",
@@ -6262,11 +6262,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R670.png"
               ],
               "secureImageURL": [],
-              "locationText": "昆明",
+              "locationText": "Kunming",
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "昆明市五华区东风西路 11 号 \n顺城购物中心\n650031",
+              "storeAddress": "Shuncheng Shopping Center\nNo. 11 Dongfeng Road, Wuhua District\n650031",
               "phoneNumber": "400 639 3602"
             }
           ]
@@ -6279,7 +6279,7 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/IT",
       "states": [
         {
-          "stateName": "Firenze",
+          "stateName": "Florence",
           "stores": [
             {
               "storeNumber": "R449",
@@ -6299,25 +6299,6 @@
               "enableInStoreMode": true,
               "storeAddress": "Centro Commerciale I Gigli\nVia San Quirico, 165\n50013 Campi Bisenzio",
               "phoneNumber": "055 880 3000"
-            },
-            {
-              "storeNumber": "R602",
-              "countryCode": "IT",
-              "storeName": "Firenze",
-              "latitude": "43.771301",
-              "longitude": "11.25345",
-              "storeRadius": "70",
-              "accuracyThreshold": "500",
-              "imageURL": [
-                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R602.png"
-              ],
-              "secureImageURL": [],
-              "locationText": "Firenze",
-              "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
-              "enableInStoreMode": true,
-              "storeAddress": "Piazza della Repubblica\n50123 Firenze",
-              "phoneNumber": "055 464 1900"
             }
           ]
         },
@@ -6342,25 +6323,6 @@
               "enableInStoreMode": true,
               "storeAddress": "Via Roma, 82\n10121 Torino",
               "phoneNumber": "011 506 6201"
-            },
-            {
-              "storeNumber": "R278",
-              "countryCode": "IT",
-              "storeName": "Le Gru",
-              "latitude": "45.0556",
-              "longitude": "7.61299",
-              "storeRadius": "70",
-              "accuracyThreshold": "500",
-              "imageURL": [
-                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R278.png"
-              ],
-              "secureImageURL": [],
-              "locationText": "Grugliasco",
-              "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
-              "enableInStoreMode": true,
-              "storeAddress": "Centro commerciale Le Gru\nVia Crea, 10\n10095 Grugliasco",
-              "phoneNumber": "011 7705 1100"
             }
           ]
         },
@@ -6403,55 +6365,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R562.png"
               ],
               "secureImageURL": [],
-              "locationText": "EUR",
+              "locationText": "Roma EUR",
               "timeZone": "Europe/Rome",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Centro Commerciale Euroma2\nViale dell'Oceano Pacifico, 83\n00144 EUR",
+              "storeAddress": "Centro Commerciale Euroma2\nViale dell'Oceano Pacifico, 83\n00144 Roma EUR",
               "phoneNumber": "06 4523 0700"
-            },
-            {
-              "storeNumber": "R381",
-              "countryCode": "IT",
-              "storeName": "Porta di Roma",
-              "latitude": "41.9715",
-              "longitude": "12.53983",
-              "storeRadius": "70",
-              "accuracyThreshold": "500",
-              "imageURL": [
-                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R381.png"
-              ],
-              "secureImageURL": [],
-              "locationText": "Bufalotta",
-              "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
-              "enableInStoreMode": true,
-              "storeAddress": "Galleria Porta di Roma\nVia Alberto Lionello, 201\n00139 Bufalotta",
-              "phoneNumber": "06 8720 8501"
-            },
-            {
-              "storeNumber": "R038",
-              "countryCode": "IT",
-              "storeName": "RomaEst",
-              "latitude": "41.91376",
-              "longitude": "12.66103",
-              "storeRadius": "70",
-              "accuracyThreshold": "500",
-              "imageURL": [
-                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R038.png"
-              ],
-              "secureImageURL": [],
-              "locationText": "Lunghezza",
-              "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
-              "enableInStoreMode": true,
-              "storeAddress": "Centro commerciale RomaEst\nVia Collatina, 858\n00132 Lunghezza",
-              "phoneNumber": "06 224 5300"
             }
           ]
         },
         {
-          "stateName": "Milano",
+          "stateName": "Milan",
           "stores": [
             {
               "storeNumber": "R441",
@@ -6542,6 +6466,97 @@
           ]
         },
         {
+          "stateName": "Rome",
+          "stores": [
+            {
+              "storeNumber": "R381",
+              "countryCode": "IT",
+              "storeName": "Porta di Roma",
+              "latitude": "41.9715",
+              "longitude": "12.53983",
+              "storeRadius": "70",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R381.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Roma Bufalotta",
+              "timeZone": "Europe/Rome",
+              "scanAndBuy": "SNB",
+              "enableInStoreMode": true,
+              "storeAddress": "Galleria Porta di Roma\nVia Alberto Lionello, 201\n00139 Roma Bufalotta",
+              "phoneNumber": "06 8720 8501"
+            },
+            {
+              "storeNumber": "R038",
+              "countryCode": "IT",
+              "storeName": "RomaEst",
+              "latitude": "41.91376",
+              "longitude": "12.66103",
+              "storeRadius": "70",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R038.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Roma Lunghezza",
+              "timeZone": "Europe/Rome",
+              "scanAndBuy": "SNB",
+              "enableInStoreMode": true,
+              "storeAddress": "Centro commerciale RomaEst\nVia Collatina, 858\n00132 Roma Lunghezza",
+              "phoneNumber": "06 224 5300"
+            }
+          ]
+        },
+        {
+          "stateName": "Turin",
+          "stores": [
+            {
+              "storeNumber": "R278",
+              "countryCode": "IT",
+              "storeName": "Le Gru",
+              "latitude": "45.0556",
+              "longitude": "7.61299",
+              "storeRadius": "70",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R278.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Grugliasco",
+              "timeZone": "Europe/Rome",
+              "scanAndBuy": "SNB",
+              "enableInStoreMode": true,
+              "storeAddress": "Centro commerciale Le Gru\nVia Crea, 10\n10095 Grugliasco",
+              "phoneNumber": "011 7705 1100"
+            }
+          ]
+        },
+        {
+          "stateName": "Firenze",
+          "stores": [
+            {
+              "storeNumber": "R602",
+              "countryCode": "IT",
+              "storeName": "Firenze",
+              "latitude": "43.771301",
+              "longitude": "11.25345",
+              "storeRadius": "70",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R602.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Firenze",
+              "timeZone": "Europe/Rome",
+              "scanAndBuy": "SNB",
+              "enableInStoreMode": true,
+              "storeAddress": "Piazza della Repubblica\n50123 Firenze",
+              "phoneNumber": "055 464 1900"
+            }
+          ]
+        },
+        {
           "stateName": "Venezia",
           "stores": [
             {
@@ -6628,11 +6643,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R667.png"
               ],
               "secureImageURL": [],
-              "locationText": "Milano",
+              "locationText": "Milan",
               "timeZone": "Europe/Rome",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Piazza del Liberty, 1\n20121 Milano",
+              "storeAddress": "Piazza del Liberty\n1 - 20121 Milano\n1 - 20121 Milan",
               "phoneNumber": "02 3030 2400"
             }
           ]
@@ -8116,7 +8131,7 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/BR",
       "states": [
         {
-          "stateName": "RJ",
+          "stateName": "Rio de Janeiro",
           "stores": [
             {
               "storeNumber": "R567",
@@ -8130,11 +8145,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R567.png"
               ],
               "secureImageURL": [],
-              "locationText": "Rio de Janeiro",
+              "locationText": "Barra da Tijuca",
               "timeZone": "Brazil/East",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "Avenida das Américas, 3.900\nBarra da Tijuca\nRio de Janeiro,22640-102",
+              "storeAddress": "Avenida das Americas, 3.900\nBarra da Tijuca,22640",
               "phoneNumber": "(21) 3179-3700"
             }
           ]
@@ -8185,11 +8200,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R687.png"
               ],
               "secureImageURL": [],
-              "locationText": "Wien",
+              "locationText": "Vienna",
               "timeZone": "Europe/Vienna",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Kärntner Straße 11\n1010 Wien",
+              "storeAddress": "Kärntner Straße 11\n1010 Vienna",
               "phoneNumber": "01 206092544"
             }
           ]
@@ -8220,7 +8235,7 @@
               "timeZone": "Europe/Paris",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "9 rue Clément\n75006 Paris",
+              "storeAddress": "7-9 rue Clément\n75006 Paris",
               "phoneNumber": "01 85 65 48 00"
             },
             {
@@ -8278,11 +8293,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R425.png"
               ],
               "secureImageURL": [],
-              "locationText": "Marne-la-Vallée",
+              "locationText": "Marne-la-Vallee",
               "timeZone": "Europe/Paris",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Centre Commercial Val d’Europe\n14, cours du Danube - Serris\n77711 Marne-la-Vallée",
+              "storeAddress": "Centre Commercial Val d’Europe\n14, cours du Danube - Serris\n77711 Marne-la-Vallee",
               "phoneNumber": "01 64 17 35 00"
             }
           ]
@@ -8302,11 +8317,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R315.png"
               ],
               "secureImageURL": [],
-              "locationText": "Vélizy-Villacoublay",
+              "locationText": "Velizy-Villacoublay",
               "timeZone": "Europe/Paris",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2 Avenue de l’Europe\n78140 Vélizy-Villacoublay",
+              "storeAddress": "2 Avenue de l'Europe\n78140 Velizy-Villacoublay",
               "phoneNumber": "01 30 70 77 00"
             },
             {
@@ -8349,7 +8364,7 @@
               "timeZone": "Europe/Paris",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "114 av. des Champs-Élysées\n75008 Paris",
+              "storeAddress": "114 Av. des Champs-Élysées,\n75008 Paris",
               "phoneNumber": "01 70 98 09 00"
             }
           ]
@@ -8446,7 +8461,7 @@
           ]
         },
         {
-          "stateName": " Bouches-du-Rhône",
+          "stateName": "Bouches-du-Rhône",
           "stores": [
             {
               "storeNumber": "R477",
@@ -8466,12 +8481,7 @@
               "enableInStoreMode": true,
               "storeAddress": "2 Place du Général de Gaulle\n13100 Aix-en-Provence",
               "phoneNumber": "04 88 80 78 00"
-            }
-          ]
-        },
-        {
-          "stateName": "Bouches-du-Rhône",
-          "stores": [
+            },
             {
               "storeNumber": "R357",
               "countryCode": "FR",
@@ -8580,11 +8590,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R178.png"
               ],
               "secureImageURL": [],
-              "locationText": "Puteaux - la Défense",
+              "locationText": "Puteaux - la Defense",
               "timeZone": "Europe/Paris",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Centre commercial Les Quatre Temps\n15 Parvis de la Défense\n92800 Puteaux - la Défense",
+              "storeAddress": "Centre commercial Les Quatre Temps\n15 Parvis de la Defense\n92800 Puteaux - la Defense",
               "phoneNumber": "01 41 97 36 00"
             }
           ]
@@ -8656,7 +8666,7 @@
               "timeZone": "Europe/Paris",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Centre Commercial Rosny 2 \nAvenue du Général-de-Gaulle\n93110 Rosny-Sous-Bois",
+              "storeAddress": "Centre Commercial Rosny 2 \nAvenue du General-de-Gaulle\n93117 Rosny-Sous-Bois",
               "phoneNumber": "01 73 30 89 00"
             }
           ]
@@ -8669,12 +8679,12 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/TW",
       "states": [
         {
-          "stateName": "",
+          "stateName": "Taiwan",
           "stores": [
             {
               "storeNumber": "R694",
               "countryCode": "TW",
-              "storeName": "信義 A13",
+              "storeName": "Xinyi A13",
               "latitude": "25.036067",
               "longitude": "121.567972",
               "storeRadius": "70",
@@ -8683,22 +8693,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R694.png"
               ],
               "secureImageURL": [],
-              "locationText": "台北",
+              "locationText": "Taipei",
               "timeZone": "Asia/Taipei",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "信義區松壽路 13 號\n台北",
+              "storeAddress": "No. 13 Songshou Road\nTaipei",
               "phoneNumber": "02 7742 7700"
-            }
-          ]
-        },
-        {
-          "stateName": "台北",
-          "stores": [
+            },
             {
               "storeNumber": "R713",
               "countryCode": "TW",
-              "storeName": "台北 101",
+              "storeName": "Taipei 101",
               "latitude": "25.033626",
               "longitude": "121.564215",
               "storeRadius": "70",
@@ -8707,11 +8712,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R713.png"
               ],
               "secureImageURL": [],
-              "locationText": "台北",
+              "locationText": "Taipei",
               "timeZone": "Asia/Taipei",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "信義區市府路 45 號\n台北 101 購物中心 1F\n台北",
+              "storeAddress": "Taipei 101 L1\nNo. 45 Shifu Road, Xinyi District\nTaipei",
               "phoneNumber": "02 8726 3500"
             }
           ]
@@ -8724,7 +8729,7 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/DE",
       "states": [
         {
-          "stateName": "Nordrhein-Westfalen",
+          "stateName": "North Rhine-Westphalia",
           "stores": [
             {
               "storeNumber": "R331",
@@ -8757,11 +8762,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R559.png"
               ],
               "secureImageURL": [],
-              "locationText": "Köln",
+              "locationText": "Cologne",
               "timeZone": "Europe/Berlin",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Schildergasse 1-9\n50667 Köln",
+              "storeAddress": "Schildergasse 1-9\n50667 Cologne",
               "phoneNumber": "0221 65013700"
             },
             {
@@ -8795,17 +8800,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R520.png"
               ],
               "secureImageURL": [],
-              "locationText": "Köln",
+              "locationText": "Cologne",
               "timeZone": "Europe/Berlin",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Rhein Center Köln-Weiden\nAachener Straße 1253\n50858 Köln",
+              "storeAddress": "Rhein Center\nAachener Straße 1253\n50858 Cologne",
               "phoneNumber": "02234 2020600"
             }
           ]
         },
         {
-          "stateName": "Hessen",
+          "stateName": "Hesse",
           "stores": [
             {
               "storeNumber": "R434",
@@ -8829,7 +8834,7 @@
             {
               "storeNumber": "R352",
               "countryCode": "DE",
-              "storeName": "Große Bockenheimer Straße",
+              "storeName": "Grosse Bockenheimer Strasse",
               "latitude": "50.11468",
               "longitude": "8.67505",
               "storeRadius": "70",
@@ -8842,13 +8847,13 @@
               "timeZone": "Europe/Berlin",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Große Bockenheimer Straße 30\n60313 Frankfurt",
+              "storeAddress": "Grosse Bockenheimer Strasse 30\n60313 Frankfurt",
               "phoneNumber": "069 219308000"
             }
           ]
         },
         {
-          "stateName": "Bayern",
+          "stateName": "Bavaria",
           "stores": [
             {
               "storeNumber": "R431",
@@ -8872,7 +8877,7 @@
             {
               "storeNumber": "R045",
               "countryCode": "DE",
-              "storeName": "Rosenstraße",
+              "storeName": "Rosenstrasse",
               "latitude": "48.13683",
               "longitude": "11.57449",
               "storeRadius": "70",
@@ -8881,17 +8886,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R045.png"
               ],
               "secureImageURL": [],
-              "locationText": "München",
+              "locationText": "Munich",
               "timeZone": "Europe/Berlin",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Rosenstraße 1\n80331 München",
+              "storeAddress": "Rosenstrasse 1\n80331 Munich",
               "phoneNumber": "089 242145000"
             },
             {
               "storeNumber": "R521",
               "countryCode": "DE",
-              "storeName": " OEZ",
+              "storeName": "OEZ",
               "latitude": "48.183625",
               "longitude": "11.532914",
               "storeRadius": "70",
@@ -8900,11 +8905,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R521.png"
               ],
               "secureImageURL": [],
-              "locationText": "München",
+              "locationText": "Munich",
               "timeZone": "Europe/Berlin",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Olympia-Einkaufszentrum\nHanauer Straße 68\n80993 München",
+              "storeAddress": "Olympia-Einkaufszentrum\nHanauer Straße 68\n80993 Munich",
               "phoneNumber": "089 204002800"
             }
           ]
@@ -9025,7 +9030,7 @@
           ]
         },
         {
-          "stateName": "Sachsen",
+          "stateName": "Saxony",
           "stores": [
             {
               "storeNumber": "R430",
@@ -9043,7 +9048,7 @@
               "timeZone": "Europe/Berlin",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Altmarkt 25\n01067 Dresden",
+              "storeAddress": "Altmarkt 25\n1067 Dresden",
               "phoneNumber": "0351 49774000"
             }
           ]
@@ -9222,13 +9227,13 @@
               "timeZone": "Europe/Madrid",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Puerto Venecia Shopping Resort, The Gallery\nAvda. Puerto Venecia, s/n\n50021 - Zaragoza",
+              "storeAddress": "C. C. Puerto Venecia, Galería de Moda\nAvda. Puerto Venecia, s/n\n50021 - Zaragoza",
               "phoneNumber": "976 18 89 00"
             }
           ]
         },
         {
-          "stateName": "",
+          "stateName": "Murcia",
           "stores": [
             {
               "storeNumber": "R507",
@@ -9242,11 +9247,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R507.png"
               ],
               "secureImageURL": [],
-              "locationText": "Murcia",
+              "locationText": "Churra",
               "timeZone": "Europe/Madrid",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Centro Comercial Nueva Condomina\nAutovía A-7, km 760\n30110 - Murcia",
+              "storeAddress": "Centro Comercial Nueva Condomina\nAutovía A-7, km 760\n30110 - Churra",
               "phoneNumber": "968 38 78 00"
             }
           ]
@@ -9270,7 +9275,7 @@
               "timeZone": "Europe/Madrid",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Calle Colón, 25\n46004 - Valencia",
+              "storeAddress": "Calle Colón 25\n46004 - Valencia",
               "phoneNumber": "963 50 63 00"
             }
           ]
@@ -9307,12 +9312,12 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/KR",
       "states": [
         {
-          "stateName": "서울",
+          "stateName": "Seoul",
           "stores": [
             {
               "storeNumber": "R692",
               "countryCode": "KR",
-              "storeName": "가로수길",
+              "storeName": "Garosugil",
               "latitude": "37.5209",
               "longitude": "127.0228",
               "storeRadius": "70",
@@ -9321,11 +9326,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R692.png"
               ],
               "secureImageURL": [],
-              "locationText": "서울",
+              "locationText": "Seoul",
               "timeZone": "Asia/Seoul",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "강남구\n압구정로 12길 46\n서울, 06028",
+              "storeAddress": "46 Apgujeong-ro 12-gil\nGangnam-gu\nSeoul, 06028",
               "phoneNumber": "02-2086-4600"
             }
           ]
@@ -9488,7 +9493,7 @@
           ]
         },
         {
-          "stateName": "Genève",
+          "stateName": "Geneva",
           "stores": [
             {
               "storeNumber": "R275",
@@ -9502,17 +9507,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R275.png"
               ],
               "secureImageURL": [],
-              "locationText": "Genève",
+              "locationText": "Geneva",
               "timeZone": "Europe/Zurich",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Rue de Rive 4\n1204 Genève",
+              "storeAddress": "Rue de Rive 4\n1204 Geneva",
               "phoneNumber": "022 318 03 00"
             }
           ]
         },
         {
-          "stateName": "Zürich",
+          "stateName": "Zurich",
           "stores": [
             {
               "storeNumber": "R159",
@@ -9526,11 +9531,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R159.png"
               ],
               "secureImageURL": [],
-              "locationText": "Zürich",
+              "locationText": "Zurich",
               "timeZone": "Europe/Zurich",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Rennweg 43\n8001 Zürich",
+              "storeAddress": "Rennweg 43\n8001 Zurich",
               "phoneNumber": "044 213 18 00"
             },
             {
@@ -9545,11 +9550,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R309.png"
               ],
               "secureImageURL": [],
-              "locationText": "Wallisellen",
+              "locationText": "Glattzentrum bei Wallisellen",
               "timeZone": "Europe/Zurich",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Einkaufszentrum Glatt\nNeue Winterthurerstrasse 99\n8304 Wallisellen ",
+              "storeAddress": "Einkaufszentrum Glatt\nNeue Winterthurerstrasse 99\n8301 Glattzentrum bei Wallisellen",
               "phoneNumber": "044 832 81 00"
             }
           ]
@@ -10017,12 +10022,12 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/JP",
       "states": [
         {
-          "stateName": "東京都",
+          "stateName": "Tokyo",
           "stores": [
             {
               "storeNumber": "R224",
               "countryCode": "JP",
-              "storeName": "表参道",
+              "storeName": "Omotesando",
               "latitude": "35.666129",
               "longitude": "139.710932",
               "storeRadius": "70",
@@ -10031,17 +10036,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R224.png"
               ],
               "secureImageURL": [],
-              "locationText": "渋谷区",
+              "locationText": "Shibuya-ku",
               "timeZone": "Asia/Tokyo",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "神宮前4-2-13\n渋谷区,150-0001",
+              "storeAddress": "4-2-13 Jingumae\nShibuya-ku,150-0001",
               "phoneNumber": "03-6757-4400"
             },
             {
               "storeNumber": "R128",
               "countryCode": "JP",
-              "storeName": "新宿",
+              "storeName": "Shinjuku",
               "latitude": "35.691",
               "longitude": "139.7041",
               "storeRadius": "70",
@@ -10050,17 +10055,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R128.png"
               ],
               "secureImageURL": [],
-              "locationText": "新宿区",
+              "locationText": "Shinjuku-ku",
               "timeZone": "Asia/Tokyo",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "新宿3−30−13\n新宿マルイ本館\n新宿区,160-0022",
+              "storeAddress": "Shinjuku Marui Honkan\n3-30-13 Shinjuku\nShinjuku-ku,160-0022",
               "phoneNumber": "03-5656-1800"
             },
             {
               "storeNumber": "R119",
               "countryCode": "JP",
-              "storeName": "渋谷",
+              "storeName": "Shibuya",
               "latitude": "35.66196",
               "longitude": "139.69978",
               "storeRadius": "70",
@@ -10069,17 +10074,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R119.png"
               ],
               "secureImageURL": [],
-              "locationText": "渋谷区",
+              "locationText": "Shibuya-ku",
               "timeZone": "Asia/Tokyo",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "神南1-20-9 \n公園通りビル\n渋谷区,150-0041",
+              "storeAddress": "Koendori Building\n1-20-9 Jinnan\nShibuya-ku,150-0041",
               "phoneNumber": "03-6670-1800"
             },
             {
               "storeNumber": "R079",
               "countryCode": "JP",
-              "storeName": "銀座",
+              "storeName": "Ginza",
               "latitude": "35.67232",
               "longitude": "139.76572",
               "storeRadius": "70",
@@ -10088,17 +10093,17 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R079.png"
               ],
               "secureImageURL": [],
-              "locationText": "中央区",
+              "locationText": "Chuo-ku",
               "timeZone": "Asia/Tokyo",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "銀座3-5-12\nサヱグサビル本館\n中央区,104-0061",
+              "storeAddress": "Sayegusa Building\n3-5-12 Ginza\nChuo-ku,104-0061",
               "phoneNumber": "03-5159-8200"
             },
             {
               "storeNumber": "R718",
               "countryCode": "JP",
-              "storeName": "丸の内",
+              "storeName": "Marunouchi",
               "latitude": "35.680225",
               "longitude": "139.763906",
               "storeRadius": "70",
@@ -10107,22 +10112,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R718.png"
               ],
               "secureImageURL": [],
-              "locationText": "千代田区",
+              "locationText": "Chiyoda-ku",
               "timeZone": "Asia/Tokyo",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "丸の内2-5-2\n三菱ビル\n千代田区,100-0005",
+              "storeAddress": "Mitsubishi Building\n2-5-2 Marunouchi\nChiyoda-ku,100-0005",
               "phoneNumber": "03-4213-0500"
             }
           ]
         },
         {
-          "stateName": "愛知県",
+          "stateName": "Aichi",
           "stores": [
             {
               "storeNumber": "R005",
               "countryCode": "JP",
-              "storeName": "名古屋栄",
+              "storeName": "Nagoya Sakae",
               "latitude": "35.16555",
               "longitude": "136.90716",
               "storeRadius": "70",
@@ -10131,11 +10136,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R005.png"
               ],
               "secureImageURL": [],
-              "locationText": "名古屋市",
+              "locationText": "Nagoya-shi",
               "timeZone": "Asia/Tokyo",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "中区栄3-17-15\nエフエックスビル\n名古屋市,460-0008",
+              "storeAddress": "FX Building\n3-17-15 Sakae, Naka-ku\nNagoya-shi,460-0008",
               "phoneNumber": "052-238-2400"
             }
           ]
@@ -10146,7 +10151,7 @@
             {
               "storeNumber": "R048",
               "countryCode": "JP",
-              "storeName": "福岡",
+              "storeName": "Fukuoka",
               "latitude": "33.587908",
               "longitude": "130.397033",
               "storeRadius": "70",
@@ -10155,22 +10160,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R048.png"
               ],
               "secureImageURL": [],
-              "locationText": "福岡市",
+              "locationText": "Fukuoka-shi",
               "timeZone": "Asia/Tokyo",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "中央区天神2-5-19\n福岡市,810-0001",
+              "storeAddress": "2-5-19 Tenjin, Chuo-ku\nFukuoka-shi,810-0001",
               "phoneNumber": "092-778-0200"
             }
           ]
         },
         {
-          "stateName": "大阪府",
+          "stateName": "Osaka",
           "stores": [
             {
               "storeNumber": "R091",
               "countryCode": "JP",
-              "storeName": "心斎橋",
+              "storeName": "Shinsaibashi",
               "latitude": "34.672",
               "longitude": "135.50007",
               "storeRadius": "70",
@@ -10179,22 +10184,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R091.png"
               ],
               "secureImageURL": [],
-              "locationText": "大阪市",
+              "locationText": "Osaka-shi",
               "timeZone": "Asia/Tokyo",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "中央区西心斎橋1-5-5\nアーバンBLD心斎橋\n大阪市,542-0086",
+              "storeAddress": "UrbanBLD Shinsaibashi\n1-5-5 Shinsaibashi, Chuo-ku\nOsaka-shi,542-0086",
               "phoneNumber": "06-4963-4500"
             }
           ]
         },
         {
-          "stateName": "神奈川県",
+          "stateName": "Kanagawa",
           "stores": [
             {
               "storeNumber": "R710",
               "countryCode": "JP",
-              "storeName": "川崎",
+              "storeName": "Kawasaki",
               "latitude": "35.532695",
               "longitude": "139.695856",
               "storeRadius": "70",
@@ -10203,22 +10208,22 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R710.png"
               ],
               "secureImageURL": [],
-              "locationText": "川崎市",
+              "locationText": "Kawasaki-shi",
               "timeZone": "Asia/Tokyo",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "幸区堀川町72-1\nラゾーナ川崎プラザ\n川崎市,212-0013",
+              "storeAddress": "Lazona Kawasaki Plaza\n72-1 Horikawacho, Saiwai-ku\nKawasaki-shi,212-8576",
               "phoneNumber": "044-577-5100"
             }
           ]
         },
         {
-          "stateName": "京都府",
+          "stateName": "Kyoto",
           "stores": [
             {
               "storeNumber": "R711",
               "countryCode": "JP",
-              "storeName": "京都",
+              "storeName": "Kyoto",
               "latitude": "35.003825",
               "longitude": "135.762675",
               "storeRadius": "70",
@@ -10227,11 +10232,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R711.png"
               ],
               "secureImageURL": [],
-              "locationText": "京都市",
+              "locationText": "Kyoto-shi",
               "timeZone": "Asia/Tokyo",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "下京区\n四条通高倉東入立売中之町83-1\n京都市,600-8006",
+              "storeAddress": "83-1 Tachiurinakanocho\nShijo-dori Takakura Higashiiru\nKyoto-shi,",
               "phoneNumber": "075-757-8700"
             }
           ]
@@ -10505,7 +10510,7 @@
               "timeZone": "Europe/Brussels",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Avenue de la Toison d’Or 26/28\nBruxelles ",
+              "storeAddress": "Avenue de la Toison d’Or 26-28 \nBruxelles ",
               "phoneNumber": "0800 81 685"
             }
           ]
@@ -10592,7 +10597,7 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/MX",
       "states": [
         {
-          "stateName": "CDMX",
+          "stateName": "D.F., Mexico",
           "stores": [
             {
               "storeNumber": "R708",
@@ -10606,13 +10611,18 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R708.png"
               ],
               "secureImageURL": [],
-              "locationText": "Del. Cuajimalpa",
+              "locationText": "Cuajimalpa de Morelos",
               "timeZone": "Mexico/General",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "Avenida Vasco de Quiroga 3800\nLomas de Santa Fe, Antigua Mina de Totolapa;Del. Cuajimalpa,CP 05109",
+              "storeAddress": "Avenida Vasco de Quiroga 3800\nLomas de Santa Fe, Antigua Mina de Totoloapa,;Cuajimalpa de Morelos ,05109",
               "phoneNumber": "01 55 1037 6400"
-            },
+            }
+          ]
+        },
+        {
+          "stateName": "CDMX",
+          "stores": [
             {
               "storeNumber": "R740",
               "countryCode": "MX",
@@ -10625,11 +10635,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R740.png"
               ],
               "secureImageURL": [],
-              "locationText": "Ciudad de México",
+              "locationText": "Mexico City",
               "timeZone": "Mexico/General",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "Av. Ejército Nacional #843-B\nCentro Comercial Antara Fashion Hall, Miguel Hidalgo;Ciudad de México,11520",
+              "storeAddress": "Av. Ejército Nacional #843-B\nCentro Comercial Antara Fashion Hall, Miguel Hidalgo;Mexico City,11520",
               "phoneNumber": "01 55 4739 3890"
             }
           ]
