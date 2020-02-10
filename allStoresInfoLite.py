@@ -55,13 +55,13 @@ if filecmp.cmp(newLocation, listLoc) == False and orgListSize and newListSize an
 		fileLines.append(formatJSON.split("\n"))
 		if formatFile == listLoc: fileWrite(listLoc.replace(".json", "-format.json"), formatJSON)
 	for line in difflib.unified_diff(fileLines[0], fileLines[1]): fileDiff += line + "\n"
-	fileWrite("/root/www/changeLog-latest.html", fileDiff + "</code></pre></body></html>")
+	fileWrite("/root/www/storelist.html", fileDiff + "</code></pre></body></html>")
 	os.system("mv " + newLocation + " " + listLoc.replace(".json", "-" + changeTime + ".json"))
 	logging.info("文件生成完成，上一版本已保存至 storeList-" + changeTime + ".json")
 	pushAns = "于 " + runTime + " 检测到更新，大小差异 " + str(deltaListSize) + " 字节"
 	logging.info("[运行结果] " + pushAns)
 	IFTTT.pushbots(pushAns, "https://www.apple.com/jp/retail/store/includes/marunouchi/drawer/images/store-drawer-tile-1_small_2x.jpg",
-		"http://myv.ps/changeLog-latest.html", "linkraw", IFTTT.getkey()[0], 0)
+		"http://myv.ps/storelist.html", "linkraw", IFTTT.getkey()[0], 0)
 elif newListSize == 0: 
 	logging.error("未能成功下载 allStoresInfoLite 文件")
 elif dlc.count("Jiefangbei") == 0:
