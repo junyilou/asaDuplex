@@ -62,7 +62,8 @@ if sys.argv[1] == "normal":
 if sys.argv[1] == "special":
 	with open(rpath + "specialist.txt") as l:
 		specialist = l.read().replace("\n", "").split(", ")
-		specialist.remove('')
+		try: specialist.remove('')
+		except ValueError: pass
 	if len(specialist):
 		logging.info("开始特别观察模式")
 		for i in specialist:
