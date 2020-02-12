@@ -41,24 +41,24 @@ os.system("wget -t 20 -T 5 -U ASA/" + asaVersion + " -O " + listLoc + " --header
 newListSize = os.path.getsize(listLoc); dlc = fileOpen(listLoc)
 fileWrite(listLoc, dlc.replace('?interpolation=progressive-bicubic&output-quality=85&output-format=jpg&resize=312:*', ''))
 
-runTime = time.strftime("%F %T", time.localtime())
+runTime = time.strftime("%F", time.localtime())
 
 if filecmp.cmp(newLocation, listLoc) == False and orgListSize and newListSize and "Jiefangbei" in dlc:
 	logging.info("检测到有文件变化，正在生成 changeLog")
 	deltaListSize = newListSize - orgListSize
-	fileLines = []; changeTime = time.strftime("%Y%m%d-%H%M%S", time.localtime())
+	fileLines = []
 	fileDiff = '<!DOCTYPE html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>'
-	fileDiff += "storeList changeLog " + changeTime + "</title></head><body><pre><code>"
-	fileDiff += "Generated at " + changeTime + " GMT+8\n"
+	fileDiff += "storeList changeLog " + runTime + "</title></head><body><pre><code>"
+	fileDiff += "Generated at " + runTime + " GMT+8\n"
 	for formatFile in [newLocation, listLoc]:
 		formatJSON = json.dumps(json.loads(fileOpen(formatFile)), ensure_ascii = False, indent = 2)
 		fileLines.append(formatJSON.split("\n"))
 		if formatFile == listLoc: fileWrite(listLoc.replace(".json", "-format.json"), formatJSON)
 	for line in difflib.unified_diff(fileLines[0], fileLines[1]): fileDiff += line + "\n"
 	fileWrite("/root/www/storelist.html", fileDiff + "</code></pre></body></html>")
-	os.system("mv " + newLocation + " " + listLoc.replace(".json", "-" + changeTime + ".json"))
-	logging.info("文件生成完成，上一版本已保存至 storeList-" + changeTime + ".json")
-	pushAns = "于 " + runTime + " 检测到更新，大小差异 " + str(deltaListSize) + " 字节"
+	os.system("mv " + newLocation + " " + listLoc.replace(".json", "-" + runTime + ".json"))
+	logging.info("文件生成完成，上一版本已保存至 storeList-" + runTime + ".json")
+	pushAns = "检测到 Apple Store 零售店信息文件更新，文件大小差异 " + str(deltaListSize) + " 字节"
 	logging.info("[运行结果] " + pushAns)
 	IFTTT.pushbots(pushAns, "https://www.apple.com/jp/retail/store/includes/marunouchi/drawer/images/store-drawer-tile-1_small_2x.jpg",
 		"http://myv.ps/storelist.html", "linkraw", IFTTT.getkey()[0], 0)
