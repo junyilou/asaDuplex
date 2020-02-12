@@ -32,6 +32,14 @@ def fileWrite(fileloc, writer):
 	with open(fileloc, "w") as fout:
 		fout.write(writer)
 
+def fileOpen(fileloc):
+	try: 
+		with open(fileloc) as fin:
+			return fin.read()
+	except FileNotFoundError:
+		logging.error(fileloc + " 文件不存在")
+		return None
+
 transdict = {"周一": 0, "周二": 1, "周三": 2, "周四": 3, "周五": 4, "周六": 5, "周日": 6}
 revtrans = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 
@@ -53,13 +61,13 @@ for i in storeID:
 	" --header 'X-MALang: zh-CN' " +
 	"'https://mobileapp.apple.com/mnr/p/cn/retail/storeDetails?storeNumber=R" + str(i) + "'")
 
-with open (rpath + "storeHours.json") as org: orgjson = json.loads(org.read())
+orgjson = json.loads(fileOpen(rpath + "storeHours.json"))
 
 allSpecial = {"created": runtime}
 comparison = ""
 
 for sn, sid in zip(storename, storeID):
-	with open (rpath + "storeDeatils-R" + str(sid) + ".txt") as fin: storejson = fin.read()
+	storejson = fileOpen(rpath + "storeDeatils-R" + str(sid) + ".txt")
 	storedict = json.loads(storejson)["allStoreHoursMergedResponse"]
 
 	try: 
