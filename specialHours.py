@@ -62,8 +62,10 @@ for sn, sid in zip(storename, storeID):
 	with open (rpath + "storeDeatils-R" + str(sid) + ".txt") as fin: storejson = fin.read()
 	storedict = json.loads(storejson)["allStoreHoursMergedResponse"]
 
-	try: special = storedict["specialHours"]
-	except: special = []
+	try: 
+		special = storedict["specialHours"]
+	except: 
+		special = []
 	storeSpecial = {}
 	for s in special:
 		sWeekday = datetime.datetime.strptime(s["specialDate"], '%Y年%m月%d日').weekday()
@@ -77,11 +79,24 @@ for sn, sid in zip(storename, storeID):
 		try: 
 			orgSpecial = orgjson[str(sid)]["time"][s["specialDate"]]
 		except KeyError:
-			aOut = "Apple " + sn + " 在 " + s["specialDate"] + " 新增特别营业时间 " + fSpecial
+			aOut = "+ Apple " + sn + " 在 " + s["specialDate"] + " 新增特别营业时间 " + fSpecial
 			comparison += aOut + "\n"; logging.info("监测到 " + aOut)
 		else: 
 			if orgSpecial != fSpecial:
-				aOut = "Apple " + sn + " 在 " + s["specialDate"] + " 的特别营业时间由 " + orgSpecial + " 改为 " + fSpecial
+				aOut = "= Apple " + sn + " 在 " + s["specialDate"] + " 的特别营业时间由 " + orgSpecial + " 改为 " + fSpecial
+				comparison += aOut + "\n"; logging.info("监测到 " + aOut)
+	try: 
+		oload = orgjson[str(sid)]["time"]
+	except KeyError: 
+		pass
+	else:
+		for odate in oload:
+			odatetime = datetime.datetime.strptime(odate, '%Y年%m月%d日')
+			if odatetime < datetime.datetime.now(): continue
+			try:
+				newSpecial = storeSpecial[odate]
+			except KeyError:
+				aOut = "- Apple " + sn + " 在 " + odate + " 的营业时间 " + oload[odate] + " 已被取消"
 				comparison += aOut + "\n"; logging.info("监测到 " + aOut)
 	if len(storeSpecial):
 		addSpecial = {sid: {"storename": sn, "time": storeSpecial}}
