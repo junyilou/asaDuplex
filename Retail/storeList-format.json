@@ -1013,8 +1013,8 @@
               "storeNumber": "R202",
               "countryCode": "US",
               "storeName": "Stamford",
-              "latitude": "41.0537943751529",
-              "longitude": "-73.5363822095017",
+              "latitude": "41.1058",
+              "longitude": "-73.4185",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
