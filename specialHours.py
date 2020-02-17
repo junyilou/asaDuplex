@@ -24,8 +24,7 @@ def tttf(raw):
 
 def ftup(raw): 
 	detm = raw % 60; deth = str(int((raw - detm) / 60))
-	if detm < 10: detm = "0" + str(detm)
-	else: detm = str(detm)
+	detm = "%02d" % detm
 	return (deth, detm)
 
 def fileWrite(fileloc, writer): 

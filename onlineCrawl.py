@@ -2,8 +2,8 @@ import urllib.request, urllib.error, os, sys, IFTTT, logging
 from bs4 import BeautifulSoup
 from socket import timeout
 
-userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) \
-AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"
+userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) \
+AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.5 Safari/605.1.15"
 alphabet = [chr(i) for i in range(65, 90)]
 removeList = ['B', 'I', 'O', 'S']
 alphabet = [t for t in alphabet if t not in removeList]
@@ -78,13 +78,13 @@ for a in range(amount):
 		newList.append(ans[a]); outPlus += ", " + ans[a]
 
 	if a + 1 == amount or len(newList) > 9:
-		if len(newList) > 0 and len(newList) < 4:
+		if len(newList) in [1, 2, 3]:
 			logging.info("累计新产品不超过 3 个，准备逐个输出")
 			for e in range(len(newList)):
 				pushAns = "Apple Online Store 更新了新产品：" + title(newList[e]) + "，产品部件号：" + newList[e] + "。"
 				logging.info("[运行结果] " + pushAns)
 				IFTTT.pushbots(pushAns, productImage(newList[e]), url.replace(ans[a], newList[e]), "linkraw", masterKey[0], 0)
-		else:
+		elif len(newList):
 			newTitle = list()
 			for nt in newList: 
 				logging.info("正在获得 " + nt + " 的产品名称用于输出")
