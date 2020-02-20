@@ -1,7 +1,7 @@
-import json, datetime, os, logging, time, IFTTT
+import json, datetime, os, logging, time, IFTTT, requests
 from retailData import storename, storeID
 
-asaVersion = "5.7.0"
+asaVersion = "5.7.0"; remoteAsaVersion = 0
 rpath = os.path.expanduser('~') + "/Retail/"
 formatAsaVersion = int("".join(asaVersion.split(".")))
 
@@ -43,10 +43,12 @@ transdict = {"周一": 0, "周二": 1, "周三": 2, "周四": 3, "周五": 4, "�
 revtrans = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 
 logging.info("正在确认远程 Apple Store app 版本...")
-os.system("wget -t 20 -T 5 -O " + rpath + "iTunesLookup https://itunes.apple.com/cn/lookup?id=375380948")
-try: remoteAsaVersion = int("".join(json.loads(fileOpen(rpath + "iTunesLookup"))["results"][0]["version"].split(".")))
-except: remoteAsaVersion = 0
-if remoteAsaVersion > 0 and remoteAsaVersion < 100: remoteAsaVersion *= 10
+try: 
+	lookup = requests.get("https://itunes.apple.com/cn/lookup?id=375380948").json()
+except: pass
+else: 
+	remoteAsaVersion = int("".join(lookup["results"][0]["version"].split(".")))
+if remoteAsaVersion in range(10, 101): remoteAsaVersion *= 10
 if remoteAsaVersion > formatAsaVersion:
 	asaVersion = ".".join(list(str(remoteAsaVersion)))
 	logging.info("从远程获得了新的 Apple Store app 版本 " + asaVersion)
@@ -54,16 +56,14 @@ if remoteAsaVersion > formatAsaVersion:
 for i in storeID:
 	listLoc = rpath + "storeDeatils-R" + str(i) + ".txt"
 	logging.info("正在下载零售店 R" + str(i) + " 的细节文件...")
-	os.system("wget -t 20 -T 5 -U ASA/5.7 -O " + listLoc + 
+	os.system("wget -t 20 -T 5 -U ASA/" + asaVersion + " -O " + listLoc + 
 	" --header 'x-ma-pcmh: REL-" + asaVersion + "'" + 
 	" --header 'X-DeviceConfiguration: vv=" + asaVersion + ";sv=13.3' " +
 	" --header 'X-MALang: zh-CN' " +
 	"'https://mobileapp.apple.com/mnr/p/cn/retail/storeDetails?storeNumber=R" + str(i) + "'")
 
 orgjson = json.loads(fileOpen(rpath + "storeHours.json"))
-
-allSpecial = {"created": runtime}
-comparison = ""
+allSpecial = {"created": runtime}; comparison = ""
 
 for sn, sid in zip(storename, storeID):
 	storejson = fileOpen(rpath + "storeDeatils-R" + str(sid) + ".txt")

@@ -1,6 +1,6 @@
-import os, time, json, filecmp, difflib, logging, IFTTT
+import os, time, json, filecmp, difflib, logging, IFTTT, requests
 
-asaVersion = "5.7.0"
+asaVersion = "5.7.0"; remoteAsaVersion = 0
 rpath = os.path.expanduser('~') + "/Retail/"
 formatAsaVersion = int("".join(asaVersion.split(".")))
 
@@ -23,10 +23,12 @@ def fileWrite(fileloc, writer):
 		fout.write(writer)
 
 logging.info("正在确认远程 Apple Store app 版本...")
-os.system("wget -t 20 -T 5 -O " + rpath + "iTunesLookup https://itunes.apple.com/cn/lookup?id=375380948")
-try: remoteAsaVersion = int("".join(json.loads(fileOpen(rpath + "iTunesLookup"))["results"][0]["version"].split(".")))
-except: remoteAsaVersion = 0
-if remoteAsaVersion > 0 and remoteAsaVersion < 100: remoteAsaVersion *= 10
+try: 
+	lookup = requests.get("https://itunes.apple.com/cn/lookup?id=375380948").json()
+except: pass
+else: 
+	remoteAsaVersion = int("".join(lookup["results"][0]["version"].split(".")))
+if remoteAsaVersion in range(10, 101): remoteAsaVersion *= 10
 if remoteAsaVersion > formatAsaVersion:
 	asaVersion = ".".join(list(str(remoteAsaVersion)))
 	logging.info("从远程获得了新的 Apple Store app 版本 " + asaVersion)
