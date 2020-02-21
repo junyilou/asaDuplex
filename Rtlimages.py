@@ -30,6 +30,9 @@ def down(rtl, isSpecial):
 			rnso = "这家零售店最早开幕于 " + time.strftime("%Y 年 %-m 月 %-d 日", time.strptime(rnso, "%Y-%m-%d")) + "。"
 		if isSpecial: 
 			exce += rtl + ", "
+			specialist.remove(rtl)
+			with open(rpath + "specialist.txt", "w") as w:
+				w.write(", ".join(specialist))
 		tellRaw = "零售店编号 R" + rtl + "，新图片的大小是 " + str(int(newsize / 1024)) + " KB。" + rnso
 		imageURL = dieter + spr + "?output-format=jpg"
 		titaru = rflag + "Apple " + rname + " 图片更新"
