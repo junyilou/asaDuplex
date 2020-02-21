@@ -68,6 +68,7 @@ allSpecial = {"created": runtime}; comparison = ""
 for sn, sid in zip(storename, storeID):
 	storejson = fileOpen(rpath + "storeDeatils-R" + str(sid) + ".txt")
 	storedict = json.loads(storejson)["allStoreHoursMergedResponse"]
+	storeDiff = ""
 
 	try: 
 		special = storedict["specialHours"]
@@ -86,12 +87,12 @@ for sn, sid in zip(storename, storeID):
 		try: 
 			orgSpecial = orgjson[str(sid)]["time"][s["specialDate"]]
 		except KeyError:
-			aOut = "+ Apple " + sn + " 在 " + s["specialDate"] + " 新增特别营业时间 " + fSpecial
-			comparison += aOut + "\n"; logging.info("监测到 " + aOut)
+			storeDiff += " " * 8 + s["specialDate"] + "：新增 " + fSpecial + "\n"
+			logging.info("Apple " + sn + " " + s["specialDate"] + " 新增 " + fSpecial)
 		else: 
 			if orgSpecial != fSpecial:
-				aOut = "= Apple " + sn + " 在 " + s["specialDate"] + " 的特别营业时间由 " + orgSpecial + " 改为 " + fSpecial
-				comparison += aOut + "\n"; logging.info("监测到 " + aOut)
+				storeDiff += " " * 8 + s["specialDate"] + "：由 " + orgSpecial + " 改为 " + fSpecial + "\n"
+				logging.info("Apple " + sn + " " + s["specialDate"] + " 改为 " + fSpecial)
 	try: 
 		oload = orgjson[str(sid)]["time"]
 	except KeyError: 
@@ -103,11 +104,13 @@ for sn, sid in zip(storename, storeID):
 			try:
 				newSpecial = storeSpecial[odate]
 			except KeyError:
-				aOut = "- Apple " + sn + " 在 " + odate + " 的营业时间 " + oload[odate] + " 已被取消"
-				comparison += aOut + "\n"; logging.info("监测到 " + aOut)
+				storeDiff += " " * 8 + odate + "：取消 " + oload[odate] + "\n"
+				logging.info("Apple " + sn + " " + odate + " 取消 " + oload[odate])
 	if len(storeSpecial):
 		addSpecial = {sid: {"storename": sn, "time": storeSpecial}}
 		allSpecial = {**allSpecial, **addSpecial}
+	if len(storeDiff):
+		comparison += "    Apple " + sn + "\n" + storeDiff
 	os.remove(rpath + "storeDeatils-R" + str(sid) + ".txt")
 
 jOut = json.dumps(allSpecial, ensure_ascii = False, indent = 2)
@@ -116,7 +119,7 @@ fileWrite(rpath + "storeHours.json", jOut)
 logging.info("写入新的 storeHours.json")
 
 if len(comparison):
-	tOut = "Generated on: " + runtime + "\n\nChanges:\n" + comparison + "\nOriginal JSON:\n" + jOut
+	tOut = "Apple Store 特别营业时间\n生成于 " + runtime + "\n\n变化：\n" + comparison + "\n原始 JSON:\n" + jOut
 	fileDiff = '<!DOCTYPE html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>'
 	fileDiff += "storeHours " + runtime + "</title></head><body><pre><code>"
 	fileDiff += tOut + "</code></pre></body></html>"
