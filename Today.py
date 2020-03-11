@@ -1,7 +1,7 @@
 import os, json, time, logging, IFTTT
 from retailData import filename, storename
 
-rpath, wAns, allChina = os.path.expanduser('~') + "/Retail/", "", len(filename)
+rpath, wAns = os.path.expanduser('~') + "/Retail/", ""
 with open(rpath + "savedEvent.txt") as m: mark = m.read()
 
 logging.basicConfig(
