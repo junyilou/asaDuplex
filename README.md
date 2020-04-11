@@ -10,18 +10,20 @@
     用户通过在 IFTTT 网站设置 Maker Webhooks，方便代码将结果直接推送至手机 app
     
     *  通过 ~/key.txt 获得 API Key
-    *  3 个自定义参数推送 (IFTTT 定的)
+    *  3 个自定义参数推送
     *  Debug Mode 供查错和修正
+    
+    3 个自定义参数是 IFTTT 给予用户的最大参数数，已向 IFTTT 反应太少而无果，适合比较简单的程序结果推送。未来将优化需要较复杂结果输出的代码使用 Telegram Bot 推送结果。
 
 
 ### 代码
 * allStoresInfoLite.py: 从 mobileapps.apple.com 刷新 Apple Store 零售店信息
-* onlineCrawl.py: 获得 Apple Online Store 最新上架的 Apple 品牌产品
 * Recruitment.py: 获得全球正在招聘的 Apple Store 零售店以观察新店招聘情况
 * Rtlimages.py: 从 rtlimages.apple.com 获得最新的 Apple Store 零售店图片
 * specialHours.py: 获得中国内地零售店的特别营业时间动态更新
 * storeDistance.py: 通过 storeList.json 中的坐标计算全球零售店距离并排序
-* Today.py: 取得中国内地最新 Today at Apple 活动标题
+* Today.py: 取得中国内地最新 Today at Apple 活动
+* ~~onlineCrawl.py: 获得 Apple Online Store 新上架的 Apple 品牌产品~~ (因更新涉及较多不便于公开的内容而移除)
 
 ### 文本
 
