@@ -19,7 +19,7 @@
 ### 代码
 * allStoresInfoLite.py: 从 mobileapps.apple.com 刷新 Apple Store 零售店信息
 * Recruitment.py: 获得全球正在招聘的 Apple Store 零售店以观察新店招聘情况
-* Rtlimages.py: 从 rtlimages.apple.com 获得最新的 Apple Store 零售店图片
+* Rtlimages.py: 从 rtlimages.apple.com 对比零售店图片更新
 * specialHours.py: 获得中国内地零售店的特别营业时间动态更新
 * storeDistance.py: 通过 storeList.json 中的坐标计算全球零售店距离并排序
 * Today.py: 取得中国内地最新 Today at Apple 活动
@@ -29,7 +29,7 @@
 
 * retailData.py: 为了避免在代码中出现大量已知数据而提前预存的一些零售店信息
 * savedEvent.txt: 由 Today.py 生成的，已经检测到并保存的 Today at Apple 活动列表
-* storeInfo.json: 部分 Apple Store 名称、店号和所属国家或区域 emoji 旗帜
+* storeInfo.json: 部分 Apple Store 名称、店号、所属地旗帜和已知图片的最后修改时间
 * storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的结果
 
 

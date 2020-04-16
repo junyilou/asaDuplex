@@ -3,7 +3,7 @@ import os, sys, json, time, logging, requests, IFTTT
 logging.basicConfig(
 	filename = os.path.expanduser('~') + "/logs/" + os.path.basename(__file__) + ".log",
 	format = '[%(asctime)s %(levelname)s] %(message)s',
-	level = logging.DEBUG, filemode = 'a', datefmt = '%F %T %p')
+	level = logging.INFO, filemode = 'a', datefmt = '%F %T %p')
 
 def down(rtl, isSpecial):
 	base = dieter + "R" + rtl + ".png"
@@ -23,9 +23,8 @@ def down(rtl, isSpecial):
 			rname = "Store"
 			rflag = ""; rnso = ""
 		if rnso != "" and rnso != "TBC": 
-			rnso = "这家零售店最早开幕于 " + time.strftime("%Y 年 %-m 月 %-d 日", time.strptime(rnso, "%Y-%m-%d")) + "。"
+			rnso = "该店开幕于 " + time.strftime("%Y 年 %-m 月 %-d 日", time.strptime(rnso, "%Y-%m-%d")) + "。"
 		if isSpecial: 
-			exce += rtl + ", "
 			specialist.remove(rtl)
 			with open(rpath + "specialist.txt", "w") as w:
 				w.write(", ".join(specialist))
