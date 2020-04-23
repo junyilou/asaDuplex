@@ -57,7 +57,7 @@ if filecmp.cmp(newLocation, listLoc) == False and orgListSize and newListSize an
 		fileLines.append(formatJSON.split("\n"))
 		if formatFile == listLoc: fileWrite(listLoc.replace(".json", "-format.json"), formatJSON)
 	for line in difflib.unified_diff(fileLines[0], fileLines[1]): fileDiff += line + "\n"
-	fileWrite("/root/www/storelist.html", fileDiff + "</code></pre></body></html>")
+	fileWrite("/home/storelist.html", fileDiff + "</code></pre></body></html>")
 	os.system("mv " + newLocation + " " + listLoc.replace(".json", "-" + runTime + ".json"))
 	logging.info("文件生成完成，上一版本已保存至 storeList-" + runTime + ".json")
 	pushAns = "检测到 Apple Store 零售店信息文件更新，文件大小差异 " + str(deltaListSize) + " 字节"

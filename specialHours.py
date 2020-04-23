@@ -123,7 +123,7 @@ if len(comparison):
 	fileDiff = '<!DOCTYPE html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>'
 	fileDiff += "storeHours " + runtime + "</title></head><body><pre><code>"
 	fileDiff += tOut + "</code></pre></body></html>"
-	fileWrite("/root/www/storeHours.html", fileDiff)
+	fileWrite("/home/storeHours.html", fileDiff)
 	logging.info("文件生成完成，上一版本已保存至 storeHours-" + runtime + ".json")
 	pushAns = "监测到 Apple Store 零售店有 " + str(comparison.count("Apple")) + " 个特别营业时间变化，点击链接查看详细变化和原始 JSON 内容。"
 	logging.info("[运行结果] " + pushAns)
