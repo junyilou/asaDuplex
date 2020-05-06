@@ -5,10 +5,15 @@ asaVersion = "5.7.0"; remoteAsaVersion = 0
 rpath = os.path.expanduser('~') + "/Retail/"
 formatAsaVersion = int("".join(asaVersion.split(".")))
 
-logging.basicConfig(
-	filename = os.path.expanduser('~') + "/logs/" + os.path.basename(__file__) + ".log",
-	format = '[%(asctime)s %(levelname)s] %(message)s',
-	level = logging.DEBUG, filemode = 'w', datefmt = '%F %T %p')
+if os.path.isdir('logs'):
+	logging.basicConfig(
+		filename = "logs/" + os.path.basename(__file__) + ".log",
+		format = '[%(asctime)s %(levelname)s] %(message)s',
+		level = logging.DEBUG, filemode = 'a', datefmt = '%F %T')
+else:
+	logging.basicConfig(
+		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
+		level = logging.DEBUG, datefmt = '%T')
 logging.info("程序启动")
 runtime = datetime.datetime.now().strftime("%F")
 

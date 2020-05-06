@@ -4,10 +4,15 @@ from retailData import filename, storename
 rpath, wAns = os.path.expanduser('~') + "/Retail/", ""
 with open(rpath + "savedEvent.txt") as m: mark = m.read()
 
-logging.basicConfig(
-	filename = os.path.expanduser('~') + "/logs/" + os.path.basename(__file__) + ".log",
-	format = '[%(asctime)s %(levelname)s] %(message)s',
-	level = logging.DEBUG, filemode = 'a', datefmt = '%F %T %p')
+if os.path.isdir('logs'):
+	logging.basicConfig(
+		filename = "logs/" + os.path.basename(__file__) + ".log",
+		format = '[%(asctime)s %(levelname)s] %(message)s',
+		level = logging.DEBUG, filemode = 'a', datefmt = '%F %T')
+else:
+	logging.basicConfig(
+		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
+		level = logging.DEBUG, datefmt = '%T')
 logging.info("程序启动")
 
 for fn in filename:

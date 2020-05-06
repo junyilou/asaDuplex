@@ -6,10 +6,15 @@ imageURL = "https://www.apple.com/jobs/images/retail/hero/desktop.jpg"
 with open(rpath + "savedJobs.txt") as m: mark = m.read()
 #stateCHN, stateCode, stateEmoji, specialistCode = ["澳大利亚"], ["AU"], ["🇦🇺"], [7991] #Debug
 
-logging.basicConfig(
-	filename = os.path.expanduser('~') + "/logs/" + os.path.basename(__file__) + ".log",
-	format = '[%(asctime)s %(levelname)s] %(message)s',
-	level = logging.DEBUG, filemode = 'w', datefmt = '%F %T %p')
+if os.path.isdir('logs'):
+	logging.basicConfig(
+		filename = "logs/" + os.path.basename(__file__) + ".log",
+		format = '[%(asctime)s %(levelname)s] %(message)s',
+		level = logging.DEBUG, filemode = 'a', datefmt = '%F %T')
+else:
+	logging.basicConfig(
+		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
+		level = logging.DEBUG, datefmt = '%T')
 logging.info("程序启动")
 
 for scn, scd, ste, spl in zip(stateCHN, stateCode, stateEmoji, specialistCode):
