@@ -1,7 +1,7 @@
 import json, datetime, os, logging, time, IFTTT, requests
 from retailData import storename, storeID
 
-asaVersion = "5.7.0"; remoteAsaVersion = 0
+asaVersion = "5.8.0"; remoteAsaVersion = 0
 rpath = os.path.expanduser('~') + "/Retail/"
 formatAsaVersion = int("".join(asaVersion.split(".")))
 
@@ -25,12 +25,7 @@ def tttf(raw):
 	if '下午' in raw:
 		if hrs == "12": fhrs = 12
 		else: fhrs = int(hrs) + 12
-	return fhrs * 60 + int(rawtime[1])
-
-def ftup(raw): 
-	detm = raw % 60; deth = str(int((raw - detm) / 60))
-	detm = "%02d" % detm
-	return (deth, detm)
+	return (fhrs, int(rawtime[1]))
 
 def fileWrite(fileloc, writer): 
 	with open(fileloc, "w") as fout:
@@ -43,9 +38,6 @@ def fileOpen(fileloc):
 	except FileNotFoundError:
 		logging.error(fileloc + " 文件不存在")
 		return None
-
-transdict = {"周一": 0, "周二": 1, "周三": 2, "周四": 3, "周五": 4, "周六": 5, "周日": 6}
-revtrans = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 
 logging.info("正在确认远程 Apple Store app 版本...")
 try: 
@@ -79,16 +71,18 @@ for sn, sid in zip(storename, storeID):
 		special = storedict["specialHours"]
 	except: 
 		special = []
-	storeSpecial = {}
+	storeSpecial = {}; storeComment = {}
 	for s in special:
 		sWeekday = datetime.datetime.strptime(s["specialDate"], '%Y年%m月%d日').weekday()
 		if s["isClosed"] == "Y": 
 			fSpecial = "CLOSED"
 		else: 
-			sTime = (tttf(s["startTime"]), tttf(s["endTime"]))
-			fSpecial = ftup(sTime[0])[0] + ":" + ftup(sTime[0])[1] + " - " + ftup(sTime[1])[0] + ":" + ftup(sTime[1])[1]
+			sTime = tttf(s["startTime"]); eTime = tttf(s["endTime"])
+			fSpecial = str(sTime[0]) + ":" + "%02d" % sTime[1] + " - " + str(eTime[0]) + ":" + "%02d" % eTime[1]
 		singleSpecial = {s["specialDate"]: fSpecial}
+		singleComment = {s["specialDate"]: "[" + s["reason"] + "]" + s["comments"]}
 		storeSpecial = {**storeSpecial, **singleSpecial}
+		storeComment = {**storeComment, **singleComment}
 		try: 
 			orgSpecial = orgjson[str(sid)]["time"][s["specialDate"]]
 		except KeyError:
@@ -112,7 +106,7 @@ for sn, sid in zip(storename, storeID):
 				storeDiff += " " * 8 + odate + "：取消 " + oload[odate] + "\n"
 				logging.info("Apple " + sn + " " + odate + " 取消 " + oload[odate])
 	if len(storeSpecial):
-		addSpecial = {sid: {"storename": sn, "time": storeSpecial}}
+		addSpecial = {sid: {"storename": sn, "time": storeSpecial, "comment": storeComment}}
 		allSpecial = {**allSpecial, **addSpecial}
 	if len(storeDiff):
 		comparison += "    Apple " + sn + "\n" + storeDiff
