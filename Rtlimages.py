@@ -4,11 +4,11 @@ if os.path.isdir('logs'):
 	logging.basicConfig(
 		filename = "logs/" + os.path.basename(__file__) + ".log",
 		format = '[%(asctime)s %(levelname)s] %(message)s',
-		level = logging.DEBUG, filemode = 'a', datefmt = '%F %T')
+		level = logging.INFO, filemode = 'a', datefmt = '%F %T')
 else:
 	logging.basicConfig(
 		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
-		level = logging.DEBUG, datefmt = '%T')
+		level = logging.INFO, datefmt = '%T')
 
 def down(rtl, isSpecial):
 	base = dieter + "R" + rtl + ".png"
@@ -44,7 +44,7 @@ def down(rtl, isSpecial):
 		else: logging.info("检查到 "+ pname + " 的图片没有更新")
 
 totalStore = 901
-asaVersion = "5.7.0"
+asaVersion = "5.8.0"
 masterKey = IFTTT.getkey()
 rpath = os.path.expanduser('~') + "/Retail/"
 with open(rpath + "storeInfo.json") as s:
