@@ -33,6 +33,11 @@ def down(rtl, isSpecial):
 			specialist.remove(rtl)
 			with open(rpath + "specialist.txt", "w") as w:
 				w.write(", ".join(specialist))
+		storejson['last'][rtl] = r.headers['Last-Modified']
+		logging.info("正在更新 storeInfo.json")
+		sOut = json.dumps(storejson, ensure_ascii = False, indent = 2)
+		with open(rpath + "storeInfo.json", "w") as sw:
+			sw.write(sOut)
 		tellRaw = "零售店编号 R" + rtl + "，新图片的最后修改标签是 " + r.headers['Last-Modified'] + "。" + rnso
 		titaru = rflag + "Apple " + rname + " 图片更新"
 		logging.info("[运行结果] " + titaru + "，" + tellRaw)
