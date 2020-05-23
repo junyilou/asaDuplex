@@ -59,7 +59,10 @@ for i in storeID:
 	" --header 'X-MALang: zh-CN' " +
 	"'https://mobileapp.apple.com/mnr/p/cn/retail/storeDetails?storeNumber=R" + str(i) + "'")
 
-orgjson = json.loads(fileOpen(rpath + "storeHours.json"))
+try:
+	orgjson = json.loads(fileOpen(rpath + "storeHours.json"))
+except:
+	orjson = {}
 allSpecial = {"created": runtime}; comparison = ""
 
 for sn, sid in zip(storename, storeID):
