@@ -1,6 +1,7 @@
 import os, json, time, logging, IFTTT
 from retailData import filename, storename
 
+filename = filename[:42]; storename = storename[:42] #Mainland China only
 rpath, wAns = os.path.expanduser('~') + "/Retail/", ""
 with open(rpath + "savedEvent.txt") as m: mark = m.read()
 
