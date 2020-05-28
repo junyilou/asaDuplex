@@ -83,7 +83,13 @@ for sn, sid in zip(storename, storeID):
 			sTime = tttf(s["startTime"]); eTime = tttf(s["endTime"])
 			fSpecial = str(sTime[0]) + ":" + "%02d" % sTime[1] + " - " + str(eTime[0]) + ":" + "%02d" % eTime[1]
 		singleSpecial = {s["specialDate"]: fSpecial}
-		singleComment = {s["specialDate"]: "[" + s["reason"] + "]" + s["comments"]}
+		try:
+			comments = s["comments"]
+		except KeyError:
+			singleComment = {s["specialDate"]: "[" + s["reason"] + "]"}
+		else:
+			if comments != "": singleComment = {s["specialDate"]: "[" + s["reason"] + "] " + comments}
+			else: singleComment = {s["specialDate"]: "[" + s["reason"] + "]"}
 		storeSpecial = {**storeSpecial, **singleSpecial}
 		storeComment = {**storeComment, **singleComment}
 		try: 
