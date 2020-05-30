@@ -51,22 +51,22 @@ if remoteAsaVersion > formatAsaVersion:
 	logging.info("从远程获得了新的 Apple Store app 版本 " + asaVersion)
 
 for i in storeID:
-	listLoc = rpath + "storeDeatils-R" + str(i) + ".txt"
-	logging.info("正在下载零售店 R" + str(i) + " 的细节文件...")
+	listLoc = rpath + "storeDeatils-R" + i + ".txt"
+	logging.info("正在下载零售店 R" + i + " 的细节文件...")
 	os.system("wget -t 20 -T 5 -U ASA/" + asaVersion + " -O " + listLoc + 
 	" --header 'x-ma-pcmh: REL-" + asaVersion + "'" + 
 	" --header 'X-DeviceConfiguration: vv=" + asaVersion + ";sv=13.3' " +
 	" --header 'X-MALang: zh-CN' " +
-	"'https://mobileapp.apple.com/mnr/p/cn/retail/storeDetails?storeNumber=R" + str(i) + "'")
+	"'https://mobileapp.apple.com/mnr/p/cn/retail/storeDetails?storeNumber=R" + i + "'")
 
 try:
 	orgjson = json.loads(fileOpen(rpath + "storeHours.json"))
 except:
-	orjson = {}
+	orgjson = {}
 allSpecial = {"created": runtime}; comparison = ""
 
 for sn, sid in zip(storename, storeID):
-	storejson = fileOpen(rpath + "storeDeatils-R" + str(sid) + ".txt")
+	storejson = fileOpen(rpath + "storeDeatils-R" + sid + ".txt")
 	storedict = json.loads(storejson)["allStoreHoursMergedResponse"]
 	storeDiff = ""
 
@@ -93,7 +93,7 @@ for sn, sid in zip(storename, storeID):
 		storeSpecial = {**storeSpecial, **singleSpecial}
 		storeComment = {**storeComment, **singleComment}
 		try: 
-			orgSpecial = orgjson[str(sid)]["time"][s["specialDate"]]
+			orgSpecial = orgjson[sid]["time"][s["specialDate"]]
 		except KeyError:
 			storeDiff += " " * 8 + s["specialDate"] + "：新增 " + fSpecial + "\n"
 			logging.info("Apple " + sn + " " + s["specialDate"] + " 新增 " + fSpecial)
@@ -102,7 +102,7 @@ for sn, sid in zip(storename, storeID):
 				storeDiff += " " * 8 + s["specialDate"] + "：由 " + orgSpecial + " 改为 " + fSpecial + "\n"
 				logging.info("Apple " + sn + " " + s["specialDate"] + " 改为 " + fSpecial)
 	try: 
-		oload = orgjson[str(sid)]["time"]
+		oload = orgjson[sid]["time"]
 	except KeyError: 
 		pass
 	else:
@@ -119,7 +119,7 @@ for sn, sid in zip(storename, storeID):
 		allSpecial = {**allSpecial, **addSpecial}
 	if len(storeDiff):
 		comparison += "    Apple " + sn + "\n" + storeDiff
-	os.remove(rpath + "storeDeatils-R" + str(sid) + ".txt")
+	os.remove(rpath + "storeDeatils-R" + sid + ".txt")
 
 jOut = json.dumps(allSpecial, ensure_ascii = False, indent = 2)
 os.system("mv " + rpath + "storeHours.json " + rpath + "storeHours-" + runtime + ".json")
