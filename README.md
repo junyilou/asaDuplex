@@ -27,7 +27,6 @@
 
 ### 文本
 
-* retailData.py: 为了避免在代码中出现大量已知数据而提前预存的一些零售店信息
 * savedEvent.txt: 由 Today.py 生成的，已经检测到并保存的 Today at Apple 活动列表
 * storeInfo.json: 部分 Apple Store 名称、店号、所属地旗帜和已知图片的最后修改时间
 * storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的结果
