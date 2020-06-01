@@ -1,4 +1,5 @@
-import os, time, json, filecmp, difflib, logging, IFTTT, requests
+import os, time, json, filecmp, difflib, logging, requests
+import IFTTT
 
 asaVersion = "5.8.0"; remoteAsaVersion = 0
 rpath = os.path.expanduser('~') + "/Retail/"

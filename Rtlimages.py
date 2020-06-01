@@ -1,4 +1,5 @@
-import os, sys, json, time, logging, requests, IFTTT
+import os, sys, json, time, logging, requests
+import IFTTT
 
 if os.path.isdir('logs'):
 	logging.basicConfig(
@@ -14,7 +15,7 @@ def down(rtl, isSpecial):
 	base = dieter + "R" + rtl + ".png"
 	try: rmod = storejson['last'][rtl]
 	except KeyError: rmod = ""
-	r = requests.head(base, allow_redirects = False) #如果要检查 404 改 True
+	r = requests.head(base, allow_redirects = False) #如需检查 404 改 True
 	if r.status_code != 200: return 0
 	if r.headers['Last-Modified'] != rmod:
 		logging.info("监测到 R" + rtl + " 有更新，正在保存图片")
