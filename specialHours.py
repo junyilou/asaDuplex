@@ -4,9 +4,10 @@ import IFTTT
 storename = ['七宝', '上海环贸 iapm', '五角场', '南京东路', '浦东', '环球港', '香港广场', '昆明', 
 '三里屯', '华贸购物中心', '朝阳大悦城', '王府井', '西单大悦城', '成都万象城', '成都太古里', '天津大悦城', '天津恒隆广场', 
 '天津万象城', '济南恒隆广场', '青岛万象城', '天环广场', '珠江新城', '深圳益田假日广场', '南宁万象城', '南京艾尚天地', '南京金茂汇', 
-'虹悦城', '无锡恒隆广场', '苏州', '郑州万象城', '天一广场', '杭州万象城', '西湖', '厦门新城市广场', '泰禾广场', 
+'虹悦城', '无锡恒隆广场', '苏州', '郑州万象城', '天一广场', '杭州万象城', '西湖', '厦门新生活广场', '泰禾广场', 
 '大连恒隆广场', '百年城', '中街大悦城', '沈阳万象城', '解放碑', '重庆万象城', '重庆北城天街', 'ifc mall', 'Festival Walk', 
 'Canton Road', 'New Town Plaza', 'apm Hong Kong', 'Causeway Bay', '澳門銀河', '金沙廣場', '信義 A13', '台北 101']
+storeID = list()
 
 asaVersion = "5.8.0"; remoteAsaVersion = 0
 rpath = os.path.expanduser('~') + "/Retail/"
@@ -14,16 +15,6 @@ formatAsaVersion = int("".join(asaVersion.split(".")))
 
 with open(rpath + "storeInfo.json") as w:
 	storeInfo = json.loads(w.read())["name"]
-
-for s in storename:
-	flag = 1
-	for k in list(storeInfo.keys()):
-		if storeInfo[k] == s:
-			storeID.append(k)
-			flag = 0; break
-	if flag:
-		logging.error("零售店 " + s + " 没有找到")
-		storeID.append("900")
 
 if os.path.isdir('logs'):
 	logging.basicConfig(
@@ -36,6 +27,16 @@ else:
 		level = logging.DEBUG, datefmt = '%T')
 logging.info("程序启动")
 runtime = datetime.datetime.now().strftime("%F")
+
+for s in storename:
+	flag = 1
+	for k in list(storeInfo.keys()):
+		if storeInfo[k] == s:
+			storeID.append(k)
+			flag = 0; break
+	if flag:
+		logging.error("零售店 " + s + " 没有找到")
+		storeID.append("824")
 
 def tttf(raw):
 	rawtime = raw[2:].split(":"); hrs = rawtime[0]
