@@ -38,15 +38,7 @@ for s in storename:
 		logging.error("零售店 " + s + " 没有找到")
 		storeID.append("824")
 
-def tttf(raw):
-	rawtime = raw[2:].split(":"); hrs = rawtime[0]
-	if '上午' in raw:
-		if hrs == "12": fhrs = 0
-		else: fhrs = int(hrs)
-	if '下午' in raw:
-		if hrs == "12": fhrs = 12
-		else: fhrs = int(hrs) + 12
-	return (fhrs, int(rawtime[1]))
+weekList = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 
 def fileWrite(fileloc, writer): 
 	with open(fileloc, "w") as fout:
@@ -93,26 +85,46 @@ for sn, sid in zip(storename, storeID):
 
 	try: 
 		special = storedict["specialHours"]
+		regular = storedict["regularHours"]
 	except: 
-		special = []
-	storeSpecial = {}; storeComment = {}
+		continue
+
+	regularHours = [""] * 7
+	for r in regular:
+		rRange = r["range"].replace(":", "")
+		if len(rRange) == 2:
+			regularHours[weekList.index(rRange)] = r["time"]
+		elif " – " in rRange:
+			(rangeA, rangeB) = rRange.split(" – ")
+			for i in range(weekList.index(rangeA), weekList.index(rangeB) + 1):
+				regularHours[i] = r["time"]
+		elif rRange == "暂时关闭":
+			regularHours = ["已关闭"] * 7
+		else:
+			regularHours = ["N/A"] * 7
+			logging.error("Apple " + sn + " 的一般营业时间未被正确匹配到")
+
+	appendJSON = {}
 	for s in special:
 		sWeekday = datetime.datetime.strptime(s["specialDate"], '%Y年%m月%d日').weekday()
+		fRegular = regularHours[sWeekday]
+		
 		if s["isClosed"] == "Y": 
-			fSpecial = "CLOSED"
+			fSpecial = "已关闭"
 		else: 
-			sTime = tttf(s["startTime"]); eTime = tttf(s["endTime"])
-			fSpecial = str(sTime[0]) + ":" + "%02d" % sTime[1] + " - " + str(eTime[0]) + ":" + "%02d" % eTime[1]
-		singleSpecial = {s["specialDate"]: fSpecial}
+			fSpecial = s["startTime"] + " – " + s["endTime"]
+
 		try:
 			comments = s["comments"]
 		except KeyError:
-			singleComment = {s["specialDate"]: "[" + s["reason"] + "]"}
+			fComment = "[" + s["reason"] + "]"
 		else:
-			if comments != "": singleComment = {s["specialDate"]: "[" + s["reason"] + "] " + comments}
-			else: singleComment = {s["specialDate"]: "[" + s["reason"] + "]"}
-		storeSpecial = {**storeSpecial, **singleSpecial}
-		storeComment = {**storeComment, **singleComment}
+			if comments != "": fComment = "[" + s["reason"] + "] " + comments
+			else: fComment = "[" + s["reason"] + "]"
+
+		singleJSON = {s["specialDate"]: {"regular": fRegular, "special": fSpecial, "comment": fComment}}
+		appendJSON = {**appendJSON, **singleJSON}
+
 		try: 
 			orgSpecial = orgjson[sid]["time"][s["specialDate"]]
 		except KeyError:
@@ -122,6 +134,7 @@ for sn, sid in zip(storename, storeID):
 			if orgSpecial != fSpecial:
 				storeDiff += " " * 8 + s["specialDate"] + "：由 " + orgSpecial + " 改为 " + fSpecial + "\n"
 				logging.info("Apple " + sn + " " + s["specialDate"] + " 改为 " + fSpecial)
+	
 	try: 
 		oload = orgjson[sid]["time"]
 	except KeyError: 
@@ -131,13 +144,17 @@ for sn, sid in zip(storename, storeID):
 			odatetime = datetime.datetime.strptime(odate, '%Y年%m月%d日')
 			if odatetime < datetime.datetime.now(): continue
 			try:
-				newSpecial = storeSpecial[odate]
+				newSpecial = appendJSON[odate]
 			except KeyError:
 				storeDiff += " " * 8 + odate + "：取消 " + oload[odate] + "\n"
 				logging.info("Apple " + sn + " " + odate + " 取消 " + oload[odate])
-	if len(storeSpecial):
-		addSpecial = {sid: {"storename": sn, "time": storeSpecial, "comment": storeComment}}
+	
+
+	if len(appendJSON):
+		addSpecial = {sid: {"storename": sn, **appendJSON}}
 		allSpecial = {**allSpecial, **addSpecial}
+	
+
 	if len(storeDiff):
 		comparison += "    Apple " + sn + "\n" + storeDiff
 	os.remove(rpath + "storeDeatils-R" + sid + ".txt")
