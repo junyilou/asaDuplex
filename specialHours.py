@@ -87,6 +87,7 @@ for sn, sid in zip(storename, storeID):
 		special = storedict["specialHours"]
 		regular = storedict["regularHours"]
 	except: 
+		os.remove(rpath + "storeDeatils-R" + sid + ".txt")
 		continue
 
 	regularHours = [""] * 7
@@ -126,7 +127,7 @@ for sn, sid in zip(storename, storeID):
 		appendJSON = {**appendJSON, **singleJSON}
 
 		try: 
-			orgSpecial = orgjson[sid]["time"][s["specialDate"]]
+			orgSpecial = orgjson[sid][s["specialDate"]]["special"]
 		except KeyError:
 			storeDiff += " " * 8 + s["specialDate"] + "：新增 " + fSpecial + "\n"
 			logging.info("Apple " + sn + " " + s["specialDate"] + " 新增 " + fSpecial)
@@ -136,33 +137,33 @@ for sn, sid in zip(storename, storeID):
 				logging.info("Apple " + sn + " " + s["specialDate"] + " 改为 " + fSpecial)
 	
 	try: 
-		oload = orgjson[sid]["time"]
+		oload = orgjson[sid]
 	except KeyError: 
 		pass
 	else:
-		for odate in oload:
+		for odate in oload.keys():
+			if odate == "storename": 
+				continue
 			odatetime = datetime.datetime.strptime(odate, '%Y年%m月%d日')
-			if odatetime < datetime.datetime.now(): continue
+			if odatetime < datetime.datetime.now(): 
+				continue
 			try:
 				newSpecial = appendJSON[odate]
 			except KeyError:
 				storeDiff += " " * 8 + odate + "：取消 " + oload[odate] + "\n"
 				logging.info("Apple " + sn + " " + odate + " 取消 " + oload[odate])
-	
 
 	if len(appendJSON):
 		addSpecial = {sid: {"storename": sn, **appendJSON}}
 		allSpecial = {**allSpecial, **addSpecial}
-	
-
 	if len(storeDiff):
 		comparison += "    Apple " + sn + "\n" + storeDiff
 	os.remove(rpath + "storeDeatils-R" + sid + ".txt")
 
 jOut = json.dumps(allSpecial, ensure_ascii = False, indent = 2)
 os.system("mv " + rpath + "storeHours.json " + rpath + "storeHours-" + runtime + ".json")
-fileWrite(rpath + "storeHours.json", jOut)
 logging.info("写入新的 storeHours.json")
+fileWrite(rpath + "storeHours.json", jOut)
 
 if len(comparison):
 	tOut = "Apple Store 特别营业时间\n生成于 " + runtime + "\n\n变化：\n" + comparison + "\n原始 JSON:\n" + jOut
