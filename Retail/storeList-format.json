@@ -3,8 +3,9 @@
     "trackPage": {
       "server": "mobileapp.apple.com",
       "eVar4": "AOS : retail/allStoresInfoLite",
-      "eVar3": "AOS : China Consumer",
       "prop40": "506738",
+      "eVar3": "AOS : China Consumer",
+      "eVar14": "zh-cn",
       "eVar19": "AOS: CN Consumer:retail/allStoresInfoLite",
       "prop8": "AOS : retail/allStoresInfoLite",
       "storeId": "506738",
@@ -1012,7 +1013,7 @@
             {
               "storeNumber": "R202",
               "countryCode": "US",
-              "storeName": "Stamford",
+              "storeName": "SoNo Collection",
               "latitude": "41.1058",
               "longitude": "-73.4185",
               "storeRadius": "70",
@@ -1021,11 +1022,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R202.png"
               ],
               "secureImageURL": [],
-              "locationText": "Stamford, CT",
+              "locationText": "Norwalk, CT",
               "timeZone": "America/New_York",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "100 Greyrock Place\nStamford,CT 06901 ",
+              "storeAddress": "100 N. Water Street\nNorwalk,CT 06854 ",
               "phoneNumber": "(203) 658-1801"
             },
             {
@@ -2165,6 +2166,25 @@
               "phoneNumber": "(408) 961-1560"
             },
             {
+              "storeNumber": "R825",
+              "countryCode": "US",
+              "storeName": "Corporate Events",
+              "latitude": "21.278075",
+              "longitude": "-157.828165",
+              "storeRadius": "70",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R825.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Cupertino, CA",
+              "timeZone": "America/Los_Angeles",
+              "scanAndBuy": "OFF",
+              "enableInStoreMode": false,
+              "storeAddress": "One Apple Parkway\nCupertino,CA 95014 ",
+              "phoneNumber": "(800) 692-7753"
+            },
+            {
               "storeNumber": "R305",
               "countryCode": "US",
               "storeName": "Del Monte",
@@ -2720,8 +2740,8 @@
               "storeNumber": "R338",
               "countryCode": "US",
               "storeName": "The Promenade Shops at Briargate",
-              "latitude": "38.962661",
-              "longitude": "-104.795242",
+              "latitude": "38.962692",
+              "longitude": "-104.79529",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -6885,8 +6905,8 @@
               "storeNumber": "R333",
               "countryCode": "CA",
               "storeName": "Fairview",
-              "latitude": "43.7781",
-              "longitude": "-79.34368",
+              "latitude": "43.778",
+              "longitude": "-79.3442",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -10146,7 +10166,7 @@
           ]
         },
         {
-          "stateName": "",
+          "stateName": "Fukuoka",
           "stores": [
             {
               "storeNumber": "R048",
