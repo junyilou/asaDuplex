@@ -61,10 +61,10 @@ for scn, scd, ste, spl in zip(stateCHN, stateCode, stateEmoji, specialistCode):
 		for c in cityJSON:
 			rolloutCode = c["code"]
 			if not rolloutCode in mark:
-				logging.info("找到了" + scn + "新店 " + rolloutCode + " 不在已知列表中")
+				logging.info("找到了" + scn + "的新店 " + rolloutCode + " 不在已知列表中")
 				wAns += ste + rolloutCode + ", "
 				pushAns = ("新店新机遇: " + ste + scn + "新增招聘地点 " + c["name"]
-				+ ", 代号 " + rolloutCode + ", 文件名 " + j["id"].replace("postLocation-", "") + ".json")
+				+ ", 代号 " + rolloutCode + ", 文件名 " + os.path.basename(savename))
 				logging.info("[运行结果] " + pushAns)
 				IFTTT.pushbots(pushAns, "Apple 招贤纳才", imageURL, "raw", IFTTT.getkey(), 0)
 if wAns != "":
