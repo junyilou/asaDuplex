@@ -123,8 +123,7 @@ for sn, sid in zip(storename, storeID):
 			if comments != "": fComment = "[" + s["reason"] + "] " + comments
 			else: fComment = "[" + s["reason"] + "]"
 
-		singleJSON = {s["specialDate"]: {"regular": fRegular, "special": fSpecial, "comment": fComment}}
-		appendJSON = {**appendJSON, **singleJSON}
+		appendJSON[s["specialDate"]] = {"regular": fRegular, "special": fSpecial, "comment": fComment}
 
 		try: 
 			orgSpecial = orgjson[sid][s["specialDate"]]["special"]
@@ -154,8 +153,7 @@ for sn, sid in zip(storename, storeID):
 				logging.info("Apple " + sn + " " + odate + " 取消 " + oload[odate])
 
 	if len(appendJSON):
-		addSpecial = {sid: {"storename": sn, **appendJSON}}
-		allSpecial = {**allSpecial, **addSpecial}
+		allSpecial[sid] = {"storename": sn, **appendJSON}
 	if len(storeDiff):
 		comparison += "    Apple " + sn + "\n" + storeDiff
 	os.remove(rpath + "storeDeatils-R" + sid + ".txt")
