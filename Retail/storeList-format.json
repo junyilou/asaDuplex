@@ -2166,25 +2166,6 @@
               "phoneNumber": "(408) 961-1560"
             },
             {
-              "storeNumber": "R825",
-              "countryCode": "US",
-              "storeName": "Corporate Events",
-              "latitude": "21.278075",
-              "longitude": "-157.828165",
-              "storeRadius": "70",
-              "accuracyThreshold": "500",
-              "imageURL": [
-                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R825.png"
-              ],
-              "secureImageURL": [],
-              "locationText": "Cupertino, CA",
-              "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "OFF",
-              "enableInStoreMode": false,
-              "storeAddress": "One Apple Parkway\nCupertino,CA 95014 ",
-              "phoneNumber": "(800) 692-7753"
-            },
-            {
               "storeNumber": "R305",
               "countryCode": "US",
               "storeName": "Del Monte",
@@ -3992,8 +3973,8 @@
               "storeNumber": "R271",
               "countryCode": "US",
               "storeName": "Reston",
-              "latitude": "38.9584",
-              "longitude": "-77.358345",
+              "latitude": "38.9585",
+              "longitude": "-77.3581",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -4004,7 +3985,7 @@
               "timeZone": "America/New_York",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "11949 Market Street\nReston,VA 20190 ",
+              "storeAddress": "11937 Market Street\nReston,VA 20190 ",
               "phoneNumber": "(571) 449-4800"
             },
             {
@@ -5449,8 +5430,8 @@
               "storeNumber": "R320",
               "countryCode": "CN",
               "storeName": "Sanlitun",
-              "latitude": "39.93367",
-              "longitude": "116.44792",
+              "latitude": "39.933456",
+              "longitude": "116.447967",
               "storeRadius": "100",
               "accuracyThreshold": "1000",
               "imageURL": [
@@ -5461,7 +5442,7 @@
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "Building 6, No. 19, Sanlitun Road\nTaikoo Li Sanlitun, Chaoyang District\n100027",
+              "storeAddress": "Building 7, Taikoo Li Sanlitun South\nNo. 19 Sanlitun Road, Chaoyang District\n100027",
               "phoneNumber": "400 617 1363"
             },
             {
@@ -7579,7 +7560,7 @@
             {
               "storeNumber": "R135",
               "countryCode": "GB",
-              "storeName": "Buchanan Street",
+              "storeName": "Glasgow",
               "latitude": "55.86157",
               "longitude": "-4.2541",
               "storeRadius": "70",
@@ -9350,7 +9331,7 @@
               "timeZone": "Asia/Seoul",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "46 Apgujeong-ro 12-gil\nGangnam-gu\nSeoul, 06028",
+              "storeAddress": "Seoul 46 Apgujeong-ro 12-gil\nGangnam-gu\n06028",
               "phoneNumber": "02-2086-4600"
             }
           ]
