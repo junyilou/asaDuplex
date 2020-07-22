@@ -15,8 +15,10 @@ def down(rtl, isSpecial):
 	base = dieter + "R" + rtl + ".png"
 	try: rmod = storejson['last'][rtl]
 	except KeyError: rmod = ""
-	r = requests.head(base, allow_redirects = False) #如需检查 404 改 True
-	if r.status_code != 200: return 0
+	r = requests.head(base, allow_redirects = True)
+	if r.status_code == 404:
+		logging.info("检查到 R" + rtl + " 的图片服务器中不存在")
+		return
 	if r.headers['Last-Modified'] != rmod:
 		logging.info("监测到 R" + rtl + " 有更新，正在保存图片")
 		os.system("wget -O " + rpath + "R" + rtl + "_" +
@@ -46,8 +48,7 @@ def down(rtl, isSpecial):
 	elif isSpecial:
 		try: pname = "Apple " + storejson['name'][rtl] + " (R" + rtl + ")"
 		except KeyError: pname = "Apple Store (R" + rtl + ")"  
-		if r.status_code == 404: logging.info("检查到 " + pname + " 的图片服务器中不存在")
-		else: logging.info("检查到 "+ pname + " 的图片没有更新")
+		logging.info("检查到 "+ pname + " 的图片没有更新")
 
 totalStore = 901
 asaVersion = "5.8.0"
