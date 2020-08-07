@@ -526,7 +526,7 @@
     "715": "Downtown Brooklyn",
     "718": "丸の内",
     "728": "Iconsiam",
-    "733": "CentralWorld",
+    "733": "Central World",
     "736": "Jewel Changi Airport",
     "740": "Antara",
     "746": "Galleria Dallas",
@@ -1844,7 +1844,7 @@
     "267": "Tue, 20 Aug 2013 09:24:16 GMT",
     "269": "Tue, 20 Aug 2013 09:24:16 GMT",
     "270": "Tue, 20 Aug 2013 09:24:16 GMT",
-    "271": "Tue, 20 Aug 2013 09:24:16 GMT",
+    "271": "Fri, 24 Jul 2020 22:32:30 GMT",
     "272": "Tue, 20 Aug 2013 09:24:16 GMT",
     "273": "Tue, 20 Aug 2013 09:24:16 GMT",
     "275": "Fri, 25 Jan 2019 18:47:56 GMT",
@@ -2126,6 +2126,7 @@
     "746": "Thu, 18 Apr 2019 23:28:27 GMT",
     "824": "Fri, 17 Nov 2017 16:31:16 GMT",
     "825": "Thu, 30 May 2019 20:51:56 GMT",
-    "900": "Wed, 04 Dec 2019 04:58:46 GMT"
+    "900": "Wed, 04 Dec 2019 04:58:46 GMT",
+    "733": "Thu, 06 Aug 2020 05:31:21 GMT"
   }
 }

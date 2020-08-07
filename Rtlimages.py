@@ -16,7 +16,7 @@ def down(rtl, isSpecial):
 	try: rmod = storejson['last'][rtl]
 	except KeyError: rmod = ""
 	r = requests.head(base, allow_redirects = True)
-	if r.status_code == 404:
+	if r.status_code == 404 and isSpecial:
 		logging.info("检查到 R" + rtl + " 的图片服务器中不存在")
 		return
 	if r.headers['Last-Modified'] != rmod:

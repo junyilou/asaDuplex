@@ -41,7 +41,6 @@ for fn, cyn in zip(filename, storename):
 			logging.info("在 Apple " + cyn + " 找到了新活动: " + singleName)
 			wAns += singleName + ",\n"; citAns = cyn
 			for sn, csn in zip(filename, storename):
-				logging.info("正在寻找 Apple " + csn + " 有没有相同的活动")
 				with open(rpath + sn + ".json") as e: 
 					eAns = e.read()
 					eJson = json.loads(eAns.replace("\u2060", ""))["courses"]

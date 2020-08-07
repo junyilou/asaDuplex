@@ -10675,6 +10675,30 @@
               "phoneNumber": "02 055 9600"
             }
           ]
+        },
+        {
+          "stateName": "เขตปทุมวัน",
+          "stores": [
+            {
+              "storeNumber": "R733",
+              "countryCode": "TH",
+              "storeName": "Central World",
+              "latitude": "13.744892",
+              "longitude": "100.539972",
+              "storeRadius": "70",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R733.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "กรุงเทพมหานคร",
+              "timeZone": "Asia/Bangkok",
+              "scanAndBuy": "SCAN",
+              "enableInStoreMode": true,
+              "storeAddress": "4, 4/1-4/2, 4/4 ถนนราชดำริห์\nกรุงเทพมหานคร 10330",
+              "phoneNumber": "02 035 9800"
+            }
+          ]
         }
       ]
     },
