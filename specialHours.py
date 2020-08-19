@@ -9,7 +9,7 @@ storename = ['七宝', '上海环贸 iapm', '五角场', '南京东路', '浦东
 'Canton Road', 'New Town Plaza', 'apm Hong Kong', 'Causeway Bay', '澳門銀河', '金沙廣場', '信義 A13', '台北 101']
 storeID = list()
 
-asaVersion = "5.8.0"; remoteAsaVersion = 0
+asaVersion = "5.9.0"; remoteAsaVersion = 0
 rpath = os.path.expanduser('~') + "/Retail/"
 formatAsaVersion = int("".join(asaVersion.split(".")))
 
@@ -83,12 +83,11 @@ for sn, sid in zip(storename, storeID):
 	storedict = json.loads(storejson)["allStoreHoursMergedResponse"]
 	storeDiff = ""
 
-	try: 
-		special = storedict["specialHours"]
-		regular = storedict["regularHours"]
-	except: 
+	if not storedict["hasSpecialHours"]:
 		os.remove(rpath + "storeDeatils-R" + sid + ".txt")
 		continue
+	regular = storedict["regularHours"]
+	special = storedict["specialHours"]
 
 	regularHours = [""] * 7
 	for r in regular:

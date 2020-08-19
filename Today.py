@@ -36,7 +36,7 @@ for fn in filename:
 	if fn == "xinyia13": region = "tw"
 	logging.info("正在下载活动时间表文件: " + fn)
 	os.system("wget -t 20 -T 3 -O " + rpath + fn + ".json --no-check-certificate " +
-		"'https://www.apple.com/today-bff/landing/store?stageRootPath=/" + region +"&storeSlug=" + fn + "'")
+		"'https://www.apple.com/today-bff/landing/store?stageRootPath=/" + region + "&storeSlug=" + fn + "'")
 
 for fn, cyn in zip(filename, storename):
 	with open(rpath + fn + ".json") as r:

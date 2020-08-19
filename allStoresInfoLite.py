@@ -1,7 +1,7 @@
 import os, time, json, filecmp, difflib, logging, requests
 import IFTTT
 
-asaVersion = "5.8.0"; remoteAsaVersion = 0
+asaVersion = "5.9.0"; remoteAsaVersion = 0
 rpath = os.path.expanduser('~') + "/Retail/"
 formatAsaVersion = int("".join(asaVersion.split(".")))
 
