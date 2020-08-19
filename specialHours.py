@@ -36,7 +36,7 @@ for s in storename:
 			flag = 0; break
 	if flag:
 		logging.error("零售店 " + s + " 没有找到")
-		storeID.append("824")
+		if "824" not in storeID: storeID.append("824")
 
 weekList = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 
@@ -68,7 +68,7 @@ for i in storeID:
 	logging.info("正在下载零售店 R" + i + " 的细节文件...")
 	os.system("wget -t 20 -T 5 -U ASA/" + asaVersion + " -O " + listLoc + 
 	" --header 'x-ma-pcmh: REL-" + asaVersion + "'" + 
-	" --header 'X-DeviceConfiguration: vv=" + asaVersion + ";sv=13.3' " +
+	" --header 'X-DeviceConfiguration: vv=" + asaVersion + ";sv=13.6.1' " +
 	" --header 'X-MALang: zh-CN' " +
 	"'https://mobileapp.apple.com/mnr/p/cn/retail/storeDetails?storeNumber=R" + i + "'")
 
@@ -148,8 +148,8 @@ for sn, sid in zip(storename, storeID):
 			try:
 				newSpecial = appendJSON[odate]
 			except KeyError:
-				storeDiff += " " * 8 + odate + "：取消 " + oload[odate] + "\n"
-				logging.info("Apple " + sn + " " + odate + " 取消 " + oload[odate])
+				storeDiff += " " * 8 + odate + "：取消 " + oload[odate]["special"] + "\n"
+				logging.info("Apple " + sn + " " + odate + " 取消 " + oload[odate]["special"])
 
 	if len(appendJSON):
 		allSpecial[sid] = {"storename": sn, **appendJSON}
