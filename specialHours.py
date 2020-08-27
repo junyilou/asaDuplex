@@ -28,6 +28,7 @@ else:
 logging.info("程序启动")
 runtime = datetime.datetime.now().strftime("%F")
 
+namerem = list()
 for s in storename:
 	flag = 1
 	for k in list(storeInfo.keys()):
@@ -36,7 +37,8 @@ for s in storename:
 			flag = 0; break
 	if flag:
 		logging.error("零售店 " + s + " 没有找到")
-		if "824" not in storeID: storeID.append("824")
+		namerem.append(s)
+storename = [i for i in storename if i not in namerem]
 
 weekList = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 
