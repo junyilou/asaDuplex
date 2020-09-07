@@ -14,8 +14,8 @@ stateEmoji = ["🇸🇬", "🇹🇷", "🇦🇪", "🇬🇧", "🇩🇪", "🇹�
 "🇫🇷", "🇦🇺", "🇮🇹", "🇲🇴", "🇧🇷", "🇯🇵", "🇰🇷", "🇨🇦", "🇦🇹"]
 
 specialistCode = [8238, 8164, 8225, 8145, 8043, 8311, 8158, 
-8297, 8017, 8251, 8119, 8346, 8056, 8082, 8132, 8030, 8069,
-7991, 8095, 8282, 8176, 8107, 8326, 8004, 8333]
+8297, 8017, 8251, 8119, 8346, 8056, 8082, 8132, 8030, 
+8069, 7991, 8095, 8282, 8176, 8106, 8326, 8004, 8333]
 
 rpath, wAns = os.path.expanduser('~') + "/Retail/Jobs/", ""
 imageURL = "https://www.apple.com/jobs/images/retail/hero/desktop.jpg"
@@ -36,15 +36,19 @@ logging.info("程序启动")
 for scn, scd, ste, spl in zip(stateCHN, stateCode, stateEmoji, specialistCode):
 	realCode = "11443" + str(spl)
 	savename = rpath + scd + "/state.json"
-	while True:
-		logging.info("正在下载" + scn + "的国家文件")
-		os.system("wget -t 20 -T 5 -O " + savename + " https://jobs.apple.com/api" + 
-		"/v1/jobDetails/PIPE-" + realCode + "/stateProvinceList")
-		if os.path.getsize(savename) > 0: break
-	with open(savename) as j: jRead = j.read()
-	if "Maintenance" in jRead: 
-		logging.error("遇到了 Apple 招聘页面维护"); break
-	stateJSON = json.loads(jRead)["searchResults"]
+
+	logging.info("正在下载" + scn + "的国家文件")
+	os.system("wget -t 20 -T 5 -O " + savename + " https://jobs.apple.com/api/v1/jobDetails/PIPE-" + realCode + "/stateProvinceList")
+	try:
+		with open(savename) as j: jRead = j.read()
+		if "Maintenance" in jRead: 
+			logging.error("遇到了 Apple 招聘页面维护")
+			break
+		stateJSON = json.loads(jRead)["searchResults"]
+	except:
+		logging.error("打开" + scn + "的国家文件错误")
+		continue
+
 	for i in stateJSON: 
 		savename = rpath + scd + "/location_" + i["id"].replace("postLocation-", "") + ".json"
 		while True:
@@ -52,6 +56,7 @@ for scn, scd, ste, spl in zip(stateCHN, stateCode, stateEmoji, specialistCode):
 			os.system("wget -t 20 -T 5 -O " + savename + " 'https://jobs.apple.com/api/v1/jobDetails/PIPE-" 
 			+ realCode + "/storeLocations?searchField=stateProvince&fieldValue=" + i["id"] + "'")
 			if os.path.getsize(savename) > 0: break
+
 	for j in stateJSON: 
 		savename = rpath + scd + "/location_" + j["id"].replace("postLocation-", "") + ".json"
 		with open(savename) as j: jRead = j.read()

@@ -20,11 +20,11 @@ if os.path.isdir('logs'):
 	logging.basicConfig(
 		filename = "logs/" + os.path.basename(__file__) + ".log",
 		format = '[%(asctime)s %(levelname)s] %(message)s',
-		level = logging.DEBUG, filemode = 'a', datefmt = '%F %T')
+		level = logging.INFO, filemode = 'a', datefmt = '%F %T')
 else:
 	logging.basicConfig(
 		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
-		level = logging.DEBUG, datefmt = '%T')
+		level = logging.INFO, datefmt = '%T')
 logging.info("程序启动")
 runtime = datetime.datetime.now().strftime("%F")
 
@@ -55,39 +55,33 @@ def fileOpen(fileloc):
 		return None
 
 logging.info("正在确认远程 Apple Store app 版本...")
-try: 
-	lookup = requests.get("https://itunes.apple.com/cn/lookup?id=375380948").json()
+try: lookup = requests.get("https://itunes.apple.com/cn/lookup?id=375380948").json()
 except: pass
 else: 
 	remoteAsaVersion = int("".join(lookup["results"][0]["version"].split(".")))
-if remoteAsaVersion in range(10, 101): remoteAsaVersion *= 10
+if remoteAsaVersion in range(10, 101): 
+	remoteAsaVersion *= 10
 if remoteAsaVersion > formatAsaVersion:
 	asaVersion = ".".join(list(str(remoteAsaVersion)))
 	logging.info("从远程获得了新的 Apple Store app 版本 " + asaVersion)
 
-for i in storeID:
-	listLoc = rpath + "storeDeatils-R" + i + ".txt"
-	logging.info("正在下载零售店 R" + i + " 的细节文件...")
-	os.system("wget -t 20 -T 5 -U ASA/" + asaVersion + " -O " + listLoc + 
-	" --header 'x-ma-pcmh: REL-" + asaVersion + "'" + 
-	" --header 'X-DeviceConfiguration: vv=" + asaVersion + ";sv=13.6.1' " +
-	" --header 'X-MALang: zh-CN' " +
-	"'https://mobileapp.apple.com/mnr/p/cn/retail/storeDetails?storeNumber=R" + i + "'")
-
-try:
-	orgjson = json.loads(fileOpen(rpath + "storeHours.json"))
-except:
-	orgjson = {}
 allSpecial = {"created": runtime}; comparison = ""
+try: orgjson = json.loads(fileOpen(rpath + "storeHours.json"))
+except: orgjson = {}
 
 for sn, sid in zip(storename, storeID):
-	storejson = fileOpen(rpath + "storeDeatils-R" + sid + ".txt")
-	storedict = json.loads(storejson)["allStoreHoursMergedResponse"]
-	storeDiff = ""
+	logging.info("正在下载 Apple " + sn + " 的细节文件...")
+	headers = {
+		"User-Agent": "ASA/" + asaVersion + " (iPhone) ss/2.00",
+		"x-ma-pcmh":  "REL-" + asaVersion,
+		"X-MALang":   "zh-CN",
+		"X-DeviceConfiguration":  "ss=2.00;v=iPhone12,1;m=iPhone;dim=828x1792;vv=" + asaVersion + ";sv=" + "14.0"}
+	url = "https://mobileapp.apple.com/mnr/p/cn/retail/storeDetails?storeNumber=R" + sid
 
-	if not storedict["hasSpecialHours"]:
-		os.remove(rpath + "storeDeatils-R" + sid + ".txt")
-		continue
+	storeDiff = ""
+	storedict = requests.get(url, verify = False, headers = headers).json()["allStoreHoursMergedResponse"]
+
+	if not storedict["hasSpecialHours"]: continue
 	regular = storedict["regularHours"]
 	special = storedict["specialHours"]
 
@@ -157,7 +151,6 @@ for sn, sid in zip(storename, storeID):
 		allSpecial[sid] = {"storename": sn, **appendJSON}
 	if len(storeDiff):
 		comparison += "    Apple " + sn + "\n" + storeDiff
-	os.remove(rpath + "storeDeatils-R" + sid + ".txt")
 
 jOut = json.dumps(allSpecial, ensure_ascii = False, indent = 2)
 os.system("mv " + rpath + "storeHours.json " + rpath + "storeHours-" + runtime + ".json")
