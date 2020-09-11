@@ -30,8 +30,8 @@
               "storeNumber": "R206",
               "countryCode": "US",
               "storeName": "Cherry Hill",
-              "latitude": "39.94074",
-              "longitude": "-75.02479",
+              "latitude": "39.941067",
+              "longitude": "-75.023797",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -9331,7 +9331,7 @@
               "timeZone": "Asia/Seoul",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "Seoul 46 Apgujeong-ro 12-gil\nGangnam-gu\n06028",
+              "storeAddress": "Seoul 43, Garosu-gil\nGangnam-gu\n06028",
               "phoneNumber": "02-2086-4600"
             }
           ]
@@ -10673,12 +10673,7 @@
               "enableInStoreMode": true,
               "storeAddress": "299 ถนนเจริญนคร\nแขวงคลองต้นไทร เขตคลองสาน\nกรุงเทพมหานคร 10600",
               "phoneNumber": "02 055 9600"
-            }
-          ]
-        },
-        {
-          "stateName": "เขตปทุมวัน",
-          "stores": [
+            },
             {
               "storeNumber": "R733",
               "countryCode": "TH",
@@ -10695,7 +10690,7 @@
               "timeZone": "Asia/Bangkok",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "4, 4/1-4/2, 4/4 ถนนราชดำริห์\nกรุงเทพมหานคร 10330",
+              "storeAddress": "4, 4/1-4/2, 4/4 ถนนราชดำริห์\nเขตปทุมวัน\nกรุงเทพมหานคร 10330",
               "phoneNumber": "02 035 9800"
             }
           ]
@@ -10747,6 +10742,25 @@
               "enableInStoreMode": true,
               "storeAddress": "270 Orchard Road\nSingapore,238857",
               "phoneNumber": "1800 699 2824"
+            },
+            {
+              "storeNumber": "R633",
+              "countryCode": "SG",
+              "storeName": "Marina Bay Sands",
+              "latitude": "1.283286",
+              "longitude": "103.857547",
+              "storeRadius": "70",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R633.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Singapore",
+              "timeZone": "Asia/Singapore",
+              "scanAndBuy": "SNB",
+              "enableInStoreMode": true,
+              "storeAddress": "2 Bayfront Avenue, B2-06\nSingapore,018972",
+              "phoneNumber": "1800 407 4949"
             }
           ]
         }
