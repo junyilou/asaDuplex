@@ -6300,11 +6300,30 @@
               "enableInStoreMode": true,
               "storeAddress": "Centro Commerciale I Gigli\nVia San Quirico, 165\n50013 Campi Bisenzio",
               "phoneNumber": "055 880 3000"
+            },
+            {
+              "storeNumber": "R602",
+              "countryCode": "IT",
+              "storeName": "Firenze",
+              "latitude": "43.771301",
+              "longitude": "11.25345",
+              "storeRadius": "70",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R602.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Florence",
+              "timeZone": "Europe/Rome",
+              "scanAndBuy": "SNB",
+              "enableInStoreMode": true,
+              "storeAddress": "Piazza della Repubblica\n50123 Florence",
+              "phoneNumber": "055 464 1900"
             }
           ]
         },
         {
-          "stateName": "Torino",
+          "stateName": "Piedmont",
           "stores": [
             {
               "storeNumber": "R442",
@@ -6318,11 +6337,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R442.png"
               ],
               "secureImageURL": [],
-              "locationText": "Torino",
+              "locationText": "Turin",
               "timeZone": "Europe/Rome",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Via Roma, 82\n10121 Torino",
+              "storeAddress": "Via Roma, 82\n10121 Turin",
               "phoneNumber": "011 506 6201"
             }
           ]
@@ -6534,31 +6553,7 @@
           ]
         },
         {
-          "stateName": "Firenze",
-          "stores": [
-            {
-              "storeNumber": "R602",
-              "countryCode": "IT",
-              "storeName": "Firenze",
-              "latitude": "43.771301",
-              "longitude": "11.25345",
-              "storeRadius": "70",
-              "accuracyThreshold": "500",
-              "imageURL": [
-                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R602.png"
-              ],
-              "secureImageURL": [],
-              "locationText": "Firenze",
-              "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
-              "enableInStoreMode": true,
-              "storeAddress": "Piazza della Repubblica\n50123 Firenze",
-              "phoneNumber": "055 464 1900"
-            }
-          ]
-        },
-        {
-          "stateName": "Venezia",
+          "stateName": "Venice",
           "stores": [
             {
               "storeNumber": "R625",
@@ -6630,7 +6625,7 @@
           ]
         },
         {
-          "stateName": "",
+          "stateName": "Lombardy",
           "stores": [
             {
               "storeNumber": "R667",
@@ -6648,7 +6643,7 @@
               "timeZone": "Europe/Rome",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Piazza del Liberty\n1 - 20121 Milano\n1 - 20121 Milan",
+              "storeAddress": "Piazza del Liberty, 1\n20121 Milan",
               "phoneNumber": "02 3030 2400"
             }
           ]
@@ -7536,7 +7531,7 @@
           ]
         },
         {
-          "stateName": "Glasgow",
+          "stateName": "",
           "stores": [
             {
               "storeNumber": "R340",
@@ -7558,23 +7553,23 @@
               "phoneNumber": "0141 885 4200"
             },
             {
-              "storeNumber": "R135",
+              "storeNumber": "R363",
               "countryCode": "GB",
-              "storeName": "Glasgow",
-              "latitude": "55.86157",
-              "longitude": "-4.2541",
+              "storeName": "Union Square",
+              "latitude": "57.143454",
+              "longitude": "-2.096898",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
-                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R135.png"
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R363.png"
               ],
               "secureImageURL": [],
-              "locationText": "Glasgow",
+              "locationText": "Aberdeen",
               "timeZone": "Europe/London",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "147 Buchanan Street\nGlasgow,G1 2JX",
-              "phoneNumber": "0141 300 4700"
+              "storeAddress": "27/28 Ground Level Mall, Union Square\nGuild Square\nAberdeen,AB11 5PN",
+              "phoneNumber": "01224 287900"
             }
           ]
         },
@@ -7847,30 +7842,6 @@
           ]
         },
         {
-          "stateName": "Aberdeen",
-          "stores": [
-            {
-              "storeNumber": "R363",
-              "countryCode": "GB",
-              "storeName": "Union Square",
-              "latitude": "57.143454",
-              "longitude": "-2.096898",
-              "storeRadius": "70",
-              "accuracyThreshold": "500",
-              "imageURL": [
-                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R363.png"
-              ],
-              "secureImageURL": [],
-              "locationText": "Aberdeen",
-              "timeZone": "Europe/London",
-              "scanAndBuy": "SNB",
-              "enableInStoreMode": true,
-              "storeAddress": "27/28 Ground Level Mall, Union Square\nGuild Square\nAberdeen,AB11 5PN",
-              "phoneNumber": "01224 287900"
-            }
-          ]
-        },
-        {
           "stateName": "Hampshire",
           "stores": [
             {
@@ -8006,6 +7977,30 @@
               "enableInStoreMode": true,
               "storeAddress": "Merchants Hall\nChapelfield\nNorwich,NR2 1SU",
               "phoneNumber": "01603 216600"
+            }
+          ]
+        },
+        {
+          "stateName": "Glasgow",
+          "stores": [
+            {
+              "storeNumber": "R135",
+              "countryCode": "GB",
+              "storeName": "Glasgow",
+              "latitude": "55.86157",
+              "longitude": "-4.2541",
+              "storeRadius": "70",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R135.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Glasgow",
+              "timeZone": "Europe/London",
+              "scanAndBuy": "SNB",
+              "enableInStoreMode": true,
+              "storeAddress": "147 Buchanan Street\nGlasgow,G1 2JX",
+              "phoneNumber": "0141 300 4700"
             }
           ]
         },
@@ -8347,7 +8342,7 @@
           ]
         },
         {
-          "stateName": "",
+          "stateName": "Île-de-France",
           "stores": [
             {
               "storeNumber": "R675",
@@ -8365,7 +8360,7 @@
               "timeZone": "Europe/Paris",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "114 Av. des Champs-Élysées,\n75008 Paris",
+              "storeAddress": "114 Av. des Champs-Élysées\n75008 Paris",
               "phoneNumber": "01 70 98 09 00"
             }
           ]
@@ -8916,7 +8911,7 @@
           ]
         },
         {
-          "stateName": "Niedersachsen",
+          "stateName": "Lower Saxony",
           "stores": [
             {
               "storeNumber": "R455",
@@ -8934,7 +8929,7 @@
               "timeZone": "Europe/Berlin",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Bahnhofstraße 5\n30159 Hannover",
+              "storeAddress": "Bahnhofstrasse 5\n30159 Hannover",
               "phoneNumber": "0511 93620700"
             }
           ]
@@ -9049,7 +9044,7 @@
               "timeZone": "Europe/Berlin",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Altmarkt 25\n1067 Dresden",
+              "storeAddress": "Altmarkt 25\n01067 Dresden",
               "phoneNumber": "0351 49774000"
             }
           ]
@@ -10369,7 +10364,7 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/SE",
       "states": [
         {
-          "stateName": "Skåne",
+          "stateName": "Scania",
           "stores": [
             {
               "storeNumber": "R593",
@@ -10406,7 +10401,7 @@
               "timeZone": "Europe/Stockholm",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Emporia\nHyllie Boulevard 19\n215 32 Malmö",
+              "storeAddress": "Emporia\nHyllie Boulevard 19\n21532 Malmö",
               "phoneNumber": "040-37 10 00"
             }
           ]
@@ -10507,11 +10502,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R486.png"
               ],
               "secureImageURL": [],
-              "locationText": "Bruxelles",
+              "locationText": "Brussels",
               "timeZone": "Europe/Brussels",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Avenue de la Toison d’Or 26-28 \nBruxelles ",
+              "storeAddress": "Avenue de la Toison d’Or 26/28\nBrussels ",
               "phoneNumber": "0800 81 685"
             }
           ]
@@ -10524,7 +10519,7 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/NL",
       "states": [
         {
-          "stateName": "Noord-Holland",
+          "stateName": "North Holland",
           "stores": [
             {
               "storeNumber": "R408",
@@ -10542,7 +10537,7 @@
               "timeZone": "Europe/Amsterdam",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Hirschgebouw, Leidseplein 25\n1017 PS Amsterdam",
+              "storeAddress": "Hirsch Building, Leidseplein 25\n1017 PS Amsterdam",
               "phoneNumber": "020 530 2200"
             },
             {
@@ -10567,7 +10562,7 @@
           ]
         },
         {
-          "stateName": "Zuid-Holland",
+          "stateName": "South Holland",
           "stores": [
             {
               "storeNumber": "R540",
@@ -10581,11 +10576,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R540.png"
               ],
               "secureImageURL": [],
-              "locationText": "Den Haag",
+              "locationText": "The Hague",
               "timeZone": "Europe/Amsterdam",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Passage 39\n2511 AB Den Haag",
+              "storeAddress": "Passage 39\n2511 AB The Hague",
               "phoneNumber": "070 701 0300"
             }
           ]
