@@ -75,7 +75,7 @@ for sn, sid in zip(storename, storeID):
 		"User-Agent": "ASA/" + asaVersion + " (iPhone) ss/2.00",
 		"x-ma-pcmh":  "REL-" + asaVersion,
 		"X-MALang":   "zh-CN",
-		"X-DeviceConfiguration":  "ss=2.00;v=iPhone12,1;m=iPhone;dim=828x1792;vv=" + asaVersion + ";sv=" + "14.0"}
+		"X-DeviceConfiguration":  "ss=2.00;dim=828x1792;m=iPhone;v=iPhone12,1;vv=" + asaVersion + ";sv=14.0.1"}
 	url = "https://mobileapp.apple.com/mnr/p/cn/retail/storeDetails?storeNumber=R" + sid
 
 	storeDiff = ""
