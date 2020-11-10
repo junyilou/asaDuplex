@@ -42,7 +42,7 @@ for fn, cyn in zip(filename, storename):
 	with open(rpath + fn + ".json") as r:
 		raw = r.read(); rJson = json.loads(raw.replace("\u2060", ""))["courses"]
 	for rTitle in rJson:
-		rCourse = rJson[rTitle]; singleName = rCourse["name"]
+		rCourse = rJson[rTitle]; singleName = rCourse["name"].replace("\n", "")
 		if not singleName in mark and not singleName in wAns: 
 			logging.info("在 Apple " + cyn + " 找到了新活动: " + singleName)
 			wAns += singleName + ",\n"; citAns = cyn
@@ -52,7 +52,7 @@ for fn, cyn in zip(filename, storename):
 					eJson = json.loads(eAns.replace("\u2060", ""))["courses"]
 				for eTitle in eJson:
 					eCourse = eJson[eTitle]
-					if eCourse["name"] == singleName and not csn in citAns:
+					if eCourse["name"].replace("\n", "") == singleName and not csn in citAns:
 						logging.info("找到 Apple " + csn + " 有相同的活动")
 						citAns += "、" + csn
 			pushAns = "#TodayatApple " + citAns + "有新活动: " + singleName
