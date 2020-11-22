@@ -44,7 +44,6 @@ def down(rtl, isSpecial):
 			sw.write(sOut)
 		tellRaw = "零售店编号 R" + rtl + "，新图片的最后修改标签是 " + r.headers['Last-Modified'] + "。" + rnso
 		titaru = rflag + "Apple " + rname + " 图片更新"
-		logging.info("[运行结果] " + titaru + "，" + tellRaw)
 		IFTTT.pushbots(tellRaw, titaru, base + "?output-format=jpg", "raw", masterKey, 0)
 	elif isSpecial:
 		try: pname = "Apple " + storejson['name'][rtl] + " (R" + rtl + ")"

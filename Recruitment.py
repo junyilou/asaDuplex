@@ -77,7 +77,6 @@ for scn, scd, ste, spl in zip(stateCHN, stateCode, stateEmoji, specialistCode):
 				wAns += ste + rolloutCode + ", "
 				pushAns = ("新店新机遇: " + ste + scn + "新增招聘地点 " + c["name"]
 				+ ", 代号 " + rolloutCode + ", 文件名 " + os.path.basename(savename))
-				logging.info("[运行结果] " + pushAns)
 				IFTTT.pushbots(pushAns, "Apple 招贤纳才", imageURL, "raw", IFTTT.getkey(), 0)
 if wAns != "":
 	logging.info("正在更新 savedJobs 文件")

@@ -67,7 +67,6 @@ if filecmp.cmp(newLocation, listLoc) == False and orgListSize and newListSize an
 	os.system("mv " + newLocation + " " + listLoc.replace(".json", "-" + runTime + ".json"))
 	logging.info("文件生成完成，上一版本已保存至 storeList-" + runTime + ".json")
 	pushAns = "检测到 Apple Store 零售店信息文件更新，文件大小差异 " + str(deltaListSize) + " 字节"
-	logging.info("[运行结果] " + pushAns)
 	IFTTT.pushbots(pushAns, "https://www.apple.com/jp/retail/store/includes/marunouchi/drawer/images/store-drawer-tile-1_small_2x.jpg",
 		"http://myv.ps/storelist.html", "linkraw", IFTTT.getkey()[0], 0)
 elif newListSize == 0: 

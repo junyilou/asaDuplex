@@ -165,7 +165,6 @@ if len(comparison):
 	fileWrite("/home/storeHours.html", fileDiff)
 	logging.info("文件生成完成，上一版本已保存至 storeHours-" + runtime + ".json")
 	pushAns = "监测到 Apple Store 零售店有 " + str(comparison.count("Apple")) + " 个特别营业时间变化，点击链接查看详细变化和原始 JSON 内容。"
-	logging.info("[运行结果] " + pushAns)
 	IFTTT.pushbots(pushAns, "https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_small_2x.jpg",
 		"http://myv.ps/storeHours.html", "linkraw", IFTTT.getkey()[0], 0)
 else: 

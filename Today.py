@@ -57,7 +57,6 @@ for fn, cyn in zip(filename, storename):
 						citAns += "、" + csn
 			pushAns = "#TodayatApple " + citAns + "有新活动: " + singleName
 			pushAns = pushAns.replace('"', "").replace("'", "").replace("：", " - ")
-			logging.info("[运行结果] " + pushAns)
 			pictureURL = rCourse["backgroundMedia"]["images"][0]["landscape"]["source"]
 			IFTTT.pushbots(pushAns, "Today at Apple 新活动", pictureURL, "raw", IFTTT.getkey()[0], 0)
 if wAns != "":

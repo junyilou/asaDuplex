@@ -1,15 +1,5 @@
 import os, sys, logging, requests
 
-if os.path.isdir('logs'):
-	logging.basicConfig(
-		filename = "logs/" + os.path.basename(__file__) + ".log",
-		format = '[%(asctime)s %(levelname)s] %(message)s',
-		level = logging.DEBUG, filemode = 'a', datefmt = '%F %T')
-else:
-	logging.basicConfig(
-		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
-		level = logging.DEBUG, datefmt = '%T')
-
 def getkey():
 	isKey = os.path.isfile(os.path.expanduser('~') + "/key.txt")
 	if not isKey:
@@ -23,7 +13,7 @@ def getkey():
 def pushbots(value1, value2, value3, trigger, keylist, logMode):
 	if type(keylist) == str: keylist = keylist.split()
 
-	logging.info("启动 IFTTT 推送，收到的 trigger 是 " + trigger)
+	logging.info("启动 IFTTT 推送，trigger 是 " + trigger)
 	logging.info("参数一 " + value1)
 	logging.info("参数二 " + value2)
 	logging.info("参数三 " + value3)
@@ -36,4 +26,4 @@ def pushbots(value1, value2, value3, trigger, keylist, logMode):
 				data = {"value1": value1, "value2": value2, "value3": value3})
 		logging.info("退出 IFTTT 推送")
 	else:
-		logging.info("目前是 logMode 状态下，不会进行输出")
+		logging.info("目前是 logMode 状态下，不会发送网络请求")
