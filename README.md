@@ -6,7 +6,7 @@
 
 你可以在[微博](https://weibo.com/arsteller)和 [Telegram Channel](https://t.me/guopuzd) 关注果铺知道以直接接收以下代码的运行结果。
 
--
+\-
 
 ### 大事记
 
@@ -16,7 +16,7 @@
 
 2020 年 11 月：起初，这些代码配合 IFTTT Webhooks 将代码结果发至 iOS 用户，但 IFTTT 不愿意开放三个以上的参数，且在 2020 年末开始实行 IFTTT Pro 会员制，现在改为使用 Telegram Bot 推送结果，同时也支持了在发送的内容中应用 Markdown 文本样式、按钮、链接等。
 
--
+\-
 
 要使用 Telegram Bot 接收代码结果，您应该首先在同目录创建名为 bot.py 的文件，包含至少一个 Telegram Bot Token 和接收消息的 Chat ID（可以是一个用户、Channel 等），一个示例是：
 
@@ -28,7 +28,7 @@ chat_ids = ["123456789", "-1024204840964"] # 通常一个用户是正数，Chann
 
 在下述代码的顶部都有导入 bot.py 的代码，选择其中一个 Bot Token 和 chat_id 继续。当然，您也可以选择直接把 token 和 chat_id 直接写在对应代码中，这里使用 bot.py 是为了方便 Git 管理。
 
- -
+ \-
 
 ### 代码
 
@@ -51,7 +51,7 @@ chat_ids = ["123456789", "-1024204840964"] # 通常一个用户是正数，Chann
 * storeInfo.json: 全球 Apple Store 名称、店号、所属地旗帜和已知图片的最后修改时间
 * storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的结果
 
- -
+\-
 
 ###### 底注
 
