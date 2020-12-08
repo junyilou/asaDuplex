@@ -1,5 +1,8 @@
 import os, json, time, logging
-import IFTTT
+import telegram
+
+from bot import tokens, chat_ids
+token = tokens[0]; chat_id = chat_ids[0]
 
 import sys
 if len(sys.argv) > 1 and sys.argv[1] == "special":
@@ -75,9 +78,16 @@ for scn, scd, ste, spl in zip(stateCHN, stateCode, stateEmoji, specialistCode):
 			if not rolloutCode in mark:
 				logging.info("找到了" + scn + "的新店 " + rolloutCode + " 不在已知列表中")
 				wAns += ste + rolloutCode + ", "
-				pushAns = ("新店新机遇: " + ste + scn + "新增招聘地点 " + c["name"]
-				+ ", 代号 " + rolloutCode + ", 文件名 " + os.path.basename(savename))
-				IFTTT.pushbots(pushAns, "Apple 招贤纳才", imageURL, "raw", IFTTT.getkey(), 0)
+				pushAns = (ste + scn + " 新增招聘地点 " + c["name"]
+				+ "，编号 " + rolloutCode + "，文件名 " + os.path.basename(savename))
+				linkURL = "https://jobs.apple.com/zh-cn/details/" + realCode
+				bot = telegram.Bot(token = token)
+				bot.send_photo(
+					chat_id = chat_id, 
+					photo = imageURL,
+					caption = '*来自 Recruitment 的通知*\n' + pushAns + "\n\n" + linkURL,
+					parse_mode = 'Markdown')
+
 if wAns != "":
 	logging.info("正在更新 savedJobs 文件")
 	with open(rpath + "savedJobs.txt", "w") as m:

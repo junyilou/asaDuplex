@@ -1,5 +1,8 @@
 import os, time, json, filecmp, difflib, logging, requests
-import IFTTT
+import telegram
+
+from bot import tokens, chat_ids
+token = tokens[0]; chat_id = chat_ids[0]
 
 asaVersion = "5.9.0"; remoteAsaVersion = 0
 rpath = os.path.expanduser('~') + "/Retail/"
@@ -9,11 +12,11 @@ if os.path.isdir('logs'):
 	logging.basicConfig(
 		filename = "logs/" + os.path.basename(__file__) + ".log",
 		format = '[%(asctime)s %(levelname)s] %(message)s',
-		level = logging.DEBUG, filemode = 'a', datefmt = '%F %T')
+		level = logging.INFO, filemode = 'a', datefmt = '%F %T')
 else:
 	logging.basicConfig(
 		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
-		level = logging.DEBUG, datefmt = '%T')
+		level = logging.INFO, datefmt = '%T')
 logging.info("程序启动")
 
 def fileOpen(fileloc):
@@ -53,28 +56,49 @@ runTime = time.strftime("%F", time.localtime())
 
 if filecmp.cmp(newLocation, listLoc) == False and orgListSize and newListSize and "Jiefangbei" in dlc:
 	logging.info("检测到有文件变化，正在生成 changeLog")
-	deltaListSize = newListSize - orgListSize
 	fileLines = []
-	fileDiff = '<!DOCTYPE html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>'
-	fileDiff += "storeList changeLog " + runTime + "</title></head><body><pre><code>"
+	fileDiff = """
+<!DOCTYPE html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>allStoresInfoLite</title>
+</head>
+
+<body><pre><code>
+"""
 	fileDiff += "Generated at " + runTime + " GMT+8\n"
 	for formatFile in [newLocation, listLoc]:
 		formatJSON = json.dumps(json.loads(fileOpen(formatFile)), ensure_ascii = False, indent = 2)
 		fileLines.append(formatJSON.split("\n"))
-		if formatFile == listLoc: fileWrite(listLoc.replace(".json", "-format.json"), formatJSON)
-	for line in difflib.unified_diff(fileLines[0], fileLines[1]): fileDiff += line + "\n"
-	fileWrite("/home/storelist.html", fileDiff + "</code></pre></body></html>")
+		if formatFile == listLoc: 
+			fileWrite(listLoc.replace(".json", "-format.json"), formatJSON)
+	for line in difflib.unified_diff(fileLines[0], fileLines[1]): 
+		fileDiff += line + "\n"
+	fileDiff += "</code></pre></body></html>"
+	fileWrite("/home/storelist.html", fileDiff)
 	os.system("mv " + newLocation + " " + listLoc.replace(".json", "-" + runTime + ".json"))
-	logging.info("文件生成完成，上一版本已保存至 storeList-" + runTime + ".json")
-	pushAns = "检测到 Apple Store 零售店信息文件更新，文件大小差异 " + str(deltaListSize) + " 字节"
-	IFTTT.pushbots(pushAns, "https://www.apple.com/jp/retail/store/includes/marunouchi/drawer/images/store-drawer-tile-1_small_2x.jpg",
-		"http://myv.ps/storelist.html", "linkraw", IFTTT.getkey()[0], 0)
+	logging.info("文件生成完成")
+
+	logging.getLogger().setLevel(logging.DEBUG)
+	bot = telegram.Bot(token = token)
+	bot.send_photo(
+		chat_id = chat_id, 
+		photo = "https://www.apple.com/jp/retail/store/includes/marunouchi/drawer/images/store-drawer-tile-1_medium_2x.jpg",
+		caption = '*来自 allStoresInfoLite 的通知*\nApple Store 零售店信息文件已更新\n\nhttps://shunitsu.moe/storelist.html',
+		parse_mode = 'Markdown')
+	logging.getLogger().setLevel(logging.INFO)
+
 elif newListSize == 0: 
 	logging.error("未能成功下载 allStoresInfoLite 文件")
+
 elif dlc.count("Jiefangbei") == 0:
 	os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
 	logging.error("所下载的 allStoresInfoLite 文件似乎不是英语版本")
+
 else: 
 	os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
 	logging.info("没有发现 storeList 文件更新")
+
 logging.info("程序结束")
