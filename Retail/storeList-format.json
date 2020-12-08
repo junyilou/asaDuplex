@@ -3778,8 +3778,8 @@
               "storeNumber": "R006",
               "countryCode": "US",
               "storeName": "Lenox Square",
-              "latitude": "33.847202",
-              "longitude": "-84.363156",
+              "latitude": "33.847941",
+              "longitude": "-84.363533",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -5401,7 +5401,7 @@
     },
     {
       "countryCode": "CN",
-      "countryName": "China Mainland",
+      "countryName": "China mainland",
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/CN",
       "states": [
         {
@@ -5567,7 +5567,7 @@
             {
               "storeNumber": "R703",
               "countryCode": "CN",
-              "storeName": "Nanjing Jinmao Place",
+              "storeName": "Xuanwu Lake",
               "latitude": "32.074006",
               "longitude": "118.778214",
               "storeRadius": "70",
@@ -9063,8 +9063,8 @@
               "storeNumber": "R450",
               "countryCode": "ES",
               "storeName": "Puerta del Sol",
-              "latitude": "40.417242",
-              "longitude": "-3.702246",
+              "latitude": "40.416900303279924",
+              "longitude": "-3.7021565437316895",
               "storeRadius": "70",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -9339,7 +9339,7 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/HK",
       "states": [
         {
-          "stateName": "香港",
+          "stateName": "",
           "stores": [
             {
               "storeNumber": "R673",
@@ -9353,11 +9353,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R673.png"
               ],
               "secureImageURL": [],
-              "locationText": "觀塘",
+              "locationText": "香港",
               "timeZone": "Asia/Hong_Kong",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "觀塘道 418 號\n香港,觀塘",
+              "storeAddress": "觀塘觀塘道 418 號\n香港",
               "phoneNumber": "3572 8900"
             },
             {
@@ -9372,11 +9372,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R485.png"
               ],
               "secureImageURL": [],
-              "locationText": "九龍塘",
+              "locationText": "香港",
               "timeZone": "Asia/Hong_Kong",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "又一城\n九龍塘達之路 80 號\n香港,九龍塘",
+              "storeAddress": "又一城\n九龍塘達之路 80 號\n香港",
               "phoneNumber": "3979 3600"
             },
             {
@@ -9391,11 +9391,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R499.png"
               ],
               "secureImageURL": [],
-              "locationText": "尖沙咀",
+              "locationText": "香港",
               "timeZone": "Asia/Hong_Kong",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "廣東道 100 號\n香港,尖沙咀",
+              "storeAddress": "尖沙咀廣東道 100 號\n香港",
               "phoneNumber": "3979 8800"
             },
             {
@@ -9410,11 +9410,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R610.png"
               ],
               "secureImageURL": [],
-              "locationText": "沙田",
+              "locationText": "香港",
               "timeZone": "Asia/Hong_Kong",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "新城市廣場 1 期 L4\n沙田正街 18 號\n香港,沙田",
+              "storeAddress": "新城市廣場 1 期 L4\n沙田沙田正街 18 號\n香港",
               "phoneNumber": "3899 7800"
             },
             {
@@ -9429,11 +9429,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R409.png"
               ],
               "secureImageURL": [],
-              "locationText": "銅鑼灣",
+              "locationText": "香港",
               "timeZone": "Asia/Hong_Kong",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "希慎廣場\n銅鑼灣軒尼詩道 500 號\n香港,銅鑼灣",
+              "storeAddress": "希慎廣場\n銅鑼灣軒尼詩道 500 號\n香港",
               "phoneNumber": "3979 3100"
             },
             {
@@ -9448,11 +9448,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R428.png"
               ],
               "secureImageURL": [],
-              "locationText": "中環",
+              "locationText": "香港",
               "timeZone": "Asia/Hong_Kong",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "國際金融中心商場\n香港中環金融街 8 號\n香港,中環",
+              "storeAddress": "國際金融中心商場\n中環金融街 8 號\n香港",
               "phoneNumber": "3972 1500"
             }
           ]
@@ -10443,7 +10443,7 @@
             {
               "storeNumber": "R697",
               "countryCode": "MO",
-              "storeName": "金沙廣場",
+              "storeName": "路氹金光大道",
               "latitude": "22.147525",
               "longitude": "113.564607",
               "storeRadius": "70",
@@ -10456,7 +10456,7 @@
               "timeZone": "Asia/Macau",
               "scanAndBuy": "OFF",
               "enableInStoreMode": false,
-              "storeAddress": "路氹城\n金沙廣場\n澳門",
+              "storeAddress": "路氹城\n倫敦人購物中心\n澳門",
               "phoneNumber": "8791 7000"
             },
             {
