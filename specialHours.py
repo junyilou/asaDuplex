@@ -10,7 +10,7 @@ storename = ['七宝', '上海环贸 iapm', '五角场', '南京东路', '浦东
 '天津万象城', '济南恒隆广场', '青岛万象城', '天环广场', '珠江新城', '深圳益田假日广场', '南宁万象城', '南京艾尚天地', '玄武湖', 
 '虹悦城', '无锡恒隆广场', '苏州', '郑州万象城', '天一广场', '杭州万象城', '西湖', '厦门新生活广场', '泰禾广场', 
 '大连恒隆广场', '百年城', '中街大悦城', '沈阳万象城', '解放碑', '重庆万象城', '重庆北城天街', 'ifc mall', 'Festival Walk', 
-'Canton Road', 'New Town Plaza', 'apm Hong Kong', 'Causeway Bay', '路氹金光大道', '金沙廣場', '信義 A13', '台北 101']
+'Canton Road', 'New Town Plaza', 'apm Hong Kong', 'Causeway Bay', '澳門銀河', '路氹金光大道', '信義 A13', '台北 101']
 storeID = list()
 
 asaVersion = "5.9.0"; remoteAsaVersion = 0
