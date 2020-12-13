@@ -18,7 +18,9 @@
 
 \-
 
-要使用 Telegram Bot 接收代码结果，您应该首先在同目录创建名为 bot.py 的文件，包含至少一个 Telegram Bot Token 和接收消息的 Chat ID（可以是一个用户、Channel 等），一个示例是：
+Telegram Bot 推送部分使用了 [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) 库，你需要首先安装此库。
+
+要正确接收代码结果，还需首先在同目录创建名为 bot.py 的文件，包含至少一个 Bot Token 和接收消息的 Chat ID（可以是一个用户、Channel 等），一个示例是：
 
 ```python
 # bot.py
@@ -26,7 +28,7 @@ tokens = ["1234567890:ABCDEFghijklMNOPQRstu_vwxY-Z0123456"] # Bot Token
 chat_ids = ["123456789", "-1024204840964"] # 通常一个用户是正数，Channel 是负数
 ```
 
-在下述代码的顶部都有导入 bot.py 的代码，选择其中一个 Bot Token 和 chat_id 继续。当然，您也可以选择直接把 token 和 chat_id 直接写在对应代码中，这里使用 bot.py 是为了方便 Git 管理。
+在下述代码的顶部都有导入 bot.py 的代码，选择其中一个 Bot Token 和 chat_id 继续。当然也可以选择直接把 token 和 chat_id 直接写在对应代码中，这里使用 bot.py 是为了方便 Git 管理。
 
  \-
 
