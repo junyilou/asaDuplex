@@ -65,7 +65,7 @@ for f in masterJSON:
 						logging.info("在 " + j + " 找到相同新活动")
 						stores += "、" + storename[filename.index(j)]
 						break
-			push = "🏛 " + stores + "\n🧑‍💻 " + fName
+			push = "#TodayatApple " + fName + "\n@ " + stores + "\n\n" + fCourse["mediumDescription"]
 			push = push.replace('"', "").replace("'", "").replace("：", " - ").replace("_", "\_")
 			logging.info("输出: " + push.replace("\n", " "))
 			photoURL = fCourse["backgroundMedia"]["images"][0]["landscape"]["source"]
