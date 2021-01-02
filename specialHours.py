@@ -28,6 +28,11 @@ logging.info("程序启动")
 runtime = datetime.datetime.now().strftime("%F")
 
 weekList = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+headers = {
+	"User-Agent": "ASA/" + asaVersion + " (iPhone) ss/2.00",
+	"x-ma-pcmh":  "REL-" + asaVersion,
+	"X-MALang":   "zh-CN",
+	"X-DeviceConfiguration":  "ss=2.00;dim=828x1792;m=iPhone;v=iPhone12,1;vv=" + asaVersion + ";sv=14.0.1"}
 
 def fileWrite(fileloc, writer): 
 	with open(fileloc, "w") as fout:
@@ -58,11 +63,7 @@ except: orgjson = {}
 
 for sid, sn in master:
 	logging.info("正在下载 Apple " + sn + " 的细节文件...")
-	headers = {
-		"User-Agent": "ASA/" + asaVersion + " (iPhone) ss/2.00",
-		"x-ma-pcmh":  "REL-" + asaVersion,
-		"X-MALang":   "zh-CN",
-		"X-DeviceConfiguration":  "ss=2.00;dim=828x1792;m=iPhone;v=iPhone12,1;vv=" + asaVersion + ";sv=14.0.1"}
+
 	url = "https://mobileapp.apple.com/mnr/p/cn/retail/storeDetails?storeNumber=R" + sid
 
 	storeDiff = ""
