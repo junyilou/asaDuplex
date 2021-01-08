@@ -4,57 +4,49 @@ import telegram
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
 
-asaVersion = "5.9.0"; remoteAsaVersion = 0
-rpath = os.path.expanduser('~') + "/Retail/"
-formatAsaVersion = int("".join(asaVersion.split(".")))
+requests.packages.urllib3.disable_warnings()
+
+asaVersion = "5.10.0"; asaAgent = ".".join(asaVersion.split(".")[:2])
+headers = {
+	"User-Agent": "ASA/" + asaAgent + " (iPhone) ss/3.00",
+	"x-ma-pcmh":  "REL-" + asaVersion,
+	"X-MALang":   "zh-CN",
+	"X-Apple-I-TimeZone": "GMT+8",
+	"X-Apple-I-Locale":   "zh_CN",
+	"X-MMe-Client-Info":  "<iPhone13,2> <iPhone OS;14.3;18C66> <com.apple.AuthKit/1 (com.apple.store.Jolly/" + asaVersion + ")>",
+	"X-DeviceConfiguration":  "ss=3.00;dim=1170x2532;m=iPhone;v=iPhone13,2;vv=" + asaAgent + ";sv=14.3"}
 
 if os.path.isdir('logs'):
 	logging.basicConfig(
 		filename = "logs/" + os.path.basename(__file__) + ".log",
 		format = '[%(asctime)s %(levelname)s] %(message)s',
-		level = logging.INFO, filemode = 'a', datefmt = '%F %T')
+		level = logging.DEBUG, filemode = 'a', datefmt = '%F %T')
 else:
 	logging.basicConfig(
 		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
-		level = logging.INFO, datefmt = '%T')
+		level = logging.DEBUG, datefmt = '%T')
 logging.info("程序启动")
 
-def fileOpen(fileloc):
-	try: 
-		with open(fileloc) as fin:
-			return fin.read()
-	except FileNotFoundError:
-		logging.error(fileloc + " 文件不存在")
-		return None
+listFile = "Retail/storeList.json"
+oldFile  = listFile.replace(".json", "-old.json")
 
-def fileWrite(fileloc, writer): 
-	with open(fileloc, "w") as fout:
-		fout.write(writer)
+if os.path.isfile(listFile):
+	orgListSize = os.path.getsize(listFile)
+	os.rename(listFile, oldFile)
+else:
+	orgListSize = 0
 
-logging.info("正在确认远程 Apple Store app 版本...")
-try: 
-	lookup = requests.get("https://itunes.apple.com/cn/lookup?id=375380948").json()
-except: pass
-else: 
-	remoteAsaVersion = int("".join(lookup["results"][0]["version"].split(".")))
-if remoteAsaVersion in range(10, 101): remoteAsaVersion *= 10
-if remoteAsaVersion > formatAsaVersion:
-	asaVersion = ".".join(list(str(remoteAsaVersion)))
-	logging.info("从远程获得了新的 Apple Store app 版本 " + asaVersion)
+r = requests.get("https://mobileapp.apple.com/mnr/p/cn/retail/allStoresInfoLite", headers = headers, verify = False)
+with open(listFile, "w") as w:
+	dlc = r.text.replace('?interpolation=progressive-bicubic&output-quality=85&output-format=jpg&resize=312:*', '')
+	w.write(dlc)
 
-logging.info("正在确认远程 Apple Store app 文件...")
-listLoc = rpath + "storeList.json"
-orgListSize = os.path.getsize(listLoc)
-os.system("mv " + listLoc + " " + listLoc.replace(".json", "-old.json"))
-newLocation = listLoc.replace(".json", "-old.json")
-os.system("wget -t 20 -T 5 -U ASA/" + asaVersion + " -O " + listLoc + " --header 'x-ma-pcmh: REL-" + 
-	asaVersion + "' https://mobileapp.apple.com/mnr/p/cn/retail/allStoresInfoLite")
-newListSize = os.path.getsize(listLoc); dlc = fileOpen(listLoc)
-fileWrite(listLoc, dlc.replace('?interpolation=progressive-bicubic&output-quality=85&output-format=jpg&resize=312:*', ''))
+newListSize = os.path.getsize(listFile)
+qualify = [filecmp.cmp(listFile, oldFile), newListSize > 0, "Jiefangbei" in dlc]
 
-runTime = time.strftime("%F", time.localtime())
+if qualify == [False, True, True]:
+	runtime = time.strftime("%F", time.localtime())
 
-if filecmp.cmp(newLocation, listLoc) == False and orgListSize and newListSize and "Jiefangbei" in dlc:
 	logging.info("检测到有文件变化，正在生成 changeLog")
 	fileLines = []
 	fileDiff = """
@@ -68,37 +60,43 @@ if filecmp.cmp(newLocation, listLoc) == False and orgListSize and newListSize an
 
 <body><pre><code>
 """
-	fileDiff += "Generated at " + runTime + " GMT+8\n"
-	for formatFile in [newLocation, listLoc]:
-		formatJSON = json.dumps(json.loads(fileOpen(formatFile)), ensure_ascii = False, indent = 2)
-		fileLines.append(formatJSON.split("\n"))
-		if formatFile == listLoc: 
-			fileWrite(listLoc.replace(".json", "-format.json"), formatJSON)
+	fileDiff += "Apple Store 零售店信息文件\n生成于 " + runtime + "\n"
+	for formatFile in [oldFile, listFile]:
+		with open(formatFile) as f:
+			formatJSON = json.dumps(json.loads(f.read()), ensure_ascii = False, indent = 2)
+			fileLines.append(formatJSON.split("\n"))
+		if formatFile == listFile:
+			with open(listFile.replace(".json", "-format.json"), "w") as w:
+				w.write(formatJSON)
+
 	for line in difflib.unified_diff(fileLines[0], fileLines[1]): 
 		fileDiff += line + "\n"
 	fileDiff += "</code></pre></body></html>"
-	fileWrite("/home/storelist.html", fileDiff)
-	os.system("mv " + newLocation + " " + listLoc.replace(".json", "-" + runTime + ".json"))
+
+	with open("/home/storelist.html", "w") as w:
+		w.write(fileDiff)
+	os.rename(oldFile, listFile.replace(".json", "-" + runtime + ".json"))
 	logging.info("文件生成完成")
 
-	logging.getLogger().setLevel(logging.DEBUG)
 	bot = telegram.Bot(token = token)
 	bot.send_photo(
 		chat_id = chat_id, 
 		photo = "https://www.apple.com/jp/retail/store/includes/marunouchi/drawer/images/store-drawer-tile-1_medium_2x.jpg",
 		caption = '*来自 allStoresInfoLite 的通知*\nApple Store 零售店信息文件已更新\n\nhttps://shunitsu.moe/storelist.html',
 		parse_mode = 'Markdown')
-	logging.getLogger().setLevel(logging.INFO)
 
-elif newListSize == 0: 
-	logging.error("未能成功下载 allStoresInfoLite 文件")
+elif qualify[0] == True:
+	logging.info("没有发现 storeList 文件更新")
 
-elif dlc.count("Jiefangbei") == 0:
-	os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
+elif qualify[1] == False:
+	logging.info("下载 allStoresInfoLite 失败")
+
+elif qualify[2] == False:
 	logging.error("所下载的 allStoresInfoLite 文件似乎不是英语版本")
 
-else: 
-	os.system("mv " + listLoc.replace(".json", "-old.json") + " " + listLoc)
-	logging.info("没有发现 storeList 文件更新")
+try:
+	os.rename(oldFile, listFile)
+except:
+	pass
 
 logging.info("程序结束")
