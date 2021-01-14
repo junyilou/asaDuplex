@@ -69,6 +69,7 @@ for f in masterJSON:
 			push = push.replace('"', "").replace("'", "").replace("：", " - ").replace("_", "\_")
 			logging.info("输出: " + push.replace("\n", " "))
 			photoURL = fCourse["backgroundMedia"]["images"][0]["landscape"]["source"]
+			photoURL += "?output-format=jpg&output-quality=80&resize=2880:*"
 
 			logging.getLogger().setLevel(logging.DEBUG)
 			bot = telegram.Bot(token = token)
