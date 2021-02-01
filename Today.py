@@ -5,21 +5,26 @@ requests.packages.urllib3.disable_warnings()
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
 
-filename = ['qibao', 'shanghaiiapm', 'wujiaochang', 'nanjingeast', 'pudong', 'globalharbor','hongkongplaza', 'kunming', 
-'sanlitun', 'chinacentralmall', 'chaoyangjoycity', 'wangfujing', 'xidanjoycity', 'mixcchengdu', 'taikoolichengdu', 'tianjinjoycity','riverside66tianjin',
-'mixctianjin', 'parc66jinan', 'mixcqingdao', 'parccentral','zhujiangnewtown', 'holidayplazashenzhen', 'mixcnanning', 'nanjingist', 'xuanwulake', 
-'wondercity', 'center66wuxi', 'suzhou', 'mixczhengzhou', 'tianyisquare', 'mixchangzhou', 'westlake', 'xiamenlifestylecenter', 'tahoeplaza', 
-'olympia66dalian', 'parkland', 'zhongjiejoycity', 'mixcshenyang', 'jiefangbei', 'mixcchongqing', 'paradisewalkchongqing',
-'ifcmall', 'festivalwalk', 'cantonroad', 'newtownplaza', 'apmhongkong', 'causewaybay', 'galaxymacau', 'cotaistrip', 'xinyia13', 'taipei101']
+from storeInfo import *
 
-storename = ['七宝', '上海环贸 iapm', '五角场', '南京东路', '浦东', '环球港', '香港广场', '昆明', 
-'三里屯', '华贸购物中心', '朝阳大悦城', '王府井', '西单大悦城', '成都万象城', '成都太古里', '天津大悦城', '天津恒隆广场', 
-'天津万象城', '济南恒隆广场', '青岛万象城', '天环广场', '珠江新城', '深圳益田假日广场', '南宁万象城', '南京艾尚天地', '玄武湖', 
-'虹悦城', '无锡恒隆广场', '苏州', '郑州万象城', '天一广场', '杭州万象城', '西湖', '厦门新生活广场', '泰禾广场', 
-'大连恒隆广场', '百年城', '中街大悦城', '沈阳万象城', '解放碑', '重庆万象城', '重庆北城天街',
-'ifc mall', 'Festival Walk', 'Canton Road', 'New Town Plaza', 'apm Hong Kong', 'Causeway Bay', '澳門銀河', '路氹金光大道', '信義 A13', '台北 101']
+args = {'s': ['🇨🇳']}
 
-reg = {"qibao": "cn", "ifcmall": "hk", "galaxymacau": "mo", "xinyia13": "tw"}
+stores = []
+functions = {'r': StoreID, 'n': StoreName, 's': StoreNation}
+for f in functions.keys():
+	if f in args.keys():
+		S = map(functions[f], args[f])
+		for _s in list(S):
+			for __s in _s:
+				if __s[0] not in stores:
+					stores.append(__s[0])
+
+nationCode = {
+	"🇺🇸": "", "🇨🇳": "cn", "🇬🇧": "uk", "🇨🇦": "ca", "🇦🇺": "au", "🇫🇷": "fr", "🇮🇹": "it",
+	"🇩🇪": "de", "🇪🇸": "es", "🇯🇵": "jp", "🇨🇭": "chde", "🇦🇪": "ae", "🇳🇱": "nl", "🇸🇪": "se",
+	"🇧🇷": "br", "🇹🇷": "tr", "🇸🇬": "sg", "🇲🇽": "mx", "🇦🇹": "at", "🇧🇪": "befr", "🇰🇷": "kr",
+	"🇹🇭": "th", "🇭🇰": "hk", "🇲🇴": "mo", "🇹🇼": "tw"
+}
 
 appn = ""
 with open("Retail/savedEvent.txt") as m: 
@@ -37,15 +42,17 @@ else:
 logging.info("程序启动")
 
 masterJSON = {}
-for fn in filename:
-	try: region = reg[fn]
-	except KeyError: pass
 
+for sid in stores:
 	try:
-		logging.info("正在下载活动安排表文件: " + fn)
-		r = requests.get("https://www.apple.com/today-bff/landing/store?stageRootPath=/" + region + "&storeSlug=" + fn, verify = False)
-		masterJSON[fn] = json.loads(r.text.replace("\u2060", ""))["courses"]
-	except: pass
+		sif = storeInfo(sid)
+		region = "" if sif["flag"] == "🇺🇸" else "/" + nationCode[sif["flag"]]
+		url = "https://www.apple.com/today-bff/landing/store?stageRootPath={}&storeSlug={}".format(region, sif["website"])
+	except KeyError:
+		logging.error("未能匹配到 R{} 的零售店官网页面地址".format(sid))
+	logging.info("正在访问 R{} 的零售店官网页面".format(sid))
+	r = requests.get(url, verify = False)
+	masterJSON[sid] = json.loads(r.text.replace("\u2060", ""))["courses"]
 
 for f in masterJSON:
 	fStore = masterJSON[f]
@@ -53,8 +60,9 @@ for f in masterJSON:
 		fCourse = fStore[fID]
 		fName = fCourse["name"].replace("\n", "")
 		if (not fName in mark) and (not fName in appn):
-			logging.info("在 " + f + " 找到新活动 " + fName)
-			appn += fName + ",\n"; stores = storename[filename.index(f)]
+			appn += fName + ",\n"
+			stores = storeInfo(f)["name"]
+			logging.info("在{}找到新活动 {}".format(stores, fName))
 			for j in masterJSON:
 				jStore = masterJSON[j]
 				if jStore == fStore:
@@ -62,10 +70,11 @@ for f in masterJSON:
 				for jID in jStore:
 					jCourse = jStore[jID]
 					if (jCourse["name"].replace("\n", "") == fName):
-						logging.info("在 " + j + " 找到相同新活动")
-						stores += "、" + storename[filename.index(j)]
+						jName = storeInfo(j)["name"]
+						logging.info("在{}找到相同新活动".format(jName))
+						stores += "、" + jName
 						break
-			push = "#TodayatApple " + fName + "\n@ " + stores + "\n\n" + fCourse["mediumDescription"]
+			push = "#TodayatApple {}}\n@ {}\n\n".format(fName, stores) + fCourse["mediumDescription"]
 			push = push.replace('"', "").replace("'", "").replace("：", " - ").replace("_", "\_")
 			logging.info("输出: " + push.replace("\n", " "))
 			photoURL = fCourse["backgroundMedia"]["images"][0]["landscape"]["source"]

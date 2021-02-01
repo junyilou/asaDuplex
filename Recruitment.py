@@ -85,7 +85,7 @@ for scn, scd, ste, spl in zip(stateCHN, stateCode, stateEmoji, specialistCode):
 				bot.send_photo(
 					chat_id = chat_id, 
 					photo = imageURL,
-					caption = '*来自 Recruitment 的通知*\n' + pushAns + "\n\n" + linkURL,
+					caption = '*来自 Recruitment 的通知*\n' + pushAns.replace("_", "\_") + "\n\n" + linkURL,
 					parse_mode = 'Markdown')
 
 if wAns != "":

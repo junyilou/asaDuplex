@@ -1,8 +1,10 @@
 import json
-import logging
 
 with open("Retail/storeInfo.json") as r:
-	j = json.loads(r.read())
+	info = json.loads(r.read())
+
+with open("Retail/storeList.json") as r:
+	asto = json.loads(r.read())["countryStateMapping"]
 
 def StoreID(storeid):
 	if type(storeid) == int:
@@ -10,25 +12,51 @@ def StoreID(storeid):
 	storeid = storeid.replace("R", "")
 	if len(storeid) == 3:
 		try:
-			return [(storeid, j["name"][storeid])]
+			return [(storeid, info["name"][storeid])]
 		except KeyError:
 			return []
 	else:
 		return []
 
 def StoreName(name):
-	flag = 1
+	stores = list()
 	name = name.replace("_", " ")
-	for i in j["name"].keys():
-		if j["name"][i] == name:
-			return [(i, name)]
-	return []
+	for i in info["name"].keys():
+		if info["name"][i] == name:
+			stores.append((i, name))
+	return stores
 
 def StoreNation(emoji):
+	if emoji == "TW":
+		emoji = "🇹🇼"
 	stores = list()
-	for i in j["flag"].keys():
-		if j["flag"][i] == emoji:
-			storename = j["name"][i]
+	for i in info["flag"].keys():
+		if info["flag"][i] == emoji:
+			storename = info["name"][i]
 			if storename[:8] != "Store in":
 				stores.append((i, storename))
 	return stores
+
+def storeInfo(storeid):
+	if type(storeid) == int:
+		storeid = "%03d" % storeid
+	storeid = storeid.replace("R", "")
+	ret = {}
+	for t in info.keys():
+		if storeid in info[t].keys():
+			ret[t] = info[t][storeid]
+	return ret
+
+def storeList(storeid):
+	if type(storeid) == int:
+		storeid = "%03d" % storeid
+	storeid = "R" + storeid.replace("R", "")
+	find = {}
+	for i in asto:
+		for k in i["states"]:
+			for m in k["stores"]:
+				if m["storeNumber"] == storeid:
+					find = m
+					find["stateName"] = k["stateName"]
+					find = dict([(k, find[k]) for k in sorted(find.keys())])
+	return find
