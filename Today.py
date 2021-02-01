@@ -7,7 +7,7 @@ token = tokens[0]; chat_id = chat_ids[0]
 
 from storeInfo import *
 
-args = {'s': ['🇨🇳']}
+args = {'s': ['🇨🇳', '🇭🇰', '🇲🇴', 'TW']}
 
 stores = []
 functions = {'r': StoreID, 'n': StoreName, 's': StoreNation}
