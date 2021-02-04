@@ -5,7 +5,6 @@
       "eVar4": "AOS : retail/allStoresInfoLite",
       "prop40": "506738",
       "eVar3": "AOS : China Consumer",
-      "eVar14": "zh-cn",
       "eVar19": "AOS: CN Consumer:retail/allStoresInfoLite",
       "prop8": "AOS : retail/allStoresInfoLite",
       "storeId": "506738",
@@ -40,7 +39,7 @@
               "secureImageURL": [],
               "locationText": "Cherry Hill, NJ",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2000 Route 38\nCherry Hill,NJ 08002 ",
               "phoneNumber": "(856) 792-9480"
@@ -59,7 +58,7 @@
               "secureImageURL": [],
               "locationText": "Wayne, NJ",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1400 Willowbrook Mall\nWayne,NJ 07470 ",
               "phoneNumber": "(973) 339-2800"
@@ -78,7 +77,7 @@
               "secureImageURL": [],
               "locationText": "Rockaway, NJ",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "301 Mt. Hope Avenue\nRockaway,NJ 07866 ",
               "phoneNumber": "(973) 384-9220"
@@ -97,7 +96,7 @@
               "secureImageURL": [],
               "locationText": "Bridgewater, NJ",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "400 Commons Way\nBridgewater,NJ 08807 ",
               "phoneNumber": "(908) 547-3800"
@@ -116,7 +115,7 @@
               "secureImageURL": [],
               "locationText": "Paramus, NJ",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1 Garden State Plaza\nParamus,NJ 07652 ",
               "phoneNumber": "(201) 975-9500"
@@ -135,7 +134,7 @@
               "secureImageURL": [],
               "locationText": "Freehold, NJ",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3710 Route 9 South\nFreehold,NJ 07728 ",
               "phoneNumber": "(732) 358-8426"
@@ -154,7 +153,7 @@
               "secureImageURL": [],
               "locationText": "Woodcliff Lake, NJ",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "441 Chestnut Ridge Road\nWoodcliff Lake,NJ 07677 ",
               "phoneNumber": "(201) 474-4180"
@@ -173,7 +172,7 @@
               "secureImageURL": [],
               "locationText": "Short Hills, NJ",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1200 Morris Turnpike\nShort Hills,NJ 07078 ",
               "phoneNumber": "(973) 564-5813"
@@ -192,7 +191,7 @@
               "secureImageURL": [],
               "locationText": "Edison, NJ",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "55 Parsonage Road\nEdison,NJ 08837 ",
               "phoneNumber": "(732) 623-7700"
@@ -211,7 +210,7 @@
               "secureImageURL": [],
               "locationText": "Marlton, NJ",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "500 Route 73 South\nMarlton,NJ 08053 ",
               "phoneNumber": "(856) 355-4940"
@@ -230,7 +229,7 @@
               "secureImageURL": [],
               "locationText": "Lawrence Township, NJ",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "150 Quaker Bridge Mall     \nLawrence Township,NJ 08648 ",
               "phoneNumber": "(609) 606-9030"
@@ -273,7 +272,7 @@
               "secureImageURL": [],
               "locationText": "Syracuse, NY",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1 Destiny USA Drive\nSyracuse,NY 13204 ",
               "phoneNumber": "(315) 233-5920"
@@ -406,7 +405,7 @@
               "secureImageURL": [],
               "locationText": "Albany, NY",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1 Crossgates Mall Road\nAlbany,NY 12203 ",
               "phoneNumber": "(518) 389-0140"
@@ -444,7 +443,7 @@
               "secureImageURL": [],
               "locationText": "Buffalo, NY",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "G116 Walden Galleria\nBuffalo,NY 14225 ",
               "phoneNumber": "(716) 706-2000"
@@ -463,7 +462,7 @@
               "secureImageURL": [],
               "locationText": "Yonkers, NY",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "143 Market Street\nYonkers,NY 10710 ",
               "phoneNumber": "(914) 620-0965"
@@ -482,7 +481,7 @@
               "secureImageURL": [],
               "locationText": "Victor, NY",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "7979 Pittsford-Victor Road\nVictor,NY 14564 ",
               "phoneNumber": "(585) 421-6070"
@@ -501,7 +500,7 @@
               "secureImageURL": [],
               "locationText": "Nanuet, NY",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "8115 Fashion Drive \nNanuet,NY 10954 ",
               "phoneNumber": "(845) 215-6980"
@@ -558,7 +557,7 @@
               "secureImageURL": [],
               "locationText": "White Plains, NY",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "125 Westchester Avenue\nWhite Plains,NY 10601 ",
               "phoneNumber": "(914) 539-4530"
@@ -677,7 +676,7 @@
               "secureImageURL": [],
               "locationText": "Friendswood, TX",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "500 Baybrook Mall\nFriendswood,TX 77546 ",
               "phoneNumber": "(281) 204-0500"
@@ -696,7 +695,7 @@
               "secureImageURL": [],
               "locationText": "Sugar Land, TX",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "16535 Southwest Freeway\nSugar Land,TX 77479 ",
               "phoneNumber": "(281) 269-3410"
@@ -715,7 +714,7 @@
               "secureImageURL": [],
               "locationText": "Houston, TX",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2000 Willowbrook Drive\nHouston,TX 77070 ",
               "phoneNumber": "(281) 571-4400"
@@ -734,7 +733,7 @@
               "secureImageURL": [],
               "locationText": "Houston, TX",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "4012 Westheimer Road\nHouston,TX 77027 ",
               "phoneNumber": "(832) 325-3500"
@@ -791,7 +790,7 @@
               "secureImageURL": [],
               "locationText": "The Woodlands, TX",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1201 Lake Woodlands Drive\nThe Woodlands,TX 77380 ",
               "phoneNumber": "(281) 203-6870"
@@ -810,7 +809,7 @@
               "secureImageURL": [],
               "locationText": "San Antonio, TX",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "15900 La Cantera Parkway\nSan Antonio,TX 78256 ",
               "phoneNumber": "(210) 276-2302"
@@ -829,7 +828,7 @@
               "secureImageURL": [],
               "locationText": "El Paso, TX",
               "timeZone": "America/Denver",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "8401 Gateway Boulevard West\nEl Paso,TX 79925 ",
               "phoneNumber": "(915) 774-8020"
@@ -848,7 +847,7 @@
               "secureImageURL": [],
               "locationText": "Southlake, TX",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "260 Grand Avenue\nSouthlake,TX 76092 ",
               "phoneNumber": "(817) 722-1401"
@@ -867,7 +866,7 @@
               "secureImageURL": [],
               "locationText": "Dallas, TX",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "8687 North Central Expressway\nDallas,TX 75225 ",
               "phoneNumber": "(214) 765-0820"
@@ -886,7 +885,7 @@
               "secureImageURL": [],
               "locationText": "San Antonio, TX",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "7400 San Pedro Avenue\nSan Antonio,TX 78216 ",
               "phoneNumber": "(210) 321-4420"
@@ -905,7 +904,7 @@
               "secureImageURL": [],
               "locationText": "Dallas, TX",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3101 Knox Street\nDallas,TX 75205 ",
               "phoneNumber": "(214) 520-8532"
@@ -924,7 +923,7 @@
               "secureImageURL": [],
               "locationText": "Houston, TX",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "303 Memorial City\nHouston,TX 77024 ",
               "phoneNumber": "(713) 986-2476"
@@ -943,7 +942,7 @@
               "secureImageURL": [],
               "locationText": "Houston, TX",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "5085 Westheimer Road\nHouston,TX 77056 ",
               "phoneNumber": "(713) 353-5471"
@@ -981,7 +980,7 @@
               "secureImageURL": [],
               "locationText": "Dallas, TX",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "13350 Dallas Parkway\nDallas,TX 75240 ",
               "phoneNumber": "(972) 942-7210"
@@ -1005,7 +1004,7 @@
               "secureImageURL": [],
               "locationText": "New Haven, CT",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "65 Broadway\nNew Haven,CT 06511 ",
               "phoneNumber": "(203) 498-8950"
@@ -1024,7 +1023,7 @@
               "secureImageURL": [],
               "locationText": "Norwalk, CT",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "100 N. Water Street\nNorwalk,CT 06854 ",
               "phoneNumber": "(203) 658-1801"
@@ -1043,7 +1042,7 @@
               "secureImageURL": [],
               "locationText": "Farmington, CT",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "500 Westfarms Mall\nFarmington,CT 06032 ",
               "phoneNumber": "(860) 221-0800"
@@ -1062,7 +1061,7 @@
               "secureImageURL": [],
               "locationText": "Greenwich, CT",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "356 Greenwich Avenue\nGreenwich,CT 06830 ",
               "phoneNumber": "(203) 302-6691"
@@ -1081,7 +1080,7 @@
               "secureImageURL": [],
               "locationText": "Danbury, CT",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Seven Backus Avenue\nDanbury,CT 06810 ",
               "phoneNumber": "(203) 546-6340"
@@ -1100,7 +1099,7 @@
               "secureImageURL": [],
               "locationText": "Trumbull, CT",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "5065 Main Street\nTrumbull,CT 06611 ",
               "phoneNumber": "(203) 666-3928"
@@ -1119,7 +1118,7 @@
               "secureImageURL": [],
               "locationText": "South Windsor, CT",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "401 Evergreen Walk\nSouth Windsor,CT 06074 ",
               "phoneNumber": "(860) 512-2070"
@@ -1143,7 +1142,7 @@
               "secureImageURL": [],
               "locationText": "Ridgeland, MS",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1000 Highland Colony Parkway\nRidgeland,MS 39157 ",
               "phoneNumber": "(601) 607-4521"
@@ -1167,7 +1166,7 @@
               "secureImageURL": [],
               "locationText": "Knoxville, TN",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "7600 Kingston Pike\nKnoxville,TN 37919 ",
               "phoneNumber": "(865) 824-2507"
@@ -1186,7 +1185,7 @@
               "secureImageURL": [],
               "locationText": "Nashville, TN",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2126 Abbott Martin Road\nNashville,TN 37215 ",
               "phoneNumber": "(615) 514-2430"
@@ -1205,7 +1204,7 @@
               "secureImageURL": [],
               "locationText": "Germantown, TN",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2031 West Street\nGermantown,TN 38138 ",
               "phoneNumber": "(901) 751-6980"
@@ -1224,7 +1223,7 @@
               "secureImageURL": [],
               "locationText": "Franklin, TN",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1800 Galleria Boulevard\nFranklin,TN 37067 ",
               "phoneNumber": "(615) 435-0620"
@@ -1248,7 +1247,7 @@
               "secureImageURL": [],
               "locationText": "Modesto, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3401 Dale Road\nModesto,CA 95356 ",
               "phoneNumber": "(209) 342-1500"
@@ -1267,7 +1266,7 @@
               "secureImageURL": [],
               "locationText": "Glendale, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "877 Americana Way\nGlendale,CA 91210 ",
               "phoneNumber": "(818) 254-1070"
@@ -1286,7 +1285,7 @@
               "secureImageURL": [],
               "locationText": "Santa Barbara, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "928 State Street\nSanta Barbara,CA 93101 ",
               "phoneNumber": "(805) 560-1500"
@@ -1305,7 +1304,7 @@
               "secureImageURL": [],
               "locationText": "Los Angeles, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "10250 Santa Monica Boulevard\nLos Angeles,CA 90067 ",
               "phoneNumber": "(424) 204-4290"
@@ -1324,7 +1323,7 @@
               "secureImageURL": [],
               "locationText": "San Jose, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "925 Blossom Hill Road\nSan Jose,CA 95123 ",
               "phoneNumber": "(408) 960-0110"
@@ -1343,7 +1342,7 @@
               "secureImageURL": [],
               "locationText": "Temecula, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "40764 Winchester Road\nTemecula,CA 92591 ",
               "phoneNumber": "(951) 326-2400"
@@ -1362,7 +1361,7 @@
               "secureImageURL": [],
               "locationText": "Pleasanton, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "One Stoneridge Mall\nPleasanton,CA 94588 ",
               "phoneNumber": "(925) 398-1962"
@@ -1381,7 +1380,7 @@
               "secureImageURL": [],
               "locationText": "San Mateo, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "60  31st Avenue\nSuite K03\nSan Mateo,CA 94403 ",
               "phoneNumber": "(650) 645-4800"
@@ -1400,7 +1399,7 @@
               "secureImageURL": [],
               "locationText": "San Francisco, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2125 Chestnut Street\nSan Francisco,CA 94123 ",
               "phoneNumber": "(415) 848-4445"
@@ -1419,7 +1418,7 @@
               "secureImageURL": [],
               "locationText": "Chula Vista, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2015 Birch Road\nChula Vista,CA 91915 ",
               "phoneNumber": "(619) 205-6400"
@@ -1438,7 +1437,7 @@
               "secureImageURL": [],
               "locationText": "Valencia, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "24201 West Valencia Boulevard\nValencia,CA 91355 ",
               "phoneNumber": "(661) 678-1490"
@@ -1457,7 +1456,7 @@
               "secureImageURL": [],
               "locationText": "Costa Mesa, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3333 Bear Street\nCosta Mesa,CA 92626 ",
               "phoneNumber": "(714) 424-6331"
@@ -1476,7 +1475,7 @@
               "secureImageURL": [],
               "locationText": "Palo Alto, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "340 University Avenue\nPalo Alto,CA 94301 ",
               "phoneNumber": "(650) 798-2800"
@@ -1495,7 +1494,7 @@
               "secureImageURL": [],
               "locationText": "Los Angeles, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "8500 Beverly Boulevard\nLos Angeles,CA 90048 ",
               "phoneNumber": "(424) 239-3880"
@@ -1514,7 +1513,7 @@
               "secureImageURL": [],
               "locationText": "Fresno, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "645 E. Shaw Avenue\nFresno,CA 93710 ",
               "phoneNumber": "(559) 244-3400"
@@ -1533,7 +1532,7 @@
               "secureImageURL": [],
               "locationText": "Glendale, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2126 Glendale Galleria\nGlendale,CA 91210 ",
               "phoneNumber": "(818) 502-8310"
@@ -1552,7 +1551,7 @@
               "secureImageURL": [],
               "locationText": "Manhattan Beach, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3200 Sepulveda Boulevard\nManhattan Beach,CA 90266 ",
               "phoneNumber": "(310) 421-3720"
@@ -1571,7 +1570,7 @@
               "secureImageURL": [],
               "locationText": "Los Gatos, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "23 N. Santa Cruz Avenue\nLos Gatos,CA 95030 ",
               "phoneNumber": "(408) 399-3880"
@@ -1590,7 +1589,7 @@
               "secureImageURL": [],
               "locationText": "Burlingame, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1301 Burlingame Avenue\nBurlingame,CA 94010 ",
               "phoneNumber": "(650) 645-8930"
@@ -1609,7 +1608,7 @@
               "secureImageURL": [],
               "locationText": "Sherman Oaks, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "14006 Riverside Drive\nSherman Oaks,CA 91423 ",
               "phoneNumber": "(818) 464-3080"
@@ -1628,7 +1627,7 @@
               "secureImageURL": [],
               "locationText": "Irvine, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "930 Spectrum Center Drive\nIrvine,CA 92618 ",
               "phoneNumber": "(949) 255-1500"
@@ -1647,7 +1646,7 @@
               "secureImageURL": [],
               "locationText": "San Francisco, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3251 20th Avenue\nSan Francisco,CA 94132 ",
               "phoneNumber": "(415) 571-2780"
@@ -1666,7 +1665,7 @@
               "secureImageURL": [],
               "locationText": "Thousand Oaks, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "432 West Hillcrest Drive\nThousand Oaks,CA 91360 ",
               "phoneNumber": "(805) 277-5040"
@@ -1685,7 +1684,7 @@
               "secureImageURL": [],
               "locationText": "Pasadena, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "54 West Colorado Boulevard\nPasadena,CA 91105 ",
               "phoneNumber": "(626) 463-6223"
@@ -1704,7 +1703,7 @@
               "secureImageURL": [],
               "locationText": "Newport Beach, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1113 Newport Center Drive\nNewport Beach,CA 92660 ",
               "phoneNumber": "(949) 629-9717"
@@ -1723,7 +1722,7 @@
               "secureImageURL": [],
               "locationText": "Walnut Creek, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1200 S. Main Street\nWalnut Creek,CA 94596 ",
               "phoneNumber": "(925) 949-5463"
@@ -1742,7 +1741,7 @@
               "secureImageURL": [],
               "locationText": "Northridge, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "9301 Tampa Avenue\nNorthridge,CA 91324 ",
               "phoneNumber": "(818) 477-9010"
@@ -1761,7 +1760,7 @@
               "secureImageURL": [],
               "locationText": "Palm Desert, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "73445 El Paseo\nPalm Desert,CA 92260 ",
               "phoneNumber": "(760) 862-9710"
@@ -1780,7 +1779,7 @@
               "secureImageURL": [],
               "locationText": "Roseville, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1151 Galleria Boulevard\nRoseville,CA 95678 ",
               "phoneNumber": "(916) 872-2506"
@@ -1799,7 +1798,7 @@
               "secureImageURL": [],
               "locationText": "Santa Monica, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1415 Third Street Promenade\nSanta Monica,CA 90401 ",
               "phoneNumber": "(310) 633-2670"
@@ -1818,7 +1817,7 @@
               "secureImageURL": [],
               "locationText": "Carlsbad, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1923 Calle Barcelona\nCarlsbad,CA 92009 ",
               "phoneNumber": "(760) 697-9800"
@@ -1837,7 +1836,7 @@
               "secureImageURL": [],
               "locationText": "Cupertino, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "One Infinite Loop\nCupertino,CA 95014 ",
               "phoneNumber": "(408) 606-5775"
@@ -1856,7 +1855,7 @@
               "secureImageURL": [],
               "locationText": "Los Angeles, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "189 The Grove Drive\nLos Angeles,CA 90036 ",
               "phoneNumber": "(323) 617-9800"
@@ -1875,7 +1874,7 @@
               "secureImageURL": [],
               "locationText": "Santa Clara, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2855 Stevens Creek Boulevard\nSanta Clara,CA 95050 ",
               "phoneNumber": "(408) 551-2150"
@@ -1894,7 +1893,7 @@
               "secureImageURL": [],
               "locationText": "Brea, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1016C Brea Mall\nBrea,CA 92821 ",
               "phoneNumber": "(714) 989-5550"
@@ -1913,7 +1912,7 @@
               "secureImageURL": [],
               "locationText": "Santa Rosa, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1071 Santa Rosa Plaza\nSanta Rosa,CA 95401 ",
               "phoneNumber": "(707) 508-3500"
@@ -1932,7 +1931,7 @@
               "secureImageURL": [],
               "locationText": "Escondido, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "272 E Via Rancho Parkway\nEscondido,CA 92025 ",
               "phoneNumber": "(760) 317-2484"
@@ -1951,7 +1950,7 @@
               "secureImageURL": [],
               "locationText": "San Diego, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "7007 Friars Road\nSan Diego,CA 92108 ",
               "phoneNumber": "(619) 682-3477"
@@ -1970,7 +1969,7 @@
               "secureImageURL": [],
               "locationText": "Canoga Park, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "6600 Topanga Canyon Boulevard\nCanoga Park,CA 91303 ",
               "phoneNumber": "(818) 577-1800"
@@ -1989,7 +1988,7 @@
               "secureImageURL": [],
               "locationText": "Mission Viejo, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "936C Shops at Mission Viejo\nMission Viejo,CA 92691 ",
               "phoneNumber": "(949) 325-6426"
@@ -2008,7 +2007,7 @@
               "secureImageURL": [],
               "locationText": "Sacramento, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1689 Arden Way\nSacramento,CA 95815 ",
               "phoneNumber": "(916) 830-5610"
@@ -2027,7 +2026,7 @@
               "secureImageURL": [],
               "locationText": "San Luis Obispo, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "899 Higuera Street\nSan Luis Obispo,CA 93401 ",
               "phoneNumber": "(805) 542-8800"
@@ -2046,7 +2045,7 @@
               "secureImageURL": [],
               "locationText": "San Francisco, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "300 Post Street\nSan Francisco,CA 94108 ",
               "phoneNumber": "(415) 486-4800"
@@ -2065,7 +2064,7 @@
               "secureImageURL": [],
               "locationText": "Corte Madera, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1520 Redwood Highway\nCorte Madera,CA 94925 ",
               "phoneNumber": "(415) 413-9120"
@@ -2084,7 +2083,7 @@
               "secureImageURL": [],
               "locationText": "Emeryville, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "5640 Bay Street\nEmeryville,CA 94608 ",
               "phoneNumber": "(510) 350-2400"
@@ -2103,7 +2102,7 @@
               "secureImageURL": [],
               "locationText": "Palo Alto, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "379 Stanford Shopping Center\nPalo Alto,CA 94304 ",
               "phoneNumber": "(650) 798-6180"
@@ -2122,7 +2121,7 @@
               "secureImageURL": [],
               "locationText": "Rancho Cucamonga, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "12461 South Main Street\nRancho Cucamonga,CA 91739 ",
               "phoneNumber": "(909) 803-5220"
@@ -2141,10 +2140,29 @@
               "secureImageURL": [],
               "locationText": "San Diego, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "4305 La Jolla Village Drive\nSan Diego,CA 92122 ",
               "phoneNumber": "(858) 795-6870"
+            },
+            {
+              "storeNumber": "R900",
+              "countryCode": "US",
+              "storeName": "Mock Store - Vintage D",
+              "latitude": "8.349934",
+              "longitude": "-141.88855",
+              "storeRadius": "10",
+              "accuracyThreshold": "0",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R900.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Cupertino, CA",
+              "timeZone": "America/Los_Angeles",
+              "scanAndBuy": "SNB",
+              "enableInStoreMode": false,
+              "storeAddress": "Bubb Road\nCupertino,CA 9014 ",
+              "phoneNumber": "(408) 123-4567"
             },
             {
               "storeNumber": "R824",
@@ -2160,7 +2178,7 @@
               "secureImageURL": [],
               "locationText": "Cupertino, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "10600 North Tantau Avenue\nCupertino,CA 95014 ",
               "phoneNumber": "(408) 961-1560"
@@ -2179,7 +2197,7 @@
               "secureImageURL": [],
               "locationText": "Monterey, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "240 Del Monte Center\nMonterey,CA 93940 ",
               "phoneNumber": "(831) 647-4480"
@@ -2198,7 +2216,7 @@
               "secureImageURL": [],
               "locationText": "Cerritos, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "242 Los Cerritos Center\nCerritos,CA 90703 ",
               "phoneNumber": "(562) 356-1555"
@@ -2217,7 +2235,7 @@
               "secureImageURL": [],
               "locationText": "Bakersfield, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2701 Ming Avenue\nBakersfield,CA 93304 ",
               "phoneNumber": "(661) 396-3480"
@@ -2236,7 +2254,7 @@
               "secureImageURL": [],
               "locationText": "Berkeley, CA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1823 4th Street\nBerkeley,CA 94710 ",
               "phoneNumber": "(510) 898-3341"
@@ -2322,7 +2340,7 @@
               "secureImageURL": [],
               "locationText": "Miami, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "7535 Dadeland Mall\nMiami,FL 33156 ",
               "phoneNumber": "(305) 341-9812"
@@ -2341,7 +2359,7 @@
               "secureImageURL": [],
               "locationText": "Jacksonville, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "4835 River City Drive\nJacksonville,FL 32246 ",
               "phoneNumber": "(904) 380-3080"
@@ -2360,7 +2378,7 @@
               "secureImageURL": [],
               "locationText": "Fort Lauderdale, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2388 E. Sunrise Boulevard\nFort Lauderdale,FL 33304 ",
               "phoneNumber": "(954) 331-4501"
@@ -2379,7 +2397,7 @@
               "secureImageURL": [],
               "locationText": "Palm Beach Gardens, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3101 PGA Boulevard\nPalm Beach Gardens,FL 33410 ",
               "phoneNumber": "(561) 273-2160"
@@ -2398,7 +2416,7 @@
               "secureImageURL": [],
               "locationText": "Miami, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "8888 SW 136th Street\nMiami,FL 33176 ",
               "phoneNumber": "(305) 234-4565"
@@ -2417,7 +2435,7 @@
               "secureImageURL": [],
               "locationText": "Miami Beach, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1021 Lincoln Road\nMiami Beach,FL 33139 ",
               "phoneNumber": "(305) 421-0400"
@@ -2436,7 +2454,7 @@
               "secureImageURL": [],
               "locationText": "Wellington, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "10300 W. Forest Hill Boulevard\nWellington,FL 33414 ",
               "phoneNumber": "(561) 273-2940"
@@ -2455,7 +2473,7 @@
               "secureImageURL": [],
               "locationText": "Tampa, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2223 N West Shore Boulevard\nTampa,FL 33607 ",
               "phoneNumber": "(813) 393-4720"
@@ -2474,7 +2492,7 @@
               "secureImageURL": [],
               "locationText": "Orlando, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "8001 S. Orange Blossom Trail\nOrlando,FL 32809 ",
               "phoneNumber": "(407) 563-1020"
@@ -2493,7 +2511,7 @@
               "secureImageURL": [],
               "locationText": "Naples, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "5555 Tamiami Trail North\nNaples,FL 34108 ",
               "phoneNumber": "(239) 254-4240"
@@ -2531,7 +2549,7 @@
               "secureImageURL": [],
               "locationText": "Orlando, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "4200 Conroy Road\nOrlando,FL 32839 ",
               "phoneNumber": "(407) 352-5551"
@@ -2550,7 +2568,7 @@
               "secureImageURL": [],
               "locationText": "Altamonte Springs, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "451 E Altamonte Drive\nAltamonte Springs,FL 32701 ",
               "phoneNumber": "(407) 551-0404"
@@ -2569,7 +2587,7 @@
               "secureImageURL": [],
               "locationText": "Boca Raton, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "6000 Glades Road\nBoca Raton,FL 33431 ",
               "phoneNumber": "(561) 226-0270"
@@ -2588,7 +2606,7 @@
               "secureImageURL": [],
               "locationText": "Estero, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "23151 Fashion Drive\nEstero,FL 33928 ",
               "phoneNumber": "(239) 949-8860"
@@ -2607,7 +2625,7 @@
               "secureImageURL": [],
               "locationText": "Aventura, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "19501 Biscayne Boulevard\nAventura,FL 33180 ",
               "phoneNumber": "(305) 914-9826"
@@ -2626,7 +2644,7 @@
               "secureImageURL": [],
               "locationText": "Miami, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "701 S. Miami Avenue\nMiami,FL 33130 ",
               "phoneNumber": "(786) 843-4350"
@@ -2645,7 +2663,7 @@
               "secureImageURL": [],
               "locationText": "Sarasota, FL",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "140 University Town Center Dr\nSarasota,FL 34243 ",
               "phoneNumber": "(941) 358-4600"
@@ -2688,7 +2706,7 @@
               "secureImageURL": [],
               "locationText": "Greenville, SC",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "700 Haywood Road\nGreenville,SC 29607 ",
               "phoneNumber": "(864) 987-7580"
@@ -2712,7 +2730,7 @@
               "secureImageURL": [],
               "locationText": "Lone Tree, CO",
               "timeZone": "America/Denver",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "8405 Park Meadows Center Drive\nLone Tree,CO 80124 ",
               "phoneNumber": "(303) 256-1501"
@@ -2731,7 +2749,7 @@
               "secureImageURL": [],
               "locationText": "Colorado Springs, CO",
               "timeZone": "America/Denver",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1685 Briargate Parkway\nSuite 315\nColorado Springs,CO 80920 ",
               "phoneNumber": "(719) 522-4460"
@@ -2750,7 +2768,7 @@
               "secureImageURL": [],
               "locationText": "Littleton, CO",
               "timeZone": "America/Denver",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "7301 S Santa Fe Drive\nLittleton,CO 80120 ",
               "phoneNumber": "(303) 256-2580"
@@ -2769,7 +2787,7 @@
               "secureImageURL": [],
               "locationText": "Denver, CO",
               "timeZone": "America/Denver",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3000 E 1st Avenue\nDenver,CO 80206 ",
               "phoneNumber": "(303) 583-7310"
@@ -2788,7 +2806,7 @@
               "secureImageURL": [],
               "locationText": "Boulder, CO",
               "timeZone": "America/Denver",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1755 29th Street\nBoulder,CO 80301 ",
               "phoneNumber": "(720) 479-9451"
@@ -2807,7 +2825,7 @@
               "secureImageURL": [],
               "locationText": "Broomfield, CO",
               "timeZone": "America/Denver",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "One West Flatiron Crossing Dr\nBroomfield,CO 80021 ",
               "phoneNumber": "(720) 479-0465"
@@ -2831,7 +2849,7 @@
               "secureImageURL": [],
               "locationText": "Madison, WI",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "702 North Midvale Boulevard\nMadison,WI 53705 ",
               "phoneNumber": "(608) 827-9840"
@@ -2850,7 +2868,7 @@
               "secureImageURL": [],
               "locationText": "Glendale, WI",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "5715 N Centerpark Way\nGlendale,WI 53217 ",
               "phoneNumber": "(414) 977-3410"
@@ -2869,7 +2887,7 @@
               "secureImageURL": [],
               "locationText": "Wauwatosa, WI",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2500 N. Mayfair Road\nWauwatosa,WI 53226 ",
               "phoneNumber": "(414) 290-9780"
@@ -2893,7 +2911,7 @@
               "secureImageURL": [],
               "locationText": "Tukwila, WA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "801 Southcenter Mall\nTukwila,WA 98188 ",
               "phoneNumber": "(206) 288-4400"
@@ -2912,7 +2930,7 @@
               "secureImageURL": [],
               "locationText": "Tacoma, WA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "4502 S Steele Street\nTacoma,WA 98409 ",
               "phoneNumber": "(253) 620-1454"
@@ -2931,7 +2949,7 @@
               "secureImageURL": [],
               "locationText": "Lynnwood, WA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3000 184th Street S.W.\nLynnwood,WA 98037 ",
               "phoneNumber": "(425) 921-1560"
@@ -2950,7 +2968,7 @@
               "secureImageURL": [],
               "locationText": "Bellevue, WA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "213 Bellevue Square\nBellevue,WA 98004 ",
               "phoneNumber": "(425) 519-0080"
@@ -2969,7 +2987,7 @@
               "secureImageURL": [],
               "locationText": "Seattle, WA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2651 NE 49th St\nSeattle,WA 98105 ",
               "phoneNumber": "(206) 892-0433"
@@ -2988,7 +3006,7 @@
               "secureImageURL": [],
               "locationText": "Spokane, WA",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "710 West Main Avenue\nSpokane,WA 99201 ",
               "phoneNumber": "(509) 458-8080"
@@ -3012,7 +3030,7 @@
               "secureImageURL": [],
               "locationText": "Naperville, IL",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "120 West Jefferson Avenue\nNaperville,IL 60540 ",
               "phoneNumber": "(630) 536-5400"
@@ -3031,7 +3049,7 @@
               "secureImageURL": [],
               "locationText": "Orland Park, IL",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "288 Orland Square Drive\nOrland Park,IL 60462 ",
               "phoneNumber": "(708) 645-5401"
@@ -3050,7 +3068,7 @@
               "secureImageURL": [],
               "locationText": "Schaumburg, IL",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "N311 Woodfield Mall\nSchaumburg,IL 60173 ",
               "phoneNumber": "(630) 237-2160"
@@ -3069,7 +3087,7 @@
               "secureImageURL": [],
               "locationText": "Deer Park, IL",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "20530 N. Rand Road\nDeer Park,IL 60010 ",
               "phoneNumber": "(847) 847-0400"
@@ -3088,7 +3106,7 @@
               "secureImageURL": [],
               "locationText": "Northbrook, IL",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1056 Northbrook Court\nNorthbrook,IL 60062 ",
               "phoneNumber": "(847) 205-2020"
@@ -3107,7 +3125,7 @@
               "secureImageURL": [],
               "locationText": "Oak Brook, IL",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "70 Oakbrook Center\nOak Brook,IL 60523 ",
               "phoneNumber": "(630) 481-3470"
@@ -3145,7 +3163,7 @@
               "secureImageURL": [],
               "locationText": "Chicago, IL",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "801 W. North Avenue\nChicago,IL 60642 ",
               "phoneNumber": "(312) 777-4200"
@@ -3164,7 +3182,7 @@
               "secureImageURL": [],
               "locationText": "Skokie, IL",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "4999 Old Orchard Center\nSkokie,IL 60077 ",
               "phoneNumber": "(847) 983-9230"
@@ -3226,7 +3244,7 @@
               "secureImageURL": [],
               "locationText": "Natick, MA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1245 Worcester Street\nNatick,MA 01760 ",
               "phoneNumber": "(508) 903-2800"
@@ -3245,7 +3263,7 @@
               "secureImageURL": [],
               "locationText": "Lynnfield, MA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1220 Market Street\nLynnfield,MA 01940 ",
               "phoneNumber": "(978) 326-0970"
@@ -3264,7 +3282,7 @@
               "secureImageURL": [],
               "locationText": "Boston, MA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "815 Boylston Street\nBoston,MA 02116 ",
               "phoneNumber": "(617) 385-9400"
@@ -3283,7 +3301,7 @@
               "secureImageURL": [],
               "locationText": "Burlington, MA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "75 Middlesex Turnpike\nBurlington,MA 01803 ",
               "phoneNumber": "(781) 653-0970"
@@ -3321,7 +3339,7 @@
               "secureImageURL": [],
               "locationText": "Cambridge, MA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "100 CambridgeSide Place\nCambridge,MA 02141 ",
               "phoneNumber": "(617) 528-7970"
@@ -3340,7 +3358,7 @@
               "secureImageURL": [],
               "locationText": "Holyoke, MA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "50 Holyoke Street\nHolyoke,MA 01040 ",
               "phoneNumber": "(413) 493-3878"
@@ -3359,7 +3377,7 @@
               "secureImageURL": [],
               "locationText": "Chestnut Hill, MA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "199 Boylston Street\nChestnut Hill,MA 02467 ",
               "phoneNumber": "(617) 454-9940"
@@ -3378,7 +3396,7 @@
               "secureImageURL": [],
               "locationText": "Marlborough, MA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "601 Donald Lynch Boulevard\nMarlborough,MA 01752 ",
               "phoneNumber": "(978) 838-5000"
@@ -3402,7 +3420,7 @@
               "secureImageURL": [],
               "locationText": "Birmingham, AL",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "217 Summit Boulevard\nBirmingham,AL 35243 ",
               "phoneNumber": "(205) 909-2570"
@@ -3421,7 +3439,7 @@
               "secureImageURL": [],
               "locationText": "Huntsville, AL",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "320 The Bridge Street\nHuntsville,AL 35806 ",
               "phoneNumber": "(256) 327-8800"
@@ -3445,7 +3463,7 @@
               "secureImageURL": [],
               "locationText": "Newark, DE",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "125 Christiana Mall\nNewark,DE 19702 ",
               "phoneNumber": "(302) 533-3514"
@@ -3469,7 +3487,7 @@
               "secureImageURL": [],
               "locationText": "West Des Moines, IA",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "101 Jordan Creek Parkway\nWest Des Moines,IA 50266 ",
               "phoneNumber": "(515) 440-9900"
@@ -3493,7 +3511,7 @@
               "secureImageURL": [],
               "locationText": "Akron, OH",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3265 West Market Street\nAkron,OH 44333 ",
               "phoneNumber": "(330) 865-6280"
@@ -3512,7 +3530,7 @@
               "secureImageURL": [],
               "locationText": "Columbus, OH",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "4210 The Strand\nColumbus,OH 43219 ",
               "phoneNumber": "(614) 934-2810"
@@ -3531,7 +3549,7 @@
               "secureImageURL": [],
               "locationText": "Cincinnati, OH",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "7875 Montgomery Road\nCincinnati,OH 45236 ",
               "phoneNumber": "(513) 826-3620"
@@ -3550,7 +3568,7 @@
               "secureImageURL": [],
               "locationText": "Westlake, OH",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "267 Crocker Park Boulevard\nWestlake,OH 44145 ",
               "phoneNumber": "(440) 788-2800"
@@ -3569,7 +3587,7 @@
               "secureImageURL": [],
               "locationText": "Toledo, OH",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "5001 Monroe Street\nToledo,OH 43623 ",
               "phoneNumber": "(419) 473-4250"
@@ -3588,7 +3606,7 @@
               "secureImageURL": [],
               "locationText": "Woodmere, OH",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "28849 Chagrin Boulevard\nWoodmere,OH 44122 ",
               "phoneNumber": "(216) 535-4560"
@@ -3607,7 +3625,7 @@
               "secureImageURL": [],
               "locationText": "Beavercreek, OH",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "4422 Cedar Park Drive\nBeavercreek,OH 45440 ",
               "phoneNumber": "(937) 431-4200"
@@ -3626,7 +3644,7 @@
               "secureImageURL": [],
               "locationText": "Columbus, OH",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1500 Polaris Parkway\nColumbus,OH 43240 ",
               "phoneNumber": "(614) 987-1430"
@@ -3650,7 +3668,7 @@
               "secureImageURL": [],
               "locationText": "Ann Arbor, MI",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "100 Briarwood Circle\nAnn Arbor,MI 48108 ",
               "phoneNumber": "(734) 780-2471"
@@ -3669,7 +3687,7 @@
               "secureImageURL": [],
               "locationText": "Clinton Township, MI",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "17360 Hall Road\nClinton Township,MI 48038 ",
               "phoneNumber": "(586) 840-0500"
@@ -3688,7 +3706,7 @@
               "secureImageURL": [],
               "locationText": "Grand Rapids, MI",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3195 28th Street\nGrand Rapids,MI 49512 ",
               "phoneNumber": "(616) 956-1420"
@@ -3707,7 +3725,7 @@
               "secureImageURL": [],
               "locationText": "Troy, MI",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2800 W Big Beaver Road\nTroy,MI 48084 ",
               "phoneNumber": "(248) 822-0081"
@@ -3726,7 +3744,7 @@
               "secureImageURL": [],
               "locationText": "Novi, MI",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "27500 Novi Road\nNovi,MI 48377 ",
               "phoneNumber": "(248) 675-0320"
@@ -3745,7 +3763,7 @@
               "secureImageURL": [],
               "locationText": "Lansing, MI",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3025 Preyde Boulevard\nLansing,MI 48912 ",
               "phoneNumber": "(517) 374-4920"
@@ -3769,7 +3787,7 @@
               "secureImageURL": [],
               "locationText": "Atlanta, GA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2860 Cumberland Mall\nSuite 1153\nAtlanta,GA 30339 ",
               "phoneNumber": "(678) 402-0725"
@@ -3788,7 +3806,7 @@
               "secureImageURL": [],
               "locationText": "Atlanta, GA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3393 Peachtree Road NE\nAtlanta,GA 30326 ",
               "phoneNumber": "(404) 926-3085"
@@ -3807,7 +3825,7 @@
               "secureImageURL": [],
               "locationText": "Augusta, GA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3450 Wrightsboro Road\nAugusta,GA 30909 ",
               "phoneNumber": "(706) 731-1800"
@@ -3826,7 +3844,7 @@
               "secureImageURL": [],
               "locationText": "Buford, GA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3333 Buford Drive\nBuford,GA 30519 ",
               "phoneNumber": "(678) 288-3400"
@@ -3845,7 +3863,7 @@
               "secureImageURL": [],
               "locationText": "Atlanta, GA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "4400 Ashford Dunwoody Road\nAtlanta,GA 30346 ",
               "phoneNumber": "(678) 459-9800"
@@ -3864,7 +3882,7 @@
               "secureImageURL": [],
               "locationText": "Alpharetta, GA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "8130 Avalon Boulevard\nAlpharetta,GA 30009 ",
               "phoneNumber": "(770) 510-1670"
@@ -4064,7 +4082,7 @@
               "secureImageURL": [],
               "locationText": "Las Vegas, NV",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "6671 Las Vegas Boulevard South\nLas Vegas,NV 89119 ",
               "phoneNumber": "(702) 221-8826"
@@ -4083,7 +4101,7 @@
               "secureImageURL": [],
               "locationText": "Las Vegas, NV",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3500 Las Vegas Blvd South\nCaesars Palace\nLas Vegas,NV 89109 ",
               "phoneNumber": "(702) 684-8800"
@@ -4102,7 +4120,7 @@
               "secureImageURL": [],
               "locationText": "Las Vegas, NV",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3200 Las Vegas Boulevard South\nLas Vegas,NV 89109 ",
               "phoneNumber": "(702) 577-9740"
@@ -4121,7 +4139,7 @@
               "secureImageURL": [],
               "locationText": "Reno, NV",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "13945 South Virginia Street\nReno,NV 89511 ",
               "phoneNumber": "(775) 333-5460"
@@ -4140,7 +4158,7 @@
               "secureImageURL": [],
               "locationText": "Las Vegas, NV",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1985 Festival Plaza Drive\nLas Vegas,NV 89135 ",
               "phoneNumber": "(702) 677-3940"
@@ -4164,7 +4182,7 @@
               "secureImageURL": [],
               "locationText": "Charlotte, NC",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "6801 Northlake Mall Drive\nCharlotte,NC 28216 ",
               "phoneNumber": "(704) 972-0980"
@@ -4183,7 +4201,7 @@
               "secureImageURL": [],
               "locationText": "Raleigh, NC",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "4325 Glenwood Avenue\nRaleigh,NC 27612 ",
               "phoneNumber": "(919) 334-3400"
@@ -4202,7 +4220,7 @@
               "secureImageURL": [],
               "locationText": "Durham, NC",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "8030 Renaissance Parkway\nDurham,NC 27713 ",
               "phoneNumber": "(919) 474-6940"
@@ -4221,7 +4239,7 @@
               "secureImageURL": [],
               "locationText": "Greensboro, NC",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3320 West Friendly Avenue\nGreensboro,NC 27410 ",
               "phoneNumber": "(336) 291-0486"
@@ -4240,7 +4258,7 @@
               "secureImageURL": [],
               "locationText": "Charlotte, NC",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "4400 Sharon Road\nCharlotte,NC 28211 ",
               "phoneNumber": "(704) 972-3280"
@@ -4426,7 +4444,7 @@
               "secureImageURL": [],
               "locationText": "Glendale, AZ",
               "timeZone": "US/Arizona",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "7700 West Arrowhead Towne Ctr\nGlendale,AZ 85308 ",
               "phoneNumber": "(623) 707-2860"
@@ -4445,7 +4463,7 @@
               "secureImageURL": [],
               "locationText": "Chandler, AZ",
               "timeZone": "US/Arizona",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3111 W Chandler Boulevard\nChandler,AZ 85226 ",
               "phoneNumber": "(480) 636-3900"
@@ -4464,7 +4482,7 @@
               "secureImageURL": [],
               "locationText": "Gilbert, AZ",
               "timeZone": "US/Arizona",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2218 E. Williams Field Road\nGilbert,AZ 85295 ",
               "phoneNumber": "(480) 366-8477"
@@ -4483,7 +4501,7 @@
               "secureImageURL": [],
               "locationText": "Scottsdale, AZ",
               "timeZone": "US/Arizona",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "7014 East Camelback Road\nScottsdale,AZ 85251 ",
               "phoneNumber": "(602) 606-1470"
@@ -4502,7 +4520,7 @@
               "secureImageURL": [],
               "locationText": "Scottsdale, AZ",
               "timeZone": "US/Arizona",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "15169 North Scottsdale Road\nScottsdale,AZ 85254 ",
               "phoneNumber": "(480) 627-5501"
@@ -4521,7 +4539,7 @@
               "secureImageURL": [],
               "locationText": "Tucson, AZ",
               "timeZone": "US/Arizona",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2905 East Skyline Drive\nTucson,AZ 85718 ",
               "phoneNumber": "(520) 209-7440"
@@ -4588,7 +4606,7 @@
               "secureImageURL": [],
               "locationText": "Metairie, LA",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3301 Veterans Memorial Blvd\nMetairie,LA 70002 ",
               "phoneNumber": "(504) 830-1400"
@@ -4607,7 +4625,7 @@
               "secureImageURL": [],
               "locationText": "Baton Rouge, LA",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "6401 Bluebonnet Boulevard\nBaton Rouge,LA 70836 ",
               "phoneNumber": "(225) 765-3500"
@@ -4631,7 +4649,7 @@
               "secureImageURL": [],
               "locationText": "St. Louis, MO",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2440 Saint Louis Galleria\nSt. Louis,MO 63117 ",
               "phoneNumber": "(314) 290-0400"
@@ -4650,7 +4668,7 @@
               "secureImageURL": [],
               "locationText": "St. Louis, MO",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "131 West County Center\nSt. Louis,MO 63131 ",
               "phoneNumber": "(314) 288-1830"
@@ -4669,7 +4687,7 @@
               "secureImageURL": [],
               "locationText": "Kansas City, MO",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "227 Nichols Road\nKansas City,MO 64112 ",
               "phoneNumber": "(816) 448-9200"
@@ -4693,7 +4711,7 @@
               "secureImageURL": [],
               "locationText": "Nashua, NH",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "310 Daniel Webster Highway\nNashua,NH 03060 ",
               "phoneNumber": "(603) 521-3400"
@@ -4712,7 +4730,7 @@
               "secureImageURL": [],
               "locationText": "Salem, NH",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "99 Rockingham Park Boulevard\nSalem,NH 03079 ",
               "phoneNumber": "(603) 328-3140"
@@ -4731,7 +4749,7 @@
               "secureImageURL": [],
               "locationText": "Manchester, NH",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1500 S Willow Street\nManchester,NH 03103 ",
               "phoneNumber": "(603) 391-0180"
@@ -4755,7 +4773,7 @@
               "secureImageURL": [],
               "locationText": "Bethesda, MD",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "4860 Bethesda Avenue\nBethesda,MD 20814 ",
               "phoneNumber": "(301) 634-0880"
@@ -4774,7 +4792,7 @@
               "secureImageURL": [],
               "locationText": "Annapolis, MD",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1735 Annapolis Mall\nAnnapolis,MD 21401 ",
               "phoneNumber": "(410) 972-3290"
@@ -4793,7 +4811,7 @@
               "secureImageURL": [],
               "locationText": "Columbia, MD",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "10300 Little Patuxent Parkway\nColumbia,MD 21044 ",
               "phoneNumber": "(410) 423-1801"
@@ -4812,7 +4830,7 @@
               "secureImageURL": [],
               "locationText": "Towson, MD",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "825 Dulaney Valley Road\nTowson,MD 21204 ",
               "phoneNumber": "(410) 427-0360"
@@ -4831,7 +4849,7 @@
               "secureImageURL": [],
               "locationText": "Bethesda, MD",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "7101 Democracy Boulevard\nBethesda,MD 20817 ",
               "phoneNumber": "(301) 634-9930"
@@ -4855,7 +4873,7 @@
               "secureImageURL": [],
               "locationText": "Willow Grove, PA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2500 West Moreland Road\nWillow Grove,PA 19090 ",
               "phoneNumber": "(215) 346-8160"
@@ -4874,7 +4892,7 @@
               "secureImageURL": [],
               "locationText": "Pittsburgh, PA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "301 South Hills Village\nPittsburgh,PA 15241 ",
               "phoneNumber": "(412) 308-1970"
@@ -4893,7 +4911,7 @@
               "secureImageURL": [],
               "locationText": "Ardmore, PA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "61 St. James Place\nArdmore,PA 19003 ",
               "phoneNumber": "(610) 726-9400"
@@ -4912,7 +4930,7 @@
               "secureImageURL": [],
               "locationText": "Philadelphia, PA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1607 Walnut Street\nPhiladelphia,PA 19103 ",
               "phoneNumber": "(215) 861-6400"
@@ -4931,7 +4949,7 @@
               "secureImageURL": [],
               "locationText": "Whitehall, PA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "250 Lehigh Valley Mall\nWhitehall,PA 18052 ",
               "phoneNumber": "(610) 266-4860"
@@ -4950,7 +4968,7 @@
               "secureImageURL": [],
               "locationText": "King of Prussia, PA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "160 N. Gulph Road\nKing of Prussia,PA 19406 ",
               "phoneNumber": "(484) 636-5090"
@@ -4988,7 +5006,7 @@
               "secureImageURL": [],
               "locationText": "Lancaster, PA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "541 Park City Center\nLancaster,PA 17601 ",
               "phoneNumber": "(717) 295-8800"
@@ -5007,7 +5025,7 @@
               "secureImageURL": [],
               "locationText": "Pittsburgh, PA",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1000 Ross Park Mall Drive\nPittsburgh,PA 15237 ",
               "phoneNumber": "(412) 318-0656"
@@ -5031,7 +5049,7 @@
               "secureImageURL": [],
               "locationText": "Mishawaka, IN",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "6501 North Grape Road\nMishawaka,IN 46545 ",
               "phoneNumber": "(574) 277-9500"
@@ -5050,7 +5068,7 @@
               "secureImageURL": [],
               "locationText": "Indianapolis, IN",
               "timeZone": "America/Indianapolis",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "8702 Keystone Crossing\nIndianapolis,IN 46240 ",
               "phoneNumber": "(317) 814-3740"
@@ -5074,7 +5092,7 @@
               "secureImageURL": [],
               "locationText": "Tigard, OR",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "7293 SW Bridgeport Road\nTigard,OR 97224 ",
               "phoneNumber": "(503) 670-8400"
@@ -5112,7 +5130,7 @@
               "secureImageURL": [],
               "locationText": "Tigard, OR",
               "timeZone": "America/Los_Angeles",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "9585 SW Washington Square Road\nTigard,OR 97223 ",
               "phoneNumber": "(503) 495-2080"
@@ -5136,7 +5154,7 @@
               "secureImageURL": [],
               "locationText": "Louisville, KY",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "7900 Shelbyville Road\nLouisville,KY 40222 ",
               "phoneNumber": "(502) 326-2840"
@@ -5155,7 +5173,7 @@
               "secureImageURL": [],
               "locationText": "Lexington, KY",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3401 Nicholasville Road\nLexington,KY 40503 ",
               "phoneNumber": "(859) 971-5400"
@@ -5203,7 +5221,7 @@
               "secureImageURL": [],
               "locationText": "Providence, RI",
               "timeZone": "America/New_York",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "20 Providence Place\nProvidence,RI 02903 ",
               "phoneNumber": "(401) 533-9400"
@@ -5251,7 +5269,7 @@
               "secureImageURL": [],
               "locationText": "Little Rock, AR",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "17711 Chenal Parkway\nLittle Rock,AR 72223 ",
               "phoneNumber": "(501) 821-5130"
@@ -5318,7 +5336,7 @@
               "secureImageURL": [],
               "locationText": "Leawood, KS",
               "timeZone": "America/Chicago",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "4529 West 119th Street\nLeawood,KS 66209 ",
               "phoneNumber": "(913) 234-9800"
@@ -5366,7 +5384,7 @@
               "secureImageURL": [],
               "locationText": "Boise, ID",
               "timeZone": "America/Denver",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "350 North Milwaukee Street\n#1083\nBoise,ID 83704 ",
               "phoneNumber": "(208) 377-6500"
@@ -5461,7 +5479,7 @@
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "China Central Mall\n81 Jianguo Road, Chaoyang District\n",
+              "storeAddress": "China Central Mall\n81 Jianguo Road, Chaoyang District\n100025",
               "phoneNumber": "400 617 1210"
             },
             {
@@ -5623,7 +5641,7 @@
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "10 Minzhu Road, \nErqi District\n450099",
+              "storeAddress": "10 Minzhu Road\nErqi District\n450099",
               "phoneNumber": "400 617 1264"
             }
           ]
@@ -5776,7 +5794,7 @@
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "3300 North Zhongshan Road\n Putuo District\n200062",
+              "storeAddress": "3300 North Zhongshan Road\nPutuo District\n200062",
               "phoneNumber": "400 617 1335"
             },
             {
@@ -6119,7 +6137,7 @@
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": "No. 218, Tianhe Road\n Tianhe District\n510000",
+              "storeAddress": "No. 218, Tianhe Road\nTianhe District\n510000",
               "phoneNumber": "400 613 9742"
             },
             {
@@ -6243,7 +6261,7 @@
               "timeZone": "Asia/Shanghai",
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
-              "storeAddress": " SM Lifestyle Center\nNo.399 Jiahe Road, Siming District\n",
+              "storeAddress": " SM Lifestyle Center\nNo.399 Jiahe Road, Siming District\n361012",
               "phoneNumber": "400 617 1383"
             }
           ]
@@ -6296,7 +6314,7 @@
               "secureImageURL": [],
               "locationText": "Campi Bisenzio",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro Commerciale I Gigli\nVia San Quirico, 165\n50013 Campi Bisenzio",
               "phoneNumber": "055 880 3000"
@@ -6315,7 +6333,7 @@
               "secureImageURL": [],
               "locationText": "Florence",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Piazza della Repubblica\n50123 Florence",
               "phoneNumber": "055 464 1900"
@@ -6339,7 +6357,7 @@
               "secureImageURL": [],
               "locationText": "Turin",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Via Roma, 82\n10121 Turin",
               "phoneNumber": "011 506 6201"
@@ -6363,7 +6381,7 @@
               "secureImageURL": [],
               "locationText": "Rimini",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro Commerciale Le Befane\nVia Caduti di Nassiriya, 20\n47900 Rimini",
               "phoneNumber": "0541 181 3200"
@@ -6387,7 +6405,7 @@
               "secureImageURL": [],
               "locationText": "Roma EUR",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro Commerciale Euroma2\nViale dell'Oceano Pacifico, 83\n00144 Roma EUR",
               "phoneNumber": "06 4523 0700"
@@ -6411,7 +6429,7 @@
               "secureImageURL": [],
               "locationText": "Rozzano",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro Commerciale Fiordaliso\nVia Curiel, 25\n20089 Rozzano",
               "phoneNumber": "02 5779 7600"
@@ -6430,7 +6448,7 @@
               "secureImageURL": [],
               "locationText": "Carugate",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro Commerciale Carosello\nStrada Provinciale 208 KM 2\n20061 Carugate",
               "phoneNumber": "02 9250 7200"
@@ -6454,7 +6472,7 @@
               "secureImageURL": [],
               "locationText": "Marcianise",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro Commerciale Campania\nS.S. Sannitica 87 - Località Aurno\n81025 Marcianise",
               "phoneNumber": "0823 698 7100"
@@ -6478,7 +6496,7 @@
               "secureImageURL": [],
               "locationText": "Misterbianco",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Strada provinciale 54 - Località La Tenutella\nContrada Cubba\n95045 Misterbianco",
               "phoneNumber": "095 718 1801"
@@ -6502,7 +6520,7 @@
               "secureImageURL": [],
               "locationText": "Roma Bufalotta",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Galleria Porta di Roma\nVia Alberto Lionello, 201\n00139 Roma Bufalotta",
               "phoneNumber": "06 8720 8501"
@@ -6545,7 +6563,7 @@
               "secureImageURL": [],
               "locationText": "Grugliasco",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro commerciale Le Gru\nVia Crea, 10\n10095 Grugliasco",
               "phoneNumber": "011 7705 1100"
@@ -6569,7 +6587,7 @@
               "secureImageURL": [],
               "locationText": "Mestre",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro commerciale Nave de Vero\nVia Arduino - Marghera\n30175 Mestre",
               "phoneNumber": "041 884 2700"
@@ -6617,7 +6635,7 @@
               "secureImageURL": [],
               "locationText": "Bologna",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Via Rizzoli, 16\n40125 Bologna",
               "phoneNumber": "051 640 0100"
@@ -6641,7 +6659,7 @@
               "secureImageURL": [],
               "locationText": "Milan",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Piazza del Liberty, 1\n20121 Milan",
               "phoneNumber": "02 3030 2400"
@@ -6665,7 +6683,7 @@
               "secureImageURL": [],
               "locationText": "Orio al Serio",
               "timeZone": "Europe/Rome",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro commerciale Oriocenter\nVia Portico, 71\n24050 Orio al Serio",
               "phoneNumber": "035 421400"
@@ -6796,7 +6814,7 @@
               "secureImageURL": [],
               "locationText": "Burlington, ON",
               "timeZone": "Canada/Eastern",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "900 Maple Avenue\nBurlington,Ontario L7S 2J8",
               "phoneNumber": "(289) 288-2012"
@@ -6815,7 +6833,7 @@
               "secureImageURL": [],
               "locationText": "Toronto, ON",
               "timeZone": "Canada/Eastern",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "25 The West Mall\nToronto,Ontario M9C 1B8",
               "phoneNumber": "(416) 646-8489"
@@ -6834,7 +6852,7 @@
               "secureImageURL": [],
               "locationText": "Waterloo, ON",
               "timeZone": "Canada/Eastern",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "550 King Street North\nWaterloo,Ontario N2L 5W6",
               "phoneNumber": "(519) 772-5150"
@@ -6853,7 +6871,7 @@
               "secureImageURL": [],
               "locationText": "Mississauga, ON",
               "timeZone": "Canada/Eastern",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "100 City Centre Drive\nMississauga,Ontario L5B 2C9",
               "phoneNumber": "(905) 366-0580"
@@ -6872,7 +6890,7 @@
               "secureImageURL": [],
               "locationText": "Ottawa, ON",
               "timeZone": "Canada/Eastern",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "50 Rideau Street\nOttawa,Ontario K1N 9J7",
               "phoneNumber": "(613) 688-5575"
@@ -6891,7 +6909,7 @@
               "secureImageURL": [],
               "locationText": "Toronto, ON",
               "timeZone": "Canada/Eastern",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1800 Sheppard Avenue East\nToronto,Ontario M2J 5A7",
               "phoneNumber": "(416) 646-4412"
@@ -6910,7 +6928,7 @@
               "secureImageURL": [],
               "locationText": "London, ON",
               "timeZone": "Canada/Eastern",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1680 Richmond Street North\nLondon,Ontario N6G 3Y9",
               "phoneNumber": "(519) 963-4060"
@@ -6929,7 +6947,7 @@
               "secureImageURL": [],
               "locationText": "Ottawa, ON",
               "timeZone": "Canada/Eastern",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "100 Bayshore Drive\nOttawa,Ontario K2B 8C1",
               "phoneNumber": "(613) 288-7950"
@@ -6948,7 +6966,7 @@
               "secureImageURL": [],
               "locationText": "Toronto, ON",
               "timeZone": "Canada/Eastern",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "220 Yonge Street\nToronto,Ontario M5B 2H1",
               "phoneNumber": "(647) 258-0801"
@@ -6967,7 +6985,7 @@
               "secureImageURL": [],
               "locationText": "Toronto, ON",
               "timeZone": "Canada/Eastern",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3401 Dufferin Street\nToronto,Ontario M6A 3A1",
               "phoneNumber": "(416) 785-1776"
@@ -6986,7 +7004,7 @@
               "secureImageURL": [],
               "locationText": "Markham, ON",
               "timeZone": "Canada/Eastern",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "5000 Highway 7 East\nMarkham,Ontario L3R 4M9",
               "phoneNumber": "(905) 513-2860"
@@ -7005,7 +7023,7 @@
               "secureImageURL": [],
               "locationText": "Newmarket, ON",
               "timeZone": "Canada/Eastern",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "17600 Yonge Street\nNewmarket,Ontario L3Y 4Z1",
               "phoneNumber": "(905) 952-3400"
@@ -7029,7 +7047,7 @@
               "secureImageURL": [],
               "locationText": "Calgary, AB",
               "timeZone": "Canada/Mountain",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "6455 Macleod Trail SW\nCalgary,Alberta T2H 0K8",
               "phoneNumber": "(403) 444-3759"
@@ -7048,7 +7066,7 @@
               "secureImageURL": [],
               "locationText": "Edmonton, AB",
               "timeZone": "Canada/Mountain",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "8882-170 Street\nEdmonton,Alberta T5T 4M2",
               "phoneNumber": "(780) 701-0540"
@@ -7067,7 +7085,7 @@
               "secureImageURL": [],
               "locationText": "Calgary, AB",
               "timeZone": "Canada/Mountain",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "3625 Shaganappi Trail NW\nCalgary,Alberta T3A 0E2",
               "phoneNumber": "(403) 648-4865"
@@ -7086,7 +7104,7 @@
               "secureImageURL": [],
               "locationText": "Edmonton, AB",
               "timeZone": "Canada/Mountain",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "5015 111 St\nEdmonton,Alberta T6H 4M6",
               "phoneNumber": "(780) 801-3820"
@@ -7308,7 +7326,7 @@
               "secureImageURL": [],
               "locationText": "Belfast",
               "timeZone": "Europe/London",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Upper Ground Floor\n1 Victoria Square\nBelfast,BT1 4QG",
               "phoneNumber": "028 9016 1900"
@@ -7456,7 +7474,7 @@
               "secureImageURL": [],
               "locationText": "Cardiff",
               "timeZone": "Europe/London",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "63-66 Grand Arcade\nSt David’s Dewi Sant\nCardiff,CF10 2EL",
               "phoneNumber": "029 2055 6800"
@@ -8143,7 +8161,7 @@
               "secureImageURL": [],
               "locationText": "Barra da Tijuca",
               "timeZone": "Brazil/East",
-              "scanAndBuy": "SCAN",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Avenida das Americas, 3.900\nBarra da Tijuca,22640",
               "phoneNumber": "(21) 3179-3700"
@@ -8167,7 +8185,7 @@
               "secureImageURL": [],
               "locationText": "São Paulo",
               "timeZone": "Brazil/East",
-              "scanAndBuy": "SCAN",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Av. Roque Petroni Júnior, 1089\nVila Gertrudes\nSão Paulo,04707-900",
               "phoneNumber": "(11) 5180-5900"
@@ -8198,7 +8216,7 @@
               "secureImageURL": [],
               "locationText": "Vienna",
               "timeZone": "Europe/Vienna",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Kärntner Straße 11\n1010 Vienna",
               "phoneNumber": "01 206092544"
@@ -8229,7 +8247,7 @@
               "secureImageURL": [],
               "locationText": "Paris",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "7-9 rue Clément\n75006 Paris",
               "phoneNumber": "01 85 65 48 00"
@@ -8248,7 +8266,7 @@
               "secureImageURL": [],
               "locationText": "Paris",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "12 rue Halévy\n75009 Paris",
               "phoneNumber": "01 44 83 42 00"
@@ -8272,7 +8290,7 @@
               "secureImageURL": [],
               "locationText": "Lieusaint",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centre commercial régional\n3, allée du Préambule\n77127 Lieusaint",
               "phoneNumber": "01 60 18 26 00"
@@ -8291,7 +8309,7 @@
               "secureImageURL": [],
               "locationText": "Marne-la-Vallee",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centre Commercial Val d’Europe\n14, cours du Danube - Serris\n77711 Marne-la-Vallee",
               "phoneNumber": "01 64 17 35 00"
@@ -8315,7 +8333,7 @@
               "secureImageURL": [],
               "locationText": "Velizy-Villacoublay",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2 Avenue de l'Europe\n78140 Velizy-Villacoublay",
               "phoneNumber": "01 30 70 77 00"
@@ -8334,7 +8352,7 @@
               "secureImageURL": [],
               "locationText": "Le Chesnay",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centre commercial régional Parly 2\nAvenue Charles de Gaulle\n78158 Le Chesnay",
               "phoneNumber": "01 39 66 26 00"
@@ -8358,7 +8376,7 @@
               "secureImageURL": [],
               "locationText": "Paris",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "114 Av. des Champs-Élysées\n75008 Paris",
               "phoneNumber": "01 70 98 09 00"
@@ -8382,7 +8400,7 @@
               "secureImageURL": [],
               "locationText": "Lyon",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centre Commercial Confluence\n112 Cours Charlemagne\n69002 Lyon",
               "phoneNumber": "04 37 23 15 00"
@@ -8401,7 +8419,7 @@
               "secureImageURL": [],
               "locationText": "Lyon",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centre commercial La Part-Dieu\n69003 Lyon",
               "phoneNumber": "04 72 13 25 00"
@@ -8425,7 +8443,7 @@
               "secureImageURL": [],
               "locationText": "Saint Herblain",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Galerie Atlantis Le Centre\n44811 Saint Herblain",
               "phoneNumber": "02 40 85 57 00"
@@ -8449,7 +8467,7 @@
               "secureImageURL": [],
               "locationText": "Montpellier",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centre Commercial Odysseum\nZone Odysseum Zac Port Marianne\n34000 Montpellier",
               "phoneNumber": "04 67 13 99 00"
@@ -8473,7 +8491,7 @@
               "secureImageURL": [],
               "locationText": "Aix-en-Provence",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2 Place du Général de Gaulle\n13100 Aix-en-Provence",
               "phoneNumber": "04 88 80 78 00"
@@ -8492,7 +8510,7 @@
               "secureImageURL": [],
               "locationText": "Marseille",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Les Terrasses du Port\n9 Quai du Lazaret\n13002 Marseille",
               "phoneNumber": "04 20 10 54 00"
@@ -8516,7 +8534,7 @@
               "secureImageURL": [],
               "locationText": "Strasbourg",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "L’Aubette\nPlace Kléber\n67000 Strasbourg",
               "phoneNumber": "03 88 10 13 00"
@@ -8540,7 +8558,7 @@
               "secureImageURL": [],
               "locationText": "Nice",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Avenue Eugène Donadeï\nSaint-Laurent Du Var\n06700 Nice",
               "phoneNumber": "04 92 12 51 50"
@@ -8564,7 +8582,7 @@
               "secureImageURL": [],
               "locationText": "Lille",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "1 rue Faidherbe\n59800 Lille",
               "phoneNumber": "03 59 81 89 00"
@@ -8588,7 +8606,7 @@
               "secureImageURL": [],
               "locationText": "Puteaux - la Defense",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centre commercial Les Quatre Temps\n15 Parvis de la Defense\n92800 Puteaux - la Defense",
               "phoneNumber": "01 41 97 36 00"
@@ -8612,7 +8630,7 @@
               "secureImageURL": [],
               "locationText": "Dijon",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centre Commercial de la Toison d’Or\nAvenue de Langres\n21078 Dijon",
               "phoneNumber": "03 80 40 45 00"
@@ -8636,7 +8654,7 @@
               "secureImageURL": [],
               "locationText": "Bordeaux",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "2-4 rue Sainte-Catherine\n33000 Bordeaux",
               "phoneNumber": "05 56 69 58 00"
@@ -8660,7 +8678,7 @@
               "secureImageURL": [],
               "locationText": "Rosny-Sous-Bois",
               "timeZone": "Europe/Paris",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centre Commercial Rosny 2 \nAvenue du General-de-Gaulle\n93117 Rosny-Sous-Bois",
               "phoneNumber": "01 73 30 89 00"
@@ -8694,7 +8712,7 @@
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
               "storeAddress": "No. 13 Songshou Road\nTaipei",
-              "phoneNumber": "02 7742 7700"
+              "phoneNumber": "0800 020 010"
             },
             {
               "storeNumber": "R713",
@@ -8713,7 +8731,7 @@
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
               "storeAddress": "Taipei 101 L1\nNo. 45 Shifu Road, Xinyi District\nTaipei",
-              "phoneNumber": "02 8726 3500"
+              "phoneNumber": "0800 020 005"
             }
           ]
         }
@@ -9092,7 +9110,7 @@
               "secureImageURL": [],
               "locationText": "Majadahonda",
               "timeZone": "Europe/Madrid",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro Comercial Gran Plaza 2\nCalle de los Químicos, 1\n28222 - Majadahonda",
               "phoneNumber": "916 34 97 00"
@@ -9111,7 +9129,7 @@
               "secureImageURL": [],
               "locationText": "Leganés",
               "timeZone": "Europe/Madrid",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro Comercial Parquesur\nAvenida Gran Bretaña s/n\n28916 - Leganés",
               "phoneNumber": "916 44 51 00"
@@ -9130,7 +9148,7 @@
               "secureImageURL": [],
               "locationText": "Arroyomolinos",
               "timeZone": "Europe/Madrid",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro comercial de Ocio Madrid Xanadú\nCarretera N-V, Km 23,5\n28939 - Arroyomolinos",
               "phoneNumber": "914 81 76 00"
@@ -9178,7 +9196,7 @@
               "secureImageURL": [],
               "locationText": "Barcelona",
               "timeZone": "Europe/Madrid",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Passeig de Gràcia, 1\n08007 - Barcelona",
               "phoneNumber": "932 95 05 00"
@@ -9197,7 +9215,7 @@
               "secureImageURL": [],
               "locationText": "Barcelona",
               "timeZone": "Europe/Madrid",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro comercial La Maquinista\nPasseig de Potosí, 2\n08030 - Barcelona",
               "phoneNumber": "934 66 90 00"
@@ -9221,7 +9239,7 @@
               "secureImageURL": [],
               "locationText": "Zaragoza",
               "timeZone": "Europe/Madrid",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "C. C. Puerto Venecia, Galería de Moda\nAvda. Puerto Venecia, s/n\n50021 - Zaragoza",
               "phoneNumber": "976 18 89 00"
@@ -9245,7 +9263,7 @@
               "secureImageURL": [],
               "locationText": "Churra",
               "timeZone": "Europe/Madrid",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro Comercial Nueva Condomina\nAutovía A-7, km 760\n30110 - Churra",
               "phoneNumber": "968 38 78 00"
@@ -9293,7 +9311,7 @@
               "secureImageURL": [],
               "locationText": "Arroyo de la Encomienda",
               "timeZone": "Europe/Madrid",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Centro Comercial Río Shopping\nCalle Me falta un tornillo, 5\n47195 - Arroyo de la Encomienda",
               "phoneNumber": "983 36 89 00"
@@ -9327,7 +9345,7 @@
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
               "storeAddress": "Seoul 43, Garosu-gil\nGangnam-gu\n06028",
-              "phoneNumber": "02-2086-4600"
+              "phoneNumber": "080-500-0029"
             }
           ]
         }
@@ -9481,7 +9499,7 @@
               "secureImageURL": [],
               "locationText": "Basel",
               "timeZone": "Europe/Zurich",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Freie Strasse 47\n4001 Basel",
               "phoneNumber": "061 206 01 00"
@@ -9772,11 +9790,11 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R351.png"
               ],
               "secureImageURL": [],
-              "locationText": "Robina Town Centre",
+              "locationText": "Robina",
               "timeZone": "Australia/Brisbane",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Robina Town Centre\nRobina Town Centre Drive\nRobina Town Centre QLD 4230 ",
+              "storeAddress": "Robina Town Centre\nRobina Town Centre Drive\nRobina QLD 4230 ",
               "phoneNumber": "(07) 5667 0400"
             },
             {
@@ -10232,7 +10250,7 @@
               "timeZone": "Asia/Tokyo",
               "scanAndBuy": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "83-1 Tachiurinakanocho\nShijo-dori Takakura Higashiiru\nKyoto-shi,",
+              "storeAddress": "83-1 Tachiurinakanocho\nShijo-dori Takakura Higashiiru\nKyoto-shi,600-8006",
               "phoneNumber": "075-757-8700"
             }
           ]
@@ -10380,7 +10398,7 @@
               "secureImageURL": [],
               "locationText": "Helsingborg",
               "timeZone": "Europe/Stockholm",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Väla Centrum\nMarknadsvägen 9\n260 36 Helsingborg",
               "phoneNumber": "042-17 02 00"
@@ -10399,7 +10417,7 @@
               "secureImageURL": [],
               "locationText": "Malmö",
               "timeZone": "Europe/Stockholm",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Emporia\nHyllie Boulevard 19\n21532 Malmö",
               "phoneNumber": "040-37 10 00"
@@ -10423,7 +10441,7 @@
               "secureImageURL": [],
               "locationText": "Täby",
               "timeZone": "Europe/Stockholm",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Täby Centrum\nStora Marknadsvägen 15\n183 34 Täby",
               "phoneNumber": "08-446 93 00"
@@ -10535,7 +10553,7 @@
               "secureImageURL": [],
               "locationText": "Amsterdam",
               "timeZone": "Europe/Amsterdam",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Hirsch Building, Leidseplein 25\n1017 PS Amsterdam",
               "phoneNumber": "020 530 2200"
@@ -10554,7 +10572,7 @@
               "secureImageURL": [],
               "locationText": "Haarlem",
               "timeZone": "Europe/Amsterdam",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Grote Houtstraat 99\n2011 SH Haarlem",
               "phoneNumber": "023 799 3800"
@@ -10578,7 +10596,7 @@
               "secureImageURL": [],
               "locationText": "The Hague",
               "timeZone": "Europe/Amsterdam",
-              "scanAndBuy": "SNB",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Passage 39\n2511 AB The Hague",
               "phoneNumber": "070 701 0300"
@@ -10609,7 +10627,7 @@
               "secureImageURL": [],
               "locationText": "Cuajimalpa de Morelos",
               "timeZone": "Mexico/General",
-              "scanAndBuy": "SCAN",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Avenida Vasco de Quiroga 3800\nLomas de Santa Fe, Antigua Mina de Totoloapa,;Cuajimalpa de Morelos ,05109",
               "phoneNumber": "01 55 1037 6400"
@@ -10633,7 +10651,7 @@
               "secureImageURL": [],
               "locationText": "Mexico City",
               "timeZone": "Mexico/General",
-              "scanAndBuy": "SCAN",
+              "scanAndBuy": "OFF",
               "enableInStoreMode": true,
               "storeAddress": "Av. Ejército Nacional #843-B\nCentro Comercial Antara Fashion Hall, Miguel Hidalgo;Mexico City,11520",
               "phoneNumber": "01 55 4739 3890"
@@ -10667,7 +10685,7 @@
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
               "storeAddress": "299 ถนนเจริญนคร\nแขวงคลองต้นไทร เขตคลองสาน\nกรุงเทพมหานคร 10600",
-              "phoneNumber": "02 055 9600"
+              "phoneNumber": "1800 019 447"
             },
             {
               "storeNumber": "R733",
@@ -10686,7 +10704,7 @@
               "scanAndBuy": "SCAN",
               "enableInStoreMode": true,
               "storeAddress": "4, 4/1-4/2, 4/4 ถนนราชดำริห์\nเขตปทุมวัน\nกรุงเทพมหานคร 10330",
-              "phoneNumber": "02 035 9800"
+              "phoneNumber": "1800 019 448"
             }
           ]
         }

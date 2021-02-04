@@ -16,7 +16,7 @@ nationCode = {
 
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
-def speHours(sid):
+def speHours(sid, mode = "special"):
 	try:
 		sif = storeInfo(sid)
 		url = "https://www.apple.com/{}/retail/{}".format(nationCode[sif["flag"]], sif["website"])
@@ -32,7 +32,7 @@ def speHours(sid):
 		for day in regular["dayOfWeek"]:
 			if regular["opens"] == regular["closes"] == "24:00:00":
 				regularHours[dayOfWeek.index(day)] = "已关闭"
-			if regular["opens"] == "24:00:00" and regular["closes"] == "23:59:00":
+			elif regular["opens"] == "24:00:00" and regular["closes"] == "23:59:00":
 				regularHours[dayOfWeek.index(day)] = "24 小时营业"
 			else:
 				regularHours[dayOfWeek.index(day)] = "{} - {}".format(regular["opens"][:-3], regular["closes"][:-3])
@@ -51,6 +51,9 @@ def speHours(sid):
 				specialDict = {"regular": fRegular, "special": "{} - {}".format(special["opens"][:-3], special["closes"][:-3])}
 			else:
 				specialDict = {"regular": fRegular, "special": "已关闭"}
-			specialHours[datetime.strftime(validDate, "%Y年%-m月%-d日")] = specialDict
+			specialHours[datetime.strftime(validDate, "%Y-%m-%d")] = specialDict
 
-	return specialHours
+	if mode == "special":
+		return specialHours
+	if mode == "regular":
+		return regularHours

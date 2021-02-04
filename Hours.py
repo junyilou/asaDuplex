@@ -3,6 +3,7 @@ from special import speHours
 
 import json, os, logging, telegram
 from datetime import datetime, date
+from sys import stdout
 
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
@@ -21,22 +22,28 @@ else:
 		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
 		level = logging.INFO, datefmt = '%T')
 
-stores = []; storen = []
+logging.info("程序启动")
+runtime = datetime.now().strftime("%F")
+
+stores = list()
 functions = {'r': StoreID, 'n': StoreName, 's': StoreNation}
 for f in functions.keys():
 	if f in args.keys():
 		S = map(functions[f], args[f])
 		for _s in list(S):
 			for __s in _s:
-				if __s[0] not in stores:
-					stores.append(__s[0])
-					storen.append(__s[1])
-
-logging.info("程序启动")
-runtime = datetime.now().strftime("%F")
+				if __s not in stores:
+					stores.append(__s)
+try:
+	stores.sort(key = lambda k: storeOrder().index("R" + k[0]))
+except ValueError:
+	logging.error("未能成功对请求的零售店按地区进行排序")
+	pass
 
 comparison = ""
+calendar = {}
 allSpecial = {"created": runtime}
+
 try: 
 	with open("Retail/storeHours.json") as o:
 		orgjson = json.loads(o.read())
@@ -45,7 +52,11 @@ except FileNotFoundError:
 	with open("Retail/storeHours.json", "w") as w:
 		w.write("{}")
 
-for sid, sn in zip(stores, storen):
+for sid, sn in stores:
+	cur = stores.index((sid, sn)) + 1; tot = len(stores); perc = int(cur / tot * 20)
+	print("[{:=^{}}{:^{}}] R{} {}/{} {:.1%}".format("", perc, "", 20 - perc, sid, cur, tot, cur / tot), end = "\r")
+	stdout.flush()
+
 	specialHours = speHours(sid)
 	storeDiff = ""
 
@@ -54,15 +65,19 @@ for sid, sn in zip(stores, storen):
 
 	for s in specialHours:
 		fSpecial = specialHours[s]["special"]
+
+		if s in calendar.keys():
+			calendar[s][sn] = fSpecial
+		else:
+			calendar[s] = {sn: fSpecial}
+
 		try: 
 			orgSpecial = orgjson[sid][s]["special"]
 		except KeyError:
 			storeDiff += " " * 8 + "{}：新增 {}\n".format(s, fSpecial)
-			logging.info("Apple {} {} 新增 {}".format(sn, s, fSpecial))
 		else: 
 			if orgSpecial != fSpecial:
 				storeDiff += " " * 8 + "{}：由 {} 改为 {}\n".format(s, orgSpecial, fSpecial)
-				logging.info("Apple {} {} 改为 {}".format(sn, s, fSpecial))
 
 	try: 
 		oload = orgjson[sid]
@@ -72,14 +87,13 @@ for sid, sn in zip(stores, storen):
 		for odate in oload.keys():
 			if odate == "storename": 
 				continue
-			odatetime = datetime.strptime(odate, '%Y年%m月%d日').date()
+			odatetime = datetime.strptime(odate, '%Y-%m-%d').date()
 			if odatetime < date.today(): 
 				continue
 			try:
 				newSpecial = specialHours[odate]
 			except KeyError:
 				storeDiff += " " * 8 + "{}：取消 {}\n".format(odate, oload[odate]["special"])
-				logging.info("Apple {} {} 取消 {}".format(sn, odate, olad[odate]["special"]))
 
 	if len(storeDiff):
 		comparison += "    Apple {}\n{}".format(sn, storeDiff)
@@ -88,11 +102,12 @@ os.rename("Retail/storeHours.json", "Retail/storeHours-" + runtime + ".json")
 
 logging.info("写入新的 storeHours.json")
 jOut = json.dumps(allSpecial, ensure_ascii = False, indent = 2)
+calendar = dict(sorted(calendar.items(), key = lambda k: k[0]))
+calendar = json.dumps(calendar, ensure_ascii = False, indent = 2)
 with open("Retail/storeHours.json", "w") as w:
 	w.write(jOut)
 
 if len(comparison):
-	tOut = "Apple Store 特别营业时间\n生成于 {}\n\n变化：\n{}\n原始 JSON:\n{}".format(runtime, comparison, jOut)
 	fileDiff = """
 <!DOCTYPE html>
 
@@ -103,9 +118,13 @@ if len(comparison):
 </head>
 
 <body><pre><code>
-{}
+Apple Store 特别营业时间
+生成于 {}\n\n
+变化：\n{}\n
+日历:\n{}\n\n
+原始 JSON:\n{}
 </code></pre></body></html>
-""".format(tOut)
+""".format(runtime, comparison, calendar, jOut)
 	with open("/home/storeHours.html", "w") as w:
 		w.write(fileDiff)
 	logging.info("文件生成完成")

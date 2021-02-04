@@ -58,5 +58,12 @@ def storeList(storeid):
 				if m["storeNumber"] == storeid:
 					find = m
 					find["stateName"] = k["stateName"]
-					find = dict([(k, find[k]) for k in sorted(find.keys())])
+					find = dict(sorted(find.items(), key = lambda k: k[0]))
 	return find
+
+def storeOrder():
+	stores = list()
+	for i in asto:
+		for k in i["states"]:
+			stores += sorted([m["storeNumber"] for m in k["stores"]])
+	return stores
