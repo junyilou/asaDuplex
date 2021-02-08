@@ -8,7 +8,7 @@ with open("Retail/storeList.json") as r:
 
 def StoreID(storeid):
 	if type(storeid) == int:
-		storeid = "%03d" % storeid
+		storeid = f"{storeid:0>3d}"
 	storeid = storeid.replace("R", "")
 	if len(storeid) == 3:
 		try:
@@ -39,7 +39,7 @@ def StoreNation(emoji):
 
 def storeInfo(storeid):
 	if type(storeid) == int:
-		storeid = "%03d" % storeid
+		storeid = f"{storeid:0>3d}"
 	storeid = storeid.replace("R", "")
 	ret = {}
 	for t in info.keys():
@@ -49,7 +49,7 @@ def storeInfo(storeid):
 
 def storeList(storeid):
 	if type(storeid) == int:
-		storeid = "%03d" % storeid
+		storeid = f"{storeid:0>3d}"
 	storeid = "R" + storeid.replace("R", "")
 	find = {}
 	for i in asto:

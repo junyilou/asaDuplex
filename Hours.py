@@ -9,7 +9,7 @@ from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
 
 ### *** EDIT START *** ###
-args = {'s': ['🇨🇳', '🇭🇰', '🇲🇴', 'TW']}
+args = {'s': ['🇨🇳', '🇭🇰', '🇲🇴', '🇹🇼']}
 ### *** EDIT  END  *** ###
 
 if os.path.isdir('logs'):
@@ -53,8 +53,8 @@ except FileNotFoundError:
 		w.write("{}")
 
 for sid, sn in stores:
-	cur = stores.index((sid, sn)) + 1; tot = len(stores); perc = int(cur / tot * 20)
-	print("[{:=^{}}{:^{}}] R{} {}/{} {:.1%}".format("", perc, "", 20 - perc, sid, cur, tot, cur / tot), end = "\r")
+	cur = stores.index((sid, sn)) + 1; tot = len(stores); perc = int(cur / tot * 40)
+	print(f"[{'':=^{perc}}{'':^{40 - perc}}] R{sid} {cur}/{tot} {cur / tot:.1%}", end = "\r")
 	stdout.flush()
 
 	specialHours = speHours(sid)
@@ -74,10 +74,10 @@ for sid, sn in stores:
 		try: 
 			orgSpecial = orgjson[sid][s]["special"]
 		except KeyError:
-			storeDiff += " " * 8 + "{}：新增 {}\n".format(s, fSpecial)
+			storeDiff += f"{'':^8}{s}：新增 {fSpecial}\n"
 		else: 
 			if orgSpecial != fSpecial:
-				storeDiff += " " * 8 + "{}：由 {} 改为 {}\n".format(s, orgSpecial, fSpecial)
+				storeDiff += f"{'':^8}{s}：由 {orgSpecial} 改为 {fSpecial}\n"
 
 	try: 
 		oload = orgjson[sid]
@@ -93,12 +93,12 @@ for sid, sn in stores:
 			try:
 				newSpecial = specialHours[odate]
 			except KeyError:
-				storeDiff += " " * 8 + "{}：取消 {}\n".format(odate, oload[odate]["special"])
+				storeDiff += f"{'':^8}{odate}：取消 {oload[odate]['special']}\n"
 
 	if len(storeDiff):
-		comparison += "    Apple {}\n{}".format(sn, storeDiff)
+		comparison += f"{'':^4} Apple {sn}\n{storeDiff}"
 
-os.rename("Retail/storeHours.json", "Retail/storeHours-" + runtime + ".json")
+os.rename("Retail/storeHours.json", f"Retail/storeHours-{runtime}.json")
 
 logging.info("写入新的 storeHours.json")
 jOut = json.dumps(allSpecial, ensure_ascii = False, indent = 2)
@@ -108,7 +108,7 @@ with open("Retail/storeHours.json", "w") as w:
 	w.write(jOut)
 
 if len(comparison):
-	fileDiff = """
+	fileDiff = f"""
 <!DOCTYPE html>
 
 <head>
@@ -119,12 +119,12 @@ if len(comparison):
 
 <body><pre><code>
 Apple Store 特别营业时间
-生成于 {}\n\n
-变化：\n{}\n
-日历:\n{}\n\n
-原始 JSON:\n{}
+生成于 {runtime}\n\n
+变化:\n{comparison}\n
+日历:\n{calendar}\n\n
+原始 JSON:\n{jOut}
 </code></pre></body></html>
-""".format(runtime, comparison, calendar, jOut)
+"""
 	with open("/home/storeHours.html", "w") as w:
 		w.write(fileDiff)
 	logging.info("文件生成完成")
@@ -132,14 +132,15 @@ Apple Store 特别营业时间
 	logging.getLogger().setLevel(logging.DEBUG)
 	bot = telegram.Bot(token = token)
 	bot.send_photo(
-		chat_id = chat_id,
+		chat_id = chat_id, 
 		photo = "https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_medium_2x.jpg",
-		caption = '*来自 Hours 的通知*\n{} 个 Apple Store 有特别营业时间变化\n\nhttps://shunitsu.moe/storeHours.html'.format(comparison.count("Apple")),
-		parse_mode = 'Markdown')
+		caption = f'*来自 Hours 的通知*\n{comparison.count("Apple")} 个 Apple Store 有特别营业时间变化 [↗](https://shunitsu.moe/storeHours.html)',
+		parse_mode = 'MarkdownV2')
 	logging.getLogger().setLevel(logging.INFO)
 
+
 else: 
-	os.remove("Retail/storeHours-{}.json".format(runtime))
+	os.remove(f"Retail/storeHours-{runtime}.json")
 	logging.info("没有发现 storeHours 文件更新")
 
 logging.info("程序结束")

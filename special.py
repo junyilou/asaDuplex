@@ -19,11 +19,11 @@ dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
 def speHours(sid, mode = "special"):
 	try:
 		sif = storeInfo(sid)
-		url = "https://www.apple.com/{}/retail/{}".format(nationCode[sif["flag"]], sif["website"])
+		url = f"https://www.apple.com/{nationCode[sif['flag']]}/retail/{sif['website']}"
 	except KeyError:
-		logging.error("未能匹配到 R{} 的零售店官网页面地址".format(sid))
+		logging.error(f"未能匹配到 R{sid} 的零售店官网页面地址")
 		return {}
-	logging.info("正在访问 R{} 的零售店官网页面".format(sid))
+	logging.info(f"正在访问 R{sid} 的零售店官网页面")
 	r = requests.get(url, headers = userAgent).text
 	j = json.loads(r.split('<script type="application/ld+json">')[1].split("</script>")[0])
 
@@ -35,7 +35,7 @@ def speHours(sid, mode = "special"):
 			elif regular["opens"] == "24:00:00" and regular["closes"] == "23:59:00":
 				regularHours[dayOfWeek.index(day)] = "24 小时营业"
 			else:
-				regularHours[dayOfWeek.index(day)] = "{} - {}".format(regular["opens"][:-3], regular["closes"][:-3])
+				regularHours[dayOfWeek.index(day)] = f"{regular['opens'][:-3]} - {regular['closes'][:-3]}"
 	
 	specialHours = {}
 	for special in j["specialOpeningHoursSpecification"]:
@@ -48,7 +48,7 @@ def speHours(sid, mode = "special"):
 		for validDate in validDates:
 			fRegular = regularHours[validDate.weekday()]
 			if "opens" in special.keys():
-				specialDict = {"regular": fRegular, "special": "{} - {}".format(special["opens"][:-3], special["closes"][:-3])}
+				specialDict = {"regular": fRegular, "special": f"{special['opens'][:-3]} - {special['closes'][:-3]}"}
 			else:
 				specialDict = {"regular": fRegular, "special": "已关闭"}
 			specialHours[datetime.strftime(validDate, "%Y-%m-%d")] = specialDict

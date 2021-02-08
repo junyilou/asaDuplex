@@ -1,36 +1,43 @@
-import os, json, time, logging
-import telegram
+import os, json, time, logging, requests, telegram
 
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
 
-import sys
-if len(sys.argv) > 1 and sys.argv[1] == "special":
-	stateCHN = ["中国"]
-	stateCode = ["CN"]
-	stateEmoji = ["🇨🇳"]
-	specialistCode = [8030]
-else:
-	stateCHN = ["新加坡", "土耳其", "阿联酋", "英国", "德国", "台湾", "美国", 
-	"墨西哥", "瑞士", "比利时", "荷兰", "泰国", "西班牙", "香港", "瑞典", "中国", 
-	"法国", "澳大利亚", "意大利", "澳门", "巴西", "日本", "韩国", "加拿大", "奥地利"]
+requests.packages.urllib3.disable_warnings()
 
-	stateCode = ["SG", "TR", "AE", "UK", "DE", "TW", "US", 
-	"MX", "CH", "BE", "NL", "TH", "ES", "HK", "SE", "CN", 
-	"FR", "AU", "IT", "MO", "BR", "JP", "KR", "CA", "AT"]
+stateCHN = ["新加坡", "土耳其", "阿联酋", "英国", "德国", "台湾", "美国", 
+"墨西哥", "瑞士", "比利时", "荷兰", "泰国", "西班牙", "香港", "瑞典", "中国", 
+"法国", "澳大利亚", "意大利", "澳门", "巴西", "日本", "韩国", "加拿大", "奥地利"]
 
-	stateEmoji = ["🇸🇬", "🇹🇷", "🇦🇪", "🇬🇧", "🇩🇪", "🇹🇼", "🇺🇸", 
-	"🇲🇽","🇨🇭", "🇧🇪", "🇳🇱", "🇹🇭", "🇪🇸", "🇭🇰", "🇸🇪", "🇨🇳", 
-	"🇫🇷", "🇦🇺", "🇮🇹", "🇲🇴", "🇧🇷", "🇯🇵", "🇰🇷", "🇨🇦", "🇦🇹"]
+stateCode = ["SG", "TR", "AE", "UK", "DE", "TW", "US", 
+"MX", "CH", "BE", "NL", "TH", "ES", "HK", "SE", "CN", 
+"FR", "AU", "IT", "MO", "BR", "JP", "KR", "CA", "AT"]
 
-	specialistCode = [8238, 8164, 8225, 8145, 8043, 8311, 8158, 
-	8297, 8017, 8251, 8119, 8346, 8056, 8082, 8132, 8030, 
-	8069, 7991, 8095, 8282, 8176, 8106, 8326, 8004, 8333]
+stateEmoji = ["🇸🇬", "🇹🇷", "🇦🇪", "🇬🇧", "🇩🇪", "🇹🇼", "🇺🇸", 
+"🇲🇽","🇨🇭", "🇧🇪", "🇳🇱", "🇹🇭", "🇪🇸", "🇭🇰", "🇸🇪", "🇨🇳", 
+"🇫🇷", "🇦🇺", "🇮🇹", "🇲🇴", "🇧🇷", "🇯🇵", "🇰🇷", "🇨🇦", "🇦🇹"]
 
-rpath, wAns = os.path.expanduser('~') + "/Retail/Jobs/", ""
+specialistCode = [8238, 8164, 8225, 8145, 8043, 8311, 8158, 
+8297, 8017, 8251, 8119, 8346, 8056, 8082, 8132, 8030, 
+8069, 7991, 8095, 8282, 8176, 8106, 8326, 8004, 8333]
+
+wAns = ""
 imageURL = "https://www.apple.com/jobs/images/retail/hero/desktop.jpg"
-with open(rpath + "savedJobs.txt") as m: mark = m.read()
-#stateCHN, stateCode, stateEmoji, specialistCode = ["澳大利亚"], ["AU"], ["🇦🇺"], [7991] #Debug
+
+userAgent = {
+	"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15\
+	 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15"
+}
+
+def disMarkdown(text):
+	temp = text
+	signs = "\\`_{}[]()#+-.!="
+	for s in signs:
+		temp = temp.replace(s, f"\\{s}")
+	return temp
+
+with open("Retail/savedJobs.txt") as m: mark = m.read()
+#stateCHN, stateCode, stateEmoji, specialistCode = ["中国"], ["CN"], ["🇨🇳"], [8030] #Debug
 
 if os.path.isdir('logs'):
 	logging.basicConfig(
@@ -44,53 +51,54 @@ else:
 logging.info("程序启动")
 
 for scn, scd, ste, spl in zip(stateCHN, stateCode, stateEmoji, specialistCode):
-	realCode = "11443" + str(spl)
-	savename = rpath + scd + "/state.json"
+	realCode = f"11443{spl}"
+	logging.info(f"正在下载{scn}的国家文件")
 
-	logging.info("正在下载" + scn + "的国家文件")
-	os.system("wget -t 20 -T 5 -O " + savename + " https://jobs.apple.com/api/v1/jobDetails/PIPE-" + realCode + "/stateProvinceList")
+	r = requests.get(f"https://jobs.apple.com/api/v1/jobDetails/PIPE-{realCode}/stateProvinceList", headers = userAgent, verify = False)
 	try:
-		with open(savename) as j: jRead = j.read()
-		if "Maintenance" in jRead: 
+		stateJSON = r.json()["searchResults"]
+	except:
+		if "Maintenance" in r.text:
 			logging.error("遇到了 Apple 招聘页面维护")
 			break
-		stateJSON = json.loads(jRead)["searchResults"]
-	except:
-		logging.error("打开" + scn + "的国家文件错误")
-		continue
+		else:
+			logging.error(f"打开{scn}的国家文件错误")
+			continue
 
+	logging.info(f"找到{scn}有城市文件 {len(stateJSON)} 个")
 	for i in stateJSON: 
-		savename = rpath + scd + "/location_" + i["id"].replace("postLocation-", "") + ".json"
-		while True:
-			logging.info("正在下载" + scn + "下的城市文件 " + i["id"] + ".json")
-			os.system("wget -t 20 -T 5 -O " + savename + " 'https://jobs.apple.com/api/v1/jobDetails/PIPE-" 
-			+ realCode + "/storeLocations?searchField=stateProvince&fieldValue=" + i["id"] + "'")
-			if os.path.getsize(savename) > 0: break
+		cID = i["id"].replace("postLocation-", "")
+		logging.info(f"正在下载{scn}的城市文件 {cID}")
 
-	for j in stateJSON: 
-		savename = rpath + scd + "/location_" + j["id"].replace("postLocation-", "") + ".json"
-		with open(savename) as j: jRead = j.read()
-		if "Maintenance" in jRead: 
-			logging.error("遇到了 Apple 招聘页面维护"); break
-		cityJSON = json.loads(jRead)
+		r = requests.get(f"https://jobs.apple.com/api/v1/jobDetails/PIPE-{realCode}/storeLocations?searchField=stateProvince&fieldValue={i['id']}", headers = userAgent, verify = False)
+		try:
+			cityJSON = r.json()
+		except:
+			if "Maintenance" in r.text:
+				break
+			else:
+				logging.error(f"打开{scn}的城市文件 {cID} 错误")
+				continue
+
 		for c in cityJSON:
 			rolloutCode = c["code"]
 			if not rolloutCode in mark:
-				logging.info("找到了" + scn + "的新店 " + rolloutCode + " 不在已知列表中")
-				wAns += ste + rolloutCode + ", "
-				pushAns = (ste + scn + " 新增招聘地点 " + c["name"]
-				+ "，编号 " + rolloutCode + "，文件名 " + os.path.basename(savename))
-				linkURL = "https://jobs.apple.com/zh-cn/details/" + realCode
+				logging.info(f"找到了{scn}的新店 {rolloutCode} 不在已知列表中")
+
+				wAns += f"{ste}{rolloutCode}, "
+				linkURL = f"https://jobs.apple.com/zh-cn/details/{realCode}"
+				pushAns = f"*来自 Recruitment 的通知*\n{ste}{scn}新增招聘地点\n名称: {c['name']}，编号: {rolloutCode} "
+				
 				bot = telegram.Bot(token = token)
 				bot.send_photo(
 					chat_id = chat_id, 
 					photo = imageURL,
-					caption = '*来自 Recruitment 的通知*\n' + pushAns.replace("_", "\_") + "\n\n" + linkURL,
-					parse_mode = 'Markdown')
+					caption = disMarkdown(pushAns) + f"[↗]({linkURL})",
+					parse_mode = 'MarkdownV2')
 
 if wAns != "":
 	logging.info("正在更新 savedJobs 文件")
-	with open(rpath + "savedJobs.txt", "w") as m:
+	with open("Retail/savedJobs.txt", "w") as m:
 		m.write(mark + wAns)
 
 logging.info("程序结束")

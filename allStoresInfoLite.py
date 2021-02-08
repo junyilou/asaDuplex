@@ -8,13 +8,13 @@ requests.packages.urllib3.disable_warnings()
 
 asaVersion = "5.10.0"; asaAgent = ".".join(asaVersion.split(".")[:2])
 headers = {
-	"User-Agent": "ASA/" + asaAgent + " (iPhone) ss/3.00",
-	"x-ma-pcmh":  "REL-" + asaVersion,
+	"User-Agent": f"ASA/{asaAgent} (iPhone) ss/3.00",
+	"x-ma-pcmh":  f"REL-{asaVersion}",
 	"X-MALang":   "zh-CN",
 	"X-Apple-I-TimeZone": "GMT+8",
 	"X-Apple-I-Locale":   "zh_CN",
-	"X-MMe-Client-Info":  "<iPhone13,2> <iPhone OS;14.3;18C66> <com.apple.AuthKit/1 (com.apple.store.Jolly/" + asaVersion + ")>",
-	"X-DeviceConfiguration":  "ss=3.00;dim=1170x2532;m=iPhone;v=iPhone13,2;vv=" + asaAgent + ";sv=14.3"}
+	"X-MMe-Client-Info": f"<iPhone13,2> <iPhone OS;14.3;18C66> <com.apple.AuthKit/1 (com.apple.store.Jolly/{asaVersion})>",
+	"X-DeviceConfiguration":  f"ss=3.00;dim=1170x2532;m=iPhone;v=iPhone13,2;vv={asaAgent};sv=14.3"}
 
 if os.path.isdir('logs'):
 	logging.basicConfig(
@@ -49,7 +49,7 @@ if qualify == [False, True, True]:
 
 	logging.info("检测到有文件变化，正在生成 changeLog")
 	fileLines = []
-	fileDiff = """
+	fileDiff = f"""
 <!DOCTYPE html>
 
 <head>
@@ -59,8 +59,9 @@ if qualify == [False, True, True]:
 </head>
 
 <body><pre><code>
+Apple Store 零售店信息文件
+生成于 {runtime}
 """
-	fileDiff += "Apple Store 零售店信息文件\n生成于 " + runtime + "\n"
 	for formatFile in [oldFile, listFile]:
 		with open(formatFile) as f:
 			formatJSON = json.dumps(json.loads(f.read()), ensure_ascii = False, indent = 2)
@@ -82,8 +83,8 @@ if qualify == [False, True, True]:
 	bot.send_photo(
 		chat_id = chat_id, 
 		photo = "https://www.apple.com/jp/retail/store/includes/marunouchi/drawer/images/store-drawer-tile-1_medium_2x.jpg",
-		caption = '*来自 allStoresInfoLite 的通知*\nApple Store 零售店信息文件已更新\n\nhttps://shunitsu.moe/storelist.html',
-		parse_mode = 'Markdown')
+		caption = '*来自 allStoresInfoLite 的通知*\nApple Store 零售店信息文件已更新 [↗](https://shunitsu.moe/storelist.html)',
+		parse_mode = 'MarkdownV2')
 
 elif qualify[0] == True:
 	logging.info("没有发现 storeList 文件更新")
