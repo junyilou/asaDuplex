@@ -37,9 +37,14 @@ chat_ids = ["123456789", "-1024204840964"] # 通常一个用户是正数，Chann
 * allStoresInfoLite.py: 从 mobileapps.apple.com 刷新 Apple Store 零售店信息
 * Recruitment.py: 获得正在招聘的 Apple Store 零售店以观察新店招聘情况
 * Rtlimages.py: 获得 Apple 服务器中每一零售店图片的最后修改时间并与已知比较判定新图
-* specialHours.py: 获得 Apple Store 零售店的特别营业时间动态更新
+* Hours.py: 获得 Apple Store 零售店的特别营业时间动态更新
 * storeDistance.py: 通过 storeList.json 中的坐标计算全球零售店距离
 * Today.py: 取得中国最新 Today at Apple 活动
+
+### 模块
+
+* special.py: 返回某店常规营业时间或特别营业时间的转换数据
+* storeInfo.py: 从店名、编号或区域倒找零售店，或者返回零售店的 storeInfo 或 storeList 信息
 
 ### 已移除的代码
 
@@ -50,7 +55,8 @@ chat_ids = ["123456789", "-1024204840964"] # 通常一个用户是正数，Chann
 ### 文本文档
 
 * savedEvent.txt: 由 Today.py 生成的，已经检测到并保存的 Today at Apple 活动列表
-* storeInfo.json: 全球 Apple Store 名称、店号、所属地旗帜和已知图片的最后修改时间
+* savedJobs.txt: 由 Recruitment.py 生成的，已经在检测到招聘的零售店编号
+* storeInfo.json: 全球 Apple Store 名称、编号、旗帜、图片最后修改时间、URL
 * storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的结果
 
 \-
