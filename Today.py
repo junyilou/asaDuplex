@@ -1,30 +1,37 @@
 import os, json, time, logging, requests
-import telegram
+from telegram import Bot
+from sys import stdout
 requests.packages.urllib3.disable_warnings()
+
+from storeInfo import *
+from special import nationCode
 
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
 
-from storeInfo import *
-
 args = {'s': ['🇨🇳', '🇭🇰', '🇲🇴', 'TW']}
 
-stores = []
+stores = list()
 functions = {'r': StoreID, 'n': StoreName, 's': StoreNation}
 for f in functions.keys():
 	if f in args.keys():
 		S = map(functions[f], args[f])
 		for _s in list(S):
 			for __s in _s:
-				if __s[0] not in stores:
-					stores.append(__s[0])
+				if __s not in stores:
+					stores.append(__s)
+try:
+	stores.sort(key = lambda k: storeOrder().index("R" + k[0]))
+except ValueError:
+	logging.error("未能成功对请求的零售店按地区进行排序")
+	pass
 
-nationCode = {
-	"🇺🇸": "", "🇨🇳": "cn", "🇬🇧": "uk", "🇨🇦": "ca", "🇦🇺": "au", "🇫🇷": "fr", "🇮🇹": "it",
-	"🇩🇪": "de", "🇪🇸": "es", "🇯🇵": "jp", "🇨🇭": "chde", "🇦🇪": "ae", "🇳🇱": "nl", "🇸🇪": "se",
-	"🇧🇷": "br", "🇹🇷": "tr", "🇸🇬": "sg", "🇲🇽": "mx", "🇦🇹": "at", "🇧🇪": "befr", "🇰🇷": "kr",
-	"🇹🇭": "th", "🇭🇰": "hk", "🇲🇴": "mo", "🇹🇼": "tw"
-}
+def disMarkdown(text):
+	temp = text
+	signs = "\\`_{}[]()#+-.!="
+	for s in signs:
+		temp = temp.replace(s, f"\\{s}")
+	return temp
 
 appn = ""
 with open("Retail/savedEvent.txt") as m: 
@@ -43,14 +50,18 @@ logging.info("程序启动")
 
 masterJSON = {}
 
-for sid in stores:
+for sid, sn in stores:
 	try:
 		sif = storeInfo(sid)
-		region = "" if sif["flag"] == "🇺🇸" else "/" + nationCode[sif["flag"]]
-		url = "https://www.apple.com/today-bff/landing/store?stageRootPath={}&storeSlug={}".format(region, sif["website"])
+		url = f"https://www.apple.com/today-bff/landing/store?stageRootPath={nationCode[sif['flag']]}&storeSlug={sif['website']}"
 	except KeyError:
-		logging.error("未能匹配到 R{} 的零售店官网页面地址".format(sid))
-	logging.info("正在访问 R{} 的零售店官网页面".format(sid))
+		logging.error(f"未能匹配到 R{sid} 的零售店官网页面地址")
+		continue
+
+	cur = stores.index((sid, sn)) + 1; tot = len(stores); perc = int(cur / tot * 40)
+	print(f"[{'':=^{perc}}{'':^{40 - perc}}] R{sid} {cur}/{tot} {cur / tot:.1%}", end = "\r")
+	stdout.flush()
+	logging.info(f"访问 Apple {sn} 的零售店官网页面")
 	r = requests.get(url, verify = False)
 	masterJSON[sid] = json.loads(r.text.replace("\u2060", ""))["courses"]
 
@@ -60,9 +71,9 @@ for f in masterJSON:
 		fCourse = fStore[fID]
 		fName = fCourse["name"].replace("\n", "")
 		if (not fName in mark) and (not fName in appn):
-			appn += fName + ",\n"
+			appn += f"{fName},\n"
 			stores = storeInfo(f)["name"]
-			logging.info("在{}找到新活动 {}".format(stores, fName))
+			logging.info(f"在 {stores} 找到新活动 {fName}")
 			for j in masterJSON:
 				jStore = masterJSON[j]
 				if jStore == fStore:
@@ -71,29 +82,29 @@ for f in masterJSON:
 					jCourse = jStore[jID]
 					if (jCourse["name"].replace("\n", "") == fName):
 						jName = storeInfo(j)["name"]
-						logging.info("在{}找到相同新活动".format(jName))
-						stores += "、" + jName
+						logging.info(f"在 {jName} 找到相同新活动")
+						stores += f"、{jName}"
 						break
-			push = "#TodayatApple {}}\n@ {}\n\n".format(fName, stores) + fCourse["mediumDescription"]
+			push = f"#TodayatApple {fName}\n@ {stores}\n\n{fCourse['mediumDescription']}"
 			push = push.replace('"', "").replace("'", "").replace("：", " - ").replace("_", "\_")
 			logging.info("输出: " + push.replace("\n", " "))
 			photoURL = fCourse["backgroundMedia"]["images"][0]["landscape"]["source"]
 			photoURL += "?output-format=jpg&output-quality=80&resize=2880:*"
 
 			logging.getLogger().setLevel(logging.DEBUG)
-			bot = telegram.Bot(token = token)
+			bot = Bot(token = token)
 			try:
 				bot.send_photo(
 					chat_id = chat_id, 
 					photo = photoURL,
-					caption = '*来自 Today 的通知*\n' + push,
-					parse_mode = 'Markdown')
+					caption = disMarkdown(push),
+					parse_mode = 'MarkdownV2')
 			except:
 				logging.error("未能成功发送带有图片的消息")
 				bot.send_message(
 					chat_id = chat_id,
-					text = '*来自 Today 的通知*\n' + push + "\n\n" + photoURL.replace("_", "\_"),
-					parse_mode = 'Markdown')
+					text = disMarkdown(f'{push}\n\n{photoURL}'),
+					parse_mode = 'MarkdownV2')
 			logging.getLogger().setLevel(logging.INFO)
 
 if appn != "":

@@ -1,7 +1,8 @@
 from storeInfo import *
 from special import speHours
 
-import json, os, logging, telegram
+import json, os, logging
+from telegram import Bot
 from datetime import datetime, date
 from sys import stdout
 
@@ -130,7 +131,7 @@ Apple Store 特别营业时间
 	logging.info("文件生成完成")
 
 	logging.getLogger().setLevel(logging.DEBUG)
-	bot = telegram.Bot(token = token)
+	bot = Bot(token = token)
 	bot.send_photo(
 		chat_id = chat_id, 
 		photo = "https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_medium_2x.jpg",

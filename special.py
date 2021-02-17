@@ -13,17 +13,18 @@ nationCode = {
 	"🇧🇷": "br", "🇹🇷": "tr", "🇸🇬": "sg", "🇲🇽": "mx", "🇦🇹": "at", "🇧🇪": "befr", "🇰🇷": "kr",
 	"🇹🇭": "th", "🇭🇰": "hk", "🇲🇴": "mo", "🇹🇼": "tw"
 }
+nationCode = dict([(i[0], f"/{i[1]}") if i[0] != "🇺🇸" else i for i in nationCode.items()])
 
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 def speHours(sid, mode = "special"):
 	try:
 		sif = storeInfo(sid)
-		url = f"https://www.apple.com/{nationCode[sif['flag']]}/retail/{sif['website']}"
+		url = f"https://www.apple.com{nationCode[sif['flag']]}/retail/{sif['website']}"
 	except KeyError:
 		logging.error(f"未能匹配到 R{sid} 的零售店官网页面地址")
 		return {}
-	logging.info(f"正在访问 R{sid} 的零售店官网页面")
+	logging.info(f"访问 Apple {sn} 的零售店官网页面")
 	r = requests.get(url, headers = userAgent).text
 	j = json.loads(r.split('<script type="application/ld+json">')[1].split("</script>")[0])
 
@@ -40,7 +41,7 @@ def speHours(sid, mode = "special"):
 	specialHours = {}
 	for special in j["specialOpeningHoursSpecification"]:
 		validDates = []
-		startDate = datetime.strptime(special["validFrom"], "%Y-%m-%d").date()
+		startDate = max(datetime.now().date() - timedelta(days = 1), datetime.strptime(special["validFrom"], "%Y-%m-%d").date())
 		endDate = datetime.strptime(special["validThrough"], "%Y-%m-%d").date()
 		while startDate <= endDate:
 			validDates.append(startDate)
@@ -56,4 +57,4 @@ def speHours(sid, mode = "special"):
 	if mode == "special":
 		return specialHours
 	if mode == "regular":
-		return regularHours
+		return regularHours, len(specialHours)
