@@ -97,7 +97,7 @@ for sid, sn in stores:
 				storeDiff += f"{'':^8}{odate}：取消 {oload[odate]['special']}\n"
 
 	if len(storeDiff):
-		comparison += f"{'':^4} Apple {sn}\n{storeDiff}"
+		comparison += f"{'':^4}Apple {sn}\n{storeDiff}"
 
 os.rename("Retail/storeHours.json", f"Retail/storeHours-{runtime}.json")
 
