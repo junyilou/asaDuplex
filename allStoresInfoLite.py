@@ -6,7 +6,7 @@ token = tokens[0]; chat_id = chat_ids[0]
 
 requests.packages.urllib3.disable_warnings()
 
-asaVersion = "5.10.0"; asaAgent = ".".join(asaVersion.split(".")[:2])
+asaVersion = "5.11.0"; asaAgent = ".".join(asaVersion.split(".")[:2])
 headers = {
 	"User-Agent": f"ASA/{asaAgent} (iPhone) ss/3.00",
 	"x-ma-pcmh":  f"REL-{asaVersion}",
