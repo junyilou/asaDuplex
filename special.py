@@ -11,7 +11,7 @@ nationCode = {
 	"🇺🇸": "", "🇨🇳": "cn", "🇬🇧": "uk", "🇨🇦": "ca", "🇦🇺": "au", "🇫🇷": "fr", "🇮🇹": "it",
 	"🇩🇪": "de", "🇪🇸": "es", "🇯🇵": "jp", "🇨🇭": "chde", "🇦🇪": "ae", "🇳🇱": "nl", "🇸🇪": "se",
 	"🇧🇷": "br", "🇹🇷": "tr", "🇸🇬": "sg", "🇲🇽": "mx", "🇦🇹": "at", "🇧🇪": "befr", "🇰🇷": "kr",
-	"🇹🇭": "th", "🇭🇰": "hk", "🇲🇴": "mo", "🇹🇼": "tw"
+	"🇹🇭": "th", "🇭🇰": "hk", "🇲🇴": "mo", "🇹🇼": "tw", "TW": "tw"
 }
 nationCode = dict([(i[0], f"/{i[1]}") if i[0] != "🇺🇸" else i for i in nationCode.items()])
 
@@ -23,7 +23,10 @@ def speHours(sid, mode = "special"):
 		url = f"https://www.apple.com{nationCode[sif['flag']]}/retail/{sif['website']}"
 	except KeyError:
 		logging.error(f"未能匹配到 R{sid} 的零售店官网页面地址")
-		return {}
+		if mode == "special":
+			return {}
+		if mode == "regular":
+			return {}, 0
 	logging.info(f"访问 R{sid} 的零售店官网页面")
 	r = requests.get(url, headers = userAgent).text
 	j = json.loads(r.split('<script type="application/ld+json">')[1].split("</script>")[0])

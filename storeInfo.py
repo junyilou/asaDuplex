@@ -9,6 +9,8 @@ with open("Retail/storeList.json") as r:
 def StoreID(storeid):
 	if type(storeid) == int:
 		storeid = f"{storeid:0>3d}"
+	if len(storeid) == 2:
+		storeid = "0" + storeid
 	storeid = storeid.replace("R", "")
 	if len(storeid) == 3:
 		try:
@@ -67,3 +69,13 @@ def storeOrder():
 		for k in i["states"]:
 			stores += sorted([m["storeNumber"] for m in k["stores"]])
 	return stores
+
+def storeState(state):
+	states = ""
+	for i in asto:
+		if i["countryCode"] == state[:2].upper():
+			for k in i["states"]:
+				if k["stateName"] != "":
+					states += f"*{k['stateName']}* "
+				states += "- " + "、".join([f"{StoreID(m['storeNumber'])[0][1]} ({m['storeNumber']})" for m in k["stores"]]) + "\n"
+	return states
