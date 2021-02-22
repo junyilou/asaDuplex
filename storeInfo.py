@@ -7,12 +7,10 @@ with open("Retail/storeList.json") as r:
 	asto = json.loads(r.read())["countryStateMapping"]
 
 def StoreID(storeid):
-	if type(storeid) == int:
-		storeid = f"{storeid:0>3d}"
-	if len(storeid) == 2:
-		storeid = "0" + storeid
+	if type(storeid) == int or len(storeid) < 3:
+		storeid = f"{storeid:0>3}"
 	storeid = storeid.replace("R", "")
-	if len(storeid) == 3:
+	if storeid.isdigit():
 		try:
 			return [(storeid, info["name"][storeid])]
 		except KeyError:
@@ -40,8 +38,8 @@ def StoreNation(emoji):
 	return stores
 
 def storeInfo(storeid):
-	if type(storeid) == int:
-		storeid = f"{storeid:0>3d}"
+	if type(storeid) == int or len(storeid) < 3:
+		storeid = f"{storeid:0>3}"
 	storeid = storeid.replace("R", "")
 	ret = {}
 	for t in info.keys():
@@ -50,9 +48,9 @@ def storeInfo(storeid):
 	return ret
 
 def storeList(storeid):
-	if type(storeid) == int:
-		storeid = f"{storeid:0>3d}"
-	storeid = "R" + storeid.replace("R", "")
+	if type(storeid) == int or len(storeid) < 3:
+		storeid = f"{storeid:0>3}"
+	storeid = storeid.replace("R", "")
 	find = {}
 	for i in asto:
 		for k in i["states"]:

@@ -32,6 +32,13 @@ def speHours(sid, mode = "special"):
 	j = json.loads(r.split('<script type="application/ld+json">')[1].split("</script>")[0])
 
 	regularHours = [""] * 7
+	if "openingHoursSpecification" not in j.keys():
+		logging.error(f"未能从 R{sid} 的零售店官网页面地址匹配到营业时间信息")
+		if mode == "special":
+			return {}
+		if mode == "regular":
+			return {}, 0
+
 	for regular in j["openingHoursSpecification"]:
 		for day in regular["dayOfWeek"]:
 			if regular["opens"] == regular["closes"] == "24:00:00":
