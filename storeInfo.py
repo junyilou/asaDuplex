@@ -50,7 +50,7 @@ def storeInfo(storeid):
 def storeList(storeid):
 	if type(storeid) == int or len(storeid) < 3:
 		storeid = f"{storeid:0>3}"
-	storeid = storeid.replace("R", "")
+	storeid = "R" + storeid.replace("R", "")
 	find = {}
 	for i in asto:
 		for k in i["states"]:
