@@ -35,11 +35,14 @@ for f in functions.keys():
 			for __s in _s:
 				if __s not in stores:
 					stores.append(__s)
-try:
-	stores.sort(key = lambda k: storeOrder().index("R" + k[0]))
-except ValueError:
-	logging.error("未能成功对请求的零售店按地区进行排序")
-	pass
+order = {}; Order = storeOrder()
+for store in stores:
+	sid = store[0]
+	try:
+		order[sid] = Order.index("R" + sid)
+	except ValueError:
+		order[sid] = 900 + int(sid)
+stores.sort(key = lambda k: order[k[0]])
 
 comparison = ""
 calendar = {}
