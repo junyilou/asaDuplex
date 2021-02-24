@@ -22,8 +22,8 @@ def StoreName(name):
 	stores = list()
 	name = name.replace("_", " ")
 	for i in info["name"].keys():
-		if info["name"][i] == name:
-			stores.append((i, name))
+		if info["name"][i].upper() == name.upper():
+			stores.append((i, info["name"][i]))
 	return stores
 
 def StoreNation(emoji):
@@ -69,11 +69,11 @@ def storeOrder():
 	return stores
 
 def storeState(state):
-	states = ""
+	states = list()
 	for i in asto:
 		if i["countryCode"] == state[:2].upper():
 			for k in i["states"]:
-				if k["stateName"] != "":
-					states += f"*{k['stateName']}* "
-				states += "- " + "、".join([f"{StoreID(m['storeNumber'])[0][1]} ({m['storeNumber']})" for m in k["stores"]]) + "\n"
+				prefix = f"    *{k['stateName']} - *" if k["stateName"] != "" else "    *- *"
+				states.append(prefix + "、".join([f"{StoreID(m['storeNumber'])[0][1]} ({m['storeNumber']})" for m in k["stores"]]) + "\n")
+	states = "".join(sorted(states))
 	return states
