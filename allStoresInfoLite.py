@@ -42,9 +42,9 @@ with open(listFile, "w") as w:
 	w.write(dlc)
 
 newListSize = os.path.getsize(listFile)
-qualify = [filecmp.cmp(listFile, oldFile), newListSize > 0, "Jiefangbei" in dlc]
+qualify = [filecmp.cmp(listFile, oldFile), newListSize > 0]
 
-if qualify == [False, True, True]:
+if qualify == [False, True]:
 	runtime = time.strftime("%F", time.localtime())
 
 	logging.info("检测到有文件变化，正在生成 changeLog")
@@ -91,9 +91,6 @@ elif qualify[0] == True:
 
 elif qualify[1] == False:
 	logging.info("下载 allStoresInfoLite 失败")
-
-elif qualify[2] == False:
-	logging.error("所下载的 allStoresInfoLite 文件似乎不是英语版本")
 
 try:
 	os.rename(oldFile, listFile)
