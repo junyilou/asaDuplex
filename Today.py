@@ -4,30 +4,14 @@ from sys import stdout
 requests.packages.urllib3.disable_warnings()
 
 from storeInfo import *
-from special import nationCode
 
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
 
-args = {'s': ['🇨🇳', '🇭🇰', '🇲🇴', 'TW']}
+args = "🇨🇳 🇭🇰 🇲🇴 TW"
 
-stores = list()
-functions = {'r': StoreID, 'n': StoreName, 's': StoreNation}
-for f in functions.keys():
-	if f in args.keys():
-		S = map(functions[f], args[f])
-		for _s in list(S):
-			for __s in _s:
-				if __s not in stores:
-					stores.append(__s)
-order = {}; Order = storeOrder()
-for store in stores:
-	sid = store[0]
-	try:
-		order[sid] = Order.index("R" + sid)
-	except ValueError:
-		order[sid] = 900 + int(sid)
-stores.sort(key = lambda k: order[k[0]])
+pair = storePairs(args.split())
+stores = storeReturn(pair)
 
 def disMarkdown(text):
 	temp = text
@@ -65,7 +49,7 @@ for sid, sn in stores:
 	print(f"[{'':=^{perc}}{'':^{40 - perc}}] R{sid} {cur}/{tot} {cur / tot:.1%}", end = "\r")
 	stdout.flush()
 	logging.info(f"访问 Apple {sn} 的零售店官网页面")
-	r = requests.get(url, verify = False)
+	r = requests.get(url, verify = False, headers = userAgent)
 	masterJSON[sid] = json.loads(r.text.replace("\u2060", ""))["courses"]
 
 for f in masterJSON:

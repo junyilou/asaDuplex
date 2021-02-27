@@ -2,7 +2,7 @@
 
 **一个完全关于 Apple Store 的 Repository。** — Junyi
 
-果铺知道通过以下代码获得了许多关于 Apple Store 零售店的信息更新，
+果铺知道通过以下代码获得了许多关于 Apple Store 零售店的信息，
 
 你可以在[微博](https://weibo.com/arsteller)和 [Telegram Channel](https://t.me/guopuzd) 关注果铺知道以直接接收以下代码的运行结果。
 
@@ -16,15 +16,17 @@
 
 2020 年 11 月：停止通过 IFTTT Webhooks 将代码结果发至 iOS 用户，改为使用 Telegram Bot 推送结果，同时也支持了在发送的内容中应用 Markdown 文本样式、按钮、链接等。
 
-2021 年 2 月：将 specialHours、Rtlimages 变得更加模块化，使数据获取和数据处理分析分开，方便其他代码可以利用相同的数据实现其他的功能。这是为正在开发的 Telegram Bot 做出的更新，此 Telegram Bot 中以不同的呈现方式展现 Apple Store 零售店信息及特别营业时间信息等。
+2021 年 2 月：将 specialHours、Rtlimages 变得更加模块化，使数据获取和数据处理分析分开，方便其他代码可以利用相同的数据实现其他的功能。
+
+2021 年 3 月：利用 asaDuplex 中的部分代码，推出果铺知道 Telegram Bot，方便用户快速查询 Apple Store 零售店信息及特别营业时间信息。
 
 ![bot](Retail/bot.jpg)
 
 \-
 
-asaDuplex 使用了 [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) 库以完成 Telegram 推送，你需要首先安装此库。
+asaDuplex 大量使用了 [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot) 库，你需要首先安装此库。
 
-要正确接收代码结果，建议首先 clone 整个库，以避免运行时缺少必要文件。同时，**需首先在同目录创建名为 bot.py 的文件**以填写结果输出对象，包含至少一个 Bot Token 和接收消息的 Chat ID（可以是一个用户、Channel 等），一个示例是：
+要正确接收输出型代码的结果（通常以大写字母开头），建议首先 clone 整个库，以避免运行时缺少必要文件。同时，**需首先在同目录创建名为 bot.py 的文件**以填写结果输出对象，包含至少一个 Bot Token 和接收消息的 Chat ID（可以是一个用户、Channel 等），一个示例是：
 
 ```python
 # bot.py
@@ -34,7 +36,7 @@ chat_ids = ["123456789", "-1024204840964"] # 通常一个用户是正数，Chann
 
 在代码的顶部都有导入 bot.py 的代码，选择其中一个 Bot Token 和 chat_id 继续。当然你也可以选择把 token 和 chat_id 直接写在对应代码中而不是去导入，这里使用 bot.py 是为了方便 Git 管理。
 
-\* asaDuplex 开源代码中暂不包括通过图示的 Telegram Bot 接收用户消息并完成指定功能的代码。
+\* asaDuplex 尚不开源 Telegram Bot 的运行代码。
 
  \-
 
@@ -49,14 +51,23 @@ chat_ids = ["123456789", "-1024204840964"] # 通常一个用户是正数，Chann
 ### 数据获取模块
 
 * storeInfo.py
-  * 其本质是通过分析 storeInfo.json 和 storeList.json 两个纯文本 获得 Apple Store 零售店信息
-  * 可以通过输入店号、店名返回一家店的信息，在用户只记得两者之一时获得另一者；也可以通过输入一个国家或地区的 Emoji 获得当地全部零售店的信息
-  * 可以整理某店的店号、店名、国家或地区、开店时间、照片标签和官网 URL 地址（这些数据来自 storeInfo）
-  * 可以整理某店的地址、坐标、电话、EasyPay 服务器状态、时区信息（这些数据来自 storeList）
+
+  * 是一个非常强大的模块（确信），其本质是通过分析 Retail/storeInfo.json 来处理 Apple Store 零售店信息
+
+  * **StoreID, StoreName, StoreNation：**可以通过输入店号、店名返回一家店的信息，在用户只记得两者之一时获得另一者；也可以通过输入 Emoji 来代表该地区所有 Apple Store 零售店
+  * **storeInfo：**整理某店的店号、店名、国家或地区、开店时间、照片标签、官网 URL 后缀（这些数据来自 storeInfo）
+  * **storeURL：**通过 URL 后缀和国家地区代码生成完整的 Apple 官网地址
+  * **storePage：**访问由 storeURL 生成的地址，获得零售店坐标、时区、电话、地址、所在地区行政区划信息等
+  * **storeState：**返回一个字符串，包括一个国家或地区按行政区划分类的所有 Apple Store 零售店的名字和店号
+  * **reloadJSON：**重载所有函数使用的 storeInfo.json 文件，在数据有更新时使用
+  * **storePairs：**自动将输入的文本分类为店号、店名、国家或地区 Emoji，例如 "🇨🇳、480、解放碑" 将返回一个字典 {"n": ["解放碑"], "r": ["480"], "s": ["🇨🇳"]}
+  * **storeReturn：**利用一个包括 "n", "r", "s" 的字典，调用 StoreID, StoreName 和 StoreNation，找到输入对应的实际零售店，例如上面 storePairs 的例子将返回出 42 家零售店，支持定义接受的类型（例如不接受国家），支持自动按照行政区划将所有零售店排序
+
 * special.py
-  * 包括一个 nationCode 字典，便于生成零售店的官网 URL 地址
   * 自动解析 apple.com 源代码中提供的零售店常规营业时间安排和特别营业时间
   * 可仅返回常规营业时间数据，也可返回每个特别营业时间及其对应常规营业时间的数据
+  * 已经于 2021 年 2 月底适配了新版 Apple 零售店页面 HTML 代码
+
 * dieter.py
   * DieterInfo 类似 storeInfo 返回一个零售店的信息（名称、编号、开业时间）简述
   * DieterHeader 通过 HEAD 确认 Apple 服务器某家零售店图片的最后修改时间

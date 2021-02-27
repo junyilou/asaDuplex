@@ -9,9 +9,10 @@ from sys import stdout
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
 
-### *** EDIT START *** ###
-args = {'s': ['🇨🇳', '🇭🇰', '🇲🇴', '🇹🇼']}
-### *** EDIT  END  *** ###
+args = "🇨🇳"
+
+pair = storePairs(args.split())
+stores = storeReturn(pair)
 
 if os.path.isdir('logs'):
 	logging.basicConfig(
@@ -22,27 +23,8 @@ else:
 	logging.basicConfig(
 		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
 		level = logging.INFO, datefmt = '%T')
-
 logging.info("程序启动")
-runtime = datetime.now().strftime("%F")
-
-stores = list()
-functions = {'r': StoreID, 'n': StoreName, 's': StoreNation}
-for f in functions.keys():
-	if f in args.keys():
-		S = map(functions[f], args[f])
-		for _s in list(S):
-			for __s in _s:
-				if __s not in stores:
-					stores.append(__s)
-order = {}; Order = storeOrder()
-for store in stores:
-	sid = store[0]
-	try:
-		order[sid] = Order.index("R" + sid)
-	except ValueError:
-		order[sid] = 900 + int(sid)
-stores.sort(key = lambda k: order[k[0]])
+runtime = str(date.today())
 
 comparison = ""
 calendar = {}
