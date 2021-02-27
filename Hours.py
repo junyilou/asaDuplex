@@ -9,7 +9,7 @@ from sys import stdout
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
 
-args = "🇨🇳"
+args = "🇨🇳 🇭🇰 🇲🇴 TW"
 
 pair = storePairs(args.split())
 stores = storeReturn(pair)
