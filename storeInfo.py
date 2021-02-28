@@ -1,4 +1,6 @@
 import json, requests
+from time import strftime, strptime
+requests.packages.urllib3.disable_warnings()
 
 userAgent = {
 	"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15\
@@ -19,7 +21,9 @@ def StoreID(storeid):
 	storeid = storeid.replace("R", "")
 	if storeid.isdigit():
 		try:
-			return [(storeid, infoJSON["name"][storeid])]
+			name = infoJSON["name"][storeid]
+			name = name if type(name) == str else name[0]
+			return [(storeid, name)]
 		except KeyError:
 			return []
 	else:
@@ -29,8 +33,10 @@ def StoreName(name):
 	stores = []
 	name = name.replace("_", " ")
 	for i in infoJSON["name"]:
-		if infoJSON["name"][i].upper() == name.upper():
-			stores.append((i, infoJSON["name"][i]))
+		comp = [infoJSON["name"][i]] if type(infoJSON["name"][i]) == str else infoJSON["name"][i]
+		for cname in comp:
+			if cname.upper() == name.upper():
+				stores.append((i, comp[0]))
 	return stores
 
 def StoreNation(emoji):
@@ -39,9 +45,10 @@ def StoreNation(emoji):
 	stores = []
 	for i in infoJSON["flag"]:
 		if infoJSON["flag"][i] == emoji:
-			storename = infoJSON["name"][i]
-			if storename[:8] != "Store in":
-				stores.append((i, storename))
+			name = infoJSON["name"][i]
+			name = name if type(name) == str else name[0]
+			if name[:8] != "Store in":
+				stores.append((i, name))
 	return stores
 
 def storeInfo(storeid):
@@ -143,3 +150,18 @@ def storeReturn(pair, accept_function = ['r', 'n', 's'], sort = True):
 				order[sid] = 900 + int(sid)
 		stores.sort(key = lambda k: order[k[0]])
 	return stores
+
+def DieterInfo(rtl):
+	storeJSON = storeInfo(rtl)
+	if "name" in storeJSON:
+		name = storeJSON["name"]
+		name = name if type(name) == str else name[0]
+	else:
+		name = "Store"
+	flag = (storeJSON['flag'] + " ") if "flag" in storeJSON else ""
+	nso = (", 首次开幕于 " + strftime("%Y 年 %-m 月 %-d 日", strptime(storeJSON['nso'], "%Y-%m-%d"))) if "nso" in storeJSON else ""
+	return f"#图片更新 #标签 {flag}Apple {name}, R{rtl}{nso}"
+
+def DieterHeader(rtl):
+	r = requests.head(f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{StoreID(rtl)[0][0]}.png", allow_redirects = True, verify = False)
+	return "404" if r.status_code == 404 else r.headers['Last-Modified']

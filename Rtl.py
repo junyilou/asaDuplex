@@ -1,7 +1,7 @@
 import os, sys, json, logging, requests
 from telegram import Bot
 
-from dieter import DieterInfo, DieterHeader
+from storeInfo import DieterInfo, DieterHeader
 
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
