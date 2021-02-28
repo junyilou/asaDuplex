@@ -53,7 +53,7 @@ chat_ids = ["123456789", "-1024204840964"] # 通常一个用户是正数，Chann
 * storeInfo.py
 
   * 是一个非常强大的模块（确信），其本质是通过分析 Retail/storeInfo.json 来处理 Apple Store 零售店信息
-* StoreID, StoreName, StoreNation：可以通过输入店号、店名返回一家店的信息，在用户只记得两者之一时获得另一者；也可以通过输入 Emoji 来代表该地区所有 Apple Store 零售店
+  * StoreID, StoreName, StoreNation：可以通过输入店号、店名返回一家店的信息，在用户只记得两者之一时获得另一者；也可以通过输入 Emoji 来代表该地区所有 Apple Store 零售店
   * storeInfo：整理某店的店号、店名、国家或地区、开业时间、照片标签、官网 URL 后缀
   * storeURL：通过 URL 后缀和国家地区代码生成完整的 Apple 官网地址
   * storePage：访问由 storeURL 生成的地址，获得零售店坐标、时区、电话、地址、所在地区行政区划信息等
@@ -73,7 +73,7 @@ chat_ids = ["123456789", "-1024204840964"] # 通常一个用户是正数，Chann
 
 * savedEvent.txt: 由 Today.py 生成的，已经检测到并保存的 Today at Apple 活动列表
 * savedJobs.txt: 由 Recruitment.py 生成的，已经在检测到招聘的零售店编号
-* storeInfo.json: 全球 Apple Store 名称、编号、旗帜、图片最后修改时间、URL
+* storeInfo.json: 全球 Apple Store 名称（包含部分曾用名、ASCII 兼容名等以便于更广的匹配）、店号、国家或地区旗帜、官网图片最后修改时间、URL
 * storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的结果
 
 ### ~~已移除的代码~~
