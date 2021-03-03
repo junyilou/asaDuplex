@@ -5,24 +5,20 @@ token = tokens[0]; chat_id = chat_ids[0]
 
 requests.packages.urllib3.disable_warnings()
 
-stateCHN = ["新加坡", "土耳其", "阿联酋", "英国", "德国", "台湾", "美国", 
-"墨西哥", "瑞士", "比利时", "荷兰", "泰国", "西班牙", "香港", "瑞典", "中国", 
+stateCHN = ["土耳其", "阿联酋", "英国", "德国", "台湾", "美国", 
+"墨西哥", "瑞士", "比利时", "荷兰", "西班牙", "香港", "瑞典", "中国", 
 "法国", "澳大利亚", "意大利", "澳门", "巴西", "日本", "韩国", "加拿大", "奥地利"]
 
-stateCode = ["SG", "TR", "AE", "UK", "DE", "TW", "US", 
-"MX", "CH", "BE", "NL", "TH", "ES", "HK", "SE", "CN", 
-"FR", "AU", "IT", "MO", "BR", "JP", "KR", "CA", "AT"]
-
-stateEmoji = ["🇸🇬", "🇹🇷", "🇦🇪", "🇬🇧", "🇩🇪", "🇹🇼", "🇺🇸", 
-"🇲🇽","🇨🇭", "🇧🇪", "🇳🇱", "🇹🇭", "🇪🇸", "🇭🇰", "🇸🇪", "🇨🇳", 
+stateEmoji = ["🇹🇷", "🇦🇪", "🇬🇧", "🇩🇪", "🇹🇼", "🇺🇸", 
+"🇲🇽","🇨🇭", "🇧🇪", "🇳🇱", "🇪🇸", "🇭🇰", "🇸🇪", "🇨🇳", 
 "🇫🇷", "🇦🇺", "🇮🇹", "🇲🇴", "🇧🇷", "🇯🇵", "🇰🇷", "🇨🇦", "🇦🇹"]
 
-specialistCode = [8238, 8164, 8225, 8145, 8043, 8311, 8158, 
-8297, 8017, 8251, 8119, 8346, 8056, 8082, 8132, 8030, 
-8069, 7991, 8095, 8282, 8176, 8106, 8326, 8004, 8333]
+specialistCode = [8164, 8225, 8145, 8043, 8311, 8158, 
+8297, 8017, 8251, 8119, 8056, 8082, 8132, 8030, 
+8069, 7991, 8095, 8282, 8176, 8106, 8326, 8004, 8333] #JP - Store Leader
 
 wAns = ""
-imageURL = "https://www.apple.com/jobs/images/retail/hero/desktop.jpg"
+imageURL = "https://www.apple.com/jobs/images/retail/hero/desktop@2x.jpg"
 
 userAgent = {
 	"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15\
@@ -37,7 +33,7 @@ def disMarkdown(text):
 	return temp
 
 with open("Retail/savedJobs.txt") as m: mark = m.read()
-#stateCHN, stateCode, stateEmoji, specialistCode = ["中国"], ["CN"], ["🇨🇳"], [8030] #Debug
+#stateCHN, stateEmoji, specialistCode = ["中国"], ["🇨🇳"], [8030] #Debug
 
 if os.path.isdir('logs'):
 	logging.basicConfig(
@@ -50,7 +46,7 @@ else:
 		level = logging.DEBUG, datefmt = '%T')
 logging.info("程序启动")
 
-for scn, scd, ste, spl in zip(stateCHN, stateCode, stateEmoji, specialistCode):
+for scn, ste, spl in zip(stateCHN, stateEmoji, specialistCode):
 	realCode = f"11443{spl}"
 	logging.info(f"正在下载{scn}的国家文件")
 
