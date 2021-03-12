@@ -350,7 +350,10 @@
     "285": "North County",
     "286": "The Promenade at Chenal",
     "287": "Georgetown",
-    "288": "Fritz Farm",
+    "288": [
+      "Fritz Farm",
+      "Fayette Mall"
+    ],
     "289": "Brandon",
     "290": "North Star",
     "291": "Altamonte",
@@ -1949,9 +1952,9 @@
     "044": "Tue, 20 Aug 2013 09:23:58 GMT",
     "045": "Tue, 20 Aug 2013 09:23:58 GMT",
     "046": "Thu, 21 Apr 2016 00:25:18 GMT",
-    "047": "Fri, 19 Feb 2021 23:12:43 GMT",
+    "047": "Mon, 01 Mar 2021 21:07:56 GMT",
     "048": "Tue, 01 Oct 2019 23:08:53 GMT",
-    "049": "Mon, 15 Feb 2021 16:00:11 GMT",
+    "049": "Fri, 05 Mar 2021 03:26:24 GMT",
     "050": "Tue, 20 Aug 2013 09:23:59 GMT",
     "051": "Wed, 05 Dec 2018 22:40:52 GMT",
     "052": "Thu, 21 Apr 2016 00:25:20 GMT",
@@ -1979,7 +1982,7 @@
     "074": "Thu, 04 Oct 2018 17:54:13 GMT",
     "075": "Tue, 24 May 2016 20:28:13 GMT",
     "076": "Tue, 29 Mar 2016 15:59:40 GMT",
-    "077": "Sat, 20 Feb 2021 05:53:14 GMT",
+    "077": "Fri, 05 Mar 2021 19:02:45 GMT",
     "078": "Thu, 21 Apr 2016 00:25:19 GMT",
     "079": "Tue, 20 Aug 2013 09:24:01 GMT",
     "080": "Mon, 17 Apr 2017 18:26:53 GMT",
@@ -2158,7 +2161,7 @@
     "285": "Fri, 08 May 2015 23:40:16 GMT",
     "286": "Tue, 20 Aug 2013 09:24:17 GMT",
     "287": "Tue, 15 Jan 2019 22:47:01 GMT",
-    "288": "Thu, 25 Feb 2021 21:56:17 GMT",
+    "288": "Fri, 05 Mar 2021 21:17:58 GMT",
     "289": "Tue, 20 Aug 2013 09:24:17 GMT",
     "290": "Fri, 11 Oct 2019 18:03:18 GMT",
     "291": "Thu, 12 Sep 2019 21:14:23 GMT",
@@ -3396,6 +3399,9 @@
       "Cambridgeshire": [
         "270"
       ],
+      "Cardiff": [
+        "334"
+      ],
       "Central London": [
         "092",
         "245"
@@ -3449,9 +3455,6 @@
       ],
       "Somerset": [
         "335"
-      ],
-      "South Glamorgan": [
-        "334"
       ],
       "South Yorkshire": [
         "153"
