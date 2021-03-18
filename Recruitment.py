@@ -17,6 +17,10 @@ specialistCode = [8164, 8225, 8145, 8043, 8311, 8158,
 8297, 8017, 8251, 8119, 8056, 8082, 8132, 8030, 
 8069, 7991, 8095, 8282, 8176, 8106, 8326, 8004, 8333] #JP - Store Leader
 
+from sys import argv
+if len(argv) > 1 and argv[1] == "special":
+	stateCHN = ["中国"]; stateEmoji = ["🇨🇳"]; specialistCode = [8030]
+
 wAns = ""
 imageURL = "https://www.apple.com/jobs/images/retail/hero/desktop@2x.jpg"
 
@@ -33,17 +37,16 @@ def disMarkdown(text):
 	return temp
 
 with open("Retail/savedJobs.txt") as m: mark = m.read()
-#stateCHN, stateEmoji, specialistCode = ["中国"], ["🇨🇳"], [8030] #Debug
 
 if os.path.isdir('logs'):
 	logging.basicConfig(
 		filename = "logs/" + os.path.basename(__file__) + ".log",
 		format = '[%(asctime)s %(levelname)s] %(message)s',
-		level = logging.DEBUG, filemode = 'a', datefmt = '%F %T')
+		level = logging.INFO, filemode = 'a', datefmt = '%F %T')
 else:
 	logging.basicConfig(
 		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
-		level = logging.DEBUG, datefmt = '%T')
+		level = logging.INFO, datefmt = '%T')
 logging.info("程序启动")
 
 for scn, ste, spl in zip(stateCHN, stateEmoji, specialistCode):
