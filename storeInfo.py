@@ -18,7 +18,7 @@ nationCode = {'🇺🇸': '', '🇨🇳': '/cn', '🇬🇧': '/uk', '🇨🇦': 
 def StoreID(storeid):
 	if type(storeid) == int or len(storeid) < 3:
 		storeid = f"{storeid:0>3}"
-	storeid = storeid.replace("R", "")
+	storeid = storeid.upper().replace("R", "")
 	if storeid.isdigit():
 		try:
 			name = infoJSON["name"][storeid]
@@ -40,7 +40,7 @@ def StoreName(name):
 	return stores
 
 def StoreNation(emoji):
-	if emoji == "TW":
+	if emoji.upper() == "TW":
 		emoji = "🇹🇼"
 	stores = []
 	for i in infoJSON["flag"]:
@@ -52,19 +52,18 @@ def StoreNation(emoji):
 	return stores
 
 def storeInfo(storeid):
-	if type(storeid) == int or len(storeid) < 3:
-		storeid = f"{storeid:0>3}"
-	storeid = storeid.replace("R", "")
-	ret = {}
-	for t in infoJSON.keys():
-		if storeid in infoJSON[t]:
-			ret[t] = infoJSON[t][storeid]
-	return ret
+	sid = StoreID(storeid)[0][0]
+	return dict([(t, infoJSON[t][sid]) for t in infoJSON if sid in infoJSON[t]])
 
 def storeURL(storeid):
 	sif = storeInfo(storeid)
 	try:
-		url = f"https://www.apple.com{nationCode[sif['flag']]}/retail/{sif['website']}"
+		website = sif["website"]
+		name = sif["name"]
+		name = name if type(name) == str else name[0]
+		if website == "-":
+			website = name.lower().replace(" ", "")
+		url = f"https://www.apple.com{nationCode[sif['flag']]}/retail/{website}"
 	except KeyError:
 		return "N/A"
 	return url
@@ -122,7 +121,7 @@ def reloadJSON():
 def storePairs(args):
 	pair = {"r": [], "s": [], "n": []}
 	for a in args:
-		if a.isdigit() or a.replace("R", "").isdigit():
+		if a.isdigit() or a.upper().replace("R", "").isdigit():
 			pair["r"].append(a)
 		elif a in nationCode:
 			pair["s"].append(a)
@@ -163,5 +162,9 @@ def DieterInfo(rtl):
 	return f"#图片更新 #标签 {flag}Apple {name}, R{rtl}{nso}"
 
 def DieterHeader(rtl):
-	r = requests.head(f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{StoreID(rtl)[0][0]}.png", allow_redirects = True, verify = False)
+	sid = StoreID(rtl)
+	if not len(sid):
+		return "404"
+	else:
+		r = requests.head(f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid[0][0]}.png", allow_redirects = True, verify = False)
 	return "404" if r.status_code == 404 else r.headers['Last-Modified']
