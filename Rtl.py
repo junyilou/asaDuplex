@@ -33,13 +33,13 @@ def down(rtl, isSpecial):
 	except KeyError: 
 		rmod = ""
 	rhed = DieterHeader(rtl)
-	if rhed == "404" :
+	if rhed == "404":
 		if isSpecial:
 			logging.info(f"检查到 R{rtl} 的图片服务器中不存在")
 		return
 	if rhed != rmod:
 		logging.info(f"监测到 R{rtl} 有更新，正在保存图片")
-		savename = f"R{rtl}_{rhed.replace(' ', '').replace(',', '').replace(':', '')}.png"
+		savename = f"R{rtl}_{rhed.replace(' ', '').replace(':', '')}.png"
 		photoURL = f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{rtl}.png"
 
 		r = requests.get(photoURL, headers = {'User-Agent': userAgent}, verify = False)

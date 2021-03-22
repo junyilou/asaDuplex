@@ -167,4 +167,4 @@ def DieterHeader(rtl):
 		return "404"
 	else:
 		r = requests.head(f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid[0][0]}.png", allow_redirects = True, verify = False)
-	return "404" if r.status_code == 404 else r.headers['Last-Modified']
+	return "404" if r.status_code == 404 else r.headers['Last-Modified'][5:-4]
