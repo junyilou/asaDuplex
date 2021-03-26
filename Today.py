@@ -39,9 +39,11 @@ masterJSON = {}
 
 for sid, sn in stores:
 	try:
-		sif = storeInfo(sid)
-		url = f"https://www.apple.com/today-bff/landing/store?stageRootPath={nationCode[sif['flag']]}&storeSlug={sif['website']}"
-	except KeyError:
+		slug = storeURL(sid)
+		flag = slug.split("https://www.apple.com")[1].split("/retail/")[0]
+		website = slug.split("/retail/")[1]
+		url = f"https://www.apple.com/today-bff/landing/store?stageRootPath={flag}&storeSlug={website}"
+	except IndexError:
 		logging.error(f"未能匹配到 R{sid} 的零售店官网页面地址")
 		continue
 

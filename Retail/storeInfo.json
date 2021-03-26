@@ -380,7 +380,10 @@
     ],
     "316": "University Park Village",
     "317": "State Street",
-    "318": "King Street",
+    "318": [
+    	"Charleston",
+    	"King Street"
+    ],
     "320": [
       "三里屯",
       "Sanlitun"
@@ -845,7 +848,10 @@
       "Park Visitor Center",
       "Apple Park Visitor Center"
     ],
-    "825": "WWDC Store",
+    "825": [
+      "Corporate Events",
+      "WWDC Store"
+    ],
     "900": "Mock Store"
   },
   "flag": {
