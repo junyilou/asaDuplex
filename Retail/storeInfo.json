@@ -316,7 +316,10 @@
     ],
     "250": "West 14th Street",
     "251": "Upper West Side",
-    "252": "Cabot Circus",
+    "252": [
+    	"Bristol",
+    	"Cabot Circus"
+    ],
     "253": "Chatswood Chase",
     "254": "Bondi",
     "255": "Touchwood Centre",
@@ -632,7 +635,10 @@
     ],
     "539": "Haarlem",
     "540": "Den Haag",
-    "545": "Drake Circus",
+    "545": [
+    	"Plymouth",
+    	"Drake Circus"
+    ],
     "547": "il Leone",
     "549": "Quaker Bridge",
     "550": "Valley Plaza",
