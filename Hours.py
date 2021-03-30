@@ -111,7 +111,7 @@ Apple Store 特别营业时间
 原始 JSON:\n{jOut}
 </code></pre></body></html>
 """
-	with open("/home/storeHours.html", "w") as w:
+	with open("/home/centos/www/storeHours.html", "w") as w:
 		w.write(fileDiff)
 	logging.info("文件生成完成")
 

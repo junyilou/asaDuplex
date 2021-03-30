@@ -1,11 +1,7 @@
 import logging, requests, json
 from datetime import timedelta, date
-from storeInfo import storeInfo, storeURL
+from storeInfo import storeInfo, storeURL, userAgent
 
-userAgent = {
-	"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15\
-	 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15"
-}
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 def dateConvert(strdate):
@@ -58,7 +54,10 @@ def speHours(sid, mode = "special"):
 			if "opens" not in special:
 				specialDict = {"regular": fRegular, "special": "已关闭"}
 			else:
-				specialDict = {"regular": fRegular, "special": f'{special["opens"]} - {special["closes"]}'}
+				fSpecial = f'{special["opens"]} - {special["closes"]}'
+				if fRegular == fSpecial:
+					break
+				specialDict = {"regular": fRegular, "special": fSpecial}
 			specialHours[str(validDate)] = specialDict
 	specialHours = dict(sorted(specialHours.items(), key = lambda k: k[0]))
 

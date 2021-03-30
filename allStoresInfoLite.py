@@ -74,7 +74,7 @@ Apple Store 零售店信息文件
 		fileDiff += line + "\n"
 	fileDiff += "</code></pre></body></html>"
 
-	with open("/home/storelist.html", "w") as w:
+	with open("/home/centos/www/storelist.html", "w") as w:
 		w.write(fileDiff)
 	os.rename(oldFile, listFile.replace(".json", "-" + runtime + ".json"))
 	logging.info("文件生成完成")
