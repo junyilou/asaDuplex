@@ -7,7 +7,7 @@ userAgent = {
 	 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15"
 }
 
-with open("Retail/storeInfo.json") as r:
+with open("storeInfo.json") as r:
 	infoJSON = json.loads(r.read())
 
 nationCode = {'🇺🇸': '', '🇨🇳': '/cn', '🇬🇧': '/uk', '🇨🇦': '/ca', '🇦🇺': '/au', '🇫🇷': '/fr', 

@@ -52,7 +52,7 @@ chat_ids = ["123456789", "-1024204840964"] # 通常一个用户是正数，Chann
 
 * storeInfo.py
 
-  * 是一个非常强大的模块（确信），其本质是通过分析 Retail/storeInfo.json 来处理 Apple Store 零售店信息
+  * 是一个非常强大的模块（确信），其本质是通过分析 storeInfo.json 来处理 Apple Store 零售店信息
   * StoreID, StoreName, StoreNation：可以通过输入店号、店名返回一家店的信息，在用户只记得两者之一时获得另一者；也可以通过输入 Emoji 来代表该地区所有 Apple Store 零售店
   * storeInfo：整理某店的店号、店名、国家或地区、开业时间、照片标签、官网 URL 后缀
   * storeURL：通过 URL 后缀和国家地区代码生成完整的 Apple 官网地址
