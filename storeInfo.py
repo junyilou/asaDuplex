@@ -64,15 +64,19 @@ def storeURL(storeid):
 		if website == "-":
 			website = name.lower().replace(" ", "")
 		url = f"https://www.apple.com{nationCode[sif['flag']]}/retail/{website}"
+		url = url.replace("apple.com/cn", "apple.com.cn")
 	except KeyError:
 		return "N/A"
 	return url
 
-def storePage(storeid):
-	url = storeURL(storeid)
-	if url == "N/A":
-		return {}
-	r = requests.get(url, headers = userAgent).text
+def storePage(sid):
+	try:
+		r = requests.get(storeURL(sid), headers = userAgent).text
+	except:
+		return ""
+	return r
+
+def storeDict(r):
 	try:
 		j = json.loads(r.split('<script id="__NEXT_DATA__" type="application/json">')[1].split("</script>")[0])
 		j = j["props"]["pageProps"]["storeDetailsData"]
@@ -115,7 +119,7 @@ def storeOrder():
 
 def reloadJSON():
 	global infoJSON
-	with open("Retail/storeInfo.json") as r:
+	with open("storeInfo.json") as r:
 		infoJSON = json.loads(r.read())
 
 def storePairs(args):

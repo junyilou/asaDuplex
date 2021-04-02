@@ -40,7 +40,7 @@ masterJSON = {}
 for sid, sn in stores:
 	try:
 		slug = storeURL(sid)
-		flag = slug.split("https://www.apple.com")[1].split("/retail/")[0]
+		flag = slug.split("https://www.apple.com")[1].split("/retail/")[0].replace(".cn", "/cn")
 		website = slug.split("/retail/")[1]
 		url = f"https://www.apple.com/today-bff/landing/store?stageRootPath={flag}&storeSlug={website}"
 	except IndexError:

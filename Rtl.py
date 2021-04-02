@@ -59,7 +59,7 @@ def down(rtl, isSpecial):
 		storejson['last'] = dict([(k, storejson['last'][k]) for k in sorted(storejson['last'].keys())])
 		logging.info("正在更新 storeInfo.json")
 		sOut = json.dumps(storejson, ensure_ascii = False, indent = 2)
-		with open("Retail/storeInfo.json", "w") as sw:
+		with open("storeInfo.json", "w") as sw:
 			sw.write(sOut)
 
 		logging.getLogger().setLevel(logging.DEBUG)
@@ -88,13 +88,14 @@ def down(rtl, isSpecial):
 		logging.info(f"检查到 {pname} 的图片没有更新")
 
 totalStore = 901
-with open("Retail/storeInfo.json") as s:
+with open("storeInfo.json") as s:
 	storejson = json.loads(s.read())
 
 if len(sys.argv) == 1:
 	print("请指定一种运行模式: normal, special 或 single")
 	logging.info("Rtl 未被指定运行模式")
 	logging.info("程序结束")
+	exit()
 
 if sys.argv[1] == "normal":
 	logging.info("开始枚举零售店")

@@ -10,7 +10,7 @@ def dateConvert(strdate):
 	actual = standard + timedelta(days = int(day) - 1)
 	return actual
 
-def speHours(sid, mode = "special"):
+def speHours(sid, r, mode = "special"):
 	url = storeURL(sid)
 	if url == "N/A":
 		logging.error(f"未能匹配到 R{sid} 的零售店官网页面地址")
@@ -19,7 +19,6 @@ def speHours(sid, mode = "special"):
 		if mode == "regular":
 			return {}, 0
 	logging.info(f"访问 R{sid} 的零售店官网页面")
-	r = requests.get(url, headers = userAgent).text
 	
 	try:
 		j = json.loads(r.split('<script type="application/ld+json">')[1].split("</script>")[0])
