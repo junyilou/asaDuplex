@@ -61,7 +61,7 @@ for f in masterJSON:
 		fName = fCourse["name"].replace("\n", "")
 		if (not fName in mark) and (not fName in appn):
 			appn += f"{fName},\n"
-			stores = storeInfo(f)["name"]
+			stores = actualName(storeInfo(f)["name"])
 			logging.info(f"在 {stores} 找到新活动 {fName}")
 			for j in masterJSON:
 				jStore = masterJSON[j]
@@ -70,12 +70,12 @@ for f in masterJSON:
 				for jID in jStore:
 					jCourse = jStore[jID]
 					if (jCourse["name"].replace("\n", "") == fName):
-						jName = storeInfo(j)["name"]
+						jName = actualName(storeInfo(j)["name"])
 						logging.info(f"在 {jName} 找到相同新活动")
 						stores += f"、{jName}"
 						break
 			push = f"#TodayatApple {fName}\n@ {stores}\n\n{fCourse['mediumDescription']}"
-			push = push.replace('"', "").replace("'", "").replace("：", " - ").replace("_", "\_")
+			push = push.replace('"', "").replace("'", "").replace("：", " - ")
 			logging.info("输出: " + push.replace("\n", " "))
 			photoURL = fCourse["backgroundMedia"]["images"][0]["landscape"]["source"]
 			photoURL += "?output-format=jpg&output-quality=80&resize=2880:*"

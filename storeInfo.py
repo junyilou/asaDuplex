@@ -21,8 +21,7 @@ def StoreID(storeid):
 	storeid = storeid.upper().replace("R", "")
 	if storeid.isdigit():
 		try:
-			name = infoJSON["name"][storeid]
-			name = name if type(name) == str else name[0]
+			name = actualName(infoJSON["name"][storeid])
 			return [(storeid, name)]
 		except KeyError:
 			return []
@@ -45,11 +44,13 @@ def StoreNation(emoji):
 	stores = []
 	for i in infoJSON["flag"]:
 		if infoJSON["flag"][i] == emoji:
-			name = infoJSON["name"][i]
-			name = name if type(name) == str else name[0]
+			name = actualName(infoJSON["name"][i])
 			if name[:8] != "Store in":
 				stores.append((i, name))
 	return stores
+
+def actualName(name):
+	return name if type(name) == str else name[0]
 
 def storeInfo(storeid):
 	sid = StoreID(storeid)[0][0]
@@ -59,8 +60,7 @@ def storeURL(storeid):
 	sif = storeInfo(storeid)
 	try:
 		website = sif["website"]
-		name = sif["name"]
-		name = name if type(name) == str else name[0]
+		name = actualName(sif["name"])
 		if website == "-":
 			website = name.lower().replace(" ", "")
 		url = f"https://www.apple.com{nationCode[sif['flag']]}/retail/{website}"
@@ -157,8 +157,7 @@ def storeReturn(pair, accept_function = ['r', 'n', 's'], sort = True):
 def DieterInfo(rtl):
 	storeJSON = storeInfo(rtl)
 	if "name" in storeJSON:
-		name = storeJSON["name"]
-		name = name if type(name) == str else name[0]
+		name = actualName(storeJSON["name"])
 	else:
 		name = "Store"
 	flag = (storeJSON['flag'] + " ") if "flag" in storeJSON else ""

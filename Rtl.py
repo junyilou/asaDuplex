@@ -1,4 +1,4 @@
-import os, sys, json, logging, requests
+import os, sys, json, logging, requests, time
 from telegram import Bot
 
 from storeInfo import DieterInfo, DieterHeader
@@ -57,6 +57,7 @@ def down(rtl, isSpecial):
 		
 		storejson['last'][rtl] = rhed
 		storejson['last'] = dict([(k, storejson['last'][k]) for k in sorted(storejson['last'].keys())])
+		storejson['update'] = time.strftime("%F %T GMT", time.gmtime())
 		logging.info("正在更新 storeInfo.json")
 		sOut = json.dumps(storejson, ensure_ascii = False, indent = 2)
 		with open("storeInfo.json", "w") as sw:
