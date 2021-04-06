@@ -20,9 +20,10 @@ def disMarkdown(text):
 		temp = temp.replace(s, f"\\{s}")
 	return temp
 
-appn = ""
+append = ""
+masterJSON = {}
 with open("Retail/savedEvent.txt") as m: 
-	mark = m.read()
+	savedID = m.read()
 
 if os.path.isdir('logs'):
 	logging.basicConfig(
@@ -34,8 +35,6 @@ else:
 		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
 		level = logging.INFO, datefmt = '%T')
 logging.info("程序启动")
-
-masterJSON = {}
 
 for sid, sn in stores:
 	try:
@@ -52,34 +51,59 @@ for sid, sn in stores:
 	stdout.flush()
 	logging.info(f"访问 Apple {sn} 的零售店官网页面")
 	r = requests.get(url, verify = False, headers = userAgent)
-	masterJSON[sid] = json.loads(r.text.replace("\u2060", ""))["courses"]
+	rj = json.loads(r.text.replace("\u2060", "").replace("\\n", ""))
+	masterJSON[sid] = {"courses": rj["courses"], "schedules": rj["schedules"]}
 
-for f in masterJSON:
-	fStore = masterJSON[f]
-	for fID in fStore:
-		fCourse = fStore[fID]
-		fName = fCourse["name"].replace("\n", "")
-		if (not fName in mark) and (not fName in appn):
-			appn += f"{fName},\n"
-			stores = actualName(storeInfo(f)["name"])
-			logging.info(f"在 {stores} 找到新活动 {fName}")
+for i in masterJSON:
+	_store = masterJSON[i]
+	for courseID in _store["courses"]:
+		availableStore = [i]
+		course = _store["courses"][courseID]
+		if not any([courseID in savedID, courseID in append]):
+			courseName = course["name"]
+			append += f"{courseID} {courseName}\n"
+			courseStore = actualName(storeInfo(i)["name"])
+
 			for j in masterJSON:
-				jStore = masterJSON[j]
-				if jStore == fStore:
+				if i == j:
 					continue
-				for jID in jStore:
-					jCourse = jStore[jID]
-					if (jCourse["name"].replace("\n", "") == fName):
-						jName = actualName(storeInfo(j)["name"])
-						logging.info(f"在 {jName} 找到相同新活动")
-						stores += f"、{jName}"
-						break
-			push = f"#TodayatApple {fName}\n@ {stores}\n\n{fCourse['mediumDescription']}"
-			push = push.replace('"', "").replace("'", "").replace("：", " - ")
-			logging.info("输出: " + push.replace("\n", " "))
-			photoURL = fCourse["backgroundMedia"]["images"][0]["landscape"]["source"]
-			photoURL += "?output-format=jpg&output-quality=80&resize=2880:*"
+				__store = masterJSON[j]
+				for sameID in __store["courses"]:
+					if sameID == courseID:
+						availableStore.append(j)
+						courseStore += f'、{actualName(storeInfo(j)["name"])}'
+			if "VIRTUAL" in course["type"]:
+				courseName = "[线上活动] " + courseName
+			logging.info(f"在 {courseStore} 找到新活动 {courseName} ID {courseID}")
 
+			availableTime = []
+			for ___store in availableStore:
+				for s in masterJSON[___store]["schedules"]:
+					session = masterJSON[___store]["schedules"][s]
+					if session["courseId"] == courseID:
+						availableTime.append((session["displayDate"][0]["dateTime"], session["startTime"], ___store, s))
+			if not len(availableTime):
+				timing = "该课程尚无具体时间安排"
+				sessionURL = storeURL(i).replace("/retail", "/today")
+			else:
+				sortTime = sorted(availableTime, key = lambda k: k[1])[0]
+				if len(availableStore) == 1:
+					if len(availableTime) == 1:
+						timing = sortTime[0]
+					else:
+						timing = f"{sortTime[0]} 起，共 {len(availableTime)} 次排课"
+				else:
+					timing = f"{sortTime[0]} 于 Apple {actualName(storeInfo(sortTime[2])['name'])} 起，共 {len(availableTime)} 次排课"
+				sessionURL = f"{storeURL(i).split('/retail')[0]}/today/event/{course['urlTitle']}/{sortTime[3]}/?sn=R{sortTime[2]}"
+
+				logging.info(f"找到此活动的课程时间 {timing}")
+				logging.info(f"找到此活动的链接 {sessionURL}")
+
+			push = f"#TodayatApple *{courseName}*\n\n🗺️ {courseStore}\n🕘 {timing}\n\n*课程简介*\n{course['mediumDescription']}\n\n*预约课程*\n{sessionURL}"
+			push = push.replace('"', "").replace("'", "").replace("：", " - ")
+			photoURL = course["backgroundMedia"]["images"][0]["landscape"]["source"]
+			photoURL += "?output-format=jpg&output-quality=80&resize=2880:*"
+			
 			logging.getLogger().setLevel(logging.DEBUG)
 			bot = Bot(token = token)
 			try:
@@ -96,9 +120,9 @@ for f in masterJSON:
 					parse_mode = 'MarkdownV2')
 			logging.getLogger().setLevel(logging.INFO)
 
-if appn != "":
+if append != "":
 	logging.info("正在更新 savedEvent 文件")
 	with open("Retail/savedEvent.txt", "w") as m:
-		m.write(mark + appn)
+		m.write(savedID + append)
 
 logging.info("程序结束")
