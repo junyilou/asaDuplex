@@ -17,6 +17,8 @@ specialistCode = [8164, 8225, 8145, 8043, 8311, 8158,
 8297, 8017, 8251, 8119, 8056, 8082, 8132, 8030, 
 8069, 7991, 8095, 8282, 8176, 8106, 8326, 8004, 8333] #JP - Store Leader
 
+stateCHN, stateEmoji, specialistCode = ["美国"], ["🇺🇸"], [8158]
+
 from sys import argv
 if len(argv) > 1 and argv[1] == "special":
 	stateCHN = ["中国"]; stateEmoji = ["🇨🇳"]; specialistCode = [8030]
@@ -86,13 +88,13 @@ for scn, ste, spl in zip(stateCHN, stateEmoji, specialistCode):
 
 				wAns += f"{ste}{rolloutCode}, "
 				linkURL = f"https://jobs.apple.com/zh-cn/details/{realCode}"
-				pushAns = f"*来自 Recruitment 的通知*\n{ste}{scn}新增招聘地点\n名称: {c['name']}，编号: {rolloutCode} "
+				pushAns = f"*来自 Recruitment 的通知*\n{ste}{scn}新增招聘地点\n{rolloutCode} - {c['name']}"
 				
 				bot = telegram.Bot(token = token)
 				bot.send_photo(
 					chat_id = chat_id, 
 					photo = imageURL,
-					caption = disMarkdown(pushAns) + f"[↗]({linkURL})",
+					caption = disMarkdown(pushAns) + f" [↗]({linkURL})",
 					parse_mode = 'MarkdownV2')
 
 if wAns != "":
