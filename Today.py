@@ -1,12 +1,12 @@
 import os, json, time, logging, requests
-from telegram import Bot
+from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup
 from sys import stdout
 requests.packages.urllib3.disable_warnings()
 
 from storeInfo import *
 
 from bot import tokens, chat_ids
-token = tokens[0]; chat_id = chat_ids[0]
+token = tokens[2]; chat_id = chat_ids[0]
 
 args = "🇨🇳 🇭🇰 🇲🇴 TW"
 
@@ -72,8 +72,9 @@ for i in masterJSON:
 					if sameID == courseID:
 						availableStore.append(j)
 						courseStore += f'、{actualName(storeInfo(j)["name"])}'
-			if "VIRTUAL" in course["type"]:
-				courseName = "[线上活动] " + courseName
+			
+			specialSuffix = "（线上）" if "VIRTUAL" in course["type"] else ''
+			specialPrefix = f"{course['collectionName']} 系列活动\n" if course['collectionName'] else ''
 			logging.info(f"在 {courseStore} 找到新活动 {courseName} ID {courseID}")
 
 			availableTime = []
@@ -85,6 +86,7 @@ for i in masterJSON:
 			if not len(availableTime):
 				timing = "该课程尚无具体时间安排"
 				sessionURL = storeURL(i).replace("/retail", "/today")
+				keyboard = [[InlineKeyboardButton("访问 Apple 主页", url = sessionURL)]]
 			else:
 				sortTime = sorted(availableTime, key = lambda k: k[1])[0]
 				if len(availableStore) == 1:
@@ -94,30 +96,39 @@ for i in masterJSON:
 						timing = f"{sortTime[0]} 起，共 {len(availableTime)} 次排课"
 				else:
 					timing = f"{sortTime[0]} 于 Apple {actualName(storeInfo(sortTime[2])['name'])} 起，共 {len(availableTime)} 次排课"
+
 				sessionURL = f"{storeURL(i).split('/retail')[0]}/today/event/{course['urlTitle']}/{sortTime[3]}/?sn=R{sortTime[2]}"
+				keyboard = [[InlineKeyboardButton("预约课程", url = sessionURL)]]
 
 				logging.info(f"找到此活动的课程时间 {timing}")
-				logging.info(f"找到此活动的链接 {sessionURL}")
+				logging.info(f"最终课程信息：课程 ID {courseID}，课次 ID {courseID if not len(availableTime) else sortTime[3]}")
 
-			push = f"#TodayatApple *{courseName}*\n\n🗺️ {courseStore}\n🕘 {timing}\n\n*课程简介*\n{course['mediumDescription']}\n\n*预约课程*\n{sessionURL}"
-			push = push.replace('"', "").replace("'", "").replace("：", " - ")
+			push = f"""#TodayatApple 新活动\n
+{specialPrefix}*{courseName}*{specialSuffix}\n
+🗺️ {courseStore}
+🕘 {timing}\n
+*课程简介*
+{course['longDescription']}"""
+			push = push.replace('"', "").replace("'", "")
 			photoURL = course["backgroundMedia"]["images"][0]["landscape"]["source"]
-			photoURL += "?output-format=jpg&output-quality=80&resize=2880:*"
-			
+			photoURL += "?output-quality=80&resize=2880:*"
+			keyboard[0].append(InlineKeyboardButton("下载活动配图", url = photoURL))
+			reply_markup = InlineKeyboardMarkup(keyboard)
+
 			logging.getLogger().setLevel(logging.DEBUG)
 			bot = Bot(token = token)
 			try:
 				bot.send_photo(
-					chat_id = chat_id, 
-					photo = photoURL,
+					chat_id = chat_id, photo = photoURL,
 					caption = disMarkdown(push),
-					parse_mode = 'MarkdownV2')
+					parse_mode = 'MarkdownV2',
+					reply_markup = reply_markup)
 			except:
 				logging.error("未能成功发送带有图片的消息")
 				bot.send_message(
-					chat_id = chat_id,
-					text = disMarkdown(f'{push}\n\n{photoURL}'),
-					parse_mode = 'MarkdownV2')
+					chat_id = chat_id, text = disMarkdown(push),
+					parse_mode = 'MarkdownV2',
+					reply_markup = reply_markup)
 			logging.getLogger().setLevel(logging.INFO)
 
 if append != "":
