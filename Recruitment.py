@@ -17,8 +17,6 @@ specialistCode = [8164, 8225, 8145, 8043, 8311, 8158,
 8297, 8017, 8251, 8119, 8056, 8082, 8132, 8030, 
 8069, 7991, 8095, 8282, 8176, 8106, 8326, 8004, 8333] #JP - Store Leader
 
-stateCHN, stateEmoji, specialistCode = ["美国"], ["🇺🇸"], [8158]
-
 from sys import argv
 if len(argv) > 1 and argv[1] == "special":
 	stateCHN = ["中国"]; stateEmoji = ["🇨🇳"]; specialistCode = [8030]
