@@ -97,7 +97,7 @@ for i in masterJSON:
 				else:
 					timing = f"{sortTime[0]} 于 Apple {actualName(storeInfo(sortTime[2])['name'])} 起，共 {len(availableTime)} 次排课"
 
-				sessionURL = f"{storeURL(i).split('/retail')[0]}/today/event/{course['urlTitle']}/{sortTime[3]}/?sn=R{sortTime[2]}"
+				sessionURL = f"{storeURL(sortTime[2]).split('/retail')[0]}/today/event/{course['urlTitle']}/{sortTime[3]}/?sn=R{sortTime[2]}"
 				keyboard = [[InlineKeyboardButton("预约课程", url = sessionURL)]]
 
 				logging.info(f"找到此活动的课程时间 {timing}")
