@@ -10,15 +10,16 @@ requests.packages.urllib3.disable_warnings()
 userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) \
 AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.1 Safari/605.1.15"
 
-if os.path.isdir('logs'):
-	logging.basicConfig(
-		filename = "logs/" + os.path.basename(__file__) + ".log",
-		format = '[%(asctime)s %(levelname)s] %(message)s',
-		level = logging.INFO, filemode = 'a', datefmt = '%F %T')
-else:
-	logging.basicConfig(
-		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
-		level = logging.INFO, datefmt = '%T')
+def setLogger():
+	if os.path.isdir('logs'):
+		logging.basicConfig(
+			filename = "logs/" + os.path.basename(__file__) + ".log",
+			format = '[%(asctime)s %(levelname)s] %(message)s',
+			level = logging.INFO, filemode = 'a', datefmt = '%F %T')
+	else:
+		logging.basicConfig(
+			format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
+			level = logging.INFO, datefmt = '%T')
 
 def disMarkdown(text):
 	temp = text
@@ -94,11 +95,10 @@ with open("storeInfo.json") as s:
 
 if len(sys.argv) == 1:
 	print("请指定一种运行模式: normal, special 或 single")
-	logging.info("Rtl 未被指定运行模式")
-	logging.info("程序结束")
 	exit()
 
 if sys.argv[1] == "normal":
+	setLogger()
 	logging.info("开始枚举零售店")
 	for j in range(1, totalStore):
 		down(f"{j:0>3d}", False)
@@ -114,12 +114,14 @@ if sys.argv[1] == "special":
 	except ValueError: 
 		pass
 	if len(specialist):
+		setLogger()
 		logging.info("开始特别观察模式: " + ", ".join(specialist))
 		for i in specialist:
 			down(i, True)
 		logging.info("程序结束")
 
 if sys.argv[1] == "single":
+	setLogger()
 	logging.info("开始单独调用模式: " + ", ".join(sys.argv[2:]))
 	for i in sys.argv[2:]:
 		down(i, False)

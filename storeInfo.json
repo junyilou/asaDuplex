@@ -1,5 +1,5 @@
 {
-  "update": "2021-04-17 5:50:00 GMT",
+  "update": "2021-05-05 10:30:14 GMT",
   "name": {
     "001": "Glendale Galleria",
     "002": "Palo Alto",
@@ -397,14 +397,20 @@
     "324": "Renaissance at Colony Park",
     "325": "Willowbrook",
     "327": "Manhasset",
-    "328": "Princes Street",
+    "328": [
+      "Edinburgh",
+      "Princes Street"
+    ],
     "331": [
       "Düsseldorf",
       "Duesseldorf"
     ],
     "332": "Rideau",
     "333": "Fairview",
-    "334": "St David's 2",
+    "334": [
+      "Cardiff",
+      "St David's 2"
+    ],
     "335": "SouthGate",
     "338": "The Promenade Shops at Briargate",
     "339": "Tacoma Mall",
@@ -471,7 +477,10 @@
       "香港广场",
       "Hong Kong Plaza"
     ],
-    "391": "Chapelfield",
+    "391": [
+      "Norwich", 
+      "Chapelfield"
+    ],
     "392": "Fairview Pointe-Claire",
     "393": "Cribbs Causeway",
     "394": "Strasbourg",
@@ -2117,7 +2126,7 @@
     "208": "22 Aug 2019 18:11:03",
     "209": "15 Jan 2019 20:21:11",
     "210": "20 Aug 2013 09:24:12",
-    "211": "20 Aug 2013 09:24:12",
+    "211": "03 May 2021 04:29:38",
     "213": "20 Aug 2013 09:24:12",
     "214": "21 Dec 2015 19:11:45",
     "215": "15 Oct 2018 17:46:08",
@@ -2638,7 +2647,6 @@
     "208": "-",
     "209": "-",
     "210": "-",
-    "211": "-",
     "213": "-",
     "214": "-",
     "215": "-",
@@ -3309,7 +3317,6 @@
         "036",
         "078",
         "129",
-        "211",
         "221",
         "271",
         "598",
@@ -3331,6 +3338,7 @@
       "已关闭": [
         "171",
         "173",
+        "211",
         "272",
         "302",
         "825"

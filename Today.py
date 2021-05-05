@@ -72,8 +72,8 @@ for i in masterJSON:
 					if sameID == courseID:
 						availableStore.append(j)
 						courseStore += f'、{actualName(storeInfo(j)["name"])}'
+			courseStore = "线上活动" if "VIRTUAL" in course["type"] else courseStore
 			
-			specialSuffix = "（线上）" if "VIRTUAL" in course["type"] else ''
 			specialPrefix = f"{course['collectionName']} 系列活动\n" if course['collectionName'] else ''
 			logging.info(f"在 {courseStore} 找到新活动 {courseName} ID {courseID}")
 
@@ -83,17 +83,27 @@ for i in masterJSON:
 					session = masterJSON[___store]["schedules"][s]
 					if session["courseId"] == courseID:
 						availableTime.append((session["displayDate"][0]["dateTime"], session["startTime"], ___store, s))
+
 			if not len(availableTime):
 				timing = "该课程尚无具体时间安排"
 				sessionURL = storeURL(i).replace("/retail", "/today")
 				keyboard = [[InlineKeyboardButton("访问 Apple 主页", url = sessionURL)]]
+				logging.error("未找到此课程的排课信息")
+			elif "VIRTUAL" in course["type"]:
+				setTime = availableTime[0]
+				timing = setTime[0]
+				sessionURL = f"{storeURL(setTime[2]).split('/retail')[0]}/today/event/{course['urlTitle']}/{setTime[3]}/?sn=R{setTime[2]}"
+				keyboard = [[InlineKeyboardButton("预约课程", url = sessionURL)]]
+
+				logging.info(f"找到线上活动的课程时间 {timing}")
+				logging.info(f"最终课程信息：课程 ID {courseID}，课次 ID {setTime[3]}")
 			else:
 				sortTime = sorted(availableTime, key = lambda k: k[1])[0]
 				if len(availableStore) == 1:
 					if len(availableTime) == 1:
 						timing = sortTime[0]
 					else:
-						timing = f"{sortTime[0]} 起，共 {len(availableTime)} 次排课"
+						timing = f"{sortTime[0]} 起，共 {len(availableTime)} 个排课"
 				else:
 					timing = f"{sortTime[0]} 于 Apple {actualName(storeInfo(sortTime[2])['name'])} 起，共 {len(availableTime)} 次排课"
 
@@ -101,10 +111,10 @@ for i in masterJSON:
 				keyboard = [[InlineKeyboardButton("预约课程", url = sessionURL)]]
 
 				logging.info(f"找到此活动的课程时间 {timing}")
-				logging.info(f"最终课程信息：课程 ID {courseID}，课次 ID {courseID if not len(availableTime) else sortTime[3]}")
+				logging.info(f"最终课程信息：课程 ID {courseID}，课次 ID {sortTime[3]}")
 
 			push = f"""#TodayatApple 新活动\n
-{specialPrefix}*{courseName}*{specialSuffix}\n
+{specialPrefix}*{courseName}*\n
 🗺️ {courseStore}
 🕘 {timing}\n
 *课程简介*
