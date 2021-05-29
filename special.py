@@ -30,6 +30,13 @@ def speHours(sid, r, mode = "special"):
 			return {}, 0
 
 	regularHours = [""] * 7
+	if "openingHoursSpecification" not in j:
+		logging.error(f"未能从 R{sid} 的零售店官网页面地址匹配到营业时间信息")
+		if mode == "special":
+			return {}
+		if mode == "regular":
+			return {}, 0
+
 	for regular in j["openingHoursSpecification"]:
 		for day in regular["dayOfWeek"]:
 			if "opens" not in regular:
