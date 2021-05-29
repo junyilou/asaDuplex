@@ -2,18 +2,12 @@ import json, requests
 from time import strftime, strptime
 requests.packages.urllib3.disable_warnings()
 
-userAgent = {
-	"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15\
-	 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15"
-}
+from constants import (
+	userAgent, webNation
+)
 
 with open("storeInfo.json") as r:
 	infoJSON = json.loads(r.read())
-
-nationCode = {'🇺🇸': '', '🇨🇳': '/cn', '🇬🇧': '/uk', '🇨🇦': '/ca', '🇦🇺': '/au', '🇫🇷': '/fr', 
-	'🇮🇹': '/it', '🇩🇪': '/de', '🇪🇸': '/es', '🇯🇵': '/jp', '🇨🇭': '/chde', '🇦🇪': '/ae', '🇳🇱': '/nl', 
-	'🇸🇪': '/se', '🇧🇷': '/br', '🇹🇷': '/tr', '🇸🇬': '/sg', '🇲🇽': '/mx', '🇦🇹': '/at', '🇧🇪': '/befr', 
-	'🇰🇷': '/kr', '🇹🇭': '/th', '🇭🇰': '/hk', '🇲🇴': '/mo', '🇹🇼': '/tw', 'TW': '/tw'}
 
 def StoreID(storeid):
 	if type(storeid) == int or len(storeid) < 3:
@@ -36,6 +30,15 @@ def StoreName(name):
 		for cname in comp:
 			if cname.upper() == name.upper():
 				stores.append((i, comp[0]))
+	for i in infoJSON["state"]:
+		for j in infoJSON["state"][i]:
+			if j.upper() == name.upper():
+				for s in infoJSON["state"][i][j]:
+					stores.append((s, actualName(storeInfo(s)["name"])))
+	for i in infoJSON["alias"]:
+		if i.upper() == name.upper():
+			for s in infoJSON["alias"][i]:
+				stores.append((s, actualName(storeInfo(s)["name"])))
 	return stores
 
 def StoreNation(emoji):
@@ -63,7 +66,7 @@ def storeURL(storeid):
 		name = actualName(sif["name"])
 		if website == "-":
 			website = name.lower().replace(" ", "")
-		url = f"https://www.apple.com{nationCode[sif['flag']]}/retail/{website}"
+		url = f"https://www.apple.com{webNation[sif['flag']]}/retail/{website}"
 		url = url.replace("apple.com/cn", "apple.com.cn")
 	except KeyError:
 		return "N/A"
@@ -127,7 +130,7 @@ def storePairs(args):
 	for a in args:
 		if a.isdigit() or a.upper().replace("R", "").isdigit():
 			pair["r"].append(a)
-		elif a in nationCode:
+		elif a in webNation:
 			pair["s"].append(a)
 		else:
 			pair["n"].append(a.replace("Apple_", ""))
