@@ -6,19 +6,13 @@ requests.packages.urllib3.disable_warnings()
 from storeInfo import *
 
 from bot import tokens, chat_ids
-token = tokens[2]; chat_id = chat_ids[0]
+token = tokens[0]; chat_id = chat_ids[0]
+from constants import disMarkdown
 
 args = "🇨🇳 🇭🇰 🇲🇴 TW"
 
 pair = storePairs(args.split())
 stores = storeReturn(pair)
-
-def disMarkdown(text):
-	temp = text
-	signs = "\\`_{}[]()#+-.!="
-	for s in signs:
-		temp = temp.replace(s, f"\\{s}")
-	return temp
 
 append = ""
 masterJSON = {}

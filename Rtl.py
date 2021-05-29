@@ -7,28 +7,13 @@ from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
 requests.packages.urllib3.disable_warnings()
 
-userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) \
-AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.1 Safari/605.1.15"
-
-def setLogger():
-	if os.path.isdir('logs'):
-		logging.basicConfig(
-			filename = "logs/" + os.path.basename(__file__) + ".log",
-			format = '[%(asctime)s %(levelname)s] %(message)s',
-			level = logging.INFO, filemode = 'a', datefmt = '%F %T')
-	else:
-		logging.basicConfig(
-			format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
-			level = logging.INFO, datefmt = '%T')
-
-def disMarkdown(text):
-	temp = text
-	signs = "\\`_{}[]()#+-.!="
-	for s in signs:
-		temp = temp.replace(s, f"\\{s}")
-	return temp
+from constants import (
+	disMarkdown, setLogger, userAgent
+)
 
 def down(rtl, isSpecial):
+	if type(rtl) == int:
+		rtl = f"{rtl:0>3d}"
 	try: 
 		rmod = storejson['last'][rtl]
 	except KeyError: 
@@ -43,7 +28,7 @@ def down(rtl, isSpecial):
 		savename = f"R{rtl}_{rhed.replace(' ', '').replace(':', '')}.png"
 		photoURL = f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{rtl}.png"
 
-		r = requests.get(photoURL, headers = {'User-Agent': userAgent}, verify = False)
+		r = requests.get(photoURL, headers = userAgent, verify = False)
 		with open(f"Retail/{savename}", "wb") as w:
 			w.write(r.content)
 
@@ -98,7 +83,7 @@ if len(sys.argv) == 1:
 	exit()
 
 if sys.argv[1] == "normal":
-	setLogger()
+	setLogger(logging.INFO, os.path.basename(__file__))
 	logging.info("开始枚举零售店")
 	for j in range(1, totalStore):
 		down(f"{j:0>3d}", False)
@@ -108,20 +93,17 @@ if sys.argv[1] == "normal":
 
 if sys.argv[1] == "special":
 	with open("Retail/specialist.txt") as l:
-		specialist = l.read().replace("\n", "").split(", ")
-	try: 
-		specialist.remove('')
-	except ValueError: 
-		pass
+		specialist = eval(f"[{l.read()}]")
+	specialist = [str(i) for i in specialist]
 	if len(specialist):
-		setLogger()
+		setLogger(logging.INFO, os.path.basename(__file__))
 		logging.info("开始特别观察模式: " + ", ".join(specialist))
 		for i in specialist:
 			down(i, True)
 		logging.info("程序结束")
 
 if sys.argv[1] == "single":
-	setLogger()
+	setLogger(logging.INFO, os.path.basename(__file__))
 	logging.info("开始单独调用模式: " + ", ".join(sys.argv[2:]))
 	for i in sys.argv[2:]:
 		down(i, False)

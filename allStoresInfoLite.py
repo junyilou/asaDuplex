@@ -1,30 +1,16 @@
-import os, time, json, filecmp, difflib, logging, requests
+import os, time, json, logging
+import requests, filecmp, difflib
 import telegram
 
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
+from constants import (
+	asaHeaders, setLogger, DIFFhead, DIFFfoot
+)
 
 requests.packages.urllib3.disable_warnings()
+setLogger(logging.INFO, os.path.basename(__file__))
 
-asaVersion = "5.11.0"; asaAgent = ".".join(asaVersion.split(".")[:2])
-headers = {
-	"User-Agent": f"ASA/{asaAgent} (iPhone) ss/3.00",
-	"x-ma-pcmh":  f"REL-{asaVersion}",
-	"X-MALang":   "zh-CN",
-	"X-Apple-I-TimeZone": "GMT+8",
-	"X-Apple-I-Locale":   "zh_CN",
-	"X-MMe-Client-Info": f"<iPhone13,2> <iPhone OS;14.3;18C66> <com.apple.AuthKit/1 (com.apple.store.Jolly/{asaVersion})>",
-	"X-DeviceConfiguration":  f"ss=3.00;dim=1170x2532;m=iPhone;v=iPhone13,2;vv={asaAgent};sv=14.3"}
-
-if os.path.isdir('logs'):
-	logging.basicConfig(
-		filename = "logs/" + os.path.basename(__file__) + ".log",
-		format = '[%(asctime)s %(levelname)s] %(message)s',
-		level = logging.DEBUG, filemode = 'a', datefmt = '%F %T')
-else:
-	logging.basicConfig(
-		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
-		level = logging.DEBUG, datefmt = '%T')
 logging.info("程序启动")
 
 listFile = "Retail/storeList.json"
@@ -36,7 +22,7 @@ if os.path.isfile(listFile):
 else:
 	orgListSize = 0
 
-r = requests.get("https://mobileapp.apple.com/mnr/p/cn/retail/allStoresInfoLite", headers = headers, verify = False)
+r = requests.get("https://mobileapp.apple.com/mnr/p/cn/retail/allStoresInfoLite", headers = asaHeaders, verify = False)
 with open(listFile, "w") as w:
 	dlc = r.text.replace('?interpolation=progressive-bicubic&output-quality=85&output-format=jpg&resize=312:*', '')
 	w.write(dlc)
@@ -49,17 +35,7 @@ if qualify == [False, True]:
 
 	logging.info("检测到有文件变化，正在生成 changeLog")
 	fileLines = []
-	fileDiff = f"""
-<!DOCTYPE html>
-
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>allStoresInfoLite</title>
-</head>
-
-<body><pre><code>
-Apple Store 零售店信息文件
+	fileDiff = f"""{DIFFhead}Apple Store 零售店信息文件
 生成于 {runtime}
 """
 	for formatFile in [oldFile, listFile]:
@@ -72,7 +48,7 @@ Apple Store 零售店信息文件
 
 	for line in difflib.unified_diff(fileLines[0], fileLines[1]): 
 		fileDiff += line + "\n"
-	fileDiff += "</code></pre></body></html>"
+	fileDiff += DIFFfoot
 
 	with open("/home/centos/www/storelist.html", "w") as w:
 		w.write(fileDiff)

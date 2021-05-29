@@ -1,28 +1,22 @@
+import json, os, logging
+from sys import stdout
+from datetime import datetime, date
+import telegram
+
 from storeInfo import *
 from special import speHours
-
-import json, os, logging
-from telegram import Bot
-from datetime import datetime, date
-from sys import stdout
-
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
+from constants import (
+	setLogger, DIFFhead, DIFFfoot
+)
 
-args = "🇨🇳 🇭🇰 🇲🇴 TW"
+args = "🇨🇳"
 
 pair = storePairs(args.split())
 stores = storeReturn(pair)
 
-if os.path.isdir('logs'):
-	logging.basicConfig(
-		filename = "logs/" + os.path.basename(__file__) + ".log",
-		format = '[%(asctime)s %(levelname)s] %(message)s',
-		level = logging.INFO, filemode = 'a', datefmt = '%F %T')
-else:
-	logging.basicConfig(
-		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
-		level = logging.INFO, datefmt = '%T')
+setLogger(logging.INFO, os.path.basename(__file__))
 logging.info("程序启动")
 runtime = str(date.today())
 
@@ -94,36 +88,25 @@ with open("Retail/storeHours.json", "w") as w:
 	w.write(jOut)
 
 if len(comparison):
-	fileDiff = f"""
-<!DOCTYPE html>
-
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>specialHours</title>
-</head>
-
-<body><pre><code>
-Apple Store 特别营业时间
+	fileDiff = f"""{DIFFhead}Apple Store 特别营业时间
 生成于 {runtime}\n\n
 变化:\n{comparison}\n
 日历:\n{calendar}\n\n
 原始 JSON:\n{jOut}
-</code></pre></body></html>
+{DIFFfoot}
 """
 	with open("/home/centos/www/storeHours.html", "w") as w:
 		w.write(fileDiff)
 	logging.info("文件生成完成")
 
 	logging.getLogger().setLevel(logging.DEBUG)
-	bot = Bot(token = token)
+	bot = telegram.Bot(token = token)
 	bot.send_photo(
 		chat_id = chat_id, 
 		photo = "https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_medium_2x.jpg",
 		caption = f'*来自 Hours 的通知*\n{comparison.count("Apple")} 个 Apple Store 有特别营业时间变化 [↗](https://shunitsu.moe/storeHours.html)',
 		parse_mode = 'MarkdownV2')
 	logging.getLogger().setLevel(logging.INFO)
-
 
 else: 
 	os.remove(f"Retail/storeHours-{runtime}.json")
