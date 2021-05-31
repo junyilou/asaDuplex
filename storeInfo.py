@@ -57,7 +57,7 @@ def actualName(name):
 
 def storeInfo(storeid):
 	sid = StoreID(storeid)[0][0]
-	return dict([(t, infoJSON[t][sid]) for t in infoJSON if sid in infoJSON[t]])
+	return dict([(t, infoJSON[t][sid]) for t in infoJSON if (sid in infoJSON[t]) and (type(infoJSON[t]) == dict)])
 
 def storeURL(storeid):
 	sif = storeInfo(storeid)
