@@ -11,7 +11,15 @@ from constants import (
 	setLogger, DIFFhead, DIFFfoot
 )
 
-args = "🇨🇳"
+printDebug = True
+from sys import argv
+if "silent" in argv[1:]:
+	printDebug = False
+	argv.remove("silent")
+if len(argv[1:]):
+	args = " ".join(argv[1:])
+else:
+	args = "🇨🇳"
 
 pair = storePairs(args.split())
 stores = storeReturn(pair)
@@ -33,9 +41,10 @@ except FileNotFoundError:
 		w.write("{}")
 
 for sid, sn in stores:
-	cur = stores.index((sid, sn)) + 1; tot = len(stores); perc = int(cur / tot * 40)
-	print(f"[{'':=^{perc}}{'':^{40 - perc}}] R{sid} {cur}/{tot} {cur / tot:.1%}", end = "\r")
-	stdout.flush()
+	if printDebug:
+		cur = stores.index((sid, sn)) + 1; tot = len(stores); perc = int(cur / tot * 40)
+		print(f"[{'':=^{perc}}{'':^{40 - perc}}] R{sid} {cur}/{tot} {cur / tot:.1%}", end = "\r")
+		stdout.flush()
 
 	specialHours = speHours(sid, storePage(sid))
 	storeDiff = ""

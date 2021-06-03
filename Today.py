@@ -9,7 +9,15 @@ from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
 from constants import disMarkdown
 
-args = "🇨🇳 🇭🇰 🇲🇴 TW"
+printDebug = True
+from sys import argv
+if "silent" in argv[1:]:
+	printDebug = False
+	argv.remove("silent")
+if len(argv[1:]):
+	args = " ".join(argv[1:])
+else:
+	args = "🇨🇳 🇭🇰 🇲🇴 TW"
 
 pair = storePairs(args.split())
 stores = storeReturn(pair)
@@ -40,9 +48,10 @@ for sid, sn in stores:
 		logging.error(f"未能匹配到 R{sid} 的零售店官网页面地址")
 		continue
 
-	cur = stores.index((sid, sn)) + 1; tot = len(stores); perc = int(cur / tot * 40)
-	print(f"[{'':=^{perc}}{'':^{40 - perc}}] R{sid} {cur}/{tot} {cur / tot:.1%}", end = "\r")
-	stdout.flush()
+	if printDebug:
+		cur = stores.index((sid, sn)) + 1; tot = len(stores); perc = int(cur / tot * 40)
+		print(f"[{'':=^{perc}}{'':^{40 - perc}}] R{sid} {cur}/{tot} {cur / tot:.1%}", end = "\r")
+		stdout.flush()
 	logging.info(f"访问 Apple {sn} 的零售店官网页面")
 	r = requests.get(url, verify = False, headers = userAgent)
 	rj = json.loads(r.text.replace("\u2060", "").replace("\\n", ""))
