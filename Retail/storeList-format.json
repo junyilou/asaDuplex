@@ -1,20 +1,18 @@
 {
   "omniture": {
     "trackPage": {
+      "prop2": "AOS : China Consumer",
       "server": "mobileapp.apple.com",
       "eVar4": "AOS : retail/allStoresInfoLite",
       "prop40": "506738",
       "eVar3": "AOS : China Consumer",
       "eVar14": "zh-cn",
-      "eVar19": "AOS: CN Consumer:retail/allStoresInfoLite",
+      "prop20": "asa:cn consumer",
       "prop8": "AOS : retail/allStoresInfoLite",
       "storeId": "506738",
-      "pageName": "AOS : retail/allStoresInfoLite",
-      "prop2": "AOS : China Consumer",
-      "prop19": "AOS: CN Consumer:retail/allStoresInfoLite",
-      "prop20": "asa:cn consumer",
       "eVar30": "mobileapp.apple.com",
-      "currencyCode": "CNY"
+      "currencyCode": "CNY",
+      "pageName": "AOS : retail/allStoresInfoLite"
     }
   },
   "countryStateMapping": [
@@ -5003,6 +5001,28 @@
               "phoneNumber": "(714) 424-6331"
             },
             {
+              "storeNumber": "R720",
+              "countryCode": "US",
+              "storeName": "Tower Theatre",
+              "latitude": "34.0435491",
+              "longitude": "-118.2546643",
+              "storeRadius": "50",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R720.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Los Angeles, CA",
+              "timeZone": "America/Los_Angeles",
+              "instoreCheckoutMode": "SCAN_AND_BUY",
+              "selfCheckout": "SNB",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipSelfCheckout": "SNB",
+              "enableInStoreMode": true,
+              "storeAddress": "802 S Broadway\nLos Angeles,CA 90014 ",
+              "phoneNumber": "(213) 6551200"
+            },
+            {
               "storeNumber": "R002",
               "countryCode": "US",
               "storeName": "Palo Alto",
@@ -5292,8 +5312,8 @@
               "storeNumber": "R039",
               "countryCode": "US",
               "storeName": "Valley Fair",
-              "latitude": "37.325424",
-              "longitude": "-121.947241",
+              "latitude": "37.324585",
+              "longitude": "-121.946497",
               "storeRadius": "200",
               "accuracyThreshold": "500",
               "imageURL": [
