@@ -34,8 +34,7 @@ asaNation = {'🇺🇸': 'a/us', '🇨🇳': 'p/cn', '🇬🇧': 'e/uk', '🇨�
 	'🇰🇷': 'p/kr', '🇹🇭': 'p/th-en', '🇭🇰': 'p/hk-zh', '🇹🇼': 'p/tw'}
 
 userAgent = {
-	"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15\
-	 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15"
+	"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15(KHTML, like Gecko) Version/14.0.2 Safari/605.1.15"
 }
 webNation = {'🇺🇸': '', '🇨🇳': '/cn', '🇬🇧': '/uk', '🇨🇦': '/ca', '🇦🇺': '/au', '🇫🇷': '/fr', 
 	'🇮🇹': '/it', '🇩🇪': '/de', '🇪🇸': '/es', '🇯🇵': '/jp', '🇨🇭': '/chde', '🇦🇪': '/ae', '🇳🇱': '/nl', 

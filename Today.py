@@ -7,7 +7,7 @@ from storeInfo import *
 
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
-from constants import disMarkdown
+from constants import disMarkdown, setLogger
 
 printDebug = True
 from sys import argv
@@ -27,15 +27,7 @@ masterJSON = {}
 with open("Retail/savedEvent.txt") as m: 
 	savedID = m.read()
 
-if os.path.isdir('logs'):
-	logging.basicConfig(
-		filename = "logs/" + os.path.basename(__file__) + ".log",
-		format = '[%(asctime)s %(levelname)s] %(message)s',
-		level = logging.INFO, filemode = 'a', datefmt = '%F %T')
-else:
-	logging.basicConfig(
-		format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
-		level = logging.INFO, datefmt = '%T')
+setLogger(logging.INFO, os.path.basename(__file__))
 logging.info("程序启动")
 
 for sid, sn in stores:
@@ -54,8 +46,11 @@ for sid, sn in stores:
 		stdout.flush()
 	logging.info(f"访问 Apple {sn} 的零售店官网页面")
 	r = requests.get(url, verify = False, headers = userAgent)
-	rj = json.loads(r.text.replace("\u2060", "").replace("\\n", ""))
-	masterJSON[sid] = {"courses": rj["courses"], "schedules": rj["schedules"]}
+	try:
+		rj = json.loads(r.text.replace("\u2060", "").replace("\u00A0", " ").replace("\\n", ""))
+		masterJSON[sid] = {"courses": rj["courses"], "schedules": rj["schedules"]}
+	except json.decoder.JSONDecodeError:
+		pass
 
 for i in masterJSON:
 	_store = masterJSON[i]

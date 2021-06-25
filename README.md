@@ -46,7 +46,8 @@ chat_ids = ["123456789", "-1024204840964"] # 通常一个用户是正数，Chann
 * Recruitment.py: 取得全球 Specialist 招聘情况以获得未来新店
 * Rtl.py: 取得 Apple Store 零售店服务器图片更新
 * Hours.py: 取得 Apple Store 特别营业时间信息
-* Today.py: 取得大中华区最新 Today at Apple 活动
+* Today.py: 取得最新 Today at Apple 活动
+* Sitemap.py: 作为 Today.py 的补充，通过 sitemap.xml 取得额外的 Today at Apple 活动
 
 ### 数据获取模块
 
