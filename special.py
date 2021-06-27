@@ -1,8 +1,7 @@
 import logging, requests, json
 from datetime import timedelta, date
 from storeInfo import storeInfo, storeURL, userAgent
-
-dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+from constants import dayOfWeekENG
 
 def dateConvert(strdate):
 	year, month, day = strdate.split("-")
@@ -40,11 +39,11 @@ def speHours(sid, r, mode = "special"):
 	for regular in j["openingHoursSpecification"]:
 		for day in regular["dayOfWeek"]:
 			if "opens" not in regular:
-				regularHours[dayOfWeek.index(day)] = "已关闭"
+				regularHours[dayOfWeekENG.index(day)] = "已关闭"
 			elif regular["opens"] == "00:00" and regular["closes"] == "23:59":
-				regularHours[dayOfWeek.index(day)] = "24 小时营业"
+				regularHours[dayOfWeekENG.index(day)] = "24 小时营业"
 			else:
-				regularHours[dayOfWeek.index(day)] = f'{regular["opens"]} - {regular["closes"]}'
+				regularHours[dayOfWeekENG.index(day)] = f'{regular["opens"]} - {regular["closes"]}'
 	
 	specialHours = {}
 	for special in j["specialOpeningHoursSpecification"]:

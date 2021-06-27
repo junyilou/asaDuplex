@@ -97,7 +97,7 @@ with open("Retail/storeHours.json", "w") as w:
 	w.write(jOut)
 
 if len(comparison):
-	fileDiff = f"""{DIFFhead}Apple Store 特别营业时间
+	fileDiff = f"""{DIFFhead.replace('DIFF HEAD', 'Special Hours')}Apple Store 特别营业时间
 生成于 {runtime}\n\n
 变化:\n{comparison}\n
 日历:\n{calendar}\n\n

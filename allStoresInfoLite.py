@@ -35,7 +35,7 @@ if qualify == [False, True]:
 
 	logging.info("检测到有文件变化，正在生成 changeLog")
 	fileLines = []
-	fileDiff = f"""{DIFFhead}Apple Store 零售店信息文件
+	fileDiff = f"""{DIFFhead.replace('DIFF HEAD', 'allStoresInfoLite')}Apple Store 零售店信息文件
 生成于 {runtime}
 """
 	for formatFile in [oldFile, listFile]:

@@ -47,7 +47,7 @@ DIFFhead = """
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>allStoresInfoLite</title>
+<title>DIFF HEAD</title>
 </head>
 
 <body><pre><code>\n"""
@@ -56,7 +56,7 @@ DIFFfoot = "</code></pre></body></html>"
 editStart = "### *** EDIT START *** ###\n"
 editEnd   = "\n### *** EDIT  END  *** ###"
 
-dayOfWeekCHN = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+dayOfWeekCHN = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
 dayOfWeekENG = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 orderDict = {
