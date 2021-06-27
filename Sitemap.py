@@ -11,7 +11,7 @@ from constants import (
 	userAgent, dayOfWeekCHN, disMarkdown, setLogger
 )
 
-args = "/cn /hk /mo /tw" # Use /us for US
+args = ".cn /hk /mo /tw" # Use /us for US
 
 storePattern = "R[0-9]{3}"
 cseidPattern = "6[0-9]{18}"
@@ -74,10 +74,18 @@ for slug, region in parts:
 for slug, region, courseID, storeID in master:
 	logging.info(f"处理活动 {courseID} {slug}")
 	uRegion = ("/" + region[1:]) if region else ""
-	if not storeID:
-		r = requests.get(f"https://www.apple.com/today-bff/session/course?stageRootPath={uRegion}&courseSlug={slug}")
-	else:
-		r = requests.get(f"https://www.apple.com/today-bff/session/schedule?stageRootPath={uRegion}&courseSlug={slug}&scheduleId={courseID}&sn={storeID}")
+	
+	try:
+		if not storeID:
+			raise Exception
+		url = f"https://www.apple.com/today-bff/session/schedule?stageRootPath={uRegion}&courseSlug={slug}&scheduleId={courseID}&sn={storeID}"
+		r = requests.get(url, headers = userAgent)
+		if r.text == "Unknown request":
+			raise Exception
+	except:
+		url = f"https://www.apple.com/today-bff/session/course?stageRootPath={uRegion}&courseSlug={slug}"
+		r = requests.get(url, headers = userAgent)
+
 	_store = json.loads(r.text.replace("\u2060", "").replace("\u00A0", " ").replace("\\n", ""))
 
 	course = _store["courses"][courseID]
