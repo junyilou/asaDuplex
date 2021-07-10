@@ -16,10 +16,12 @@ args = ".cn /hk /mo /tw" # Use /us for US
 storePattern = "R[0-9]{3}"
 cseidPattern = "6[0-9]{18}"
 
-append = ""
+sitemapAppend = eventAppend = ""
 seen = []; master = []
 with open("Retail/savedEvent.txt") as m: 
 	savedID = m.read()
+with open("Retail/savedSitemap.txt") as m: 
+	savedID += m.read()
 
 setLogger(logging.INFO, os.path.basename(__file__))
 logging.info("程序启动")
@@ -90,7 +92,11 @@ for slug, region, courseID, storeID in master:
 
 	course = _store["courses"][courseID]
 	courseName = course["name"]
-	append += f"{courseID} {courseName}\n"
+
+	sitemapAppend += f"{courseID} {courseName}\n"
+	if storeID:
+		eventAppend += f"{courseID} {courseName}\n"
+
 	courseStore = actualName(storeInfo(storeID)["name"]) if storeID else "尚无已排课零售店"
 	courseStore = "线上活动" if "VIRTUAL" in course["type"] else courseStore
 	specialPrefix = f"{course['collectionName']} 系列活动\n" if course['collectionName'] else ''
@@ -106,7 +112,7 @@ for slug, region, courseID, storeID in master:
 		sessionURL = f"https://www.apple.com{region}/today/event/{slug}"
 		keyboard = [[InlineKeyboardButton("查看课程详情", url = sessionURL)]]
 
-	push = f"""#TodayatApple 新活动\n
+	push = f"""#TodayatApple #Sitemap 新活动\n
 {specialPrefix}*{courseName}*\n
 🗺️ {courseStore}
 🕘 {timing}\n
@@ -118,6 +124,7 @@ for slug, region, courseID, storeID in master:
 	photoURL += "?output-quality=80&resize=2880:*"
 	keyboard[0].append(InlineKeyboardButton("下载活动配图", url = photoURL))
 	reply_markup = InlineKeyboardMarkup(keyboard)
+
 
 	bot = Bot(token = token)
 	try:
@@ -132,9 +139,13 @@ for slug, region, courseID, storeID in master:
 			parse_mode = 'MarkdownV2',
 			reply_markup = reply_markup)
 
-if append != "":
-	logging.info("正在更新 savedEvent 文件")
-	with open("Retail/savedEvent.txt", "w") as m:
-		m.write(savedID + append)
+if sitemapAppend:
+	logging.info("正在更新 savedSitemap 文件")
+	with open("Retail/savedSitemap.txt", "w") as m:
+		m.write(savedID + sitemapAppend)
+	if eventAppend:
+		logging.info("正在更新 savedSitemap 文件")
+		with open("Retail/savedEvent.txt", "a") as m:
+			m.write(eventAppend)
 
 logging.info("程序结束")
