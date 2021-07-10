@@ -172,5 +172,12 @@ def DieterHeader(rtl):
 	if not len(sid):
 		return "404"
 	else:
-		r = requests.head(f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid[0][0]}.png", allow_redirects = True, verify = False)
-	return "404" if r.status_code == 404 else r.headers['Last-Modified'][5:-4]
+		try:
+			r = requests.head(f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid[0][0]}.png", 
+			headers = userAgent, allow_redirects = True, verify = False, timeout = 5)
+		except requests.exceptions.ReadTimeout:
+			return "404" # Bad Handling Method
+		if r.status_code in [403, 404, 500, 502]:
+			return "404"
+		else:
+			return r.headers['Last-Modified'][5:-4]
