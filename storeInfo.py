@@ -67,7 +67,6 @@ def storeURL(storeid):
 		if website == "-":
 			website = name.lower().replace(" ", "")
 		url = f"https://www.apple.com{webNation[sif['flag']]}/retail/{website}"
-		url = url.replace("apple.com/cn", "apple.com.cn")
 	except KeyError:
 		return "N/A"
 	return url
