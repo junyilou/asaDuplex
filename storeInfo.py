@@ -110,6 +110,32 @@ def storeState(stateCode):
 		for prov in infoJSON["state"][stateCode]])
 	return reply
 
+def getState(sid):
+	for i in infoJSON["state"]:
+		for j in infoJSON["state"][i]:
+			if sid in infoJSON["state"][i][j]:
+				return j, infoJSON["state"][i][j]
+
+def stateReplace(rstores):
+	stores = rstores.copy()
+	if not stores:
+		return stores
+	while True:
+		for store in stores:
+			flag = False
+			if not store.isdigit():
+				continue
+			stateName, stateStore = getState(store)
+			if all([i in stores for i in stateStore]):
+				stores[stores.index(store)] = f"{stateName} ({len(stateStore)})"
+				[stores.remove(j) for j in stateStore if j != store]
+				flag = True
+			if flag:
+				break
+		if flag == False:
+			break
+	return stores
+
 def storeOrder():
 	stores = []
 	state = infoJSON["state"]
@@ -135,7 +161,7 @@ def storePairs(args):
 			pair["n"].append(a.replace("Apple_", ""))
 	return pair
 
-def storeReturn(pair, accept_function = ['r', 'n', 's'], sort = True):
+def storeReturn(pair, accept_function = ['r', 'n', 's'], sort = True, remove_close = False):
 	stores = list()
 	functions = {'r': StoreID, 'n': StoreName, 's': StoreNation}
 	for f in accept_function:
@@ -144,6 +170,8 @@ def storeReturn(pair, accept_function = ['r', 'n', 's'], sort = True):
 			for _s in list(S):
 				for __s in _s:
 					if __s not in stores:
+						if remove_close and getState(__s[0])[0] == "已关闭":
+							continue
 						stores.append(__s)
 	if sort:
 		order = {}; Order = storeOrder()

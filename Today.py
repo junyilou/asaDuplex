@@ -60,7 +60,6 @@ for i in masterJSON:
 		if not any([courseID in savedID, courseID in append]):
 			courseName = course["name"]
 			append += f"{courseID} {courseName}\n"
-			courseStore = actualName(storeInfo(i)["name"])
 
 			for j in masterJSON:
 				if i == j:
@@ -69,9 +68,12 @@ for i in masterJSON:
 				for sameID in __store["courses"]:
 					if sameID == courseID:
 						availableStore.append(j)
-						courseStore += f'、{actualName(storeInfo(j)["name"])}'
-			courseStore = "线上活动" if "VIRTUAL" in course["type"] else courseStore
-			
+			textStore = stateReplace(availableStore)
+			for a in textStore:
+				if a.isdigit():
+					textStore[textStore.index(a)] = actualName(storeInfo(a)["name"])
+			courseStore = "线上活动" if "VIRTUAL" in course["type"] else "、".join(textStore)
+
 			specialPrefix = f"{course['collectionName']} 系列活动\n" if course['collectionName'] else ''
 			logging.info(f"在 {courseStore} 找到新活动 {courseName} ID {courseID}")
 
