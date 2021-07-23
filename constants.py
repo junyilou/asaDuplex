@@ -33,18 +33,19 @@ asaNation = {'🇺🇸': 'a/us', '🇨🇳': 'p/cn', '🇬🇧': 'e/uk', '🇨�
 	'🇸🇪': 'e/se', '🇧🇷': 'a/br', '🇹🇷': 'e/tr', '🇸🇬': 'p/sg', '🇲🇽': 'a/mx', '🇦🇹': 'e/at', '🇧🇪': 'e/be-fr', 
 	'🇰🇷': 'p/kr', '🇹🇭': 'p/th-en', '🇭🇰': 'p/hk-zh', '🇹🇼': 'p/tw'}
 
-userAgent = {
-	"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6)\
-AppleWebKit/605.1.15(KHTML, like Gecko)Version/14.0.2 Safari/605.1.15"
-}
+userAgent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6)\
+AppleWebKit/605.1.15(KHTML, like Gecko)Version/14.0.2 Safari/605.1.15"}
 
-webNation = {**dict([(i[0], i[1][1:4]) for i in asaNation.items()]), "🇺🇸": '', "🇨🇳": '.cn', "🇨🇭": "/chde", "🇧🇪": "/befr", "TW": "/tw", '🇲🇴': '/mo'}
-storeNation = {**webNation, "🇨🇭": "/ch-de", "🇧🇪": "/be-fr"}
+webNation = {**dict([(i[0], i[1][1:4]) for i in asaNation.items()]), 
+	"🇺🇸": '', "🇨🇳": '.cn', "🇨🇭": "/chde", "🇧🇪": "/befr", "TW": "/tw", '🇲🇴': '/mo'} # for /retail
+storeNation = {**webNation, "🇨🇭": "/ch-de", "🇧🇪": "/be-fr"} # for /shop
 
 partSample = {'🇺🇸': 'AM', '🇨🇳': 'FE', '🇬🇧': 'ZM', '🇨🇦': 'AM', '🇦🇺': 'FE', '🇫🇷': 'ZM', 
 	'🇮🇹': 'ZM', '🇩🇪': 'ZM', '🇪🇸': 'ZM', '🇯🇵': 'FE', '🇳🇱': 'ZM', 
 	'🇸🇪': 'ZM', '🇸🇬': 'FE', '🇦🇹': 'ZM', 
 	'🇰🇷': 'FE', '🇹🇭': 'FE', '🇭🇰': 'FE', '🇹🇼': 'FE'}
+partRuleFull = "([FGHMNPS][0-9A-Z]{3}[0-9][A-Z]{1,2}/[A-Z])"
+partRuleCheck = "([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z]))"
 
 DIFFhead = """
 <!DOCTYPE html>

@@ -1,7 +1,7 @@
 import logging, requests, json
 from datetime import timedelta, date, datetime
 from storeInfo import storeInfo, storeURL, userAgent, storePage
-from constants import dayOfWeekENG, partSample
+from constants import dayOfWeekENG, partSample, storeNation
 
 def dateConvert(strdate):
 	year, month, day = strdate.split("-")
@@ -11,13 +11,14 @@ def dateConvert(strdate):
 
 def comment(sid):
 	try:
-		partNumber = f"MX0K2{partSample[storeInfo(sid)['flag']]}/A"
-	except IndexError:
+		flag = storeInfo(sid)['flag']
+		partNumber = f"MX0K2{partSample[flag]}/A"
+	except KeyError:
 		return {}
-	baseURL = storeURL(sid).split('/retail')[0]
+	baseURL = f"https://www.apple.com{storeNation[flag]}"
 	referer = {**userAgent, "Referer": f"{baseURL}/shop/product/{partNumber}"}
 	url = f"{baseURL}/shop/fulfillment-messages?searchNearby=false&parts.0={partNumber}&store=R{sid}"
-	
+
 	try:
 		r = requests.get(url, headers = referer).json()
 		j = r["body"]["content"]["pickupMessage"]["stores"]
