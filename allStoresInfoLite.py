@@ -59,7 +59,7 @@ if qualify == [False, True]:
 	bot.send_photo(
 		chat_id = chat_id, 
 		photo = "https://www.apple.com/jp/retail/store/includes/marunouchi/drawer/images/store-drawer-tile-1_medium_2x.jpg",
-		caption = '*来自 allStoresInfoLite 的通知*\nApple Store 零售店信息文件已更新 [↗](https://shunitsu.moe/storelist.html)',
+		caption = '*来自 allStoresInfoLite 的通知*\nApple Store 零售店信息文件已更新 [↗](http://myv.ps/storelist.html)',
 		parse_mode = 'MarkdownV2')
 
 elif qualify[0] == True:

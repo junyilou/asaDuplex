@@ -151,6 +151,8 @@ def reloadJSON():
 		infoJSON = json.loads(r.read())
 
 def storePairs(args):
+	if type(args) == str:
+		args = [args]
 	pair = {"r": [], "s": [], "n": []}
 	for a in args:
 		if a.isdigit() or a.upper().replace("R", "").isdigit():

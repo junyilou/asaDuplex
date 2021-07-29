@@ -22,7 +22,7 @@ else:
 	args = "🇨🇳"
 
 pair = storePairs(args.split())
-stores = storeReturn(pair)
+stores = storeReturn(pair, remove_close = True)
 
 setLogger(logging.INFO, os.path.basename(__file__))
 logging.info("程序启动")
@@ -113,7 +113,7 @@ if len(comparison):
 	bot.send_photo(
 		chat_id = chat_id, 
 		photo = "https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_medium_2x.jpg",
-		caption = f'*来自 Hours 的通知*\n{comparison.count("Apple")} 个 Apple Store 有特别营业时间变化 [↗](https://shunitsu.moe/storeHours.html)',
+		caption = f'*来自 Hours 的通知*\n{comparison.count("Apple")} 个 Apple Store 有特别营业时间变化 [↗](http://myv.ps/storeHours.html)',
 		parse_mode = 'MarkdownV2')
 	logging.getLogger().setLevel(logging.INFO)
 

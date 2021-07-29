@@ -20,7 +20,7 @@ else:
 	args = "🇨🇳 🇭🇰 🇲🇴 TW"
 
 pair = storePairs(args.split())
-stores = storeReturn(pair)
+stores = storeReturn(pair, remove_close = True)
 
 append = ""
 masterJSON = {}
