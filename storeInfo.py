@@ -3,7 +3,7 @@ from time import strftime, strptime
 requests.packages.urllib3.disable_warnings()
 
 from constants import (
-	userAgent, webNation
+	userAgent, webNation, dieterURL
 )
 
 with open("storeInfo.json") as r:
@@ -199,14 +199,13 @@ def DieterInfo(rtl):
 def DieterHeader(rtl):
 	sid = StoreID(rtl)
 	if not len(sid):
-		return "404"
+		return None
 	else:
 		try:
-			r = requests.head(f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid[0][0]}.png", 
-			headers = userAgent, allow_redirects = True, verify = False, timeout = 5)
+			r = requests.head(dieterURL(sid[0][0]), headers = userAgent, allow_redirects = True, verify = False, timeout = 5)
 		except requests.exceptions.ReadTimeout:
-			return "404" # Bad Handling Method
-		if r.status_code in [403, 404, 500, 502]:
-			return "404"
+			return None
+		if r.status_code in [403, 404, 422, 500, 502]:
+			return None
 		else:
 			return r.headers['Last-Modified'][5:-4]
