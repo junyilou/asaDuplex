@@ -1,16 +1,18 @@
-import os, json, time, logging
-import requests, telegram
+import os
+import json
+import time
+import logging
+import requests
 requests.packages.urllib3.disable_warnings()
 
-from bot import tokens, chat_ids
-token = tokens[0]; chat_id = chat_ids[0]
-from constants import (
-	RecruitState, RecruitEmoji, RecruitCode, disMarkdown, setLogger, userAgent
-)
+from sdk_aliyun import post
+from modules.constants import (RecruitState, RecruitEmoji, 
+	RecruitCode, disMarkdown, setLogger, userAgent)
+from bot import chat_ids
 
 from sys import argv
 if len(argv) > 1 and argv[1] == "special":
-	RecruitState = ["中国"]; RecruitEmoji = ["🇨🇳"]; RecruitCode = [8030]
+	RecruitState = ["中国", "阿联酋"]; RecruitEmoji = ["🇨🇳", "🇦🇪"]; RecruitCode = [8030, 8225]
 
 wAns = ""
 imageURL = "https://www.apple.com/jobs/images/retail/hero/desktop@2x.jpg"
@@ -59,12 +61,14 @@ for scn, ste, spl in zip(RecruitState, RecruitEmoji, RecruitCode):
 				linkURL = f"https://jobs.apple.com/zh-cn/details/{realCode}"
 				pushAns = f"*来自 Recruitment 的通知*\n{ste}{scn}新增招聘地点\n{rolloutCode} - {c['name']}"
 				
-				bot = telegram.Bot(token = token)
-				bot.send_photo(
-					chat_id = chat_id, 
-					photo = imageURL,
-					caption = disMarkdown(pushAns) + f" [↗]({linkURL})",
-					parse_mode = 'MarkdownV2')
+				push = {
+					"mode": "photo-text",
+					"text": f"{disMarkdown(pushAns)} [↗]({linkURL})",
+					"chat_id": chat_ids[0],
+					"parse": "MARK",
+					"image": imageURL
+				}
+				post(push)
 
 if wAns != "":
 	logging.info("正在更新 savedJobs 文件")
