@@ -652,7 +652,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Koendori Building\n1-20-9 Jinnan\nShibuya-ku,150-0041",
               "phoneNumber": "(03) 66701800"
@@ -674,7 +674,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Shinjuku Marui Honkan\n3-30-13 Shinjuku\nShinjuku-ku,160-0022",
               "phoneNumber": "(03) 56561800"
@@ -696,7 +696,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "4-2-13 Jingumae\nShibuya-ku,150-0001",
               "phoneNumber": "(03) 67574400"
@@ -718,7 +718,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Sayegusa Building\n3-5-12 Ginza\nChuo-ku,104-0061",
               "phoneNumber": "(03) 51598200"
@@ -740,7 +740,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Mitsubishi Building\n2-5-2 Marunouchi\nChiyoda-ku,100-0005",
               "phoneNumber": "(03) 42130500"
@@ -767,7 +767,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "83-1 Tachiurinakanocho\nShijo-dori Takakura Higashiiru\nKyoto-shi,600-8006",
               "phoneNumber": "(075) 7578700"
@@ -794,7 +794,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "FX Building\n3-17-15 Sakae, Naka-ku\nNagoya-shi,460-0008",
               "phoneNumber": "(052) 2382400"
@@ -821,7 +821,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "2-5-19 Tenjin, Chuo-ku\nFukuoka-shi,810-0001",
               "phoneNumber": "(092) 7780200"
@@ -848,7 +848,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "UrbanBLD Shinsaibashi\n1-5-5 Shinsaibashi, Chuo-ku\nOsaka-shi,542-0086",
               "phoneNumber": "(06) 49634500"
@@ -875,7 +875,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Lazona Kawasaki Plaza\n72-1 Horikawacho, Saiwai-ku\nKawasaki-shi,212-8576",
               "phoneNumber": "(044) 5775100"
@@ -2785,7 +2785,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "OFF",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "OFF",
+              "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "450 SW Yamhill Street\nPortland,OR 97204 ",
               "phoneNumber": "(503) 265-2010"
@@ -3263,9 +3263,9 @@
               "locationText": "Greenville, SC",
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "OFF",
+              "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "OFF",
+              "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "700 Haywood Road\nGreenville,SC 29607 ",
               "phoneNumber": "(864) 9877580"
@@ -3356,9 +3356,9 @@
               "locationText": "Murray, UT",
               "timeZone": "America/Denver",
               "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "OFF",
+              "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "OFF",
+              "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "6191 S State Street\nMurray,UT 84107 ",
               "phoneNumber": "(801) 905-4410"
@@ -4100,9 +4100,9 @@
               "locationText": "Las Vegas, NV",
               "timeZone": "America/Los_Angeles",
               "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "OFF",
+              "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "OFF",
+              "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "1985 Festival Plaza Drive\nLas Vegas,NV 89135 ",
               "phoneNumber": "(702) 6773940"
@@ -4303,9 +4303,9 @@
               "locationText": "Elmhurst, NY",
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "OFF",
+              "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "OFF",
+              "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "90-15 Queens Boulevard\nElmhurst,NY 11373 ",
               "phoneNumber": "(718) 4891540"
@@ -6257,9 +6257,9 @@
               "locationText": "Miami, FL",
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "OFF",
+              "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "OFF",
+              "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "701 S. Miami Avenue\nMiami,FL 33130 ",
               "phoneNumber": "(786) 8434350"
@@ -6323,9 +6323,9 @@
               "locationText": "Fort Lauderdale, FL",
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "OFF",
+              "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "OFF",
+              "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "2388 E. Sunrise Boulevard\nFort Lauderdale,FL 33304 ",
               "phoneNumber": "(954) 331-4501"
@@ -6345,9 +6345,9 @@
               "locationText": "Miami Beach, FL",
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "OFF",
+              "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "OFF",
+              "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "1021 Lincoln Road\nMiami Beach,FL 33139 ",
               "phoneNumber": "(305) 421-0400"
@@ -6477,9 +6477,9 @@
               "locationText": "Miami, FL",
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "OFF",
+              "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "OFF",
+              "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "8888 SW 136th Street\nMiami,FL 33176 ",
               "phoneNumber": "(305) 234-4565"
@@ -6543,9 +6543,9 @@
               "locationText": "Aventura, FL",
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "OFF",
+              "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "OFF",
+              "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "19501 Biscayne Boulevard\nAventura,FL 33180 ",
               "phoneNumber": "(305) 914-9826"
@@ -8820,7 +8820,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "1485 Portage Avenue\nWinnipeg, Manitoba R3G 0W4 ",
               "phoneNumber": "(204) 7774500"
@@ -8847,7 +8847,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "5015 111 St\nEdmonton, Alberta T6H 4M6 ",
               "phoneNumber": "(780) 8013820"
@@ -8869,7 +8869,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "3625 Shaganappi Trail NW\nCalgary, Alberta T3A 0E2 ",
               "phoneNumber": "(403) 6484865"
@@ -8891,7 +8891,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "8882-170 Street\nEdmonton, Alberta T5T 4M2 ",
               "phoneNumber": "(780) 7010540"
@@ -8913,7 +8913,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "6455 Macleod Trail SW\nCalgary, Alberta T2H 0K8 ",
               "phoneNumber": "(403) 4443759"
@@ -8940,7 +8940,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "7001 Mumford Road\nHalifax, Nova Scotia B3L 4N9 ",
               "phoneNumber": "(902) 4423495"
@@ -8967,7 +8967,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "3035, boulevard Le Carrefour, local C14B\nLaval,Quebec H7T 1C8",
               "phoneNumber": "(450) 9024400"
@@ -8989,7 +8989,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "9120 boul. Leduc\nBrossard,Quebec J4Y 0L3",
               "phoneNumber": "(450) 6181400"
@@ -9011,7 +9011,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "1321 Rue Ste-Catherine Ouest\nMontreal,Quebec H3G 1P7",
               "phoneNumber": "(514) 906-8400"
@@ -9033,7 +9033,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "2450 Boulevard Laurier\nQuebec City,Quebec G1V 2L1",
               "phoneNumber": "(418) 266-8600"
@@ -9055,7 +9055,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "6801, Transcanada Highway\nPointe-Claire,Quebec H9R 5J2",
               "phoneNumber": "(514) 6308800"
@@ -9082,7 +9082,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "10355 152 Street\nSurrey, British Columbia V3R 7C1 ",
               "phoneNumber": "(604) 6343240"
@@ -9104,7 +9104,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "2929 Barnet Highway\nCoquitlam, British Columbia V3B 5R5 ",
               "phoneNumber": "(604) 9451160"
@@ -9126,7 +9126,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "6551 No. 3 Road\nRichmond, British Columbia V6Y 2B6 ",
               "phoneNumber": "(604) 2483940"
@@ -9148,7 +9148,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "320 4700 Kingsway\nBurnaby, British Columbia V5H 4J2 ",
               "phoneNumber": "(778) 373-4810"
@@ -9170,7 +9170,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "701 West Georgia Street\nVancouver, British Columbia V7Y 1G5 ",
               "phoneNumber": "(778) 373-1800"
@@ -9197,7 +9197,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "5000 Highway 7 East\nMarkham, Ontario L3R 4M9 ",
               "phoneNumber": "(905) 5132860"
@@ -9219,7 +9219,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "900 Maple Avenue\nBurlington, Ontario L7S 2J8 ",
               "phoneNumber": "(289) 2882012"
@@ -9241,7 +9241,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "1680 Richmond Street North\nLondon, Ontario N6G 3Y9 ",
               "phoneNumber": "(519) 9634060"
@@ -9263,7 +9263,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "550 King Street North\nWaterloo, Ontario N2L 5W6 ",
               "phoneNumber": "(519) 7725150"
@@ -9285,7 +9285,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "50 Rideau Street\nOttawa, Ontario K1N 9J7 ",
               "phoneNumber": "(613) 6885575"
@@ -9307,7 +9307,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "1800 Sheppard Avenue East\nToronto, Ontario M2J 5A7 ",
               "phoneNumber": "(416) 6464412"
@@ -9329,7 +9329,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "220 Yonge Street\nToronto, Ontario M5B 2H1 ",
               "phoneNumber": "(647) 2580801"
@@ -9351,7 +9351,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "100 City Centre Drive\nMississauga, Ontario L5B 2C9 ",
               "phoneNumber": "(905) 3660580"
@@ -9373,7 +9373,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "3401 Dufferin Street\nToronto, Ontario M6A 3A1 ",
               "phoneNumber": "(416) 7851776"
@@ -9395,7 +9395,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "25 The West Mall\nToronto, Ontario M9C 1B8 ",
               "phoneNumber": "(416) 646-8489"
@@ -9417,7 +9417,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "100 Bayshore Drive\nOttawa, Ontario K2B 8C1 ",
               "phoneNumber": "(613) 2887950"
@@ -9439,7 +9439,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "17600 Yonge Street\nNewmarket, Ontario L3Y 4Z1 ",
               "phoneNumber": "(905) 9523400"
@@ -9473,7 +9473,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "OFF",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "OFF",
+              "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "Shoppes at Londoner\nCotai,Macao",
               "phoneNumber": "87917000"
@@ -9500,7 +9500,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "OFF",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "OFF",
+              "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "Galaxy Macau™ The Promenade\nCotai\nMacao,Macao",
               "phoneNumber": "87919000"
@@ -9534,7 +9534,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Mall of the Emirates\nAl Barsha 1\nDubai ",
               "phoneNumber": "(800) 04441819"
@@ -9556,7 +9556,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "The Dubai Mall\nDowntown\nDubai ",
               "phoneNumber": "(800) 04449012"
@@ -9578,7 +9578,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Yas Mall\nYas Island\nAbu Dhabi ",
               "phoneNumber": "(800) 04441824"
@@ -11609,7 +11609,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "790 Hay Street\nPerth WA 6000 ",
               "phoneNumber": "(08) 6140-3800"
@@ -11631,7 +11631,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Westfield Booragoon\n125 Riseley Street\nBooragoon WA 6154 ",
               "phoneNumber": "(08) 6557-6000"
@@ -11658,7 +11658,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Broadway Shopping Centre\n1 Bay Street\nBroadway NSW 2007 ",
               "phoneNumber": "(02) 8035-4000"
@@ -11680,7 +11680,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Westfield Hornsby\n236 Pacific Highway\nHornsby NSW 2077 ",
               "phoneNumber": "(02) 8401-8800"
@@ -11702,7 +11702,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "367 George Street\nSydney NSW 2000 ",
               "phoneNumber": "(02) 8083-9400"
@@ -11724,7 +11724,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Castle Towers Shopping Centre\n6-14 Castle Street\nCastle Hill NSW 2154 ",
               "phoneNumber": "(02) 8864-0800"
@@ -11746,7 +11746,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Chatswood Chase Shopping Centre\nVictoria Avenue\nChatswood NSW 2067 ",
               "phoneNumber": "(02) 8064-6300"
@@ -11768,7 +11768,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Charlestown Square\n30 Pearson Street\nCharlestown NSW 2290 ",
               "phoneNumber": "(02) 4032-5800"
@@ -11790,7 +11790,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Westfield Penrith\n585 High Street\nPenrith NSW 2750 ",
               "phoneNumber": "(02) 4702-9400"
@@ -11812,7 +11812,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "213 Oxford Street\nBondi Junction NSW 2022 ",
               "phoneNumber": "(02) 9019-2400"
@@ -11834,7 +11834,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Westfield Miranda\n600 Kingsway\nMiranda NSW 2228 ",
               "phoneNumber": "(02) 85781700"
@@ -11861,7 +11861,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Chadstone Shopping Centre\n1341 Dandenong Road\nChadstone VIC 3148 ",
               "phoneNumber": "(03) 90387500"
@@ -11883,7 +11883,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Highpoint Shopping Centre\n120-200 Rosamond Road\nMaribyrnong VIC 3032 ",
               "phoneNumber": "(03) 99759700"
@@ -11905,7 +11905,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Westfield Southland\n1239 Nepean Highway\nCheltenham VIC 3192 ",
               "phoneNumber": "(03) 8523-1400"
@@ -11927,7 +11927,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Westfield Fountain Gate\n352 Princes Highway\nFountain Gate VIC 3805 ",
               "phoneNumber": "(03) 8765-4000"
@@ -11949,7 +11949,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Westfield Doncaster\n619 Doncaster Road\nDoncaster VIC 3108 ",
               "phoneNumber": "(03) 9914-2800"
@@ -11976,7 +11976,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Canberra Centre\n148 Bunda Street\nCanberra ACT 2601 ",
               "phoneNumber": "(02) 6224-9500"
@@ -12003,7 +12003,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "MacArthur Chambers\n233 Queen Street\nBrisbane City QLD 4000 ",
               "phoneNumber": "(07) 31829000"
@@ -12025,7 +12025,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Westfield Carindale\n1151 Creek Road\nCarindale QLD 4152 ",
               "phoneNumber": "(07) 3199-2200"
@@ -12047,7 +12047,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Westfield Chermside\nCnr Gympie and Hamilton Roads\nChermside QLD 4032 ",
               "phoneNumber": "(07) 3115-0800"
@@ -12069,7 +12069,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Robina Town Centre\nRobina Town Centre QLD 4230 ",
               "phoneNumber": "(07) 5667-0400"
@@ -12096,7 +12096,7 @@
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
+              "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
               "storeAddress": "Rundle Place Centre\n77-90 Rundle Mall\nAdelaide SA 5000 ",
               "phoneNumber": "(08) 70885300"
