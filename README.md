@@ -24,12 +24,12 @@
 
 ![bot](Retail/bot.jpg)
 
-\* asaDuplex 尚不开源 Telegram Bot 的运行代码。
+\* asaDuplex 尚不开源 Telegram Bot 的运行代码，您可以在[这里](https://t.me/guopuzdbot)进行体验。
 
 **在所有代码的顶部，可能包含类似如下代码：**
 
 ```python
-froom sdk_aliyun import post
+from sdk_aliyun import post
 from bot import tokens
 ```
 
