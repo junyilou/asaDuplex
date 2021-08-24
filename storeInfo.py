@@ -1,10 +1,9 @@
-import json, requests
+import json
+import requests
 from time import strftime, strptime
 requests.packages.urllib3.disable_warnings()
 
-from constants import (
-	userAgent, webNation, dieterURL
-)
+from modules.constants import userAgent, webNation, localeNation, dieterURL
 
 with open("storeInfo.json") as r:
 	infoJSON = json.loads(r.read())
@@ -56,50 +55,60 @@ def actualName(name):
 	return name if type(name) == str else name[0]
 
 def storeInfo(storeid):
-	sid = StoreID(storeid)[0][0]
-	return dict([(t, infoJSON[t][sid]) for t in infoJSON if (sid in infoJSON[t]) and (type(infoJSON[t]) == dict)])
+	try:
+		sid = StoreID(storeid)[0][0]
+		return dict([(t, infoJSON[t][sid]) for t in infoJSON if (sid in infoJSON[t]) and (type(infoJSON[t]) == dict)])
+	except IndexError:
+		return {}
 
 def storeURL(storeid):
 	sif = storeInfo(storeid)
 	try:
 		website = sif["website"]
-		name = actualName(sif["name"])
 		if website == "-":
-			website = name.lower().replace(" ", "")
+			website = actualName(sif["name"]).lower().replace(" ", "")
 		url = f"https://www.apple.com{webNation[sif['flag']]}/retail/{website}"
+		return url
 	except KeyError:
-		return "N/A"
-	return url
+		return None
 
-def storePage(sid):
+def storeDict(storeid, mode = "dict"):
+	sif = storeInfo(storeid)
 	try:
-		r = requests.get(storeURL(sid), headers = userAgent).text
-	except:
-		return ""
-	return r
+		website = sif["website"]
+		if website == "-":
+			website = actualName(sif["name"]).lower().replace(" ", "")
+		url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={website}&locale={localeNation[sif['flag']]}&sc=false"
+		
+		r = requests.get(url, headers = userAgent).json()
+		try:
+			hours = {
+				"regular": r["hours"]["hoursData"],
+				"special": r["hours"]["specialHoursData"]
+			}
+		except:
+			hours = {}
+		if mode == "hours":
+			return hours
+		if mode == "dict":
+			add = r["address"]
+			address = add["address1"].rstrip(" ")
+			address += f', {add["address2"]}' if add["address2"] else ""
+			prov = add["city"]
+			prov += f', {add["stateName"]}' if add["stateName"] else ""
+			prov += f', {add["postal"]}' if add["postal"] else ""
 
-def storeDict(r):
-	try:
-		j = json.loads(r.split('<script id="__NEXT_DATA__" type="application/json">')[1].split("</script>")[0])
-		j = j["props"]["pageProps"]["storeDetailsData"]
-
-		add = j["address"]
-		address = add["address1"][:-1] if add["address1"][-1] == " " else add["address1"]
-		address += f', {add["address2"]}' if add["address2"] != "" else ""
-		prov = add["city"]
-		prov += f', {add["stateName"]}' if add["stateName"] != "" else ""
-		prov += f', {add["postal"]}' if add["postal"] != "" else ""
-
-		page = {
-			**j["geolocation"],
-			"timezone": j["timezone"],
-			"telephone": j["telephone"],
-			"address": address,
-			"province": prov
-		}
+			page = {
+				**r["geolocation"],
+				"timezone": r["timezone"],
+				"telephone": r["telephone"],
+				"address": address,
+				"province": prov,
+				**hours
+			}
+		return page
 	except:
 		return {}
-	return page
 
 def storeState(stateCode):
 	states = []
