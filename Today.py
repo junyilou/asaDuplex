@@ -1,13 +1,15 @@
-import os, json, time, logging, requests
-from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup
+import os
+import json
+import time
+import logging
+import requests
 from sys import stdout
 requests.packages.urllib3.disable_warnings()
 
 from storeInfo import *
-
-from bot import tokens, chat_ids
-token = tokens[0]; chat_id = chat_ids[0]
-from constants import disMarkdown, setLogger
+from modules.constants import disMarkdown, setLogger
+from bot import chat_ids
+from sdk_aliyun import post
 
 printDebug = True
 from sys import argv
@@ -44,7 +46,6 @@ for sid, sn in stores:
 		cur = stores.index((sid, sn)) + 1; tot = len(stores); perc = int(cur / tot * 40)
 		print(f"[{'':=^{perc}}{'':^{40 - perc}}] R{sid} {cur}/{tot} {cur / tot:.1%}", end = "\r")
 		stdout.flush()
-	logging.info(f"访问 Apple {sn} 的零售店官网页面")
 	r = requests.get(url, verify = False, headers = userAgent)
 	try:
 		rj = json.loads(r.text.replace("\u2060", "").replace("\u00A0", " ").replace("\\n", ""))
@@ -87,13 +88,13 @@ for i in masterJSON:
 			if not len(availableTime):
 				timing = "该课程尚无具体时间安排"
 				sessionURL = storeURL(i).replace("/retail", "/today")
-				keyboard = [[InlineKeyboardButton("访问 Apple 主页", url = sessionURL)]]
+				keyboard = [[["访问课程页面", sessionURL]]]
 				logging.error("未找到此课程的排课信息")
 			elif "VIRTUAL" in course["type"]:
 				setTime = availableTime[0]
 				timing = setTime[0]
 				sessionURL = f"{storeURL(setTime[2]).split('/retail')[0]}/today/event/{course['urlTitle']}/{setTime[3]}/?sn=R{setTime[2]}"
-				keyboard = [[InlineKeyboardButton("预约课程", url = sessionURL)]]
+				keyboard = [[["预约课程", sessionURL]]]
 
 				logging.info(f"找到线上活动的课程时间 {timing}")
 				logging.info(f"最终课程信息：课程 ID {courseID}，课次 ID {setTime[3]}")
@@ -108,40 +109,32 @@ for i in masterJSON:
 					timing = f"{sortTime[0]} 于 Apple {actualName(storeInfo(sortTime[2])['name'])} 起，共 {len(availableTime)} 次排课"
 
 				sessionURL = f"{storeURL(sortTime[2]).split('/retail')[0]}/today/event/{course['urlTitle']}/{sortTime[3]}/?sn=R{sortTime[2]}"
-				keyboard = [[InlineKeyboardButton("预约课程", url = sessionURL)]]
+				keyboard = [[["预约课程", sessionURL]]]
 
 				logging.info(f"找到此活动的课程时间 {timing}")
 				logging.info(f"最终课程信息：课程 ID {courseID}，课次 ID {sortTime[3]}")
 
-			push = f"""#TodayatApple 新活动\n
+			text = f"""#TodayatApple 新活动\n
 {specialPrefix}*{courseName}*\n
 🗺️ {courseStore}
 🕘 {timing}\n
 *课程简介*
-{course['longDescription']}"""
-			push = push.replace('"', "").replace("'", "")
+{course['longDescription']}""".replace('"', "").replace("'", "")
 			photoURL = course["backgroundMedia"]["images"][0]["landscape"]["source"]
 			photoURL += "?output-quality=80&resize=2880:*"
-			keyboard[0].append(InlineKeyboardButton("下载活动配图", url = photoURL))
-			reply_markup = InlineKeyboardMarkup(keyboard)
+			keyboard[0].append(["下载活动配图", photoURL])
 
-			logging.getLogger().setLevel(logging.DEBUG)
-			bot = Bot(token = token)
-			try:
-				bot.send_photo(
-					chat_id = chat_id, photo = photoURL,
-					caption = disMarkdown(push),
-					parse_mode = 'MarkdownV2',
-					reply_markup = reply_markup)
-			except:
-				logging.error("未能成功发送带有图片的消息")
-				bot.send_message(
-					chat_id = chat_id, text = disMarkdown(push),
-					parse_mode = 'MarkdownV2',
-					reply_markup = reply_markup)
-			logging.getLogger().setLevel(logging.INFO)
+			push = {
+				"mode": "photo-text",
+				"text": disMarkdown(text),
+				"image": photoURL,
+				"parse": "MARK",
+				"chat_id": chat_ids[0],
+				"keyboard": keyboard
+			}
+			post(push)
 
-if append != "":
+if append:
 	logging.info("正在更新 savedEvent 文件")
 	with open("Retail/savedEvent.txt", "w") as m:
 		m.write(savedID + append)

@@ -1,10 +1,15 @@
-import os, sys, json, logging, requests, time
-from telegram import Bot
+import os
+import sys
+import json
+import logging
+import requests
+import time
 from datetime import datetime, timezone, date
 requests.packages.urllib3.disable_warnings()
 
 from storeInfo import DieterInfo, DieterHeader
-from constants import disMarkdown, setLogger, userAgent, dieterURL
+from modules.constants import disMarkdown, setLogger, userAgent, dieterURL
+
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
 
@@ -39,7 +44,8 @@ def down(rtl, isSpecial):
 		logging.info(f"R{rtl} 更新，标签为 {remote}")
 		savename = f"Retail/R{rtl}_{remote.replace(' ', '').replace(':', '')}.png"
 
-		r = requests.get(dieterURL(rtl).split("?")[0], headers = userAgent, verify = False)
+		photoURL = dieterURL(rtl)
+		r = requests.get(photoURL, headers = userAgent, verify = False)
 		with open(savename, "wb") as w:
 			w.write(r.content)
 
@@ -61,7 +67,7 @@ def down(rtl, isSpecial):
 		try:
 			bot.send_photo(
 				chat_id = chat_id, 
-				photo = open(f"Retail/{savename}", "rb"),
+				photo = open(savename, "rb"),
 				caption = disMarkdown(f'*来自 Rtl 的通知*\n{tellRaw}'),
 				parse_mode = 'MarkdownV2'
 			)

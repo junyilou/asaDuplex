@@ -1,12 +1,14 @@
-import os, time, json, logging
-import requests, filecmp, difflib
-import telegram
+import os
+import time
+import json
+import logging
+import requests
+import filecmp
+import difflib
 
-from bot import tokens, chat_ids
-token = tokens[0]; chat_id = chat_ids[0]
-from constants import (
-	asaHeaders, setLogger, DIFFhead, DIFFfoot
-)
+from modules.constants import asaHeaders, setLogger, DIFFhead, DIFFfoot
+from sdk_aliyun import post
+from bot import chat_ids
 
 requests.packages.urllib3.disable_warnings()
 setLogger(logging.INFO, os.path.basename(__file__))
@@ -50,17 +52,19 @@ if qualify == [False, True]:
 		fileDiff += line + "\n"
 	fileDiff += DIFFfoot
 
-	with open("/home/centos/www/storelist.html", "w") as w:
+	with open("/root/html/storelist.html", "w") as w:
 		w.write(fileDiff)
 	os.rename(oldFile, listFile.replace(".json", "-" + runtime + ".json"))
 	logging.info("文件生成完成")
 
-	bot = telegram.Bot(token = token)
-	bot.send_photo(
-		chat_id = chat_id, 
-		photo = "https://www.apple.com/jp/retail/store/includes/marunouchi/drawer/images/store-drawer-tile-1_medium_2x.jpg",
-		caption = '*来自 allStoresInfoLite 的通知*\nApple Store 零售店信息文件已更新 [↗](http://myv.ps/storelist.html)',
-		parse_mode = 'MarkdownV2')
+	push = {
+		"mode": "photo-text",
+		"text": "*来自 allStoresInfoLite 的通知*\nApple Store 零售店信息文件已更新 [↗](http://aliy.un/html/storelist.html)",
+		"parse": "MARK",
+		"image": "https://www.apple.com/jp/retail/store/includes/marunouchi/drawer/images/store-drawer-tile-1_medium_2x.jpg",
+		"chat_id": chat_ids[0]
+	}
+	post(push)
 
 elif qualify[0] == True:
 	logging.info("没有发现 storeList 文件更新")

@@ -1,15 +1,14 @@
-import json, os, logging
+import json
+import os
+import logging
 from sys import stdout
 from datetime import datetime, date
-import telegram
 
 from storeInfo import *
-from special import speHours
-from bot import tokens, chat_ids
-token = tokens[0]; chat_id = chat_ids[0]
-from constants import (
-	setLogger, DIFFhead, DIFFfoot
-)
+from modules.special import speHours
+from modules.constants import setLogger, DIFFhead, DIFFfoot
+from sdk_aliyun import post
+from bot import chat_ids
 
 printDebug = True
 from sys import argv
@@ -104,18 +103,18 @@ if len(comparison):
 原始 JSON:\n{jOut}
 {DIFFfoot}
 """
-	with open("/home/centos/www/storeHours.html", "w") as w:
+	with open("/root/html/storeHours.html", "w") as w:
 		w.write(fileDiff)
 	logging.info("文件生成完成")
 
-	logging.getLogger().setLevel(logging.DEBUG)
-	bot = telegram.Bot(token = token)
-	bot.send_photo(
-		chat_id = chat_id, 
-		photo = "https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_medium_2x.jpg",
-		caption = f'*来自 Hours 的通知*\n{comparison.count("Apple")} 个 Apple Store 有特别营业时间变化 [↗](http://myv.ps/storeHours.html)',
-		parse_mode = 'MarkdownV2')
-	logging.getLogger().setLevel(logging.INFO)
+	push = {
+		"mode": "photo-text",
+		"chat_id": chat_ids[0], 
+		"image": "https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_medium_2x.jpg",
+		"text": f'*来自 Hours 的通知*\n{comparison.count("Apple")} 个 Apple Store 有特别营业时间变化 [↗](http://aliy.un/html/storeHours.html)',
+		"parse": 'MARK'
+	}
+	post(push)
 
 else: 
 	os.remove(f"Retail/storeHours-{runtime}.json")

@@ -1,15 +1,15 @@
-import re, requests, json, logging, os
+import re
+import requests
+import json
+import logging
+import os
 from datetime import datetime
-from telegram import Bot, InlineKeyboardButton, InlineKeyboardMarkup
 requests.packages.urllib3.disable_warnings()
 
 from storeInfo import *
-
-from bot import tokens, chat_ids
-token = tokens[0]; chat_id = chat_ids[0]
-from constants import (
-	userAgent, dayOfWeekCHN, disMarkdown, setLogger
-)
+from modules.constants import userAgent, dayOfWeekCHN, disMarkdown, setLogger
+from bot import chat_ids
+from sdk_aliyun import post
 
 args = ".cn /hk /mo /tw" # Use /us for US
 
@@ -104,40 +104,36 @@ for slug, region, courseID, storeID in master:
 	if _store["schedules"]:
 		timing = _store["schedules"][courseID]["displayDate"][0]["dateTime"]
 		sessionURL = f"https://www.apple.com{region}/today/event/{slug}/{courseID}/?sn={storeID}"
-		keyboard = [[InlineKeyboardButton("预约课程", url = sessionURL)]]
+		keyboard = [[["预约课程", sessionURL]]]
 	else:
 		date = re.search("[0-9]{6}", slug).group()
 		valid = validDates(date)
-		timing = " (或) ".join([(i[0].strftime("%-m 月 %-d 日 ") + dayOfWeekCHN[i[0].weekday()].replace("周", "星期")) for i in valid if i[1] < 30])
+		timing = " (或) ".join([(i[0].strftime("%-m 月 %-d 日 ") + dayOfWeekCHN[i[0].weekday()].replace("周", "星期")) for i in valid if i[1] < 45])
 		sessionURL = f"https://www.apple.com{region}/today/event/{slug}"
-		keyboard = [[InlineKeyboardButton("查看课程详情", url = sessionURL)]]
+		keyboard = [[["查看课程详情", sessionURL]]]
 
-	push = f"""#TodayatApple #Sitemap 新活动\n
+	text = f"""#TodayatApple #Sitemap 新活动\n
 {specialPrefix}*{courseName}*\n
 🗺️ {courseStore}
 🕘 {timing}\n
 *课程简介*
-{course['longDescription']}"""
+{course['longDescription']}
 
-	push = push.replace('"', "").replace("'", "")
+*课程号* {courseID}""".replace('"', "").replace("'", "")
 	photoURL = course["backgroundMedia"]["images"][0]["landscape"]["source"]
 	photoURL += "?output-quality=80&resize=2880:*"
-	keyboard[0].append(InlineKeyboardButton("下载活动配图", url = photoURL))
-	reply_markup = InlineKeyboardMarkup(keyboard)
+	keyboard[0].append(["下载活动配图", photoURL])
 
-
-	bot = Bot(token = token)
-	try:
-		bot.send_photo(
-			chat_id = chat_id, photo = photoURL,
-			caption = disMarkdown(push),
-			parse_mode = 'MarkdownV2',
-			reply_markup = reply_markup)
-	except:
-		bot.send_message(
-			chat_id = chat_id, text = disMarkdown(push),
-			parse_mode = 'MarkdownV2',
-			reply_markup = reply_markup)
+	push = {
+		"mode": "photo-text",
+		"text": disMarkdown(text),
+		"image": photoURL,
+		"parse": "MARK",
+		"chat_id": chat_ids[0],
+		"keyboard": keyboard
+	}
+	post(push)
+	break
 
 if sitemapAppend:
 	logging.info("正在更新 savedSitemap 文件")
