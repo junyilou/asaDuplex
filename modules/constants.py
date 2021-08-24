@@ -18,7 +18,19 @@ def setLogger(level, name):
 			format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
 			level = level, datefmt = '%T')
 
-asaVersion = "5.12.0"
+def textConvert(strdict):
+	if strdict["closed"]:
+		return "不营业"
+	elif strdict["openTime"] == "00:00" and strdict["closeTime"] == "23:59":
+		return "24 小时营业"
+	else:
+		return f'{strdict["openTime"]} - {strdict["closeTime"]}'
+
+def dieterURL(sid, mode = None):
+	bicubic = "?resize=2880:1612&output-format=jpg&output-quality=90&interpolation=progressive-bicubic" if mode else ""
+	return f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid}{bicubic}"
+
+asaVersion = "5.13.0"
 asaAgent = ".".join(asaVersion.split(".")[:2])
 asaHeaders = {
 	"User-Agent": f"ASA/{asaAgent} (iPhone) ss/3.00",
@@ -27,14 +39,11 @@ asaHeaders = {
 	"X-Apple-I-TimeZone": "GMT+8",
 	"X-Apple-I-Locale":   "zh_CN",
 	"X-MMe-Client-Info": f"<iPhone13,2> <iPhone OS;14.3;18C66> <com.apple.AuthKit/1 (com.apple.store.Jolly/{asaVersion})>",
-	"X-DeviceConfiguration":  f"ss=3.00;dim=1170x2532;m=iPhone;v=iPhone13,2;vv={asaAgent};sv=14.3"}
+	"X-DeviceConfiguration":  f"ss=3.00;dim=1170x2532;m=iPhone;v=iPhone13,2;vv={asaAgent};sv=15.0"}
 asaNation = {'🇺🇸': 'a/us', '🇨🇳': 'p/cn', '🇬🇧': 'e/uk', '🇨🇦': 'a/ca', '🇦🇺': 'p/au', '🇫🇷': 'e/fr', 
 	'🇮🇹': 'e/it', '🇩🇪': 'e/de', '🇪🇸': 'e/es', '🇯🇵': 'j/jp', '🇨🇭': 'e/ch-de', '🇦🇪': 'e/ae', '🇳🇱': 'e/nl', 
 	'🇸🇪': 'e/se', '🇧🇷': 'a/br', '🇹🇷': 'e/tr', '🇸🇬': 'p/sg', '🇲🇽': 'a/mx', '🇦🇹': 'e/at', '🇧🇪': 'e/be-fr', 
 	'🇰🇷': 'p/kr', '🇹🇭': 'p/th-en', '🇭🇰': 'p/hk-zh', '🇹🇼': 'p/tw'}
-
-dieterURL = lambda sid: f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid}.png?\
-resize=2880:1612&output-format=jpg&output-quality=90&interpolation=progressive-bicubic"
 
 userAgent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6)\
 AppleWebKit/605.1.15(KHTML, like Gecko)Version/14.0.2 Safari/605.1.15"}
@@ -42,6 +51,10 @@ AppleWebKit/605.1.15(KHTML, like Gecko)Version/14.0.2 Safari/605.1.15"}
 webNation = {**dict([(i[0], i[1][1:4]) for i in asaNation.items()]), 
 	"🇺🇸": '', "🇨🇳": '.cn', "🇨🇭": "/chde", "🇧🇪": "/befr", "TW": "/tw", '🇲🇴': '/mo'} # for /retail
 storeNation = {**webNation, "🇨🇭": "/ch-de", "🇧🇪": "/be-fr"} # for /shop
+localeNation = {'🇺🇸': 'en_US', '🇨🇳': 'zh_CN', '🇬🇧': 'en_GB', '🇨🇦': 'en_CA', '🇦🇺': 'en_AU', '🇫🇷': 'fr_FR', 
+	'🇮🇹': 'it_IT', '🇩🇪': 'de_DE', '🇪🇸': 'es_ES', '🇯🇵': 'ja_JP', '🇨🇭': 'de_CH', '🇦🇪': 'en_AE', '🇳🇱': 'nl/NL', 
+	'🇸🇪': 'sv_SE', '🇧🇷': 'pt_BR', '🇹🇷': 'tr_TR', '🇸🇬': 'en_SG', '🇲🇽': 'es_NX', '🇦🇹': 'de_AT', '🇧🇪': 'fr/BE', 
+	'🇰🇷': 'ko_KR', '🇹🇭': 'th_TH', '🇭🇰': 'zh_HK', '🇹🇼': 'zh_TW'} # for rsp
 
 partSample = {'🇺🇸': 'AM', '🇨🇳': 'FE', '🇬🇧': 'ZM', '🇨🇦': 'AM', '🇦🇺': 'FE', '🇫🇷': 'ZM', 
 	'🇮🇹': 'ZM', '🇩🇪': 'ZM', '🇪🇸': 'ZM', '🇯🇵': 'FE', '🇳🇱': 'ZM', 
