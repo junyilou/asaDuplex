@@ -45,7 +45,7 @@ for sid, sn in stores:
 		print(f"[{'':=^{perc}}{'':^{40 - perc}}] R{sid} {cur}/{tot} {cur / tot:.1%}", end = "\r")
 		stdout.flush()
 
-	specialHours = speHours(sid, storePage(sid))
+	specialHours = speHours(sid)
 	storeDiff = ""
 
 	if len(specialHours):

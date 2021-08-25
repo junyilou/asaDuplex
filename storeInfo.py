@@ -196,14 +196,13 @@ def storeReturn(pair, accept_function = ['r', 'n', 's'], sort = True, remove_clo
 	return stores
 
 def DieterInfo(rtl):
-	storeJSON = storeInfo(rtl)
-	if "name" in storeJSON:
-		name = actualName(storeJSON["name"])
-	else:
-		name = "Store"
-	flag = (storeJSON['flag'] + " ") if "flag" in storeJSON else ""
-	nso = (", 首次开幕于 " + strftime("%Y 年 %-m 月 %-d 日", strptime(storeJSON['nso'], "%Y-%m-%d"))) if "nso" in storeJSON else ""
-	return f"#图片更新 #标签 {flag}Apple {name}, R{rtl}{nso}"
+	sif = storeInfo(rtl)
+	if sif:
+		name = actualName(sif["name"])
+		info = f"*{sif['flag']} Apple {name}* (R{rtl})"
+		if "nso" in sif:
+			info += f'\n首次开幕于 {strftime("%Y 年 %-m 月 %-d 日", strptime(sif["nso"], "%Y-%m-%d"))}'
+	return info
 
 def DieterHeader(rtl):
 	sid = StoreID(rtl)

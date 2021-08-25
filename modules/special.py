@@ -44,6 +44,8 @@ def speHours(sid):
 	except:
 		logging.error(f"未能获得 R{sid} 营业时间信息")
 		return {}
+	if not j:
+		return {}
 
 	regularHours = {}
 	for regular in j["regular"]:
