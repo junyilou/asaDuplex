@@ -133,7 +133,7 @@ def storeReturn(args, sort = True, remove_close = False, remove_future = False, 
 	if type(args) == str:
 		args = args.split(" ")
 	for a in args:
-		digit = a.isdigit or a.upper().replace("R", "").isdigit()
+		digit = a.isdigit() or a.upper().replace("R", "").isdigit()
 		stores = (StoreID(a) + StoreMatch(a, fuzzy)) if digit else StoreMatch(a, fuzzy)
 		for s in stores:
 			if s and s not in ans:
