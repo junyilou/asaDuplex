@@ -1,5 +1,6 @@
 import json
 import requests
+from functools import partial
 from time import strftime, strptime
 requests.packages.urllib3.disable_warnings()
 
@@ -7,48 +8,22 @@ from modules.constants import userAgent, webNation, localeNation, dieterURL
 
 with open("storeInfo.json") as r:
 	infoJSON = json.loads(r.read())
+storeLibrary = {}
 
 def StoreID(storeid):
-	if type(storeid) == int or len(storeid) < 3:
-		storeid = f"{storeid:0>3}"
-	storeid = storeid.upper().replace("R", "")
-	if storeid.isdigit():
-		try:
-			name = actualName(infoJSON["name"][storeid])
-			return [(storeid, name)]
-		except KeyError:
-			return []
-	else:
-		return []
+	i = f"{storeid:0>3}".upper().replace("R", "")
+	return [(i, actualName(infoJSON["name"][i]))] if i in storeLibrary else []
 
-def StoreName(name):
+def StoreMatch(keyword, fuzzy = False):
 	stores = []
-	name = name.replace("_", " ")
-	for i in infoJSON["name"]:
-		comp = [infoJSON["name"][i]] if type(infoJSON["name"][i]) == str else infoJSON["name"][i]
-		for cname in comp:
-			if cname.upper() == name.upper():
-				stores.append((i, comp[0]))
-	for i in infoJSON["state"]:
-		for j in infoJSON["state"][i]:
-			if j.upper() == name.upper():
-				for s in infoJSON["state"][i][j]:
-					stores.append((s, actualName(storeInfo(s)["name"])))
-	for i in infoJSON["alias"]:
-		if i.upper() == name.upper():
-			for s in infoJSON["alias"][i]:
-				stores.append((s, actualName(storeInfo(s)["name"])))
-	return stores
-
-def StoreNation(emoji):
-	if emoji.upper() == "TW":
-		emoji = "🇹🇼"
-	stores = []
-	for i in infoJSON["flag"]:
-		if infoJSON["flag"][i] == emoji:
-			name = actualName(infoJSON["name"][i])
-			if name[:8] != "Store in":
-				stores.append((i, name))
+	keyword = keyword.replace("_", " ").lower()
+	for i in storeLibrary:
+		if fuzzy:
+			if any([keyword in j.lower() for j in storeLibrary[i]]):
+				stores.append((i, actualName(infoJSON["name"][i])))
+		else:
+			if any([keyword == j.lower() for j in storeLibrary[i]]):
+				stores.append((i, actualName(infoJSON["name"][i])))
 	return stores
 
 def actualName(name):
@@ -125,8 +100,7 @@ def getState(sid):
 			if sid in infoJSON["state"][i][j]:
 				return j, infoJSON["state"][i][j]
 
-def stateReplace(rstores):
-	stores = rstores.copy()
+def stateReplace(stores):
 	if not stores:
 		return stores
 	while True:
@@ -154,46 +128,32 @@ def storeOrder():
 				stores.append(k)
 	return stores
 
-def reloadJSON():
-	global infoJSON
-	with open("storeInfo.json") as r:
-		infoJSON = json.loads(r.read())
-
-def storePairs(args):
+def storeReturn(args, sort = True, remove_close = False, remove_future = False, fuzzy = False):
+	ans = []
 	if type(args) == str:
-		args = [args]
-	pair = {"r": [], "s": [], "n": []}
+		args = args.split(" ")
 	for a in args:
-		if a.isdigit() or a.upper().replace("R", "").isdigit():
-			pair["r"].append(a)
-		elif a in webNation:
-			pair["s"].append(a)
-		else:
-			pair["n"].append(a.replace("Apple_", ""))
-	return pair
+		digit = a.isdigit or a.upper().replace("R", "").isdigit()
+		stores = (StoreID(a) + StoreMatch(a, fuzzy)) if digit else StoreMatch(a, fuzzy)
+		for s in stores:
+			if s and s not in ans:
+				if remove_close and getState(s[0])[0] == "已关闭":
+					continue
+				if remove_future and "Store in" in infoJSON["name"][s[0]]:
+					continue
+				ans.append(s)
 
-def storeReturn(pair, accept_function = ['r', 'n', 's'], sort = True, remove_close = False):
-	stores = list()
-	functions = {'r': StoreID, 'n': StoreName, 's': StoreNation}
-	for f in accept_function:
-		if f in pair:
-			S = map(functions[f], pair[f])
-			for _s in list(S):
-				for __s in _s:
-					if __s not in stores:
-						if remove_close and getState(__s[0])[0] == "已关闭":
-							continue
-						stores.append(__s)
 	if sort:
-		order = {}; Order = storeOrder()
-		for store in stores:
+		order = {}
+		Order = storeOrder()
+		for store in ans:
 			sid = store[0]
 			try:
 				order[sid] = Order.index(sid)
 			except ValueError:
 				order[sid] = 900 + int(sid)
-		stores.sort(key = lambda k: order[k[0]])
-	return stores
+		ans.sort(key = lambda k: order[k[0]])
+	return ans
 
 def DieterInfo(rtl):
 	sif = storeInfo(rtl)
@@ -217,3 +177,37 @@ def DieterHeader(rtl):
 			return None
 		else:
 			return r.headers['Last-Modified'][5:-4]
+
+def library():
+	global storeLibrary
+	storeLibrary = {}
+	for i in infoJSON["name"]:
+		comp = [infoJSON["name"][i]] if type(infoJSON["name"][i]) == str else infoJSON["name"][i]
+		for j in comp:
+			storeLibrary[i] = storeLibrary.get(i, []) + [j]
+	for i in infoJSON["state"]:
+		for j in infoJSON["state"][i]:
+			for s in infoJSON["state"][i][j]:
+				storeLibrary[s] = storeLibrary.get(s, []) + [j]
+	for i in infoJSON["alias"]:
+		for j in infoJSON["alias"][i]:
+			storeLibrary[j] = storeLibrary.get(j, []) + [i]
+	for i in infoJSON["website"]:
+		website = infoJSON["website"][i]
+		if website == "-":
+			website = actualName(infoJSON["name"][i]).lower().replace(" ", "")
+		storeLibrary[i] = storeLibrary.get(i, []) + [website]
+	for i in infoJSON["flag"]:
+		flag = infoJSON["flag"][i]
+		storeLibrary[i] = storeLibrary.get(i, []) + [flag]
+		if flag == "🇭🇰":
+			storeLibrary[i] = storeLibrary.get(i, []) + ["HK", "Hong Kong"]
+		if flag == "🇹🇼":
+			storeLibrary[i] = storeLibrary.get(i, []) + ["TW", "Taiwan"]
+
+library()
+def reloadJSON():
+	global infoJSON
+	with open("storeInfo.json") as r:
+		infoJSON = json.loads(r.read())
+	library()

@@ -20,8 +20,7 @@ if len(argv[1:]):
 else:
 	args = "🇨🇳"
 
-pair = storePairs(args.split())
-stores = storeReturn(pair, remove_close = True)
+stores = storeReturn(args, remove_close = True)
 
 setLogger(logging.INFO, os.path.basename(__file__))
 logging.info("程序启动")

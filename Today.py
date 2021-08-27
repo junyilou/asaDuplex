@@ -21,8 +21,7 @@ if len(argv[1:]):
 else:
 	args = "🇨🇳 🇭🇰 🇲🇴 TW"
 
-pair = storePairs(args.split())
-stores = storeReturn(pair, remove_close = True)
+stores = storeReturn(args, remove_close = True)
 
 append = ""
 masterJSON = {}
