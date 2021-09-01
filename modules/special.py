@@ -5,11 +5,13 @@ from datetime import timedelta, date, datetime
 from storeInfo import storeInfo, userAgent, storeDict
 from modules.constants import dayOfWeekENG, partSample, storeNation, textConvert
 
+'''
 def dateConvert(strdate):
 	year, month, day = strdate.split("-")
 	standard = date(int(year), 1, 1)
 	actual = standard + timedelta(days = int(day) - 1)
 	return actual
+'''
 
 def comment(sid):
 	try:
@@ -60,7 +62,7 @@ def speHours(sid):
 		if len(specialHours) == 14:
 			break
 
-		validDate = dateConvert(special["date"])
+		validDate = datetime.strptime(special["date"], "%Y-%m-%d").date()
 		regular = regularHours[validDate.weekday()]
 		spetext = textConvert(special)
 
