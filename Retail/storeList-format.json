@@ -365,7 +365,7 @@
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "City-Galerie Augsburg\nWilly-Brandt-Platz 1\n86153 Augsburg",
-              "phoneNumber": "(0821) 9076-490-00"
+              "phoneNumber": "(821) 9076-490-00"
             },
             {
               "storeNumber": "R045",
@@ -1873,8 +1873,8 @@
               "storeNumber": "R226",
               "countryCode": "GB",
               "storeName": "White City",
-              "latitude": "51.50747",
-              "longitude": "-0.22066",
+              "latitude": "51.507799",
+              "longitude": "-0.221664",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -5180,8 +5180,8 @@
               "storeNumber": "R051",
               "countryCode": "US",
               "storeName": "Third Street Promenade",
-              "latitude": "34.01541",
-              "longitude": "-118.49529",
+              "latitude": "34.015328138540426",
+              "longitude": "-118.49542915821075",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -6290,8 +6290,8 @@
               "storeNumber": "R312",
               "countryCode": "US",
               "storeName": "Dadeland",
-              "latitude": "25.6906031071807",
-              "longitude": "-80.3138027473283",
+              "latitude": "25.689879",
+              "longitude": "-80.313707",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -6965,8 +6965,8 @@
               "storeNumber": "R041",
               "countryCode": "US",
               "storeName": "Twelve Oaks",
-              "latitude": "42.49288",
-              "longitude": "-83.47071",
+              "latitude": "42.4924",
+              "longitude": "-83.4704",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -10365,6 +10365,33 @@
               "enableInStoreMode": true,
               "storeAddress": "大连市西岗区五四路 66 号\n116000",
               "phoneNumber": "4006139741"
+            }
+          ]
+        },
+        {
+          "stateName": "Hunan",
+          "stores": [
+            {
+              "storeNumber": "R617",
+              "countryCode": "CN",
+              "storeName": "长沙",
+              "latitude": "28.195803",
+              "longitude": "112.971235",
+              "storeRadius": "50",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R617.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "长沙",
+              "timeZone": "Asia/Shanghai",
+              "instoreCheckoutMode": "SCAN_AND_BUY",
+              "selfCheckout": "SNL",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipSelfCheckout": "SNL",
+              "enableInStoreMode": true,
+              "storeAddress": "长沙市芙蓉区解放西路 188 号\n长沙国金中心一层\n410000",
+              "phoneNumber": "4006043168"
             }
           ]
         },
