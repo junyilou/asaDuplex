@@ -1,4 +1,5 @@
-import logging, os
+import os
+import logging
 
 def disMarkdown(text):
 	temp = text
@@ -28,7 +29,7 @@ def textConvert(strdict):
 
 def dieterURL(sid, mode = None):
 	bicubic = "?resize=2880:1612&output-format=jpg&output-quality=90&interpolation=progressive-bicubic" if mode else ""
-	return f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid}{bicubic}"
+	return f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid}.png{bicubic}"
 
 asaVersion = "5.13.0"
 asaAgent = ".".join(asaVersion.split(".")[:2])
@@ -61,7 +62,7 @@ partSample = {'🇺🇸': 'AM', '🇨🇳': 'FE', '🇬🇧': 'ZM', '🇨🇦': 
 	'🇸🇪': 'ZM', '🇸🇬': 'FE', '🇦🇹': 'ZM', 
 	'🇰🇷': 'FE', '🇹🇭': 'FE', '🇭🇰': 'FE', '🇹🇼': 'FE'}
 partRuleFull = "([FGHMNPS][0-9A-Z]{3}[0-9][A-Z]{1,2}/[A-Z])"
-partRuleCheck = "([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z]))"
+partRuleCheck = "([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?)"
 
 DIFFhead = """
 <!DOCTYPE html>

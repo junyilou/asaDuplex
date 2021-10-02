@@ -2,8 +2,8 @@ import logging
 import requests
 import json
 from datetime import timedelta, date, datetime
-from storeInfo import storeInfo, userAgent, storeDict
-from modules.constants import dayOfWeekENG, partSample, storeNation, textConvert
+from storeInfo import storeInfo, storeDict
+from modules.constants import userAgent, dayOfWeekENG, partSample, storeNation, textConvert
 
 '''
 def dateConvert(strdate):
@@ -21,7 +21,7 @@ def comment(sid):
 		return {}
 	baseURL = f"https://www.apple.com{storeNation[flag]}"
 	referer = {**userAgent, "Referer": f"{baseURL}/shop/product/{partNumber}"}
-	url = f"{baseURL}/shop/fulfillment-messages?searchNearby=false&parts.0={partNumber}&store=R{sid}"
+	url = f"{baseURL}/shop/fulfillment-messages?searchNearby=true&parts.0={partNumber}&store=R{sid}"
 
 	try:
 		r = requests.get(url, headers = referer).json()
