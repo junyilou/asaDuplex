@@ -33,7 +33,11 @@ for ste in RecruitDict:
 	realCode = f"11443{spl}"
 	logging.info(f"正在下载{scn}的国家文件")
 
-	r = s.get(f"https://jobs.apple.com/api/v1/jobDetails/PIPE-{realCode}/stateProvinceList", headers = userAgent, verify = False)
+	try:
+		r = s.get(f"https://jobs.apple.com/api/v1/jobDetails/PIPE-{realCode}/stateProvinceList", headers = userAgent, verify = False)
+	except:
+		logging.error(f"下载{scn}的国家文件错误")
+		continue
 	try:
 		stateJSON = r.json()["searchResults"]
 	except:
@@ -49,7 +53,11 @@ for ste in RecruitDict:
 		cID = i["id"].replace("postLocation-", "")
 		logging.info(f"正在下载{scn}的城市文件 {cID}")
 
-		r = s.get(f"https://jobs.apple.com/api/v1/jobDetails/PIPE-{realCode}/storeLocations?searchField=stateProvince&fieldValue={i['id']}", headers = userAgent, verify = False)
+		try:
+			r = s.get(f"https://jobs.apple.com/api/v1/jobDetails/PIPE-{realCode}/storeLocations?searchField=stateProvince&fieldValue={i['id']}", headers = userAgent, verify = False)
+		except:
+			logging.error(f"下载{scn}的城市文件 {cID} 错误")
+			continue
 		try:
 			cityJSON = r.json()
 		except:
