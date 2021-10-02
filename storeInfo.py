@@ -4,7 +4,7 @@ from functools import partial
 from time import strftime, strptime
 requests.packages.urllib3.disable_warnings()
 
-from modules.constants import userAgent, webNation, localeNation, dieterURL
+from modules.constants import userAgent, webNation, localeNation, dieterURL, RecruitDict
 
 with open("storeInfo.json") as r:
 	infoJSON = json.loads(r.read())
@@ -100,7 +100,8 @@ def getState(sid):
 			if sid in infoJSON["state"][i][j]:
 				return j, infoJSON["state"][i][j]
 
-def stateReplace(stores):
+def stateReplace(rstores):
+	stores = rstores.copy()
 	if not stores:
 		return stores
 	while True:
@@ -128,7 +129,7 @@ def storeOrder():
 				stores.append(k)
 	return stores
 
-def storeReturn(args, sort = True, remove_close = False, remove_future = False, fuzzy = False):
+def storeReturn(args, sort = True, remove_close = False, remove_future = False, fuzzy = False, no_country = False):
 	ans = []
 	if type(args) == str:
 		args = args.split(" ")
@@ -141,6 +142,10 @@ def storeReturn(args, sort = True, remove_close = False, remove_future = False, 
 					continue
 				if remove_future and "Store in" in infoJSON["name"][s[0]]:
 					continue
+				if no_country:
+					nmlst = [RecruitDict[i]["name"] for i in RecruitDict]
+					if a in nmlst or a in webNation:
+						continue
 				ans.append(s)
 
 	if sort:
@@ -204,6 +209,7 @@ def library():
 			storeLibrary[i] = storeLibrary.get(i, []) + ["HK", "Hong Kong"]
 		if flag == "🇹🇼":
 			storeLibrary[i] = storeLibrary.get(i, []) + ["TW", "Taiwan"]
+		storeLibrary[i] += [RecruitDict[flag]["name"]]
 
 library()
 def reloadJSON():
