@@ -10,6 +10,7 @@ requests.packages.urllib3.disable_warnings()
 from storeInfo import DieterInfo, DieterHeader
 from modules.constants import disMarkdown, setLogger, userAgent, dieterURL
 
+from telegram import Bot
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
 
@@ -35,7 +36,7 @@ def down(rtl, isSpecial):
 		savedDatetime = datetime(2001, 5, 19)
 
 	if remoteDatetime > savedDatetime:
-		if remoteDatetime.date() == date(2021, 7, 13):
+		if remoteDatetime.date() in [date(2021, 7, 13), date(2021, 8, 28), date(2021, 8, 29)]:
 			logging.info(f"R{rtl} 找到了更佳的远端无效时间")
 			storejson['last'][rtl] = remote
 			storejson['update'] = datetime.now(timezone.utc).strftime("%F %T GMT")
