@@ -4333,6 +4333,28 @@
               "phoneNumber": "(631) 982-2500"
             },
             {
+              "storeNumber": "R753",
+              "countryCode": "US",
+              "storeName": "The Mall at Bay Plaza",
+              "latitude": "40.8638",
+              "longitude": "-73.8269",
+              "storeRadius": "50",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R753.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Bronx, NY",
+              "timeZone": "America/New_York",
+              "instoreCheckoutMode": "SCAN_AND_BUY",
+              "selfCheckout": "SNB",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipSelfCheckout": "SNB",
+              "enableInStoreMode": true,
+              "storeAddress": "200 Baychester Avenue\nBronx,NY 10475 ",
+              "phoneNumber": "(718) 5307760"
+            },
+            {
               "storeNumber": "R016",
               "countryCode": "US",
               "storeName": "Walden Galleria",
