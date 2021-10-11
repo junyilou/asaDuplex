@@ -5268,8 +5268,8 @@
               "storeNumber": "R094",
               "countryCode": "US",
               "storeName": "Victoria Gardens",
-              "latitude": "34.1110023154753",
-              "longitude": "-117.533889761525",
+              "latitude": "34.11069",
+              "longitude": "-117.5335",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -12218,6 +12218,28 @@
         {
           "stateName": "İstanbul",
           "stores": [
+            {
+              "storeNumber": "R724",
+              "countryCode": "TR",
+              "storeName": "Bağdat Caddesi",
+              "latitude": "40.9647222",
+              "longitude": "29.071944444444444",
+              "storeRadius": "50",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R724.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Kadıköy İstanbul",
+              "timeZone": "Europe/Istanbul",
+              "instoreCheckoutMode": "SCAN_AND_BUY",
+              "selfCheckout": "SNL",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipSelfCheckout": "SNL",
+              "enableInStoreMode": true,
+              "storeAddress": "Bağdat Avenue, No: 342\nCaddebostan\nİstanbul,Kadıköy İstanbul",
+              "phoneNumber": "(0216) 4680100"
+            },
             {
               "storeNumber": "R588",
               "countryCode": "TR",
