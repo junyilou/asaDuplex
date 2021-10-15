@@ -89,14 +89,6 @@ for i in masterJSON:
 				sessionURL = storeURL(i).replace("/retail", "/today")
 				keyboard = [[["访问课程页面", sessionURL]]]
 				logging.error("未找到此课程的排课信息")
-			elif "VIRTUAL" in course["type"]:
-				setTime = availableTime[0]
-				timing = setTime[0]
-				sessionURL = f"{storeURL(setTime[2]).split('/retail')[0]}/today/event/{course['urlTitle']}/{setTime[3]}/?sn=R{setTime[2]}"
-				keyboard = [[["预约课程", sessionURL]]]
-
-				logging.info(f"找到线上活动的课程时间 {timing}")
-				logging.info(f"最终课程信息：课程 ID {courseID}，课次 ID {setTime[3]}")
 			else:
 				sortTime = sorted(availableTime, key = lambda k: k[1])[0]
 				if len(availableStore) == 1:
