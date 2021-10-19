@@ -91,13 +91,15 @@ for i in masterJSON:
 				logging.error("未找到此课程的排课信息")
 			else:
 				sortTime = sorted(availableTime, key = lambda k: k[1])[0]
+				countlist = set([s[3] for s in availableTime])
 				if len(availableStore) == 1:
 					if len(availableTime) == 1:
 						timing = sortTime[0]
 					else:
-						timing = f"{sortTime[0]} 起，共 {len(availableTime)} 个排课"
+						timing = f"{sortTime[0]} 起，共 {len(countlist)} 个排课"
 				else:
-					timing = f"{sortTime[0]} 于 Apple {actualName(storeInfo(sortTime[2])['name'])} 起，共 {len(availableTime)} 次排课"
+					location = "" if "VIRTUAL" in course["type"] else f"于 Apple {actualName(storeInfo(sortTime[2])['name'])} "
+					timing = f"{sortTime[0]} {location}起，共 {len(countlist)} 次排课"
 
 				sessionURL = f"{storeURL(sortTime[2]).split('/retail')[0]}/today/event/{course['urlTitle']}/{sortTime[3]}/?sn=R{sortTime[2]}"
 				keyboard = [[["预约课程", sessionURL]]]
