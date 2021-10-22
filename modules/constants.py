@@ -63,6 +63,7 @@ partSample = {'🇺🇸': 'AM', '🇨🇳': 'FE', '🇬🇧': 'ZM', '🇨🇦': 
 	'🇰🇷': 'FE', '🇹🇭': 'FE', '🇭🇰': 'FE', '🇹🇼': 'FE'}
 partRuleFull = "([FGHMNPS][0-9A-Z]{3}[0-9][A-Z]{1,2}/[A-Z])"
 partRuleCheck = "([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?)"
+partSpecialProduct = "(Z[0-9A-Z]{3}&[\\s\\S]*)"
 
 DIFFhead = """
 <!DOCTYPE html>
@@ -97,9 +98,13 @@ orderDict = {
 	'RECEIVED_BY_CARRIER': '承运商已揽收', 'RECEIVED_BY_APPLE': 'Apple 已收货', 
 	'SHIPPING_TO_PICKUP_POINT': '正在运往取货点', 'PREPARING_FOR_DISPATCH': '正在准备派送', 'DISPATCHED': '已派送',
 	'PAYMENT_DUE_STORED_ORDER': '等待付款', 'PAYMENT_DUE': '等待付款', "CANCELED": "已取消", 
-	"PAYMENT_EXPIRED": "订单已过期", "PAYMENT_EXPIRED_STORED_ORDER": "订单已过期"}
+	"PAYMENT_EXPIRED": "订单已过期", "PAYMENT_EXPIRED_STORED_ORDER": "订单已过期",
+	'PENDING_SHIPMENT': '等待新产品发货', 'TRADEUP_KIT': '你的折抵换购套件已在寄送途中',
+	'TRADEUP_INSPECTION': '正在检查你的设备', 'TRADEUP_DONE': '你的折抵换购已核实',
+	'TRADEUP_SHIP_BACK': '请寄回你的设备', 'TRADEUP_ALMOST_DONE': '折抵换购即将完成',
+	'TRADEUP_CANCELED': '你的折抵换购已取消', 'TRADEUP_HOLD': '你的折抵换购已暂缓处理', 'TRADEUP_COURIER': '安排上门取件',}
 completeStatus = [
-	"COMPLETE", "TRADEIN_COMPLETE", "TRADEUP_COMPLETE", "DELIVERED_TO_YOU", "DELIVERED",
+	"COMPLETE", "TRADEIN_COMPLETE", "TRADEUP_COMPLETE", "TRADEUP_CANCELED", "TRADEUP_DONE", "DELIVERED_TO_YOU", "DELIVERED",
 	"REFUND_INITIATED", "PICKED_UP", "EMAIL_SENT", "ELECTRONICALLY_DELIVERED", "CANCELED", "PAYMENT_EXPIRED"]
 
 RecruitDict = {

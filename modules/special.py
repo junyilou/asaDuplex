@@ -16,7 +16,7 @@ def dateConvert(strdate):
 def comment(sid):
 	try:
 		flag = storeInfo(sid)['flag']
-		partNumber = f"MX0K2{partSample[flag]}/A"
+		partNumber = f"MM0A3{partSample[flag]}/A"
 	except KeyError:
 		return {}
 	baseURL = f"https://www.apple.com{storeNation[flag]}"
