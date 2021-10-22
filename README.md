@@ -17,18 +17,17 @@
 #### 模块
 
 * storeInfo.py: 处理 storeInfo.json 的数据，提供强大的通用函数
-
 * modules/special.py: 分析 Apple Store 零售店营业时间，并尝试获得特别营业时间内部备忘录
 * modules/constants.py: 保存部分常量和通用函数
 
 #### 文本
 
-* savedEvent.txt、savedSitemap: 由 Today.py 或 Sitemap.py 生成的，已经检测到并保存的 Today at Apple 活动列表
+* savedEvent.txt 和 savedSitemap.txt: 由 Today.py 或 Sitemap.py 生成的，已经检测到并保存的 Today at Apple 活动列表
 * savedJobs.txt: 由 Recruitment.py 生成的，已经在检测到招聘的零售店编号
 * storeInfo.json: 全球 Apple Store 名称（包含部分曾用名、ASCII 兼容名等以便于更广的匹配）、店号、国家或地区旗帜、开店时间、官网图片最后修改时间、URL 标签、全球各国地区零售店按行政区划字典、用于模糊搜索的关键字 alias 等
 * storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的零售店详细信息
 
-## 您可以如何使用本库分享的数据
+## 如何使用
 
 * storeInfo.json 提供了极为丰富的 Apple Store 零售店信息，可供查阅
 
@@ -74,7 +73,7 @@
   {'name': ['解放碑', 'Jiefangbei'], 'flag': '🇨🇳', 'nso': '2015-1-31', 'last': '29 Aug 2021 06:57:49', 'website': 'jiefangbei'}
   ```
 
-* Hours、Today 等代码设计为可以比较本地已经保存的结果（例如已经记录的 Today at Apple 活动）寻找差异并输出图文结果，这些数据也被用到了果铺知道 Bot 和果铺知道 Channel 中。
+* Hours.py、Today.py 等代码设计为可以比较本地已经保存的结果（例如已经记录的 Today at Apple 活动）寻找差异并输出图文结果，这些数据也被用到了果铺知道 Bot 和果铺知道 Channel 中。
 
   ![today](Retail/today.jpg)
 
@@ -85,9 +84,7 @@
   from bot import tokens
   ```
 
-  这是我个人对结果推送的实现方式，`sdk_aliyun` 和 `bot` 并未在此库中给出。
-
-  可以看到，代码运行到输出阶段会产生一个包含文本、图片、链接等内容的字典，您可以通过编写适合您自己的推送结果的方式以获取代码结果，例如将内容推送至 Telegram Channel、微信公众号、其他第三方 iOS 推送 app 等。
+  这是我个人对结果推送的实现方式，`sdk_aliyun` 和 `bot` 并未在此库中给出。代码运行到输出阶段会产生一个包含文本、图片、链接等内容的字典，您可以通过编写适合您自己的推送结果的方式以获取代码结果，例如将内容推送至 Telegram Channel、微信公众号、其他第三方 iOS 推送 app 等。
 
 ## 库历史
 
