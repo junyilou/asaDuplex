@@ -1,10 +1,10 @@
 ### asaDuplex
 
-A repo all about Apple Store.
+![bot](Retail/bot.jpg)
 
-\-
+\* asaDuplex 尚不开源 Telegram Bot 的运行代码，您可以在[这里](https://t.me/guopuzdbot)进行体验。
 
-### 仓库内容
+## 仓库内容
 
 #### 代码
 
@@ -28,9 +28,7 @@ A repo all about Apple Store.
 * storeInfo.json: 全球 Apple Store 名称（包含部分曾用名、ASCII 兼容名等以便于更广的匹配）、店号、国家或地区旗帜、开店时间、官网图片最后修改时间、URL 标签、全球各国地区零售店按行政区划字典、用于模糊搜索的关键字 alias 等
 * storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的零售店详细信息
 
-\-
-
-### 您可以如何使用本库分享的数据
+## 您可以如何使用本库分享的数据
 
 * storeInfo.json 提供了极为丰富的 Apple Store 零售店信息，可供查阅
 
@@ -91,9 +89,7 @@ A repo all about Apple Store.
 
   可以看到，代码运行到输出阶段会产生一个包含文本、图片、链接等内容的字典，您可以通过编写适合您自己的推送结果的方式以获取代码结果，例如将内容推送至 Telegram Channel、微信公众号、其他第三方 iOS 推送 app 等。
 
-\-
-
-### 库历史
+## 库历史
 
 2019 年 8 月：迁移库并命名 asaDuplex，所有代码要求使用 Python 3。
 
@@ -107,21 +103,13 @@ A repo all about Apple Store.
 
 2021 年 8 月：进一步模块化代码，并将代码结果推送剥离，不再依赖 Telegram Bot 做结果推送。
 
-![bot](Retail/bot.jpg)
-
-\* asaDuplex 尚不开源 Telegram Bot 的运行代码，您可以在[这里](https://t.me/guopuzdbot)进行体验。
-
- \-
-
-### ~~已移除的代码~~
+## ~~已移除的代码~~
 
 * inStock.py: 根据产品部件号码查寻指定产品在指定零售店的库存情况，为避免滥用移除
 * onlineCrawl.py: 通过访问 Apple 官网以寻找新上架的产品部件号码，为避免滥用移除
 * IFTTT.py: 起初为了 IFTTT Webhooks 推送创建的辅助程序，现已不再需要
 
-\-
-
-###### 底注
+## 底注
 
 免责声明：
 
