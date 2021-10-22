@@ -1,22 +1,107 @@
 ### asaDuplex
 
-**一个完全关于 Apple Store 的 Repository。** — Junyi
-
-果铺知道通过以下代码获得了许多关于 Apple Store 零售店的信息，
-
-你可以在[微博](https://weibo.com/arsteller)和 [Telegram Channel](https://t.me/guopuzd) 关注果铺知道以直接接收以下代码的运行结果。
+A repo all about Apple Store.
 
 \-
 
-### 大事记
+### 仓库内容
 
-2019 年 8 月：所有代码要求使用 Python 3，不向下兼容 Python 2。
+#### 代码
 
-2019 年 11 月：停止通过 while True 和 time.sleep 实行占用内存的持久运行，改为一次执行代码，推荐配合 crontab 等计划任务命令使用。代码中引入了 logging 来保存代码的运行 log。
+* allStoresInfoLite.py: 取得 Apple Store 零售店服务器信息
+* Recruitment.py: 取得全球 Specialist 招聘情况以获得未来新店
+* Rtl.py: 取得 Apple Store 零售店服务器图片更新
+* Hours.py: 取得 Apple Store 特别营业时间信息
+* Today.py 和 Sitemap.py: 取得最新 Today at Apple 活动
+
+#### 模块
+
+* storeInfo.py: 处理 storeInfo.json 的数据，提供强大的通用函数
+
+* modules/special.py: 分析 Apple Store 零售店营业时间，并尝试获得特别营业时间内部备忘录
+* modules/constants.py: 保存部分常量和通用函数
+
+#### 文本
+
+* savedEvent.txt、savedSitemap: 由 Today.py 或 Sitemap.py 生成的，已经检测到并保存的 Today at Apple 活动列表
+* savedJobs.txt: 由 Recruitment.py 生成的，已经在检测到招聘的零售店编号
+* storeInfo.json: 全球 Apple Store 名称（包含部分曾用名、ASCII 兼容名等以便于更广的匹配）、店号、国家或地区旗帜、开店时间、官网图片最后修改时间、URL 标签、全球各国地区零售店按行政区划字典、用于模糊搜索的关键字 alias 等
+* storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的零售店详细信息
+
+\-
+
+### 您可以如何使用本库分享的数据
+
+* storeInfo.json 提供了极为丰富的 Apple Store 零售店信息，可供查阅
+
+* storeInfo.py 包装了大量函数对 storeInfo.json 进行处理，这包括：
+
+  * `storeReturn(args, sort = True, remove_close = False, remove_future = False, fuzzy = False, no_country = False)`
+
+  传入关键字，包括店号、店名、城市、国家或地区可搜索零售店，默认自动按照行政区划进行排序，还可配置启用模糊搜索、移除未开业零售店、移除已关闭零售店等。
+
+  ```python
+  >>> storeReturn("浙江 南京 🇲🇴 670")
+  
+  [('493', '南京艾尚天地'), ('643', '虹悦城'), ('703', '玄武湖'), ('670', '昆明'), ('471', '西湖'), ('531', '天一广场'), ('532', '杭州万象城'), ('672', '澳門銀河'), ('697', '路氹金光大道')]
+  ```
+
+  * `stateReplace(rstores)`
+
+  传入零售店店号数组，将按照行政区划进行压缩，便于一次性输出多个零售店。
+
+  ```python
+  >>> stateReplace(['480', '476', '573', '580', '670'])
+  
+  ['重庆 (3)', '580', '云南 (1)']
+  ```
+
+  * `storeDict(storeid, mode = "dict")`
+
+  传入零售店店号，联网从 Apple 官网获取零售店基本信息简单处理后返回。
+
+  ```python
+  >>> storeDict(480)
+  
+  {'latitude': 29.560981, 'longitude': 106.572272, 'timezone': 'Asia/Shanghai', 'telephone': '400-617-1224', 'address': '重庆市渝中区邹容路 108 号', 'province': '重庆, 重庆, 400010', 'regular': [{'name': 'Monday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Tuesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Wednesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Thursday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Friday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Saturday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Sunday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}], 'special': []}
+  ```
+
+  * `storeInfo(storeid)`
+
+  传入零售店店号，不联网从本地返回基本零售店信息。
+
+  ```python
+  >>> storeInfo(480)
+  
+  {'name': ['解放碑', 'Jiefangbei'], 'flag': '🇨🇳', 'nso': '2015-1-31', 'last': '29 Aug 2021 06:57:49', 'website': 'jiefangbei'}
+  ```
+
+* Hours、Today 等代码设计为可以比较本地已经保存的结果（例如已经记录的 Today at Apple 活动）寻找差异并输出图文结果，这些数据也被用到了果铺知道 Bot 和果铺知道 Channel 中。
+
+  ![today](Retail/today.jpg)
+
+  在许多代码的顶部，可能包含类似如下代码：
+
+  ```python
+  from sdk_aliyun import post
+  from bot import tokens
+  ```
+
+  这是我个人对结果推送的实现方式，`sdk_aliyun` 和 `bot` 并未在此库中给出。
+
+  可以看到，代码运行到输出阶段会产生一个包含文本、图片、链接等内容的字典，您可以通过编写适合您自己的推送结果的方式以获取代码结果，例如将内容推送至 Telegram Channel、微信公众号、其他第三方 iOS 推送 app 等。
+
+\-
+
+### 库历史
+
+2019 年 8 月：迁移库并命名 asaDuplex，所有代码要求使用 Python 3。
+
+2019 年 11 月：停止通过 while True 和 time.sleep 进行持续的前台运行，改为一次执行代码，引入 logging 做为输出。
 
 2020 年 11 月：停止通过 IFTTT Webhooks 将代码结果发至 iOS 用户，改为使用 Telegram Bot 推送结果，同时也支持了在发送的内容中应用 Markdown 文本样式、按钮、链接等。
 
-2021 年 2 月：将 specialHours、Rtlimages 变得更加模块化，使数据获取和数据处理分析分开，方便其他代码可以利用相同的数据实现其他的功能。
+2021 年 2 月：将 specialHours (现 Hours)、Rtlimages (现 Rtl) 变得更加模块化，使数据获取和数据处理分析分开，方便其他代码可以利用相同的数据实现其他的功能。
 
 2021 年 3 月：利用 asaDuplex 中的部分代码，推出果铺知道 Telegram Bot，方便用户快速查询 Apple Store 零售店信息及特别营业时间信息。
 
@@ -26,53 +111,7 @@
 
 \* asaDuplex 尚不开源 Telegram Bot 的运行代码，您可以在[这里](https://t.me/guopuzdbot)进行体验。
 
-**在所有代码的顶部，可能包含类似如下代码：**
-
-```python
-from sdk_aliyun import post
-from bot import tokens
-```
-
-这是我个人对结果推送的实现方式，`sdk_aliyun` 和 `bot` 并未在此库中给出。
-
-可以看到，代码运行到输出阶段会产生一个包含文本、图片、链接等内容的字典，您可以通过编写适合您自己的推送结果的方式以获取代码结果，例如将内容推送至 Telegram Channel、微信公众号、其他第三方 iOS 推送 app 等。
-
  \-
-
-### 代码
-
-* allStoresInfoLite.py: 取得 Apple Store 零售店服务器信息
-* Recruitment.py: 取得全球 Specialist 招聘情况以获得未来新店
-* Rtl.py: 取得 Apple Store 零售店服务器图片更新
-* Hours.py: 取得 Apple Store 特别营业时间信息
-* Today.py: 取得最新 Today at Apple 活动
-* Sitemap.py: 作为 Today.py 的补充，通过 sitemap.xml 取得额外的 Today at Apple 活动
-
-### 数据获取模块
-
-* storeInfo.py
-
-  * 是一个非常强大的模块，其本质是通过分析 storeInfo.json 来处理 Apple Store 零售店信息
-  * 通过 StoreID、StoreName、StoreNation 实现模糊搜索零售店
-  * 通过 storeDict 从 Apple 官网获得零售店的基本数据
-  * 通过 storePairs、storeReturn 实现自动拆分和解析不固定格式的零售店输入
-  * 通过 DieterInfo 和 DieterHeader 返回零售店图片标头
-* special.py
-  * 自动解析 apple.com 源代码中提供的零售店常规营业时间安排和特别营业时间
-  * 可尝试从 Apple 官网获得零售店特别营业时间的内部批注信息
-  * 已完全适配了新版 Apple 零售店页面 HTML 代码
-* constants.py
-  * 为一些常量或较为啰嗦的需要在许多代码中反复用到的函数
-  * 可能包括果铺知道 Bot 其他代码用到的数据
-  * 提供一个简易的 Markdown 转换函数
-
-
-### 数据文本
-
-* savedEvent.txt、savedSitemap: 由 Today.py 或 Sitemap.py 生成的，已经检测到并保存的 Today at Apple 活动列表
-* savedJobs.txt: 由 Recruitment.py 生成的，已经在检测到招聘的零售店编号
-* storeInfo.json: 全球 Apple Store 名称（包含部分曾用名、ASCII 兼容名等以便于更广的匹配）、店号、国家或地区旗帜、开店时间、官网图片最后修改时间、URL slug、全球各国地区零售店按行政区划拆分、用于模糊搜索的关键字 alias 等
-* storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的零售店详细信息
 
 ### ~~已移除的代码~~
 
