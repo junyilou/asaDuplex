@@ -24,11 +24,11 @@ stores = storeReturn(args, remove_close = True, remove_future = True)
 
 setLogger(logging.INFO, os.path.basename(__file__))
 logging.info("程序启动")
-runtime = str(date.today())
 
+today = date.today()
+runtime = str(today)
 comparison = ""
 calendar = {}
-allSpecial = {"created": runtime}
 
 try: 
 	with open("Retail/storeHours.json") as o:
@@ -37,6 +37,8 @@ except FileNotFoundError:
 	orgjson = {}
 	with open("Retail/storeHours.json", "w") as w:
 		w.write("{}")
+
+allSpecial = {**orgjson, "created": runtime}
 
 for sid, sn in stores:
 	if printDebug:
@@ -52,12 +54,10 @@ for sid, sn in stores:
 
 	for s in specialHours:
 		fSpecial = specialHours[s]["special"]
-
-		if s in calendar.keys():
+		if s in calendar:
 			calendar[s][sn] = fSpecial
 		else:
 			calendar[s] = {sn: fSpecial}
-
 		try: 
 			orgSpecial = orgjson[sid][s]["special"]
 		except KeyError:
@@ -66,24 +66,34 @@ for sid, sn in stores:
 			if orgSpecial != fSpecial:
 				storeDiff += f"{'':^8}{s}：由 {orgSpecial} 改为 {fSpecial}\n"
 
-	try: 
-		oload = orgjson[sid]
-	except KeyError: 
-		pass
-	else:
-		for odate in oload.keys():
+	if sid in orgjson:
+		for odate in list(orgjson[sid]):
 			if odate == "storename": 
 				continue
 			odatetime = datetime.strptime(odate, '%Y-%m-%d').date()
-			if odatetime < date.today(): 
+			if odatetime < today: 
 				continue
 			try:
 				newSpecial = specialHours[odate]
 			except KeyError:
-				storeDiff += f"{'':^8}{odate}：取消 {oload[odate]['special']}\n"
+				storeDiff += f"{'':^8}{odate}：取消 {orgjson[sid][odate]['special']}\n"
+				allSpecial[sid].pop(odate)
 
 	if len(storeDiff):
 		comparison += f"{'':^4}Apple {sn}\n{storeDiff}"
+
+for s in list(allSpecial):
+	if s == "created":
+		continue
+	saved = allSpecial[s]
+	for d in list(saved):
+		if d == "storename":
+			continue
+		t = datetime.strptime(d, '%Y-%m-%d').date()
+		if t < today:
+			allSpecial[s].pop(d)
+	if len(saved) == 1:
+		allSpecial.pop(s)
 
 os.rename("Retail/storeHours.json", f"Retail/storeHours-{runtime}.json")
 
@@ -102,7 +112,8 @@ if len(comparison):
 原始 JSON:\n{jOut}
 {DIFFfoot}
 """
-	with open("/root/html/storeHours.html", "w") as w:
+	#with open("/root/html/storeHours.html", "w") as w:
+	with open("storeHours.html", "w") as w:
 		w.write(fileDiff)
 	logging.info("文件生成完成")
 
@@ -113,7 +124,7 @@ if len(comparison):
 		"text": f'*来自 Hours 的通知*\n{comparison.count("Apple")} 个 Apple Store 有特别营业时间变化 [↗](http://aliy.un/html/storeHours.html)',
 		"parse": 'MARK'
 	}
-	post(push)
+	print(push)
 
 else: 
 	os.remove(f"Retail/storeHours-{runtime}.json")
