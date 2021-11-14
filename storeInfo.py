@@ -1,7 +1,7 @@
 import json
 import requests
 from functools import partial
-from time import strftime, strptime
+from datetime import datetime
 requests.packages.urllib3.disable_warnings()
 
 from modules.constants import userAgent, webNation, localeNation, dieterURL, RecruitDict
@@ -95,6 +95,7 @@ def storeState(stateCode):
 	return reply
 
 def getState(sid):
+	sid = f"{sid}"
 	for i in infoJSON["state"]:
 		for j in infoJSON["state"][i]:
 			if sid in infoJSON["state"][i][j]:
@@ -166,7 +167,7 @@ def DieterInfo(rtl):
 		name = actualName(sif["name"])
 		info = f"*{sif['flag']} Apple {name}* (R{rtl})"
 		if "nso" in sif:
-			info += f'\n首次开幕于 {strftime("%Y 年 %-m 月 %-d 日", strptime(sif["nso"], "%Y-%m-%d"))}'
+			info += f'\n首次开幕于 {datetime.strptime(sif["nso"], "%Y-%m-%d").strftime("%Y 年 %-m 月 %-d 日")}'
 	return info
 
 def DieterHeader(rtl):
@@ -210,10 +211,12 @@ def library():
 		if flag == "🇹🇼":
 			storeLibrary[i] = storeLibrary.get(i, []) + ["TW", "Taiwan"]
 		storeLibrary[i] += [RecruitDict[flag]["name"]]
+		storeLibrary[i] += RecruitDict[flag]["altername"]
 
 library()
-def reloadJSON():
+def reloadJSON(filename = "storeInfo.json"):
 	global infoJSON
-	with open("storeInfo.json") as r:
+	with open(filename) as r:
 		infoJSON = json.loads(r.read())
 	library()
+	return infoJSON["update"]

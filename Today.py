@@ -92,14 +92,9 @@ for i in masterJSON:
 			else:
 				sortTime = sorted(availableTime, key = lambda k: k[1])[0]
 				countlist = set([s[3] for s in availableTime])
-				if len(availableStore) == 1:
-					if len(availableTime) == 1:
-						timing = sortTime[0]
-					else:
-						timing = f"{sortTime[0]} 起，共 {len(countlist)} 个排课"
-				else:
-					location = "" if "VIRTUAL" in course["type"] else f"于 Apple {actualName(storeInfo(sortTime[2])['name'])} "
-					timing = f"{sortTime[0]} {location}起，共 {len(countlist)} 次排课"
+				multiSet = f" 起，共 {len(countlist)} 个排课" if len(countlist) > 1 else ""
+				multiLoc = ("" if "VIRTUAL" in course["type"] else f" 于 Apple {actualName(storeInfo(sortTime[2])['name'])}") if len(availableStore) > 1 else ""
+				timing = f"{sortTime[0]}{multiLoc}{multiSet}"
 
 				sessionURL = f"{storeURL(sortTime[2]).split('/retail')[0]}/today/event/{course['urlTitle']}/{sortTime[3]}/?sn=R{sortTime[2]}"
 				keyboard = [[["预约课程", sessionURL]]]

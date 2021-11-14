@@ -112,8 +112,7 @@ if len(comparison):
 原始 JSON:\n{jOut}
 {DIFFfoot}
 """
-	#with open("/root/html/storeHours.html", "w") as w:
-	with open("storeHours.html", "w") as w:
+	with open("/root/html/storeHours.html", "w") as w:
 		w.write(fileDiff)
 	logging.info("文件生成完成")
 
@@ -124,7 +123,7 @@ if len(comparison):
 		"text": f'*来自 Hours 的通知*\n{comparison.count("Apple")} 个 Apple Store 有特别营业时间变化 [↗](http://aliy.un/html/storeHours.html)',
 		"parse": 'MARK'
 	}
-	print(push)
+	post(push)
 
 else: 
 	os.remove(f"Retail/storeHours-{runtime}.json")

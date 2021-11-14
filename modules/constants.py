@@ -31,7 +31,7 @@ def dieterURL(sid, mode = None):
 	bicubic = "?resize=2880:1612&output-format=jpg&output-quality=90&interpolation=progressive-bicubic" if mode else ""
 	return f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid}.png{bicubic}"
 
-asaVersion = "5.13.0"
+asaVersion = "5.14.0"
 asaAgent = ".".join(asaVersion.split(".")[:2])
 asaHeaders = {
 	"User-Agent": f"ASA/{asaAgent} (iPhone) ss/3.00",
@@ -39,8 +39,8 @@ asaHeaders = {
 	"X-MALang":   "zh-CN",
 	"X-Apple-I-TimeZone": "GMT+8",
 	"X-Apple-I-Locale":   "zh_CN",
-	"X-MMe-Client-Info": f"<iPhone13,2> <iPhone OS;14.3;18C66> <com.apple.AuthKit/1 (com.apple.store.Jolly/{asaVersion})>",
-	"X-DeviceConfiguration":  f"ss=3.00;dim=1170x2532;m=iPhone;v=iPhone13,2;vv={asaAgent};sv=15.0"}
+	"X-MMe-Client-Info": f"<iPhone13,2> <iPhone OS;15.1;19B74> <com.apple.AuthKit/1 (com.apple.store.Jolly/{asaVersion})>",
+	"X-DeviceConfiguration":  f"ss=3.00;dim=1170x2532;m=iPhone;v=iPhone13,2;vv={asaAgent};sv=15.1"}
 asaNation = {'🇺🇸': 'a/us', '🇨🇳': 'p/cn', '🇬🇧': 'e/uk', '🇨🇦': 'a/ca', '🇦🇺': 'p/au', '🇫🇷': 'e/fr', 
 	'🇮🇹': 'e/it', '🇩🇪': 'e/de', '🇪🇸': 'e/es', '🇯🇵': 'j/jp', '🇨🇭': 'e/ch-de', '🇦🇪': 'e/ae', '🇳🇱': 'e/nl', 
 	'🇸🇪': 'e/se', '🇧🇷': 'a/br', '🇹🇷': 'e/tr', '🇸🇬': 'p/sg', '🇲🇽': 'a/mx', '🇦🇹': 'e/at', '🇧🇪': 'e/be-fr', 
@@ -89,7 +89,7 @@ orderDict = {
 	'RETURN_STARTED': '已发起退货', 'RETURN_RECEIVED': '退货已收到', 'REFUND_INITIATED': '退货完成', 
 	'READY_FOR_COURIER': '等待承运商取货', 'PICKEDUP_BY_COURIER': '承运商已取货', 
 	'SHIPPED_TO_YOU': '已发货', 'DELIVERED_TO_YOU': '已送达', 'SHIPPED_TO_APPLE': '已送至 Apple', 
-	'TRADEIN_COMPLETE': '折抵换购完成', 'RECEIVED_AT_APPLE': 'Apple 已收货', 
+	'TRADEIN_COMPLETE': '折抵换购完成', 'RECEIVED_AT_APPLE': 'Apple 已收货', 'TRADE_IN_INSPECTION_COMPLETE': '你的折抵换购将很快完成',
 	'READY_FOR_PICKUP': '随时可取', 'PICKED_UP': '已取货', 'SHIPPING_TO_STORE': '正在送货到零售店', 
 	'CHECKIN_TODAY': '今日办理登记', 'EMAIL_SENT': '已发送电子邮件', 'ELECTRONICALLY_DELIVERED': '已经以电子方式发送', 
 	'PAYMENT_RECEIVED': '已收到付款', 'ORDER_IN_PROGRESS': '订单处理中', 'OUT_FOR_DELIVERY': '正在派送', 
