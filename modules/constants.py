@@ -44,23 +44,23 @@ asaHeaders = {
 asaNation = {'🇺🇸': 'a/us', '🇨🇳': 'p/cn', '🇬🇧': 'e/uk', '🇨🇦': 'a/ca', '🇦🇺': 'p/au', '🇫🇷': 'e/fr', 
 	'🇮🇹': 'e/it', '🇩🇪': 'e/de', '🇪🇸': 'e/es', '🇯🇵': 'j/jp', '🇨🇭': 'e/ch-de', '🇦🇪': 'e/ae', '🇳🇱': 'e/nl', 
 	'🇸🇪': 'e/se', '🇧🇷': 'a/br', '🇹🇷': 'e/tr', '🇸🇬': 'p/sg', '🇲🇽': 'a/mx', '🇦🇹': 'e/at', '🇧🇪': 'e/be-fr', 
-	'🇰🇷': 'p/kr', '🇹🇭': 'p/th-en', '🇭🇰': 'p/hk-zh', '🇹🇼': 'p/tw'}
+	'🇰🇷': 'p/kr', '🇹🇭': 'p/th-en', '🇭🇰': 'p/hk-zh', '🇹🇼': 'p/tw'} # No Service in Macau and India
 
-userAgent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6)\
-AppleWebKit/605.1.15(KHTML, like Gecko)Version/14.0.2 Safari/605.1.15"}
+userAgent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \
+AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15"}
 
 webNation = {**dict([(i[0], i[1][1:4]) for i in asaNation.items()]), 
-	"🇺🇸": '', "🇨🇳": '.cn', "🇨🇭": "/chde", "🇧🇪": "/befr", "TW": "/tw", '🇲🇴': '/mo'} # for /retail
+	"🇺🇸": '', "🇨🇳": '.cn', "🇨🇭": "/chde", "🇧🇪": "/befr", "TW": "/tw", '🇲🇴': '/mo', '🇮🇳': '/in'} # for /retail
 storeNation = {**webNation, "🇨🇭": "/ch-de", "🇧🇪": "/be-fr"} # for /shop
 localeNation = {'🇺🇸': 'en_US', '🇨🇳': 'zh_CN', '🇬🇧': 'en_GB', '🇨🇦': 'en_CA', '🇦🇺': 'en_AU', '🇫🇷': 'fr_FR', 
 	'🇮🇹': 'it_IT', '🇩🇪': 'de_DE', '🇪🇸': 'es_ES', '🇯🇵': 'ja_JP', '🇨🇭': 'de_CH', '🇦🇪': 'en_AE', '🇳🇱': 'nl_NL', 
 	'🇸🇪': 'sv_SE', '🇧🇷': 'pt_BR', '🇹🇷': 'tr_TR', '🇸🇬': 'en_SG', '🇲🇽': 'es_MX', '🇦🇹': 'de_AT', '🇧🇪': 'fr_BE', 
-	'🇰🇷': 'ko_KR', '🇹🇭': 'th_TH', '🇭🇰': 'zh_HK', '🇲🇴': 'zh_MO', '🇹🇼': 'zh_TW'} # for rsp
+	'🇰🇷': 'ko_KR', '🇹🇭': 'th_TH', '🇭🇰': 'zh_HK', '🇲🇴': 'zh_MO', '🇹🇼': 'zh_TW', '🇮🇳': 'en_IN'} # for rsp
 
 partSample = {'🇺🇸': 'AM', '🇨🇳': 'FE', '🇬🇧': 'ZM', '🇨🇦': 'AM', '🇦🇺': 'FE', '🇫🇷': 'ZM', 
 	'🇮🇹': 'ZM', '🇩🇪': 'ZM', '🇪🇸': 'ZM', '🇯🇵': 'FE', '🇳🇱': 'ZM', 
 	'🇸🇪': 'ZM', '🇸🇬': 'FE', '🇦🇹': 'ZM', 
-	'🇰🇷': 'FE', '🇹🇭': 'FE', '🇭🇰': 'FE', '🇹🇼': 'FE'}
+	'🇰🇷': 'FE', '🇹🇭': 'FE', '🇭🇰': 'FE', '🇹🇼': 'FE', '🇮🇳': 'ZM'}
 partRuleFull = "([FGHMNPS][0-9A-Z]{3}[0-9][A-Z]{1,2}/[A-Z])"
 partRuleCheck = "([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?)"
 partSpecialProduct = "(Z[0-9A-Z]{3}&[\\s\\S]*)"
@@ -108,29 +108,30 @@ completeStatus = [
 	"REFUND_INITIATED", "PICKED_UP", "EMAIL_SENT", "ELECTRONICALLY_DELIVERED", "CANCELED", "PAYMENT_EXPIRED"]
 
 RecruitDict = {
-	"🇹🇷": {"name": "土耳其", "code": 8164, "altername": ["Turkey", "TR"]}, 
-	"🇦🇪": {"name": "阿联酋", "code": 8225, "altername": ["UAE", "AE"]}, 
-	"🇬🇧": {"name": "英国", "code": 8145, "altername": ["UK", "GB", "United Kingdom", "Great Britain"]}, 
-	"🇩🇪": {"name": "德国", "code": 8043, "altername": ["Germany", "DE", "Deutschland"]}, 
-	"🇹🇼": {"name": "台湾", "code": 8311, "altername": ["Taiwan", "TW", "ROC"]}, 
-	"🇺🇸": {"name": "美国", "code": 8158, "altername": ["US", "Ameria", "United States"]}, 
-	"🇲🇽": {"name": "墨西哥", "code": 8297, "altername": ["Mexico", "MX"]}, 
-	"🇨🇭": {"name": "瑞士", "code": 8017, "altername": ["Switzerland", "CH", "Swiss"]}, 
-	"🇧🇪": {"name": "比利时", "code": 8251, "altername": ["Belgium", "BE"]}, 
-	"🇳🇱": {"name": "荷兰", "code": 8119, "altername": ["Netherlands", "Holland", "NL"]}, 
-	"🇪🇸": {"name": "西班牙", "code": 8056, "altername": ["Spain", "ES"]}, 
-	"🇭🇰": {"name": "香港", "code": 8082, "altername": ["Hong Kong", "HK"]}, 
-	"🇸🇪": {"name": "瑞典", "code": 8132, "altername": ["Sweden", "SE"]}, 
-	"🇨🇳": {"name": "中国", "code": 8030, "altername": ["China", "CN"]}, 
-	"🇫🇷": {"name": "法国", "code": 8069, "altername": ["France", "FR"]}, 
-	"🇦🇺": {"name": "澳大利亚", "code": 7991, "altername": ["Australia", "AU"]}, 
-	"🇮🇹": {"name": "意大利", "code": 8095, "altername": ["Italia", "IT"]}, 
-	"🇲🇴": {"name": "澳门", "code": 8282, "altername": ["Macau", "MO"]}, 
-	"🇧🇷": {"name": "巴西", "code": 8176, "altername": ["Brazil", "BR"]}, 
-	"🇯🇵": {"name": "日本", "code": 8107, "altername": ["Japan", "JP"]}, 
-	"🇰🇷": {"name": "韩国", "code": 8326, "altername": ["Korea", "KR"]}, 
-	"🇨🇦": {"name": "加拿大", "code": 8004, "altername": ["Canada", "CA"]}, 
-	"🇦🇹": {"name": "奥地利", "code": 8333, "altername": ["Austria", "AT"]}, 
-	"🇸🇬": {"name": "新加坡", "code": 8238, "altername": ["Singapore", "SG"]},
-	"🇹🇭": {"name": "泰国", "code": 8346, "altername": ["Thailand", "TH"]}
+	"🇹🇷": {"name": "土耳其", "code": 114438164, "altername": ["Turkey", "TR"]}, 
+	"🇦🇪": {"name": "阿联酋", "code": 114438225, "altername": ["UAE", "AE"]}, 
+	"🇬🇧": {"name": "英国", "code": 114438145, "altername": ["UK", "GB", "United Kingdom", "Great Britain"]}, 
+	"🇩🇪": {"name": "德国", "code": 114438043, "altername": ["Germany", "DE", "Deutschland"]}, 
+	"🇹🇼": {"name": "台湾", "code": 114438311, "altername": ["Taiwan", "TW", "ROC"]}, 
+	"🇺🇸": {"name": "美国", "code": 114438158, "altername": ["US", "Ameria", "United States"]}, 
+	"🇲🇽": {"name": "墨西哥", "code": 114438297, "altername": ["Mexico", "MX"]}, 
+	"🇨🇭": {"name": "瑞士", "code": 114438017, "altername": ["Switzerland", "CH", "Swiss"]}, 
+	"🇧🇪": {"name": "比利时", "code": 114438251, "altername": ["Belgium", "BE"]}, 
+	"🇳🇱": {"name": "荷兰", "code": 114438119, "altername": ["Netherlands", "Holland", "NL"]}, 
+	"🇪🇸": {"name": "西班牙", "code": 114438056, "altername": ["Spain", "ES"]}, 
+	"🇭🇰": {"name": "香港", "code": 114438082, "altername": ["Hong Kong", "HK"]}, 
+	"🇸🇪": {"name": "瑞典", "code": 114438132, "altername": ["Sweden", "SE"]}, 
+	"🇨🇳": {"name": "中国", "code": 114438030, "altername": ["China", "CN"]}, 
+	"🇫🇷": {"name": "法国", "code": 114438069, "altername": ["France", "FR"]}, 
+	"🇦🇺": {"name": "澳大利亚", "code": 114437991, "altername": ["Australia", "AU"]}, 
+	"🇮🇹": {"name": "意大利", "code": 114438095, "altername": ["Italia", "IT"]}, 
+	"🇲🇴": {"name": "澳门", "code": 114438282, "altername": ["Macau", "MO"]}, 
+	"🇧🇷": {"name": "巴西", "code": 114438176, "altername": ["Brazil", "BR"]}, 
+	"🇯🇵": {"name": "日本", "code": 114438107, "altername": ["Japan", "JP"]}, 
+	"🇰🇷": {"name": "韩国", "code": 114438326, "altername": ["Korea", "KR"]}, 
+	"🇨🇦": {"name": "加拿大", "code": 114438004, "altername": ["Canada", "CA"]}, 
+	"🇦🇹": {"name": "奥地利", "code": 114438333, "altername": ["Austria", "AT"]}, 
+	"🇸🇬": {"name": "新加坡", "code": 114438238, "altername": ["Singapore", "SG"]},
+	"🇹🇭": {"name": "泰国", "code": 114438346, "altername": ["Thailand", "TH"]},
+	"🇮🇳": {"name": "印度", "code": 200314117, "altername": ["India", "IN"]}
 }

@@ -85,6 +85,7 @@ def storeDict(storeid, mode = "dict"):
 	except:
 		return {}
 
+'''
 def storeState(stateCode):
 	states = []
 	if stateCode not in infoJSON["state"]:
@@ -93,6 +94,7 @@ def storeState(stateCode):
 		"、".join([f"{StoreID(store)[0][1]} (R{store})" for store in infoJSON["state"][stateCode][prov]]) \
 		for prov in infoJSON["state"][stateCode]])
 	return reply
+'''
 
 def getState(sid):
 	sid = f"{sid}"
