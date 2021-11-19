@@ -40,7 +40,7 @@ def comment(sid):
 			reason[sDay] = sTxt
 	return reason
 
-def speHours(sid):
+def speHours(sid, limit = 14):
 	try:
 		j = storeDict(sid, mode = "hours")
 	except:
@@ -59,7 +59,7 @@ def speHours(sid):
 	if j["special"]:
 		specialReasons = comment(sid)
 	for special in j["special"]:
-		if len(specialHours) == 14:
+		if len(specialHours) == limit:
 			break
 
 		validDate = datetime.strptime(special["date"], "%Y-%m-%d").date()
