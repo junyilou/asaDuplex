@@ -22,6 +22,33 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/DE",
       "states": [
         {
+          "stateName": "",
+          "stores": [
+            {
+              "storeNumber": "R443",
+              "countryCode": "DE",
+              "storeName": "Rosenthaler Strasse",
+              "latitude": "51.1657",
+              "longitude": "10.4515",
+              "storeRadius": "50",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R443.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Berlin",
+              "timeZone": "Europe/Berlin",
+              "instoreCheckoutMode": "SCAN_AND_BUY",
+              "selfCheckout": "SNB",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipSelfCheckout": "SNB",
+              "enableInStoreMode": true,
+              "storeAddress": "44 Rosenthaler Strasse\n10178 Berlin",
+              "phoneNumber": "(030) 346493600"
+            }
+          ]
+        },
+        {
           "stateName": "Saxony",
           "stores": [
             {
@@ -1433,7 +1460,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "Avenida das Americas, 3.900\nBarra da Tijuca,22640",
+              "storeAddress": "Avenida das Americas, 3.900\nBarra da Tijuca, 22640",
               "phoneNumber": "(21) 31793700"
             }
           ]
@@ -1460,7 +1487,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "Av. Roque Petroni Júnior, 1089\nVila Gertrudes\nSão Paulo,04707-900",
+              "storeAddress": "Av. Roque Petroni Júnior, 1089\nVila Gertrudes\nSão Paulo, 04707-900",
               "phoneNumber": "(11) 51805900"
             }
           ]
@@ -2628,7 +2655,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4325 Glenwood Avenue\nRaleigh,NC 27612 ",
+              "storeAddress": "4325 Glenwood Avenue\nRaleigh, NC 27612 ",
               "phoneNumber": "(919) 3343400"
             },
             {
@@ -2650,7 +2677,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "8030 Renaissance Parkway\nDurham,NC 27713 ",
+              "storeAddress": "8030 Renaissance Parkway\nDurham, NC 27713 ",
               "phoneNumber": "(919) 4746940"
             },
             {
@@ -2672,7 +2699,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "6801 Northlake Mall Drive\nCharlotte,NC 28216 ",
+              "storeAddress": "6801 Northlake Mall Drive\nCharlotte, NC 28216 ",
               "phoneNumber": "(704) 9720980"
             },
             {
@@ -2694,7 +2721,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3320 West Friendly Avenue\nGreensboro,NC 27410 ",
+              "storeAddress": "3320 West Friendly Avenue\nGreensboro, NC 27410 ",
               "phoneNumber": "(336) 2910486"
             },
             {
@@ -2716,7 +2743,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4400 Sharon Road\nCharlotte,NC 28211 ",
+              "storeAddress": "4400 Sharon Road\nCharlotte, NC 28211 ",
               "phoneNumber": "(704) 9723280"
             }
           ]
@@ -2743,7 +2770,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "9585 SW Washington Square Road\nTigard,OR 97223 ",
+              "storeAddress": "9585 SW Washington Square Road\nTigard, OR 97223 ",
               "phoneNumber": "(503) 495-2080"
             },
             {
@@ -2765,7 +2792,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "7293 SW Bridgeport Road\nTigard,OR 97224 ",
+              "storeAddress": "7293 SW Bridgeport Road\nTigard, OR 97224 ",
               "phoneNumber": "(503) 670-8400"
             },
             {
@@ -2787,7 +2814,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "450 SW Yamhill Street\nPortland,OR 97204 ",
+              "storeAddress": "450 SW Yamhill Street\nPortland, OR 97204 ",
               "phoneNumber": "(503) 265-2010"
             }
           ]
@@ -2814,7 +2841,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "8702 Keystone Crossing\nIndianapolis,IN 46240 ",
+              "storeAddress": "8702 Keystone Crossing\nIndianapolis, IN 46240 ",
               "phoneNumber": "(317) 814-3740"
             },
             {
@@ -2836,7 +2863,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "6501 North Grape Road\nMishawaka,IN 46545 ",
+              "storeAddress": "6501 North Grape Road\nMishawaka, IN 46545 ",
               "phoneNumber": "(574) 277-9500"
             }
           ]
@@ -2863,7 +2890,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1800 Galleria Boulevard\nFranklin,TN 37067 ",
+              "storeAddress": "1800 Galleria Boulevard\nFranklin, TN 37067 ",
               "phoneNumber": "(615) 435-0620"
             },
             {
@@ -2885,7 +2912,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "7600 Kingston Pike\nKnoxville,TN 37919 ",
+              "storeAddress": "7600 Kingston Pike\nKnoxville, TN 37919 ",
               "phoneNumber": "(865) 824-2507"
             },
             {
@@ -2907,7 +2934,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2126 Abbott Martin Road\nNashville,TN 37215 ",
+              "storeAddress": "2126 Abbott Martin Road\nNashville, TN 37215 ",
               "phoneNumber": "(615) 514-2430"
             },
             {
@@ -2929,7 +2956,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "500 Broadway\nNashville,TN 37203 ",
+              "storeAddress": "500 Broadway\nNashville, TN 37203 ",
               "phoneNumber": "(615) 9861140"
             },
             {
@@ -2951,7 +2978,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2031 West Street\nGermantown,TN 38138 ",
+              "storeAddress": "2031 West Street\nGermantown, TN 38138 ",
               "phoneNumber": "(901) 751-6980"
             }
           ]
@@ -2978,7 +3005,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "7021 S. Memorial Drive\nTulsa,OK 74133 ",
+              "storeAddress": "7021 S. Memorial Drive\nTulsa, OK 74133 ",
               "phoneNumber": "(918) 249-7800"
             },
             {
@@ -3000,7 +3027,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1901 NW Expressway Street\nOklahoma City,OK 73118 ",
+              "storeAddress": "1901 NW Expressway Street\nOklahoma City, OK 73118 ",
               "phoneNumber": "(405) 767-6600"
             }
           ]
@@ -3027,7 +3054,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "364 Maine Mall Road\nSouth Portland,ME 04106 ",
+              "storeAddress": "364 Maine Mall Road\nSouth Portland, ME 04106 ",
               "phoneNumber": "(207) 771-9400"
             }
           ]
@@ -3054,7 +3081,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "217 Summit Boulevard\nBirmingham,AL 35243 ",
+              "storeAddress": "217 Summit Boulevard\nBirmingham, AL 35243 ",
               "phoneNumber": "(205) 909-2570"
             },
             {
@@ -3076,7 +3103,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "320 The Bridge Street\nHuntsville,AL 35806 ",
+              "storeAddress": "320 The Bridge Street\nHuntsville, AL 35806 ",
               "phoneNumber": "(256) 327-8800"
             }
           ]
@@ -3103,7 +3130,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "17711 Chenal Parkway\nLittle Rock,AR 72223 ",
+              "storeAddress": "17711 Chenal Parkway\nLittle Rock, AR 72223 ",
               "phoneNumber": "(501) 821-5130"
             }
           ]
@@ -3130,7 +3157,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4502 S Steele Street\nTacoma,WA 98409 ",
+              "storeAddress": "4502 S Steele Street\nTacoma, WA 98409 ",
               "phoneNumber": "(253) 620-1454"
             },
             {
@@ -3152,7 +3179,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "801 Southcenter Mall\nTukwila,WA 98188 ",
+              "storeAddress": "801 Southcenter Mall\nTukwila, WA 98188 ",
               "phoneNumber": "(206) 288-4400"
             },
             {
@@ -3174,7 +3201,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "710 West Main Avenue\nSpokane,WA 99201 ",
+              "storeAddress": "710 West Main Avenue\nSpokane, WA 99201 ",
               "phoneNumber": "(509) 458-8080"
             },
             {
@@ -3196,7 +3223,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "213 Bellevue Square\nBellevue,WA 98004 ",
+              "storeAddress": "213 Bellevue Square\nBellevue, WA 98004 ",
               "phoneNumber": "(425) 519-0080"
             },
             {
@@ -3218,7 +3245,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3000 184th Street S.W.\nLynnwood,WA 98037 ",
+              "storeAddress": "3000 184th Street S.W.\nLynnwood, WA 98037 ",
               "phoneNumber": "(425) 921-1560"
             },
             {
@@ -3240,7 +3267,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2651 NE 49th St\nSeattle,WA 98105 ",
+              "storeAddress": "2651 NE 49th St\nSeattle, WA 98105 ",
               "phoneNumber": "(206) 892-0433"
             }
           ]
@@ -3267,7 +3294,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "700 Haywood Road\nGreenville,SC 29607 ",
+              "storeAddress": "700 Haywood Road\nGreenville, SC 29607 ",
               "phoneNumber": "(864) 9877580"
             },
             {
@@ -3289,7 +3316,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "301 King Street\nCharleston,SC 29401 ",
+              "storeAddress": "301 King Street\nCharleston, SC 29401 ",
               "phoneNumber": "(843) 7270400"
             }
           ]
@@ -3316,7 +3343,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "50 South Main Street\nSalt Lake City,UT 84101 ",
+              "storeAddress": "50 South Main Street\nSalt Lake City, UT 84101 ",
               "phoneNumber": "(801) 456-9400"
             },
             {
@@ -3338,7 +3365,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "148 N. East Promontory\nFarmington,UT 84025 ",
+              "storeAddress": "148 N. East Promontory\nFarmington, UT 84025 ",
               "phoneNumber": "(801) 2189501"
             },
             {
@@ -3360,7 +3387,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "6191 S State Street\nMurray,UT 84107 ",
+              "storeAddress": "6191 S State Street\nMurray, UT 84107 ",
               "phoneNumber": "(801) 905-4410"
             }
           ]
@@ -3387,7 +3414,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "17170 Davenport Street\nOmaha,NE 68118 ",
+              "storeAddress": "17170 Davenport Street\nOmaha, NE 68118 ",
               "phoneNumber": "(402) 970-4477"
             }
           ]
@@ -3414,7 +3441,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1685 Briargate Parkway\nSuite 315\nColorado Springs,CO 80920 ",
+              "storeAddress": "1685 Briargate Parkway\nSuite 315\nColorado Springs, CO 80920 ",
               "phoneNumber": "(719) 522-4460"
             },
             {
@@ -3436,7 +3463,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "8405 Park Meadows Center Drive\nLone Tree,CO 80124 ",
+              "storeAddress": "8405 Park Meadows Center Drive\nLone Tree, CO 80124 ",
               "phoneNumber": "(303) 256-1501"
             },
             {
@@ -3458,7 +3485,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3000 E 1st Avenue\nDenver,CO 80206 ",
+              "storeAddress": "3000 E 1st Avenue\nDenver, CO 80206 ",
               "phoneNumber": "(303) 583-7310"
             },
             {
@@ -3480,7 +3507,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1755 29th Street\nBoulder,CO 80301 ",
+              "storeAddress": "1755 29th Street\nBoulder, CO 80301 ",
               "phoneNumber": "(720) 479-9451"
             },
             {
@@ -3502,7 +3529,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "7301 S Santa Fe Drive\nLittleton,CO 80120 ",
+              "storeAddress": "7301 S Santa Fe Drive\nLittleton, CO 80120 ",
               "phoneNumber": "(303) 256-2580"
             },
             {
@@ -3524,7 +3551,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "One West Flatiron Crossing Dr\nBroomfield,CO 80021 ",
+              "storeAddress": "One West Flatiron Crossing Dr\nBroomfield, CO 80021 ",
               "phoneNumber": "(720) 479-0465"
             }
           ]
@@ -3551,7 +3578,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "50 Holyoke Street\nHolyoke,MA 01040 ",
+              "storeAddress": "50 Holyoke Street\nHolyoke, MA 01040 ",
               "phoneNumber": "(413) 493-3878"
             },
             {
@@ -3573,7 +3600,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "815 Boylston Street\nBoston,MA 02116 ",
+              "storeAddress": "815 Boylston Street\nBoston, MA 02116 ",
               "phoneNumber": "(617) 385-9400"
             },
             {
@@ -3595,7 +3622,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "601 Donald Lynch Boulevard\nMarlborough,MA 01752 ",
+              "storeAddress": "601 Donald Lynch Boulevard\nMarlborough, MA 01752 ",
               "phoneNumber": "(978) 8385000"
             },
             {
@@ -3617,7 +3644,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "508 Legacy Place \nDedham,MA 02026 ",
+              "storeAddress": "508 Legacy Place \nDedham, MA 02026 ",
               "phoneNumber": "(781) 471-3800"
             },
             {
@@ -3639,7 +3666,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "94 Derby Street\nSuite #271\nHingham,MA 02043 ",
+              "storeAddress": "94 Derby Street\nSuite #271\nHingham, MA 02043 ",
               "phoneNumber": "(781) 556-0400"
             },
             {
@@ -3661,7 +3688,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "250 Granite Street\nBraintree,MA 02184 ",
+              "storeAddress": "250 Granite Street\nBraintree, MA 02184 ",
               "phoneNumber": "(781) 817-1270"
             },
             {
@@ -3683,7 +3710,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1220 Market Street\nLynnfield,MA 01940 ",
+              "storeAddress": "1220 Market Street\nLynnfield, MA 01940 ",
               "phoneNumber": "(978) 326-0970"
             },
             {
@@ -3705,7 +3732,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1245 Worcester Street\nNatick,MA 01760 ",
+              "storeAddress": "1245 Worcester Street\nNatick, MA 01760 ",
               "phoneNumber": "(508) 903-2800"
             },
             {
@@ -3727,7 +3754,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "75 Middlesex Turnpike\nBurlington,MA 01803 ",
+              "storeAddress": "75 Middlesex Turnpike\nBurlington, MA 01803 ",
               "phoneNumber": "(781) 653-0970"
             },
             {
@@ -3749,7 +3776,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "100 CambridgeSide Place\nCambridge,MA 02141 ",
+              "storeAddress": "100 CambridgeSide Place\nCambridge, MA 02141 ",
               "phoneNumber": "(617) 528-7970"
             },
             {
@@ -3771,7 +3798,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "199 Boylston Street\nChestnut Hill,MA 02467 ",
+              "storeAddress": "199 Boylston Street\nChestnut Hill, MA 02467 ",
               "phoneNumber": "(617) 454-9940"
             }
           ]
@@ -3798,7 +3825,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2440 Saint Louis Galleria\nSt. Louis,MO 63117 ",
+              "storeAddress": "2440 Saint Louis Galleria\nSt. Louis, MO 63117 ",
               "phoneNumber": "(314) 290-0400"
             },
             {
@@ -3820,7 +3847,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "227 Nichols Road\nKansas City,MO 64112 ",
+              "storeAddress": "227 Nichols Road\nKansas City, MO 64112 ",
               "phoneNumber": "(816) 448-9200"
             },
             {
@@ -3842,7 +3869,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "131 West County Center\nSt. Louis,MO 63131 ",
+              "storeAddress": "131 West County Center\nSt. Louis, MO 63131 ",
               "phoneNumber": "(314) 288-1830"
             }
           ]
@@ -3869,7 +3896,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "320 West 5th Avenue\nAnchorage,AK 99501 ",
+              "storeAddress": "320 West 5th Avenue\nAnchorage, AK 99501 ",
               "phoneNumber": "(907) 257-1900"
             }
           ]
@@ -3896,7 +3923,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3111 W Chandler Boulevard\nChandler,AZ 85226 ",
+              "storeAddress": "3111 W Chandler Boulevard\nChandler, AZ 85226 ",
               "phoneNumber": "(480) 636-3900"
             },
             {
@@ -3918,7 +3945,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "7700 West Arrowhead Towne Ctr\nGlendale,AZ 85308 ",
+              "storeAddress": "7700 West Arrowhead Towne Ctr\nGlendale, AZ 85308 ",
               "phoneNumber": "(623) 707-2860"
             },
             {
@@ -3940,7 +3967,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2218 E. Williams Field Road\nGilbert,AZ 85295 ",
+              "storeAddress": "2218 E. Williams Field Road\nGilbert, AZ 85295 ",
               "phoneNumber": "(480) 366-8477"
             },
             {
@@ -3962,7 +3989,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "7014 East Camelback Road\nScottsdale,AZ 85251 ",
+              "storeAddress": "7014 East Camelback Road\nScottsdale, AZ 85251 ",
               "phoneNumber": "(602) 6061470"
             },
             {
@@ -3984,7 +4011,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2905 East Skyline Drive\nTucson,AZ 85718 ",
+              "storeAddress": "2905 East Skyline Drive\nTucson, AZ 85718 ",
               "phoneNumber": "(520) 209-7440"
             },
             {
@@ -4006,7 +4033,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "15169 North Scottsdale Road\nScottsdale,AZ 85254 ",
+              "storeAddress": "15169 North Scottsdale Road\nScottsdale, AZ 85254 ",
               "phoneNumber": "(480) 627-5501"
             }
           ]
@@ -4033,7 +4060,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "702 North Midvale Boulevard\nMadison,WI 53705 ",
+              "storeAddress": "444 North Midvale Boulevard\nMadison, WI 53705 ",
               "phoneNumber": "(608) 827-9840"
             },
             {
@@ -4055,7 +4082,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2500 N. Mayfair Road\nWauwatosa,WI 53226 ",
+              "storeAddress": "2500 N. Mayfair Road\nWauwatosa, WI 53226 ",
               "phoneNumber": "(414) 290-9780"
             },
             {
@@ -4077,7 +4104,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "5715 N Centerpark Way\nGlendale,WI 53217 ",
+              "storeAddress": "5715 N Centerpark Way\nGlendale, WI 53217 ",
               "phoneNumber": "(414) 977-3410"
             }
           ]
@@ -4104,7 +4131,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1985 Festival Plaza Drive\nLas Vegas,NV 89135 ",
+              "storeAddress": "1985 Festival Plaza Drive\nLas Vegas, NV 89135 ",
               "phoneNumber": "(702) 6773940"
             },
             {
@@ -4126,7 +4153,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3200 Las Vegas Boulevard South\nLas Vegas,NV 89109 ",
+              "storeAddress": "3200 Las Vegas Boulevard South\nLas Vegas, NV 89109 ",
               "phoneNumber": "(702) 577-9740"
             },
             {
@@ -4148,7 +4175,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "13945 South Virginia Street\nReno,NV 89511 ",
+              "storeAddress": "13945 South Virginia Street\nReno, NV 89511 ",
               "phoneNumber": "(775) 333-5460"
             },
             {
@@ -4170,7 +4197,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3500 Las Vegas Blvd South\nCaesars Palace\nLas Vegas,NV 89109 ",
+              "storeAddress": "3500 Las Vegas Blvd South\nCaesars Palace\nLas Vegas, NV 89109 ",
               "phoneNumber": "(702) 684-8800"
             },
             {
@@ -4192,7 +4219,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "6671 Las Vegas Boulevard South\nLas Vegas,NV 89119 ",
+              "storeAddress": "6671 Las Vegas Boulevard South\nLas Vegas, NV 89119 ",
               "phoneNumber": "(702) 221-8826"
             }
           ]
@@ -4219,7 +4246,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1 Destiny USA Drive\nSyracuse,NY 13204 ",
+              "storeAddress": "1 Destiny USA Drive\nSyracuse, NY 13204 ",
               "phoneNumber": "(315) 233-5920"
             },
             {
@@ -4241,7 +4268,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "45 Grand Central Terminal\nNew York,NY 10017 ",
+              "storeAddress": "45 Grand Central Terminal\nNew York, NY 10017 ",
               "phoneNumber": "(212) 284-1800"
             },
             {
@@ -4263,7 +4290,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1900 Northern Boulevard\nManhasset,NY 11030 ",
+              "storeAddress": "1900 Northern Boulevard\nManhasset, NY 11030 ",
               "phoneNumber": "(516) 7342420"
             },
             {
@@ -4285,7 +4312,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1 Crossgates Mall Road\nAlbany,NY 12203 ",
+              "storeAddress": "1 Crossgates Mall Road\nAlbany, NY 12203 ",
               "phoneNumber": "(518) 389-0140"
             },
             {
@@ -4307,7 +4334,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "90-15 Queens Boulevard\nElmhurst,NY 11373 ",
+              "storeAddress": "90-15 Queens Boulevard\nElmhurst, NY 11373 ",
               "phoneNumber": "(718) 4891540"
             },
             {
@@ -4329,7 +4356,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "516 Smith Haven Mall\nLake Grove,NY 11755 ",
+              "storeAddress": "516 Smith Haven Mall\nLake Grove, NY 11755 ",
               "phoneNumber": "(631) 982-2500"
             },
             {
@@ -4351,7 +4378,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "200 Baychester Avenue\nBronx,NY 10475 ",
+              "storeAddress": "200 Baychester Avenue\nBronx, NY 10475 ",
               "phoneNumber": "(718) 5307760"
             },
             {
@@ -4373,7 +4400,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "G116 Walden Galleria\nBuffalo,NY 14225 ",
+              "storeAddress": "G116 Walden Galleria\nBuffalo, NY 14225 ",
               "phoneNumber": "(716) 706-2000"
             },
             {
@@ -4395,7 +4422,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "185 Greenwich Street\nNew York,NY 10007 ",
+              "storeAddress": "185 Greenwich Street\nNew York, NY 10007 ",
               "phoneNumber": "(646) 8023800"
             },
             {
@@ -4417,7 +4444,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "8115 Fashion Drive \nNanuet,NY 10954 ",
+              "storeAddress": "8115 Fashion Drive \nNanuet, NY 10954 ",
               "phoneNumber": "(845) 2156980"
             },
             {
@@ -4439,7 +4466,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "160 Walt Whitman Road\nHuntington Station,NY 11746 ",
+              "storeAddress": "160 Walt Whitman Road\nHuntington Station, NY 11746 ",
               "phoneNumber": "(631) 760-0160"
             },
             {
@@ -4461,7 +4488,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "123 Flatbush Avenue\nBrooklyn,NY 11217-1483 ",
+              "storeAddress": "123 Flatbush Avenue\nBrooklyn, NY 11217-1483 ",
               "phoneNumber": "(718) 6376200"
             },
             {
@@ -4483,7 +4510,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "247 Bedford Avenue\nBrooklyn,NY 11211 ",
+              "storeAddress": "247 Bedford Avenue\nBrooklyn, NY 11211 ",
               "phoneNumber": "(929) 3972740"
             },
             {
@@ -4505,7 +4532,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1981 Broadway\nNew York,NY 10023 ",
+              "storeAddress": "1981 Broadway\nNew York, NY 10023 ",
               "phoneNumber": "(212) 209-3400"
             },
             {
@@ -4527,7 +4554,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2655 Richmond Avenue\nStaten Island,NY 10314 ",
+              "storeAddress": "2655 Richmond Avenue\nStaten Island, NY 10314 ",
               "phoneNumber": "(718) 5682230"
             },
             {
@@ -4549,7 +4576,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "940 Madison Avenue\nNew York,NY 10021 ",
+              "storeAddress": "940 Madison Avenue\nNew York, NY 10021 ",
               "phoneNumber": "(646) 3432700"
             },
             {
@@ -4571,7 +4598,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "103 Prince Street\nNew York,NY 10012 ",
+              "storeAddress": "103 Prince Street\nNew York, NY 10012 ",
               "phoneNumber": "(212) 226-3126"
             },
             {
@@ -4593,7 +4620,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "767 Fifth Avenue\nNew York,NY 10153 ",
+              "storeAddress": "767 Fifth Avenue\nNew York, NY 10153 ",
               "phoneNumber": "(212) 336-1440"
             },
             {
@@ -4615,7 +4642,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "143 Market Street\nYonkers,NY 10710 ",
+              "storeAddress": "143 Market Street\nYonkers, NY 10710 ",
               "phoneNumber": "(914) 6200965"
             },
             {
@@ -4637,7 +4664,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "401 W 14th Street\nNew York,NY 10014 ",
+              "storeAddress": "401 W 14th Street\nNew York, NY 10014 ",
               "phoneNumber": "(212) 444-3400"
             },
             {
@@ -4659,7 +4686,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "7979 Pittsford-Victor Road\nVictor,NY 14564 ",
+              "storeAddress": "7979 Pittsford-Victor Road\nVictor, NY 14564 ",
               "phoneNumber": "(585) 421-6070"
             },
             {
@@ -4681,7 +4708,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "630 Old Country Road\nGarden City,NY 11530 ",
+              "storeAddress": "630 Old Country Road\nGarden City, NY 11530 ",
               "phoneNumber": "(516) 7398540"
             },
             {
@@ -4703,7 +4730,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "125 Westchester Avenue\nWhite Plains,NY 10601 ",
+              "storeAddress": "125 Westchester Avenue\nWhite Plains, NY 10601 ",
               "phoneNumber": "(914) 539-4530"
             }
           ]
@@ -4730,7 +4757,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1229 Wisconsin Avenue NW\nWashington,DC 20007 ",
+              "storeAddress": "1229 Wisconsin Avenue NW\nWashington, DC 20007 ",
               "phoneNumber": "(202) 5721460"
             },
             {
@@ -4752,7 +4779,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "801 K Street NW\nWashington,DC 20001 ",
+              "storeAddress": "801 K Street NW\nWashington, DC 20001 ",
               "phoneNumber": "(202) 6096400"
             }
           ]
@@ -4779,7 +4806,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "20 Providence Place\nProvidence,RI 02903 ",
+              "storeAddress": "20 Providence Place\nProvidence, RI 02903 ",
               "phoneNumber": "(401) 533-9400"
             }
           ]
@@ -4806,7 +4833,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4078 Finn Way\nSuite 120\nLexington,KY 40517 ",
+              "storeAddress": "4078 Finn Way\nSuite 120\nLexington, KY 40517 ",
               "phoneNumber": "(859) 971-5400"
             },
             {
@@ -4828,7 +4855,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "7900 Shelbyville Road\nLouisville,KY 40222 ",
+              "storeAddress": "7900 Shelbyville Road\nLouisville, KY 40222 ",
               "phoneNumber": "(502) 326-2840"
             }
           ]
@@ -4855,7 +4882,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2301 Kalakaua Avenue\nHonolulu,HI 96815 ",
+              "storeAddress": "2301 Kalakaua Avenue\nHonolulu, HI 96815 ",
               "phoneNumber": "(808) 931-2480"
             },
             {
@@ -4877,7 +4904,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4211 Waialae Avenue\nHonolulu,HI 96816 ",
+              "storeAddress": "4211 Waialae Avenue\nHonolulu, HI 96816 ",
               "phoneNumber": "(808) 738-4400"
             },
             {
@@ -4899,7 +4926,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1450 Ala Moana Boulevard\nHonolulu,HI 96814 ",
+              "storeAddress": "1450 Ala Moana Boulevard\nHonolulu, HI 96814 ",
               "phoneNumber": "(808) 983-7650"
             }
           ]
@@ -4926,7 +4953,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "114 West Market\nBloomington,MN 55425 ",
+              "storeAddress": "114 West Market\nBloomington, MN 55425 ",
               "phoneNumber": "(952) 229-5630"
             },
             {
@@ -4948,7 +4975,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1595 Highway 36 W\nSpace 500\nRoseville,MN 55113 ",
+              "storeAddress": "1595 Highway 36 W\nSpace 500\nRoseville, MN 55113 ",
               "phoneNumber": "(763) 656-5010"
             },
             {
@@ -4970,7 +4997,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1560 Southdale Center\nEdina,MN 55435 ",
+              "storeAddress": "1560 Southdale Center\nEdina, MN 55435 ",
               "phoneNumber": "(952) 656-0140"
             },
             {
@@ -4992,7 +5019,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "12531 Wayzata Boulevard\nMinnetonka,MN 55305 ",
+              "storeAddress": "12531 Wayzata Boulevard\nMinnetonka, MN 55305 ",
               "phoneNumber": "(952) 486-4861"
             }
           ]
@@ -5019,7 +5046,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3333 Bear Street\nCosta Mesa,CA 92626 ",
+              "storeAddress": "3333 Bear Street\nCosta Mesa, CA 92626 ",
               "phoneNumber": "(714) 424-6331"
             },
             {
@@ -5041,7 +5068,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "802 S Broadway\nLos Angeles,CA 90014 ",
+              "storeAddress": "802 S Broadway\nLos Angeles, CA 90014 ",
               "phoneNumber": "(213) 6551200"
             },
             {
@@ -5063,7 +5090,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "340 University Avenue\nPalo Alto,CA 94301 ",
+              "storeAddress": "340 University Avenue\nPalo Alto, CA 94301 ",
               "phoneNumber": "(650) 798-2800"
             },
             {
@@ -5085,7 +5112,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "8500 Beverly Boulevard\nLos Angeles,CA 90048 ",
+              "storeAddress": "8500 Beverly Boulevard\nLos Angeles, CA 90048 ",
               "phoneNumber": "(424) 239-3880"
             },
             {
@@ -5107,7 +5134,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3401 Dale Road\nModesto,CA 95356 ",
+              "storeAddress": "3401 Dale Road\nModesto, CA 95356 ",
               "phoneNumber": "(209) 342-1500"
             },
             {
@@ -5129,7 +5156,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "379 Stanford Shopping Center\nPalo Alto,CA 94304 ",
+              "storeAddress": "379 Stanford Shopping Center\nPalo Alto, CA 94304 ",
               "phoneNumber": "(650) 798-6180"
             },
             {
@@ -5151,7 +5178,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "877 Americana Way\nGlendale,CA 91210 ",
+              "storeAddress": "877 Americana Way\nGlendale, CA 91210 ",
               "phoneNumber": "(818) 254-1070"
             },
             {
@@ -5173,7 +5200,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "73445 El Paseo\nPalm Desert,CA 92260 ",
+              "storeAddress": "73445 El Paseo\nPalm Desert, CA 92260 ",
               "phoneNumber": "(760) 862-9710"
             },
             {
@@ -5195,7 +5222,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1151 Galleria Boulevard\nRoseville,CA 95678 ",
+              "storeAddress": "1151 Galleria Boulevard\nRoseville, CA 95678 ",
               "phoneNumber": "(916) 872-2506"
             },
             {
@@ -5217,7 +5244,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1415 Third Street Promenade\nSanta Monica,CA 90401 ",
+              "storeAddress": "1415 Third Street Promenade\nSanta Monica, CA 90401 ",
               "phoneNumber": "(310) 633-2670"
             },
             {
@@ -5239,7 +5266,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1923 Calle Barcelona\nCarlsbad,CA 92009 ",
+              "storeAddress": "1923 Calle Barcelona\nCarlsbad, CA 92009 ",
               "phoneNumber": "(760) 697-9800"
             },
             {
@@ -5261,7 +5288,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "One Infinite Loop\nCupertino,CA 95014 ",
+              "storeAddress": "One Infinite Loop\nCupertino, CA 95014 ",
               "phoneNumber": "(408) 6065775"
             },
             {
@@ -5283,15 +5310,15 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "12461 South Main Street\nRancho Cucamonga,CA 91739 ",
+              "storeAddress": "12461 South Main Street\nRancho Cucamonga, CA 91739 ",
               "phoneNumber": "(909) 803-5220"
             },
             {
               "storeNumber": "R050",
               "countryCode": "US",
               "storeName": "The Grove",
-              "latitude": "34.0722477377302",
-              "longitude": "-118.357806470545",
+              "latitude": "34.07143",
+              "longitude": "-118.357469",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -5305,7 +5332,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "189 The Grove Drive\nLos Angeles,CA 90036 ",
+              "storeAddress": "189 The Grove Drive\nLos Angeles, CA 90036 ",
               "phoneNumber": "(323) 617-9800"
             },
             {
@@ -5327,7 +5354,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "928 State Street\nSanta Barbara,CA 93101 ",
+              "storeAddress": "928 State Street\nSanta Barbara, CA 93101 ",
               "phoneNumber": "(805) 560-1500"
             },
             {
@@ -5349,7 +5376,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2855 Stevens Creek Boulevard\nSanta Clara,CA 95050 ",
+              "storeAddress": "2855 Stevens Creek Boulevard\nSanta Clara, CA 95050 ",
               "phoneNumber": "(408) 5512150"
             },
             {
@@ -5371,7 +5398,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "645 E. Shaw Avenue\nFresno,CA 93710 ",
+              "storeAddress": "645 E. Shaw Avenue\nFresno, CA 93710 ",
               "phoneNumber": "(559) 244-3400"
             },
             {
@@ -5393,7 +5420,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1016C Brea Mall\nBrea,CA 92821 ",
+              "storeAddress": "1016C Brea Mall\nBrea, CA 92821 ",
               "phoneNumber": "(714) 989-5550"
             },
             {
@@ -5415,7 +5442,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1071 Santa Rosa Plaza\nSanta Rosa,CA 95401 ",
+              "storeAddress": "1071 Santa Rosa Plaza\nSanta Rosa, CA 95401 ",
               "phoneNumber": "(707) 508-3500"
             },
             {
@@ -5437,7 +5464,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2126 Glendale Galleria\nGlendale,CA 91210 ",
+              "storeAddress": "2126 Glendale Galleria\nGlendale, CA 91210 ",
               "phoneNumber": "(818) 502-8310"
             },
             {
@@ -5459,7 +5486,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3200 Sepulveda Boulevard\nManhattan Beach,CA 90266 ",
+              "storeAddress": "3200 Sepulveda Boulevard\nManhattan Beach, CA 90266 ",
               "phoneNumber": "(310) 421-3720"
             },
             {
@@ -5481,7 +5508,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "23 N. Santa Cruz Avenue\nLos Gatos,CA 95030 ",
+              "storeAddress": "23 N. Santa Cruz Avenue\nLos Gatos, CA 95030 ",
               "phoneNumber": "(408) 399-3880"
             },
             {
@@ -5503,7 +5530,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "272 E Via Rancho Parkway\nEscondido,CA 92025 ",
+              "storeAddress": "272 E Via Rancho Parkway\nEscondido, CA 92025 ",
               "phoneNumber": "(760) 317-2484"
             },
             {
@@ -5525,7 +5552,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "7007 Friars Road\nSan Diego,CA 92108 ",
+              "storeAddress": "7007 Friars Road\nSan Diego, CA 92108 ",
               "phoneNumber": "(619) 682-3477"
             },
             {
@@ -5547,7 +5574,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4305 La Jolla Village Drive\nSan Diego,CA 92122 ",
+              "storeAddress": "4305 La Jolla Village Drive\nSan Diego, CA 92122 ",
               "phoneNumber": "(858) 795-6870"
             },
             {
@@ -5569,7 +5596,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "240 Del Monte Center\nMonterey,CA 93940 ",
+              "storeAddress": "240 Del Monte Center\nMonterey, CA 93940 ",
               "phoneNumber": "(831) 647-4480"
             },
             {
@@ -5591,7 +5618,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "10250 Santa Monica Boulevard\nLos Angeles,CA 90067 ",
+              "storeAddress": "10250 Santa Monica Boulevard\nLos Angeles, CA 90067 ",
               "phoneNumber": "(424) 204-4290"
             },
             {
@@ -5613,7 +5640,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "925 Blossom Hill Road\nSan Jose,CA 95123 ",
+              "storeAddress": "925 Blossom Hill Road\nSan Jose, CA 95123 ",
               "phoneNumber": "(408) 960-0110"
             },
             {
@@ -5635,7 +5662,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1301 Burlingame Avenue\nBurlingame,CA 94010 ",
+              "storeAddress": "1301 Burlingame Avenue\nBurlingame, CA 94010 ",
               "phoneNumber": "(650) 645-8930"
             },
             {
@@ -5657,7 +5684,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "40764 Winchester Road\nTemecula,CA 92591 ",
+              "storeAddress": "40764 Winchester Road\nTemecula, CA 92591 ",
               "phoneNumber": "(951) 326-2400"
             },
             {
@@ -5679,7 +5706,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "14006 Riverside Drive\nSherman Oaks,CA 91423 ",
+              "storeAddress": "14006 Riverside Drive\nSherman Oaks, CA 91423 ",
               "phoneNumber": "(818) 464-3080"
             },
             {
@@ -5701,7 +5728,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "6600 Topanga Canyon Boulevard\nCanoga Park,CA 91303 ",
+              "storeAddress": "6600 Topanga Canyon Boulevard\nCanoga Park, CA 91303 ",
               "phoneNumber": "(818) 577-1800"
             },
             {
@@ -5723,7 +5750,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "One Stoneridge Mall\nPleasanton,CA 94588 ",
+              "storeAddress": "One Stoneridge Mall\nPleasanton, CA 94588 ",
               "phoneNumber": "(925) 398-1962"
             },
             {
@@ -5745,7 +5772,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "242 Los Cerritos Center\nCerritos,CA 90703 ",
+              "storeAddress": "242 Los Cerritos Center\nCerritos, CA 90703 ",
               "phoneNumber": "(562) 356-1555"
             },
             {
@@ -5767,7 +5794,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "930 Spectrum Center Drive\nIrvine,CA 92618 ",
+              "storeAddress": "930 Spectrum Center Drive\nIrvine, CA 92618 ",
               "phoneNumber": "(949) 255-1500"
             },
             {
@@ -5789,7 +5816,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "936C Shops at Mission Viejo\nMission Viejo,CA 92691 ",
+              "storeAddress": "936C Shops at Mission Viejo\nMission Viejo, CA 92691 ",
               "phoneNumber": "(949) 325-6426"
             },
             {
@@ -5811,7 +5838,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "10600 North Tantau Avenue\nCupertino,CA 95014 ",
+              "storeAddress": "10600 North Tantau Avenue\nCupertino, CA 95014 ",
               "phoneNumber": "(408) 9611560"
             },
             {
@@ -5833,7 +5860,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1689 Arden Way\nSacramento,CA 95815 ",
+              "storeAddress": "1689 Arden Way\nSacramento, CA 95815 ",
               "phoneNumber": "(916) 830-5610"
             },
             {
@@ -5855,7 +5882,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3251 20th Avenue\nSan Francisco,CA 94132 ",
+              "storeAddress": "3251 20th Avenue\nSan Francisco, CA 94132 ",
               "phoneNumber": "(415) 571-2780"
             },
             {
@@ -5877,7 +5904,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2701 Ming Avenue\nBakersfield,CA 93304 ",
+              "storeAddress": "2701 Ming Avenue\nBakersfield, CA 93304 ",
               "phoneNumber": "(661) 3963480"
             },
             {
@@ -5899,7 +5926,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "432 West Hillcrest Drive\nThousand Oaks,CA 91360 ",
+              "storeAddress": "432 West Hillcrest Drive\nThousand Oaks, CA 91360 ",
               "phoneNumber": "(805) 277-5040"
             },
             {
@@ -5921,7 +5948,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "60  31st Avenue\nSuite K03\nSan Mateo,CA 94403 ",
+              "storeAddress": "60  31st Avenue\nSuite K03\nSan Mateo, CA 94403 ",
               "phoneNumber": "(650) 645-4800"
             },
             {
@@ -5943,7 +5970,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "54 West Colorado Boulevard\nPasadena,CA 91105 ",
+              "storeAddress": "54 West Colorado Boulevard\nPasadena, CA 91105 ",
               "phoneNumber": "(626) 463-6223"
             },
             {
@@ -5965,7 +5992,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "899 Higuera Street\nSan Luis Obispo,CA 93401 ",
+              "storeAddress": "899 Higuera Street\nSan Luis Obispo, CA 93401 ",
               "phoneNumber": "(805) 542-8800"
             },
             {
@@ -5987,7 +6014,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "300 Post Street\nSan Francisco,CA 94108 ",
+              "storeAddress": "300 Post Street\nSan Francisco, CA 94108 ",
               "phoneNumber": "(415) 4864800"
             },
             {
@@ -6009,7 +6036,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1520 Redwood Highway\nCorte Madera,CA 94925 ",
+              "storeAddress": "1520 Redwood Highway\nCorte Madera, CA 94925 ",
               "phoneNumber": "(415) 413-9120"
             },
             {
@@ -6031,7 +6058,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2125 Chestnut Street\nSan Francisco,CA 94123 ",
+              "storeAddress": "2125 Chestnut Street\nSan Francisco, CA 94123 ",
               "phoneNumber": "(415) 8484445"
             },
             {
@@ -6053,7 +6080,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1823 4th Street\nBerkeley,CA 94710 ",
+              "storeAddress": "1823 4th Street\nBerkeley, CA 94710 ",
               "phoneNumber": "(510) 898-3341"
             },
             {
@@ -6075,7 +6102,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2015 Birch Road\nChula Vista,CA 91915 ",
+              "storeAddress": "2015 Birch Road\nChula Vista, CA 91915 ",
               "phoneNumber": "(619) 205-6400"
             },
             {
@@ -6097,7 +6124,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1113 Newport Center Drive\nNewport Beach,CA 92660 ",
+              "storeAddress": "1113 Newport Center Drive\nNewport Beach, CA 92660 ",
               "phoneNumber": "(949) 629-9717"
             },
             {
@@ -6119,7 +6146,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "5640 Bay Street\nEmeryville,CA 94608 ",
+              "storeAddress": "5640 Bay Street\nEmeryville, CA 94608 ",
               "phoneNumber": "(510) 350-2400"
             },
             {
@@ -6141,7 +6168,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1200 S. Main Street\nWalnut Creek,CA 94596 ",
+              "storeAddress": "1200 S. Main Street\nWalnut Creek, CA 94596 ",
               "phoneNumber": "(925) 949-5463"
             },
             {
@@ -6163,7 +6190,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "24201 West Valencia Boulevard\nValencia,CA 91355 ",
+              "storeAddress": "24201 West Valencia Boulevard\nValencia, CA 91355 ",
               "phoneNumber": "(661) 678-1490"
             },
             {
@@ -6185,7 +6212,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "9301 Tampa Avenue\nNorthridge,CA 91324 ",
+              "storeAddress": "9301 Tampa Avenue\nNorthridge, CA 91324 ",
               "phoneNumber": "(818) 477-9010"
             }
           ]
@@ -6212,7 +6239,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4529 West 119th Street\nLeawood,KS 66209 ",
+              "storeAddress": "4529 West 119th Street\nLeawood, KS 66209 ",
               "phoneNumber": "(913) 234-9800"
             }
           ]
@@ -6239,7 +6266,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2223 N West Shore Boulevard\nTampa,FL 33607 ",
+              "storeAddress": "2223 N West Shore Boulevard\nTampa, FL 33607 ",
               "phoneNumber": "(813) 393-4720"
             },
             {
@@ -6261,7 +6288,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3101 PGA Boulevard\nPalm Beach Gardens,FL 33410 ",
+              "storeAddress": "3101 PGA Boulevard\nPalm Beach Gardens, FL 33410 ",
               "phoneNumber": "(561) 273-2160"
             },
             {
@@ -6283,7 +6310,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "701 S. Miami Avenue\nMiami,FL 33130 ",
+              "storeAddress": "701 S. Miami Avenue\nMiami, FL 33130 ",
               "phoneNumber": "(786) 8434350"
             },
             {
@@ -6305,7 +6332,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "5555 Tamiami Trail North\nNaples,FL 34108 ",
+              "storeAddress": "5555 Tamiami Trail North\nNaples, FL 34108 ",
               "phoneNumber": "(239) 254-4240"
             },
             {
@@ -6327,7 +6354,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "7535 Dadeland Mall\nMiami,FL 33156 ",
+              "storeAddress": "7535 Dadeland Mall\nMiami, FL 33156 ",
               "phoneNumber": "(305) 341-9812"
             },
             {
@@ -6349,7 +6376,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2388 E. Sunrise Boulevard\nFort Lauderdale,FL 33304 ",
+              "storeAddress": "2388 E. Sunrise Boulevard\nFort Lauderdale, FL 33304 ",
               "phoneNumber": "(954) 331-4501"
             },
             {
@@ -6371,7 +6398,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1021 Lincoln Road\nMiami Beach,FL 33139 ",
+              "storeAddress": "1021 Lincoln Road\nMiami Beach, FL 33139 ",
               "phoneNumber": "(305) 421-0400"
             },
             {
@@ -6393,7 +6420,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "10300 W. Forest Hill Boulevard\nWellington,FL 33414 ",
+              "storeAddress": "10300 W. Forest Hill Boulevard\nWellington, FL 33414 ",
               "phoneNumber": "(561) 273-2940"
             },
             {
@@ -6415,7 +6442,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "459 Brandon Town Center Drive\nBrandon,FL 33511 ",
+              "storeAddress": "459 Brandon Town Center Drive\nBrandon, FL 33511 ",
               "phoneNumber": "(813) 413-3400"
             },
             {
@@ -6437,7 +6464,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "140 University Town Center Dr\nSarasota,FL 34243 ",
+              "storeAddress": "140 University Town Center Dr\nSarasota, FL 34243 ",
               "phoneNumber": "(941) 3584600"
             },
             {
@@ -6459,7 +6486,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "8001 S. Orange Blossom Trail\nOrlando,FL 32809 ",
+              "storeAddress": "8001 S. Orange Blossom Trail\nOrlando, FL 32809 ",
               "phoneNumber": "(407) 563-1020"
             },
             {
@@ -6481,7 +6508,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4835 River City Drive\nJacksonville,FL 32246 ",
+              "storeAddress": "4835 River City Drive\nJacksonville, FL 32246 ",
               "phoneNumber": "(904) 380-3080"
             },
             {
@@ -6503,7 +6530,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "8888 SW 136th Street\nMiami,FL 33176 ",
+              "storeAddress": "8888 SW 136th Street\nMiami, FL 33176 ",
               "phoneNumber": "(305) 234-4565"
             },
             {
@@ -6525,7 +6552,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "23151 Fashion Drive\nEstero,FL 33928 ",
+              "storeAddress": "23151 Fashion Drive\nEstero, FL 33928 ",
               "phoneNumber": "(239) 949-8860"
             },
             {
@@ -6547,7 +6574,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4200 Conroy Road\nOrlando,FL 32839 ",
+              "storeAddress": "4200 Conroy Road\nOrlando, FL 32839 ",
               "phoneNumber": "(407) 352-5551"
             },
             {
@@ -6569,7 +6596,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "19501 Biscayne Boulevard\nAventura,FL 33180 ",
+              "storeAddress": "19501 Biscayne Boulevard\nAventura, FL 33180 ",
               "phoneNumber": "(305) 914-9826"
             },
             {
@@ -6591,7 +6618,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "6000 Glades Road\nBoca Raton,FL 33431 ",
+              "storeAddress": "6000 Glades Road\nBoca Raton, FL 33431 ",
               "phoneNumber": "(561) 226-0270"
             },
             {
@@ -6613,7 +6640,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "451 E Altamonte Drive\nAltamonte Springs,FL 32701 ",
+              "storeAddress": "451 E Altamonte Drive\nAltamonte Springs, FL 32701 ",
               "phoneNumber": "(407) 551-0404"
             }
           ]
@@ -6640,7 +6667,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "125 Christiana Mall\nNewark,DE 19702 ",
+              "storeAddress": "125 Christiana Mall\nNewark, DE 19702 ",
               "phoneNumber": "(302) 5333514"
             }
           ]
@@ -6667,7 +6694,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2000 Route 38\nCherry Hill,NJ 08002 ",
+              "storeAddress": "2000 Route 38\nCherry Hill, NJ 08002 ",
               "phoneNumber": "(856) 7929480"
             },
             {
@@ -6689,7 +6716,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1400 Willowbrook Mall\nWayne,NJ 07470 ",
+              "storeAddress": "1400 Willowbrook Mall\nWayne, NJ 07470 ",
               "phoneNumber": "(973) 3392800"
             },
             {
@@ -6711,7 +6738,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3710 Route 9 South\nFreehold,NJ 07728 ",
+              "storeAddress": "3710 Route 9 South\nFreehold, NJ 07728 ",
               "phoneNumber": "(732) 3588426"
             },
             {
@@ -6733,7 +6760,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1 Garden State Plaza\nParamus,NJ 07652 ",
+              "storeAddress": "1 Garden State Plaza\nParamus, NJ 07652 ",
               "phoneNumber": "(201) 9759500"
             },
             {
@@ -6755,7 +6782,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "301 Mt. Hope Avenue\nRockaway,NJ 07866 ",
+              "storeAddress": "301 Mt. Hope Avenue\nRockaway, NJ 07866 ",
               "phoneNumber": "(973) 3849220"
             },
             {
@@ -6777,7 +6804,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "400 Commons Way\nBridgewater,NJ 08807 ",
+              "storeAddress": "400 Commons Way\nBridgewater, NJ 08807 ",
               "phoneNumber": "(908) 547-3800"
             },
             {
@@ -6799,7 +6826,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "441 Chestnut Ridge Road\nWoodcliff Lake,NJ 07677 ",
+              "storeAddress": "441 Chestnut Ridge Road\nWoodcliff Lake, NJ 07677 ",
               "phoneNumber": "(201) 4744180"
             },
             {
@@ -6821,7 +6848,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "500 Route 73 South\nMarlton,NJ 08053 ",
+              "storeAddress": "500 Route 73 South\nMarlton, NJ 08053 ",
               "phoneNumber": "(856) 3554940"
             },
             {
@@ -6843,7 +6870,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "55 Parsonage Road\nEdison,NJ 08837 ",
+              "storeAddress": "55 Parsonage Road\nEdison, NJ 08837 ",
               "phoneNumber": "(732) 6237700"
             },
             {
@@ -6865,7 +6892,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1200 Morris Turnpike\nShort Hills,NJ 07078 ",
+              "storeAddress": "1200 Morris Turnpike\nShort Hills, NJ 07078 ",
               "phoneNumber": "(973) 5645813"
             },
             {
@@ -6887,7 +6914,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "150 Quaker Bridge Mall     \nLawrence Township,NJ 08648 ",
+              "storeAddress": "150 Quaker Bridge Mall     \nLawrence Township, NJ 08648 ",
               "phoneNumber": "(609) 6069030"
             }
           ]
@@ -6914,7 +6941,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "17360 Hall Road\nClinton Township,MI 48038 ",
+              "storeAddress": "17360 Hall Road\nClinton Township, MI 48038 ",
               "phoneNumber": "(586) 840-0500"
             },
             {
@@ -6936,7 +6963,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3195 28th Street\nGrand Rapids,MI 49512 ",
+              "storeAddress": "3195 28th Street\nGrand Rapids, MI 49512 ",
               "phoneNumber": "(616) 956-1420"
             },
             {
@@ -6958,7 +6985,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2800 W Big Beaver Road\nTroy,MI 48084 ",
+              "storeAddress": "2800 W Big Beaver Road\nTroy, MI 48084 ",
               "phoneNumber": "(248) 822-0081"
             },
             {
@@ -6980,7 +7007,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "100 Briarwood Circle\nAnn Arbor,MI 48108 ",
+              "storeAddress": "100 Briarwood Circle\nAnn Arbor, MI 48108 ",
               "phoneNumber": "(734) 780-2471"
             },
             {
@@ -7002,7 +7029,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "27500 Novi Road\nNovi,MI 48377 ",
+              "storeAddress": "27500 Novi Road\nNovi, MI 48377 ",
               "phoneNumber": "(248) 675-0320"
             },
             {
@@ -7024,7 +7051,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3025 Preyde Boulevard\nLansing,MI 48912 ",
+              "storeAddress": "3025 Preyde Boulevard\nLansing, MI 48912 ",
               "phoneNumber": "(517) 3744920"
             }
           ]
@@ -7051,7 +7078,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1000 Ross Park Mall Drive\nPittsburgh,PA 15237 ",
+              "storeAddress": "1000 Ross Park Mall Drive\nPittsburgh, PA 15237 ",
               "phoneNumber": "(412) 318-0656"
             },
             {
@@ -7073,7 +7100,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "541 Park City Center\nLancaster,PA 17601 ",
+              "storeAddress": "541 Park City Center\nLancaster, PA 17601 ",
               "phoneNumber": "(717) 2958800"
             },
             {
@@ -7095,7 +7122,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "301 South Hills Village\nPittsburgh,PA 15241 ",
+              "storeAddress": "301 South Hills Village\nPittsburgh, PA 15241 ",
               "phoneNumber": "(412) 308-1970"
             },
             {
@@ -7117,7 +7144,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2500 West Moreland Road\nWillow Grove,PA 19090 ",
+              "storeAddress": "2500 West Moreland Road\nWillow Grove, PA 19090 ",
               "phoneNumber": "(215) 3468160"
             },
             {
@@ -7139,7 +7166,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "61 St. James Place\nArdmore,PA 19003 ",
+              "storeAddress": "61 St. James Place\nArdmore, PA 19003 ",
               "phoneNumber": "(610) 7269400"
             },
             {
@@ -7161,7 +7188,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "160 N. Gulph Road\nKing of Prussia,PA 19406 ",
+              "storeAddress": "160 N. Gulph Road\nKing of Prussia, PA 19406 ",
               "phoneNumber": "(484) 6365090"
             },
             {
@@ -7183,7 +7210,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "5508 Walnut Street\nPittsburgh,PA 15232 ",
+              "storeAddress": "5508 Walnut Street\nPittsburgh, PA 15232 ",
               "phoneNumber": "(412) 316-2460"
             },
             {
@@ -7205,7 +7232,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1607 Walnut Street\nPhiladelphia,PA 19103 ",
+              "storeAddress": "1607 Walnut Street\nPhiladelphia, PA 19103 ",
               "phoneNumber": "(215) 8616400"
             },
             {
@@ -7227,7 +7254,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "250 Lehigh Valley Mall\nWhitehall,PA 18052 ",
+              "storeAddress": "250 Lehigh Valley Mall\nWhitehall, PA 18052 ",
               "phoneNumber": "(610) 2664860"
             }
           ]
@@ -7254,7 +7281,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1000 Highland Colony Parkway\nRidgeland,MS 39157 ",
+              "storeAddress": "1000 Highland Colony Parkway\nRidgeland, MS 39157 ",
               "phoneNumber": "(601) 607-4521"
             }
           ]
@@ -7281,7 +7308,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "101 Jordan Creek Parkway\nWest Des Moines,IA 50266 ",
+              "storeAddress": "101 Jordan Creek Parkway\nWest Des Moines, IA 50266 ",
               "phoneNumber": "(515) 440-9900"
             }
           ]
@@ -7308,7 +7335,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2240 Q Street NE\nAlbuquerque,NM 87110 ",
+              "storeAddress": "2240 Q Street NE\nAlbuquerque, NM 87110 ",
               "phoneNumber": "(505) 837-6480"
             }
           ]
@@ -7335,7 +7362,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4012 Westheimer Road\nHouston,TX 77027 ",
+              "storeAddress": "4012 Westheimer Road\nHouston, TX 77027 ",
               "phoneNumber": "(832) 325-3500"
             },
             {
@@ -7357,7 +7384,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1620 S. University Drive\nFort Worth,TX 76107 ",
+              "storeAddress": "1620 S. University Drive\nFort Worth, TX 76107 ",
               "phoneNumber": "(817) 840-9801"
             },
             {
@@ -7379,7 +7406,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "13350 Dallas Parkway\nDallas,TX 75240 ",
+              "storeAddress": "13350 Dallas Parkway\nDallas, TX 75240 ",
               "phoneNumber": "(972) 9427210"
             },
             {
@@ -7401,7 +7428,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "500 Baybrook Mall\nFriendswood,TX 77546 ",
+              "storeAddress": "500 Baybrook Mall\nFriendswood, TX 77546 ",
               "phoneNumber": "(281) 204-0500"
             },
             {
@@ -7423,7 +7450,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3121 Palm Way\nAustin,TX 78758 ",
+              "storeAddress": "3121 Palm Way\nAustin, TX 78758 ",
               "phoneNumber": "(512) 691-4800"
             },
             {
@@ -7445,7 +7472,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "16535 Southwest Freeway\nSugar Land,TX 77479 ",
+              "storeAddress": "16535 Southwest Freeway\nSugar Land, TX 77479 ",
               "phoneNumber": "(281) 269-3410"
             },
             {
@@ -7467,7 +7494,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1201 Lake Woodlands Drive\nThe Woodlands,TX 77380 ",
+              "storeAddress": "1201 Lake Woodlands Drive\nThe Woodlands, TX 77380 ",
               "phoneNumber": "(281) 203-6870"
             },
             {
@@ -7489,7 +7516,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2000 Willowbrook Drive\nHouston,TX 77070 ",
+              "storeAddress": "2000 Willowbrook Drive\nHouston, TX 77070 ",
               "phoneNumber": "(281) 571-4400"
             },
             {
@@ -7511,7 +7538,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "5085 Westheimer Road\nHouston,TX 77056 ",
+              "storeAddress": "5085 Westheimer Road\nHouston, TX 77056 ",
               "phoneNumber": "(713) 3535471"
             },
             {
@@ -7533,7 +7560,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "7400 San Pedro Avenue\nSan Antonio,TX 78216 ",
+              "storeAddress": "7400 San Pedro Avenue\nSan Antonio, TX 78216 ",
               "phoneNumber": "(210) 321-4420"
             },
             {
@@ -7555,7 +7582,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "8687 North Central Expressway\nDallas,TX 75225 ",
+              "storeAddress": "8687 North Central Expressway\nDallas, TX 75225 ",
               "phoneNumber": "(214) 7650820"
             },
             {
@@ -7577,7 +7604,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3101 Knox Street\nDallas,TX 75205 ",
+              "storeAddress": "3101 Knox Street\nDallas, TX 75205 ",
               "phoneNumber": "(214) 520-8532"
             },
             {
@@ -7599,7 +7626,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "15900 La Cantera Parkway\nSan Antonio,TX 78256 ",
+              "storeAddress": "15900 La Cantera Parkway\nSan Antonio, TX 78256 ",
               "phoneNumber": "(210) 276-2302"
             },
             {
@@ -7621,7 +7648,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "303 Memorial City\nHouston,TX 77024 ",
+              "storeAddress": "303 Memorial City\nHouston, TX 77024 ",
               "phoneNumber": "(713) 986-2476"
             },
             {
@@ -7643,7 +7670,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "260 Grand Avenue\nSouthlake,TX 76092 ",
+              "storeAddress": "260 Grand Avenue\nSouthlake, TX 76092 ",
               "phoneNumber": "(817) 722-1401"
             },
             {
@@ -7665,7 +7692,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "8401 Gateway Boulevard West\nEl Paso,TX 79925 ",
+              "storeAddress": "8401 Gateway Boulevard West\nEl Paso, TX 79925 ",
               "phoneNumber": "(915) 774-8020"
             },
             {
@@ -7687,7 +7714,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2901 S. Capital of Texas Hwy\nAustin,TX 78746 ",
+              "storeAddress": "2901 S. Capital of Texas Hwy\nAustin, TX 78746 ",
               "phoneNumber": "(512) 634-0520"
             }
           ]
@@ -7714,7 +7741,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "288 Orland Square Drive\nOrland Park,IL 60462 ",
+              "storeAddress": "288 Orland Square Drive\nOrland Park, IL 60462 ",
               "phoneNumber": "(708) 645-5401"
             },
             {
@@ -7736,7 +7763,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "120 West Jefferson Avenue\nNaperville,IL 60540 ",
+              "storeAddress": "120 West Jefferson Avenue\nNaperville, IL 60540 ",
               "phoneNumber": "(630) 536-5400"
             },
             {
@@ -7758,7 +7785,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "N311 Woodfield Mall\nSchaumburg,IL 60173 ",
+              "storeAddress": "N311 Woodfield Mall\nSchaumburg, IL 60173 ",
               "phoneNumber": "(630) 237-2160"
             },
             {
@@ -7780,7 +7807,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "20530 N. Rand Road\nDeer Park,IL 60010 ",
+              "storeAddress": "20530 N. Rand Road\nDeer Park, IL 60010 ",
               "phoneNumber": "(847) 847-0400"
             },
             {
@@ -7802,7 +7829,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "401 North Michigan Avenue\nChicago,IL 60611 ",
+              "storeAddress": "401 North Michigan Avenue\nChicago, IL 60611 ",
               "phoneNumber": "(312) 529-9500"
             },
             {
@@ -7824,7 +7851,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "70 Oakbrook Center\nOak Brook,IL 60523 ",
+              "storeAddress": "70 Oakbrook Center\nOak Brook, IL 60523 ",
               "phoneNumber": "(630) 481-3470"
             },
             {
@@ -7846,7 +7873,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4999 Old Orchard Center\nSkokie,IL 60077 ",
+              "storeAddress": "4999 Old Orchard Center\nSkokie, IL 60077 ",
               "phoneNumber": "(847) 983-9230"
             },
             {
@@ -7868,7 +7895,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1056 Northbrook Court\nNorthbrook,IL 60062 ",
+              "storeAddress": "1056 Northbrook Court\nNorthbrook, IL 60062 ",
               "phoneNumber": "(847) 205-2020"
             },
             {
@@ -7890,7 +7917,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "801 W. North Avenue\nChicago,IL 60642 ",
+              "storeAddress": "801 W. North Avenue\nChicago, IL 60642 ",
               "phoneNumber": "(312) 777-4200"
             }
           ]
@@ -7917,7 +7944,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "401 Evergreen Walk\nSouth Windsor,CT 06074 ",
+              "storeAddress": "401 Evergreen Walk\nSouth Windsor, CT 06074 ",
               "phoneNumber": "(860) 5122070"
             },
             {
@@ -7939,7 +7966,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "65 Broadway\nNew Haven,CT 06511 ",
+              "storeAddress": "65 Broadway\nNew Haven, CT 06511 ",
               "phoneNumber": "(203) 498-8950"
             },
             {
@@ -7961,7 +7988,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "100 N. Water Street\nNorwalk,CT 06854 ",
+              "storeAddress": "100 N. Water Street\nNorwalk, CT 06854 ",
               "phoneNumber": "(203) 658-1801"
             },
             {
@@ -7983,7 +8010,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "500 Westfarms Mall\nFarmington,CT 06032 ",
+              "storeAddress": "500 Westfarms Mall\nFarmington, CT 06032 ",
               "phoneNumber": "(860) 221-0800"
             },
             {
@@ -8005,7 +8032,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "356 Greenwich Avenue\nGreenwich,CT 06830 ",
+              "storeAddress": "356 Greenwich Avenue\nGreenwich, CT 06830 ",
               "phoneNumber": "(203) 302-6691"
             },
             {
@@ -8027,7 +8054,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "5065 Main Street\nTrumbull,CT 06611 ",
+              "storeAddress": "5065 Main Street\nTrumbull, CT 06611 ",
               "phoneNumber": "(203) 6663928"
             },
             {
@@ -8049,7 +8076,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Seven Backus Avenue\nDanbury,CT 06810 ",
+              "storeAddress": "Seven Backus Avenue\nDanbury, CT 06810 ",
               "phoneNumber": "(203) 546-6340"
             }
           ]
@@ -8076,7 +8103,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1500 S Willow Street\nManchester,NH 03103 ",
+              "storeAddress": "1500 S Willow Street\nManchester, NH 03103 ",
               "phoneNumber": "(603) 3910180"
             },
             {
@@ -8098,7 +8125,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "99 Rockingham Park Boulevard\nSalem,NH 03079 ",
+              "storeAddress": "99 Rockingham Park Boulevard\nSalem, NH 03079 ",
               "phoneNumber": "(603) 328-3140"
             },
             {
@@ -8120,7 +8147,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "310 Daniel Webster Highway\nNashua,NH 03060 ",
+              "storeAddress": "310 Daniel Webster Highway\nNashua, NH 03060 ",
               "phoneNumber": "(603) 521-3400"
             }
           ]
@@ -8147,7 +8174,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3301 Veterans Memorial Blvd\nMetairie,LA 70002 ",
+              "storeAddress": "3301 Veterans Memorial Blvd\nMetairie, LA 70002 ",
               "phoneNumber": "(504) 830-1400"
             },
             {
@@ -8169,7 +8196,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "6401 Bluebonnet Boulevard\nBaton Rouge,LA 70836 ",
+              "storeAddress": "6401 Bluebonnet Boulevard\nBaton Rouge, LA 70836 ",
               "phoneNumber": "(225) 765-3500"
             }
           ]
@@ -8196,7 +8223,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "28849 Chagrin Boulevard\nWoodmere,OH 44122 ",
+              "storeAddress": "28849 Chagrin Boulevard\nWoodmere, OH 44122 ",
               "phoneNumber": "(216) 535-4560"
             },
             {
@@ -8218,7 +8245,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4210 The Strand\nColumbus,OH 43219 ",
+              "storeAddress": "4210 The Strand\nColumbus, OH 43219 ",
               "phoneNumber": "(614) 934-2810"
             },
             {
@@ -8240,7 +8267,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "7875 Montgomery Road\nCincinnati,OH 45236 ",
+              "storeAddress": "7875 Montgomery Road\nCincinnati, OH 45236 ",
               "phoneNumber": "(513) 826-3620"
             },
             {
@@ -8262,7 +8289,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "5001 Monroe Street\nToledo,OH 43623 ",
+              "storeAddress": "5001 Monroe Street\nToledo, OH 43623 ",
               "phoneNumber": "(419) 4734250"
             },
             {
@@ -8284,7 +8311,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3265 West Market Street\nAkron,OH 44333 ",
+              "storeAddress": "3265 West Market Street\nAkron, OH 44333 ",
               "phoneNumber": "(330) 865-6280"
             },
             {
@@ -8306,7 +8333,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4422 Cedar Park Drive\nBeavercreek,OH 45440 ",
+              "storeAddress": "4422 Cedar Park Drive\nBeavercreek, OH 45440 ",
               "phoneNumber": "(937) 4314200"
             },
             {
@@ -8328,7 +8355,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1500 Polaris Parkway\nColumbus,OH 43240 ",
+              "storeAddress": "1500 Polaris Parkway\nColumbus, OH 43240 ",
               "phoneNumber": "(614) 987-1430"
             },
             {
@@ -8350,7 +8377,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "267 Crocker Park Boulevard\nWestlake,OH 44145 ",
+              "storeAddress": "267 Crocker Park Boulevard\nWestlake, OH 44145 ",
               "phoneNumber": "(440) 788-2800"
             }
           ]
@@ -8377,7 +8404,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "8130 Avalon Boulevard\nAlpharetta,GA 30009 ",
+              "storeAddress": "8130 Avalon Boulevard\nAlpharetta, GA 30009 ",
               "phoneNumber": "(770) 510-1670"
             },
             {
@@ -8399,7 +8426,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3333 Buford Drive\nBuford,GA 30519 ",
+              "storeAddress": "3333 Buford Drive\nBuford, GA 30519 ",
               "phoneNumber": "(678) 288-3400"
             },
             {
@@ -8421,7 +8448,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3393 Peachtree Road NE\nAtlanta,GA 30326 ",
+              "storeAddress": "3393 Peachtree Road NE\nAtlanta, GA 30326 ",
               "phoneNumber": "(404) 926-3085"
             },
             {
@@ -8443,7 +8470,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3450 Wrightsboro Road\nAugusta,GA 30909 ",
+              "storeAddress": "3450 Wrightsboro Road\nAugusta, GA 30909 ",
               "phoneNumber": "(706) 731-1800"
             },
             {
@@ -8465,7 +8492,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2860 Cumberland Mall\nSuite 1153\nAtlanta,GA 30339 ",
+              "storeAddress": "2860 Cumberland Mall\nSuite 1153\nAtlanta, GA 30339 ",
               "phoneNumber": "(678) 4020725"
             },
             {
@@ -8487,7 +8514,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4400 Ashford Dunwoody Road\nAtlanta,GA 30346 ",
+              "storeAddress": "4400 Ashford Dunwoody Road\nAtlanta, GA 30346 ",
               "phoneNumber": "(678) 459-9800"
             }
           ]
@@ -8514,7 +8541,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1100 South Hayes Street\nArlington,VA 22202 ",
+              "storeAddress": "1100 South Hayes Street\nArlington, VA 22202 ",
               "phoneNumber": "(703) 2361550"
             },
             {
@@ -8536,7 +8563,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "701 Lynnhaven Parkway\nVirginia Beach,VA 23452 ",
+              "storeAddress": "701 Lynnhaven Parkway\nVirginia Beach, VA 23452 ",
               "phoneNumber": "(757) 3062480"
             },
             {
@@ -8558,7 +8585,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "15100 Potomac Town Place\nWoodbridge,VA 22191 ",
+              "storeAddress": "15100 Potomac Town Place\nWoodbridge, VA 22191 ",
               "phoneNumber": "(703) 9862030"
             },
             {
@@ -8580,7 +8607,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2700 Clarendon Boulevard\nArlington,VA 22201 ",
+              "storeAddress": "2700 Clarendon Boulevard\nArlington, VA 22201 ",
               "phoneNumber": "(703) 2367970"
             },
             {
@@ -8602,7 +8629,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "11800 W. Broad Street\nRichmond,VA 23233 ",
+              "storeAddress": "11800 W. Broad Street\nRichmond, VA 23233 ",
               "phoneNumber": "(804) 4203000"
             },
             {
@@ -8624,7 +8651,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "11750 Fair Oaks\nFairfax,VA 22033 ",
+              "storeAddress": "11750 Fair Oaks\nFairfax, VA 22033 ",
               "phoneNumber": "(703) 2517400"
             },
             {
@@ -8646,7 +8673,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1961 Chain Bridge Road\nMcLean,VA 22102 ",
+              "storeAddress": "1961 Chain Bridge Road\nMcLean, VA 22102 ",
               "phoneNumber": "(703) 3368450"
             },
             {
@@ -8668,7 +8695,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "11937 Market Street\nReston,VA 20190 ",
+              "storeAddress": "11937 Market Street\nReston, VA 20190 ",
               "phoneNumber": "(571) 4494800"
             }
           ]
@@ -8695,7 +8722,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "4860 Bethesda Avenue\nBethesda,MD 20814 ",
+              "storeAddress": "4860 Bethesda Avenue\nBethesda, MD 20814 ",
               "phoneNumber": "(301) 634-0880"
             },
             {
@@ -8717,7 +8744,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "10300 Little Patuxent Parkway\nColumbia,MD 21044 ",
+              "storeAddress": "10300 Little Patuxent Parkway\nColumbia, MD 21044 ",
               "phoneNumber": "(410) 4231801"
             },
             {
@@ -8739,7 +8766,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "1735 Annapolis Mall\nAnnapolis,MD 21401 ",
+              "storeAddress": "1735 Annapolis Mall\nAnnapolis, MD 21401 ",
               "phoneNumber": "(410) 972-3290"
             },
             {
@@ -8761,7 +8788,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "7101 Democracy Boulevard\nBethesda,MD 20817 ",
+              "storeAddress": "7101 Democracy Boulevard\nBethesda, MD 20817 ",
               "phoneNumber": "(301) 6349930"
             },
             {
@@ -8783,7 +8810,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "825 Dulaney Valley Road\nTowson,MD 21204 ",
+              "storeAddress": "825 Dulaney Valley Road\nTowson, MD 21204 ",
               "phoneNumber": "(410) 4270360"
             }
           ]
@@ -8810,7 +8837,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "350 North Milwaukee Street\n#1083\nBoise,ID 83704 ",
+              "storeAddress": "350 North Milwaukee Street\n#1083\nBoise, ID 83704 ",
               "phoneNumber": "(208) 377-6500"
             }
           ]
@@ -8991,7 +9018,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "3035, boulevard Le Carrefour, local C14B\nLaval,Quebec H7T 1C8",
+              "storeAddress": "3035, boulevard Le Carrefour, local C14B\nLaval, Quebec H7T 1C8",
               "phoneNumber": "(450) 9024400"
             },
             {
@@ -9013,7 +9040,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "9120 boul. Leduc\nBrossard,Quebec J4Y 0L3",
+              "storeAddress": "9120 boul. Leduc\nBrossard, Quebec J4Y 0L3",
               "phoneNumber": "(450) 6181400"
             },
             {
@@ -9035,7 +9062,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "1321 Rue Ste-Catherine Ouest\nMontreal,Quebec H3G 1P7",
+              "storeAddress": "1321 Rue Ste-Catherine Ouest\nMontreal, Quebec H3G 1P7",
               "phoneNumber": "(514) 906-8400"
             },
             {
@@ -9057,7 +9084,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "2450 Boulevard Laurier\nQuebec City,Quebec G1V 2L1",
+              "storeAddress": "2450 Boulevard Laurier\nQuebec City, Quebec G1V 2L1",
               "phoneNumber": "(418) 266-8600"
             },
             {
@@ -9079,7 +9106,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "6801, Transcanada Highway\nPointe-Claire,Quebec H9R 5J2",
+              "storeAddress": "6801, Transcanada Highway\nPointe-Claire, Quebec H9R 5J2",
               "phoneNumber": "(514) 6308800"
             }
           ]
@@ -11281,7 +11308,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Av. Ejército Nacional #843-B\nCentro Comercial Antara Fashion Hall, Miguel Hidalgo Mexico City,11520",
+              "storeAddress": "Av. Ejército Nacional #843-B\nCentro Comercial Antara Fashion Hall, Miguel Hidalgo Mexico City, 11520",
               "phoneNumber": "(55) 47393890"
             }
           ]
@@ -11308,7 +11335,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Avenida Vasco de Quiroga 3800\nLomas de Santa Fe, Antigua Mina de Totoloapa, Cuajimalpa de Morelos ,05109",
+              "storeAddress": "Avenida Vasco de Quiroga 3800\nLomas de Santa Fe, Antigua Mina de Totoloapa, Cuajimalpa de Morelos , 05109",
               "phoneNumber": "(55) 10376400"
             }
           ]
