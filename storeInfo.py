@@ -10,9 +10,18 @@ with open("storeInfo.json") as r:
 	infoJSON = json.loads(r.read())
 storeLibrary = {}
 
-def StoreID(storeid):
-	i = f"{storeid:0>3}".upper().replace("R", "")
-	return [(i, actualName(infoJSON["name"][i]))] if i in storeLibrary else []
+def StoreID(storeid, fuzzy = False):
+	stores = []
+	if fuzzy:
+		ids = [i for i in storeLibrary]
+		for i in ids:
+			if str(storeid) in i:
+				stores.append((i, actualName(infoJSON["name"][i])))
+	else:
+		i = f"{storeid:0>3}".upper().replace("R", "")
+		if i in storeLibrary:
+			stores = [(i, actualName(infoJSON["name"][i]))]
+	return stores
 
 def StoreMatch(keyword, fuzzy = False):
 	stores = []
@@ -58,6 +67,7 @@ def storeDict(storeid, mode = "dict"):
 		r = requests.get(url, headers = userAgent).json()
 		try:
 			hours = {
+				"isnso": r["hours"]["isNSO"],
 				"regular": r["hours"]["hoursData"],
 				"special": r["hours"]["specialHoursData"]
 			}
@@ -84,17 +94,6 @@ def storeDict(storeid, mode = "dict"):
 		return page
 	except:
 		return {}
-
-'''
-def storeState(stateCode):
-	states = []
-	if stateCode not in infoJSON["state"]:
-		return {}
-	reply = "\n".join([f"    *{prov} -* " + 
-		"、".join([f"{StoreID(store)[0][1]} (R{store})" for store in infoJSON["state"][stateCode][prov]]) \
-		for prov in infoJSON["state"][stateCode]])
-	return reply
-'''
 
 def getState(sid):
 	sid = f"{sid}"
@@ -134,17 +133,24 @@ def storeOrder():
 
 def storeReturn(args, sort = True, remove_close = False, remove_future = False, fuzzy = False, no_country = False):
 	ans = []
+	if type(args) == int:
+		args = str(args)
 	if type(args) == str:
 		args = args.split(" ")
 	for a in args:
 		digit = a.isdigit() or a.upper().replace("R", "").isdigit()
-		stores = (StoreID(a) + StoreMatch(a, fuzzy)) if digit else StoreMatch(a, fuzzy)
+		stores = (StoreID(a, fuzzy) + StoreMatch(a, fuzzy)) if digit else StoreMatch(a, fuzzy)
 		for s in stores:
 			if s and s not in ans:
-				if remove_close and getState(s[0])[0] == "已关闭":
-					continue
-				if remove_future and "Store in" in infoJSON["name"][s[0]]:
-					continue
+				sState = getState(s[0])[0]
+				judge = (remove_future, remove_close)
+				if any(judge):
+					if sState == "公司门店":
+						continue
+					if judge[0] and "Store in" in infoJSON["name"][s[0]]:
+						continue
+					if judge[1] and sState == "已关闭":
+						continue
 				if no_country:
 					nmlst = [RecruitDict[i]["name"] for i in RecruitDict]
 					if a in nmlst or a in webNation:
@@ -208,10 +214,6 @@ def library():
 	for i in infoJSON["flag"]:
 		flag = infoJSON["flag"][i]
 		storeLibrary[i] = storeLibrary.get(i, []) + [flag]
-		if flag == "🇭🇰":
-			storeLibrary[i] = storeLibrary.get(i, []) + ["HK", "Hong Kong"]
-		if flag == "🇹🇼":
-			storeLibrary[i] = storeLibrary.get(i, []) + ["TW", "Taiwan"]
 		storeLibrary[i] += [RecruitDict[flag]["name"]]
 		storeLibrary[i] += RecruitDict[flag]["altername"]
 

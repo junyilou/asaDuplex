@@ -55,7 +55,7 @@ def down(rtl, isSpecial):
 		
 		if isSpecial: 
 			logging.info("正在更新 specialist.txt")
-			specialist.remove(rtl)
+			specialist.remove(str(int(rtl)))
 			with open("Retail/specialist.txt", "w") as w:
 				w.write(", ".join(specialist))
 
