@@ -36,7 +36,7 @@ def down(rtl, isSpecial):
 		savedDatetime = datetime(2001, 5, 19)
 
 	if remoteDatetime > savedDatetime:
-		if remoteDatetime.date() in [date(2021, 7, 13), date(2021, 8, 28), date(2021, 8, 29)]:
+		if remoteDatetime.date() in [date(2021, 7, 13), date(2021, 8, 28), date(2021, 8, 29), date(2022, 1, 7)]:
 			logging.info(f"R{rtl} 找到了更佳的远端无效时间")
 			storejson['last'][rtl] = remote
 			storejson['update'] = datetime.now(timezone.utc).strftime("%F %T GMT")
