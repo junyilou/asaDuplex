@@ -1,20 +1,24 @@
 import os
 import json
-import time
 import logging
 import requests
+from datetime import datetime
 requests.packages.urllib3.disable_warnings()
 
 from sdk_aliyun import post
 from modules.constants import RecruitDict, disMarkdown, setLogger, userAgent
 from bot import chat_ids
 
+stdout = lambda p: print(datetime.now().strftime("[%F %T] ") + p)
 from sys import argv
-if len(argv) > 1 and argv[1] == "special":
-	RecruitDict = {
-		"🇦🇪": {"name": "阿联酋", "code": 114438225}, 
-		"🇨🇳": {"name": "中国", "code": 114438030},
-	}
+if len(argv) > 1:
+	if "special" in argv:
+		RecruitDict = {
+			"🇦🇪": {"name": "阿联酋", "code": 114438225}, 
+			"🇨🇳": {"name": "中国", "code": 114438030},
+		}
+	if "logging" in argv:
+		stdout = logging.info
 
 wAns = ""
 imageURL = "https://www.apple.com/jobs/images/retail/hero/desktop@2x.jpg"
@@ -22,7 +26,7 @@ imageURL = "https://www.apple.com/jobs/images/retail/hero/desktop@2x.jpg"
 with open("Retail/savedJobs.txt") as m: mark = m.read()
 
 setLogger(logging.INFO, os.path.basename(__file__))
-logging.info("程序启动")
+stdout("程序启动")
 
 s = requests.Session()
 
@@ -30,7 +34,7 @@ for ste in RecruitDict:
 	scn = RecruitDict[ste]["name"]
 	spl = RecruitDict[ste]["code"]
 
-	logging.info(f"正在下载{scn}的国家文件")
+	stdout(f"正在下载{scn}的国家文件")
 
 	try:
 		r = s.get(f"https://jobs.apple.com/api/v1/jobDetails/PIPE-{spl}/stateProvinceList", headers = userAgent, verify = False)
@@ -47,10 +51,10 @@ for ste in RecruitDict:
 			logging.error(f"打开{scn}的国家文件错误")
 			continue
 
-	logging.info(f"找到{scn}有城市文件 {len(stateJSON)} 个")
+	stdout(f"找到{scn}有城市文件 {len(stateJSON)} 个")
 	for i in stateJSON: 
 		cID = i["id"].replace("postLocation-", "")
-		# logging.info(f"正在下载{scn}的城市文件 {cID}")
+		# stdout(f"正在下载{scn}的城市文件 {cID}")
 
 		try:
 			r = s.get(f"https://jobs.apple.com/api/v1/jobDetails/PIPE-{spl}/storeLocations?searchField=stateProvince&fieldValue={i['id']}", headers = userAgent, verify = False)
@@ -69,7 +73,7 @@ for ste in RecruitDict:
 		for c in cityJSON:
 			rolloutCode = c["code"]
 			if not rolloutCode in mark:
-				logging.info(f"找到了{scn}的新店 {rolloutCode} 不在已知列表中")
+				stdout(f"找到了{scn}的新店 {rolloutCode} 不在已知列表中")
 
 				wAns += f"{ste}{rolloutCode}, "
 				linkURL = f"https://jobs.apple.com/zh-cn/details/{spl}"
@@ -85,8 +89,8 @@ for ste in RecruitDict:
 				post(push)
 
 if wAns != "":
-	logging.info("正在更新 savedJobs 文件")
+	stdout("正在更新 savedJobs 文件")
 	with open("Retail/savedJobs.txt", "w") as m:
 		m.write(mark + wAns)
 
-logging.info("程序结束")
+stdout("程序结束")
