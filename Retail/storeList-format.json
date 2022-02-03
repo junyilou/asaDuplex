@@ -22,33 +22,6 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/DE",
       "states": [
         {
-          "stateName": "",
-          "stores": [
-            {
-              "storeNumber": "R443",
-              "countryCode": "DE",
-              "storeName": "Rosenthaler Strasse",
-              "latitude": "51.1657",
-              "longitude": "10.4515",
-              "storeRadius": "50",
-              "accuracyThreshold": "500",
-              "imageURL": [
-                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R443.png"
-              ],
-              "secureImageURL": [],
-              "locationText": "Berlin",
-              "timeZone": "Europe/Berlin",
-              "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "SNB",
-              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
-              "enableInStoreMode": true,
-              "storeAddress": "44 Rosenthaler Strasse\n10178 Berlin",
-              "phoneNumber": "(030) 346493600"
-            }
-          ]
-        },
-        {
           "stateName": "Saxony",
           "stores": [
             {
@@ -126,6 +99,28 @@
               "enableInStoreMode": true,
               "storeAddress": "Kurfürstendamm 26\n10719 Berlin",
               "phoneNumber": "(030) 590090000"
+            },
+            {
+              "storeNumber": "R443",
+              "countryCode": "DE",
+              "storeName": "Rosenthaler Strasse",
+              "latitude": "52.52404",
+              "longitude": "13.40315",
+              "storeRadius": "50",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R443.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Berlin",
+              "timeZone": "Europe/Berlin",
+              "instoreCheckoutMode": "SCAN_AND_BUY",
+              "selfCheckout": "SNB",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipSelfCheckout": "SNB",
+              "enableInStoreMode": true,
+              "storeAddress": "44 Rosenthaler Strasse\n10178 Berlin",
+              "phoneNumber": "(030) 346493600"
             }
           ]
         },
@@ -392,7 +387,7 @@
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "City-Galerie Augsburg\nWilly-Brandt-Platz 1\n86153 Augsburg",
-              "phoneNumber": "(821) 9076-490-00"
+              "phoneNumber": "(0821) 9076-490-00"
             },
             {
               "storeNumber": "R045",
@@ -591,7 +586,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "International Finance Centre \n8 Finance Street\nHong Kong,Central",
+              "storeAddress": "International Finance Centre\n8 Finance Street\nHong Kong,Central",
               "phoneNumber": "39721500"
             }
           ]
@@ -796,7 +791,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "83-1 Tachiurinakanocho\nShijo-dori Takakura Higashiiru\nKyoto-shi,600-8006",
+              "storeAddress": "83-1xa0Tachiurinakanocho\nShijo-dorixa0Takakura Higashiiru\nKyoto-shi,600-8006",
               "phoneNumber": "(075) 7578700"
             }
           ]
@@ -938,7 +933,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Centre Commercial Rosny 2 \nAvenue du General-de-Gaulle\n93117 Rosny-Sous-Bois",
+              "storeAddress": "Centre Commercial Rosny 2\nAvenue du General-de-Gaulle\n93117 Rosny-Sous-Bois",
               "phoneNumber": "(01) 73308900"
             }
           ]
@@ -1335,8 +1330,8 @@
               "storeNumber": "R675",
               "countryCode": "FR",
               "storeName": "Champs-Élysées",
-              "latitude": "48.87221669282893",
-              "longitude": "2.301233410835266",
+              "latitude": "48.872216692829",
+              "longitude": "2.301233410835",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -1589,8 +1584,8 @@
               "storeNumber": "R669",
               "countryCode": "SG",
               "storeName": "Orchard Road",
-              "latitude": "1.30279546268827",
-              "longitude": "103.8363986318006",
+              "latitude": "1.302795462688",
+              "longitude": "103.836398631801",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -1812,7 +1807,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "27/28 Ground Level Mall, Union Square\nGuild Square\nAberdeen, AB11 5PN",
+              "storeAddress": "27/28 Ground Level Mall\nUnion Square\nAberdeen, AB11 5PN",
               "phoneNumber": "(012) 24-287-900"
             }
           ]
@@ -1959,15 +1954,15 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "The Arcade, Westfield Stratford City\nLondon, E20 1EQ",
+              "storeAddress": "The Arcade\nWestfield Stratford City\nLondon, E20 1EQ",
               "phoneNumber": "(020) 8277-2200"
             },
             {
               "storeNumber": "R163",
               "countryCode": "GB",
               "storeName": "Brent Cross",
-              "latitude": "51.576232751093976",
-              "longitude": "-0.224919319152832",
+              "latitude": "51.576232751094",
+              "longitude": "-0.2249193191528",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -2008,7 +2003,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Upper Level, The Oracle Shopping Centre\nReading, RG1 2AG",
+              "storeAddress": "The Oracle Shopping Centre\nUpper Level\nReading, RG1 2AG",
               "phoneNumber": "(0118) 925-4500"
             }
           ]
@@ -2035,7 +2030,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "11 Philadelphia Street, Quakers Friars\nCabot Circus\nBristol, BS1 3BZ",
+              "storeAddress": "11 Philadelphia Street\nQuakers Friars\nBristol, BS1 3BZ",
               "phoneNumber": "(0117) 900-3450"
             },
             {
@@ -2084,7 +2079,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Upper Level, Queen Anne’s Walk\nBasingstoke, RG21 7BE",
+              "storeAddress": "Upper Level\nQueen Anne’s Walk\nBasingstoke, RG21 7BE",
               "phoneNumber": "(0125) 669-6000"
             },
             {
@@ -2285,7 +2280,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "The Glades Bromley Shopping Centre\nBromley, BR1 1DN",
+              "storeAddress": "The Glades Shopping Centre\nHigh Street\nBromley, BR1 1DN",
               "phoneNumber": "(020) 8225-5500"
             }
           ]
@@ -2518,7 +2513,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Albion Street, 209 Trinity Leeds\nLeeds, LS1 5AR",
+              "storeAddress": "Albion Street\n209 Trinity Leeds\nLeeds, LS1 5AR",
               "phoneNumber": "(0113) 2511000"
             }
           ]
@@ -2770,7 +2765,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "9585 SW Washington Square Road\nTigard, OR 97223 ",
+              "storeAddress": "9585 SW Washington Square Rd\nTigard, OR 97223 ",
               "phoneNumber": "(503) 495-2080"
             },
             {
@@ -2810,7 +2805,7 @@
               "locationText": "Portland, OR",
               "timeZone": "America/Los_Angeles",
               "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "OFF",
+              "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
@@ -3279,8 +3274,8 @@
               "storeNumber": "R355",
               "countryCode": "US",
               "storeName": "Haywood Mall",
-              "latitude": "34.8493847884637",
-              "longitude": "-82.3339324090038",
+              "latitude": "34.849384788464",
+              "longitude": "-82.333932409004",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -3302,7 +3297,7 @@
               "countryCode": "US",
               "storeName": "Charleston",
               "latitude": "32.783361441121",
-              "longitude": "-79.9349348158634",
+              "longitude": "-79.934934815863",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -3463,7 +3458,7 @@
               "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "8405 Park Meadows Center Drive\nLone Tree, CO 80124 ",
+              "storeAddress": "8405 Park Meadows Center Drv\nLone Tree, CO 80124 ",
               "phoneNumber": "(303) 256-1501"
             },
             {
@@ -3536,7 +3531,7 @@
               "storeNumber": "R182",
               "countryCode": "US",
               "storeName": "FlatIron Crossing",
-              "latitude": "39.9334099030165",
+              "latitude": "39.933409903017",
               "longitude": "-105.1329389226",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -3563,8 +3558,8 @@
               "storeNumber": "R191",
               "countryCode": "US",
               "storeName": "Holyoke",
-              "latitude": "42.1683611939431",
-              "longitude": "-72.6412298664067",
+              "latitude": "42.168361193943",
+              "longitude": "-72.641229866407",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -3585,8 +3580,8 @@
               "storeNumber": "R149",
               "countryCode": "US",
               "storeName": "Boylston Street",
-              "latitude": "42.3489865114876",
-              "longitude": "-71.0824840137929",
+              "latitude": "42.348986511488",
+              "longitude": "-71.082484013793",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -3629,8 +3624,8 @@
               "storeNumber": "R346",
               "countryCode": "US",
               "storeName": "Legacy Place",
-              "latitude": "42.2308727436183",
-              "longitude": "-71.1783933202552",
+              "latitude": "42.230872743618",
+              "longitude": "-71.178393320255",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -3644,7 +3639,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "508 Legacy Place \nDedham, MA 02026 ",
+              "storeAddress": "508 Legacy Place\nDedham, MA 02026 ",
               "phoneNumber": "(781) 471-3800"
             },
             {
@@ -3695,8 +3690,8 @@
               "storeNumber": "R011",
               "countryCode": "US",
               "storeName": "MarketStreet",
-              "latitude": "42.51559067532765",
-              "longitude": "-71.0342469577784",
+              "latitude": "42.515590675328",
+              "longitude": "-71.034246957778",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -3818,14 +3813,14 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R114.png"
               ],
               "secureImageURL": [],
-              "locationText": "St. Louis, MO",
+              "locationText": "Saint Louis, MO",
               "timeZone": "America/Chicago",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "2440 Saint Louis Galleria\nSt. Louis, MO 63117 ",
+              "storeAddress": "2440 Saint Louis Galleria\nSaint Louis, MO 63117 ",
               "phoneNumber": "(314) 290-0400"
             },
             {
@@ -4045,8 +4040,8 @@
               "storeNumber": "R229",
               "countryCode": "US",
               "storeName": "Hilldale",
-              "latitude": "43.0721442814555",
-              "longitude": "-89.45294737815857",
+              "latitude": "43.072144281456",
+              "longitude": "-89.452947378159",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -4153,7 +4148,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "3200 Las Vegas Boulevard South\nLas Vegas, NV 89109 ",
+              "storeAddress": "3200 Las Vegas Blvd South\nLas Vegas, NV 89109 ",
               "phoneNumber": "(702) 577-9740"
             },
             {
@@ -4182,7 +4177,7 @@
               "storeNumber": "R161",
               "countryCode": "US",
               "storeName": "The Forum Shops",
-              "latitude": "36.1187861111111",
+              "latitude": "36.118786111111",
               "longitude": "-115.177691162857",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -4219,7 +4214,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "6671 Las Vegas Boulevard South\nLas Vegas, NV 89119 ",
+              "storeAddress": "6671 Las Vegas Blvd South\nLas Vegas, NV 89119 ",
               "phoneNumber": "(702) 221-8826"
             }
           ]
@@ -4232,7 +4227,7 @@
               "countryCode": "US",
               "storeName": "Syracuse",
               "latitude": "43.069518399488",
-              "longitude": "-76.1729174435949",
+              "longitude": "-76.172917443595",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -4275,8 +4270,8 @@
               "storeNumber": "R327",
               "countryCode": "US",
               "storeName": "Manhasset",
-              "latitude": "40.7950212155573",
-              "longitude": "-73.6764862431951",
+              "latitude": "40.795021215557",
+              "longitude": "-73.676486243195",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -4444,7 +4439,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "8115 Fashion Drive \nNanuet, NY 10954 ",
+              "storeAddress": "8115 Fashion Drive\nNanuet, NY 10954 ",
               "phoneNumber": "(845) 2156980"
             },
             {
@@ -4517,8 +4512,8 @@
               "storeNumber": "R251",
               "countryCode": "US",
               "storeName": "Upper West Side",
-              "latitude": "40.7750722222222",
-              "longitude": "-73.9825952907363",
+              "latitude": "40.775072222222",
+              "longitude": "-73.982595290736",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -4693,8 +4688,8 @@
               "storeNumber": "R060",
               "countryCode": "US",
               "storeName": "Roosevelt Field",
-              "latitude": "40.7379742099402",
-              "longitude": "-73.6123079932139",
+              "latitude": "40.73797420994",
+              "longitude": "-73.612307993214",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -4742,8 +4737,8 @@
               "storeNumber": "R287",
               "countryCode": "US",
               "storeName": "Georgetown",
-              "latitude": "38.9059225404785",
-              "longitude": "-77.0623101663529",
+              "latitude": "38.905922540478",
+              "longitude": "-77.062310166353",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -4889,7 +4884,7 @@
               "storeNumber": "R210",
               "countryCode": "US",
               "storeName": "Kahala",
-              "latitude": "21.2770811111895",
+              "latitude": "21.277081111189",
               "longitude": "-157.78698547723",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -4911,7 +4906,7 @@
               "storeNumber": "R073",
               "countryCode": "US",
               "storeName": "Ala Moana",
-              "latitude": "21.2902362221103",
+              "latitude": "21.29023622211",
               "longitude": "-157.842305770593",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -5119,7 +5114,7 @@
               "storeNumber": "R322",
               "countryCode": "US",
               "storeName": "Vintage Faire",
-              "latitude": "37.6877498089083",
+              "latitude": "37.687749808908",
               "longitude": "-121.053261792864",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -5229,8 +5224,8 @@
               "storeNumber": "R051",
               "countryCode": "US",
               "storeName": "Third Street Promenade",
-              "latitude": "34.015328138540426",
-              "longitude": "-118.49542915821075",
+              "latitude": "34.01532813854",
+              "longitude": "-118.495429158211",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -5251,7 +5246,7 @@
               "storeNumber": "R294",
               "countryCode": "US",
               "storeName": "Carlsbad",
-              "latitude": "33.0712563412084",
+              "latitude": "33.071256341208",
               "longitude": "-117.265198794902",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -5339,7 +5334,7 @@
               "storeNumber": "R317",
               "countryCode": "US",
               "storeName": "State Street",
-              "latitude": "34.4213286233217",
+              "latitude": "34.421328623322",
               "longitude": "-119.701544216385",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -5427,7 +5422,7 @@
               "storeNumber": "R044",
               "countryCode": "US",
               "storeName": "Santa Rosa Plaza",
-              "latitude": "38.4384398079659",
+              "latitude": "38.438439807966",
               "longitude": "-122.716418643098",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -5493,7 +5488,7 @@
               "storeNumber": "R240",
               "countryCode": "US",
               "storeName": "Los Gatos",
-              "latitude": "37.2233897258613",
+              "latitude": "37.223389725861",
               "longitude": "-121.983768164813",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -5537,7 +5532,7 @@
               "storeNumber": "R040",
               "countryCode": "US",
               "storeName": "Fashion Valley",
-              "latitude": "32.7684658716406",
+              "latitude": "32.768465871641",
               "longitude": "-117.165832324545",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -5581,7 +5576,7 @@
               "storeNumber": "R305",
               "countryCode": "US",
               "storeName": "Del Monte",
-              "latitude": "36.5841034599808",
+              "latitude": "36.584103459981",
               "longitude": "-121.897348157823",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -5669,7 +5664,7 @@
               "storeNumber": "R345",
               "countryCode": "US",
               "storeName": "Promenade Temecula",
-              "latitude": "33.5237571868904",
+              "latitude": "33.52375718689",
               "longitude": "-117.153113410091",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -5713,7 +5708,7 @@
               "storeNumber": "R189",
               "countryCode": "US",
               "storeName": "Topanga",
-              "latitude": "34.1902373711111",
+              "latitude": "34.190237371111",
               "longitude": "-118.603103308888",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -5955,7 +5950,7 @@
               "storeNumber": "R034",
               "countryCode": "US",
               "storeName": "Pasadena",
-              "latitude": "34.1457658830705",
+              "latitude": "34.145765883071",
               "longitude": "-118.15158605575",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -5977,7 +5972,7 @@
               "storeNumber": "R199",
               "countryCode": "US",
               "storeName": "Higuera Street",
-              "latitude": "35.2806175100414",
+              "latitude": "35.280617510041",
               "longitude": "-120.66187958447",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -6087,7 +6082,7 @@
               "storeNumber": "R213",
               "countryCode": "US",
               "storeName": "Otay Ranch",
-              "latitude": "32.6240134525643",
+              "latitude": "32.624013452564",
               "longitude": "-116.966609291354",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -6197,7 +6192,7 @@
               "storeNumber": "R023",
               "countryCode": "US",
               "storeName": "Northridge",
-              "latitude": "34.2396176052234",
+              "latitude": "34.239617605223",
               "longitude": "-118.556073088477",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -6361,8 +6356,8 @@
               "storeNumber": "R214",
               "countryCode": "US",
               "storeName": "The Galleria",
-              "latitude": "26.1368275784615",
-              "longitude": "-80.1141672492307",
+              "latitude": "26.136827578461",
+              "longitude": "-80.114167249231",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -6420,7 +6415,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "10300 W. Forest Hill Boulevard\nWellington, FL 33414 ",
+              "storeAddress": "10300 W. Forest Hill Blvd\nWellington, FL 33414 ",
               "phoneNumber": "(561) 273-2940"
             },
             {
@@ -6515,8 +6510,8 @@
               "storeNumber": "R012",
               "countryCode": "US",
               "storeName": "The Falls",
-              "latitude": "25.6437195637543",
-              "longitude": "-80.3381459437702",
+              "latitude": "25.643719563754",
+              "longitude": "-80.33814594377",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -6537,8 +6532,8 @@
               "storeNumber": "R185",
               "countryCode": "US",
               "storeName": "Coconut Point",
-              "latitude": "26.4021005908209",
-              "longitude": "-81.8066356980691",
+              "latitude": "26.402100590821",
+              "longitude": "-81.806635698069",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -6723,8 +6718,8 @@
               "storeNumber": "R138",
               "countryCode": "US",
               "storeName": "Freehold Raceway Mall",
-              "latitude": "40.2526921382089",
-              "longitude": "-74.3003351236043",
+              "latitude": "40.252692138209",
+              "longitude": "-74.300335123604",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -6745,8 +6740,8 @@
               "storeNumber": "R117",
               "countryCode": "US",
               "storeName": "Garden State Plaza",
-              "latitude": "40.9184820820207",
-              "longitude": "-74.0756301002416",
+              "latitude": "40.918482082021",
+              "longitude": "-74.075630100242",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -6811,8 +6806,8 @@
               "storeNumber": "R013",
               "countryCode": "US",
               "storeName": "Tice's Corner",
-              "latitude": "41.0419100628009",
-              "longitude": "-74.0751696418098",
+              "latitude": "41.041910062801",
+              "longitude": "-74.07516964181",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -6914,7 +6909,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "150 Quaker Bridge Mall     \nLawrence Township, NJ 08648 ",
+              "storeAddress": "150 Quaker Bridge Mall\nLawrence Township, NJ 08648 ",
               "phoneNumber": "(609) 6069030"
             }
           ]
@@ -6926,8 +6921,8 @@
               "storeNumber": "R218",
               "countryCode": "US",
               "storeName": "Partridge Creek",
-              "latitude": "42.6257132812891",
-              "longitude": "-82.9464102403831",
+              "latitude": "42.625713281289",
+              "longitude": "-82.946410240383",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -6992,8 +6987,8 @@
               "storeNumber": "R230",
               "countryCode": "US",
               "storeName": "Briarwood",
-              "latitude": "42.2404545598976",
-              "longitude": "-83.7469885272514",
+              "latitude": "42.240454559898",
+              "longitude": "-83.746988527251",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -7085,8 +7080,8 @@
               "storeNumber": "R304",
               "countryCode": "US",
               "storeName": "Park City",
-              "latitude": "40.0666215165312",
-              "longitude": "-76.3393042378344",
+              "latitude": "40.066621516531",
+              "longitude": "-76.339304237834",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -7195,8 +7190,8 @@
               "storeNumber": "R096",
               "countryCode": "US",
               "storeName": "Shadyside",
-              "latitude": "40.4510436639289",
-              "longitude": "-79.9333304989619",
+              "latitude": "40.451043663929",
+              "longitude": "-79.933330498962",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -7217,8 +7212,8 @@
               "storeNumber": "R162",
               "countryCode": "US",
               "storeName": "Walnut Street",
-              "latitude": "39.9500333333333",
-              "longitude": "-75.1678877890826",
+              "latitude": "39.950033333333",
+              "longitude": "-75.167887789083",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -7266,8 +7261,8 @@
               "storeNumber": "R324",
               "countryCode": "US",
               "storeName": "Renaissance at Colony Park",
-              "latitude": "32.4341939097761",
-              "longitude": "-90.1469243614815",
+              "latitude": "32.434193909776",
+              "longitude": "-90.146924361481",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -7391,8 +7386,8 @@
               "storeNumber": "R746",
               "countryCode": "US",
               "storeName": "Galleria Dallas",
-              "latitude": "32.930392379314874",
-              "longitude": "-96.81940425593166",
+              "latitude": "32.930392379315",
+              "longitude": "-96.819404255932",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -7413,8 +7408,8 @@
               "storeNumber": "R204",
               "countryCode": "US",
               "storeName": "Baybrook",
-              "latitude": "29.5415736844813",
-              "longitude": "-95.1481898940992",
+              "latitude": "29.541573684481",
+              "longitude": "-95.148189894099",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -7501,8 +7496,8 @@
               "storeNumber": "R321",
               "countryCode": "US",
               "storeName": "Willowbrook Mall",
-              "latitude": "29.9605468454527",
-              "longitude": "-95.5392295026013",
+              "latitude": "29.960546845453",
+              "longitude": "-95.539229502601",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -7523,8 +7518,8 @@
               "storeNumber": "R058",
               "countryCode": "US",
               "storeName": "Houston Galleria",
-              "latitude": "29.7390610314163",
-              "longitude": "-95.4644098408043",
+              "latitude": "29.739061031416",
+              "longitude": "-95.464409840804",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -7545,7 +7540,7 @@
               "storeNumber": "R290",
               "countryCode": "US",
               "storeName": "North Star",
-              "latitude": "29.5181720843081",
+              "latitude": "29.518172084308",
               "longitude": "-98.496084987277",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -7995,7 +7990,7 @@
               "storeNumber": "R025",
               "countryCode": "US",
               "storeName": "Westfarms",
-              "latitude": "41.7227580269158",
+              "latitude": "41.722758026916",
               "longitude": "-72.764513057434",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -8018,7 +8013,7 @@
               "countryCode": "US",
               "storeName": "Greenwich Avenue",
               "latitude": "41.023298255128",
-              "longitude": "-73.6252960261203",
+              "longitude": "-73.62529602612",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -8133,7 +8128,7 @@
               "countryCode": "US",
               "storeName": "Pheasant Lane",
               "latitude": "42.701675",
-              "longitude": "-71.4373736743911",
+              "longitude": "-71.437373674391",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -8159,8 +8154,8 @@
               "storeNumber": "R235",
               "countryCode": "US",
               "storeName": "Lakeside Shopping Center",
-              "latitude": "30.0060329509251",
-              "longitude": "-90.1571732014215",
+              "latitude": "30.006032950925",
+              "longitude": "-90.157173201422",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -8389,8 +8384,8 @@
               "storeNumber": "R080",
               "countryCode": "US",
               "storeName": "Avalon",
-              "latitude": "34.07062236953006",
-              "longitude": "-84.27481412887573",
+              "latitude": "34.07062236953",
+              "longitude": "-84.274814128876",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -8592,8 +8587,8 @@
               "storeNumber": "R036",
               "countryCode": "US",
               "storeName": "Clarendon",
-              "latitude": "38.8879290361825",
-              "longitude": "-77.0910429775172",
+              "latitude": "38.887929036182",
+              "longitude": "-77.091042977517",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -8707,8 +8702,8 @@
               "storeNumber": "R112",
               "countryCode": "US",
               "storeName": "Bethesda Row",
-              "latitude": "38.9806471041079",
-              "longitude": "-77.0977081040797",
+              "latitude": "38.980647104108",
+              "longitude": "-77.09770810408",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -9614,8 +9609,8 @@
               "storeNumber": "R595",
               "countryCode": "AE",
               "storeName": "Yas Mall",
-              "latitude": "24.488216",
-              "longitude": "54.608662",
+              "latitude": "24.488889",
+              "longitude": "54.61",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -9705,14 +9700,14 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R309.png"
               ],
               "secureImageURL": [],
-              "locationText": "Glattzentrum bei Wallisellen",
+              "locationText": "Glattzentrum beixa0Wallisellen",
               "timeZone": "Europe/Zurich",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Einkaufszentrum Glatt\nNeue Winterthurerstrasse 99\n8301 Glattzentrum bei Wallisellen",
+              "storeAddress": "Einkaufszentrum Glatt\nNeue Winterthurerstrasse 99\n8301 Glattzentrum beixa0Wallisellen",
               "phoneNumber": "(044) 832-81-00"
             }
           ]
@@ -10259,7 +10254,7 @@
             {
               "storeNumber": "R577",
               "countryCode": "CN",
-              "storeName": "天环广场 ",
+              "storeName": "天环广场",
               "latitude": "23.135",
               "longitude": "113.31916",
               "storeRadius": "50",
@@ -10304,8 +10299,8 @@
               "storeNumber": "R639",
               "countryCode": "CN",
               "storeName": "珠江新城",
-              "latitude": "23.11843672960212",
-              "longitude": "113.32728981971741",
+              "latitude": "23.118436729602",
+              "longitude": "113.327289819717",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -10397,8 +10392,8 @@
               "storeNumber": "R609",
               "countryCode": "CN",
               "storeName": "大连恒隆广场",
-              "latitude": "38.90586527241653",
-              "longitude": "121.6053125334242",
+              "latitude": "38.905865272417",
+              "longitude": "121.605312533424",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -10494,7 +10489,7 @@
             {
               "storeNumber": "R401",
               "countryCode": "CN",
-              "storeName": "上海环贸 iapm ",
+              "storeName": "上海环贸 iapm",
               "latitude": "31.217679",
               "longitude": "121.453441",
               "storeRadius": "50",
@@ -10517,8 +10512,8 @@
               "storeNumber": "R683",
               "countryCode": "CN",
               "storeName": "环球港",
-              "latitude": "31.23361111111111",
-              "longitude": "121.40722222222222",
+              "latitude": "31.233611111111",
+              "longitude": "121.407222222222",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -10539,7 +10534,7 @@
               "storeNumber": "R581",
               "countryCode": "CN",
               "storeName": "五角场",
-              "latitude": "31.3016666666666",
+              "latitude": "31.301666666667",
               "longitude": "121.514166666",
               "storeRadius": "50",
               "accuracyThreshold": "500",
@@ -10576,7 +10571,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "上海市闵行区漕宝路 3366 号 \n七宝万科广场\n201101",
+              "storeAddress": "上海市闵行区漕宝路 3366 号\n七宝万科广场\n201101",
               "phoneNumber": "4006139773"
             },
             {
@@ -10674,7 +10669,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "昆明市五华区东风西路 11 号 \n顺城购物中心\n650031",
+              "storeAddress": "昆明市五华区东风西路 11 号\n顺城购物中心\n650031",
               "phoneNumber": "4006393602"
             }
           ]
@@ -10847,6 +10842,28 @@
               "phoneNumber": "4006171210"
             },
             {
+              "storeNumber": "R645",
+              "countryCode": "CN",
+              "storeName": "朝阳大悦城",
+              "latitude": "39.923571285",
+              "longitude": "116.511624104",
+              "storeRadius": "50",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R645.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "北京",
+              "timeZone": "Asia/Shanghai",
+              "instoreCheckoutMode": "SCAN_AND_BUY",
+              "selfCheckout": "SNL",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipSelfCheckout": "SNL",
+              "enableInStoreMode": true,
+              "storeAddress": "北京市朝阳区朝阳北路 101 号\n100000",
+              "phoneNumber": "4006171284"
+            },
+            {
               "storeNumber": "R388",
               "countryCode": "CN",
               "storeName": "西单大悦城",
@@ -10942,33 +10959,6 @@
           ]
         },
         {
-          "stateName": "Beijing ",
-          "stores": [
-            {
-              "storeNumber": "R645",
-              "countryCode": "CN",
-              "storeName": "朝阳大悦城",
-              "latitude": "39.923571285",
-              "longitude": "116.511624104",
-              "storeRadius": "50",
-              "accuracyThreshold": "500",
-              "imageURL": [
-                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R645.png"
-              ],
-              "secureImageURL": [],
-              "locationText": "北京",
-              "timeZone": "Asia/Shanghai",
-              "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "SNL",
-              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNL",
-              "enableInStoreMode": true,
-              "storeAddress": "北京市朝阳区朝阳北路 101 号\n100000",
-              "phoneNumber": "4006171284"
-            }
-          ]
-        },
-        {
           "stateName": "Zhejiang",
           "stores": [
             {
@@ -10990,7 +10980,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "杭州市江干区富春路 701 号\n310000",
+              "storeAddress": "杭州市上城区富春路 701 号\n310000",
               "phoneNumber": "4006171304"
             },
             {
@@ -11314,7 +11304,7 @@
           ]
         },
         {
-          "stateName": "D.F., Mexico ",
+          "stateName": "D.F., Mexico",
           "stores": [
             {
               "storeNumber": "R708",
@@ -11328,14 +11318,14 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R708.png"
               ],
               "secureImageURL": [],
-              "locationText": "Cuajimalpa de Morelos ",
+              "locationText": "Cuajimalpa de Morelos",
               "timeZone": "Mexico/General",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Avenida Vasco de Quiroga 3800\nLomas de Santa Fe, Antigua Mina de Totoloapa, Cuajimalpa de Morelos , 05109",
+              "storeAddress": "Avenida Vasco de Quiroga 3800\nLomas de Santa Fe, Antigua Mina de Totoloapa, Cuajimalpa de Morelos, 05109",
               "phoneNumber": "(55) 10376400"
             }
           ]
@@ -11523,8 +11513,8 @@
               "storeNumber": "R450",
               "countryCode": "ES",
               "storeName": "Puerta del Sol",
-              "latitude": "40.416900303279924",
-              "longitude": "-3.7021565437316895",
+              "latitude": "40.41690030328",
+              "longitude": "-3.702156543732",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -11824,7 +11814,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "Chatswood Chase Shopping Centre\nVictoria Avenue\nChatswood NSW 2067 ",
+              "storeAddress": "Chatswood Chase Sydney\n345 Victoria Avenue\nChatswood NSW 2067 ",
               "phoneNumber": "(02) 8064-6300"
             },
             {
@@ -12208,7 +12198,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "4, 4/1-4/2, 4/4 Ratchadamri Road\nPathumwan\nBangkok 10330",
+              "storeAddress": "4, 4/1-4/2, 4/4 Ratchadamri Rd\nPathumwan\nBangkok 10330",
               "phoneNumber": "(1800) 019448"
             },
             {
@@ -12250,7 +12240,7 @@
               "countryCode": "TR",
               "storeName": "Bağdat Caddesi",
               "latitude": "40.9647222",
-              "longitude": "29.071944444444444",
+              "longitude": "29.071944444444",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -12286,7 +12276,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "Akasya AVM\nAcıbadem Mahallesi, Çeçen Sok. No : 25\nİstanbul,Üsküdar İstanbul",
+              "storeAddress": "Akasya AVM\nAcıbadem Mahallesi, Çeçen Sok.xa0Noxa0: 25\nİstanbul,Üsküdar İstanbul",
               "phoneNumber": "(0216) 2507100"
             },
             {
