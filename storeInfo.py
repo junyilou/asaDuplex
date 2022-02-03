@@ -13,6 +13,7 @@ storeLibrary = {}
 def StoreID(storeid, fuzzy = False):
 	stores = []
 	if fuzzy:
+		storeid = storeid.upper().replace("R", "")
 		ids = [i for i in storeLibrary]
 		for i in ids:
 			if str(storeid) in i:
@@ -65,6 +66,8 @@ def storeDict(storeid, mode = "dict"):
 		url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={website}&locale={localeNation[sif['flag']]}&sc=false"
 		
 		r = requests.get(url, headers = userAgent).json()
+		if mode == "raw":
+			return r
 		try:
 			hours = {
 				"isnso": r["hours"]["isNSO"],

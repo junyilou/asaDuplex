@@ -109,8 +109,7 @@ for i in masterJSON:
 *课程简介*
 {course['longDescription']}""".replace('"', "").replace("'", "")
 			photoURL = course["backgroundMedia"]["images"][0]["landscape"]["source"]
-			photoURL += "?output-quality=80&resize=2880:*"
-			keyboard[0].append(["下载活动配图", photoURL])
+			keyboard[0].append(["下载活动配图", photoURL + "?output-quality=80&resize=2880:*"])
 
 			push = {
 				"mode": "photo-text",
