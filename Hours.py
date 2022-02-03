@@ -16,11 +16,15 @@ if "silent" in argv[1:]:
 	printDebug = False
 	argv.remove("silent")
 if len(argv[1:]):
-	args = " ".join(argv[1:])
+	include = " ".join(argv[1:])
+	exclude = ""
 else:
-	args = "🇨🇳"
+	include = "🇨🇳"
+	exclude = "大连恒隆广场"
 
-stores = storeReturn(args, remove_close = True, remove_future = True)
+stores = storeReturn(include, remove_close = True, remove_future = True)
+excludeStores = storeReturn(exclude, remove_close = True, remove_future = True)
+stores = [i for i in stores if i not in excludeStores]
 
 setLogger(logging.INFO, os.path.basename(__file__))
 logging.info("程序启动")
@@ -28,6 +32,7 @@ logging.info("程序启动")
 today = date.today()
 runtime = str(today)
 comparison = ""
+diffStore = []
 calendar = {}
 
 try: 
@@ -50,7 +55,7 @@ for sid, sn in stores:
 	storeDiff = ""
 
 	if len(specialHours):
-		allSpecial[sid] = {"storename": sn, **specialHours}
+		allSpecial[sid] = {"storename": sn, **allSpecial.get(sid, {}), **specialHours}
 
 	for s in specialHours:
 		fSpecial = specialHours[s]["special"]
@@ -81,6 +86,7 @@ for sid, sn in stores:
 
 	if len(storeDiff):
 		comparison += f"{'':^4}Apple {sn}\n{storeDiff}"
+		diffStore.append(sn)
 
 for s in list(allSpecial):
 	if s == "created":
@@ -116,11 +122,13 @@ if len(comparison):
 		w.write(fileDiff)
 	logging.info("文件生成完成")
 
+	pushStore = "Apple " + "、Apple ".join(diffStore[:2]) + (f" 等 {len(diffStore)} 家零售店" if len(diffStore) > 2 else "")
+
 	push = {
 		"mode": "photo-text",
 		"chat_id": chat_ids[0], 
 		"image": "https://www.apple.com/retail/store/flagship-store/drawer/michiganavenue/images/store-drawer-tile-1_medium_2x.jpg",
-		"text": f'*来自 Hours 的通知*\n{comparison.count("Apple")} 个 Apple Store 有特别营业时间变化 [↗](http://aliy.un/html/storeHours.html)',
+		"text": f'*来自 Hours 的通知*\n{pushStore} 有特别营业时间更新 [↗](http://aliy.un/html/storeHours.html)',
 		"parse": 'MARK'
 	}
 	post(push)
