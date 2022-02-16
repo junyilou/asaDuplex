@@ -58,6 +58,7 @@ def speHours(sid, limit = 14):
 	specialToday = date.today()
 	if j["special"]:
 		specialReasons = comment(sid)
+	j["special"].sort(key = lambda k: k["date"])
 	for special in j["special"]:
 		if len(specialHours) == limit:
 			break
