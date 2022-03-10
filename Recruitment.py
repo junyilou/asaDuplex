@@ -14,8 +14,7 @@ from sys import argv
 if len(argv) > 1:
 	if "special" in argv:
 		RecruitDict = {
-			"🇦🇪": {"name": "阿联酋", "code": 114438225}, 
-			"🇨🇳": {"name": "中国", "code": 114438030},
+			"🇨🇳": {"name": "中国", "code": 114438030}
 		}
 	if "logging" in argv:
 		stdout = logging.info

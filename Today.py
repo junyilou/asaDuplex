@@ -19,9 +19,9 @@ if "silent" in argv[1:]:
 if len(argv[1:]):
 	args = " ".join(argv[1:])
 else:
-	args = "🇨🇳 🇭🇰 🇲🇴 TW"
+	args = "🇨🇳，🇭🇰，🇲🇴，TW"
 
-stores = storeReturn(args, remove_close = True, remove_future = True)
+stores = storeReturn(args, needSplit = True, remove_closed = True, remove_future = True)
 
 append = ""
 masterJSON = {}

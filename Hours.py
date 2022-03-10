@@ -22,8 +22,8 @@ else:
 	include = "🇨🇳"
 	exclude = "大连恒隆广场"
 
-stores = storeReturn(include, remove_close = True, remove_future = True)
-excludeStores = storeReturn(exclude, remove_close = True, remove_future = True)
+stores = storeReturn(include, needSplit = True, remove_closed = True, remove_future = True)
+excludeStores = storeReturn(exclude, needSplit = True, remove_closed = True, remove_future = True)
 stores = [i for i in stores if i not in excludeStores]
 
 setLogger(logging.INFO, os.path.basename(__file__))
