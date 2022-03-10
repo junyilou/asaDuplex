@@ -31,7 +31,7 @@ def dieterURL(sid, mode = None):
 	bicubic = "?resize=2880:1612&output-format=jpg&output-quality=90&interpolation=progressive-bicubic" if mode else ""
 	return f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid}.png{bicubic}"
 
-asaVersion = "5.14.0"
+asaVersion = "5.15.0"
 asaAgent = ".".join(asaVersion.split(".")[:2])
 asaHeaders = {
 	"User-Agent": f"ASA/{asaAgent} (iPhone) ss/3.00",
@@ -39,7 +39,7 @@ asaHeaders = {
 	"X-MALang":   "zh-CN",
 	"X-Apple-I-TimeZone": "GMT+8",
 	"X-Apple-I-Locale":   "zh_CN",
-	"X-MMe-Client-Info": f"<iPhone13,2> <iPhone OS;15.1;19B74> <com.apple.AuthKit/1 (com.apple.store.Jolly/{asaVersion})>",
+	"X-MMe-Client-Info": f"<iPhone13,2> <iPhone OS;15.3.1;19D52> <com.apple.AuthKit/1 (com.apple.store.Jolly/{asaVersion})>",
 	"X-DeviceConfiguration":  f"ss=3.00;dim=1170x2532;m=iPhone;v=iPhone13,2;vv={asaAgent};sv=15.1"}
 asaNation = {'🇺🇸': 'a/us', '🇨🇳': 'p/cn', '🇬🇧': 'e/uk', '🇨🇦': 'a/ca', '🇦🇺': 'p/au', '🇫🇷': 'e/fr', 
 	'🇮🇹': 'e/it', '🇩🇪': 'e/de', '🇪🇸': 'e/es', '🇯🇵': 'j/jp', '🇨🇭': 'e/ch-de', '🇦🇪': 'e/ae', '🇳🇱': 'e/nl', 
