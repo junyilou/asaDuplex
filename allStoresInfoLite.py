@@ -24,7 +24,7 @@ if os.path.isfile(listFile):
 else:
 	orgListSize = 0
 
-r = requests.get("https://mobileapp.apple.com/mnr/p/cn/retail/allStoresInfoLite", headers = asaHeaders, verify = False)
+r = requests.get("https://mobileapp.apple.com/retailapp/p/cn/retail/allStoresInfoLite", headers = asaHeaders, verify = False)
 with open(listFile, "w") as w:
 	dlc = r.text.replace('?interpolation=progressive-bicubic&output-quality=85&output-format=jpg&resize=312:*', '')
 	w.write(dlc)
