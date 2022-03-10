@@ -1,18 +1,17 @@
 {
   "omniture": {
     "trackPage": {
-      "prop2": "AOS : China Consumer",
       "server": "mobileapp.apple.com",
-      "eVar4": "AOS : retail/allStoresInfoLite",
-      "prop40": "506738",
-      "eVar3": "AOS : China Consumer",
-      "eVar14": "zh-cn",
-      "prop20": "asa:cn consumer",
-      "prop8": "AOS : retail/allStoresInfoLite",
+      "apl.customerSegment": "asa:cn consumer",
+      "apl.pageNameNode": "AOS : retail/allStoresInfoLite",
+      "apl.pageName": "AOS : retail/allStoresInfoLite",
+      "apl.siteSection": "AOS : retail/allStoresInfoLite",
+      "apl.langLocale": "zh-cn",
+      "apl.storeName": "AOS : China Consumer",
+      "apl.storeAndSegment": "AOS : China Consumer",
       "storeId": "506738",
-      "eVar30": "mobileapp.apple.com",
       "currencyCode": "CNY",
-      "pageName": "AOS : retail/allStoresInfoLite"
+      "apl.storefrontID": "506738"
     }
   },
   "countryStateMapping": [
@@ -9628,6 +9627,33 @@
               "phoneNumber": "(800) 04441824"
             }
           ]
+        },
+        {
+          "stateName": "Abu Dhabi",
+          "stores": [
+            {
+              "storeNumber": "R706",
+              "countryCode": "AE",
+              "storeName": "Al Maryah Island",
+              "latitude": "24.5",
+              "longitude": "54.38777777777778",
+              "storeRadius": "50",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R706.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Abu Dhabi",
+              "timeZone": "Asia/Dubai",
+              "instoreCheckoutMode": "SCAN_AND_BUY",
+              "selfCheckout": "SNB",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipSelfCheckout": "SNL",
+              "enableInStoreMode": true,
+              "storeAddress": "The Galleria Al Maryah Island\nAbu Dhabi ",
+              "phoneNumber": "(800) 04440521"
+            }
+          ]
         }
       ]
     },
@@ -10801,8 +10827,8 @@
               "storeNumber": "R448",
               "countryCode": "CN",
               "storeName": "王府井",
-              "latitude": "39.913621",
-              "longitude": "116.405781",
+              "latitude": "39.915232",
+              "longitude": "116.411669",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
