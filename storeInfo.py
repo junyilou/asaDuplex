@@ -1,3 +1,4 @@
+import re
 import json
 import requests
 from functools import partial
@@ -26,7 +27,7 @@ def StoreID(storeid, fuzzy = False):
 
 def StoreMatch(keyword, fuzzy = False):
 	stores = []
-	keyword = keyword.replace("_", " ").lower()
+	keyword = keyword.lower()
 	for i in storeLibrary:
 		if fuzzy:
 			if any([keyword in j.lower() for j in storeLibrary[i]]):
@@ -40,6 +41,7 @@ def actualName(name):
 	return name if type(name) == str else name[0]
 
 def storeInfo(storeid):
+	storeid = f"{storeid}"
 	try:
 		sid = StoreID(storeid)[0][0]
 		return dict([(t, infoJSON[t][sid]) for t in infoJSON if (sid in infoJSON[t]) and (type(infoJSON[t]) == dict)])
@@ -100,10 +102,9 @@ def storeDict(storeid, mode = "dict"):
 
 def getState(sid):
 	sid = f"{sid}"
-	for i in infoJSON["state"]:
-		for j in infoJSON["state"][i]:
-			if sid in infoJSON["state"][i][j]:
-				return j, infoJSON["state"][i][j]
+	state = infoJSON["key"][sid]["state"]
+	stores = [i for i in infoJSON["key"] if infoJSON["key"][i]["state"] == state]
+	return state, stores
 
 def stateReplace(rstores):
 	stores = rstores.copy()
@@ -125,28 +126,24 @@ def stateReplace(rstores):
 			break
 	return stores
 
-def storeOrder():
-	stores = []
-	state = infoJSON["state"]
-	for i in state:
-		for j in state[i]:
-			for k in state[i][j]:
-				stores.append(k)
-	return stores
-
-def storeReturn(args, sort = True, remove_close = False, remove_future = False, fuzzy = False, no_country = False):
+def storeReturn(args, sort = True, remove_closed = False, remove_future = False, fuzzy = False, needSplit = False):
 	ans = []
-	if type(args) == int:
-		args = str(args)
-	if type(args) == str:
-		args = args.split(" ")
+	if needSplit: # 一个以空格间隔的词典，或者一个字符串，待以逗号进行拆分
+		args = re.split(",|，", "".join(args))
+	if type(args) in [int, str]:
+		args = [f"{args}"]
 	for a in args:
+		a = a.strip()
+		if not a:
+			continue
+		if a == "all":
+			a = ""
 		digit = a.isdigit() or a.upper().replace("R", "").isdigit()
 		stores = (StoreID(a, fuzzy) + StoreMatch(a, fuzzy)) if digit else StoreMatch(a, fuzzy)
 		for s in stores:
 			if s and s not in ans:
 				sState = getState(s[0])[0]
-				judge = (remove_future, remove_close)
+				judge = (remove_future, remove_closed)
 				if any(judge):
 					if sState == "公司门店":
 						continue
@@ -154,15 +151,11 @@ def storeReturn(args, sort = True, remove_close = False, remove_future = False, 
 						continue
 					if judge[1] and sState == "已关闭":
 						continue
-				if no_country:
-					nmlst = [RecruitDict[i]["name"] for i in RecruitDict]
-					if a in nmlst or a in webNation:
-						continue
 				ans.append(s)
 
 	if sort:
 		order = {}
-		Order = storeOrder()
+		Order = sorted([i for i in infoJSON["key"]], key = lambda k: f"{storeInfo(k)['flag']} {getState(k)}")
 		for store in ans:
 			sid = store[0]
 			try:
@@ -202,13 +195,11 @@ def library():
 		comp = [infoJSON["name"][i]] if type(infoJSON["name"][i]) == str else infoJSON["name"][i]
 		for j in comp:
 			storeLibrary[i] = storeLibrary.get(i, []) + [j]
-	for i in infoJSON["state"]:
-		for j in infoJSON["state"][i]:
-			for s in infoJSON["state"][i][j]:
-				storeLibrary[s] = storeLibrary.get(s, []) + [j]
-	for i in infoJSON["alias"]:
-		for j in infoJSON["alias"][i]:
-			storeLibrary[j] = storeLibrary.get(j, []) + [i]
+	for i in infoJSON["key"]:
+		keys = [infoJSON["key"][i][j] for j in infoJSON["key"][i]]
+		if "alter" in infoJSON["key"][i]:
+			keys += infoJSON["key"][i]["alter"].split(" ")
+		storeLibrary[i] = storeLibrary.get(i, []) + keys
 	for i in infoJSON["website"]:
 		website = infoJSON["website"][i]
 		if website == "-":
