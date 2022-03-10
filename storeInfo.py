@@ -103,7 +103,9 @@ def storeDict(storeid, mode = "dict"):
 def getState(sid):
 	sid = f"{sid}"
 	state = infoJSON["key"][sid]["state"]
-	stores = [i for i in infoJSON["key"] if infoJSON["key"][i]["state"] == state]
+	stores = [i for i in infoJSON["key"] if \
+		(infoJSON["key"][i]["state"] == state) and \
+		("Store in " not in infoJSON["name"][i])]
 	return state, stores
 
 def stateReplace(rstores):
@@ -155,7 +157,7 @@ def storeReturn(args, sort = True, remove_closed = False, remove_future = False,
 
 	if sort:
 		order = {}
-		Order = sorted([i for i in infoJSON["key"]], key = lambda k: f"{storeInfo(k)['flag']} {getState(k)}")
+		Order = sorted([i for i in infoJSON["key"]], key = lambda k: f"{storeInfo(k)['flag']} {getState(k)[0]}")
 		for store in ans:
 			sid = store[0]
 			try:
