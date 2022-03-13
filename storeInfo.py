@@ -51,7 +51,7 @@ def storeInfo(storeid):
 def storeURL(storeid):
 	sif = storeInfo(storeid)
 	try:
-		website = sif["website"]
+		website = sif["key"]["website"]
 		if website == "-":
 			website = actualName(sif["name"]).lower().replace(" ", "")
 		url = f"https://www.apple.com{webNation[sif['flag']]}/retail/{website}"
@@ -62,7 +62,7 @@ def storeURL(storeid):
 def storeDict(storeid, mode = "dict"):
 	sif = storeInfo(storeid)
 	try:
-		website = sif["website"]
+		website = sif["key"]["website"]
 		if website == "-":
 			website = actualName(sif["name"]).lower().replace(" ", "")
 		url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={website}&locale={localeNation[sif['flag']]}&sc=false"
@@ -198,15 +198,18 @@ def library():
 		for j in comp:
 			storeLibrary[i] = storeLibrary.get(i, []) + [j]
 	for i in infoJSON["key"]:
-		keys = [infoJSON["key"][i][j] for j in infoJSON["key"][i]]
-		if "alter" in infoJSON["key"][i]:
-			keys += infoJSON["key"][i]["alter"].split(" ")
+		keys = []
+		for j in infoJSON["key"][i]:
+			if j == "website":
+				if infoJSON["key"][i][j] == "-":
+					keys.append(actualName(infoJSON["name"][i]).lower().replace(" ", ""))
+				else:
+					keys.append(infoJSON["key"][i][j])
+			elif j == "alter":
+				keys += infoJSON["key"][i][j].split(" ")
+			else:
+				keys += [infoJSON["key"][i][j]]
 		storeLibrary[i] = storeLibrary.get(i, []) + keys
-	for i in infoJSON["website"]:
-		website = infoJSON["website"][i]
-		if website == "-":
-			website = actualName(infoJSON["name"][i]).lower().replace(" ", "")
-		storeLibrary[i] = storeLibrary.get(i, []) + [website]
 	for i in infoJSON["flag"]:
 		flag = infoJSON["flag"][i]
 		storeLibrary[i] = storeLibrary.get(i, []) + [flag]
