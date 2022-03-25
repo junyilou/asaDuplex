@@ -2306,7 +2306,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "128 New Street\nBirmingham, B2 4DB",
+              "storeAddress": "128 New Street\nBirmingham, B2 4JH",
               "phoneNumber": "(0121) 2242100"
             },
             {
@@ -3591,7 +3591,7 @@
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
-              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "815 Boylston Street\nBoston, MA 02116 ",
@@ -4144,7 +4144,7 @@
               "timeZone": "America/Los_Angeles",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
-              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "3200 Las Vegas Blvd South\nLas Vegas, NV 89109 ",
@@ -4457,7 +4457,7 @@
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
-              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "160 Walt Whitman Road\nHuntington Station, NY 11746 ",
@@ -5147,7 +5147,7 @@
               "timeZone": "America/Los_Angeles",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
-              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "379 Stanford Shopping Center\nPalo Alto, CA 94304 ",
@@ -6751,7 +6751,7 @@
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
-              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "1 Garden State Plaza\nParamus, NJ 07652 ",
@@ -6773,7 +6773,7 @@
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
-              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "301 Mt. Hope Avenue\nRockaway, NJ 07866 ",
@@ -6998,7 +6998,7 @@
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
-              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "100 Briarwood Circle\nAnn Arbor, MI 48108 ",
@@ -7179,7 +7179,7 @@
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
-              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "160 N. Gulph Road\nKing of Prussia, PA 19406 ",
@@ -9558,7 +9558,7 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/AE",
       "states": [
         {
-          "stateName": "",
+          "stateName": "Dubai",
           "stores": [
             {
               "storeNumber": "R596",
@@ -9603,7 +9603,12 @@
               "enableInStoreMode": true,
               "storeAddress": "The Dubai Mall\nDowntown\nDubai ",
               "phoneNumber": "(800) 04449012"
-            },
+            }
+          ]
+        },
+        {
+          "stateName": "Abu Dhabi",
+          "stores": [
             {
               "storeNumber": "R595",
               "countryCode": "AE",
@@ -9625,12 +9630,7 @@
               "enableInStoreMode": true,
               "storeAddress": "Yas Mall\nYas Island\nAbu Dhabi ",
               "phoneNumber": "(800) 04441824"
-            }
-          ]
-        },
-        {
-          "stateName": "Abu Dhabi",
-          "stores": [
+            },
             {
               "storeNumber": "R706",
               "countryCode": "AE",
@@ -9772,6 +9772,33 @@
       "countryName": "South Korea",
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/KR",
       "states": [
+        {
+          "stateName": "",
+          "stores": [
+            {
+              "storeNumber": "R738",
+              "countryCode": "KR",
+              "storeName": "Myeongdong",
+              "latitude": "37.564659",
+              "longitude": "126.982678",
+              "storeRadius": "50",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R738.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Seoul",
+              "timeZone": "Asia/Seoul",
+              "instoreCheckoutMode": "SCAN_AND_BUY",
+              "selfCheckout": "SNL",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipSelfCheckout": "SNL",
+              "enableInStoreMode": true,
+              "storeAddress": "Seoul 9-1 Namdaemunro 2ga, JoongGu\nCenter Point Myeongdong\n04534",
+              "phoneNumber": "0805001007"
+            }
+          ]
+        },
         {
           "stateName": "Seoul",
           "stores": [
