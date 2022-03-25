@@ -1,5 +1,6 @@
 import os
 import logging
+import asyncio
 
 def disMarkdown(text):
 	temp = text
@@ -7,6 +8,21 @@ def disMarkdown(text):
 	for s in signs:
 		temp = temp.replace(s, f"\\{s}")
 	return temp
+
+async def request(session, url, ident = None, mode = None, **kwargs):
+	try:
+		async with session.get(url, **kwargs) as resp:
+			if mode == "raw":
+				r = await resp.read()
+			else:
+				r = await resp.text()
+		return (r, ident) if ident else r
+	except Exception as exp:
+		return (exp, ident) if ident else exp
+
+def sync(coroutine):
+	loop = asyncio.get_event_loop()
+	return loop.run_until_complete(coroutine)
 
 def setLogger(level, name):
 	if os.path.isdir('logs'):
