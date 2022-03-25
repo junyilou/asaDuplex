@@ -1,31 +1,28 @@
 import logging
-import requests
+import aiohttp
 import json
 from datetime import timedelta, date, datetime
 from storeInfo import storeInfo, storeDict
+from modules.constants import request as request
 from modules.constants import userAgent, dayOfWeekENG, partSample, storeNation, textConvert
 
-'''
-def dateConvert(strdate):
-	year, month, day = strdate.split("-")
-	standard = date(int(year), 1, 1)
-	actual = standard + timedelta(days = int(day) - 1)
-	return actual
-'''
-
-def comment(sid):
+async def comment(session, sid, sif = None):
 	try:
-		flag = storeInfo(sid)['flag']
-		partNumber = f"MM0A3{partSample[flag]}/A"
+		sif = storeInfo(sid) if sif == None else sif
+		partNumber = f"MM0A3{partSample[sif['flag']]}/A"
 	except KeyError:
 		return {}
-	baseURL = f"https://www.apple.com{storeNation[flag]}"
+
+	baseURL = f"https://www.apple.com{storeNation[sif['flag']]}"
 	referer = {**userAgent, "Referer": f"{baseURL}/shop/product/{partNumber}"}
 	url = f"{baseURL}/shop/fulfillment-messages?searchNearby=true&parts.0={partNumber}&store=R{sid}"
 
 	try:
-		r = requests.get(url, headers = referer).json()
-		j = r["body"]["content"]["pickupMessage"]["stores"]
+		r = await request(session = session, url = url, headers = userAgent, ident = None)
+		if isinstance(r, Exception):
+			raise r
+		else:
+			j = json.loads(r)["body"]["content"]["pickupMessage"]["stores"]
 	except:
 		return {}
 
@@ -40,9 +37,10 @@ def comment(sid):
 			reason[sDay] = sTxt
 	return reason
 
-def speHours(sid, limit = 14):
+async def speHours(session, sid, limit = 14):
+	sif = storeInfo(sid)
 	try:
-		j = storeDict(sid, mode = "hours")
+		j = await storeDict(session = session, storeid = sid, mode = "hours", sif = sif)
 	except:
 		logging.error(f"未能获得 R{sid} 营业时间信息")
 		return {}
@@ -57,7 +55,7 @@ def speHours(sid, limit = 14):
 	specialHours = {}
 	specialToday = date.today()
 	if j["special"]:
-		specialReasons = comment(sid)
+		specialReasons = await comment(session = session, sid = sid, sif = sif)
 	j["special"].sort(key = lambda k: k["date"])
 	for special in j["special"]:
 		if len(specialHours) == limit:
@@ -67,7 +65,7 @@ def speHours(sid, limit = 14):
 		regular = regularHours[validDate.weekday()]
 		spetext = textConvert(special)
 
-		if validDate < specialToday or regular == spetext:
+		if validDate < specialToday:# or regular == spetext:
 			continue
 		if validDate in specialReasons:
 			reason = {"reason": specialReasons[validDate]}

@@ -1,10 +1,11 @@
 import re
 import json
-import requests
+import asyncio
+import aiohttp
 from functools import partial
 from datetime import datetime
-requests.packages.urllib3.disable_warnings()
 
+from modules.constants import request as request
 from modules.constants import userAgent, webNation, localeNation, dieterURL, RecruitDict
 
 with open("storeInfo.json") as r:
@@ -48,8 +49,8 @@ def storeInfo(storeid):
 	except IndexError:
 		return {}
 
-def storeURL(storeid):
-	sif = storeInfo(storeid)
+def storeURL(storeid, sif = None):
+	sif = storeInfo(storeid) if sif == None else sif
 	try:
 		website = sif["key"]["website"]
 		if website == "-":
@@ -59,15 +60,19 @@ def storeURL(storeid):
 	except KeyError:
 		return None
 
-def storeDict(storeid, mode = "dict"):
-	sif = storeInfo(storeid)
+async def storeDict(session, storeid, mode = "dict", sif = None):
+	sif = storeInfo(storeid) if sif == None else sif
 	try:
 		website = sif["key"]["website"]
 		if website == "-":
 			website = actualName(sif["name"]).lower().replace(" ", "")
 		url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={website}&locale={localeNation[sif['flag']]}&sc=false"
-		
-		r = requests.get(url, headers = userAgent).json()
+
+		r = await request(session = session, url = url, ident = None, headers = userAgent)
+		if isinstance(r, Exception):
+			raise r
+		r = json.loads(r)
+
 		if mode == "raw":
 			return r
 		try:
@@ -167,28 +172,17 @@ def storeReturn(args, sort = True, remove_closed = False, remove_future = False,
 		ans.sort(key = lambda k: order[k[0]])
 	return ans
 
-def DieterInfo(rtl):
-	sif = storeInfo(rtl)
-	if sif:
-		name = actualName(sif["name"])
-		info = f"*{sif['flag']} Apple {name}* (R{rtl})"
-		if "nso" in sif:
-			info += f'\n首次开幕于 {datetime.strptime(sif["nso"], "%Y-%m-%d").strftime("%Y 年 %-m 月 %-d 日")}'
-	return info
-
-def DieterHeader(rtl):
+async def DieterHeader(session, rtl):
 	sid = StoreID(rtl)
-	if not len(sid):
+	sid = sid[0][0] if sid != [] else rtl
+	try:
+		async with session.head(
+			url = dieterURL(sid), headers = userAgent, ssl = False,
+			allow_redirects = False, raise_for_status = True) as resp:
+			r = resp.headers
+		return r['Last-Modified'][5:-4]
+	except:
 		return None
-	else:
-		try:
-			r = requests.head(dieterURL(sid[0][0]), headers = userAgent, allow_redirects = True, verify = False, timeout = 5)
-		except requests.exceptions.ReadTimeout:
-			return None
-		if r.status_code in [403, 404, 422, 500, 502]:
-			return None
-		else:
-			return r.headers['Last-Modified'][5:-4]
 
 def library():
 	global storeLibrary

@@ -2,25 +2,17 @@ import os
 import json
 import time
 import logging
-import requests
-from sys import stdout
-requests.packages.urllib3.disable_warnings()
+import asyncio
+import aiohttp
+from sys import argv
 
 from storeInfo import *
+from modules.constants import request as request
 from modules.constants import disMarkdown, setLogger
 from bot import chat_ids
-from sdk_aliyun import post
+from sdk_aliyun import async_post
 
-printDebug = True
-from sys import argv
-if "silent" in argv[1:]:
-	printDebug = False
-	argv.remove("silent")
-if len(argv[1:]):
-	args = " ".join(argv[1:])
-else:
-	args = "🇨🇳，🇭🇰，🇲🇴，TW"
-
+args = " ".join(argv[1:]) if len(argv[1:]) else "🇨🇳，🇭🇰，🇲🇴，TW"
 stores = storeReturn(args, needSplit = True, remove_closed = True, remove_future = True)
 
 append = ""
@@ -28,36 +20,40 @@ masterJSON = {}
 with open("Retail/savedEvent.txt") as m: 
 	savedID = m.read()
 
-setLogger(logging.INFO, os.path.basename(__file__))
-logging.info("程序启动")
+async def main():
+	global append
+	urls = []
+	for sid, sn in stores:
+		try:
+			slug = storeURL(sid)
+			flag = slug.split("https://www.apple.com")[1].split("/retail/")[0].replace(".cn", "/cn")
+			website = slug.split("/retail/")[1]
+			urls.append((f"https://www.apple.com/today-bff/landing/store?stageRootPath={flag}&storeSlug={website}", sid))
+		except:
+			logging.error(f"未能匹配到 R{sid} 的零售店官网页面地址")
+			continue
 
-for sid, sn in stores:
-	try:
-		slug = storeURL(sid)
-		flag = slug.split("https://www.apple.com")[1].split("/retail/")[0].replace(".cn", "/cn")
-		website = slug.split("/retail/")[1]
-		url = f"https://www.apple.com/today-bff/landing/store?stageRootPath={flag}&storeSlug={website}"
-	except:
-		logging.error(f"未能匹配到 R{sid} 的零售店官网页面地址")
-		continue
+	async with aiohttp.ClientSession() as session:
+		tasks = [request(session = session, url = url, ident = sid) for url, sid in urls]
+		response = await asyncio.gather(*tasks)
 
-	if printDebug:
-		cur = stores.index((sid, sn)) + 1; tot = len(stores); perc = int(cur / tot * 40)
-		print(f"[{'':=^{perc}}{'':^{40 - perc}}] R{sid} {cur}/{tot} {cur / tot:.1%}", end = "\r")
-		stdout.flush()
-	r = requests.get(url, verify = False, headers = userAgent)
-	try:
-		rj = json.loads(r.text.replace("\u2060", "").replace("\u00A0", " ").replace("\\n", ""))
-		masterJSON[sid] = {"courses": rj["courses"], "schedules": rj["schedules"]}
-	except json.decoder.JSONDecodeError:
-		pass
+	for r, sid in response:
+		try:
+			if isinstance(r, Exception):
+				raise r
+			rj = json.loads(r.replace("\u2060", "").replace("\u00A0", " ").replace("\\n", ""))
+			masterJSON[sid] = {"courses": rj["courses"], "schedules": rj["schedules"]}
+		except Exception as exp:
+			logging.error(f"打开 R{sid} 文件错误 {exp}")
+			continue
 
-for i in masterJSON:
-	_store = masterJSON[i]
-	for courseID in _store["courses"]:
-		availableStore = [i]
-		course = _store["courses"][courseID]
-		if not any([courseID in savedID, courseID in append]):
+	for i in masterJSON:
+		_store = masterJSON[i]
+		for courseID in _store["courses"]:
+			availableStore = [i]
+			course = _store["courses"][courseID]
+			if any([courseID in savedID, courseID in append]):
+				continue
 			courseName = course["name"]
 			append += f"{courseID} {courseName}\n"
 
@@ -119,11 +115,14 @@ for i in masterJSON:
 				"chat_id": chat_ids[0],
 				"keyboard": keyboard
 			}
-			post(push)
+			await async_post(push)
 
-if append:
-	logging.info("正在更新 savedEvent 文件")
-	with open("Retail/savedEvent.txt", "w") as m:
-		m.write(savedID + append)
+	if append:
+		logging.info("正在更新 savedEvent 文件")
+		with open("Retail/savedEvent.txt", "w") as m:
+			m.write(savedID + append)
 
+setLogger(logging.INFO, os.path.basename(__file__))
+logging.info("程序启动")
+asyncio.run(main())
 logging.info("程序结束")
