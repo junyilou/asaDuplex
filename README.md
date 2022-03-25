@@ -27,6 +27,10 @@
 * storeInfo.json: 全球 Apple Store 名称（包含部分曾用名、ASCII 兼容名等以便于更广的匹配）、店号、国家或地区旗帜、开店时间、官网图片最后修改时间、URL 标签、全球各国地区零售店按行政区划字典、用于模糊搜索的关键字 alias 等
 * storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的零售店详细信息
 
+#### 代码依赖
+
+本代码的网络 I/O 请求依赖 [requests](https://github.com/psf/requests)、[aiohttp](https://github.com/aio-libs/aiohttp)，可通过 pip 安装
+
 ## 如何使用
 
 * storeInfo.json 提供了极为丰富的 Apple Store 零售店信息，可供查阅
@@ -53,12 +57,12 @@
   ['重庆 (3)', '580', '云南 (1)']
   ```
 
-  * `storeDict(storeid, mode = "dict")`
+  * `await storeDict(storeid, mode = "dict")`
 
   传入零售店店号，联网从 Apple 官网获取零售店基本信息简单处理后返回。
 
   ```python
-  >>> storeDict(480)
+  >>> await storeDict(480) // 异步函数
   
   {'latitude': 29.560981, 'longitude': 106.572272, 'timezone': 'Asia/Shanghai', 'telephone': '400-617-1224', 'address': '重庆市渝中区邹容路 108 号', 'province': '重庆, 重庆, 400010', 'regular': [{'name': 'Monday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Tuesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Wednesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Thursday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Friday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Saturday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Sunday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}], 'special': []}
   ```
@@ -80,7 +84,7 @@
   在许多代码的顶部，可能包含类似如下代码：
 
   ```python
-  from sdk_aliyun import post
+  from sdk_aliyun import async_post
   from bot import tokens
   ```
 
@@ -99,6 +103,8 @@
 2021 年 3 月：利用 asaDuplex 中的部分代码，推出果铺知道 Telegram Bot，方便用户快速查询 Apple Store 零售店信息及特别营业时间信息。
 
 2021 年 8 月：进一步模块化代码，并将代码结果推送剥离，不再依赖 Telegram Bot 做结果推送。
+
+2022 年 3 月：使用 asyncio、aiohttp 异步化核心代码，极大幅度的提高运行速度。
 
 ## ~~已移除的代码~~
 
