@@ -12,10 +12,10 @@ from bot import chat_ids
 
 stdout = lambda p: print(datetime.now().strftime("[%F %T] ") + p)
 from sys import argv
+if "logging" in argv:
+	stdout = logging.info
+	argv.remove("logging")
 if len(argv) > 1:
-	if "logging" in argv:
-		stdout = logging.info
-		argv.remove("logging")
 	include = " ".join(argv[1:])
 	exclude = ""
 else:
