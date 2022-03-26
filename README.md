@@ -37,7 +37,7 @@
 
 * storeInfo.py 包装了大量函数对 storeInfo.json 进行处理，这包括：
 
-  * `storeReturn(args, sort = True, remove_closed = False, remove_future = False, fuzzy = False, needSplit = False):`
+  * function `storeReturn(args, sort = True, remove_closed = False, remove_future = False, fuzzy = False, needSplit = False):`
 
   传入关键字，包括店号、店名、城市、国家或地区可搜索零售店，默认自动按照行政区划进行排序，还可配置启用模糊搜索、移除未开业零售店、移除已关闭零售店等。
 
@@ -47,7 +47,7 @@
   [('359', '南京东路'), ('389', '浦东'), ('390', '香港广场'), ('401', '上海环贸 iapm'), ('581', '五角场'), ('678', 'Store in Shanghai'), ('683', '环球港'), ('705', '七宝'), ('493', '南京艾尚天地'), ('574', '无锡恒隆广场'), ('643', '虹悦城'), ('688', '苏州'), ('703', '玄武湖'), ('471', '西湖'), ('531', '天一广场'), ('532', '杭州万象城'), ('575', 'Store in Wuhan'), ('480', '解放碑'), ('329', 'Store in London'), ('756', 'Store in New Delhi'), ('744', 'Store in Mumbai'), ('738', 'Store in Seoul'), ('751', 'Store in Seoul East'), ('050', 'The Grove'), ('108', 'Century City'), ('124', 'Beverly Center'), ('720', 'Tower Theatre')]
   ```
 
-  * `stateReplace(rstores)`
+  * function `stateReplace(rstores)`
 
   传入零售店店号数组，将按照行政区划进行压缩，便于一次性输出多个零售店。
 
@@ -57,14 +57,15 @@
   ['重庆 (3)', '580', '云南 (1)']
   ```
 
-  * `await storeDict(storeid, mode = "dict")`
+  * coroutine `storeDict(session, storeid, mode = "dict", sif = None)`
 
   传入零售店店号，联网从 Apple 官网获取零售店基本信息简单处理后返回。
 
   ```python
-  >>> await storeDict(480) // 异步函数
+  >>> async with aiohttp.ClientSession() as session:
+  ...     await storeDict(session, 480)
   
-  {'latitude': 29.560981, 'longitude': 106.572272, 'timezone': 'Asia/Shanghai', 'telephone': '400-617-1224', 'address': '重庆市渝中区邹容路 108 号', 'province': '重庆, 重庆, 400010', 'regular': [{'name': 'Monday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Tuesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Wednesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Thursday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Friday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Saturday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Sunday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}], 'special': []}
+  {'latitude': 29.560981, 'longitude': 106.572272, 'timezone': 'Asia/Shanghai', 'telephone': '400-617-1224', 'address': '重庆市渝中区邹容路 108 号', 'province': '重庆, 重庆, 400010', 'isnso': False, 'regular': [{'name': 'Saturday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Wednesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Friday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Monday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Tuesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Thursday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Sunday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}], 'special': []}
   ```
 
   * `storeInfo(storeid)`
