@@ -10,8 +10,11 @@ def disMarkdown(text):
 	return temp
 
 async def request(session, url, ident = None, mode = None, **kwargs):
+	method = kwargs.get("method", "GET")
+	pop = kwargs.pop("method") if "method" in kwargs else None
+	logging.debug(f"[aiohttp request] [{method}] [{url}], [ident] {ident}, [mode] {mode}, [args] {kwargs}")
 	try:
-		async with session.get(url, **kwargs) as resp:
+		async with session.request(url = url, method = method, **kwargs) as resp:
 			if mode == "raw":
 				r = await resp.read()
 			else:
@@ -34,14 +37,6 @@ def setLogger(level, name):
 		logging.basicConfig(
 			format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
 			level = level, datefmt = '%T')
-
-def textConvert(strdict):
-	if strdict["closed"]:
-		return "不营业"
-	elif strdict["openTime"] == "00:00" and strdict["closeTime"] == "23:59":
-		return "24 小时营业"
-	else:
-		return f'{strdict["openTime"]} - {strdict["closeTime"]}'
 
 def dieterURL(sid, mode = None):
 	bicubic = "?resize=2880:1612&output-format=jpg&output-quality=90&interpolation=progressive-bicubic" if mode else ""

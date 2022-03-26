@@ -4,7 +4,15 @@ import json
 from datetime import timedelta, date, datetime
 from storeInfo import storeInfo, storeDict
 from modules.constants import request as request
-from modules.constants import userAgent, dayOfWeekENG, partSample, storeNation, textConvert
+from modules.constants import userAgent, dayOfWeekENG, partSample, storeNation
+
+def textConvert(strdict):
+	if strdict["closed"]:
+		return "不营业"
+	elif strdict["openTime"] == "00:00" and strdict["closeTime"] == "23:59":
+		return "24 小时营业"
+	else:
+		return f'{strdict["openTime"]} - {strdict["closeTime"]}'
 
 async def comment(session, sid, sif = None):
 	try:
