@@ -10,7 +10,9 @@ from modules.constants import userAgent, webNation, localeNation, dieterURL, Rec
 
 with open("storeInfo.json") as r:
 	infoJSON = json.loads(r.read())
+
 storeLibrary = {}
+Order = []
 
 def StoreID(storeid, fuzzy = False):
 	stores = []
@@ -105,13 +107,16 @@ async def storeDict(session, storeid, mode = "dict", sif = None):
 	except:
 		return {}
 
-def getState(sid):
+def getState(sid, stateOnly = False):
 	sid = f"{sid}"
 	state = infoJSON["key"][sid]["state"]
-	stores = [i for i in infoJSON["key"] if \
-		(infoJSON["key"][i]["state"] == state) and \
-		("Store in " not in infoJSON["name"][i])]
-	return state, stores
+	if stateOnly:
+		return state
+	else:
+		stores = [i for i in infoJSON["key"] if \
+			(infoJSON["key"][i]["state"] == state) and \
+			("Store in " not in infoJSON["name"][i])]
+		return state, stores
 
 def stateReplace(rstores):
 	stores = rstores.copy()
@@ -149,7 +154,7 @@ def storeReturn(args, sort = True, remove_closed = False, remove_future = False,
 		stores = (StoreID(a, fuzzy) + StoreMatch(a, fuzzy)) if digit else StoreMatch(a, fuzzy)
 		for s in stores:
 			if s and s not in ans:
-				sState = getState(s[0])[0]
+				sState = getState(s[0], stateOnly = True)
 				judge = (remove_future, remove_closed)
 				if any(judge):
 					if sState == "公司门店":
@@ -162,7 +167,6 @@ def storeReturn(args, sort = True, remove_closed = False, remove_future = False,
 
 	if sort:
 		order = {}
-		Order = sorted([i for i in infoJSON["key"]], key = lambda k: f"{storeInfo(k)['flag']} {getState(k)[0]}")
 		for store in ans:
 			sid = store[0]
 			try:
@@ -185,7 +189,7 @@ async def DieterHeader(session, rtl):
 		return None
 
 def library():
-	global storeLibrary
+	global storeLibrary, Order
 	storeLibrary = {}
 	for i in infoJSON["name"]:
 		comp = [infoJSON["name"][i]] if type(infoJSON["name"][i]) == str else infoJSON["name"][i]
@@ -209,6 +213,7 @@ def library():
 		storeLibrary[i] = storeLibrary.get(i, []) + [flag]
 		storeLibrary[i] += [RecruitDict[flag]["name"]]
 		storeLibrary[i] += RecruitDict[flag]["altername"]
+	Order = sorted([i for i in infoJSON["key"]], key = lambda k: f"{storeInfo(k)['flag']} {getState(k, stateOnly = True)}")
 
 library()
 def reloadJSON(filename = "storeInfo.json"):
