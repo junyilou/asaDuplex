@@ -15,6 +15,7 @@ from telegram import Bot
 from bot import tokens, chat_ids
 token = tokens[0]; chat_id = chat_ids[0]
 
+specialist = []
 with open("storeInfo.json") as s:
 	storejson = json.loads(s.read())
 
@@ -25,6 +26,7 @@ def swarp(func):
 	return wrapper
 
 async def down(session, rtl, isSpecial):
+	global specialist
 	rtl = f"{rtl:0>3}"
 	
 	try: 
@@ -57,12 +59,11 @@ async def down(session, rtl, isSpecial):
 
 		try:
 			r = await request(session = session, url = dieterURL(rtl), headers = userAgent, 
-				ssl = False, ident = None, mode = "raw")
-			if isinstance(r, Exception):
-				raise r
+				ssl = False, ident = None, mode = "raw", ensureAns = False)
 			with open(savename, "wb") as w:
 				w.write(r)
 		except:
+			logging.error(f"下载文件到 {savename} 失败")
 			pass
 
 		sif = storeInfo(rtl)
@@ -106,6 +107,7 @@ async def down(session, rtl, isSpecial):
 
 @swarp
 async def main(session):
+	global specialist
 	if len(sys.argv) == 1:
 		return
 

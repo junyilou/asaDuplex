@@ -51,8 +51,13 @@ def storeInfo(storeid):
 	except IndexError:
 		return {}
 
-def storeURL(storeid, sif = None):
-	sif = storeInfo(storeid) if sif == None else sif
+def storeURL(storeid = None, sif = None):
+	if storeid:
+		sif = storeInfo(storeid)
+	elif sif:
+		pass
+	else:
+		raise ValueError("Expect either `Store ID` or `sif dictionary` provided")
 	try:
 		website = sif["key"]["website"]
 		if website == "-":
@@ -62,17 +67,20 @@ def storeURL(storeid, sif = None):
 	except KeyError:
 		return None
 
-async def storeDict(session, storeid, mode = "dict", sif = None):
-	sif = storeInfo(storeid) if sif == None else sif
+async def storeDict(session, storeid = None, sif = None, mode = "dict"):
+	if storeid:
+		sif = storeInfo(storeid)
+	elif sif:
+		pass
+	else:
+		raise ValueError("Expect either `Store ID` or `sif dictionary` provided")
 	try:
 		website = sif["key"]["website"]
 		if website == "-":
 			website = actualName(sif["name"]).lower().replace(" ", "")
 		url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={website}&locale={localeNation[sif['flag']]}&sc=false"
 
-		r = await request(session = session, url = url, ident = None, headers = userAgent)
-		if isinstance(r, Exception):
-			raise r
+		r = await request(session = session, url = url, ident = None, headers = userAgent, ensureAns = False)
 		r = json.loads(r)
 
 		if mode == "raw":

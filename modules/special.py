@@ -26,11 +26,8 @@ async def comment(session, sid, sif = None):
 	url = f"{baseURL}/shop/fulfillment-messages?searchNearby=true&parts.0={partNumber}&store=R{sid}"
 
 	try:
-		r = await request(session = session, url = url, headers = userAgent, ident = None)
-		if isinstance(r, Exception):
-			raise r
-		else:
-			j = json.loads(r)["body"]["content"]["pickupMessage"]["stores"]
+		r = await request(session = session, url = url, headers = userAgent, ident = None, ensureAns = False)
+		j = json.loads(r)["body"]["content"]["pickupMessage"]["stores"]
 	except:
 		return {}
 
@@ -48,7 +45,7 @@ async def comment(session, sid, sif = None):
 async def speHours(session, sid, limit = 14):
 	sif = storeInfo(sid)
 	try:
-		j = await storeDict(session = session, storeid = sid, mode = "hours", sif = sif)
+		j = await storeDict(session = session, mode = "hours", sif = sif)
 	except:
 		logging.error(f"未能获得 R{sid} 营业时间信息")
 		return {}

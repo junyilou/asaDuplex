@@ -9,19 +9,29 @@ def disMarkdown(text):
 		temp = temp.replace(s, f"\\{s}")
 	return temp
 
-async def request(session, url, ident = None, mode = None, **kwargs):
+async def request(session, url, ident = None, mode = None, retryNum = 1, ensureAns = True, **kwargs):
 	method = kwargs.get("method", "GET")
 	pop = kwargs.pop("method") if "method" in kwargs else None
-	logging.debug(f"[aiohttp request] [{method}] [{url}], [ident] {ident}, [mode] {mode}, [args] {kwargs}")
-	try:
-		async with session.request(url = url, method = method, **kwargs) as resp:
-			if mode == "raw":
-				r = await resp.read()
+
+	logging.debug(f"[aiohttp request] [{'MTH ' + method:^9}] [{url}], [ident] {ident}, [mode] {mode}, [args] {kwargs}, [retry] {retryNum}")
+	while retryNum:
+		try:
+			async with session.request(url = url, method = method, **kwargs) as resp:
+				if mode == "raw":
+					r = await resp.read()
+				else:
+					r = await resp.text()
+			return (r, ident) if ident else r
+		except Exception as exp:
+			if retryNum == 1:
+				logging.debug(f"[aiohttp request] [Abandoned] [{url}], [ident] {ident}, [exp] {exp}")
+				if ensureAns:
+					return (exp, ident) if ident else exp
+				else:
+					raise exp
 			else:
-				r = await resp.text()
-		return (r, ident) if ident else r
-	except Exception as exp:
-		return (exp, ident) if ident else exp
+				retryNum -= 1
+				logging.debug(f"[aiohttp request] [Exception] [{url}], [ident] {ident}, [exp] {exp}, [retry] {retryNum} left")
 
 def sync(coroutine):
 	loop = asyncio.get_event_loop()
