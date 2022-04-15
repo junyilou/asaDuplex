@@ -30,7 +30,7 @@
 
 #### 代码依赖
 
-本代码的网络 I/O 请求依赖 [requests](https://github.com/psf/requests)、[aiohttp](https://github.com/aio-libs/aiohttp)，可通过 pip 安装
+本代码的网络 I/O 请求依赖 [requests](https://github.com/psf/requests)、[aiohttp](https://github.com/aio-libs/aiohttp)，为了分析 Today at Apple 活动所在地区的时区信息，依赖 pytz，可通过 pip 安装
 
 ## 如何使用
 
