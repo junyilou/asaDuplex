@@ -2,11 +2,11 @@ import re
 import json
 import asyncio
 import aiohttp
+import logging
 from functools import partial
-from datetime import datetime
 
 from modules.constants import request as request
-from modules.constants import userAgent, webNation, localeNation, dieterURL, RecruitDict
+from modules.constants import userAgent, webNation, localeNation, RecruitDict
 
 with open("storeInfo.json") as r:
 	infoJSON = json.loads(r.read())
@@ -51,7 +51,7 @@ def storeInfo(storeid):
 	except IndexError:
 		return {}
 
-def storeURL(storeid = None, sif = None):
+def storeURL(storeid = None, sif = None, mode = None):
 	if storeid:
 		sif = storeInfo(storeid)
 	elif sif:
@@ -62,8 +62,10 @@ def storeURL(storeid = None, sif = None):
 		website = sif["key"]["website"]
 		if website == "-":
 			website = actualName(sif["name"]).lower().replace(" ", "")
-		url = f"https://www.apple.com{webNation[sif['flag']]}/retail/{website}"
-		return url
+		if mode == "slug":
+			return website
+		else:
+			return f"https://www.apple.com{webNation[sif['flag']]}/retail/{website}"
 	except KeyError:
 		return None
 
@@ -80,7 +82,8 @@ async def storeDict(session, storeid = None, sif = None, mode = "dict"):
 			website = actualName(sif["name"]).lower().replace(" ", "")
 		url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={website}&locale={localeNation[sif['flag']]}&sc=false"
 
-		r = await request(session = session, url = url, ident = None, headers = userAgent, ensureAns = False)
+		r = await request(session = session, url = url, ident = None, 
+			headers = userAgent, ensureAns = False, retryNum = 3, timeout = 5)
 		r = json.loads(r)
 
 		if mode == "raw":
@@ -184,14 +187,20 @@ def storeReturn(args, sort = True, remove_closed = False, remove_future = False,
 		ans.sort(key = lambda k: order[k[0]])
 	return ans
 
+def dieterURL(sid, mode = 0):
+	digest = "crop=1" # "output-format=png"
+	'''
+		Akamai Image Server Refrence: 
+		https://developer.goacoustic.com/acoustic-content/docs/how-to-optimize-and-transform-your-images-automatically-with-akamai-1
+	'''
+	return f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid:0>3}.png?{digest}"
+
 async def DieterHeader(session, rtl):
 	sid = StoreID(rtl)
 	sid = sid[0][0] if sid != [] else rtl
 	try:
-		async with session.head(
-			url = dieterURL(sid), headers = userAgent, ssl = False,
-			allow_redirects = False, raise_for_status = True) as resp:
-			r = resp.headers
+		r = await request(session = session, url = dieterURL(sid), headers = userAgent, ssl = False,
+			method = "HEAD", allow_redirects = False, raise_for_status = True, mode = "head")
 		return r['Last-Modified'][5:-4]
 	except:
 		return None

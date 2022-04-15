@@ -46,6 +46,8 @@ async def speHours(session, sid, limit = 14):
 	sif = storeInfo(sid)
 	try:
 		j = await storeDict(session = session, mode = "hours", sif = sif)
+		if not j:
+			raise ValueError()
 	except:
 		logging.error(f"未能获得 R{sid} 营业时间信息")
 		return {}
