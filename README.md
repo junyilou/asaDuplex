@@ -18,11 +18,12 @@
 
 * storeInfo.py: 处理 storeInfo.json 的数据，提供强大的通用函数
 * modules/special.py: 分析 Apple Store 零售店营业时间，并尝试获得特别营业时间内部备忘录
+* modules/today.py: 一个定义了 Today at Apple 课程、排课、零售店对象的模块
 * modules/constants.py: 保存部分常量和通用函数
 
 #### 文本
 
-* savedEvent.txt: 由 Today.py 生成的，已经检测到并保存的 Today at Apple 活动列表
+* savedEvent.json: 由 Today.py 生成的，已经检测到并保存的 Today at Apple 活动列表
 * savedJobs.txt: 由 Recruitment.py 生成的，已经在检测到招聘的零售店编号
 * storeInfo.json: 全球 Apple Store 名称（包含部分曾用名、ASCII 兼容名等以便于更广的匹配）、店号、国家或地区旗帜、开店时间、官网图片最后修改时间、URL 标签、全球各国地区零售店按行政区划字典、用于模糊搜索的关键字 alias 等
 * storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的零售店详细信息
@@ -78,11 +79,85 @@
   {'name': ['成都太古里', 'Taikoo Li Chengdu'], 'flag': '🇨🇳', 'nso': '2015-11-21', 'last': '07 Jan 2022 08:59:07', 'website': 'taikoolichengdu', 'key': {'state': '四川', 'city': '成都', 'alter': 'Sichuan Chengdu'}}
   ```
 
+* today.py 定义了 Today at Apple 的对象，每个课程、排课均为一个 `class`，具有丰富的属性和方法
+
+  * 零售店对象定义了获得课程和排课方法等
+
+  ```python
+  # 零售店对象
+  >>> Store(sid = 480)
+  <Store "解放碑" (R480), "jiefangbei", "/cn">
+  
+  # 获得零售店课程
+  >>> await Store(sid = 480).getCourses()
+  [
+    <Course 6635235077318869345 "光影实验室：执导拍摄人像", "photo-lab-directing-portrait">, 
+    <Course 6443623163745894793 "音乐技巧：库乐队使用入门", "music-skills-getting-started-garageband">, 
+    <Course 6448288470942974313 "视频漫步：拍出电影级画面", "video-walks-capturing-cinematic-shots">, 
+    <Course 6716856769744568921 "技巧：管理你的屏幕使用时间", "skills-managing-your-screen-time">
+  ]
+  
+  # 获得零售店排课
+  >>> await Store(sid = 480).getSchedules()
+  [
+    <Schedule 6917310504008783289 of 6444985410678260613, 4 月 15 日 17:30 to 18:00:00, at R480>, 
+    <Schedule 6917310552016813261 of 6443623163745894793, 4 月 15 日 18:00 to 18:30:00, at R480>, 
+    <Schedule 6917310598451930025 of 6716861058294579581, 4 月 15 日 19:00 to 20:00:00, at R480>, 
+    <Schedule 6918023706237569673 of 6444985410678260613, 4 月 16 日 11:00 to 11:30:00, at R480>
+  ]
+  ```
+  
+  * 课程对象包含课程的各项属性（如课程名、封面图片 URL、介绍）等，并提供获得排课的方法
+  
+  ```python
+  # 从 URL 获得课程，也可以手动创建课程对象
+  >>> course = await parseURL("https://www.apple.com.cn/today/event/photo-lab-directing-portrait/", coro = True)
+  
+  >>> course
+  <Course 6635235077318869345 "光影实验室：执导拍摄人像", "photo-lab-directing-portrait">
+  
+  >>> course.images
+  {
+    'portrait': 'https://digitalassets-taa.cdn-apple.com/prod/image/photo-lab-directing-portrait-ww/2020-03/29a29970-2a6c-49e3-9fb4-8b146f3df6f8__4x5.jpg', 
+    'landscape': 'https://digitalassets-taa.cdn-apple.com/prod/image/photo-lab-directing-portrait-ww/2020-03/09bc55d1-0a62-4eed-8cd5-3f4511e857ab__16x9.jpg'
+  }
+  
+  >>> course.getSchedules(Store(sid = 480))
+  [
+    <Schedule 6918024654175448253 of 6635235077318869345, 4 月 17 日 14:00 to 15:00:00, at R480>, 
+    <Schedule 6918027046157664333 of 6635235077318869345, 4 月 22 日 14:00 to 15:00:00, at R480>, 
+    <Schedule 6918027087207317837 of 6635235077318869345, 4 月 22 日 16:00 to 17:00:00, at R480>
+  ]
+  ```
+  
+  * 排课对象包含每次排课的属性，包括所在零售店（`Store` 对象）、所属课程（`Course` 对象），开始和结束时间等
+  
+  ```python
+  # 从 URL 获得课程，也可以手动创建课程对象
+  >>> schedule = await parseURL("https://www.apple.com.cn/today/event/photo-lab-directing-portrait/6911594146335944905/?sn=R645", coro = True)
+  
+  >>> schedule
+  <Schedule 6911594146335944905 of 6635235077318869345, 4 月 18 日 18:30 to 19:30:00, at R645>
+  
+  >>> schedule.course
+  <Course 6635235077318869345 "光影实验室：执导拍摄人像", "photo-lab-directing-portrait">
+  
+  >>> schedule.timeStart
+  datetime.datetime(2022, 4, 18, 18, 30, tzinfo=<DstTzInfo 'Asia/Shanghai' CST+8:00:00 STD>)
+  
+  >>> schedule.url
+  'https://www.apple.com.cn/today/event/photo-lab-directing-portrait/6911594146335944905/?sn=R645'
+  ```
+  
+  此外，还提供了将 `Course` 和 `Schedule` 对象的信息进行提取，并综合至一条 Telegram 消息中的函数（效果如下图）；分析 Today at Apple 网站地图 XML Sitemap 的 `Sitemap` 对象等。
+  
+  此模块中，涉及到网络请求的函数均适用 aiohttp 的异步 I/O，故部分对象初始化和方法调用需要使用 `await` 关键字；代码中，也提供了异步转同步方法 `sync()`，方便在复杂度不高的代码中同步使用。网络请求使用线程池从而无需用户手动创建网络请求线程。
+  
 * Hours.py、Today.py 等代码设计为可以比较本地已经保存的结果（例如已经记录的 Today at Apple 活动）寻找差异并输出图文结果，这些数据也被用到了果铺知道 Bot 和果铺知道 Channel 中。
 
   ![today](Retail/today.jpg)
 
-  在许多代码的顶部，可能包含类似如下代码：
+  在代码的顶部，可能包含类似如下代码：
 
   ```python
   from sdk_aliyun import async_post
@@ -106,6 +181,8 @@
 2021 年 8 月：进一步模块化代码，并将代码结果推送剥离，不再依赖 Telegram Bot 做结果推送。
 
 2022 年 3 月：使用 asyncio、aiohttp 异步化核心代码，极大幅度的提高运行速度。
+
+2022 年 4 月：使用面向对象的思想，极高的提升了 Today at Apple 对象的多样性
 
 ## ~~已移除的代码~~
 
