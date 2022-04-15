@@ -1,128 +1,92 @@
 import os
+import re
 import json
-import time
-import logging
 import asyncio
-import aiohttp
+import logging
+from datetime import datetime
 from sys import argv
 
 from storeInfo import *
-from modules.constants import request as request
-from modules.constants import disMarkdown, setLogger
+from modules.today import Store, Sitemap, Schedule, teleinfo
+from modules.constants import setLogger
 from bot import chat_ids
 from sdk_aliyun import async_post
 
-args = " ".join(argv[1:]) if len(argv[1:]) else "🇨🇳，🇭🇰，🇲🇴，TW"
-stores = storeReturn(args, needSplit = True, remove_closed = True, remove_future = True)
-
-append = ""
-masterJSON = {}
-with open("Retail/savedEvent.txt") as m: 
-	savedID = m.read()
-
-async def main():
+async def main(mode):
 	global append
-	urls = []
-	for sid, sn in stores:
-		try:
-			slug = storeURL(sid)
-			flag = slug.split("https://www.apple.com")[1].split("/retail/")[0].replace(".cn", "/cn")
-			website = slug.split("/retail/")[1]
-			urls.append((f"https://www.apple.com/today-bff/landing/store?stageRootPath={flag}&storeSlug={website}", sid))
-		except:
-			logging.error(f"未能匹配到 R{sid} 的零售店官网页面地址")
+	if mode == "today":
+		stores = storeReturn(args["today"], needSplit = True, remove_closed = True, remove_future = True)
+		tasks = [Store(sid = sid).getSchedules() for sid, sn in stores]
+	elif mode == "sitemap":
+		tasks = [Sitemap(rootPath = i) for i in args["sitemap"]]
+	else:
+		return
+	results = await asyncio.gather(*tasks, return_exceptions = True)
+
+	courses = {}
+	for i in results:
+		if isinstance(i, Exception):
+			logging.error(i.args[0])
 			continue
+		for j in i:
+			t = type(j)
+			c = j.course if t == Schedule else j
 
-	async with aiohttp.ClientSession() as session:
-		tasks = [request(session = session, url = url, ident = sid) for url, sid in urls]
-		response = await asyncio.gather(*tasks)
+			if c.courseId not in savedID["today"]:
+				if (mode == "today") or ((mode == "sitemap") 
+				and (c.courseId not in savedID["sitemap"])):
+					courses[c] = courses.get(c, [])
+					if t == Schedule:
+						courses[c].append(j)
 
-	for r, sid in response:
-		try:
-			if isinstance(r, Exception):
-				raise r
-			rj = json.loads(r.replace("\u2060", "").replace("\u00A0", " ").replace("\\n", ""))
-			masterJSON[sid] = {"courses": rj["courses"], "schedules": rj["schedules"]}
-		except Exception as exp:
-			logging.error(f"打开 R{sid} 文件错误 {exp}")
-			continue
-
-	for i in masterJSON:
-		_store = masterJSON[i]
-		for courseID in _store["courses"]:
-			availableStore = [i]
-			course = _store["courses"][courseID]
-			if any([courseID in savedID, courseID in append]):
-				continue
-			courseName = course["name"]
-			append += f"{courseID} {courseName}\n"
-
-			for j in masterJSON:
-				if i == j:
-					continue
-				__store = masterJSON[j]
-				for sameID in __store["courses"]:
-					if sameID == courseID:
-						availableStore.append(j)
-			textStore = stateReplace(availableStore)
-			for a in textStore:
-				if a.isdigit():
-					textStore[textStore.index(a)] = actualName(storeInfo(a)["name"])
-			courseStore = "线上活动" if "VIRTUAL" in course["type"] else "、".join(textStore)
-
-			specialPrefix = f"{course['collectionName']} 系列活动\n" if course['collectionName'] else ''
-			logging.info(f"在 {courseStore} 找到新活动 {courseName} ID {courseID}")
-
-			availableTime = []
-			for ___store in availableStore:
-				for s in masterJSON[___store]["schedules"]:
-					session = masterJSON[___store]["schedules"][s]
-					if session["courseId"] == courseID:
-						availableTime.append((session["displayDate"][0]["dateTime"], session["startTime"], ___store, s))
-
-			if not len(availableTime):
-				timing = "该课程尚无具体时间安排"
-				sessionURL = storeURL(i).replace("/retail", "/today")
-				keyboard = [[["访问课程页面", sessionURL]]]
-				logging.error("未找到此课程的排课信息")
+	for course in courses:
+		schedules = sorted(courses[course])
+		append = {course.courseId: course.name}
+		if mode == "today":
+			saved[mode] = {**saved[mode], **append}
+		elif mode == "sitemap":
+			if schedules != []:
+				saved["today"] = {**saved["today"], **append}
 			else:
-				sortTime = sorted(availableTime, key = lambda k: k[1])[0]
-				countlist = set([s[3] for s in availableTime])
-				multiSet = f" 起，共 {len(countlist)} 个排课" if len(countlist) > 1 else ""
-				multiLoc = ("" if "VIRTUAL" in course["type"] else f" 于 Apple {actualName(storeInfo(sortTime[2])['name'])}") if len(availableStore) > 1 else ""
-				timing = f"{sortTime[0]}{multiLoc}{multiSet}"
+				saved[mode] = {**saved[mode], **append}
 
-				sessionURL = f"{storeURL(sortTime[2]).split('/retail')[0]}/today/event/{course['urlTitle']}/{sortTime[3]}/?sn=R{sortTime[2]}"
-				keyboard = [[["预约课程", sessionURL]]]
+		text, image, keyboard = teleinfo(course = course, schedules = schedules)
 
-				logging.info(f"找到此活动的课程时间 {timing}")
-				logging.info(f"最终课程信息：课程 ID {courseID}，课次 ID {sortTime[3]}")
+		push = {
+			"mode": "photo-text",
+			"text": text,
+			"image": image,
+			"parse": "MARK",
+			"chat_id": chat_ids[0],
+			"keyboard": keyboard
+		}
+		await async_post(push)
 
-			text = f"""#TodayatApple 新活动\n
-{specialPrefix}*{courseName}*\n
-🗺️ {courseStore}
-🕘 {timing}\n
-*课程简介*
-{course['longDescription']}""".replace('"', "").replace("'", "")
-			photoURL = course["backgroundMedia"]["images"][0]["landscape"]["source"]
-			keyboard[0].append(["下载活动配图", photoURL + "?output-quality=80&resize=2880:*"])
+if __name__ == "__main__":
+	args = {
+		"today": "🇨🇳，🇭🇰，🇲🇴，TW",
+		"sitemap": ".cn /hk /mo /tw".split(" ")
+	}
 
-			push = {
-				"mode": "photo-text",
-				"text": disMarkdown(text),
-				"image": photoURL,
-				"parse": "MARK",
-				"chat_id": chat_ids[0],
-				"keyboard": keyboard
-			}
-			await async_post(push)
+	append = {}
+	savedID = {}
 
-	if append:
+	with open("Retail/savedEvent.json") as m: 
+		saved = json.loads(m.read())
+		for m in saved:
+			savedID[m] = [i for i in saved[m]]
+
+	if len(argv) == 1:
+		argv = ["", "today"]
+
+	setLogger(logging.INFO, os.path.basename(__file__))
+	logging.info("程序启动")
+	asyncio.get_event_loop().run_until_complete(main(argv[1]))
+
+	if append != {}:
 		logging.info("正在更新 savedEvent 文件")
-		with open("Retail/savedEvent.txt", "w") as m:
-			m.write(savedID + append)
 
-setLogger(logging.INFO, os.path.basename(__file__))
-logging.info("程序启动")
-asyncio.run(main())
-logging.info("程序结束")
+		with open("Retail/savedEvent.json", "w") as w:
+			w.write(json.dumps(saved, ensure_ascii = False, indent = 2))
+
+	logging.info("程序结束")
