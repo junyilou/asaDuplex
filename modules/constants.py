@@ -4,7 +4,7 @@ import asyncio
 
 def disMarkdown(text):
 	temp = text
-	signs = "\\|_{}[]()#+-.!=<>"
+	signs = "\\|_{}[]()#+-.!=<>~"
 	for s in signs:
 		temp = temp.replace(s, f"\\{s}")
 	return temp
@@ -13,14 +13,19 @@ async def request(session, url, ident = None, mode = None, retryNum = 1, ensureA
 	method = kwargs.get("method", "GET")
 	pop = kwargs.pop("method") if "method" in kwargs else None
 
-	logging.debug(f"[aiohttp request] [{'MTH ' + method:^9}] [{url}], [ident] {ident}, [mode] {mode}, [args] {kwargs}, [retry] {retryNum}")
+	logging.debug(f"[aiohttp request] [{'MTH ' + method:^9}] '{url}', [ident] {ident}, [mode] {mode}, [args] {kwargs}, [retry] {retryNum}")
 	while retryNum:
 		try:
 			async with session.request(url = url, method = method, **kwargs) as resp:
 				if mode == "raw":
 					r = await resp.read()
+				elif mode == "head":
+					r = resp.headers
+				elif mode == "status":
+					r = resp.status
 				else:
 					r = await resp.text()
+			logging.debug(f"[aiohttp request] [Status {resp.status}] [{url}]")
 			return (r, ident) if ident else r
 		except Exception as exp:
 			if retryNum == 1:
@@ -47,10 +52,6 @@ def setLogger(level, name):
 		logging.basicConfig(
 			format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
 			level = level, datefmt = '%T')
-
-def dieterURL(sid, mode = None):
-	bicubic = "?resize=2880:1612&output-format=jpg&output-quality=90&interpolation=progressive-bicubic" if mode else ""
-	return f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid}.png{bicubic}"
 
 asaVersion = "5.15.0"
 asaAgent = ".".join(asaVersion.split(".")[:2])
