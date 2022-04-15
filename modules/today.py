@@ -358,7 +358,7 @@ class Schedule(asyncObject):
 		return self.timeEnd.strftime(form)
 
 	def __repr__(self):
-		return f'<Schedule {self.scheduleId} of {self.course.courseId}, {self.datetimeStart()} to {self.datetimeEnd("%T")}, at {self.store.sid}>'
+		return f'<Schedule {self.scheduleId} of {self.course.courseId}, {self.datetimeStart("%-m/%-d %-H:%M")}-{self.datetimeEnd()} @ {self.store.sid}>'
 
 	def __hash__(self):
 		return hash(self.scheduleId)
