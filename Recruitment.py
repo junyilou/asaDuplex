@@ -33,7 +33,7 @@ async def entry(session, region):
 		state = await request(
 			session = session, 
 			url = f"https://jobs.apple.com/api/v1/jobDetails/PIPE-{code}/stateProvinceList", 
-			ident = None, ssl = False)
+			ident = None, ssl = False, timeout = 3, retryNum = 3, ensureAns = False)
 		states = json.loads(state)["searchResults"]
 	except aiohttp.ClientError as exp:
 		logging.error(f"下载{name}文件错误 {exp}")
@@ -51,7 +51,7 @@ async def entry(session, region):
 		session = session, 
 		url = f"https://jobs.apple.com/api/v1/jobDetails/PIPE-{code}/storeLocations?searchField=stateProvince&fieldValue={city['id']}", 
 		ident = f"{name} - {city['id']}",
-		ssl = False) for city in states]
+		ssl = False, timeout = 3, retryNum = 3) for city in states]
 	cities = await asyncio.gather(*tasks)
 
 	for ident in cities:
