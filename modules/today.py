@@ -36,7 +36,6 @@ def get_session():
 		__session_pool[loop] = session
 	return session
 
-@ atexit.register
 def __clean():
 	loop = asyncio.get_event_loop()
 	async def __clean_task():
@@ -45,6 +44,7 @@ def __clean():
 		loop.run_until_complete(__clean_task())
 	else:
 		loop.create_task(__clean_task())
+atexit.register(__clean)
 
 def resolution(vids, direction = None):
 	res = {}
@@ -157,7 +157,8 @@ class Store():
 					courseId = raw["schedules"][i]["courseId"], 
 					raw = raw["courses"][raw["schedules"][i]["courseId"]], 
 					rootPath = self.rootPath)
-				) for i in raw["schedules"] if raw["schedules"][i]["storeNum"] == self.sid
+				) for i in raw["schedules"] if (raw["schedules"][i]["storeNum"] == self.sid)
+					 or ("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"])
 			]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
@@ -282,8 +283,10 @@ class Course(asyncObject):
 					raw = raw["courses"][self.courseId], 
 					courseId = self.courseId, 
 					rootPath = store.rootPath)
-				) for i in raw["schedules"] if raw["schedules"][i]["courseId"] == self.courseId 
-					and raw["schedules"][i]["storeNum"] == store.sid
+				) for i in raw["schedules"] if 
+					(raw["schedules"][i]["courseId"] == self.courseId) and 
+					((raw["schedules"][i]["storeNum"] == store.sid) or 
+					("VIRTUAL" in raw["courses"][self.courseId]["type"]))
 			]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
@@ -465,7 +468,7 @@ def validDates(ex, runtime):
 				v.append(date)
 	return " (或) ".join([i.strftime("%Y 年 %-m 月 %-d 日") for i in v])
 
-def teleinfo(course, schedules):
+def teleinfo(course, schedules, mode = "new"):
 	runtime = datetime.now()
 	offset = runtime.astimezone().utcoffset().total_seconds() / 3600
 
@@ -519,17 +522,30 @@ def teleinfo(course, schedules):
 		timing = "尚无可确定的课程时间" if valid == "" else valid
 		keyboard = [[["了解课程", course.url]]]
 
-	keyboard.append([
-		["下载配图 (横)", course.images["landscape"]], 
-		["下载配图 (纵)", course.images["portrait"]]
-	])
+	keyboard[0].append(["下载配图", course.images["landscape"]])
 
-	text = disMarkdown(f"""#TodayatApple 新活动\n
+	if schedules != []:
+		rsvp = [i.status for i in schedules]
+		upCount = rsvp.count(True)
+		seCount = len(schedules)
+		if seCount > 1:
+			if upCount:
+				signing = "所有场次均可预约" if upCount == seCount else f"{seCount} 场中的 {upCount} 场可预约"
+			else:
+				signing = "所有场次均不可预约"
+		else:
+			signing = "本场活动可预约" if upCount else "本场活动不可预约"
+		signingPrefix = "*截止发稿时…*\n" if mode == "new" else "*可预约状态*\n"
+	else:
+		signing = signingPrefix = ""
+
+	text = disMarkdown(f"""#TodayatApple {'新' if mode == "new" else ''}活动\n
 {specialPrefix}*{course.name}*\n
 🗺️ {courseStore}
 🕘 {timing}\n
 *课程简介*
-{course.description['long']}""")
+{course.description['long']}\n
+{signingPrefix}{signing}""")
 
 	image = course.images["landscape"]
 
