@@ -35,7 +35,7 @@ async def entry(session, region):
 			url = f"https://jobs.apple.com/api/v1/jobDetails/PIPE-{code}/stateProvinceList", 
 			ident = None, ssl = False, timeout = 3, retryNum = 3, ensureAns = False)
 		states = json.loads(state)["searchResults"]
-	except aiohttp.ClientError as exp:
+	except (aiohttp.ClientError, asyncio.exceptions.TimeoutError) as exp:
 		logging.error(f"下载{name}文件错误 {exp}")
 		return
 	except json.decoder.JSONDecodeError:
