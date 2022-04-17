@@ -24,20 +24,28 @@ async def main(mode):
 	results = await asyncio.gather(*tasks, return_exceptions = True)
 
 	courses = {}
+	times = 0
 	for i in results:
 		if isinstance(i, Exception):
-			logging.error(i.args[0])
+			logging.error(str(i.args))
 			continue
 		for j in i:
+			if isinstance(j, Exception):
+				logging.error(str(j.args))
+				continue
 			t = type(j)
 			c = j.course if t == Schedule else j
 
 			if c.courseId not in savedID["today"]:
 				if (mode == "today") or ((mode == "sitemap") 
 				and (c.courseId not in savedID["sitemap"])):
-					courses[c] = courses.get(c, [])
+					if c not in courses:
+						courses[c] = []
+						logging.info(str(c))
 					if t == Schedule:
 						courses[c].append(j)
+						times += 1
+	logging.info(f"找到 {len(courses)} 个课程共 {times} 次排课")
 
 	for course in courses:
 		schedules = sorted(courses[course])
