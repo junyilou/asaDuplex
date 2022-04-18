@@ -194,7 +194,7 @@ class Course(asyncObject):
 			courseId = [i for i in raw["courses"] if raw["courses"][i]["urlTitle"] == slug][0]
 			raw = raw["courses"][courseId]
 
-		if all([courseId, raw, rootPath != "None"]):
+		if all([courseId, raw, rootPath != None]):
 			self.rootPath = rootPath
 			self.courseId = courseId
 			self.name = raw["name"]
