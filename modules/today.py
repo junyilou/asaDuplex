@@ -127,7 +127,8 @@ class Store():
 			getCourse(
 				courseId = i, 
 				raw = raw["courses"][i], 
-				rootPath = self.rootPath
+				rootPath = self.rootPath, 
+				fuzzy = False
 			) for i in raw["courses"]]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
@@ -156,18 +157,19 @@ class Store():
 				course = await getCourse(
 					courseId = raw["schedules"][i]["courseId"], 
 					raw = raw["courses"][raw["schedules"][i]["courseId"]], 
-					rootPath = self.rootPath)
+					rootPath = self.rootPath,
+					fuzzy = False)
 				) for i in raw["schedules"] if (raw["schedules"][i]["storeNum"] == self.sid)
 					 or ("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"])
 			]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
-def getStore(sid, raw, rootPath):
+def getStore(sid, raw = None, rootPath = None):
 	global savedToday
 	if sid in savedToday["Store"]:
 		return savedToday["Store"][sid]
 	else:
-		get = Store(raw = raw, rootPath = rootPath)
+		get = Store(sid = sid, raw = raw, rootPath = rootPath)
 		savedToday["Store"][sid] = get
 		return get
 
@@ -282,7 +284,8 @@ class Course(asyncObject):
 				course = await getCourse(
 					raw = raw["courses"][self.courseId], 
 					courseId = self.courseId, 
-					rootPath = store.rootPath)
+					rootPath = store.rootPath,
+					fuzzy = False),
 				) for i in raw["schedules"] if 
 					(raw["schedules"][i]["courseId"] == self.courseId) and 
 					((raw["schedules"][i]["storeNum"] == store.sid) or 
@@ -290,14 +293,27 @@ class Course(asyncObject):
 			]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
-async def getCourse(courseId, raw, rootPath):
+	async def getRootSchedules(self):
+		todayNation = {**{v: k for k, v in webNation.items()}, "/cn": "🇨🇳"}
+		stores = storeReturn(todayNation.get(self.rootPath, ""), remove_closed = True, remove_future = True)
+		tasks = [self.getSchedules(getStore(sid = i[0])) for i in stores]
+		return await asyncio.gather(*tasks, return_exceptions = True)
+
+async def getCourse(courseId, rootPath = None, raw = None, fuzzy = True):
 	global savedToday
-	judge = f"{rootPath}/{courseId}"
-	if judge in savedToday["Course"]:
-		return savedToday["Course"][judge]
+	saved = list(savedToday["Course"])
+	if not fuzzy:
+		if rootPath == None:
+			raise ValueError("在非模糊模式下 rootPath 必须提供")
+		keyword = f"{rootPath}/{courseId}"
+	else:
+		keyword = f"{courseId}"
+	for i in saved:
+		if keyword in i:
+			return savedToday["Course"][i]
 	else:
 		get = await Course(raw = raw, courseId = courseId, rootPath = rootPath)
-		savedToday["Course"][judge] = get
+		savedToday["Course"][f"{rootPath}/{courseId}"] = get
 		return get
 
 class Schedule(asyncObject):
@@ -328,7 +344,8 @@ class Schedule(asyncObject):
 			course = await getCourse(
 				raw = raw["courses"][raw["schedules"][scheduleId]["courseId"]], 
 				courseId = raw["schedules"][scheduleId]["courseId"], 
-				rootPath = self.rootPath)
+				rootPath = self.rootPath,
+				fuzzy = False)
 			raw = raw["schedules"][scheduleId]
 
 		if all([scheduleId, raw, rootPath != None, course, store]):
@@ -361,7 +378,8 @@ class Schedule(asyncObject):
 		return self.timeEnd.strftime(form)
 
 	def __repr__(self):
-		return f'<Schedule {self.scheduleId} of {self.course.courseId}, {self.datetimeStart("%-m/%-d %-H:%M")}-{self.datetimeEnd()} @ {self.store.sid}>'
+		loc = self.store.sid if not self.course.virtual else "Online"
+		return f'<Schedule {self.scheduleId} of {self.course.courseId}, {self.datetimeStart("%-m/%-d %-H:%M")}-{self.datetimeEnd()} @ {loc}>'
 
 	def __hash__(self):
 		return hash(self.scheduleId)
@@ -369,20 +387,9 @@ class Schedule(asyncObject):
 	def __eq__(self, other):
 		return self.scheduleId == other.scheduleId
 
-	def __lt__(self, other):
-		if self.timeStart == other.timeStart:
-			return self.scheduleId < other.scheduleId
-		else:
-			return self.timeStart < other.timeStart
-
-	def __gt__(self, other):
-		if self.timeStart == other.timeStart:
-			return self.scheduleId > other.scheduleId
-		else:
-			return self.timeStart > other.timeStart
-
-async def getSchedule(scheduleId, raw, rootPath, slug, store, course):
+async def getSchedule(scheduleId, raw = None, rootPath = None, slug = None, store = None, course = None):
 	global savedToday
+	scheduleId = f"{scheduleId}"
 	if scheduleId in savedToday["Schedule"]:
 		return savedToday["Schedule"][scheduleId]
 	else:
