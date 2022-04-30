@@ -27,31 +27,34 @@ async def main(mode):
 	times = 0
 	for i in results:
 		if isinstance(i, Exception):
-			logging.error(str(i.args))
+			logging.error(str(i.args) if i.args else str(i))
 			continue
 		for j in i:
 			if isinstance(j, Exception):
-				logging.error(str(j.args))
+				logging.error(str(j.args) if j.args else str(j))
 				continue
-			t = type(j)
-			c = j.course if t == Schedule else j
 
+			c = j.course if hasattr(j, "scheduleId") else j
 			if c.courseId not in savedID["today"]:
 				if (mode == "today") or ((mode == "sitemap") 
 				and (c.courseId not in savedID["sitemap"])):
 					if c not in courses:
 						courses[c] = []
 						logging.info(str(c))
-					if t == Schedule:
-						courses[c].append(j)
-						times += 1
-	logging.info(f"找到 {len(courses)} 个课程共 {times} 次排课")
+					if hasattr(j, "scheduleId"):
+						if j not in courses[c]:
+							courses[c].append(j)
+							times += 1
+							logging.info(str(j))
+	logging.info(f"找到 {len(courses)} 个新课程共 {times} 次排课")
 
 	for course in courses:
 		schedules = sorted(courses[course])
 		append = {course.courseId: course.name}
 		if mode == "today":
 			saved[mode] = {**saved[mode], **append}
+			if course.courseId in saved["sitemap"]:
+				del saved["sitemap"][course.courseId]
 		elif mode == "sitemap":
 			if schedules != []:
 				saved["today"] = {**saved["today"], **append}
