@@ -598,7 +598,7 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/TW",
       "states": [
         {
-          "stateName": "Taiwan",
+          "stateName": "Taipei",
           "stores": [
             {
               "storeNumber": "R713",
@@ -4599,8 +4599,8 @@
               "storeNumber": "R095",
               "countryCode": "US",
               "storeName": "Fifth Avenue",
-              "latitude": "40.764479",
-              "longitude": "-73.973211",
+              "latitude": "40.76383",
+              "longitude": "-73.97296",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -9773,33 +9773,6 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/KR",
       "states": [
         {
-          "stateName": "",
-          "stores": [
-            {
-              "storeNumber": "R738",
-              "countryCode": "KR",
-              "storeName": "Myeongdong",
-              "latitude": "37.564659",
-              "longitude": "126.982678",
-              "storeRadius": "50",
-              "accuracyThreshold": "500",
-              "imageURL": [
-                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R738.png"
-              ],
-              "secureImageURL": [],
-              "locationText": "Seoul",
-              "timeZone": "Asia/Seoul",
-              "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "SNL",
-              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNL",
-              "enableInStoreMode": true,
-              "storeAddress": "Seoul 9-1 Namdaemunro 2ga, JoongGu\nCenter Point Myeongdong\n04534",
-              "phoneNumber": "0805001007"
-            }
-          ]
-        },
-        {
           "stateName": "Seoul",
           "stores": [
             {
@@ -9823,6 +9796,28 @@
               "enableInStoreMode": true,
               "storeAddress": "Seoul 43, Garosu-gil\nGangnam-gu\n06028",
               "phoneNumber": "0805000029"
+            },
+            {
+              "storeNumber": "R738",
+              "countryCode": "KR",
+              "storeName": "Myeongdong",
+              "latitude": "37.564659",
+              "longitude": "126.982678",
+              "storeRadius": "50",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R738.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "Seoul",
+              "timeZone": "Asia/Seoul",
+              "instoreCheckoutMode": "SCAN_AND_BUY",
+              "selfCheckout": "SNL",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipSelfCheckout": "SNL",
+              "enableInStoreMode": true,
+              "storeAddress": "Seoul 9-1 Namdaemunro 2ga, JoongGu\nHyde Park\n04534",
+              "phoneNumber": "0805001007"
             },
             {
               "storeNumber": "R747",
@@ -11012,6 +11007,33 @@
           ]
         },
         {
+          "stateName": "Hubei",
+          "stores": [
+            {
+              "storeNumber": "R575",
+              "countryCode": "CN",
+              "storeName": "武汉",
+              "latitude": "30.57971",
+              "longitude": "114.271668",
+              "storeRadius": "50",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R575.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "武汉",
+              "timeZone": "Asia/Shanghai",
+              "instoreCheckoutMode": "SCAN_AND_BUY",
+              "selfCheckout": "SNL",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipSelfCheckout": "SNL",
+              "enableInStoreMode": true,
+              "storeAddress": "武汉市江汉区解放大道 690 号\n武汉国际广场购物中心 C 座 2F\n430022",
+              "phoneNumber": "4006383818"
+            }
+          ]
+        },
+        {
           "stateName": "Zhejiang",
           "stores": [
             {
@@ -11675,7 +11697,7 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/AT",
       "states": [
         {
-          "stateName": "",
+          "stateName": "Vienna",
           "stores": [
             {
               "storeNumber": "R687",
@@ -12230,7 +12252,7 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/TH",
       "states": [
         {
-          "stateName": "",
+          "stateName": "Bangkok",
           "stores": [
             {
               "storeNumber": "R733",
