@@ -76,17 +76,7 @@ class asyncObject(object):
 class Store():
 	def __init__(self, raw = None, sid = None, rootPath = None):
 
-		if sid != None:
-			store = StoreID(sid)[0]
-			self.sid = "R" + store[0]
-			self.name = store[1]
-			sif = storeInfo(self.sid)
-			self.slug = storeURL(sif = sif, mode = "slug")
-			self.rootPath = {**webNation, "🇨🇳": "/cn"}[sif["flag"]]
-			self.timezone = None
-			self.locale = None
-			self.url = storeURL(sif = sif)
-		elif raw != None:
+		if raw != None:
 			self.name = raw["name"]
 			self.sid = raw["storeNum"]
 			self.timezone = raw["timezone"]["name"]
@@ -99,6 +89,16 @@ class Store():
 			else:
 				self.rootPath = rootPath
 			self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}{raw['path']}"
+		elif sid != None:
+			store = StoreID(sid)[0]
+			self.sid = "R" + store[0]
+			self.name = store[1]
+			sif = storeInfo(self.sid)
+			self.slug = storeURL(sif = sif, mode = "slug")
+			self.rootPath = {**webNation, "🇨🇳": "/cn"}[sif["flag"]]
+			self.timezone = None
+			self.locale = None
+			self.url = storeURL(sif = sif)
 		else:
 			raise ValueError("sid, raw 至少提供一个")
 
@@ -167,11 +167,13 @@ class Store():
 def getStore(sid, raw = None, rootPath = None):
 	global savedToday
 	if sid in savedToday["Store"]:
-		return savedToday["Store"][sid]
+		if raw != None and savedToday["Store"][sid].timezone == None:
+			get = Store(raw = raw, rootPath = rootPath)
+			savedToday["Store"][sid] = get
 	else:
 		get = Store(sid = sid, raw = raw, rootPath = rootPath)
 		savedToday["Store"][sid] = get
-		return get
+	return savedToday["Store"][sid]
 
 class Course(asyncObject):
 	async def __init__(self, courseId = None, raw = None, rootPath = None, slug = None):
@@ -236,6 +238,7 @@ class Course(asyncObject):
 				self.videos = {}
 
 			self.virtual = "VIRTUAL" in raw["type"]
+			self.special = "SPECIAL" in raw["type"] or "HIGH" in raw["talentType"]
 			self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}"
 			self.raw = raw
 
@@ -302,6 +305,8 @@ class Course(asyncObject):
 async def getCourse(courseId, rootPath = None, raw = None, fuzzy = True):
 	global savedToday
 	saved = list(savedToday["Course"])
+	if rootPath == "":
+		rootPath = "/us"
 	if not fuzzy:
 		if rootPath == None:
 			raise ValueError("在非模糊模式下 rootPath 必须提供")
@@ -349,18 +354,20 @@ class Schedule(asyncObject):
 			raw = raw["schedules"][scheduleId]
 
 		if all([scheduleId, raw, rootPath != None, course, store]):
-			self.slug = course.slug
+			self.__dict__ = course.__dict__.copy()
+			self.course = course
 			self.scheduleId = scheduleId
 			self.rootPath = rootPath
-			self.course = course
 			self.store = store
 			self.timezone = store.timezone
 			try:
 				self.tzinfo = pytz.timezone(self.timezone)
 				self.timeStart = datetime.fromtimestamp(raw["startTime"] / 1000, self.tzinfo)
 				self.timeEnd = datetime.fromtimestamp(raw["endTime"] / 1000, self.tzinfo)
+				self.rawStart = datetime.fromtimestamp(raw["startTime"] / 1000)
+				self.rawEnd = datetime.fromtimestamp(raw["endTime"] / 1000)
 			except:
-				self.tzinfo = None
+				self.tzinfo = self.rawStart = self.rawEnd = None
 				self.timeStart = datetime.fromtimestamp(raw["startTime"] / 1000)
 				self.timeEnd = datetime.fromtimestamp(raw["endTime"] / 1000)
 			self.status = raw["status"] == "RSVP"
@@ -377,6 +384,9 @@ class Schedule(asyncObject):
 			return self.timeEnd.astimezone(tzinfo).strftime(form)
 		return self.timeEnd.strftime(form)
 
+	def json(self):
+		return json.dumps(self.raw, ensure_ascii = False)
+
 	def __repr__(self):
 		loc = self.store.sid if not self.course.virtual else "Online"
 		return f'<Schedule {self.scheduleId} of {self.course.courseId}, {self.datetimeStart("%-m/%-d %-H:%M")}-{self.datetimeEnd()} @ {loc}>'
@@ -387,15 +397,25 @@ class Schedule(asyncObject):
 	def __eq__(self, other):
 		return self.scheduleId == other.scheduleId
 
+	def __lt__(self, other):
+		if self.timeStart == other.timeStart:
+			return self.scheduleId < other.scheduleId
+		else:
+			return self.timeStart < other.timeStart
+
+	def __gt__(self, other):
+		if self.timeStart == other.timeStart:
+			return self.scheduleId > other.scheduleId
+		else:
+			return self.timeStart > other.timeStart
+
 async def getSchedule(scheduleId, raw = None, rootPath = None, slug = None, store = None, course = None):
 	global savedToday
 	scheduleId = f"{scheduleId}"
-	if scheduleId in savedToday["Schedule"]:
-		return savedToday["Schedule"][scheduleId]
-	else:
+	if scheduleId not in savedToday["Schedule"]:
 		get = await Schedule(scheduleId = scheduleId, raw = raw, rootPath = rootPath, slug = slug, store = store, course = course)
 		savedToday["Schedule"][scheduleId] = get
-		return get
+	return savedToday["Schedule"][scheduleId]
 
 class Webpage(asyncObject):
 	async def __init__(self, url):
@@ -412,6 +432,7 @@ class Webpage(asyncObject):
 		return result
 
 async def Sitemap(rootPath):
+	runtime = datetime.now()
 	r = await request(
 		session = get_session(), 
 		url = f"https://www.apple.com{rootPath}/today/sitemap.xml",
@@ -420,9 +441,9 @@ async def Sitemap(rootPath):
 
 	slugs = {}
 	for i in urls:
-		matches = re.findall(r"/event/([0-9A-Za-z\-]*-[0-9]{6})", i)
-		if matches:
-			slugs[matches[0]] = slugs.get(matches[0], []) + [i]
+		matches = re.findall(r"/event/([0-9A-Za-z\-]*-([0-9]{6}))", i)
+		if matches and validDates(matches[0][1], runtime, False) != []:
+			slugs[matches[0][0]] = slugs.get(matches[0][0], []) + [i]
 
 	tasks = [
 		parseURL(
@@ -462,7 +483,7 @@ def parseURL(url, coro = False):
 		parse = None
 	return parse
 
-def validDates(ex, runtime):
+def validDates(ex, runtime, process = True):
 	v = []
 	for pattern in ["%y%m%d", "%d%m%y", "%m%d%y"]:
 		try:
@@ -470,10 +491,16 @@ def validDates(ex, runtime):
 		except ValueError:
 			pass
 		else:
-			delta = [abs(date.year - runtime.year), abs((date - runtime.date()).days)]
-			if delta[0] < 2 and delta[1] < 60 and date not in v:
+			delta = abs(date.year - runtime.year)
+			if delta > 1:
+				continue
+			delta = (date - runtime.date()).days
+			if delta > -7:
 				v.append(date)
-	return " (或) ".join([i.strftime("%Y 年 %-m 月 %-d 日") for i in v])
+	if process:
+		return " (或) ".join([i.strftime("%Y 年 %-m 月 %-d 日") for i in v])
+	else:
+		return v
 
 def teleinfo(course, schedules, mode = "new"):
 	runtime = datetime.now()
