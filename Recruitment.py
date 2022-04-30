@@ -28,8 +28,8 @@ async def entry(session, region):
 	name = RecruitDict[region]["name"]
 	code = RecruitDict[region]["code"]
 
+	stdout(f"下载{name}文件")
 	try:
-		stdout(f"下载{name}文件")
 		state = await request(
 			session = session, 
 			url = f"https://jobs.apple.com/api/v1/jobDetails/PIPE-{code}/stateProvinceList", 
@@ -50,7 +50,7 @@ async def entry(session, region):
 	tasks = [request(
 		session = session, 
 		url = f"https://jobs.apple.com/api/v1/jobDetails/PIPE-{code}/storeLocations?searchField=stateProvince&fieldValue={city['id']}", 
-		ident = f"{name} - {city['id']}",
+		ident = f"{name} - {city['id']}", mode = "json",
 		ssl = False, timeout = 3, retryNum = 3) for city in states]
 	cities = await asyncio.gather(*tasks)
 
@@ -58,17 +58,11 @@ async def entry(session, region):
 		if isinstance(ident[0], Exception):
 			try:
 				raise ident[0]
-			except aiohttp.ClientError:
+			except (aiohttp.ClientError, asyncio.exceptions.TimeoutError):
 				logging.error(f"下载{ident[1]} 文件错误")
 				continue
-		
-		try:
-			city = json.loads(ident[0])
-		except json.decoder.JSONDecodeError:
-			logging.error(f"打开{ident[1]} 文件错误")
-			continue
 
-		for store in city:
+		for store in ident[0]:
 			rollout = store["code"]
 			cityID = ident[1].split(" - ")[1]
 			if not rollout in mark:

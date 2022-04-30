@@ -23,20 +23,22 @@ async def request(session, url, ident = None, mode = None, retryNum = 1, ensureA
 					r = resp.headers
 				elif mode == "status":
 					r = resp.status
+				elif mode == "json":
+					r = await resp.json()
 				else:
 					r = await resp.text()
-			logging.debug(f"[aiohttp request] [Status {resp.status}] [{url}]")
+			logging.debug(f"[aiohttp request] [Status {resp.status}] '{url}'")
 			return (r, ident) if ident else r
 		except Exception as exp:
 			if retryNum == 1:
-				logging.debug(f"[aiohttp request] [Abandoned] [{url}], [ident] {ident}, [exp] {exp}")
+				logging.debug(f"[aiohttp request] [Abandoned] '{url}', [ident] {ident}, [exp] {exp}")
 				if ensureAns:
 					return (exp, ident) if ident else exp
 				else:
 					raise exp
 			else:
 				retryNum -= 1
-				logging.debug(f"[aiohttp request] [Exception] [{url}], [ident] {ident}, [exp] {exp}, [retry] {retryNum} left")
+				logging.debug(f"[aiohttp request] [Exception] '{url}', [ident] {ident}, [exp] {exp}, [retry] {retryNum} left")
 
 def sync(coroutine):
 	loop = asyncio.get_event_loop()
