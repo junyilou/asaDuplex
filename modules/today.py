@@ -22,6 +22,9 @@ API = {
 	}
 }
 
+TIMEOUT = 5
+RETRYNUM = 5
+
 savedToday = {"Store": {}, "Course": {}, "Schedule": {}}
 
 def set_session(session):
@@ -45,6 +48,13 @@ def __clean():
 	else:
 		loop.create_task(__clean_task())
 atexit.register(__clean)
+
+def _separate(text):
+	for i in ["\u200B", "\u200C", "\u2060"]:
+		text = text.replace(i, "")
+	for i in ["\u00A0"]:
+		text = text.replace(i, " ")
+	return text
 
 def resolution(vids, direction = None):
 	res = {}
@@ -80,7 +90,7 @@ class Store():
 			self.name = raw["name"]
 			self.sid = raw["storeNum"]
 			self.timezone = raw["timezone"]["name"]
-			self.locale = raw["locale"]
+			self.timezoneFlag = True
 			self.slug = raw["slug"]
 			if rootPath == None:
 				sif = storeInfo(self.sid)
@@ -96,8 +106,8 @@ class Store():
 			sif = storeInfo(self.sid)
 			self.slug = storeURL(sif = sif, mode = "slug")
 			self.rootPath = {**webNation, "🇨🇳": "/cn"}[sif["flag"]]
-			self.timezone = None
-			self.locale = None
+			self.timezone = datetime.now().astimezone().tzinfo
+			self.timezoneFlag = False
 			self.url = storeURL(sif = sif)
 		else:
 			raise ValueError("sid, raw 至少提供一个")
@@ -116,10 +126,10 @@ class Store():
 		r = await request(
 			session = get_session(),
 			url = API["landing"].format(STORESLUG = self.slug, ROOTPATH = self.rootPath),
-			ensureAns = False, timeout = 3, retryNum = 3, headers = userAgent)
+			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM, headers = userAgent)
 		
 		try:
-			raw = json.loads(r.replace("\u2060", "").replace("\u00A0", " "))
+			raw = json.loads(_separate(r))
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
 
@@ -137,10 +147,10 @@ class Store():
 		r = await request(
 			session = get_session(),
 			url = API["landing"].format(STORESLUG = self.slug, ROOTPATH = self.rootPath),
-			ensureAns = False, timeout = 3, retryNum = 3, headers = userAgent)
+			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM, headers = userAgent)
 		
 		try:
-			raw = json.loads(r.replace("\u2060", "").replace("\u00A0", " "))
+			raw = json.loads(_separate(r))
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
 
@@ -151,8 +161,9 @@ class Store():
 				rootPath = self.rootPath, 
 				slug = self.slug, 
 				store = getStore(
-					sid = self.sid,
-					raw = raw["stores"][self.sid],
+					sid = raw["schedules"][i]["storeNum"],
+					raw = raw["stores"][raw["schedules"][i]["storeNum"]] if \
+						raw["schedules"][i]["storeNum"] in raw["stores"] else None,
 					rootPath = self.rootPath), 
 				course = await getCourse(
 					courseId = raw["schedules"][i]["courseId"], 
@@ -167,7 +178,7 @@ class Store():
 def getStore(sid, raw = None, rootPath = None):
 	global savedToday
 	if sid in savedToday["Store"]:
-		if raw != None and savedToday["Store"][sid].timezone == None:
+		if raw != None and savedToday["Store"][sid].timezoneFlag == False:
 			get = Store(raw = raw, rootPath = rootPath)
 			savedToday["Store"][sid] = get
 	else:
@@ -188,10 +199,10 @@ class Course(asyncObject):
 			r = await request(
 				session = get_session(),
 				url = API["session"]["course"].format(COURSESLUG = self.slug, ROOTPATH = self.rootPath),
-				ensureAns = False, timeout = 3, retryNum = 3)
+				ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
 
 			try:
-				raw = json.loads(r.replace("\u2060", "").replace("\u00A0", " "))
+				raw = json.loads(_separate(r))
 			except json.decoder.JSONDecodeError:
 				raise ValueError(f"获取课程 {rootPath}/{self.slug} 数据失败") from None
 
@@ -252,6 +263,18 @@ class Course(asyncObject):
 	def __eq__(self, other):
 		return self.courseId == other.courseId and self.rootPath == other.rootPath
 
+	def __lt__(self, other):
+		if self.courseId == other.courseId:
+			return self.rootPath < other.rootPath
+		else:
+			return self.courseId < other.courseId
+
+	def __gt__(self, other):
+		if self.courseId == other.courseId:
+			return self.rootPath > other.rootPath
+		else:
+			return self.courseId > other.courseId
+
 	def json(self):
 		return json.dumps(self.raw, ensure_ascii = False)
 
@@ -267,12 +290,12 @@ class Course(asyncObject):
 		r = await request(
 			session = get_session(),
 			url = API["session"]["nearby"].format(STORESLUG = store.slug, COURSESLUG = self.slug, ROOTPATH = store.rootPath),
-			ensureAns = False, timeout = 3, retryNum = 3)
+			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
 		
 		try:
-			raw = json.loads(r.replace("\u2060", "").replace("\u00A0", " "))
+			raw = json.loads(_separate(r))
 		except json.decoder.JSONDecodeError:
-			raise ValueError(f"获取课次 {self.rootPath}/{self.slug}/{store.slug} 数据失败") from None
+			raise ValueError(f"获取课次 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
 
 		tasks = [
 			getSchedule(
@@ -335,12 +358,12 @@ class Schedule(asyncObject):
 			r = await request(
 				session = get_session(),
 				url = API["session"]["schedule"].format(COURSESLUG = self.slug, SCHEDULEID = self.scheduleId, ROOTPATH = self.rootPath),
-				ensureAns = False, timeout = 3, retryNum = 3)
+				ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
 
 			try:
-				raw = json.loads(r.replace("\u2060", "").replace("\u00A0", " "))
+				raw = json.loads(_separate(r))
 			except json.decoder.JSONDecodeError:
-				raise ValueError(f"获取课次 {rootPath}/{self.slug}/{self.scheduleId} 数据失败") from None
+				raise ValueError(f"获取课次 {self.rootPath}/{self.slug}/{self.scheduleId} 数据失败") from None
 
 			store = getStore(
 				sid = raw["schedules"][scheduleId]["storeNum"],
@@ -364,25 +387,23 @@ class Schedule(asyncObject):
 				self.tzinfo = pytz.timezone(self.timezone)
 				self.timeStart = datetime.fromtimestamp(raw["startTime"] / 1000, self.tzinfo)
 				self.timeEnd = datetime.fromtimestamp(raw["endTime"] / 1000, self.tzinfo)
-				self.rawStart = datetime.fromtimestamp(raw["startTime"] / 1000)
-				self.rawEnd = datetime.fromtimestamp(raw["endTime"] / 1000)
 			except:
-				self.tzinfo = self.rawStart = self.rawEnd = None
-				self.timeStart = datetime.fromtimestamp(raw["startTime"] / 1000)
-				self.timeEnd = datetime.fromtimestamp(raw["endTime"] / 1000)
+				self.tzinfo = self.timeStart = self.timeEnd = None
+			self.rawStart = datetime.fromtimestamp(raw["startTime"] / 1000)
+			self.rawEnd = datetime.fromtimestamp(raw["endTime"] / 1000)
 			self.status = raw["status"] == "RSVP"
 			self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}/{self.scheduleId}/?sn={self.store.sid}"
 			self.raw = raw
 
-	def datetimeStart(self, form = "%-m 月 %-d 日 %-H:%M", tzinfo = None):
-		if tzinfo != None:
-			return self.timeStart.astimezone(tzinfo).strftime(form)
-		return self.timeStart.strftime(form)
+	def datetimeStart(self, form = "%-m 月 %-d 日 %-H:%M"):
+		if self.tzinfo != None:
+			return self.timeStart.astimezone(self.tzinfo).strftime(form)
+		return self.rawStart.strftime(form)
 
-	def datetimeEnd(self, form = "%-H:%M", tzinfo = None):
-		if tzinfo != None:
-			return self.timeEnd.astimezone(tzinfo).strftime(form)
-		return self.timeEnd.strftime(form)
+	def datetimeEnd(self, form = "%-H:%M"):
+		if self.tzinfo != None:
+			return self.timeEnd.astimezone(self.tzinfo).strftime(form)
+		return self.rawEnd.strftime(form)
 
 	def json(self):
 		return json.dumps(self.raw, ensure_ascii = False)
@@ -398,21 +419,21 @@ class Schedule(asyncObject):
 		return self.scheduleId == other.scheduleId
 
 	def __lt__(self, other):
-		if self.timeStart == other.timeStart:
+		if self.rawStart == other.rawStart:
 			return self.scheduleId < other.scheduleId
 		else:
-			return self.timeStart < other.timeStart
+			return self.rawStart < other.rawStart
 
 	def __gt__(self, other):
-		if self.timeStart == other.timeStart:
+		if self.rawStart == other.rawStart:
 			return self.scheduleId > other.scheduleId
 		else:
-			return self.timeStart > other.timeStart
+			return self.rawStart > other.rawStart
 
 async def getSchedule(scheduleId, raw = None, rootPath = None, slug = None, store = None, course = None):
 	global savedToday
 	scheduleId = f"{scheduleId}"
-	if scheduleId not in savedToday["Schedule"]:
+	if raw != None:
 		get = await Schedule(scheduleId = scheduleId, raw = raw, rootPath = rootPath, slug = slug, store = store, course = course)
 		savedToday["Schedule"][scheduleId] = get
 	return savedToday["Schedule"][scheduleId]
@@ -422,7 +443,7 @@ class Webpage(asyncObject):
 		r = await request(
 			session = get_session(), 
 			url = url, ensureAns = False, 
-			timeout = 3, retryNum = 3, headers = userAgent)
+			timeout = TIMEOUT, retryNum = RETRYNUM, headers = userAgent)
 		self.raw = r
 
 	def elements(self, accept = ["jpg", "png", "mp4", "mov"]):
@@ -436,7 +457,7 @@ async def Sitemap(rootPath):
 	r = await request(
 		session = get_session(), 
 		url = f"https://www.apple.com{rootPath}/today/sitemap.xml",
-		ensureAns = False, timeout = 3, retryNum = 3, headers = userAgent)
+		ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM, headers = userAgent)
 	urls = re.findall(r"<loc>\s*(\S*)\s*</loc>", r)
 
 	slugs = {}
@@ -522,6 +543,7 @@ def teleinfo(course, schedules, mode = "new"):
 		courseStore = "Apple Store 零售店"
 	specialPrefix = f"{course.collection} 系列活动\n" if course.collection != None else ""
 
+	schedules.sort()
 	if schedules != []:
 		schedule = schedules[0]
 		scheduleTimezone = schedule.tzinfo
@@ -535,18 +557,16 @@ def teleinfo(course, schedules, mode = "new"):
 					tzText = f" GMT{int(dx):+}"
 				else:
 					tzText = f" GMT{int(dx):+}:{60 * float('.' + dy):0>2.0f}"
+		elif schedule.store.timezoneFlag == False:
+			tzText = " GMT+8"
 		else:
 			tzText = ""
 		
 		if len(schedules) > 1:
 			timing = f"{schedule.datetimeStart()} – {schedule.datetimeEnd()}{tzText} 起，共 {len(schedules)} 次排课"
-			if course.virtual:
-				keyboard = [[["预约课程", schedule.url]]]
-			else:
-				keyboard = [[[f"预约课程 ({schedule.store.name})", schedule.url]]]
 		else:
 			timing = f"{schedule.datetimeStart()} – {schedule.datetimeEnd()}{tzText}"
-			keyboard = [[["预约课程", schedule.url]]]
+		keyboard = [[["预约课程", schedule.url]]]
 	else:
 		try:
 			date = re.findall(r"[0-9]{6}", course.slug)[-1]
