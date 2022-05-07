@@ -7,7 +7,7 @@ from datetime import datetime
 from sys import argv
 
 from storeInfo import *
-from modules.today import Store, Sitemap, Schedule, teleinfo
+from modules.today import Store, Sitemap, Schedule, teleinfo, __clean
 from modules.constants import setLogger
 from bot import chat_ids
 from sdk_aliyun import async_post
@@ -93,6 +93,7 @@ if __name__ == "__main__":
 	setLogger(logging.INFO, os.path.basename(__file__))
 	logging.info("程序启动")
 	asyncio.get_event_loop().run_until_complete(main(argv[1]))
+	__clean()
 
 	if append != {}:
 		logging.info("正在更新 savedEvent 文件")
