@@ -9,6 +9,15 @@ def disMarkdown(text):
 		temp = temp.replace(s, f"\\{s}")
 	return temp
 
+def timezoneText(dtime):
+	delta = dtime.utcoffset().total_seconds() / 3600
+	dx, dy = str(delta).split(".")
+	if dy == "0":
+		tzText = f"GMT{int(dx):+}"
+	else:
+		tzText = f"GMT{int(dx):+}:{60 * float('.' + dy):0>2.0f}"
+	return tzText
+
 async def request(session, url, ident = None, mode = None, retryNum = 1, ensureAns = True, **kwargs):
 	method = kwargs.get("method", "GET")
 	pop = kwargs.pop("method") if "method" in kwargs else None
@@ -40,9 +49,14 @@ async def request(session, url, ident = None, mode = None, retryNum = 1, ensureA
 				retryNum -= 1
 				logging.debug(f"[aiohttp request] [Exception] '{url}', [ident] {ident}, [exp] {exp}, [retry] {retryNum} left")
 
-def sync(coroutine):
-	loop = asyncio.get_event_loop()
-	return loop.run_until_complete(coroutine)
+def sync(coroutine = None):
+	try:
+		loop = asyncio.get_event_loop()
+	except RuntimeError:
+		loop = asyncio.new_event_loop()
+		asyncio.set_event_loop(loop)
+	if coroutine != None:
+		return loop.run_until_complete(coroutine)
 
 def setLogger(level, name):
 	if os.path.isdir('logs'):
@@ -76,6 +90,7 @@ AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15"}
 webNation = {**dict([(i[0], i[1][1:4]) for i in asaNation.items()]), 
 	"🇺🇸": '', "🇨🇳": '.cn', "🇨🇭": "/chde", "🇧🇪": "/befr", "TW": "/tw", '🇲🇴': '/mo', '🇮🇳': '/in'} # for /retail
 storeNation = {**webNation, "🇨🇭": "/ch-de", "🇧🇪": "/be-fr"} # for /shop
+todayNation = {**{v: k for k, v in webNation.items()}, "/cn": "🇨🇳", "/tw": "🇹🇼"} # for /today-bff
 localeNation = {'🇺🇸': 'en_US', '🇨🇳': 'zh_CN', '🇬🇧': 'en_GB', '🇨🇦': 'en_CA', '🇦🇺': 'en_AU', '🇫🇷': 'fr_FR', 
 	'🇮🇹': 'it_IT', '🇩🇪': 'de_DE', '🇪🇸': 'es_ES', '🇯🇵': 'ja_JP', '🇨🇭': 'de_CH', '🇦🇪': 'en_AE', '🇳🇱': 'nl_NL', 
 	'🇸🇪': 'sv_SE', '🇧🇷': 'pt_BR', '🇹🇷': 'tr_TR', '🇸🇬': 'en_SG', '🇲🇽': 'es_MX', '🇦🇹': 'de_AT', '🇧🇪': 'fr_BE', 
@@ -134,11 +149,11 @@ completeStatus = [
 
 RecruitDict = {
 	"🇹🇷": {"name": "土耳其", "code": 114438164, "altername": ["Turkey", "TR"]}, 
-	"🇦🇪": {"name": "阿联酋", "code": 114438225, "altername": ["UAE", "AE"]}, 
-	"🇬🇧": {"name": "英国", "code": 114438145, "altername": ["UK", "GB", "United Kingdom", "Great Britain"]}, 
+	"🇦🇪": {"name": "阿联酋", "code": 114438225, "altername": ["United Arab Emirates", "UAE", "AE"]}, 
+	"🇬🇧": {"name": "英国", "code": 114438145, "altername": ["United Kingdom", "UK", "GB", "Great Britain"]}, 
 	"🇩🇪": {"name": "德国", "code": 114438043, "altername": ["Germany", "DE", "Deutschland"]}, 
 	"🇹🇼": {"name": "台湾", "code": 114438311, "altername": ["Taiwan", "TW", "ROC"]}, 
-	"🇺🇸": {"name": "美国", "code": 114438158, "altername": ["US", "Ameria", "United States"]}, 
+	"🇺🇸": {"name": "美国", "code": 114438158, "altername": ["United States", "US", "America"]}, 
 	"🇲🇽": {"name": "墨西哥", "code": 114438297, "altername": ["Mexico", "MX"]}, 
 	"🇨🇭": {"name": "瑞士", "code": 114438017, "altername": ["Switzerland", "CH", "Swiss"]}, 
 	"🇧🇪": {"name": "比利时", "code": 114438251, "altername": ["Belgium", "BE"]}, 
