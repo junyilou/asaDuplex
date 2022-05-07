@@ -1,12 +1,11 @@
 import re
 import json
 import asyncio
-import atexit
 import pytz
 
 from datetime import datetime
 from storeInfo import *
-from modules.constants import request, webNation, userAgent, sync, disMarkdown
+from modules.constants import request, webNation, userAgent, sync, disMarkdown, timezoneText, todayNation
 
 __session_pool = {}
 
@@ -43,11 +42,10 @@ def __clean():
 	loop = asyncio.get_event_loop()
 	async def __clean_task():
 		await __session_pool[loop].close()
-	if loop.is_closed():
+	if not loop.is_running():
 		loop.run_until_complete(__clean_task())
 	else:
 		loop.create_task(__clean_task())
-atexit.register(__clean)
 
 def _separate(text):
 	for i in ["\u200B", "\u200C", "\u2060"]:
@@ -98,7 +96,8 @@ class Store():
 				self.rootPath = {**webNation, "🇨🇳": "/cn"}[sif["flag"]]
 			else:
 				self.rootPath = rootPath
-			self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}{raw['path']}"
+			self.flag = todayNation[self.rootPath]
+			self.url = f"https://www.apple.com{raw['path'].replace('/cn', '.cn')}"
 		elif sid != None:
 			store = StoreID(sid)[0]
 			self.sid = "R" + store[0]
@@ -106,8 +105,9 @@ class Store():
 			sif = storeInfo(self.sid)
 			self.slug = storeURL(sif = sif, mode = "slug")
 			self.rootPath = {**webNation, "🇨🇳": "/cn"}[sif["flag"]]
-			self.timezone = datetime.now().astimezone().tzinfo
+			self.timezone = sif["timezone"]
 			self.timezoneFlag = False
+			self.flag = sif["flag"]
 			self.url = storeURL(sif = sif)
 		else:
 			raise ValueError("sid, raw 至少提供一个")
@@ -116,7 +116,10 @@ class Store():
 		return hash(self.sid)
 
 	def __eq__(self, other):
-		return self.sid == other.sid
+		try:
+			return self.sid == other.sid
+		except:
+			return False
 
 	def __repr__(self):
 		return f'<Store "{self.name}" ({self.sid}), "{self.slug}", "{self.rootPath}">'
@@ -178,7 +181,7 @@ class Store():
 def getStore(sid, raw = None, rootPath = None):
 	global savedToday
 	if sid in savedToday["Store"]:
-		if raw != None and savedToday["Store"][sid].timezoneFlag == False:
+		if raw != None:
 			get = Store(raw = raw, rootPath = rootPath)
 			savedToday["Store"][sid] = get
 	else:
@@ -261,7 +264,10 @@ class Course(asyncObject):
 		return hash(f"{self.rootPath}/{self.courseId}")
 
 	def __eq__(self, other):
-		return self.courseId == other.courseId and self.rootPath == other.rootPath
+		try:
+			return self.courseId == other.courseId and self.rootPath == other.rootPath
+		except:
+			return False
 
 	def __lt__(self, other):
 		if self.courseId == other.courseId:
@@ -320,7 +326,6 @@ class Course(asyncObject):
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
 	async def getRootSchedules(self):
-		todayNation = {**{v: k for k, v in webNation.items()}, "/cn": "🇨🇳"}
 		stores = storeReturn(todayNation.get(self.rootPath, ""), remove_closed = True, remove_future = True)
 		tasks = [self.getSchedules(getStore(sid = i[0])) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
@@ -339,10 +344,10 @@ async def getCourse(courseId, rootPath = None, raw = None, fuzzy = True):
 	for i in saved:
 		if keyword in i:
 			return savedToday["Course"][i]
-	else:
-		get = await Course(raw = raw, courseId = courseId, rootPath = rootPath)
-		savedToday["Course"][f"{rootPath}/{courseId}"] = get
-		return get
+	
+	get = await Course(raw = raw, courseId = courseId, rootPath = rootPath.replace("/us", ""))
+	savedToday["Course"][f"{rootPath}/{courseId}"] = get
+	return get
 
 class Schedule(asyncObject):
 	async def __init__(self, scheduleId = None, raw = None, rootPath = None, slug = None, store = None, course = None):
@@ -416,7 +421,10 @@ class Schedule(asyncObject):
 		return hash(self.scheduleId)
 
 	def __eq__(self, other):
-		return self.scheduleId == other.scheduleId
+		try:
+			return self.scheduleId == other.scheduleId
+		except:
+			return False
 
 	def __lt__(self, other):
 		if self.rawStart == other.rawStart:
@@ -433,7 +441,7 @@ class Schedule(asyncObject):
 async def getSchedule(scheduleId, raw = None, rootPath = None, slug = None, store = None, course = None):
 	global savedToday
 	scheduleId = f"{scheduleId}"
-	if raw != None:
+	if any([raw, rootPath, slug]):
 		get = await Schedule(scheduleId = scheduleId, raw = raw, rootPath = rootPath, slug = slug, store = store, course = course)
 		savedToday["Schedule"][scheduleId] = get
 	return savedToday["Schedule"][scheduleId]
@@ -474,31 +482,33 @@ async def Sitemap(rootPath):
 	return await asyncio.gather(*tasks, return_exceptions = True)
 
 def parseURL(url, coro = False):
-	coursePattern = r"http[\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([^\/]*)"
-	schedulePattern = r"http[\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([^\/]*)/(6[0-9]{18})(\/\?sn\=([R0-9]{4}))?"
+	coursePattern = r"(http[\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([^\/]*))"
+	schedulePattern = r"(http[\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([^\/]*)/(6[0-9]{18})(\/\?sn\=([R0-9]{4}))?)"
 	
 	course = re.findall(coursePattern, url, re.I)
 	schedule = re.findall(schedulePattern, url, re.I)
 
 	if schedule:
 		if coro:
-			parse = Schedule(slug = schedule[0][1], scheduleId = schedule[0][2], rootPath = schedule[0][0].replace(".cn", "/cn"))
+			parse = getSchedule(slug = schedule[0][2], scheduleId = schedule[0][3], rootPath = schedule[0][1].replace(".cn", "/cn"))
 		else:
 			parse = {
 				"type": "schedule",
-				"rootPath": schedule[0][0].replace(".cn", "/cn"),
-				"slug": schedule[0][1],
-				"scheduleId": schedule[0][2],
-				"sid": schedule[0][4]
+				"rootPath": schedule[0][1].replace(".cn", "/cn"),
+				"slug": schedule[0][2],
+				"scheduleId": schedule[0][3],
+				"sid": schedule[0][5],
+				"url": schedule[0][0]
 			}
 	elif course:
 		if coro:
-			parse = Course(slug = course[0][1], rootPath = course[0][0].replace(".cn", "/cn"))
+			parse = Course(slug = course[0][2], rootPath = course[0][1].replace(".cn", "/cn"))
 		else:
 			parse = {
 				"type": "course",
-				"rootPath": course[0][0].replace(".cn", "/cn"),
-				"slug": course[0][1]
+				"rootPath": course[0][1].replace(".cn", "/cn"),
+				"slug": course[0][2],
+				"url": course[0][0]
 			}
 	else:
 		parse = None
@@ -552,13 +562,7 @@ def teleinfo(course, schedules, mode = "new"):
 			if delta == offset:
 				tzText = ""
 			else:
-				dx, dy = str(delta).split(".")
-				if dy == "0":
-					tzText = f" GMT{int(dx):+}"
-				else:
-					tzText = f" GMT{int(dx):+}:{60 * float('.' + dy):0>2.0f}"
-		elif schedule.store.timezoneFlag == False:
-			tzText = " GMT+8"
+				tzText = " " + timezoneText(schedule.timeStart)
 		else:
 			tzText = ""
 		
