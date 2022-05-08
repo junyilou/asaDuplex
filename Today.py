@@ -102,3 +102,5 @@ if __name__ == "__main__":
 			w.write(json.dumps(saved, ensure_ascii = False, indent = 2))
 
 	logging.info("程序结束")
+
+	pass # Address Python Issue 26789

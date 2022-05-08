@@ -97,7 +97,7 @@ class Store():
 			else:
 				self.rootPath = rootPath
 			self.flag = todayNation[self.rootPath]
-			self.url = f"https://www.apple.com{raw['path'].replace('/cn', '.cn')}"
+			self.url = f"https://www.apple.com{'.cn' if self.rootPath == '/cn' else ''}{raw['path']}"
 		elif sid != None:
 			store = StoreID(sid)[0]
 			self.sid = "R" + store[0]
@@ -111,6 +111,7 @@ class Store():
 			self.url = storeURL(sif = sif)
 		else:
 			raise ValueError("sid, raw 至少提供一个")
+		self.raw = dict((i, self.__dict__[i]) for i in self.__dict__ if i != "raw")
 
 	def __hash__(self):
 		return hash(self.sid)
