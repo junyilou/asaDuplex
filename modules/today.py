@@ -483,8 +483,8 @@ async def Sitemap(rootPath):
 	return await asyncio.gather(*tasks, return_exceptions = True)
 
 def parseURL(url, coro = False):
-	coursePattern = r"(http[\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([^\/]*))"
-	schedulePattern = r"(http[\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([^\/]*)/(6[0-9]{18})(\/\?sn\=([R0-9]{4}))?)"
+	coursePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*))"
+	schedulePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*)/(6[0-9]{18})(\/\?sn\=([R0-9]{4}))?)"
 	
 	course = re.findall(coursePattern, url, re.I)
 	schedule = re.findall(schedulePattern, url, re.I)
@@ -499,7 +499,7 @@ def parseURL(url, coro = False):
 				"slug": schedule[0][2],
 				"scheduleId": schedule[0][3],
 				"sid": schedule[0][5],
-				"url": schedule[0][0]
+				"url": f"https://www.apple.com{schedule[0][1]}/today/event/{schedule[0][2]}/{schedule[0][3]}/?sn=R{schedule[0][5]}"
 			}
 	elif course:
 		if coro:
@@ -509,7 +509,7 @@ def parseURL(url, coro = False):
 				"type": "course",
 				"rootPath": course[0][1].replace(".cn", "/cn"),
 				"slug": course[0][2],
-				"url": course[0][0]
+				"url": f"https://www.apple.com{course[0][1]}/today/event/{course[0][2]}"
 			}
 	else:
 		parse = None
