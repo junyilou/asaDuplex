@@ -8,7 +8,7 @@ from sys import argv
 
 from storeInfo import *
 from modules.today import Store, Sitemap, Schedule, teleinfo, __clean
-from modules.constants import setLogger
+from modules.constants import setLogger, sync
 from bot import chat_ids
 from sdk_aliyun import async_post
 
@@ -92,8 +92,9 @@ if __name__ == "__main__":
 
 	setLogger(logging.INFO, os.path.basename(__file__))
 	logging.info("程序启动")
-	asyncio.get_event_loop().run_until_complete(main(argv[1]))
-	__clean()
+	loop = asyncio.new_event_loop()
+	loop.run_until_complete(main(argv[1]))
+	__clean(loop)
 
 	if append != {}:
 		logging.info("正在更新 savedEvent 文件")
@@ -102,5 +103,3 @@ if __name__ == "__main__":
 			w.write(json.dumps(saved, ensure_ascii = False, indent = 2))
 
 	logging.info("程序结束")
-
-	pass # Address Python Issue 26789

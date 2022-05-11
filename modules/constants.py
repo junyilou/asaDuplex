@@ -57,6 +57,8 @@ def sync(coroutine = None):
 		asyncio.set_event_loop(loop)
 	if coroutine != None:
 		return loop.run_until_complete(coroutine)
+	else:
+		return loop
 
 def setLogger(level, name):
 	if os.path.isdir('logs'):

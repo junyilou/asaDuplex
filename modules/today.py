@@ -2,6 +2,7 @@ import re
 import json
 import asyncio
 import pytz
+import atexit
 
 from datetime import datetime
 from storeInfo import *
@@ -27,25 +28,29 @@ RETRYNUM = 5
 savedToday = {"Store": {}, "Course": {}, "Schedule": {}}
 
 def set_session(session):
-	loop = asyncio.get_event_loop()
+	loop = asyncio.get_running_loop()
 	__session_pool[loop] = session
 
 def get_session():
-	loop = asyncio.get_event_loop()
+	loop = asyncio.get_running_loop()
 	session = __session_pool.get(loop, None)
 	if session is None:
 		session = aiohttp.ClientSession(loop = loop, headers = userAgent)
 		__session_pool[loop] = session
 	return session
 
-def __clean():
-	loop = asyncio.get_event_loop()
-	async def __clean_task():
+@atexit.register
+def __clean(loop = None):
+	try:
+		loop = asyncio.get_running_loop() if loop == None else loop
+	except:
+		return
+	async def __clean_task(loop):
 		await __session_pool[loop].close()
 	if not loop.is_running():
-		loop.run_until_complete(__clean_task())
+		loop.run_until_complete(__clean_task(loop))
 	else:
-		loop.create_task(__clean_task())
+		loop.create_task(__clean_task(loop))
 
 def _separate(text):
 	for i in ["\u200B", "\u200C", "\u2060"]:
@@ -217,6 +222,7 @@ class Course(asyncObject):
 			self.rootPath = rootPath
 			self.courseId = courseId
 			self.name = raw["name"]
+			self.title = raw["title"]
 			self.slug = raw["urlTitle"]
 			self.collection = raw["collectionName"]
 			self.description = {
