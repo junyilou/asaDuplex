@@ -7,9 +7,9 @@ import aiohttp
 import time
 from datetime import datetime, timezone, date
 
-from storeInfo import storeInfo, actualName, DieterHeader
+from storeInfo import storeInfo, actualName, dieterURL, DieterHeader
 from modules.constants import request as request
-from modules.constants import disMarkdown, setLogger, userAgent, dieterURL
+from modules.constants import disMarkdown, setLogger, userAgent
 
 from telegram import Bot
 from bot import tokens, chat_ids
@@ -19,7 +19,7 @@ specialist = []
 with open("storeInfo.json") as s:
 	storejson = json.loads(s.read())
 
-def swarp(func):
+def session_func(func):
 	async def wrapper():
 		async with aiohttp.ClientSession() as session:
 			return await func(session = session)
@@ -105,7 +105,7 @@ async def down(session, rtl, isSpecial):
 		logging.info(f"R{rtl} 图片没有更新")
 	return False
 
-@swarp
+@session_func
 async def main(session):
 	global specialist
 	if len(sys.argv) == 1:
