@@ -13,19 +13,22 @@ __session_pool = {}
 API_ROOT = "https://www.apple.com/today-bff/"
 
 API = {
-	"spotlight": API_ROOT + "spotlight?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}",
 	"landing": API_ROOT + "landing/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}",
 	"session": {
 		"course": API_ROOT + "session/course?stageRootPath={ROOTPATH}&courseSlug={COURSESLUG}",
 		"schedule": API_ROOT + "session/schedule?stageRootPath={ROOTPATH}&courseSlug={COURSESLUG}&scheduleId={SCHEDULEID}",
-		"nearby": API_ROOT + "session/course/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&courseSlug={COURSESLUG}"
+		"store": API_ROOT + "session/course/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&courseSlug={COURSESLUG}"
+	},
+	"collection": {
+		"geo": API_ROOT + "collection/geo?stageRootPath={ROOTPATH}&collectionSlug={COLLECTIONSLUG}",
+		"store": API_ROOT + "collection/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&collectionSlug={COLLECTIONSLUG}"
 	}
 }
 
 TIMEOUT = 5
 RETRYNUM = 5
 
-savedToday = {"Store": {}, "Course": {}, "Schedule": {}}
+savedToday = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}
 
 def set_session(session):
 	loop = asyncio.get_running_loop()
@@ -42,15 +45,18 @@ def get_session():
 @atexit.register
 def __clean(loop = None):
 	try:
-		loop = asyncio.get_running_loop() if loop == None else loop
+		l = [asyncio.get_running_loop()] if loop == None else [loop]
 	except:
-		return
+		l = [i for i in __session_pool]
+	
 	async def __clean_task(loop):
 		await __session_pool[loop].close()
-	if not loop.is_running():
-		loop.run_until_complete(__clean_task(loop))
-	else:
-		loop.create_task(__clean_task(loop))
+
+	for loop in l:
+		if not loop.is_running():
+			loop.run_until_complete(__clean_task(loop))
+		else:
+			loop.create_task(__clean_task(loop))
 
 def _separate(text):
 	for i in ["\u200B", "\u200C", "\u2060"]:
@@ -147,6 +153,7 @@ class Store():
 				courseId = i, 
 				raw = raw["courses"][i], 
 				rootPath = self.rootPath, 
+				moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
 				fuzzy = False
 			) for i in raw["courses"]]
 		return await asyncio.gather(*tasks, return_exceptions = True)
@@ -178,6 +185,7 @@ class Store():
 					courseId = raw["schedules"][i]["courseId"], 
 					raw = raw["courses"][raw["schedules"][i]["courseId"]], 
 					rootPath = self.rootPath,
+					moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
 					fuzzy = False)
 				) for i in raw["schedules"] if (raw["schedules"][i]["storeNum"] == self.sid)
 					 or ("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"])
@@ -196,7 +204,7 @@ def getStore(sid, raw = None, rootPath = None):
 	return savedToday["Store"][sid]
 
 class Course(asyncObject):
-	async def __init__(self, courseId = None, raw = None, rootPath = None, slug = None):
+	async def __init__(self, courseId = None, raw = None, rootPath = None, slug = None, moreAbout = None):
 		
 		if raw == None:
 			if not all([slug, rootPath != None]):
@@ -216,6 +224,7 @@ class Course(asyncObject):
 				raise ValueError(f"获取课程 {rootPath}/{self.slug} 数据失败") from None
 
 			courseId = [i for i in raw["courses"] if raw["courses"][i]["urlTitle"] == slug][0]
+			moreAbout = raw["moreAbout"]
 			raw = raw["courses"][courseId]
 
 		if all([courseId, raw, rootPath != None]):
@@ -224,7 +233,29 @@ class Course(asyncObject):
 			self.name = raw["name"]
 			self.title = raw["title"]
 			self.slug = raw["urlTitle"]
-			self.collection = raw["collectionName"]
+
+			self.collection = None
+			if moreAbout != None:
+				if type(moreAbout) == Collection:
+					self.collection = moreAbout
+				elif type(moreAbout) == dict:
+					moreAbout = [moreAbout]
+				if type(moreAbout) == list:
+					for moreDict in moreAbout:
+						try:
+							if "title" in moreDict and raw["collectionName"] == moreDict["title"]:
+								pass
+							elif "name" in moreDict and raw["collectionName"] == moreDict["name"]:
+								pass
+							else:
+								continue
+							self.collection = await getCollection(rootPath = self.rootPath, slug = moreDict["collId"], identifier = self.courseId)
+							break
+						except:
+							pass
+			if self.collection == None:
+				self.collection = raw["collectionName"]
+
 			self.description = {
 				"long": raw["longDescription"].strip(),
 				"medium": raw["mediumDescription"].strip(),
@@ -264,7 +295,8 @@ class Course(asyncObject):
 			self.raw = raw
 
 	def __repr__(self):
-		col = f', Collection "{self.collection}"' if self.collection else ""
+		col = (f', Collection <{self.collection.name}>' if type(self.collection) == Collection \
+			else f', Collection "{self.collection}"') if self.collection != None else ""
 		return f'<Course {self.courseId} "{self.name}", "{self.slug}"{col}>'
 
 	def __hash__(self):
@@ -302,7 +334,7 @@ class Course(asyncObject):
 
 		r = await request(
 			session = get_session(),
-			url = API["session"]["nearby"].format(STORESLUG = store.slug, COURSESLUG = self.slug, ROOTPATH = store.rootPath),
+			url = API["session"]["store"].format(STORESLUG = store.slug, COURSESLUG = self.slug, ROOTPATH = store.rootPath),
 			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
 		
 		try:
@@ -324,6 +356,7 @@ class Course(asyncObject):
 					raw = raw["courses"][self.courseId], 
 					courseId = self.courseId, 
 					rootPath = store.rootPath,
+					moreAbout = raw["moreAbout"],
 					fuzzy = False),
 				) for i in raw["schedules"] if 
 					(raw["schedules"][i]["courseId"] == self.courseId) and 
@@ -337,7 +370,7 @@ class Course(asyncObject):
 		tasks = [self.getSchedules(getStore(sid = i[0])) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
-async def getCourse(courseId, rootPath = None, raw = None, fuzzy = True):
+async def getCourse(courseId, rootPath = None, raw = None, moreAbout = None, fuzzy = True):
 	global savedToday
 	saved = list(savedToday["Course"])
 	if rootPath == "":
@@ -352,7 +385,7 @@ async def getCourse(courseId, rootPath = None, raw = None, fuzzy = True):
 		if keyword in i:
 			return savedToday["Course"][i]
 	
-	get = await Course(raw = raw, courseId = courseId, rootPath = rootPath.replace("/us", ""))
+	get = await Course(raw = raw, courseId = courseId, rootPath = rootPath.replace("/us", ""), moreAbout = moreAbout)
 	savedToday["Course"][f"{rootPath}/{courseId}"] = get
 	return get
 
@@ -385,6 +418,7 @@ class Schedule(asyncObject):
 				raw = raw["courses"][raw["schedules"][scheduleId]["courseId"]], 
 				courseId = raw["schedules"][scheduleId]["courseId"], 
 				rootPath = self.rootPath,
+				moreAbout = raw["moreAbout"],
 				fuzzy = False)
 			raw = raw["schedules"][scheduleId]
 
@@ -453,19 +487,132 @@ async def getSchedule(scheduleId, raw = None, rootPath = None, slug = None, stor
 		savedToday["Schedule"][scheduleId] = get
 	return savedToday["Schedule"][scheduleId]
 
-class Webpage(asyncObject):
-	async def __init__(self, url):
+class Collection(asyncObject):
+	async def __init__(self, rootPath = None, slug = None):
+		
+		if not all([rootPath != None, slug]):
+			raise ValueError("slug, rootPath 必须全部提供")
+
+		self.slug = slug
+		self.rootPath = rootPath
+		self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/collection/{self.slug}/"
+
 		r = await request(
-			session = get_session(), 
-			url = url, ensureAns = False, 
-			timeout = TIMEOUT, retryNum = RETRYNUM, headers = userAgent)
-		self.raw = r
+			session = get_session(),
+			url = API["collection"]["geo"].format(COLLECTIONSLUG = self.slug, ROOTPATH = self.rootPath),
+			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
+
+		try:
+			raw = json.loads(_separate(r))
+			self.name = raw["name"]
+		except json.decoder.JSONDecodeError:
+			raise ValueError(f"获取系列 {self.rootPath}/{self.slug} 数据失败") from None
+
+		self.description = {
+			"long": raw["longDescription"].strip(),
+			"medium": raw["mediumDescription"].strip(),
+			"short": raw["shortDescription"].strip()
+		}
+
+		media = raw["heroGallery"][0]["backgroundMedia"]
+		self.images = {
+			"portrait": media["images"][0]["portrait"]["source"],
+			"landscape": media["images"][0]["landscape"]["source"]
+		}
+		if "ambientVideo" in media:
+			self.videos = {
+				"portrait": {
+					"poster": media["ambientVideo"]["poster"][0]["portrait"]["source"],
+					"video": resolution(media["ambientVideo"]["sources"], "p"),
+				},
+				"landscape": {
+					"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
+					"video": resolution(media["ambientVideo"]["sources"], "l"),
+				}
+			}
+		else:
+			self.videos = {}
+
+		if "inCollaborationWith" in raw:
+			self.collaboration = raw["inCollaborationWith"]["partners"]
+		else:
+			self.collaboration = None
+		self.raw = raw
+
+	def __repr__(self):
+		return f'<Collection {self.name}, "{self.slug}", "{self.rootPath}">'
+
+	def __hash__(self):
+		return hash(f"{self.rootPath}/{self.slug}")
+
+	def __eq__(self, other):
+		try:
+			return self.__hash__ == other.__hash__
+		except:
+			return False
+
+	def json(self):
+		return json.dumps(self.raw, ensure_ascii = False)
 
 	def elements(self, accept = ["jpg", "png", "mp4", "mov"]):
 		accept = "|".join(accept)
 		result = []
-		none = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + "))+[\'\"]?", self.raw) if i[0] not in result]
+		none = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
+			"))+[\'\"]?", self.json()) if i[0] not in result]
 		return result
+
+	async def getSchedules(self, store):
+
+		r = await request(
+			session = get_session(),
+			url = API["collection"]["store"].format(STORESLUG = store.slug, COLLECTIONSLUG = self.slug, ROOTPATH = store.rootPath),
+			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
+		
+		try:
+			raw = json.loads(_separate(r))
+		except json.decoder.JSONDecodeError:
+			raise ValueError(f"获取课次 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
+
+		tasks = [
+			getSchedule(
+				scheduleId = i, 
+				raw = raw["schedules"][i], 
+				rootPath = store.rootPath, 
+				slug = self.slug, 
+				store = getStore(
+					sid = raw["schedules"][i]["storeNum"],
+					raw = raw["stores"][raw["schedules"][i]["storeNum"]] if \
+						raw["schedules"][i]["storeNum"] in raw["stores"] else None,
+					rootPath = store.rootPath), 
+				course = await getCourse(
+					raw = raw["courses"][raw["schedules"][i]["courseId"]], 
+					courseId = raw["schedules"][i]["courseId"], 
+					rootPath = store.rootPath,
+					moreAbout = self,
+					fuzzy = False)
+				) for i in raw["schedules"] if 
+					raw["courses"][raw["schedules"][i]["courseId"]]["collectionName"] == self.name
+			]
+		return await asyncio.gather(*tasks, return_exceptions = True)
+
+	async def getRootSchedules(self):
+		stores = storeReturn(todayNation.get(self.rootPath, ""), remove_closed = True, remove_future = True)
+		tasks = [self.getSchedules(getStore(sid = i[0])) for i in stores]
+		return await asyncio.gather(*tasks, return_exceptions = True)
+
+async def getCollection(slug, rootPath = None, identifier = 0):
+	global savedToday
+	saved = list(savedToday["Collection"])
+	if rootPath == None:
+		raise ValueError("slug, rootPath 必须全部提供")
+	keyword = f"{rootPath}/{slug}"
+	for i in saved:
+		if keyword == i:
+			return savedToday["Collection"][i]
+	
+	get = await Collection(rootPath = rootPath, slug = slug)
+	savedToday["Collection"][keyword] = get
+	return get
 
 async def Sitemap(rootPath):
 	runtime = datetime.now()
@@ -491,9 +638,11 @@ async def Sitemap(rootPath):
 def parseURL(url, coro = False):
 	coursePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*))"
 	schedulePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*)/(6[0-9]{18})(\/\?sn\=([R0-9]{4}))?)"
+	collectionPattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/collection/([a-z0-9\-]*))(/\S*)"
 	
 	course = re.findall(coursePattern, url, re.I)
 	schedule = re.findall(schedulePattern, url, re.I)
+	collection = re.findall(collectionPattern, url, re.I)
 
 	if schedule:
 		if coro:
@@ -516,6 +665,16 @@ def parseURL(url, coro = False):
 				"rootPath": course[0][1].replace(".cn", "/cn"),
 				"slug": course[0][2],
 				"url": f"https://www.apple.com{course[0][1]}/today/event/{course[0][2]}"
+			}
+	elif collection:
+		if coro:
+			parse = Collection(slug = collection[0][2], rootPath = collection[0][1].replace(".cn", "/cn"))
+		else:
+			parse = {
+				"type": "collection",
+				"rootPath": course[0][1].replace(".cn", "/cn"),
+				"slug": course[0][2],
+				"url": f"https://www.apple.com{collection[0][1]}/today/collection/{collection[0][2]}"
 			}
 	else:
 		parse = None
@@ -540,9 +699,31 @@ def validDates(ex, runtime, process = True):
 	else:
 		return v
 
-def teleinfo(course, schedules, mode = "new"):
+def teleinfo(course = None, schedules = None, collection = None, mode = "new"):
 	runtime = datetime.now()
 	offset = runtime.astimezone().utcoffset().total_seconds() / 3600
+
+	if collection != None:
+		if collection.collaboration != None:
+			collab = []
+			try:
+				for i in collection.collaboration:
+					collab.append(f"{i['name']}\n{i['description']}")
+				collab = "\n\n*合作机构*\n" + "\n\n".join(collab)
+			except:
+				collab = ""
+		else:
+			collab = ""
+
+		text = disMarkdown(f"""#TodayatApple {'新' if mode == "new" else ''}系列\n
+*{collection.name}*\n
+*系列简介*
+{collection.description['long']}{collab}""")
+
+		image = collection.images["landscape"]
+		keyboard = [[["了解系列", collection.url]]]
+
+		return text, image, keyboard
 
 	if course.virtual:
 		courseStore = "线上活动"
@@ -558,7 +739,9 @@ def teleinfo(course, schedules, mode = "new"):
 		courseStore = "、".join(textStore)
 	else:
 		courseStore = "Apple Store 零售店"
-	specialPrefix = f"{course.collection} 系列活动\n" if course.collection != None else ""
+
+	specialPrefix = (f"{course.collection.name} 系列活动\n" if hasattr(course.collection, "slug") else
+		f"{course.collection} 系列活动\n") if course.collection != None else ""
 
 	schedules.sort()
 	if schedules != []:

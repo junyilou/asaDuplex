@@ -7,7 +7,7 @@ from datetime import datetime
 from sys import argv
 
 from storeInfo import *
-from modules.today import Store, Sitemap, Schedule, teleinfo, __clean
+from modules.today import Store, Sitemap, teleinfo, __clean
 from modules.constants import setLogger, sync
 from bot import chat_ids
 from sdk_aliyun import async_post
@@ -24,6 +24,7 @@ async def main(mode):
 	results = await asyncio.gather(*tasks, return_exceptions = True)
 
 	courses = {}
+	collections = []
 	times = 0
 	for i in results:
 		if isinstance(i, Exception):
@@ -35,6 +36,12 @@ async def main(mode):
 				continue
 
 			c = j.course if hasattr(j, "scheduleId") else j
+			if hasattr(c.collection, "slug"):
+				if c.collection.slug not in saved["collection"]:
+					collections.append(c.collection)
+					append = {c.collection.slug: c.collection.name}
+					saved["collection"] = {**saved["collection"], **append}
+					logging.info(str(c.collection))
 			if c.courseId not in savedID["today"]:
 				if (mode == "today") or ((mode == "sitemap") 
 				and (c.courseId not in savedID["sitemap"])):
@@ -47,6 +54,20 @@ async def main(mode):
 							times += 1
 							logging.info(str(j))
 	logging.info(f"找到 {len(courses)} 个新课程共 {times} 次排课")
+
+	for collection in collections:
+
+		text, image, keyboard = teleinfo(collection = collection)
+
+		push = {
+			"mode": "photo-text",
+			"text": text,
+			"image": image,
+			"parse": "MARK",
+			"chat_id": chat_ids[0],
+			"keyboard": keyboard
+		}
+		await async_post(push)
 
 	for course in courses:
 		schedules = sorted(courses[course])
@@ -92,7 +113,7 @@ if __name__ == "__main__":
 
 	setLogger(logging.INFO, os.path.basename(__file__))
 	logging.info("程序启动")
-	loop = asyncio.new_event_loop()
+	loop = sync(None)
 	loop.run_until_complete(main(argv[1]))
 	__clean(loop)
 
