@@ -51,8 +51,11 @@ def __clean(loop = None):
 	
 	async def __clean_task(loop):
 		await __session_pool[loop].close()
+		del __session_pool[loop]
 
 	for loop in l:
+		if loop.is_closed():
+			return
 		if not loop.is_running():
 			loop.run_until_complete(__clean_task(loop))
 		else:
@@ -547,7 +550,7 @@ class Collection(asyncObject):
 
 	def __eq__(self, other):
 		try:
-			return self.__hash__ == other.__hash__
+			return self.__hash__() == other.__hash__()
 		except:
 			return False
 
@@ -638,7 +641,7 @@ async def Sitemap(rootPath):
 def parseURL(url, coro = False):
 	coursePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*))"
 	schedulePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*)/(6[0-9]{18})(\/\?sn\=([R0-9]{4}))?)"
-	collectionPattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/collection/([a-z0-9\-]*))(/\S*)"
+	collectionPattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/collection/([a-z0-9\-]*))(/\S*)?"
 	
 	course = re.findall(coursePattern, url, re.I)
 	schedule = re.findall(schedulePattern, url, re.I)
@@ -672,8 +675,8 @@ def parseURL(url, coro = False):
 		else:
 			parse = {
 				"type": "collection",
-				"rootPath": course[0][1].replace(".cn", "/cn"),
-				"slug": course[0][2],
+				"rootPath": collection[0][1].replace(".cn", "/cn"),
+				"slug": collection[0][2],
 				"url": f"https://www.apple.com{collection[0][1]}/today/collection/{collection[0][2]}"
 			}
 	else:
@@ -720,8 +723,8 @@ def teleinfo(course = None, schedules = None, collection = None, mode = "new"):
 *系列简介*
 {collection.description['long']}{collab}""")
 
-		image = collection.images["landscape"]
-		keyboard = [[["了解系列", collection.url]]]
+		image = collection.images["landscape"] + "?output-format=jpg&output-quality=80&resize=1280:*"
+		keyboard = [[["了解系列", collection.url], ["下载配图", collection.images["landscape"]]]]
 
 		return text, image, keyboard
 
@@ -795,6 +798,6 @@ def teleinfo(course = None, schedules = None, collection = None, mode = "new"):
 {course.description['long']}\n
 {signingPrefix}{signing}""")
 
-	image = course.images["landscape"]
+	image = course.images["landscape"] + "?output-format=jpg&output-quality=80&resize=1280:*"
 
 	return text, image, keyboard
