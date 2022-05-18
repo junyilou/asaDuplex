@@ -3432,7 +3432,7 @@
               "timeZone": "America/Denver",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
-              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "1685 Briargate Parkway\nSuite 315\nColorado Springs, CO 80920 ",
@@ -6998,7 +6998,7 @@
               "timeZone": "America/New_York",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
-              "appClipInstoreCheckoutMode": "SELF_CHECKOUT",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
               "storeAddress": "100 Briarwood Circle\nAnn Arbor, MI 48108 ",
@@ -9726,14 +9726,14 @@
                 "https://rtlimages.apple.com/cmc/dieter/store/16_9/R309.png"
               ],
               "secureImageURL": [],
-              "locationText": "Glattzentrum beixa0Wallisellen",
+              "locationText": "Glattzentrum bei Wallisellen",
               "timeZone": "Europe/Zurich",
               "instoreCheckoutMode": "SCAN_AND_BUY",
               "selfCheckout": "SNB",
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Einkaufszentrum Glatt\nNeue Winterthurerstrasse 99\n8301 Glattzentrum beixa0Wallisellen",
+              "storeAddress": "Einkaufszentrum Glatt\nNeue Winterthurerstrasse 99\n8301 Glattzentrum bei Wallisellen",
               "phoneNumber": "(044) 832-81-00"
             }
           ]
@@ -11352,7 +11352,7 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/MX",
       "states": [
         {
-          "stateName": "CDMX",
+          "stateName": "Ciudad de México",
           "stores": [
             {
               "storeNumber": "R740",
@@ -11400,7 +11400,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNB",
               "enableInStoreMode": true,
-              "storeAddress": "Avenida Vasco de Quiroga 3800\nLomas de Santa Fe, Antigua Mina de Totoloapa, Cuajimalpa de Morelos, 05109",
+              "storeAddress": "Avenida Vasco de Quiroga 3800\nLomas de Santa Fe, Antigua Mina de Totoloapa Cuajimalpa de Morelos, 05109",
               "phoneNumber": "(55) 10376400"
             }
           ]
@@ -12386,7 +12386,34 @@
       "countryFlag": "https://rtlimages.apple.com/cmc/dieter/flags/NL",
       "states": [
         {
-          "stateName": "North Holland",
+          "stateName": "Zuid-Holland",
+          "stores": [
+            {
+              "storeNumber": "R540",
+              "countryCode": "NL",
+              "storeName": "Den Haag",
+              "latitude": "52.0779495",
+              "longitude": "4.3113198",
+              "storeRadius": "50",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R540.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "The Hague",
+              "timeZone": "Europe/Amsterdam",
+              "instoreCheckoutMode": "SCAN_AND_BUY",
+              "selfCheckout": "SNB",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipSelfCheckout": "SNB",
+              "enableInStoreMode": true,
+              "storeAddress": "Passage 39\n2511 AB The Hague",
+              "phoneNumber": "(070) 7010300"
+            }
+          ]
+        },
+        {
+          "stateName": "Noord-Holland",
           "stores": [
             {
               "storeNumber": "R408",
@@ -12431,33 +12458,6 @@
               "enableInStoreMode": true,
               "storeAddress": "Grote Houtstraat 99\n2011 SH Haarlem",
               "phoneNumber": "(023) 7993800"
-            }
-          ]
-        },
-        {
-          "stateName": "South Holland",
-          "stores": [
-            {
-              "storeNumber": "R540",
-              "countryCode": "NL",
-              "storeName": "Den Haag",
-              "latitude": "52.0779495",
-              "longitude": "4.3113198",
-              "storeRadius": "50",
-              "accuracyThreshold": "500",
-              "imageURL": [
-                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R540.png"
-              ],
-              "secureImageURL": [],
-              "locationText": "The Hague",
-              "timeZone": "Europe/Amsterdam",
-              "instoreCheckoutMode": "SCAN_AND_BUY",
-              "selfCheckout": "SNB",
-              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
-              "appClipSelfCheckout": "SNB",
-              "enableInStoreMode": true,
-              "storeAddress": "Passage 39\n2511 AB The Hague",
-              "phoneNumber": "(070) 7010300"
             }
           ]
         }
