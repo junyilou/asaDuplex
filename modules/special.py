@@ -49,7 +49,7 @@ async def speHours(session, sid, limit = 14):
 		if not j:
 			raise ValueError()
 	except:
-		logging.error(f"未能获得 R{sid} 营业时间信息")
+		logging.getLogger("special").error(f"未能获得 R{sid} 营业时间信息")
 		return {}
 	if not j:
 		return {}
