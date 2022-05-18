@@ -30,9 +30,11 @@
 
 #### 代码依赖
 
-本代码的网络 I/O 请求依赖 [requests](https://github.com/psf/requests)、[aiohttp](https://github.com/aio-libs/aiohttp)，为了分析 Today at Apple 活动所在地区的时区信息，依赖 pytz，可通过 pip 安装
+本代码的网络 I/O 请求依赖 [aiohttp](https://github.com/aio-libs/aiohttp)，可通过 pip 安装，库中需要网络请求的函数全部为协程函数，需要使用 `await` 关键字等待，但也提供了简单的异步转同步方法 `sync()`，可在复杂度不高的代码中使用
 
-## 如何使用
+为了合理获取时区信息，依赖 [pytz](https://pythonhosted.org/pytz/)，可通过 pip 安装
+
+## 如何利用
 
 * storeInfo.json 提供了极为丰富的 Apple Store 零售店信息，可供查阅
 
@@ -58,27 +60,26 @@
   ['重庆 (3)', '580', '云南 (1)']
   ```
 
-  * coroutine `storeDict(session, storeid, mode = "dict", sif = None)`
+  * coroutine `storeDict(storeid = None, sif = None, session = None, mode = "dict")`
 
   传入零售店店号，联网从 Apple 官网获取零售店基本信息简单处理后返回。
 
   ```python
-  >>> async with aiohttp.ClientSession() as session:
-  ...     await storeDict(session, 480)
+  >>> await storeDict(storeid = 480)
   
   {'latitude': 29.560981, 'longitude': 106.572272, 'timezone': 'Asia/Shanghai', 'telephone': '400-617-1224', 'address': '重庆市渝中区邹容路 108 号', 'province': '重庆, 重庆, 400010', 'isnso': False, 'regular': [{'name': 'Saturday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Wednesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Friday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Monday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Tuesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Thursday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Sunday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}], 'special': []}
   ```
-
+  
   * function `storeInfo(storeid)`
-
+  
   传入零售店店号，不联网从本地返回基本零售店信息。
-
+  
   ```python
   >>> storeInfo(580)
   
   {'name': ['成都太古里', 'Taikoo Li Chengdu'], 'flag': '🇨🇳', 'nso': '2015-11-21', 'last': '07 Jan 2022 08:59:07', 'website': 'taikoolichengdu', 'key': {'state': '四川', 'city': '成都', 'alter': 'Sichuan Chengdu'}}
   ```
-
+  
 * today.py 定义了 Today at Apple 的对象，每个课程、排课均为一个 `class`，具有丰富的属性和方法
 
   * 零售店对象定义了获得课程和排课方法等
@@ -151,8 +152,6 @@
   
   此外，还提供了将 `Course` 和 `Schedule` 对象的信息进行提取，并综合至一条 Telegram 消息中的函数（效果如下图）；分析 Today at Apple 网站地图 XML Sitemap 的 `Sitemap` 对象等。
   
-  此模块中，涉及到网络请求的函数均适用 aiohttp 的异步 I/O，故部分对象初始化和方法调用需要使用 `await` 关键字；代码中，也提供了异步转同步方法 `sync()`，方便在复杂度不高的代码中同步使用。网络请求使用线程池从而无需用户手动创建网络请求线程。
-  
 * Hours.py、Today.py 等代码设计为可以比较本地已经保存的结果（例如已经记录的 Today at Apple 活动）寻找差异并输出图文结果，这些数据也被用到了果铺知道 Bot 和果铺知道 Channel 中。
 
   ![today](Retail/today.jpg)
@@ -168,21 +167,23 @@
 
 ## 库历史
 
-2019 年 8 月：迁移库并命名 asaDuplex，所有代码要求使用 Python 3。
+2019 年 6 月：迁移库并命名 asaDuplex。[[commit]](https://github.com/junyilou/asaduplex/commit/e405a00ab74969a7dcacb719bdab2847e59becb8)
 
-2019 年 11 月：停止通过 while True 和 time.sleep 进行持续的前台运行，改为一次执行代码，引入 logging 做为输出。
+2019 年 8 月：完全升级 Python 3。[[commit]](https://github.com/junyilou/asaduplex/commit/a6ac48353a318586751e4a7f901c8c4d2692b26d)
 
-2020 年 11 月：停止通过 IFTTT Webhooks 将代码结果发至 iOS 用户，改为使用 Telegram Bot 推送结果，同时也支持了在发送的内容中应用 Markdown 文本样式、按钮、链接等。
+2019 年 11 月：停止通过 while True 和 time.sleep 进行持续的前台运行，改为一次执行代码，引入 logging 做为输出。[[commit]](https://github.com/junyilou/asaduplex/commit/6ca8a09d112fe3a67ac1d28f53ec6446f99b83e7)
 
-2021 年 2 月：将 specialHours (现 Hours)、Rtlimages (现 Rtl) 变得更加模块化，使数据获取和数据处理分析分开，方便其他代码可以利用相同的数据实现其他的功能。
+2020 年 11 月：停止通过 IFTTT Webhooks 将代码结果发至 iOS 用户，改为使用 Telegram Bot 推送结果，同时也支持了在发送的内容中应用 Markdown 文本样式、按钮、链接等。[[commit]](https://github.com/junyilou/asaduplex/commit/bd1acf74a33dcb44c2076d1aac67559b547d7a0b)
+
+2021 年 2 月：将 specialHours (现 Hours)、Rtlimages (现 Rtl) 变得更加模块化，使数据获取和数据处理分析分开，方便其他代码可以利用相同的数据实现其他的功能。[[commit1]](https://github.com/junyilou/asaduplex/commit/f2d31a134ec074ae699c8df08ab916865d799dc4) [[commit2]](https://github.com/junyilou/asaduplex/commit/0f9157af532ae5f91831217d574099a7841ee247)
 
 2021 年 3 月：利用 asaDuplex 中的部分代码，推出果铺知道 Telegram Bot，方便用户快速查询 Apple Store 零售店信息及特别营业时间信息。
 
-2021 年 8 月：进一步模块化代码，并将代码结果推送剥离，不再依赖 Telegram Bot 做结果推送。
+2021 年 8 月：进一步模块化代码，并将代码结果推送剥离，不再依赖 Telegram Bot 做结果推送。[[commit]](https://github.com/junyilou/asaduplex/commit/9537444cadaf4b6b989ff26f3b2313f3aaf8c17c)
 
-2022 年 3 月：使用 asyncio、aiohttp 异步化核心代码，极大幅度的提高运行速度。
+2022 年 3 月：使用 asyncio、aiohttp 异步化核心代码，极大幅度的提高运行速度。[[commit]](https://github.com/junyilou/asaduplex/commit/6c7e3b729ab1ced4a8ae8888a5930fc55df8319e)
 
-2022 年 4 月：使用面向对象的思想，极高的提升了 Today at Apple 对象的多样性
+2022 年 4 月：使用面向对象的思想，极高的提升了 Today at Apple 对象的多样性。[[commit]](https://github.com/junyilou/asaduplex/commit/4d98ae7f00312630479243184e715c929afd5b7a)
 
 ## ~~已移除的代码~~
 

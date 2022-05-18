@@ -1,6 +1,8 @@
 import os
+import json
 import logging
 import asyncio
+import aiohttp
 
 def disMarkdown(text):
 	temp = text
@@ -18,11 +20,17 @@ def timezoneText(dtime):
 		tzText = f"GMT{int(dx):+}:{60 * float('.' + dy):0>2.0f}"
 	return tzText
 
-async def request(session, url, ident = None, mode = None, retryNum = 1, ensureAns = True, **kwargs):
+async def request(session = None, url = None, ident = None, mode = None, retryNum = 1, ensureAns = True, **kwargs):
 	method = kwargs.get("method", "GET")
 	pop = kwargs.pop("method") if "method" in kwargs else None
 
-	logging.debug(f"[aiohttp request] [{'MTH ' + method:^9}] '{url}', [ident] {ident}, [mode] {mode}, [args] {kwargs}, [retry] {retryNum}")
+	close_session = False
+	if session == None:
+		logging.getLogger("constants.request").debug("Created new Session")
+		session = aiohttp.ClientSession()
+		close_session = True
+
+	logging.getLogger("constants.request").debug(f"[{'MTH ' + method:^9}] '{url}', [ident] {ident}, [mode] {mode}, [args] {kwargs}, [retry] {retryNum}")
 	while retryNum:
 		try:
 			async with session.request(url = url, method = method, **kwargs) as resp:
@@ -33,28 +41,35 @@ async def request(session, url, ident = None, mode = None, retryNum = 1, ensureA
 				elif mode == "status":
 					r = resp.status
 				elif mode == "json":
-					r = await resp.json()
+					try:
+						r = await resp.json()
+					except:
+						r = await resp.text()
+						r = json.loads(r)
 				else:
 					r = await resp.text()
-			logging.debug(f"[aiohttp request] [Status {resp.status}] '{url}'")
+			logging.getLogger("constants.request").debug(f"[Status {resp.status}] '{url}'")
+			if close_session:
+				await session.close()
 			return (r, ident) if ident else r
 		except Exception as exp:
 			if retryNum == 1:
-				logging.debug(f"[aiohttp request] [Abandoned] '{url}', [ident] {ident}, [exp] {exp}")
+				logging.getLogger("constants.request").debug(f"[Abandoned] '{url}', [ident] {ident}, [exp] {exp}")
+				if close_session:
+					await session.close()
 				if ensureAns:
 					return (exp, ident) if ident else exp
 				else:
 					raise exp
 			else:
 				retryNum -= 1
-				logging.debug(f"[aiohttp request] [Exception] '{url}', [ident] {ident}, [exp] {exp}, [retry] {retryNum} left")
+				logging.getLogger("constants.request").debug(f"[Exception] '{url}', [ident] {ident}, [exp] {exp}, [retry] {retryNum} left")
 
-def sync(coroutine = None):
+def sync(coroutine = None, loop = None):
 	try:
-		loop = asyncio.get_event_loop()
+		loop = asyncio.get_running_loop() if loop == None else loop
 	except RuntimeError:
 		loop = asyncio.new_event_loop()
-		asyncio.set_event_loop(loop)
 	if coroutine != None:
 		return loop.run_until_complete(coroutine)
 	else:
@@ -64,11 +79,11 @@ def setLogger(level, name):
 	if os.path.isdir('logs'):
 		logging.basicConfig(
 			filename = f"logs/{name}.log",
-			format = '[%(asctime)s %(levelname)s] %(message)s',
+			format = '[%(asctime)s %(name)s %(levelname)s] %(message)s',
 			level = level, filemode = 'a', datefmt = '%F %T')
 	else:
 		logging.basicConfig(
-			format = '[%(process)d %(asctime)s %(levelname)s] %(message)s',
+			format = '[%(process)d %(asctime)s %(name)s %(levelname)s] %(message)s',
 			level = level, datefmt = '%T')
 
 asaVersion = "5.15.0"
@@ -101,10 +116,12 @@ localeNation = {'🇺🇸': 'en_US', '🇨🇳': 'zh_CN', '🇬🇧': 'en_GB', '
 partSample = {'🇺🇸': 'AM', '🇨🇳': 'FE', '🇬🇧': 'ZM', '🇨🇦': 'AM', '🇦🇺': 'FE', '🇫🇷': 'ZM', 
 	'🇮🇹': 'ZM', '🇩🇪': 'ZM', '🇪🇸': 'ZM', '🇯🇵': 'FE', '🇳🇱': 'ZM', 
 	'🇸🇪': 'ZM', '🇸🇬': 'FE', '🇦🇹': 'ZM', 
-	'🇰🇷': 'FE', '🇹🇭': 'FE', '🇭🇰': 'FE', '🇹🇼': 'FE', '🇮🇳': 'ZM'}
-partRuleFull = "([FGHMNPS][0-9A-Z]{3}[0-9][A-Z]{1,2}/[A-Z])"
-partRuleCheck = "([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?)"
-partSpecialProduct = "(Z[0-9A-Z]{3}&[\\s\\S]*)"
+	'🇰🇷': 'FE', '🇹🇭': 'FE', '🇭🇰': 'FE', '🇹🇼': 'FE', '🇮🇳': 'ZM'} # for fulfillment-messages
+
+partRuleBase = r"[FGHMNPS][0-9A-Z]{3}[0-9]"
+partRuleFull = r".*([FGHMNPS][0-9A-Z]{3}[0-9][A-Z]{1,2}/[A-Z]).*"
+partRuleCheck = r".*([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?).*"
+partSpecialProduct = r".*(Z[0-9A-Z]{3}(&.*)?).*"
 
 DIFFhead = """
 <!DOCTYPE html>

@@ -69,7 +69,7 @@ def storeURL(storeid = None, sif = None, mode = None):
 	except KeyError:
 		return None
 
-async def storeDict(session, storeid = None, sif = None, mode = "dict"):
+async def storeDict(storeid = None, sif = None, session = None, mode = "dict"):
 	if storeid:
 		sif = storeInfo(storeid)
 	elif sif:
@@ -140,9 +140,11 @@ def stateReplace(rstores):
 				continue
 			stateName, stateStore = getState(store)
 			if all([i in stores for i in stateStore]):
-				stores[stores.index(store)] = f"{stateName} ({len(stateStore)})"
-				[stores.remove(j) for j in stateStore if j != store]
-				flag = True
+				stateLen = len(stateStore)
+				if stateLen != 1:
+					flag = True
+					stores[stores.index(store)] = f"{stateName} ({len(stateStore)})"
+					[stores.remove(j) for j in stateStore if j != store]
 			if flag:
 				break
 		if flag == False:
@@ -195,7 +197,7 @@ def dieterURL(sid, mode = 0):
 	'''
 	return f"https://rtlimages.apple.com/cmc/dieter/store/16_9/R{sid:0>3}.png?{digest}"
 
-async def DieterHeader(session, rtl):
+async def DieterHeader(rtl, session = None):
 	sid = StoreID(rtl)
 	sid = sid[0][0] if sid != [] else rtl
 	try:
@@ -209,9 +211,11 @@ def library():
 	global storeLibrary, Order
 	storeLibrary = {}
 	for i in infoJSON["name"]:
-		comp = [infoJSON["name"][i]] if type(infoJSON["name"][i]) == str else infoJSON["name"][i]
+		comp = [infoJSON["name"][i]] if type(infoJSON["name"][i]) == str else infoJSON["name"][i].copy()
+		storeLibrary[i] = comp.copy()
 		for j in comp:
-			storeLibrary[i] = storeLibrary.get(i, []) + [j]
+			if " " in j:
+				storeLibrary[i].append(j.replace(" ", ""))
 	for i in infoJSON["key"]:
 		keys = []
 		for j in infoJSON["key"][i]:

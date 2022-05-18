@@ -114,6 +114,7 @@ if __name__ == "__main__":
 	setLogger(logging.INFO, os.path.basename(__file__))
 	logging.info("程序启动")
 	loop = sync(None)
+	asyncio.set_event_loop(loop)
 	loop.run_until_complete(main(argv[1]))
 	__clean(loop)
 

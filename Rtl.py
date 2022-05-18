@@ -35,7 +35,7 @@ async def down(session, rtl, isSpecial):
 	except KeyError: 
 		savedDatetime = None
 	try:
-		remote = await DieterHeader(session, rtl)
+		remote = await DieterHeader(rtl = rtl, session = session)
 		remoteDatetime = datetime.strptime(remote, "%d %b %Y %H:%M:%S")
 	except TypeError:
 		remoteDatetime = None
