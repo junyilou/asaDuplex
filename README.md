@@ -9,9 +9,9 @@
 #### 代码
 
 * allStoresInfoLite.py: 取得 Apple Store 零售店服务器信息
-* Recruitment.py: 取得全球 Specialist 招聘情况以获得未来新店
-* Rtl.py: 取得 Apple Store 零售店服务器图片更新
 * Hours.py: 取得 Apple Store 特别营业时间信息
+* Jobs.py: 取得全球 Apple 零售招聘情况以获得未来新店
+* Rtl.py: 取得 Apple Store 零售店服务器图片更新
 * Today.py: 取得最新 Today at Apple 活动
 
 #### 模块
@@ -24,7 +24,7 @@
 #### 文本
 
 * savedEvent.json: 由 Today.py 生成的，已经检测到并保存的 Today at Apple 活动列表
-* savedJobs.txt: 由 Recruitment.py 生成的，已经在检测到招聘的零售店编号
+* savedJobs.json: 由 Jobs.py 生成的，已经在检测到招聘的零售店编号
 * storeInfo.json: 全球 Apple Store 名称（包含部分曾用名、ASCII 兼容名等以便于更广的匹配）、店号、国家或地区旗帜、开店时间、官网图片最后修改时间、URL 标签、全球各国地区零售店按行政区划字典、用于模糊搜索的关键字 alias 等
 * storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的零售店详细信息
 
