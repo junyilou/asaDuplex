@@ -13,11 +13,15 @@ __session_pool = {}
 API_ROOT = "https://www.apple.com/today-bff/"
 
 API = {
-	"landing": API_ROOT + "landing/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}",
+	"landing": {
+		"store": API_ROOT + "landing/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}",
+		"nearby": API_ROOT + "landing/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&nearby=true",
+	},
 	"session": {
 		"course": API_ROOT + "session/course?stageRootPath={ROOTPATH}&courseSlug={COURSESLUG}",
 		"schedule": API_ROOT + "session/schedule?stageRootPath={ROOTPATH}&courseSlug={COURSESLUG}&scheduleId={SCHEDULEID}",
-		"store": API_ROOT + "session/course/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&courseSlug={COURSESLUG}"
+		"store": API_ROOT + "session/course/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&courseSlug={COURSESLUG}",
+		"nearby": API_ROOT + "session/course/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&courseSlug={COURSESLUG}",
 	},
 	"collection": {
 		"geo": API_ROOT + "collection/geo?stageRootPath={ROOTPATH}&collectionSlug={COLLECTIONSLUG}",
@@ -139,11 +143,12 @@ class Store():
 	def __repr__(self):
 		return f'<Store "{self.name}" ({self.sid}), "{self.slug}", "{self.rootPath}">'
 
-	async def getCourses(self):
+	async def getCourses(self, ensure = True):
 
 		r = await request(
 			session = get_session(),
-			url = API["landing"].format(STORESLUG = self.slug, ROOTPATH = self.rootPath),
+			url = (API["landing"]["store"] if ensure else API["landing"]["nearby"]).format(
+				STORESLUG = self.slug, ROOTPATH = self.rootPath),
 			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM, headers = userAgent)
 		
 		try:
@@ -161,11 +166,12 @@ class Store():
 			) for i in raw["courses"]]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
-	async def getSchedules(self):
+	async def getSchedules(self, ensure = True):
 
 		r = await request(
 			session = get_session(),
-			url = API["landing"].format(STORESLUG = self.slug, ROOTPATH = self.rootPath),
+			url = (API["landing"]["store"] if ensure else API["landing"]["nearby"]).format(
+				STORESLUG = self.slug, ROOTPATH = self.rootPath),
 			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM, headers = userAgent)
 		
 		try:
@@ -191,7 +197,7 @@ class Store():
 					moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
 					fuzzy = False)
 				) for i in raw["schedules"] if (raw["schedules"][i]["storeNum"] == self.sid)
-					 or ("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"])
+					 or ("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"]) or (not ensure)
 			]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
@@ -333,11 +339,12 @@ class Course(asyncObject):
 			"))+[\'\"]?", self.json()) if i[0] not in result]
 		return result
 
-	async def getSchedules(self, store):
+	async def getSchedules(self, store, ensure = True):
 
 		r = await request(
 			session = get_session(),
-			url = API["session"]["store"].format(STORESLUG = store.slug, COURSESLUG = self.slug, ROOTPATH = store.rootPath),
+			url = (API["session"]["store"] if ensure else API["session"]["nearby"]).format(
+				STORESLUG = store.slug, COURSESLUG = self.slug, ROOTPATH = store.rootPath),
 			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
 		
 		try:
@@ -364,7 +371,7 @@ class Course(asyncObject):
 				) for i in raw["schedules"] if 
 					(raw["schedules"][i]["courseId"] == self.courseId) and 
 					((raw["schedules"][i]["storeNum"] == store.sid) or 
-					("VIRTUAL" in raw["courses"][self.courseId]["type"]))
+					("VIRTUAL" in raw["courses"][self.courseId]["type"]) or (not ensure))
 			]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
@@ -647,6 +654,9 @@ def parseURL(url, coro = False):
 	schedule = re.findall(schedulePattern, url, re.I)
 	collection = re.findall(collectionPattern, url, re.I)
 
+	async def nothing():
+		return None
+
 	if schedule:
 		if coro:
 			parse = getSchedule(slug = schedule[0][2], scheduleId = schedule[0][3], rootPath = schedule[0][1].replace(".cn", "/cn"))
@@ -680,7 +690,10 @@ def parseURL(url, coro = False):
 				"url": f"https://www.apple.com{collection[0][1]}/today/collection/{collection[0][2]}"
 			}
 	else:
-		parse = None
+		if coro:
+			parse = nothing()
+		else:
+			parse = None
 	return parse
 
 def validDates(ex, runtime, process = True):
@@ -702,7 +715,70 @@ def validDates(ex, runtime, process = True):
 	else:
 		return v
 
-def teleinfo(course = None, schedules = None, collection = None, mode = "new"):
+lang = {
+	True: {
+		"OR": "或",
+		"NEW": "新",
+		"JOINT": "、",
+		"COURSE": "课程",
+		"COLLECTION": "系列",
+		"VIRTUAL": "线上活动",
+		"COLLAB_WITH": "*合作机构*",
+		"DOWNLOAD_IMAGE": "下载图片",
+		"LEARN_COLLECTION": "了解系列",
+		"LEARN_COURSE": "了解课程",
+		"INTRO_COLLECTION": "*系列简介*",
+		"INTRO_COURSE": "*课程简介*",
+		"SIGN_UP": "预约课程",
+		"GENERAL_STORE": "Apple Store 零售店",
+		"IN_COLLECTION": "{NAME} 系列课程\n",
+		"START_FROM": "{START} – {END}{TZTEXT}",
+		"START_FROM_ALL": "{START} – {END}{TZTEXT} 起，共 {AMOUNT} 次排课",
+		"GENERAL_TIMING": "尚无可确定的课程时间",
+		"SIGN_UP_ALL": "所有场次均可预约",
+		"SIGN_UP_NONE": "所有场次均不可预约",
+		"SIGN_UP_SOME": "✅ {AALL} 场中的 {AOK} 场可预约",
+		"SIGN_UP_SINGLE": "✅ 本场活动可预约",
+		"SIGN_UP_NOT": "❌ 本场活动不可预约",
+		"SIGN_UP_STATUS": "*可预约状态*",
+		"FORMAT_START": "%-m 月 %-d 日 %-H:%M",
+		"FORMAT_END": "%-H:%M",
+		"MAIN1": "#TodayatApple {NEW}{TYPE}\n\n*{NAME}*\n\n{INTROTITLE}\n{INTRO}{COLLAB}",
+		"MAIN2": "#TodayatApple {NEW}{TYPE}\n\n{PREFIX}*{NAME}*\n\n🗺️ {LOCATION}\n🕘 {TIME}\n\n{INTROTITLE}\n{INTRO}\n\n{SIGNPREFIX}\n{SIGN}"
+	},
+	False: {
+		"OR": "/",
+		"NEW": "",
+		"JOINT": ", ",
+		"COURSE": "Course",
+		"COLLECTION": "Collection",
+		"VIRTUAL": "Virtual Event",
+		"COLLAB_WITH": "*In collaboration with*",
+		"LEARN_COLLECTION": "Learn More",
+		"DOWNLOAD_IMAGE": "Poster",
+		"LEARN_COURSE": "Learn More",
+		"INTRO_COLLECTION": "*Introduction*",
+		"INTRO_COURSE": "*Introduction*",
+		"SIGN_UP": "Sign Up",
+		"GENERAL_STORE": "Apple Store",
+		"IN_COLLECTION": "In Collection {NAME}\n",
+		"START_FROM": "{START} – {END}{TZTEXT}",
+		"START_FROM_ALL": "{AMOUNT} Schedule{PLURAL}, starting {START} – {END}{TZTEXT}",
+		"GENERAL_TIMING": "Indeterminable Time",
+		"SIGN_UP_ALL": "All available for sign up",
+		"SIGN_UP_NONE": "Not available for sign up",
+		"SIGN_UP_SOME": "✅ {AOK} of {AALL} available for sign up",
+		"SIGN_UP_SINGLE": "✅ Available for sign up",
+		"SIGN_UP_NOT": "❌ Not available for sign up",
+		"SIGN_UP_STATUS": "*Sign Up status*",
+		"FORMAT_START": "%b %-d, %-H:%M",
+		"FORMAT_END": "%-H:%M",
+		"MAIN1": "#TodayatApple {NEW}{TYPE}\n\n*{NAME}*\n\n{INTROTITLE}\n{INTRO}{COLLAB}",
+		"MAIN2": "#TodayatApple {NEW}{TYPE}\n\n{PREFIX}*{NAME}*\n\n🗺️ {LOCATION}\n🕘 {TIME}\n\n{INTROTITLE}\n{INTRO}\n\n{SIGNPREFIX}\n{SIGN}"
+	}
+}
+
+def teleinfo(course = None, schedules = None, collection = None, mode = "new", userLang = True):
 	runtime = datetime.now()
 	offset = runtime.astimezone().utcoffset().total_seconds() / 3600
 
@@ -711,25 +787,29 @@ def teleinfo(course = None, schedules = None, collection = None, mode = "new"):
 			collab = []
 			try:
 				for i in collection.collaboration:
-					collab.append(f"{i['name']}\n{i['description']}")
-				collab = "\n\n*合作机构*\n" + "\n\n".join(collab)
+					collab.append(f"*{i['name']}*\n{i['description']}")
+				collab = f"\n\n{lang[userLang]['COLLAB_WITH']}\n" + "\n\n".join(collab)
 			except:
 				collab = ""
 		else:
 			collab = ""
 
-		text = disMarkdown(f"""#TodayatApple {'新' if mode == "new" else ''}系列\n
-*{collection.name}*\n
-*系列简介*
-{collection.description['long']}{collab}""")
+		text = disMarkdown(lang[userLang]["MAIN1"].format(
+			NEW = lang[userLang]["NEW"] if mode == "new" else '',
+			TYPE = lang[userLang]["COLLECTION"],
+			NAME = collection.name,
+			INTROTITLE = lang[userLang]["INTRO_COLLECTION"],
+			INTRO = collection.description['long'],
+			COLLAB = collab
+		))
 
 		image = collection.images["landscape"] + "?output-format=jpg&output-quality=80&resize=1280:*"
-		keyboard = [[["了解系列", collection.url], ["下载配图", collection.images["landscape"]]]]
+		keyboard = [[[lang[userLang]["LEARN_COLLECTION"], collection.url], [lang[userLang]["DOWNLOAD_IMAGE"], collection.images["landscape"]]]]
 
 		return text, image, keyboard
 
 	if course.virtual:
-		courseStore = "线上活动"
+		courseStore = lang[userLang]["VIRTUAL"]
 	elif schedules != []:
 		availableStore = []
 		for schedule in schedules:
@@ -741,10 +821,14 @@ def teleinfo(course = None, schedules = None, collection = None, mode = "new"):
 				textStore[textStore.index(a)] = actualName(storeInfo(a)["name"])
 		courseStore = "、".join(textStore)
 	else:
-		courseStore = "Apple Store 零售店"
+		courseStore = lang[userLang]["GENERAL_STORE"]
 
-	specialPrefix = (f"{course.collection.name} 系列活动\n" if hasattr(course.collection, "slug") else
-		f"{course.collection} 系列活动\n") if course.collection != None else ""
+	if course.collection == None:
+		specialPrefix = ""
+	elif hasattr(course.collection, "slug"):
+		specialPrefix = lang[userLang]["IN_COLLECTION"].format(NAME = course.collection.name)
+	else:
+		specialPrefix = lang[userLang]["IN_COLLECTION"].format(NAME = course.collection)
 
 	schedules.sort()
 	if schedules != []:
@@ -760,43 +844,59 @@ def teleinfo(course = None, schedules = None, collection = None, mode = "new"):
 			tzText = ""
 		
 		if len(schedules) > 1:
-			timing = f"{schedule.datetimeStart()} – {schedule.datetimeEnd()}{tzText} 起，共 {len(schedules)} 次排课"
+			timing = lang[userLang]["START_FROM_ALL"].format(
+				START = schedule.datetimeStart(form = lang[userLang]["FORMAT_START"]),
+				END = schedule.datetimeEnd(form = lang[userLang]["FORMAT_END"]),
+				TZTEXT = tzText, AMOUNT = len(schedules), PLURAL = "s" if len(schedules) > 1 else "")
 		else:
-			timing = f"{schedule.datetimeStart()} – {schedule.datetimeEnd()}{tzText}"
-		keyboard = [[["预约课程", schedule.url]]]
+			timing = lang[userLang]["START_FROM"].format(
+				START = schedule.datetimeStart(form = lang[userLang]["FORMAT_START"]),
+				END = schedule.datetimeEnd(form = lang[userLang]["FORMAT_END"]),
+				TZTEXT = tzText)
+		keyboard = [[[lang[userLang]["SIGN_UP"], schedule.url]]]
 	else:
 		try:
 			date = re.findall(r"[0-9]{6}", course.slug)[-1]
 			valid = validDates(date, runtime)
 		except IndexError:
 			valid = ""
-		timing = "尚无可确定的课程时间" if valid == "" else valid
-		keyboard = [[["了解课程", course.url]]]
+		timing = lang[userLang]["GENERAL_TIMING"] if valid == "" else valid
+		keyboard = [[[lang[userLang]["LEARN_COURSE"], course.url]]]
 
-	keyboard[0].append(["下载配图", course.images["landscape"]])
+	keyboard[0].append([lang[userLang]["DOWNLOAD_IMAGE"], course.images["landscape"]])
 
-	if schedules != []:
+	if mode == "new":
+		signing = signingPrefix = ""
+	elif schedules != []:
 		rsvp = [i.status for i in schedules]
 		upCount = rsvp.count(True)
 		seCount = len(schedules)
 		if seCount > 1:
 			if upCount:
-				signing = "所有场次均可预约" if upCount == seCount else f"{seCount} 场中的 {upCount} 场可预约"
+				if upCount == seCount:
+					signing = lang[userLang]["SIGN_UP_ALL"]
+				else:
+					signing = lang[userLang]["SIGN_UP_SOME"].format(AOK = upCount, AALL = seCount)
 			else:
-				signing = "所有场次均不可预约"
+				signing = lang[userLang]["SIGN_UP_NONE"]
 		else:
-			signing = "本场活动可预约" if upCount else "本场活动不可预约"
-		signingPrefix = "*截止发稿时…*\n" if mode == "new" else "*可预约状态*\n"
+			signing = lang[userLang]["SIGN_UP_SINGLE"] if upCount else lang[userLang]["SIGN_UP_NOT"]
+		signingPrefix = lang[userLang]["SIGN_UP_STATUS"]
 	else:
 		signing = signingPrefix = ""
 
-	text = disMarkdown(f"""#TodayatApple {'新' if mode == "new" else ''}活动\n
-{specialPrefix}*{course.name}*\n
-🗺️ {courseStore}
-🕘 {timing}\n
-*课程简介*
-{course.description['long']}\n
-{signingPrefix}{signing}""")
+	text = disMarkdown(lang[userLang]["MAIN2"].format(
+		NEW = lang[userLang]["NEW"] if mode == "new" else '',
+		TYPE = lang[userLang]["COURSE"],
+		PREFIX = specialPrefix,
+		NAME = course.name,
+		LOCATION = courseStore,
+		TIME = timing,
+		INTROTITLE = lang[userLang]["INTRO_COURSE"],
+		INTRO = course.description["long"],
+		SIGNPREFIX = signingPrefix,
+		SIGN = signing
+	))
 
 	image = course.images["landscape"] + "?output-format=jpg&output-quality=80&resize=1280:*"
 
