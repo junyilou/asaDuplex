@@ -4,16 +4,13 @@ import json
 import logging
 import asyncio
 import aiohttp
-import time
+from base64 import b64encode
 from datetime import datetime, timezone, date
 
+from bot import chat_ids
 from storeInfo import storeInfo, actualName, dieterURL, DieterHeader
-from modules.constants import request as request
-from modules.constants import disMarkdown, setLogger, userAgent
-
-from telegram import Bot
-from bot import tokens, chat_ids
-token = tokens[0]; chat_id = chat_ids[0]
+from modules.constants import request, disMarkdown, setLogger, userAgent
+from sdk_aliyun import async_post
 
 specialist = []
 with open("storeInfo.json") as s:
@@ -84,21 +81,17 @@ async def down(session, rtl, isSpecial):
 			storejson['last'] = dict([(k, storejson['last'][k]) for k in sorted(storejson['last'].keys())])
 		storejson['update'] = datetime.now(timezone.utc).strftime("%F %T GMT")
 
-		bot = Bot(token = token)
-		try:
-			bot.send_photo(
-				chat_id = chat_id, 
-				photo = open(savename, "rb"),
-				caption = disMarkdown(f'*来自 Rtl 的通知*\n{info}'),
-				parse_mode = 'MarkdownV2'
-			)
-		except:
-			bot.send_photo(
-				chat_id = chat_id, 
-				photo = dieterURL(rtl),
-				caption = disMarkdown(f'*来自 Rtl 的通知*\n{info}'),
-				parse_mode = 'MarkdownV2'
-			)
+		with open(savename, "rb") as r:
+			img = b64encode(r.read()).decode()
+		push = {
+			"chat_id": chat_ids[0],
+			"mode": "photo-text",
+			"image": "BASE64" + img,
+			"text": disMarkdown(f'*来自 Rtl 的通知*\n{info}'),
+			"parse": "MARK"
+		}
+		await async_post(push)
+
 		return True
 
 	elif isSpecial:
