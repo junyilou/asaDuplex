@@ -25,7 +25,8 @@ API = {
 	},
 	"collection": {
 		"geo": API_ROOT + "collection/geo?stageRootPath={ROOTPATH}&collectionSlug={COLLECTIONSLUG}",
-		"store": API_ROOT + "collection/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&collectionSlug={COLLECTIONSLUG}"
+		"store": API_ROOT + "collection/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&collectionSlug={COLLECTIONSLUG}",
+		"nearby": API_ROOT + "collection/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&collectionSlug={COLLECTIONSLUG}",
 	}
 }
 
@@ -571,11 +572,12 @@ class Collection(asyncObject):
 			"))+[\'\"]?", self.json()) if i[0] not in result]
 		return result
 
-	async def getSchedules(self, store):
+	async def getSchedules(self, store, ensure = True):
 
 		r = await request(
 			session = get_session(),
-			url = API["collection"]["store"].format(STORESLUG = store.slug, COLLECTIONSLUG = self.slug, ROOTPATH = store.rootPath),
+			url = (API["collection"]["store"] if ensure else API["collection"]["nearby"]).format(
+				STORESLUG = store.slug, COLLECTIONSLUG = self.slug, ROOTPATH = store.rootPath),
 			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
 		
 		try:
@@ -601,7 +603,9 @@ class Collection(asyncObject):
 					moreAbout = self,
 					fuzzy = False)
 				) for i in raw["schedules"] if 
-					raw["courses"][raw["schedules"][i]["courseId"]]["collectionName"] == self.name
+					(raw["courses"][raw["schedules"][i]["courseId"]]["collectionName"] == self.name) and
+					((raw["schedules"][i]["storeNum"] == store.sid) or 
+					("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"]) or (not ensure))
 			]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
