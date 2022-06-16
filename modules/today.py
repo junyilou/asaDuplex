@@ -333,10 +333,12 @@ class Course(asyncObject):
 	def json(self):
 		return json.dumps(self.raw, ensure_ascii = False)
 
-	def elements(self, accept = ["jpg", "png", "mp4", "mov"]):
-		accept = "|".join(accept)
-		result = []
-		none = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
+	def elements(self, accept = None):
+		if accept == None:
+			accept = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
+		
+		result, accept = [], "|".join(accept)
+		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
 			"))+[\'\"]?", self.json()) if i[0] not in result]
 		return result
 
@@ -551,7 +553,7 @@ class Collection(asyncObject):
 		self.raw = raw
 
 	def __repr__(self):
-		return f'<Collection {self.name}, "{self.slug}", "{self.rootPath}">'
+		return f'<Collection "{self.name}", "{self.slug}", "{self.rootPath}">'
 
 	def __hash__(self):
 		return hash(f"{self.rootPath}/{self.slug}")
@@ -565,10 +567,12 @@ class Collection(asyncObject):
 	def json(self):
 		return json.dumps(self.raw, ensure_ascii = False)
 
-	def elements(self, accept = ["jpg", "png", "mp4", "mov"]):
-		accept = "|".join(accept)
-		result = []
-		none = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
+	def elements(self, accept = None):
+		if accept == None:
+			accept = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
+		
+		result, accept = [], "|".join(accept)
+		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
 			"))+[\'\"]?", self.json()) if i[0] not in result]
 		return result
 
@@ -600,10 +604,10 @@ class Collection(asyncObject):
 					raw = raw["courses"][raw["schedules"][i]["courseId"]], 
 					courseId = raw["schedules"][i]["courseId"], 
 					rootPath = store.rootPath,
-					moreAbout = self,
+					moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
 					fuzzy = False)
 				) for i in raw["schedules"] if 
-					(raw["courses"][raw["schedules"][i]["courseId"]]["collectionName"] == self.name) and
+					self.slug in [m["collId"] for m in raw["heroGallery"] if m["heroType"] == "TAG"] and 
 					((raw["schedules"][i]["storeNum"] == store.sid) or 
 					("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"]) or (not ensure))
 			]
@@ -747,7 +751,7 @@ lang = {
 		"SIGN_UP_STATUS": "*可预约状态*",
 		"FORMAT_START": "%-m 月 %-d 日 %-H:%M",
 		"FORMAT_END": "%-H:%M",
-		"MAIN1": "#TodayatApple {NEW}{TYPE}\n\n*{NAME}*\n\n{INTROTITLE}\n{INTRO}{COLLAB}",
+		"MAIN1": "#TodayatApple {NEW}{TYPE}\n\n*{NAME}*\n\n{INTROTITLE}\n{INTRO}",
 		"MAIN2": "#TodayatApple {NEW}{TYPE}\n\n{PREFIX}*{NAME}*\n\n🗺️ {LOCATION}\n🕘 {TIME}\n\n{INTROTITLE}\n{INTRO}\n\n{SIGNPREFIX}\n{SIGN}"
 	},
 	False: {
@@ -777,7 +781,7 @@ lang = {
 		"SIGN_UP_STATUS": "*Sign Up status*",
 		"FORMAT_START": "%b %-d, %-H:%M",
 		"FORMAT_END": "%-H:%M",
-		"MAIN1": "#TodayatApple {NEW}{TYPE}\n\n*{NAME}*\n\n{INTROTITLE}\n{INTRO}{COLLAB}",
+		"MAIN1": "#TodayatApple {NEW}{TYPE}\n\n*{NAME}*\n\n{INTROTITLE}\n{INTRO}",
 		"MAIN2": "#TodayatApple {NEW}{TYPE}\n\n{PREFIX}*{NAME}*\n\n🗺️ {LOCATION}\n🕘 {TIME}\n\n{INTROTITLE}\n{INTRO}\n\n{SIGNPREFIX}\n{SIGN}"
 	}
 }
@@ -787,25 +791,19 @@ def teleinfo(course = None, schedules = None, collection = None, mode = "new", u
 	offset = runtime.astimezone().utcoffset().total_seconds() / 3600
 
 	if collection != None:
-		if collection.collaboration != None:
-			collab = []
-			try:
-				for i in collection.collaboration:
-					collab.append(f"*{i['name']}*\n{i['description']}")
-				collab = f"\n\n{lang[userLang]['COLLAB_WITH']}\n" + "\n\n".join(collab)
-			except:
-				collab = ""
-		else:
-			collab = ""
-
 		text = disMarkdown(lang[userLang]["MAIN1"].format(
 			NEW = lang[userLang]["NEW"] if mode == "new" else '',
 			TYPE = lang[userLang]["COLLECTION"],
 			NAME = collection.name,
 			INTROTITLE = lang[userLang]["INTRO_COLLECTION"],
 			INTRO = collection.description['long'],
-			COLLAB = collab
 		))
+		if collection.collaboration != None:
+			collab = []
+			for i in collection.collaboration:
+				name = disMarkdown(i["name"])
+				collab.append(f"[{name}]({i['url']})" if "url" in i else name)
+			text += f"\n\n{lang[userLang]['COLLAB_WITH']}\n{lang[userLang]['JOINT'].join(collab)}"
 
 		image = collection.images["landscape"] + "?output-format=jpg&output-quality=80&resize=1280:*"
 		keyboard = [[[lang[userLang]["LEARN_COLLECTION"], collection.url], [lang[userLang]["DOWNLOAD_IMAGE"], collection.images["landscape"]]]]
