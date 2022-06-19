@@ -11,6 +11,7 @@ from modules.constants import request, webNation, userAgent, sync, disMarkdown, 
 __session_pool = {}
 
 API_ROOT = "https://www.apple.com/today-bff/"
+SEMAPHORE_LIMIT = 50
 
 API = {
 	"landing": {
@@ -342,13 +343,17 @@ class Course(asyncObject):
 			"))+[\'\"]?", self.json()) if i[0] not in result]
 		return result
 
-	async def getSchedules(self, store, ensure = True):
+	async def getSchedules(self, store, ensure = True, semaphore = None):
 
+		if semaphore != None:
+			await semaphore.acquire()
 		r = await request(
 			session = get_session(),
 			url = (API["session"]["store"] if ensure else API["session"]["nearby"]).format(
 				STORESLUG = store.slug, COURSESLUG = self.slug, ROOTPATH = store.rootPath),
 			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
+		if semaphore != None:
+			semaphore.release()
 		
 		try:
 			raw = json.loads(_separate(r))
@@ -380,7 +385,8 @@ class Course(asyncObject):
 
 	async def getRootSchedules(self):
 		stores = storeReturn(todayNation.get(self.rootPath, ""), remove_closed = True, remove_future = True)
-		tasks = [self.getSchedules(getStore(sid = i[0])) for i in stores]
+		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
+		tasks = [self.getSchedules(getStore(sid = i[0]), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
 async def getCourse(courseId, rootPath = None, raw = None, moreAbout = None, fuzzy = True):
@@ -576,13 +582,17 @@ class Collection(asyncObject):
 			"))+[\'\"]?", self.json()) if i[0] not in result]
 		return result
 
-	async def getSchedules(self, store, ensure = True):
+	async def getSchedules(self, store, ensure = True, semaphore = None):
 
+		if semaphore != None:
+			await semaphore.acquire()
 		r = await request(
 			session = get_session(),
 			url = (API["collection"]["store"] if ensure else API["collection"]["nearby"]).format(
 				STORESLUG = store.slug, COLLECTIONSLUG = self.slug, ROOTPATH = store.rootPath),
 			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
+		if semaphore != None:
+			semaphore.release()
 		
 		try:
 			raw = json.loads(_separate(r))
@@ -615,7 +625,8 @@ class Collection(asyncObject):
 
 	async def getRootSchedules(self):
 		stores = storeReturn(todayNation.get(self.rootPath, ""), remove_closed = True, remove_future = True)
-		tasks = [self.getSchedules(getStore(sid = i[0])) for i in stores]
+		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
+		tasks = [self.getSchedules(getStore(sid = i[0]), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
 async def getCollection(slug, rootPath = None, identifier = 0):
