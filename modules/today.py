@@ -260,7 +260,7 @@ class Course(asyncObject):
 								pass
 							else:
 								continue
-							self.collection = await getCollection(rootPath = self.rootPath, slug = moreDict["collId"], identifier = self.courseId)
+							self.collection = await getCollection(rootPath = self.rootPath, slug = moreDict["collId"])
 							break
 						except:
 							pass
@@ -629,7 +629,7 @@ class Collection(asyncObject):
 		tasks = [self.getSchedules(getStore(sid = i[0]), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
-async def getCollection(slug, rootPath = None, identifier = 0):
+async def getCollection(slug, rootPath = None):
 	global savedToday
 	saved = list(savedToday["Collection"])
 	if rootPath == None:

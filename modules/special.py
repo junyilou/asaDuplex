@@ -1,16 +1,16 @@
 import logging
 import aiohttp
-import json
 from datetime import timedelta, date, datetime
 from storeInfo import storeInfo, storeDict
-from modules.constants import request as request
-from modules.constants import userAgent, dayOfWeekENG, partSample, storeNation
+from modules.constants import request, userAgent, partSample, storeNation
 
-def textConvert(strdict):
+dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+def textConvert(strdict, userLang = True):
 	if strdict["closed"]:
-		return "不营业"
+		return "不营业" if userLang else "Closed"
 	elif strdict["openTime"] == "00:00" and strdict["closeTime"] == "23:59":
-		return "24 小时营业"
+		return "24 小时营业" if userLang else "Always Open"
 	else:
 		return f'{strdict["openTime"]} - {strdict["closeTime"]}'
 
@@ -23,11 +23,11 @@ async def comment(session, sid, sif = None):
 
 	baseURL = f"https://www.apple.com{storeNation[sif['flag']]}"
 	referer = {**userAgent, "Referer": f"{baseURL}/shop/product/{partNumber}"}
-	url = f"{baseURL}/shop/fulfillment-messages?searchNearby=true&parts.0={partNumber}&store=R{sid}"
+	url = f"{baseURL}/shop/fulfillment-messages?searchNearby=false&parts.0={partNumber}&store=R{sid}"
 
 	try:
-		r = await request(session = session, url = url, headers = userAgent, ident = None, ensureAns = False)
-		j = json.loads(r)["body"]["content"]["pickupMessage"]["stores"]
+		r = await request(session = session, url = url, headers = userAgent, ident = None, ensureAns = False, mode = "json")
+		j = r["body"]["content"]["pickupMessage"]["stores"]
 	except:
 		return {}
 
@@ -42,7 +42,7 @@ async def comment(session, sid, sif = None):
 			reason[sDay] = sTxt
 	return reason
 
-async def speHours(session, sid, limit = 14):
+async def speHours(session, sid, limit = 14, userLang = True):
 	sif = storeInfo(sid)
 	try:
 		j = await storeDict(session = session, mode = "hours", sif = sif)
@@ -56,8 +56,8 @@ async def speHours(session, sid, limit = 14):
 
 	regularHours = {}
 	for regular in j["regular"]:
-		dayIndex = dayOfWeekENG.index(regular["name"])
-		regularHours[dayIndex] = textConvert(regular)
+		dayIndex = dayOfWeek.index(regular["name"])
+		regularHours[dayIndex] = textConvert(regular, userLang = userLang)
 	
 	specialHours = {}
 	specialToday = date.today()
@@ -70,7 +70,7 @@ async def speHours(session, sid, limit = 14):
 
 		validDate = datetime.strptime(special["date"], "%Y-%m-%d").date()
 		regular = regularHours[validDate.weekday()]
-		spetext = textConvert(special)
+		spetext = textConvert(special, userLang = userLang)
 
 		if validDate < specialToday:# or regular == spetext:
 			continue

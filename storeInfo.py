@@ -11,33 +11,41 @@ from modules.constants import userAgent, webNation, localeNation, RecruitDict
 with open("storeInfo.json") as r:
 	infoJSON = json.loads(r.read())
 
-storeLibrary = {}
+LIBRARY = {}
 Order = []
 
-def StoreID(storeid, fuzzy = False):
+def StoreID(storeid, fuzzy = False, include_coeff = False):
 	stores = []
 	if fuzzy:
-		storeid = storeid.upper().replace("R", "")
-		ids = [i for i in storeLibrary]
+		storeid = f"{storeid}".upper().replace("R", "")
+		ids = [i for i in LIBRARY]
 		for i in ids:
-			if str(storeid) in i:
-				stores.append((i, actualName(infoJSON["name"][i])))
+			if storeid in i:
+				coeff = (round(len(storeid) / 3, 3), ) if include_coeff else ()
+				stores.append((i, actualName(infoJSON["name"][i]), *coeff))
 	else:
-		i = f"{storeid:0>3}".upper().replace("R", "")
-		if i in storeLibrary:
-			stores = [(i, actualName(infoJSON["name"][i]))]
+		storeid = f"{storeid:0>3}".upper().replace("R", "")
+		if storeid in LIBRARY:
+			coeff = (1.0, ) if include_coeff else ()
+			stores = [(storeid, actualName(infoJSON["name"][storeid]), *coeff)]
 	return stores
 
-def StoreMatch(keyword, fuzzy = False):
+def StoreMatch(keyword, fuzzy = False, include_coeff = False):
 	stores = []
 	keyword = keyword.lower()
-	for i in storeLibrary:
-		if fuzzy:
-			if any([keyword in j.lower() for j in storeLibrary[i]]):
-				stores.append((i, actualName(infoJSON["name"][i])))
-		else:
-			if any([keyword == j.lower() for j in storeLibrary[i]]):
-				stores.append((i, actualName(infoJSON["name"][i])))
+	for i in LIBRARY:
+		for j in LIBRARY[i]:
+			k = j.lower()
+			if fuzzy:
+				if keyword in k:
+					coeff = (round(len(keyword) / len(k), 3), ) if include_coeff else ()
+					stores.append((i, actualName(infoJSON["name"][i]), *coeff))
+					break
+			else:
+				if keyword == k:
+					coeff = (1.0, ) if include_coeff else ()
+					stores.append((i, actualName(infoJSON["name"][i])), *coeff)
+					break
 	return stores
 
 def actualName(name):
@@ -129,7 +137,11 @@ def getState(sid, stateOnly = False):
 			("Store in " not in infoJSON["name"][i])]
 		return state, stores
 
-def stateReplace(rstores):
+def getNation(sid):
+	state = infoJSON["flag"][f"{sid}"]
+	return state, [i[0] for i in storeReturn(state, remove_closed = True, remove_future = True)]
+
+def stateReplace(rstores, bold = False, number = True):
 	stores = rstores.copy()
 	if not stores:
 		return stores
@@ -138,22 +150,34 @@ def stateReplace(rstores):
 			flag = False
 			if not store.isdigit():
 				continue
+			
+			nationName, nationStore = getNation(store)
+			if all([i in stores for i in nationStore]):
+				flag = True
+				deco = "*" if bold else ""
+				stores[stores.index(store)] = f"{deco}{nationName}{deco}" + (f" ({len(nationStore)})" if number else "")
+				_ = [stores.remove(j) for j in nationStore if j != store]
+			
 			stateName, stateStore = getState(store)
 			if all([i in stores for i in stateStore]):
 				stateLen = len(stateStore)
 				if stateLen != 1:
 					flag = True
-					stores[stores.index(store)] = f"{stateName} ({len(stateStore)})"
-					[stores.remove(j) for j in stateStore if j != store]
+					deco = "*" if bold else ""
+					stores[stores.index(store)] = f"{deco}{stateName}{deco}" + (f" ({len(stateStore)})" if number else "")
+					_ = [stores.remove(j) for j in stateStore if j != store]
 			if flag:
 				break
 		if flag == False:
 			break
 	return stores
 
-def storeReturn(args, sort = True, remove_closed = False, remove_future = False, fuzzy = False, needSplit = False):
+def storeReturn(args, sort = True, sort_coeff = False, 
+	remove_closed = False, remove_future = False, 
+	fuzzy = False, needSplit = False):
+
 	ans = []
-	if needSplit: # 一个以空格间隔的词典，或者一个字符串，待以逗号进行拆分
+	if needSplit:
 		args = re.split(",|，", "".join(args))
 	if type(args) in [int, str]:
 		args = [f"{args}"]
@@ -164,7 +188,7 @@ def storeReturn(args, sort = True, remove_closed = False, remove_future = False,
 		if a == "all":
 			a = ""
 		digit = a.isdigit() or a.upper().replace("R", "").isdigit()
-		stores = (StoreID(a, fuzzy) + StoreMatch(a, fuzzy)) if digit else StoreMatch(a, fuzzy)
+		stores = (StoreID(a, fuzzy, sort_coeff) + StoreMatch(a, fuzzy, sort_coeff)) if digit else StoreMatch(a, fuzzy, sort_coeff)
 		for s in stores:
 			if s and s not in ans:
 				sState = getState(s[0], stateOnly = True)
@@ -178,7 +202,10 @@ def storeReturn(args, sort = True, remove_closed = False, remove_future = False,
 						continue
 				ans.append(s)
 
-	if sort:
+	if sort_coeff:
+		ans = [i[:2] for i in sorted(ans, key = lambda k: k[2], reverse = True)]
+
+	elif sort:
 		order = {}
 		for store in ans:
 			sid = store[0]
@@ -187,6 +214,7 @@ def storeReturn(args, sort = True, remove_closed = False, remove_future = False,
 			except ValueError:
 				order[sid] = 900 + int(sid)
 		ans.sort(key = lambda k: order[k[0]])
+
 	return ans
 
 def dieterURL(sid, mode = 0):
@@ -202,20 +230,20 @@ async def DieterHeader(rtl, session = None):
 	sid = sid[0][0] if sid != [] else rtl
 	try:
 		r = await request(session = session, url = dieterURL(sid), headers = userAgent, ssl = False,
-			method = "HEAD", allow_redirects = False, raise_for_status = True, mode = "head")
+			method = "HEAD", allow_redirects = False, raise_for_status = True, mode = "head", retryNum = 3, timeout = 5)
 		return r['Last-Modified'][5:-4]
 	except:
 		return None
 
 def library():
-	global storeLibrary, Order
-	storeLibrary = {}
+	global LIBRARY, Order
+	LIBRARY = {}
 	for i in infoJSON["name"]:
 		comp = [infoJSON["name"][i]] if type(infoJSON["name"][i]) == str else infoJSON["name"][i].copy()
-		storeLibrary[i] = comp.copy()
+		LIBRARY[i] = comp.copy()
 		for j in comp:
 			if " " in j:
-				storeLibrary[i].append(j.replace(" ", ""))
+				LIBRARY[i].append(j.replace(" ", ""))
 	for i in infoJSON["key"]:
 		keys = []
 		for j in infoJSON["key"][i]:
@@ -227,13 +255,13 @@ def library():
 			elif j == "alter":
 				keys += infoJSON["key"][i][j].split(" ")
 			else:
-				keys += [infoJSON["key"][i][j]]
-		storeLibrary[i] = storeLibrary.get(i, []) + keys
+				keys += [infoJSON["key"][i][j], infoJSON["key"][i][j].replace(" ", "")]
+		LIBRARY[i] = LIBRARY.get(i, []) + keys
 	for i in infoJSON["flag"]:
 		flag = infoJSON["flag"][i]
-		storeLibrary[i] = storeLibrary.get(i, []) + [flag]
-		storeLibrary[i] += [RecruitDict[flag]["name"]]
-		storeLibrary[i] += RecruitDict[flag]["altername"]
+		LIBRARY[i] = LIBRARY.get(i, []) + [flag]
+		LIBRARY[i] += [RecruitDict[flag]["name"]]
+		LIBRARY[i] += RecruitDict[flag]["altername"]
 	Order = sorted([i for i in infoJSON["key"]], key = lambda k: f"{storeInfo(k)['flag']} {getState(k, stateOnly = True)}")
 
 library()
