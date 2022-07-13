@@ -3,14 +3,25 @@ import re
 import json
 import asyncio
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from sys import argv
 
 from storeInfo import *
-from modules.today import Store, Sitemap, teleinfo, __clean
+from modules.today import Store, Sitemap, Collection, teleinfo, __clean
 from modules.constants import setLogger, sync
 from bot import chat_ids
-from sdk_aliyun import async_post
+from sdk_aliyun import async_post as raw_post
+
+async def async_post(text, image, keyboard):
+	push = {
+		"mode": "photo-text",
+		"text": text,
+		"image": image,
+		"parse": "MARK",
+		"chat_id": chat_ids[0],
+		"keyboard": keyboard
+	}
+	await raw_post(push)
 
 async def main(mode):
 	global append
@@ -24,83 +35,72 @@ async def main(mode):
 	results = await asyncio.gather(*tasks, return_exceptions = True)
 
 	courses = {}
-	collections = []
-	times = 0
 	for i in results:
 		if isinstance(i, Exception):
 			logging.error(str(i.args) if i.args else str(i))
 			continue
+		
 		for j in i:
 			if isinstance(j, Exception):
 				logging.error(str(j.args) if j.args else str(j))
 				continue
 
-			c = j.course if hasattr(j, "scheduleId") else j
-			if hasattr(c.collection, "slug"):
-				if c.collection.slug not in saved["collection"]:
-					collections.append(c.collection)
-					append = {c.collection.slug: c.collection.name}
-					saved["collection"] = {**saved["collection"], **append}
-					logging.info(str(c.collection))
-			if c.courseId not in savedID["today"]:
-				if (mode == "today") or ((mode == "sitemap") 
-				and (c.courseId not in savedID["sitemap"])):
-					if c not in courses:
-						courses[c] = []
-						logging.info(str(c))
-					if hasattr(j, "scheduleId"):
-						if j not in courses[c]:
-							courses[c].append(j)
-							times += 1
-							logging.info(str(j))
-	logging.info(f"找到 {len(courses)} 个新课程共 {times} 次排课")
-
-	for collection in collections:
-
-		text, image, keyboard = teleinfo(collection = collection)
-
-		push = {
-			"mode": "photo-text",
-			"text": text,
-			"image": image,
-			"parse": "MARK",
-			"chat_id": chat_ids[0],
-			"keyboard": keyboard
-		}
-		await async_post(push)
+			if hasattr(j, "scheduleId"):
+				courses[j.course] = courses.get(j.course, [])
+				if j not in courses[j.course]:
+					courses[j.course].append(j)
 
 	for course in courses:
-		schedules = sorted(courses[course])
-		append = {course.courseId: course.name}
-		if mode == "today":
-			saved[mode] = {**saved[mode], **append}
-			if course.courseId in saved["sitemap"]:
-				del saved["sitemap"][course.courseId]
-		elif mode == "sitemap":
-			if schedules != []:
-				saved["today"] = {**saved["today"], **append}
-			else:
-				saved[mode] = {**saved[mode], **append}
+		cond1, cond2 = [course.courseId in saved[cond] for cond in ["today", "sitemap"]]
+		cond3 = isinstance(course.collection, Collection)
+		cond4 = cond3 and course.collection.slug in saved["collection"]
+		
+		if cond1 and cond2:
+			tempo = None
+		elif cond1 and not cond2:
+			tempo = "today"
+		elif not cond1:
+			append = True
+			tempo = "sitemap"
+			if courses[course] != []:
+				saved["today"][course.courseId] = {
+					"slug": course.slug,
+					course.flag: course.name
+				}
+				if cond2:
+					del saved["sitemap"][course.courseId][course.flag]
+					if len(saved["sitemap"][course.courseId].keys()) == 1:
+						del saved["sitemap"][course.courseId]
+					tempo = None
 
-		text, image, keyboard = teleinfo(course = course, schedules = schedules)
+			text, image, keyboard = teleinfo(course = course, schedules = sorted(courses[course]))
+			await async_post(text, image, keyboard)
 
-		push = {
-			"mode": "photo-text",
-			"text": text,
-			"image": image,
-			"parse": "MARK",
-			"chat_id": chat_ids[0],
-			"keyboard": keyboard
-		}
-		await async_post(push)
+		if tempo != None:
+			if course.courseId in saved[tempo]:
+				if course.flag not in saved[tempo][course.courseId]:
+					append = True
+					saved[tempo][course.courseId][course.flag] = course.name
+
+		if cond3 and not cond4:
+			append = True
+			saved["collection"][course.collection.slug] = {course.flag: course.collection.name}
+			text, image, keyboard = teleinfo(collection = course.collection)
+			await async_post(text, image, keyboard)
+
+		elif cond3 and cond4:
+			if course.flag not in saved["collection"][course.collection.slug]:
+				append = True
+				saved["collection"][course.collection.slug][course.flag] = course.collection.name
+
 
 if __name__ == "__main__":
 	args = {
-		"today": "🇨🇳，🇭🇰，🇲🇴，TW",
-		"sitemap": ".cn /hk /mo /tw".split(" ")
+		"today": "🇨🇳,🇭🇰,🇲🇴,🇹🇼,🇯🇵,🇰🇷,🇸🇬,🇹🇭",
+		"sitemap": ".cn /hk /mo /tw /jp /kr /sg /th".split(" ")
 	}
 
-	append = {}
+	append = False
 	savedID = {}
 
 	with open("Retail/savedEvent.json") as m: 
@@ -118,10 +118,12 @@ if __name__ == "__main__":
 	loop.run_until_complete(main(argv[1]))
 	__clean(loop)
 
-	if append != {}:
+	if append:
 		logging.info("正在更新 savedEvent 文件")
+		SAVED = {"update": datetime.now(timezone.utc).strftime("%F %T GMT")}
+		saved = dict([(i, dict([(j, saved[i][j]) for j in sorted(saved[i].keys())])) for i in saved if i != "update"])
 
 		with open("Retail/savedEvent.json", "w") as w:
-			w.write(json.dumps(saved, ensure_ascii = False, indent = 2))
+			w.write(json.dumps({**SAVED, **saved}, ensure_ascii = False, indent = 2))
 
 	logging.info("程序结束")
