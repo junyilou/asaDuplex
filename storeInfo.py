@@ -137,11 +137,15 @@ def getState(sid, stateOnly = False):
 			("Store in " not in infoJSON["name"][i])]
 		return state, stores
 
-def getNation(sid):
+def getNation(sid, userLang = None):
 	state = infoJSON["flag"][f"{sid}"]
-	return state, [i[0] for i in storeReturn(state, remove_closed = True, remove_future = True)]
+	if userLang != None:
+		name = RecruitDict[state]["name"] if userLang else RecruitDict[state]["altername"][0]
+	else:
+		name = state
+	return name, [i[0] for i in storeReturn(state, remove_closed = True, remove_future = True)]
 
-def stateReplace(rstores, bold = False, number = True):
+def stateReplace(rstores, bold = False, number = True, userLang = None):
 	stores = rstores.copy()
 	if not stores:
 		return stores
@@ -151,7 +155,7 @@ def stateReplace(rstores, bold = False, number = True):
 			if not store.isdigit():
 				continue
 			
-			nationName, nationStore = getNation(store)
+			nationName, nationStore = getNation(store, userLang = userLang)
 			if all([i in stores for i in nationStore]):
 				flag = True
 				deco = "*" if bold else ""
