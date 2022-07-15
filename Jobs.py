@@ -29,7 +29,7 @@ async def province(session, semaphore, saved, s, p):
 	global RESULTS
 
 	async with semaphore:
-		logging.info(", ".join(["开始下载 province", s, p["code"], p["stateProvince"]]))
+		# logging.info(", ".join(["开始下载 province", s, p["code"], p["stateProvince"]]))
 		r = await request(
 			session = session, ssl = False, headers = userAgent, timeout = 3, retryNum = 3, 
 			url = API["province"].format(JOBID = RecruitDict[s]["code"]),
@@ -49,9 +49,8 @@ async def province(session, semaphore, saved, s, p):
 		return 0
 
 	for c in a:
-		if c["code"] not in saved:
-			n = [s, p["code"], p["stateProvince"], c["city"], c["name"], c["code"]]
-			RESULTS.append(n)
+		n = [s, p["code"], p["stateProvince"], c["city"], c["name"], c["code"]]
+		RESULTS.append(n)
 
 	return 1
 
@@ -61,9 +60,8 @@ async def state(session, semaphore, s):
 	async with semaphore:
 		logging.info(", ".join(["开始下载 state", s, str(RecruitDict[s]["code"])]))
 		r = await request(
-			session = session, ssl = False,
-			url = API["state"].format(JOBID = RecruitDict[s]["code"]),
-			headers = userAgent, ensureAns = False)
+			session = session, ssl = False, headers = userAgent, timeout = 3, retryNum = 3, 
+			url = API["state"].format(JOBID = RecruitDict[s]["code"]))
 		
 	try:
 		a = json.loads(r)
@@ -132,17 +130,19 @@ async def main(targets, session, limit = None):
 					logging.error(", ".join(["放弃下载", taskID]))
 					TASKS.remove(t)
 
-	if RESULTS != []:
+	append = False
 
-		for r in RESULTS:
-			flag, pid, pname, city, name, code = r
-			logging.info(", ".join(["记录到新地点"] + r))
+	for flag, pid, pname, city, name, code in RESULTS:
+
+		if code not in saved:
+			append = True
+			logging.info(f"记录到新地点 {flag} {pname} {code} {name}")
 
 			SAVED[flag][pid] = SAVED[flag].get(pid, {"name": pname})
 			SAVED[flag][pid][code] = name
 
 			linkURL = f"https://jobs.apple.com/zh-cn/details/{RecruitDict[flag]['code']}"
-			pushAns = f"#新店新机遇\n\n*{flag} {pname}, {city}*\n{code} - {name}\n\n{linkURL}"
+			pushAns = f"#新店新机遇\n\n*{flag} {city}, {pname}*\n{code} - {name}\n\n{linkURL}"
 				
 			push = {
 				"mode": "photo-text",
@@ -154,6 +154,16 @@ async def main(targets, session, limit = None):
 
 			await async_post(push, session = session)
 
+		elif SAVED[flag][pid]["name"] != pname:
+			append = True
+			logging.info(f"更改名称 {SAVED[flag][pid]['name']} 为 {pname}")
+			SAVED[flag][pid]["name"] = pname
+		elif SAVED[flag][pid][code] != name:
+			append = True
+			logging.info(f"更改名称 {SAVED[flag][pid][code]} 为 {name}")
+			SAVED[flag][pid][code] = name
+
+	if append:
 		SAVED["update"] = datetime.now(timezone.utc).strftime("%F %T GMT")
 		with open("Retail/savedJobs.json", "w") as w:
 			w.write(json.dumps(SAVED, ensure_ascii = False, indent = 2))
