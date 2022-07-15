@@ -10,8 +10,9 @@ from modules.constants import request, webNation, userAgent, sync, disMarkdown, 
 
 __session_pool = {}
 
+TIMEOUT, RETRYNUM, SEMAPHORE_LIMIT = 5, 5, 50
 API_ROOT = "https://www.apple.com/today-bff/"
-SEMAPHORE_LIMIT = 50
+ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
 
 API = {
 	"landing": {
@@ -30,9 +31,6 @@ API = {
 		"nearby": API_ROOT + "collection/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&collectionSlug={COLLECTIONSLUG}",
 	}
 }
-
-TIMEOUT = 5
-RETRYNUM = 5
 
 savedToday = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}
 
@@ -131,6 +129,7 @@ class Store():
 			self.url = storeURL(sif = sif)
 		else:
 			raise ValueError("sid, raw 至少提供一个")
+		self.serial = dict(sid = self.sid)
 		self.raw = dict((i, self.__dict__[i]) for i in self.__dict__ if i != "raw")
 
 	def __hash__(self):
@@ -240,10 +239,12 @@ class Course(asyncObject):
 
 		if all([courseId, raw, rootPath != None]):
 			self.rootPath = rootPath
+			self.flag = todayNation[self.rootPath]
 			self.courseId = courseId
-			self.name = raw["name"]
+			self.name = raw["name"].strip()
 			self.title = raw["title"]
 			self.slug = raw["urlTitle"]
+			self.serial = dict(slug = self.slug, rootPath = self.rootPath)
 
 			self.collection = None
 			if moreAbout != None:
@@ -336,7 +337,7 @@ class Course(asyncObject):
 
 	def elements(self, accept = None):
 		if accept == None:
-			accept = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
+			accept = ACCEPT
 		
 		result, accept = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
@@ -404,6 +405,9 @@ async def getCourse(courseId, rootPath = None, raw = None, moreAbout = None, fuz
 		if keyword in i:
 			return savedToday["Course"][i]
 	
+	if rootPath == None:
+		raise ValueError("没有找到匹配，需要提供 rootPath")
+
 	get = await Course(raw = raw, courseId = courseId, rootPath = rootPath.replace("/us", ""), moreAbout = moreAbout)
 	savedToday["Course"][f"{rootPath}/{courseId}"] = get
 	return get
@@ -416,7 +420,7 @@ class Schedule(asyncObject):
 				raise ValueError("slug, scheduleId, rootPath 必须全部提供")
 			else:
 				self.slug = slug
-				self.scheduleId = scheduleId
+				self.scheduleId = scheduleId = f"{scheduleId}"
 				self.rootPath = rootPath
 
 			r = await request(
@@ -446,6 +450,9 @@ class Schedule(asyncObject):
 			self.course = course
 			self.scheduleId = scheduleId
 			self.rootPath = rootPath
+			self.flag = todayNation[self.rootPath]
+			self.serial = dict(slug = self.slug, scheduleId = self.scheduleId, rootPath = self.rootPath)
+
 			self.store = store
 			self.timezone = store.timezone
 			try:
@@ -514,18 +521,20 @@ class Collection(asyncObject):
 
 		self.slug = slug
 		self.rootPath = rootPath
-		self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/collection/{self.slug}/"
+		self.flag = todayNation[self.rootPath]
+		self.url = f"https://www.apple.com{rootPath.replace('/cn', '.cn')}/today/collection/{slug}/"
+		self.serial = dict(slug = slug, rootPath = rootPath)
 
 		r = await request(
 			session = get_session(),
-			url = API["collection"]["geo"].format(COLLECTIONSLUG = self.slug, ROOTPATH = self.rootPath),
+			url = API["collection"]["geo"].format(COLLECTIONSLUG = slug, ROOTPATH = rootPath),
 			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
 
 		try:
 			raw = json.loads(_separate(r))
-			self.name = raw["name"]
+			self.name = raw["name"].strip()
 		except json.decoder.JSONDecodeError:
-			raise ValueError(f"获取系列 {self.rootPath}/{self.slug} 数据失败") from None
+			raise ValueError(f"获取系列 {rootPath}/{slug} 数据失败") from None
 
 		self.description = {
 			"long": raw["longDescription"].strip(),
@@ -575,7 +584,7 @@ class Collection(asyncObject):
 
 	def elements(self, accept = None):
 		if accept == None:
-			accept = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
+			accept = ACCEPT
 		
 		result, accept = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
@@ -828,7 +837,7 @@ def teleinfo(course = None, schedules = None, collection = None, mode = "new", u
 		for schedule in schedules:
 			if schedule.store.sid[1:] not in availableStore:
 				availableStore.append(schedule.store.sid[1:])
-		textStore = stateReplace(availableStore)
+		textStore = stateReplace(availableStore, userLang = userLang)
 		for a in textStore:
 			if a.isdigit():
 				textStore[textStore.index(a)] = actualName(storeInfo(a)["name"])
