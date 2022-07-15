@@ -790,7 +790,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "83-1xa0Tachiurinakanocho\nShijo-dorixa0Takakura Higashiiru\nKyoto-shi,600-8006",
+              "storeAddress": "83-1 Tachiurinakanocho\nShijo-dori Takakura Higashiiru\nKyoto-shi,600-8006",
               "phoneNumber": "(075) 7578700"
             }
           ]
@@ -3804,7 +3804,7 @@
               "storeNumber": "R114",
               "countryCode": "US",
               "storeName": "Saint Louis Galleria",
-              "latitude": "38.637313947416175",
+              "latitude": "38.63527778",
               "longitude": "-90.34837530486631",
               "storeRadius": "50",
               "accuracyThreshold": "500",
