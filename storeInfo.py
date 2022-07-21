@@ -198,11 +198,11 @@ def storeReturn(args, sort = True, sort_coeff = False,
 				sState = getState(s[0], stateOnly = True)
 				judge = (remove_future, remove_closed)
 				if any(judge):
-					if sState == "公司门店":
+					if sState == "Internal":
 						continue
 					if judge[0] and "Store in" in infoJSON["name"][s[0]]:
 						continue
-					if judge[1] and sState == "已关闭":
+					if judge[1] and sState == "Closed":
 						continue
 				ans.append(s)
 
