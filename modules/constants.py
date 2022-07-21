@@ -65,6 +65,12 @@ async def request(session = None, url = None, ident = None, mode = None, retryNu
 				retryNum -= 1
 				logging.getLogger("constants.request").debug(f"[Exception] '{url}', [ident] {ident}, [exp] {exp}, [retry] {retryNum} left")
 
+def session_func(func, **kwargs):
+	async def wrapper(**kwargs):
+		async with aiohttp.ClientSession() as session:
+			return await func(session = session, **kwargs)
+	return wrapper
+
 def sync(coroutine = None, loop = None):
 	if loop == None:
 		loop = asyncio.new_event_loop()
@@ -137,8 +143,8 @@ editStart = "### *** EDIT START *** ###\n"
 editEnd   = "\n### *** EDIT  END  *** ###"
 
 RecruitDict = {
-	"🇹🇷": {"name": "土耳其", "code": 114438164, "altername": ["Turkey", "TR"]}, 
-	"🇦🇪": {"name": "阿联酋", "code": 114438225, "altername": ["United Arab Emirates", "UAE", "AE"]}, 
+	"🇹🇷": {"name": "土耳其", "code": 114438164, "altername": ["Turkey", "TR", "Türkiye"]}, 
+	"🇦🇪": {"name": "阿联酋", "code": 114438225, "altername": ["United Arab Emirates", "UAE", "AE", "阿拉伯联合酋长国", "阿拉伯联合大公国"]}, 
 	"🇬🇧": {"name": "英国", "code": 114438145, "altername": ["United Kingdom", "UK", "GB", "Great Britain"]}, 
 	"🇩🇪": {"name": "德国", "code": 114438043, "altername": ["Germany", "DE", "Deutschland"]}, 
 	"🇹🇼": {"name": "台湾", "code": 114438311, "altername": ["Taiwan", "TW", "ROC"]}, 
@@ -147,20 +153,20 @@ RecruitDict = {
 	"🇨🇭": {"name": "瑞士", "code": 114438017, "altername": ["Switzerland", "CH", "Swiss"]}, 
 	"🇧🇪": {"name": "比利时", "code": 114438251, "altername": ["Belgium", "BE"]}, 
 	"🇳🇱": {"name": "荷兰", "code": 114438119, "altername": ["Netherlands", "Holland", "NL"]}, 
-	"🇪🇸": {"name": "西班牙", "code": 114438056, "altername": ["Spain", "ES"]}, 
+	"🇪🇸": {"name": "西班牙", "code": 114438056, "altername": ["Spain", "ES", "España"]}, 
 	"🇭🇰": {"name": "香港", "code": 114438082, "altername": ["Hong Kong", "HK"]}, 
 	"🇸🇪": {"name": "瑞典", "code": 114438132, "altername": ["Sweden", "SE"]}, 
-	"🇨🇳": {"name": "中国", "code": 114438030, "altername": ["China", "CN"]}, 
+	"🇨🇳": {"name": "中国", "code": 114438030, "altername": ["China", "CN", "PRC"]}, 
 	"🇫🇷": {"name": "法国", "code": 114438069, "altername": ["France", "FR"]}, 
-	"🇦🇺": {"name": "澳大利亚", "code": 114437991, "altername": ["Australia", "AU"]}, 
-	"🇮🇹": {"name": "意大利", "code": 114438095, "altername": ["Italia", "IT"]}, 
-	"🇲🇴": {"name": "澳门", "code": 114438282, "altername": ["Macau", "MO"]}, 
+	"🇦🇺": {"name": "澳大利亚", "code": 114437991, "altername": ["Australia", "AU", "澳洲"]}, 
+	"🇮🇹": {"name": "意大利", "code": 114438095, "altername": ["Italy", "IT", "Italia", "义大利"]}, 
+	"🇲🇴": {"name": "澳门", "code": 114438282, "altername": ["Macau", "MO", "Macao"]}, 
 	"🇧🇷": {"name": "巴西", "code": 114438176, "altername": ["Brazil", "BR"]}, 
 	"🇯🇵": {"name": "日本", "code": 114438107, "altername": ["Japan", "JP"]}, 
-	"🇰🇷": {"name": "韩国", "code": 114438326, "altername": ["Korea", "KR"]}, 
+	"🇰🇷": {"name": "韩国", "code": 114438326, "altername": ["South Korea", "KR", "ROK", "南韩", "大韩民国"]}, 
 	"🇨🇦": {"name": "加拿大", "code": 114438004, "altername": ["Canada", "CA"]}, 
 	"🇦🇹": {"name": "奥地利", "code": 114438333, "altername": ["Austria", "AT"]}, 
-	"🇸🇬": {"name": "新加坡", "code": 114438238, "altername": ["Singapore", "SG"]},
+	"🇸🇬": {"name": "新加坡", "code": 114438238, "altername": ["Singapore", "SG", "星加坡"]},
 	"🇹🇭": {"name": "泰国", "code": 114438346, "altername": ["Thailand", "TH"]},
 	"🇮🇳": {"name": "印度", "code": 200314117, "altername": ["India", "IN"]}
 }

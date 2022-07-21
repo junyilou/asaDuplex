@@ -3,39 +3,40 @@ import sys
 import json
 import logging
 import asyncio
-import aiohttp
 from base64 import b64encode
 from datetime import datetime, timezone, date
 
 from bot import chat_ids
 from storeInfo import storeInfo, actualName, dieterURL, DieterHeader
-from modules.constants import request, disMarkdown, setLogger, userAgent
+from modules.constants import request, disMarkdown, setLogger, userAgent, session_func
 from sdk_aliyun import async_post
 
 specialist = []
 with open("storeInfo.json") as s:
 	storejson = json.loads(s.read())
 
-def session_func(func):
-	async def wrapper():
-		async with aiohttp.ClientSession() as session:
-			return await func(session = session)
-	return wrapper
-
-async def down(session, rtl, isSpecial):
+async def down(session, rtl, isSpecial, semaphore = None):
 	global specialist
 	rtl = f"{rtl:0>3}"
 	
 	try: 
 		saved = storejson['last'][rtl]
 		savedDatetime = datetime.strptime(saved, "%d %b %Y %H:%M:%S")
-	except KeyError: 
+	except KeyError:
+		saved = None
 		savedDatetime = None
 	try:
+		if semaphore != None:
+			await semaphore.acquire()
+		if rtl.endswith("00"):
+			logging.info(f"开始下载 R{rtl}")
 		remote = await DieterHeader(rtl = rtl, session = session)
 		remoteDatetime = datetime.strptime(remote, "%d %b %Y %H:%M:%S")
 	except TypeError:
 		remoteDatetime = None
+	finally:
+		if semaphore != None:
+			semaphore.release()
 
 	if not remoteDatetime:
 		if isSpecial:
@@ -68,7 +69,9 @@ async def down(session, rtl, isSpecial):
 		info = f"*{sif['flag']} Apple {name}* (R{rtl})"
 		if "nso" in sif:
 			info += f'\n首次开幕于 {datetime.strptime(sif["nso"], "%Y-%m-%d").strftime("%Y 年 %-m 月 %-d 日")}'
-		info += f"\n*修改标签* {remote}" 
+		info += f"\n*修改标签* {remote}"
+		if saved:
+			info += f"\n*原始标签* {saved}"
 		
 		if isSpecial: 
 			logging.info("正在更新 specialist.txt")
@@ -87,7 +90,7 @@ async def down(session, rtl, isSpecial):
 			"chat_id": chat_ids[0],
 			"mode": "photo-text",
 			"image": "BASE64" + img,
-			"text": disMarkdown(f'*来自 Rtl 的通知*\n{info}'),
+			"text": disMarkdown(f'*来自 Rtl 的通知*\n\n{info}'),
 			"parse": "MARK"
 		}
 		await async_post(push)
@@ -102,17 +105,18 @@ async def down(session, rtl, isSpecial):
 async def main(session):
 	global specialist
 	if len(sys.argv) == 1:
+		print("请指定一种运行模式: normal, special 或 single")
 		return
+
+	semaphore = asyncio.Semaphore(50)
 
 	if sys.argv[1] == "normal":
 		setLogger(logging.INFO, os.path.basename(__file__))
 		logging.info("开始枚举零售店")
 			
 		runFlag = False
-		for i in range(9):
-			tasks = [down(session, f"{j:0>3d}", False) for j in range(i * 100 + 1, i * 100 + 101)]
-			runFlag = any(await asyncio.gather(*tasks)) or runFlag
-			logging.info(f"已完成 {i + 1} / 9")
+		tasks = [down(session, f"{j:0>3d}", False, semaphore) for j in range(1, 901)]
+		runFlag = any(await asyncio.gather(*tasks)) or runFlag
 
 	elif sys.argv[1] == "special":
 		with open("Retail/specialist.txt") as l:
@@ -123,7 +127,7 @@ async def main(session):
 			setLogger(logging.INFO, os.path.basename(__file__))
 			logging.info("开始特别观察模式: " + ", ".join(specialist))
 
-			tasks = [down(session, i, True) for i in specialist]
+			tasks = [down(session, i, True, semaphore) for i in specialist]
 			runFlag = any(await asyncio.gather(*tasks))
 		else:
 			return
@@ -132,7 +136,7 @@ async def main(session):
 		setLogger(logging.INFO, os.path.basename(__file__))
 		logging.info("开始单独调用模式: " + ", ".join(sys.argv[2:]))
 			
-		tasks = [down(session, i, False) for i in sys.argv[2:]]
+		tasks = [down(session, i, False, semaphore) for i in sys.argv[2:]]
 		runFlag = any(await asyncio.gather(*tasks))
 
 	else:

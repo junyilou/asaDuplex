@@ -1,5 +1,4 @@
 import asyncio
-import aiohttp
 import json
 import os
 import logging
@@ -8,7 +7,7 @@ from datetime import datetime, timezone
 
 from bot import chat_ids
 from sdk_aliyun import async_post
-from modules.constants import request, setLogger, RecruitDict, userAgent, disMarkdown
+from modules.constants import request, setLogger, RecruitDict, userAgent, disMarkdown, session_func
 
 API = {
 	"state": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/stateProvinceList",
@@ -18,12 +17,6 @@ API = {
 
 TASKS = []
 RESULTS = []
-
-def session_func(func, **kwargs):
-	async def wrapper(**kwargs):
-		async with aiohttp.ClientSession() as session:
-			return await func(session = session, **kwargs)
-	return wrapper
 
 async def province(session, semaphore, saved, s, p):
 	global RESULTS
