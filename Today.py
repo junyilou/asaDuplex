@@ -51,9 +51,10 @@ async def main(mode):
 					courses[j.course].append(j)
 
 	for course in courses:
+		collection = course.collection
 		cond1, cond2 = [course.courseId in saved[cond] for cond in ["today", "sitemap"]]
-		cond3 = isinstance(course.collection, Collection)
-		cond4 = cond3 and course.collection.slug in saved["collection"]
+		cond3 = isinstance(collection, Collection)
+		cond4 = cond3 and collection.slug in saved["collection"]
 		
 		if cond1 and cond2:
 			tempo = None
@@ -73,6 +74,7 @@ async def main(mode):
 						del saved["sitemap"][course.courseId]
 					tempo = None
 
+			logging.info(str(course))
 			text, image, keyboard = teleinfo(course = course, schedules = sorted(courses[course]))
 			await async_post(text, image, keyboard)
 
@@ -84,14 +86,15 @@ async def main(mode):
 
 		if cond3 and not cond4:
 			append = True
-			saved["collection"][course.collection.slug] = {course.flag: course.collection.name}
-			text, image, keyboard = teleinfo(collection = course.collection)
+			saved["collection"][collection.slug] = {course.flag: collection.name}
+			logging.info(str(collection))
+			text, image, keyboard = teleinfo(collection = collection)
 			await async_post(text, image, keyboard)
 
 		elif cond3 and cond4:
-			if course.flag not in saved["collection"][course.collection.slug]:
+			if course.flag not in saved["collection"][collection.slug]:
 				append = True
-				saved["collection"][course.collection.slug][course.flag] = course.collection.name
+				saved["collection"][collection.slug][course.flag] = collection.name
 
 
 if __name__ == "__main__":
