@@ -75,7 +75,8 @@ async def main(mode):
 					tempo = None
 
 			logging.info(str(course))
-			text, image, keyboard = teleinfo(course = course, schedules = sorted(courses[course]))
+			schedules = [j for i in (courses[c] for c in courses if c.courseId == course.courseId) for j in i]
+			text, image, keyboard = teleinfo(course = course, schedules = sorted(schedules))
 			await async_post(text, image, keyboard)
 
 		if tempo != None:

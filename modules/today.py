@@ -838,6 +838,7 @@ def teleinfo(course = None, schedules = None, collection = None, mode = "new", u
 		for schedule in schedules:
 			if schedule.store.sid[1:] not in availableStore:
 				availableStore.append(schedule.store.sid[1:])
+		availableStore = [i[0] for i in storeReturn(availableStore)]
 		textStore = stateReplace(availableStore, userLang = userLang)
 		for a in textStore:
 			if a.isdigit():
@@ -919,7 +920,7 @@ def teleinfo(course = None, schedules = None, collection = None, mode = "new", u
 		INTRO = course.description["long"],
 		SIGNPREFIX = signingPrefix,
 		SIGN = signing
-	))
+	)).strip("\n")
 
 	image = course.images["landscape"] + "?output-format=jpg&output-quality=80&resize=1280:*"
 
