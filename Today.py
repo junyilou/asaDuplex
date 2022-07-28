@@ -5,12 +5,22 @@ import asyncio
 import logging
 from datetime import datetime, timezone
 from sys import argv
+from collections import OrderedDict
 
 from storeInfo import *
 from modules.today import Store, Sitemap, Collection, teleinfo, __clean
 from modules.util import setLogger, sync
 from bot import chat_ids
 from sdk_aliyun import async_post as raw_post
+
+def sortOD(od, topLevel = True):
+    res = OrderedDict()
+    for k, v in sorted(od.items(), reverse = topLevel):
+        if isinstance(v, dict):
+            res[k] = sortOD(v, False)
+        else:
+            res[k] = v
+    return res
 
 async def async_post(text, image, keyboard):
 	push = {
@@ -124,10 +134,8 @@ if __name__ == "__main__":
 
 	if append:
 		logging.info("正在更新 savedEvent 文件")
-		SAVED = {"update": datetime.now(timezone.utc).strftime("%F %T GMT")}
-		saved = dict([(i, dict([(j, saved[i][j]) for j in sorted(saved[i].keys())])) for i in saved if i != "update"])
-
+		saved["update"] = datetime.now(timezone.utc).strftime("%F %T GMT")
 		with open("Retail/savedEvent.json", "w") as w:
-			w.write(json.dumps({**SAVED, **saved}, ensure_ascii = False, indent = 2))
+			w.write(json.dumps(sortOD(saved), ensure_ascii = False, indent = 2))
 
 	logging.info("程序结束")
