@@ -8,7 +8,7 @@ from sys import argv
 
 from storeInfo import *
 from modules.today import Store, Sitemap, Collection, teleinfo, __clean
-from modules.constants import setLogger, sync
+from modules.util import setLogger, sync
 from bot import chat_ids
 from sdk_aliyun import async_post as raw_post
 

@@ -2,7 +2,8 @@ import logging
 import aiohttp
 from datetime import timedelta, date, datetime
 from storeInfo import storeInfo, storeDict
-from modules.constants import request, userAgent, partSample, storeNation
+from modules.constants import userAgent, partSample, storeNation
+from modules.util import request
 
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 

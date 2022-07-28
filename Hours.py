@@ -6,7 +6,8 @@ from datetime import datetime, date
 
 from storeInfo import *
 from modules.special import speHours
-from modules.constants import setLogger, DIFFhead, DIFFfoot
+from modules.constants import DIFFhead, DIFFfoot
+from modules.util import setLogger
 from sdk_aliyun import async_post
 from bot import chat_ids
 
@@ -19,8 +20,8 @@ if len(argv) > 1:
 	include = " ".join(argv[1:])
 	exclude = ""
 else:
-	include = "🇨🇳"
-	exclude = "大连恒隆广场"
+	include = "🇨🇳, Ginza"
+	exclude = ""
 
 today = date.today()
 runtime = str(today)

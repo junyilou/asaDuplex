@@ -8,7 +8,8 @@ from datetime import datetime, timezone, date
 
 from bot import chat_ids
 from storeInfo import storeInfo, actualName, dieterURL, DieterHeader
-from modules.constants import request, disMarkdown, setLogger, userAgent, session_func
+from modules.constants import userAgent
+from modules.util import request, disMarkdown, setLogger, session_func
 from sdk_aliyun import async_post
 
 specialist = []

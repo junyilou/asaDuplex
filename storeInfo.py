@@ -5,7 +5,7 @@ import aiohttp
 import logging
 from functools import partial
 
-from modules.constants import request as request
+from modules.util import request
 from modules.constants import userAgent, webNation, localeNation, RecruitDict
 
 with open("storeInfo.json") as r:

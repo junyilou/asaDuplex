@@ -6,7 +6,8 @@ import difflib
 import asyncio
 from datetime import datetime
 
-from modules.constants import asaHeaders, setLogger, request, DIFFhead, DIFFfoot
+from modules.constants import asaHeaders, DIFFhead, DIFFfoot
+from modules.util import setLogger, request
 from sdk_aliyun import async_post
 from bot import chat_ids
 
@@ -36,9 +37,7 @@ async def main():
 
 		logging.info("检测到有文件变化，正在生成 changeLog")
 		fileLines = []
-		fileDiff = f"""{DIFFhead.replace('DIFF HEAD', 'allStoresInfoLite')}Apple Store 零售店信息文件
-	生成于 {runtime}
-	"""
+		fileDiff = f"{DIFFhead.replace('DIFF HEAD', 'allStoresInfoLite')}Apple Store 零售店信息文件\n生成于 {runtime}\n"
 		for formatFile in [oldFile, listFile]:
 			with open(formatFile) as f:
 				formatJSON = json.dumps(json.loads(f.read()), ensure_ascii = False, indent = 2)

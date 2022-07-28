@@ -6,7 +6,8 @@ import atexit
 
 from datetime import datetime
 from storeInfo import *
-from modules.constants import request, webNation, userAgent, sync, disMarkdown, timezoneText, todayNation
+from modules.constants import webNation, userAgent, todayNation
+from modules.util import request, disMarkdown, timezoneText
 
 __session_pool = {}
 

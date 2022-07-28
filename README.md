@@ -19,7 +19,8 @@
 * storeInfo.py: 处理 storeInfo.json 的数据，提供强大的通用函数
 * modules/special.py: 分析 Apple Store 零售店营业时间，并尝试获得特别营业时间内部备忘录
 * modules/today.py: 一个定义了 Today at Apple 课程、排课、零售店对象的模块
-* modules/constants.py: 保存部分常量和通用函数
+* modules/constants.py: 保存部分常量
+* modules/util.py: 保存部分通用函数
 
 #### 文本
 

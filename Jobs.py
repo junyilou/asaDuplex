@@ -7,7 +7,8 @@ from datetime import datetime, timezone
 
 from bot import chat_ids
 from sdk_aliyun import async_post
-from modules.constants import request, setLogger, RecruitDict, userAgent, disMarkdown, session_func
+from modules.constants import RecruitDict, userAgent
+from modules.util import request, setLogger, disMarkdown, session_func
 
 API = {
 	"state": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/stateProvinceList",

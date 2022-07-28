@@ -2590,6 +2590,28 @@
               "enableInStoreMode": true,
               "storeAddress": "No. 1-7 The Piazza\nLondon, WC2E 8HB",
               "phoneNumber": "(020) 7447-1400"
+            },
+            {
+              "storeNumber": "R329",
+              "countryCode": "GB",
+              "storeName": "Brompton Road",
+              "latitude": "51.50129",
+              "longitude": "-0.16096",
+              "storeRadius": "50",
+              "accuracyThreshold": "500",
+              "imageURL": [
+                "https://rtlimages.apple.com/cmc/dieter/store/16_9/R329.png"
+              ],
+              "secureImageURL": [],
+              "locationText": "London",
+              "timeZone": "Europe/London",
+              "instoreCheckoutMode": "SCAN_AND_BUY",
+              "selfCheckout": "SNB",
+              "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
+              "appClipSelfCheckout": "SNB",
+              "enableInStoreMode": true,
+              "storeAddress": "17-27 Brompton Road\nLondon, SW1X 9LF",
+              "phoneNumber": "(020) 30893000"
             }
           ]
         },

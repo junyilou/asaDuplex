@@ -1,5 +1,5 @@
 {
-  "update": "2022-07-14 09:56:33 GMT",
+  "update": "2022-07-27 17:17:52 GMT",
   "🇹🇷": {
     "state940": {
       "name": "Turkey Region",
@@ -42,7 +42,7 @@
       "R245": "Covent Garden",
       "R410": "Stratford City",
       "R496": "Bromley",
-      "R329": "London-UK"
+      "R329": "Brompton Road"
     },
     "state456": {
       "name": "Tyne and Wear",
@@ -712,7 +712,8 @@
       "name": "Guangdong",
       "R484": "Holiday Plaza Shenzhen",
       "R577": "Parc Central",
-      "R639": "Zhujiang New Town"
+      "R639": "Zhujiang New Town",
+      "R761": "Shenzhen East-CN"
     },
     "state167": {
       "name": "Shandong",
