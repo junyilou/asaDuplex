@@ -14,20 +14,20 @@ with open("storeInfo.json") as r:
 LIBRARY = {}
 Order = []
 
-def StoreID(storeid, fuzzy = False, include_coeff = False):
+def StoreID(sid, fuzzy = False, include_coeff = False):
 	stores = []
 	if fuzzy:
-		storeid = f"{storeid}".upper().replace("R", "")
+		sid = f"{sid}".upper().replace("R", "")
 		ids = [i for i in LIBRARY]
 		for i in ids:
-			if storeid in i:
-				coeff = (round(len(storeid) / 3, 3), ) if include_coeff else ()
+			if sid in i:
+				coeff = (round(len(sid) / 3, 3), ) if include_coeff else ()
 				stores.append((i, actualName(infoJSON["name"][i]), *coeff))
 	else:
-		storeid = f"{storeid:0>3}".upper().replace("R", "")
-		if storeid in LIBRARY:
+		sid = f"{sid:0>3}".upper().replace("R", "")
+		if sid in LIBRARY:
 			coeff = (1.0, ) if include_coeff else ()
-			stores = [(storeid, actualName(infoJSON["name"][storeid]), *coeff)]
+			stores = [(sid, actualName(infoJSON["name"][sid]), *coeff)]
 	return stores
 
 def StoreMatch(keyword, fuzzy = False, include_coeff = False):
@@ -51,17 +51,17 @@ def StoreMatch(keyword, fuzzy = False, include_coeff = False):
 def actualName(name):
 	return name if type(name) == str else name[0]
 
-def storeInfo(storeid):
-	storeid = f"{storeid}"
+def storeInfo(sid):
+	sid = f"{sid}"
 	try:
-		sid = StoreID(storeid)[0][0]
+		sid = StoreID(sid)[0][0]
 		return dict([(t, infoJSON[t][sid]) for t in infoJSON if (sid in infoJSON[t]) and (type(infoJSON[t]) == dict)])
 	except IndexError:
 		return {}
 
-def storeURL(storeid = None, sif = None, mode = None):
-	if storeid:
-		sif = storeInfo(storeid)
+def storeURL(sid = None, sif = None, mode = None):
+	if sid:
+		sif = storeInfo(sid)
 	elif sif:
 		pass
 	else:
@@ -77,9 +77,9 @@ def storeURL(storeid = None, sif = None, mode = None):
 	except KeyError:
 		return None
 
-async def storeDict(storeid = None, sif = None, session = None, mode = "dict"):
-	if storeid:
-		sif = storeInfo(storeid)
+async def storeDict(sid = None, sif = None, session = None, mode = "dict"):
+	if sid:
+		sif = storeInfo(sid)
 	elif sif:
 		pass
 	else:
@@ -89,6 +89,8 @@ async def storeDict(storeid = None, sif = None, session = None, mode = "dict"):
 		if website == "-":
 			website = actualName(sif["name"]).lower().replace(" ", "")
 		url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={website}&locale={localeNation[sif['flag']]}&sc=false"
+		if mode == "url":
+			return url
 
 		r = await request(session = session, url = url, ident = None, 
 			headers = userAgent, ensureAns = False, retryNum = 3, timeout = 5)
