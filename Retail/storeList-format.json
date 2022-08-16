@@ -1916,8 +1916,8 @@
               "storeNumber": "R227",
               "countryCode": "GB",
               "storeName": "Bentall Centre",
-              "latitude": "51.41147",
-              "longitude": "-0.30509",
+              "latitude": "51.41154",
+              "longitude": "-0.30475",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -8811,8 +8811,8 @@
               "storeNumber": "R063",
               "countryCode": "US",
               "storeName": "Towson Town Center",
-              "latitude": "39.40371",
-              "longitude": "-76.60004",
+              "latitude": "39.404576",
+              "longitude": "-76.599685",
               "storeRadius": "50",
               "accuracyThreshold": "500",
               "imageURL": [
@@ -12368,7 +12368,7 @@
               "appClipInstoreCheckoutMode": "SCAN_AND_BUY",
               "appClipSelfCheckout": "SNL",
               "enableInStoreMode": true,
-              "storeAddress": "Akasya AVM\nAcıbadem Mahallesi, Çeçen Sok.xa0Noxa0: 25\nİstanbul,Üsküdar İstanbul",
+              "storeAddress": "Akasya AVM\nAcıbadem Mahallesi, Çeçen Sok No: 25\nİstanbul,Üsküdar İstanbul",
               "phoneNumber": "(0216) 2507100"
             },
             {

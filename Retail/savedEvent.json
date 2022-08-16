@@ -1,5 +1,5 @@
 {
-  "update": "2022-07-28 05:29:13 GMT",
+  "update": "2022-08-16 06:00:06 GMT",
   "today": {
     "6443617454119551373": {
       "slug": "art-skills-getting-started-procreate",
@@ -40,7 +40,8 @@
       "🇰🇷": "코딩 기본기: Swift Playgrounds 시작하기",
       "🇸🇬": "Coding Skills: Getting Started with Swift Playgrounds",
       "🇹🇭": "พื้นฐานเขียนโค้ด: เริ่มต้นใช้งาน Swift Playgrounds",
-      "🇲🇴": "編碼技巧：Swift Playgrounds 使用入門"
+      "🇲🇴": "編碼技巧：Swift Playgrounds 使用入門",
+      "🇭🇰": "編碼技巧：Swift Playgrounds 使用入門"
     },
     "6443987539032113545": {
       "slug": "art-skills-sketching-ideas-notes",
@@ -172,7 +173,8 @@
       "🇯🇵": "アートラボ：遊び心あふれるポートレート",
       "🇰🇷": "아트 연구소: 인물 사진에 재미 더하기",
       "🇸🇬": "Art Lab: Playful Portraits",
-      "🇹🇭": "ทดลองงานศิลปะ: ตกแต่งภาพบุคคลสุดอาร์ต"
+      "🇹🇭": "ทดลองงานศิลปะ: ตกแต่งภาพบุคคลสุดอาร์ต",
+      "🇹🇼": "藝術研究室：趣玩人像照"
     },
     "6635235077318869345": {
       "slug": "photo-lab-directing-portrait",
@@ -218,7 +220,8 @@
       "slug": "skills-managing-family-devices",
       "🇨🇳": "技巧：管理家人设备",
       "🇭🇰": "技巧：管理家人的裝置",
-      "🇲🇴": "技巧：管理家人的裝置"
+      "🇲🇴": "技巧：管理家人的裝置",
+      "🇯🇵": "スキル：家族のデバイスを管理しよう"
     },
     "6716856769744568921": {
       "slug": "skills-managing-your-screen-time",
@@ -274,15 +277,18 @@
     },
     "6858951078987006409": {
       "slug": "virtual-session-for-kids-learn-to-code-1",
-      "🇸🇬": "Virtual Session for Kids: Learn to Code 1"
+      "🇸🇬": "Virtual Session for Kids: Learn to Code 1",
+      "🇯🇵": "オンラインセッション - 子ども向け：コードを学ぼう1"
     },
     "6858953608756298441": {
       "slug": "virtual-session-for-kids-learn-to-code-2",
-      "🇸🇬": "Virtual Session for Kids: Learn to Code 2"
+      "🇸🇬": "Virtual Session for Kids: Learn to Code 2",
+      "🇯🇵": "オンラインセッション - 子ども向け：コードを学ぼう2"
     },
     "6858954953836036449": {
       "slug": "virtual-session-for-kids-lights-camera-code",
-      "🇸🇬": "Virtual Session for Kids: Lights, Camera, Code"
+      "🇸🇬": "Virtual Session for Kids: Lights, Camera, Code",
+      "🇯🇵": "オンラインセッション - 子ども向け：ライト、カメラ、コード"
     },
     "6871610251075748217": {
       "slug": "skills-your-kids-and-their-devices",
@@ -365,7 +371,8 @@
       "🇲🇴": "網上課程：用 Keynote 製作超強簡報",
       "🇸🇬": "Virtual Session: Create Powerful Presentations in Keynote",
       "🇹🇭": "เซสชั่นออนไลน์: เพิ่มพลังให้งานนำเสนอด้วย Keynote",
-      "🇹🇼": "線上課程：用 Keynote 打造超強簡報"
+      "🇹🇼": "線上課程：用 Keynote 打造超強簡報",
+      "🇭🇰": "網上課程：用 Keynote 製作超強簡報"
     },
     "6933532087828709785": {
       "slug": "skills-create-powerful-presentations-keynote",
@@ -409,7 +416,8 @@
       "slug": "photo-tour-portraits-on-location",
       "🇨🇳": "光影漫游：外景人像摄影",
       "🇯🇵": "フォトツアー：屋外でポートレート写真を撮ろう",
-      "🇲🇴": "攝影漫遊：外景人像攝影"
+      "🇲🇴": "攝影漫遊：外景人像攝影",
+      "🇹🇭": "พาทัวร์ถ่ายรูป: ถ่ายภาพบุคคลนอกสถานที่"
     },
     "6937533011857343165": {
       "slug": "art-tour-drawing-observation",
@@ -461,7 +469,9 @@
       "🇯🇵": "デザインラボ：『ラック～幸運を探す旅～』のARキャラクターと一緒にメッセージを作ろう",
       "🇰🇷": "디자인 연구소: ‘럭’ - Luck의 AR 캐릭터로 메시지 만들기",
       "🇸🇬": "Design Lab: Create a Message with AR Characters from Luck",
-      "🇹🇭": "ทดลองงานดีไซน์: สร้างสรรค์ข้อความดีๆ กับตัวการ์ตูน AR จาก Luck"
+      "🇹🇭": "ทดลองงานดีไซน์: สร้างสรรค์ข้อความดีๆ กับตัวการ์ตูน AR จาก Luck",
+      "🇹🇼": "設計研究室：用《開運奇遇記》AR 角色創作幸運小語",
+      "🇲🇴": "設計實驗室：以《天降奇運》AR 角色創作訊息"
     },
     "6949677988636426637": {
       "slug": "virtual-studio-natt-teangchatapun-081822",
@@ -543,6 +553,10 @@
       "slug": "virtual-studio-zy-cheng-090322",
       "🇸🇬": "Virtual Studio: Unforgettable Presentations with ZY Cheng"
     },
+    "6954720705830027661": {
+      "slug": "photo-tour-framing-architecture-sanlitun",
+      "🇨🇳": "光影漫游: 用镜头捕捉三里屯暮色中的建筑⻛貌"
+    },
     "6954748515818308449": {
       "slug": "video-lab-cinessay21-081422",
       "🇨🇳": "视频实验室：跟着西21映画学习创作纪实短片"
@@ -566,6 +580,62 @@
     "6955829547409769929": {
       "slug": "video-lab-yuta-hiraoka-073022",
       "🇯🇵": "ビデオラボ：平岡雄太と一緒に手書きで動画を変身させよう"
+    },
+    "6955870848440239817": {
+      "slug": "exclusive-douyin-090222",
+      "🇨🇳": "独家呈献：跟着抖音探讨用社交媒体助力环保"
+    },
+    "6955886025076278369": {
+      "slug": "coding-lab-gam-082522",
+      "🇹🇭": "สตูดิโอเสมือน: เขียนโค้ดไม่ยากอย่างที่คิด กับ แก้ม-ปรีณาพรรณ"
+    },
+    "6956228387614917821": {
+      "slug": "video-lab-mu-chayanop-090322",
+      "🇹🇭": "ทดลองถ่ายวิดีโอ: เปลี่ยนชีวิตประจำวันเป็นหนังสั้นแบบครบรสกับหมู-ชยนพ"
+    },
+    "6957347447018783313": {
+      "slug": "virtual-studio-moon-tang-081722",
+      "🇭🇰": "網上創作坊：跟 moon tang 創作夢幻的混音作品"
+    },
+    "6957631571763823005": {
+      "slug": "virtual-studio-nakrob-moonmanas-090122",
+      "🇹🇭": "สตูดิโอเสมือน: ออกแบบปกหนังสือชวนฝัน กับ นักรบ มูลมานัส"
+    },
+    "6957640343655711389": {
+      "slug": "video-lab-capcut-090322",
+      "🇨🇳": "视频实验室：跟着剪映产品经理玩转视频剪辑"
+    },
+    "6957681297162928525": {
+      "slug": "music-lab-tulegur-091022",
+      "🇨🇳": "音乐实验室：跟着图利古尔刚子为影像注入声音的力量"
+    },
+    "6957692538816201357": {
+      "slug": "video-lab-zhu-qiao-082722",
+      "🇨🇳": "视频实验室：跟着猪侨破译 Vlog 的创作密码"
+    },
+    "6958049918959649693": {
+      "slug": "virtual-studio-yellow-082722",
+      "🇹🇼": "線上創作坊：和黃宣一起開發你心中的音樂魂"
+    },
+    "6958082803565494729": {
+      "slug": "virtual-studio-polin-081922",
+      "🇹🇼": "線上創作坊：和柏霖一起譜出夢想的舞曲"
+    },
+    "6958362509720322457": {
+      "slug": "design-lab-mafueng-082722",
+      "🇹🇭": "ทดลองงานดีไซน์: เพิ่มบาลานซ์การเรียนด้วยบันทึกสุดสร้างสรรค์ กับ มะเฟือง"
+    },
+    "6961271123560792461": {
+      "slug": "art-lab-noh-sangho-082522",
+      "🇰🇷": "아트 연구소: 노상호와 함께 자신만의 움직이는 GIF 세계 만들기"
+    },
+    "6962363810955297181": {
+      "slug": "virtual-studio-takako-kansai-082722",
+      "🇯🇵": "バーチャルスタジオ：閑歳孝子に学ぶアプリのアイデアを形にする方法"
+    },
+    "6963455867576811945": {
+      "slug": "photo-lab-xi-zhinong-082122",
+      "🇨🇳": "光影实验室：跟着奚志农用影像的力量促进自然保护"
     }
   },
   "sitemap": {
@@ -615,6 +685,9 @@
       "🇭🇰": "跟 Apple 更聰明地學習",
       "🇲🇴": "跟 Apple 更聰明地學習",
       "🇹🇼": "跟 Apple 一起聰明學更多"
+    },
+    "summer-coding-fun": {
+      "🇯🇵": "Appleとコーディングを楽しむ"
     }
   }
 }
