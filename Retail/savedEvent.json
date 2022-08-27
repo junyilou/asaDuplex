@@ -1,5 +1,5 @@
 {
-  "update": "2022-08-16 06:00:06 GMT",
+  "update": "2022-08-27 01:00:03 GMT",
   "today": {
     "6443617454119551373": {
       "slug": "art-skills-getting-started-procreate",
@@ -20,7 +20,8 @@
       "🇰🇷": "뮤직 기본기: GarageBand 시작하기",
       "🇲🇴": "音樂技巧：GarageBand 使用入門",
       "🇸🇬": "Music Skills: Getting Started with GarageBand",
-      "🇹🇭": "พื้นฐานการดนตรี: เริ่มต้นใช้งาน GarageBand"
+      "🇹🇭": "พื้นฐานการดนตรี: เริ่มต้นใช้งาน GarageBand",
+      "🇹🇼": "音樂技巧：GarageBand 使用入門"
     },
     "6443626861192643469": {
       "slug": "photo-skills-photography-iphone",
@@ -104,7 +105,8 @@
       "🇰🇷": "아이를 위한 동영상 연구소: 영화 예고편 만들기",
       "🇲🇴": "兒童影片實驗室：製作電影預告片",
       "🇹🇭": "การทดลองถ่ายวิดีโอสำหรับเด็ก: สร้างตัวอย่างภาพยนตร์",
-      "🇸🇬": "Video Lab for Kids: Making a Movie Trailer"
+      "🇸🇬": "Video Lab for Kids: Making a Movie Trailer",
+      "🇭🇰": "兒童影片實驗室：製作電影預告片"
     },
     "6453337069221413229": {
       "slug": "photo-lab-fun-family-portraits",
@@ -130,6 +132,10 @@
       "slug": "product-skills-accessibility-vision-loss",
       "🇨🇳": "技巧：适用于视障人士的辅助功能"
     },
+    "6456668939250140553": {
+      "slug": "product-skills-learning-literacy",
+      "🇨🇳": "技巧：学习与读写功能"
+    },
     "6456669721362006917": {
       "slug": "product-skills-accessibility-reduced-mobility",
       "🇨🇳": "技巧：适用于行动不便人士的辅助功能"
@@ -144,7 +150,12 @@
     },
     "6456671562162341225": {
       "slug": "product-skills-using-voiceover-iphone-ipad",
-      "🇨🇳": "技巧：使用 iPhone 和 iPad 的旁白功能"
+      "🇨🇳": "技巧：使用 iPhone 和 iPad 的旁白功能",
+      "🇯🇵": "スキル：iPhoneやiPadでVoiceOverを使ってみよう"
+    },
+    "6456672052476478305": {
+      "slug": "product-skills-voiceover-mac",
+      "🇨🇳": "技巧：使用 Mac 的旁白功能"
     },
     "6587404808071512425": {
       "slug": "music-skills-getting-started-podcasting",
@@ -194,7 +205,8 @@
       "🇯🇵": "スキル：iPhoneで1日を効率よく過ごそう",
       "🇰🇷": "기본기: 일상이 가뿐해지는 iPhone 활용법",
       "🇲🇴": "技巧：用 iPhone 簡化日常事務",
-      "🇹🇭": "พื้นฐานใช้งาน: ค้นพบตัวช่วยการทำงานบน iPhone"
+      "🇹🇭": "พื้นฐานใช้งาน: ค้นพบตัวช่วยการทำงานบน iPhone",
+      "🇸🇬": "Skills: Simplifying Your Day with iPhone"
     },
     "6716852117049278813": {
       "slug": "skills-getting-started-with-iphone",
@@ -221,7 +233,8 @@
       "🇨🇳": "技巧：管理家人设备",
       "🇭🇰": "技巧：管理家人的裝置",
       "🇲🇴": "技巧：管理家人的裝置",
-      "🇯🇵": "スキル：家族のデバイスを管理しよう"
+      "🇯🇵": "スキル：家族のデバイスを管理しよう",
+      "🇹🇭": "พื้นฐานใช้งาน: จัดการอุปกรณ์บุตรหลาน"
     },
     "6716856769744568921": {
       "slug": "skills-managing-your-screen-time",
@@ -229,7 +242,8 @@
       "🇭🇰": "技巧：管理你的螢幕使用時間",
       "🇯🇵": "スキル：スクリーンタイムを管理しよう",
       "🇲🇴": "技巧：管理你的螢幕使用時間",
-      "🇰🇷": "기본기: 스크린 타임 관리하기"
+      "🇰🇷": "기본기: 스크린 타임 관리하기",
+      "🇹🇭": "พื้นฐานใช้งาน: บริหารจัดการเวลาหน้าจอ"
     },
     "6716857638150046053": {
       "slug": "skills-getting-started-with-magic-keyboard-for-ipad",
@@ -238,7 +252,8 @@
       "🇯🇵": "スキル：iPadのためのMagic Keyboardを使ってみよう",
       "🇰🇷": "기본기: iPad용 Magic Keyboard 사용 시작하기",
       "🇲🇴": "技巧：iPad 精妙鍵盤入門",
-      "🇹🇭": "พื้นฐานใช้งาน: เริ่มต้นใช้งาน Magic Keyboard กับ iPad"
+      "🇹🇭": "พื้นฐานใช้งาน: เริ่มต้นใช้งาน Magic Keyboard กับ iPad",
+      "🇸🇬": "Skills: Getting Started with Magic Keyboard for iPad"
     },
     "6716859444112491109": {
       "slug": "skills-getting-started-with-ipad",
@@ -278,24 +293,29 @@
     "6858951078987006409": {
       "slug": "virtual-session-for-kids-learn-to-code-1",
       "🇸🇬": "Virtual Session for Kids: Learn to Code 1",
-      "🇯🇵": "オンラインセッション - 子ども向け：コードを学ぼう1"
+      "🇯🇵": "オンラインセッション - 子ども向け：コードを学ぼう1",
+      "🇰🇷": "아이를 위한 온라인 세션: 코딩 배우기 1",
+      "🇹🇭": "เซสชั่นออนไลน์สำหรับเด็ก: เรียนรู้วิธีเขียนโค้ด 1"
     },
     "6858953608756298441": {
       "slug": "virtual-session-for-kids-learn-to-code-2",
       "🇸🇬": "Virtual Session for Kids: Learn to Code 2",
-      "🇯🇵": "オンラインセッション - 子ども向け：コードを学ぼう2"
+      "🇯🇵": "オンラインセッション - 子ども向け：コードを学ぼう2",
+      "🇰🇷": "아이를 위한 온라인 세션: 코딩 배우기 2"
     },
     "6858954953836036449": {
       "slug": "virtual-session-for-kids-lights-camera-code",
       "🇸🇬": "Virtual Session for Kids: Lights, Camera, Code",
-      "🇯🇵": "オンラインセッション - 子ども向け：ライト、カメラ、コード"
+      "🇯🇵": "オンラインセッション - 子ども向け：ライト、カメラ、コード",
+      "🇰🇷": "아이를 위한 온라인 세션: 조명, 카메라, 코드"
     },
     "6871610251075748217": {
       "slug": "skills-your-kids-and-their-devices",
       "🇨🇳": "技巧：孩子与设备",
       "🇭🇰": "技巧：小朋友與裝置",
       "🇲🇴": "技巧：小朋友與裝置",
-      "🇹🇭": "พื้นฐานใช้งาน: วิธีควบคุมดูแลอุปกรณ์ของเด็กๆ"
+      "🇹🇭": "พื้นฐานใช้งาน: วิธีควบคุมดูแลอุปกรณ์ของเด็กๆ",
+      "🇯🇵": "スキル：子どもたちとデバイス"
     },
     "6896277336452071821": {
       "slug": "learn-the-basics-iphone",
@@ -389,7 +409,8 @@
       "🇹🇭": "เซสชั่นออนไลน์: พลิกวิธีการจดเลคเชอร์",
       "🇨🇳": "在线课程：焕新你的课堂笔记",
       "🇲🇴": "網上課程：課堂筆記大變身",
-      "🇹🇼": "線上課程：課堂筆記大變身"
+      "🇹🇼": "線上課程：課堂筆記大變身",
+      "🇭🇰": "網上課程：課堂筆記大變身"
     },
     "6935143355421393229": {
       "slug": "video-tour-capturing-cinematic-shots",
@@ -417,19 +438,23 @@
       "🇨🇳": "光影漫游：外景人像摄影",
       "🇯🇵": "フォトツアー：屋外でポートレート写真を撮ろう",
       "🇲🇴": "攝影漫遊：外景人像攝影",
-      "🇹🇭": "พาทัวร์ถ่ายรูป: ถ่ายภาพบุคคลนอกสถานที่"
+      "🇹🇭": "พาทัวร์ถ่ายรูป: ถ่ายภาพบุคคลนอกสถานที่",
+      "🇸🇬": "Photo Tour: Taking Portraits on Location"
     },
     "6937533011857343165": {
       "slug": "art-tour-drawing-observation",
       "🇨🇳": "艺术漫游：观察与写生",
       "🇲🇴": "藝術漫遊：觀察作畫",
-      "🇯🇵": "アートツアー：観察スケッチをしよう"
+      "🇯🇵": "アートツアー：観察スケッチをしよう",
+      "🇸🇬": "Art Tour: Drawing from Observation",
+      "🇹🇭": "พาทัวร์สร้างงานศิลปะ: วาดภาพจากการสังเกต"
     },
     "6937538497499464109": {
       "slug": "art-tour-discovering-color",
       "🇨🇳": "艺术漫游：探索色彩",
       "🇯🇵": "アートツアー：街に出かけてあなたの色を見つけよう",
-      "🇲🇴": "藝術漫遊：探索色彩"
+      "🇲🇴": "藝術漫遊：探索色彩",
+      "🇸🇬": "Art Tour: Discovering Colour"
     },
     "6937543655042154953": {
       "slug": "photo-tour-framing-architecture",
@@ -458,6 +483,17 @@
     "6946040903773881501": {
       "slug": "virtual-studio-jan-curious-071322",
       "🇭🇰": "網上創作坊：跟阿水創作你的一人樂隊音樂"
+    },
+    "6946051534032306650": {
+      "slug": "music-skills-remix-katy-perry",
+      "🇨🇳": "音乐技巧：重混 Katy Perry 歌曲",
+      "🇭🇰": "音樂技巧：混音創作 Katy Perry 歌曲",
+      "🇯🇵": "ミュージックスキル：ケイティ・ペリーをリミックスしよう",
+      "🇰🇷": "뮤직 기본기: Katy Perry 리믹스",
+      "🇲🇴": "音樂技巧：混音創作 Katy Perry 歌曲",
+      "🇸🇬": "Music Skills: Remix Katy Perry",
+      "🇹🇭": "พื้นฐานการดนตรี: รีมิกซ์เพลง Katy Perry",
+      "🇹🇼": "音樂技巧：混音創作 Katy Perry"
     },
     "6947910354026791761": {
       "slug": "art-lab-slimy-oddity-073022",
@@ -636,6 +672,18 @@
     "6963455867576811945": {
       "slug": "photo-lab-xi-zhinong-082122",
       "🇨🇳": "光影实验室：跟着奚志农用影像的力量促进自然保护"
+    },
+    "6963463115510284665": {
+      "slug": "video-lab-txy-lxy-091822",
+      "🇨🇳": "视频实验室：跟着唐忻妤和梁馨尹拍出高分短片作业"
+    },
+    "6963862957097124521": {
+      "slug": "virtual-studio-matt-force-090522",
+      "🇭🇰": "網上創作坊：與 Matt Force 還原 90 年代 Hip-Hop 節拍"
+    },
+    "6965586468169744717": {
+      "slug": "exclusive-namon-and-kim-kyuha-090122",
+      "🇰🇷": "독점: 나몬과 김규하가 함께하는 ‘iPad로 만들다’ 캠페인 메이킹 스토리"
     }
   },
   "sitemap": {
@@ -664,7 +712,9 @@
       "🇯🇵": "教師のためのクリエイティビティ"
     },
     "kids-code-with-apple": {
-      "🇸🇬": "Kids Code with Apple"
+      "🇸🇬": "Kids Code with Apple",
+      "🇰🇷": "Apple과 함께하는 키즈 코딩",
+      "🇹🇭": "เขียนโค้ดกับ Apple สำหรับเด็ก"
     },
     "learn-the-basics": {
       "🇨🇳": "基础入门",

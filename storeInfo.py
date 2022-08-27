@@ -17,14 +17,14 @@ Order = []
 def StoreID(sid, fuzzy = False, include_coeff = False):
 	stores = []
 	if fuzzy:
-		sid = f"{sid}".upper().replace("R", "")
+		sid = str(sid).upper().replace("R", "")
 		ids = [i for i in LIBRARY]
 		for i in ids:
 			if sid in i:
 				coeff = (round(len(sid) / 3, 3), ) if include_coeff else ()
 				stores.append((i, actualName(infoJSON["name"][i]), *coeff))
 	else:
-		sid = f"{sid:0>3}".upper().replace("R", "")
+		sid = f"{str(sid).upper().replace('R', ''):0>3}"
 		if sid in LIBRARY:
 			coeff = (1.0, ) if include_coeff else ()
 			stores = [(sid, actualName(infoJSON["name"][sid]), *coeff)]
@@ -75,7 +75,7 @@ def storeURL(sid = None, sif = None, mode = None):
 		else:
 			return f"https://www.apple.com{webNation[sif['flag']]}/retail/{website}"
 	except KeyError:
-		return None
+		return ""
 
 async def storeDict(sid = None, sif = None, session = None, mode = "dict"):
 	if sid:
