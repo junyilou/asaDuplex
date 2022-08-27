@@ -8,7 +8,7 @@ from sys import argv
 from collections import OrderedDict
 
 from storeInfo import *
-from modules.today import Store, Sitemap, Collection, teleinfo, __clean
+from modules.today import Store, Sitemap, Collection, teleinfo, clean
 from modules.util import setLogger, sync
 from bot import chat_ids
 from sdk_aliyun import async_post as raw_post
@@ -130,7 +130,7 @@ if __name__ == "__main__":
 	loop = sync(None)
 	asyncio.set_event_loop(loop)
 	loop.run_until_complete(main(argv[1]))
-	__clean(loop)
+	clean(loop)
 
 	if append:
 		logging.info("正在更新 savedEvent 文件")

@@ -48,7 +48,7 @@ def get_session():
 	return session
 
 @atexit.register
-def __clean(loop = None):
+def clean(loop = None):
 	try:
 		l = [asyncio.get_running_loop()] if loop == None else [loop]
 	except:
@@ -111,7 +111,7 @@ class Store():
 			self.slug = raw["slug"]
 			if rootPath == None:
 				sif = storeInfo(self.sid)
-				slug = storeURL(storeid = self.sid, mode = "slug")
+				slug = storeURL(sid = self.sid, mode = "slug")
 				self.rootPath = {**webNation, "🇨🇳": "/cn"}[sif["flag"]]
 			else:
 				self.rootPath = rootPath
@@ -130,6 +130,7 @@ class Store():
 			self.url = storeURL(sif = sif)
 		else:
 			raise ValueError("sid, raw 至少提供一个")
+		self.calendar = self.url.replace("/retail/", "/today/calendar/")
 		self.serial = dict(sid = self.sid)
 		self.raw = dict((i, self.__dict__[i]) for i in self.__dict__ if i != "raw")
 
