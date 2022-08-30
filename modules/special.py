@@ -2,9 +2,10 @@ import logging
 import aiohttp
 from datetime import timedelta, date, datetime
 from storeInfo import storeInfo, storeDict
-from modules.constants import userAgent, partSample, storeNation
+from modules.constants import userAgent, allRegions
 from modules.util import request
 
+COMMENTS = {}
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 def textConvert(strdict, userLang = True):
@@ -16,32 +17,32 @@ def textConvert(strdict, userLang = True):
 		return f'{strdict["openTime"]} - {strdict["closeTime"]}'
 
 async def comment(session, sid, sif = None):
-	try:
-		sif = storeInfo(sid) if sif == None else sif
-		partNumber = f"MM0A3{partSample[sif['flag']]}/A"
-	except KeyError:
-		return {}
+	global COMMENTS
 
-	baseURL = f"https://www.apple.com{storeNation[sif['flag']]}"
-	referer = {**userAgent, "Referer": f"{baseURL}/shop/product/{partNumber}"}
-	url = f"{baseURL}/shop/fulfillment-messages?searchNearby=false&parts.0={partNumber}&store=R{sid}"
+	sif = storeInfo(sid) if sif == None else sif
+	partNumber = f'MM0A3{allRegions[sif["flag"]]["partSample"]}/A'
+	baseURL = f"https://www.apple.com{allRegions[sif['flag']]['shopURL']}/shop"
+
+	if allRegions[sif['flag']]['shopURL'] == None:
+		return COMMENTS
+	referer = {**userAgent, "Referer": f"{baseURL}/product/MM0A3"}
+	url = f"{baseURL}/fulfillment-messages?searchNearby=true&parts.0={partNumber}&store=R{sid}"
 
 	try:
-		r = await request(session = session, url = url, headers = userAgent, ident = None, ensureAns = False, mode = "json")
+		r = await request(session = session, url = url, headers = userAgent, 
+			ident = None, ensureAns = False, mode = "json")
 		j = r["body"]["content"]["pickupMessage"]["stores"]
 	except:
-		return {}
+		return COMMENTS
 
-	reason = {}
 	for s in j:
-		if s["storeNumber"] != f"R{sid}":
-			continue
 		for h in s["retailStore"]["storeHolidays"]:
 			sDay = datetime.strptime(h["date"], "%b %d")
 			sDay = date(date.today().year, sDay.month, sDay.day)
 			sTxt = (f"[{h['description']}]" if h["description"] else "") + (f" {h['comments']}" if h["comments"] else "")
-			reason[sDay] = sTxt
-	return reason
+			COMMENTS[sid] = COMMENTS.get(sid, {})
+			COMMENTS[sid][sDay] = sTxt
+	return COMMENTS
 
 async def speHours(session, sid, limit = 14, userLang = True):
 	sif = storeInfo(sid)
@@ -75,8 +76,8 @@ async def speHours(session, sid, limit = 14, userLang = True):
 
 		if validDate < specialToday:# or regular == spetext:
 			continue
-		if validDate in specialReasons:
-			reason = {"reason": specialReasons[validDate]}
+		if validDate in specialReasons.get(sid, {}):
+			reason = {"reason": specialReasons[sid][validDate]}
 		else:
 			reason = {}
 		
