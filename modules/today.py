@@ -6,7 +6,7 @@ import atexit
 
 from datetime import datetime
 from storeInfo import *
-from modules.constants import webNation, userAgent, todayNation
+from modules.constants import allRegions, userAgent
 from modules.util import request, disMarkdown, timezoneText
 
 __session_pool = {}
@@ -14,6 +14,7 @@ __session_pool = {}
 TIMEOUT, RETRYNUM, SEMAPHORE_LIMIT = 5, 5, 50
 API_ROOT = "https://www.apple.com/today-bff/"
 ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
+todayNation = dict([(allRegions[i]["rootPath"], i) for i in allRegions if i != "TW"])
 
 API = {
 	"landing": {
@@ -112,7 +113,7 @@ class Store():
 			if rootPath == None:
 				sif = storeInfo(self.sid)
 				slug = storeURL(sid = self.sid, mode = "slug")
-				self.rootPath = {**webNation, "🇨🇳": "/cn"}[sif["flag"]]
+				self.rootPath = allRegions[sif["flag"]]["rootPath"]
 			else:
 				self.rootPath = rootPath
 			self.flag = todayNation[self.rootPath]
@@ -123,7 +124,7 @@ class Store():
 			self.name = store[1]
 			sif = storeInfo(self.sid)
 			self.slug = storeURL(sif = sif, mode = "slug")
-			self.rootPath = {**webNation, "🇨🇳": "/cn"}[sif["flag"]]
+			self.rootPath = allRegions[sif["flag"]]["rootPath"]
 			self.timezone = sif["timezone"]
 			self.timezoneFlag = False
 			self.flag = sif["flag"]

@@ -6,7 +6,7 @@ import logging
 from functools import partial
 
 from modules.util import request
-from modules.constants import userAgent, webNation, localeNation, RecruitDict
+from modules.constants import userAgent, allRegions
 
 with open("storeInfo.json") as r:
 	infoJSON = json.loads(r.read())
@@ -73,7 +73,7 @@ def storeURL(sid = None, sif = None, mode = None):
 		if mode == "slug":
 			return website
 		else:
-			return f"https://www.apple.com{webNation[sif['flag']]}/retail/{website}"
+			return f"https://www.apple.com{allRegions[sif['flag']]['storeURL']}/retail/{website}"
 	except KeyError:
 		return ""
 
@@ -88,7 +88,7 @@ async def storeDict(sid = None, sif = None, session = None, mode = "dict"):
 		website = sif["key"]["website"]
 		if website == "-":
 			website = actualName(sif["name"]).lower().replace(" ", "")
-		url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={website}&locale={localeNation[sif['flag']]}&sc=false"
+		url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={website}&locale={allRegions[sif['flag']]['rspLocale']}&sc=false"
 		if mode == "url":
 			return url
 
@@ -140,12 +140,12 @@ def getState(sid, stateOnly = False):
 		return state, stores
 
 def getNation(sid, userLang = None):
-	state = infoJSON["flag"][f"{sid}"]
+	flag = infoJSON["flag"][f"{sid}"]
 	if userLang != None:
-		name = RecruitDict[state]["name"] if userLang else RecruitDict[state]["altername"][0]
+		name = allRegions[flag]["name"] if userLang else allRegions[flag]["nameEng"]
 	else:
-		name = state
-	return name, [i[0] for i in storeReturn(state, remove_closed = True, remove_future = True)]
+		name = flag
+	return name, [i[0] for i in storeReturn(flag, remove_closed = True, remove_future = True)]
 
 def stateReplace(rstores, bold = False, number = True, userLang = None):
 	stores = rstores.copy()
@@ -265,9 +265,7 @@ def library():
 		LIBRARY[i] = LIBRARY.get(i, []) + keys
 	for i in infoJSON["flag"]:
 		flag = infoJSON["flag"][i]
-		LIBRARY[i] = LIBRARY.get(i, []) + [flag]
-		LIBRARY[i] += [RecruitDict[flag]["name"]]
-		LIBRARY[i] += RecruitDict[flag]["altername"]
+		LIBRARY[i] = LIBRARY.get(i, []) + [flag, allRegions[flag]["name"], allRegions[flag]["nameEng"]] + allRegions[flag]["altername"]
 	Order = sorted([i for i in infoJSON["key"]], key = lambda k: f"{storeInfo(k)['flag']} {getState(k, stateOnly = True)}")
 
 library()
