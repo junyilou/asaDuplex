@@ -1,5 +1,5 @@
 {
-  "update": "2022-08-27 01:00:03 GMT",
+  "update": "2022-08-30 14:10:36 GMT",
   "today": {
     "6443617454119551373": {
       "slug": "art-skills-getting-started-procreate",
@@ -37,12 +37,12 @@
     "6443627468649497481": {
       "slug": "coding-skills-getting-started-swift-playgrounds",
       "🇨🇳": "编程技巧：Swift Playgrounds 使用入门",
+      "🇭🇰": "編碼技巧：Swift Playgrounds 使用入門",
       "🇯🇵": "コーディングスキル：Swift Playgroundsではじめよう",
       "🇰🇷": "코딩 기본기: Swift Playgrounds 시작하기",
-      "🇸🇬": "Coding Skills: Getting Started with Swift Playgrounds",
-      "🇹🇭": "พื้นฐานเขียนโค้ด: เริ่มต้นใช้งาน Swift Playgrounds",
       "🇲🇴": "編碼技巧：Swift Playgrounds 使用入門",
-      "🇭🇰": "編碼技巧：Swift Playgrounds 使用入門"
+      "🇸🇬": "Coding Skills: Getting Started with Swift Playgrounds",
+      "🇹🇭": "พื้นฐานเขียนโค้ด: เริ่มต้นใช้งาน Swift Playgrounds"
     },
     "6443987539032113545": {
       "slug": "art-skills-sketching-ideas-notes",
@@ -101,12 +101,12 @@
     "6453335803162362249": {
       "slug": "video-lab-making-movie-trailer",
       "🇨🇳": "儿童视频实验室：制作一部电影预告片",
+      "🇭🇰": "兒童影片實驗室：製作電影預告片",
       "🇯🇵": "ビデオラボ - 子ども向け：映画の予告編を作ろう",
       "🇰🇷": "아이를 위한 동영상 연구소: 영화 예고편 만들기",
       "🇲🇴": "兒童影片實驗室：製作電影預告片",
-      "🇹🇭": "การทดลองถ่ายวิดีโอสำหรับเด็ก: สร้างตัวอย่างภาพยนตร์",
       "🇸🇬": "Video Lab for Kids: Making a Movie Trailer",
-      "🇭🇰": "兒童影片實驗室：製作電影預告片"
+      "🇹🇭": "การทดลองถ่ายวิดีโอสำหรับเด็ก: สร้างตัวอย่างภาพยนตร์"
     },
     "6453337069221413229": {
       "slug": "photo-lab-fun-family-portraits",
@@ -121,12 +121,12 @@
     "6455123986703286881": {
       "slug": "art-lab-kids-drawing-emoji",
       "🇨🇳": "儿童艺术实验室：制作属于自己的表情符号",
+      "🇭🇰": "兒童藝術實驗室：製作屬於自己的表情符號",
       "🇯🇵": "アートラボ - 子ども向け：オリジナルの絵文字を作ろう",
       "🇰🇷": "아이를 위한 아트 연구소: 이모티콘 만들기",
       "🇲🇴": "兒童藝術實驗室：製作屬於自己的表情符號",
       "🇸🇬": "Art Lab for Kids: Make Your Own Emoji",
-      "🇹🇭": "การทดลองงานศิลปะสำหรับเด็ก: สร้างสรรค์อิโมจิสุดสดใส",
-      "🇭🇰": "兒童藝術實驗室：製作屬於自己的表情符號"
+      "🇹🇭": "การทดลองงานศิลปะสำหรับเด็ก: สร้างสรรค์อิโมจิสุดสดใส"
     },
     "6456668175656125061": {
       "slug": "product-skills-accessibility-vision-loss",
@@ -205,8 +205,8 @@
       "🇯🇵": "スキル：iPhoneで1日を効率よく過ごそう",
       "🇰🇷": "기본기: 일상이 가뿐해지는 iPhone 활용법",
       "🇲🇴": "技巧：用 iPhone 簡化日常事務",
-      "🇹🇭": "พื้นฐานใช้งาน: ค้นพบตัวช่วยการทำงานบน iPhone",
-      "🇸🇬": "Skills: Simplifying Your Day with iPhone"
+      "🇸🇬": "Skills: Simplifying Your Day with iPhone",
+      "🇹🇭": "พื้นฐานใช้งาน: ค้นพบตัวช่วยการทำงานบน iPhone"
     },
     "6716852117049278813": {
       "slug": "skills-getting-started-with-iphone",
@@ -232,8 +232,8 @@
       "slug": "skills-managing-family-devices",
       "🇨🇳": "技巧：管理家人设备",
       "🇭🇰": "技巧：管理家人的裝置",
-      "🇲🇴": "技巧：管理家人的裝置",
       "🇯🇵": "スキル：家族のデバイスを管理しよう",
+      "🇲🇴": "技巧：管理家人的裝置",
       "🇹🇭": "พื้นฐานใช้งาน: จัดการอุปกรณ์บุตรหลาน"
     },
     "6716856769744568921": {
@@ -241,8 +241,8 @@
       "🇨🇳": "技巧：管理你的屏幕使用时间",
       "🇭🇰": "技巧：管理你的螢幕使用時間",
       "🇯🇵": "スキル：スクリーンタイムを管理しよう",
-      "🇲🇴": "技巧：管理你的螢幕使用時間",
       "🇰🇷": "기본기: 스크린 타임 관리하기",
+      "🇲🇴": "技巧：管理你的螢幕使用時間",
       "🇹🇭": "พื้นฐานใช้งาน: บริหารจัดการเวลาหน้าจอ"
     },
     "6716857638150046053": {
@@ -252,8 +252,8 @@
       "🇯🇵": "スキル：iPadのためのMagic Keyboardを使ってみよう",
       "🇰🇷": "기본기: iPad용 Magic Keyboard 사용 시작하기",
       "🇲🇴": "技巧：iPad 精妙鍵盤入門",
-      "🇹🇭": "พื้นฐานใช้งาน: เริ่มต้นใช้งาน Magic Keyboard กับ iPad",
-      "🇸🇬": "Skills: Getting Started with Magic Keyboard for iPad"
+      "🇸🇬": "Skills: Getting Started with Magic Keyboard for iPad",
+      "🇹🇭": "พื้นฐานใช้งาน: เริ่มต้นใช้งาน Magic Keyboard กับ iPad"
     },
     "6716859444112491109": {
       "slug": "skills-getting-started-with-ipad",
@@ -292,30 +292,31 @@
     },
     "6858951078987006409": {
       "slug": "virtual-session-for-kids-learn-to-code-1",
-      "🇸🇬": "Virtual Session for Kids: Learn to Code 1",
       "🇯🇵": "オンラインセッション - 子ども向け：コードを学ぼう1",
       "🇰🇷": "아이를 위한 온라인 세션: 코딩 배우기 1",
+      "🇸🇬": "Virtual Session for Kids: Learn to Code 1",
       "🇹🇭": "เซสชั่นออนไลน์สำหรับเด็ก: เรียนรู้วิธีเขียนโค้ด 1"
     },
     "6858953608756298441": {
       "slug": "virtual-session-for-kids-learn-to-code-2",
-      "🇸🇬": "Virtual Session for Kids: Learn to Code 2",
       "🇯🇵": "オンラインセッション - 子ども向け：コードを学ぼう2",
-      "🇰🇷": "아이를 위한 온라인 세션: 코딩 배우기 2"
+      "🇰🇷": "아이를 위한 온라인 세션: 코딩 배우기 2",
+      "🇸🇬": "Virtual Session for Kids: Learn to Code 2",
+      "🇹🇭": "เซสชั่นออนไลน์สำหรับเด็ก: เรียนรู้วิธีเขียนโค้ด 2"
     },
     "6858954953836036449": {
       "slug": "virtual-session-for-kids-lights-camera-code",
-      "🇸🇬": "Virtual Session for Kids: Lights, Camera, Code",
       "🇯🇵": "オンラインセッション - 子ども向け：ライト、カメラ、コード",
-      "🇰🇷": "아이를 위한 온라인 세션: 조명, 카메라, 코드"
+      "🇰🇷": "아이를 위한 온라인 세션: 조명, 카메라, 코드",
+      "🇸🇬": "Virtual Session for Kids: Lights, Camera, Code"
     },
     "6871610251075748217": {
       "slug": "skills-your-kids-and-their-devices",
       "🇨🇳": "技巧：孩子与设备",
       "🇭🇰": "技巧：小朋友與裝置",
+      "🇯🇵": "スキル：子どもたちとデバイス",
       "🇲🇴": "技巧：小朋友與裝置",
-      "🇹🇭": "พื้นฐานใช้งาน: วิธีควบคุมดูแลอุปกรณ์ของเด็กๆ",
-      "🇯🇵": "スキル：子どもたちとデバイス"
+      "🇹🇭": "พื้นฐานใช้งาน: วิธีควบคุมดูแลอุปกรณ์ของเด็กๆ"
     },
     "6896277336452071821": {
       "slug": "learn-the-basics-iphone",
@@ -324,8 +325,8 @@
       "🇰🇷": "온라인 세션: iPhone 첫걸음",
       "🇲🇴": "網上課程：iPhone 入門",
       "🇸🇬": "Virtual Session: Intro to iPhone",
-      "🇹🇼": "線上課程：上手 iPhone",
-      "🇹🇭": "เซสชั่นออนไลน์: iPhone เบื้องต้น"
+      "🇹🇭": "เซสชั่นออนไลน์: iPhone เบื้องต้น",
+      "🇹🇼": "線上課程：上手 iPhone"
     },
     "6896279062584328569": {
       "slug": "learn-the-basics-ipad",
@@ -388,38 +389,38 @@
     "6933522692730356065": {
       "slug": "virtual-session-create-powerful-presentations-keynote",
       "🇨🇳": "在线课程：用 Keynote 讲演制作有感染力的演示文稿",
+      "🇭🇰": "網上課程：用 Keynote 製作超強簡報",
       "🇲🇴": "網上課程：用 Keynote 製作超強簡報",
       "🇸🇬": "Virtual Session: Create Powerful Presentations in Keynote",
       "🇹🇭": "เซสชั่นออนไลน์: เพิ่มพลังให้งานนำเสนอด้วย Keynote",
-      "🇹🇼": "線上課程：用 Keynote 打造超強簡報",
-      "🇭🇰": "網上課程：用 Keynote 製作超強簡報"
+      "🇹🇼": "線上課程：用 Keynote 打造超強簡報"
     },
     "6933532087828709785": {
       "slug": "skills-create-powerful-presentations-keynote",
-      "🇸🇬": "Skills: Create Powerful Presentations in Keynote",
-      "🇹🇭": "พื้นฐานใช้งาน: เพิ่มพลังให้งานนำเสนอด้วย Keynote",
       "🇨🇳": "技巧：用 Keynote 讲演制作有感染力的演示文稿",
       "🇭🇰": "技巧：用 Keynote 製作超強簡報",
       "🇲🇴": "技巧：用 Keynote 製作超強簡報",
+      "🇸🇬": "Skills: Create Powerful Presentations in Keynote",
+      "🇹🇭": "พื้นฐานใช้งาน: เพิ่มพลังให้งานนำเสนอด้วย Keynote",
       "🇹🇼": "技巧：用 Keynote 打造超強簡報"
     },
     "6933537308407595453": {
       "slug": "virtual-skills-transform-your-lecture-notes",
+      "🇨🇳": "在线课程：焕新你的课堂笔记",
+      "🇭🇰": "網上課程：課堂筆記大變身",
+      "🇲🇴": "網上課程：課堂筆記大變身",
       "🇸🇬": "Virtual Session: Transform Your Lecture Notes",
       "🇹🇭": "เซสชั่นออนไลน์: พลิกวิธีการจดเลคเชอร์",
-      "🇨🇳": "在线课程：焕新你的课堂笔记",
-      "🇲🇴": "網上課程：課堂筆記大變身",
-      "🇹🇼": "線上課程：課堂筆記大變身",
-      "🇭🇰": "網上課程：課堂筆記大變身"
+      "🇹🇼": "線上課程：課堂筆記大變身"
     },
     "6935143355421393229": {
       "slug": "video-tour-capturing-cinematic-shots",
       "🇨🇳": "视频漫游：拍出电影级画面",
       "🇯🇵": "ビデオツアー：映画のようなショットを撮影しよう",
+      "🇰🇷": "동영상 산책: 영화 속 장면처럼 찍어보기",
       "🇲🇴": "影片漫遊：拍出電影級畫面",
       "🇸🇬": "Video Tour: Capturing Cinematic Shots",
-      "🇹🇭": "พาทัวร์ถ่ายวิดีโอ: สร้างสรรค์ช็อตแนวภาพยนตร์",
-      "🇰🇷": "동영상 산책: 영화 속 장면처럼 찍어보기"
+      "🇹🇭": "พาทัวร์ถ่ายวิดีโอ: สร้างสรรค์ช็อตแนวภาพยนตร์"
     },
     "6936095622542754253": {
       "slug": "photo-tour-uncover-story-emerald-hill",
@@ -438,14 +439,14 @@
       "🇨🇳": "光影漫游：外景人像摄影",
       "🇯🇵": "フォトツアー：屋外でポートレート写真を撮ろう",
       "🇲🇴": "攝影漫遊：外景人像攝影",
-      "🇹🇭": "พาทัวร์ถ่ายรูป: ถ่ายภาพบุคคลนอกสถานที่",
-      "🇸🇬": "Photo Tour: Taking Portraits on Location"
+      "🇸🇬": "Photo Tour: Taking Portraits on Location",
+      "🇹🇭": "พาทัวร์ถ่ายรูป: ถ่ายภาพบุคคลนอกสถานที่"
     },
     "6937533011857343165": {
       "slug": "art-tour-drawing-observation",
       "🇨🇳": "艺术漫游：观察与写生",
-      "🇲🇴": "藝術漫遊：觀察作畫",
       "🇯🇵": "アートツアー：観察スケッチをしよう",
+      "🇲🇴": "藝術漫遊：觀察作畫",
       "🇸🇬": "Art Tour: Drawing from Observation",
       "🇹🇭": "พาทัวร์สร้างงานศิลปะ: วาดภาพจากการสังเกต"
     },
@@ -504,10 +505,10 @@
       "🇭🇰": "設計實驗室：以《天降奇運》AR 角色創作訊息",
       "🇯🇵": "デザインラボ：『ラック～幸運を探す旅～』のARキャラクターと一緒にメッセージを作ろう",
       "🇰🇷": "디자인 연구소: ‘럭’ - Luck의 AR 캐릭터로 메시지 만들기",
+      "🇲🇴": "設計實驗室：以《天降奇運》AR 角色創作訊息",
       "🇸🇬": "Design Lab: Create a Message with AR Characters from Luck",
       "🇹🇭": "ทดลองงานดีไซน์: สร้างสรรค์ข้อความดีๆ กับตัวการ์ตูน AR จาก Luck",
-      "🇹🇼": "設計研究室：用《開運奇遇記》AR 角色創作幸運小語",
-      "🇲🇴": "設計實驗室：以《天降奇運》AR 角色創作訊息"
+      "🇹🇼": "設計研究室：用《開運奇遇記》AR 角色創作幸運小語"
     },
     "6949677988636426637": {
       "slug": "virtual-studio-natt-teangchatapun-081822",
@@ -695,12 +696,12 @@
   "collection": {
     "apple-camp": {
       "🇨🇳": "Apple 夏令营",
+      "🇭🇰": "Apple Camp",
       "🇯🇵": "サマーキャンプ",
+      "🇰🇷": "Apple 캠프",
       "🇲🇴": "Apple Camp",
       "🇸🇬": "Apple Camp",
-      "🇹🇭": "Apple Camp",
-      "🇰🇷": "Apple 캠프",
-      "🇭🇰": "Apple Camp"
+      "🇹🇭": "Apple Camp"
     },
     "create-together": {
       "🇨🇳": "为万物，齐创造"
@@ -712,8 +713,8 @@
       "🇯🇵": "教師のためのクリエイティビティ"
     },
     "kids-code-with-apple": {
-      "🇸🇬": "Kids Code with Apple",
       "🇰🇷": "Apple과 함께하는 키즈 코딩",
+      "🇸🇬": "Kids Code with Apple",
       "🇹🇭": "เขียนโค้ดกับ Apple สำหรับเด็ก"
     },
     "learn-the-basics": {
@@ -729,11 +730,11 @@
       "🇸🇬": "Explore Iconic Singapore"
     },
     "study-smarter-with-apple": {
-      "🇸🇬": "Study Smarter with Apple",
-      "🇹🇭": "ฉลาดเรียนรู้กับ Apple",
       "🇨🇳": "跟着 Apple 高效学习",
       "🇭🇰": "跟 Apple 更聰明地學習",
       "🇲🇴": "跟 Apple 更聰明地學習",
+      "🇸🇬": "Study Smarter with Apple",
+      "🇹🇭": "ฉลาดเรียนรู้กับ Apple",
       "🇹🇼": "跟 Apple 一起聰明學更多"
     },
     "summer-coding-fun": {
