@@ -86,6 +86,7 @@ class State:
 			if "Maintenance" in r:
 				logging.error("Apple 招贤纳才维护中")
 				TASKS = []
+				return -1
 			else:
 				logging.warning(", ".join(["下载失败", str(self)]))
 				TASKS.append(self)
@@ -127,6 +128,7 @@ class Region:
 			if "Maintenance" in r:
 				logging.error("Apple 招贤纳才维护中")
 				TASKS = []
+				return -1
 			else:
 				logging.warning(", ".join(["下载失败", str(self)]))
 				TASKS.append(self)
@@ -176,7 +178,9 @@ async def main(targets, session):
 				continue
 			coros.append(t.runner())
 
-		await asyncio.gather(*coros)
+		r = await asyncio.gather(*coros)
+		if -1 in r:
+			return
 		_ = [TASKS.remove(t) for t in tasks]
 
 	append = False
