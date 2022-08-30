@@ -1,301 +1,697 @@
 {
-  "update": "2022-07-27 17:17:52 GMT",
-  "🇹🇷": {
-    "state940": {
-      "name": "Turkey Region",
-      "R583": "Zorlu Center",
-      "R588": "Akasya",
-      "R724": "Bagdat Caddesi"
+  "update": "2022-08-30 13:52:38 GMT",
+  "🇦🇪": {
+    "state1049": {
+      "ABUA": "Al Maryah Island",
+      "R595": "Yas Mall",
+      "name": "Abu Dhabi"
+    },
+    "state1051": {
+      "R596": "Mall of the Emirates",
+      "R597": "Dubai Mall",
+      "name": "Dubai"
     }
   },
-  "🇦🇪": {
-    "state1051": {
-      "name": "Dubai",
-      "R596": "Mall of the Emirates",
-      "R597": "Dubai Mall"
+  "🇦🇹": {
+    "state39": {
+      "R687": "Kärntner Straße",
+      "name": "Vienna"
+    }
+  },
+  "🇦🇺": {
+    "state40": {
+      "R483": "Canberra",
+      "name": "Australian Capital Territory"
     },
-    "state1049": {
-      "name": "Abu Dhabi",
-      "R595": "Yas Mall",
-      "ABUA": "Al Maryah Island"
+    "state41": {
+      "R238": "Sydney",
+      "R253": "Chatswood Chase",
+      "R254": "Bondi",
+      "R344": "Castle Towers",
+      "R385": "Charlestown",
+      "R440": "Penrith",
+      "R458": "Hornsby",
+      "R523": "Broadway",
+      "R606": "Miranda",
+      "name": "New South Wales"
+    },
+    "state43": {
+      "R351": "Robina",
+      "R384": "Chermside",
+      "R466": "Brisbane",
+      "R509": "Carindale",
+      "name": "Queensland"
+    },
+    "state44": {
+      "R405": "Rundle Place",
+      "name": "South Australia"
+    },
+    "state46": {
+      "R180": "Chadstone",
+      "R342": "Doncaster",
+      "R343": "Southland",
+      "R504": "Highpoint",
+      "R530": "Fountain Gate",
+      "name": "Victoria"
+    },
+    "state47": {
+      "R386": "Perth City",
+      "R508": "Booragoon",
+      "name": "Western Australia"
+    }
+  },
+  "🇧🇪": {
+    "state1139": {
+      "R486": "Brussels",
+      "name": "Brussels-Capital Region"
+    }
+  },
+  "🇧🇷": {
+    "state88": {
+      "R567": "VillageMall",
+      "name": "Rio de Janeiro"
+    },
+    "state95": {
+      "R608": "Morumbi",
+      "name": "Sao Paulo"
+    }
+  },
+  "🇨🇦": {
+    "state110": {
+      "R209": "Chinook Centre",
+      "R273": "West Edmonton",
+      "R301": "Market Mall",
+      "R411": "Southgate Centre",
+      "name": "Alberta"
+    },
+    "state111": {
+      "R280": "Pacific Centre",
+      "R362": "Oakridge Centre",
+      "R421": "Richmond Centre",
+      "R460": "Metrotown",
+      "R488": "Coquitlam Centre",
+      "R601": "Guildford Town Centre",
+      "name": "British Columbia"
+    },
+    "state112": {
+      "R369": "Polo Park",
+      "name": "Manitoba"
+    },
+    "state115": {
+      "R514": "Halifax Shopping Centre",
+      "name": "Nova Scotia"
+    },
+    "state117": {
+      "R120": "Yorkdale",
+      "R121": "Eaton Centre",
+      "R208": "Sherway Gardens",
+      "R332": "Rideau",
+      "R333": "Fairview",
+      "R350": "Square One",
+      "R429": "Upper Canada Mall",
+      "R447": "Mapleview Centre",
+      "R464": "Conestoga",
+      "R489": "Masonville",
+      "R490": "Bayshore Shopping Centre",
+      "R515": "Markville Shopping Centre",
+      "name": "Ontario"
+    },
+    "state119": {
+      "R207": "Carrefour Laval",
+      "R248": "Sainte-Catherine",
+      "R392": "Fairview Pointe-Claire",
+      "R412": "Place Ste-Foy",
+      "R512": "DIX30",
+      "name": "Quebec"
+    }
+  },
+  "🇨🇭": {
+    "state131": {
+      "R439": "Freie Strasse",
+      "name": "Basel-Stadt"
+    },
+    "state133": {
+      "R275": "Rue de Rive",
+      "name": "Geneva"
+    },
+    "state151": {
+      "R159": "Bahnhofstrasse",
+      "R309": "Glattzentrum",
+      "name": "Zurich"
+    }
+  },
+  "🇨🇳": {
+    "state1058": {
+      "R476": "Paradise Walk",
+      "R480": "Jiefangbei",
+      "R573": "MixC Chongqing",
+      "name": "Chongqing"
+    },
+    "state156": {
+      "R320": "Sanlitun",
+      "R388": "Xidan Joy City",
+      "R448": "Wangfujing",
+      "R479": "China Central Mall",
+      "R645": "Chaoyang Joy City",
+      "name": "Beijing"
+    },
+    "state157": {
+      "R359": "Nanjing East",
+      "R389": "Pudong",
+      "R390": "Hong Kong Plaza",
+      "R401": "Shanghai iapm",
+      "R581": "Wujiaochang",
+      "R678": "Shanghai-CN",
+      "R683": "Global Harbor",
+      "R705": "Qibao",
+      "name": "Shanghai"
+    },
+    "state158": {
+      "R579": "Riverside 66 Tianjin",
+      "R637": "Tianjin Joy City",
+      "R638": "MixC Tianjin",
+      "name": "Tianjin"
+    },
+    "state162": {
+      "R478": "Parkland",
+      "R534": "Zhongjie Joy City",
+      "R576": "MixC Shenyang",
+      "R609": "Olympia 66 Dalian",
+      "name": "Liaoning"
+    },
+    "state165": {
+      "R493": "Nanjing IST",
+      "R574": "Center 66 Wuxi",
+      "R643": "Wonder City",
+      "R688": "Suzhou",
+      "R703": "Nanjing Jinmao Place",
+      "name": "Jiangsu"
+    },
+    "state167": {
+      "R557": "MixC Qingdao",
+      "R648": "Parc 66 Jinan",
+      "name": "Shandong"
+    },
+    "state168": {
+      "R471": "West Lake",
+      "R531": "Tianyi Square",
+      "R532": "MixC Hangzhou",
+      "name": "Zhejiang"
+    },
+    "state170": {
+      "R644": "Xiamen Lifestyle Center",
+      "R646": "Tahoe Plaza",
+      "name": "Fujian"
+    },
+    "state171": {
+      "R617": "Changsha",
+      "name": "Hunan"
+    },
+    "state172": {
+      "R575": "Wuhan International Plaza",
+      "name": "Hubei"
+    },
+    "state173": {
+      "R572": "MixC Zhengzhou",
+      "name": "Henan"
+    },
+    "state174": {
+      "R484": "Holiday Plaza Shenzhen",
+      "R577": "Parc Central",
+      "R639": "Zhujiang New Town",
+      "R761": "Shenzhen East-CN",
+      "name": "Guangdong"
+    },
+    "state176": {
+      "R571": "MixC Nanning",
+      "name": "Guangxi"
+    },
+    "state178": {
+      "R502": "MixC Chengdu",
+      "R580": "Taikoo Li Chengdu",
+      "name": "Sichuan"
+    },
+    "state179": {
+      "R670": "Kunming",
+      "name": "Yunnan"
+    }
+  },
+  "🇩🇪": {
+    "state211": {
+      "R366": "Alstertal",
+      "R396": "Jungfernstieg",
+      "name": "Hamburg"
+    },
+    "state212": {
+      "R455": "Hannover",
+      "name": "Lower Saxony-Niedersachsen"
+    },
+    "state214": {
+      "R331": "Düsseldorf",
+      "R403": "CentrO",
+      "R520": "Rhein Center",
+      "R559": "Schildergasse",
+      "name": "North Rhine-Westphalia"
+    },
+    "state215": {
+      "R352": "Grosse Bockenheimer Strasse",
+      "R434": "MTZ",
+      "name": "Hesse"
+    },
+    "state217": {
+      "R519": "Sindelfingen",
+      "name": "Baden-Wurttemberg"
+    },
+    "state218": {
+      "R045": "Rosenstrasse",
+      "R431": "City-Galerie",
+      "R521": "OEZ",
+      "name": "Bavaria-Bayern"
+    },
+    "state220": {
+      "R358": "Kurfürstendamm",
+      "R443": "Rosenthaler Strasse",
+      "name": "Berlin"
+    },
+    "state223": {
+      "R430": "Altmarkt-Galerie",
+      "name": "Saxony-Sachsen"
+    }
+  },
+  "🇪🇸": {
+    "state242": {
+      "R368": "Passeig de Gracia",
+      "R406": "La Maquinista",
+      "name": "Barcelona"
+    },
+    "state262": {
+      "R397": "Xanadu",
+      "R435": "Gran Plaza 2",
+      "R436": "Parquesur",
+      "R450": "Puerta del Sol",
+      "name": "Madrid"
+    },
+    "state263": {
+      "R468": "La Canada",
+      "name": "Malaga"
+    },
+    "state264": {
+      "R507": "Nueva Condomina",
+      "name": "Murcia"
+    },
+    "state280": {
+      "R419": "Valencia",
+      "name": "Valencia"
+    },
+    "state281": {
+      "R538": "Rio Shopping",
+      "name": "Valladolid"
+    },
+    "state284": {
+      "R377": "Puerto Venecia",
+      "name": "Zaragoza"
+    }
+  },
+  "🇫🇷": {
+    "state1030": {
+      "R522": "La Toison d'Or",
+      "name": "Cote-d'Or"
+    },
+    "state295": {
+      "R395": "CAP 3000",
+      "name": "Alpes-Maritimes"
+    },
+    "state302": {
+      "R357": "Marseille",
+      "R477": "Aix-en-Provence",
+      "name": "Bouches-du-Rhone"
+    },
+    "state321": {
+      "R424": "Sainte-Catherine",
+      "name": "Gironde"
+    },
+    "state322": {
+      "R367": "Odysseum",
+      "name": "Herault"
+    },
+    "state332": {
+      "R470": "Atlantis",
+      "name": "Loire-Atlantique"
+    },
+    "state347": {
+      "R376": "Lille",
+      "name": "Nord"
+    },
+    "state355": {
+      "R394": "Strasbourg",
+      "name": "Bas-Rhin"
+    },
+    "state357": {
+      "R373": "Part-Dieu",
+      "R469": "Confluence",
+      "name": "Rhone"
+    },
+    "state363": {
+      "R277": "Opéra",
+      "R566": "Marché Saint-Germain",
+      "R675": "Champs Élysées",
+      "name": "Paris Region"
+    },
+    "state365": {
+      "R425": "Val d'Europe",
+      "R438": "Carre Senart",
+      "name": "Seine-et-Marne"
+    },
+    "state366": {
+      "R315": "Velizy 2",
+      "R374": "Parly 2",
+      "name": "Yvelines"
+    },
+    "state380": {
+      "R178": "Les Quatre Temps",
+      "name": "Hauts-de-Seine"
+    },
+    "state381": {
+      "R536": "Rosny 2",
+      "name": "Seine-Saint-Denis"
     }
   },
   "🇬🇧": {
+    "state1043": {
+      "R135": "Glasgow",
+      "R328": "Edinburgh",
+      "R340": "Braehead",
+      "R363": "Union Square",
+      "name": "Scotland"
+    },
+    "state1048": {
+      "R308": "Highcross",
+      "name": "East Midlands"
+    },
+    "state1056": {
+      "R313": "Victoria Square",
+      "name": "Northern Ireland"
+    },
+    "state1057": {
+      "R252": "Bristol",
+      "R393": "Cribbs Causeway",
+      "name": "Bristol"
+    },
+    "state1070": {
+      "R244": "Churchill Square",
+      "name": "East Sussex"
+    },
+    "state1071": {
+      "R334": "Cardiff",
+      "name": "Wales"
+    },
+    "state399": {
+      "R176": "The Oracle",
+      "name": "Berkshire"
+    },
     "state401": {
-      "name": "Buckinghamshire",
-      "R269": "Milton Keynes"
+      "R269": "Milton Keynes",
+      "name": "Buckinghamshire"
     },
-    "state465": {
-      "name": "South Yorkshire",
-      "R153": "Meadowhall"
+    "state402": {
+      "R270": "Grand Arcade",
+      "name": "Cambridgeshire"
     },
-    "state441": {
-      "name": "Norfolk",
-      "R391": "Norwich"
+    "state414": {
+      "R279": "Princesshay",
+      "R545": "Plymouth",
+      "name": "Devon"
+    },
+    "state416": {
+      "R242": "Lakeside",
+      "name": "Essex"
+    },
+    "state420": {
+      "R136": "Trafford Centre",
+      "R215": "Manchester Arndale",
+      "name": "Greater Manchester"
+    },
+    "state424": {
+      "R174": "Southampton",
+      "R482": "Festival Place",
+      "name": "Hampshire"
+    },
+    "state426": {
+      "R527": "Watford",
+      "name": "Hertfordshire"
+    },
+    "state431": {
+      "R113": "Bluewater",
+      "name": "Kent"
     },
     "state436": {
-      "name": "Greater London",
       "R092": "Regent Street",
       "R163": "Brent Cross",
       "R226": "White City",
       "R227": "Bentall Centre",
       "R245": "Covent Garden",
+      "R329": "Brompton Road",
       "R410": "Stratford City",
       "R496": "Bromley",
-      "R329": "Brompton Road"
-    },
-    "state456": {
-      "name": "Tyne and Wear",
-      "R423": "Metrocentre"
-    },
-    "state399": {
-      "name": "Berkshire",
-      "R176": "The Oracle"
-    },
-    "state1056": {
-      "name": "Northern Ireland",
-      "R313": "Victoria Square"
+      "name": "Greater London"
     },
     "state439": {
-      "name": "Merseyside",
-      "R239": "Liverpool"
+      "R239": "Liverpool",
+      "name": "Merseyside"
     },
-    "state402": {
-      "name": "Cambridgeshire",
-      "R270": "Grand Arcade"
-    },
-    "state1070": {
-      "name": "East Sussex",
-      "R244": "Churchill Square"
-    },
-    "state1048": {
-      "name": "East Midlands",
-      "R308": "Highcross"
-    },
-    "state431": {
-      "name": "Kent",
-      "R113": "Bluewater"
-    },
-    "state1043": {
-      "name": "Scotland",
-      "R135": "Glasgow",
-      "R328": "Edinburgh",
-      "R340": "Braehead",
-      "R363": "Union Square"
-    },
-    "state416": {
-      "name": "Essex",
-      "R242": "Lakeside"
+    "state441": {
+      "R391": "Norwich",
+      "name": "Norfolk"
     },
     "state443": {
-      "name": "Northumberland",
-      "R341": "Eldon Square"
-    },
-    "state424": {
-      "name": "Hampshire",
-      "R174": "Southampton",
-      "R482": "Festival Place"
+      "R341": "Eldon Square",
+      "name": "Northumberland"
     },
     "state450": {
-      "name": "Somerset",
-      "R335": "Southgate"
+      "R335": "Southgate",
+      "name": "Somerset"
     },
-    "state426": {
-      "name": "Hertfordshire",
-      "R527": "Watford"
-    },
-    "state420": {
-      "name": "Greater Manchester",
-      "R136": "Trafford Centre",
-      "R215": "Manchester Arndale"
-    },
-    "state1071": {
-      "name": "Wales",
-      "R334": "Cardiff"
+    "state456": {
+      "R423": "Metrocentre",
+      "name": "Tyne and Wear"
     },
     "state461": {
-      "name": "West Midlands",
       "R118": "Birmingham",
-      "R255": "Touchwood Centre"
+      "R255": "Touchwood Centre",
+      "name": "West Midlands"
+    },
+    "state465": {
+      "R153": "Meadowhall",
+      "name": "South Yorkshire"
     },
     "state466": {
-      "name": "West Yorkshire",
-      "R372": "Trinity Leeds"
-    },
-    "state414": {
-      "name": "Devon",
-      "R279": "Princesshay",
-      "R545": "Plymouth"
-    },
-    "state1057": {
-      "name": "Bristol",
-      "R252": "Bristol",
-      "R393": "Cribbs Causeway"
+      "R372": "Trinity Leeds",
+      "name": "West Yorkshire"
     }
   },
-  "🇩🇪": {
-    "state220": {
-      "name": "Berlin",
-      "R358": "Kurfürstendamm",
-      "R443": "Rosenthaler Strasse"
+  "🇭🇰": {
+    "state492": {
+      "R409": "Causeway Bay",
+      "R428": "ifc mall",
+      "R485": "Festival Walk",
+      "R499": "Canton Road",
+      "R610": "New Town Plaza",
+      "R673": "apm Hong Kong",
+      "name": "Hong Kong Region"
+    }
+  },
+  "🇮🇳": {
+    "state1067": {
+      "R756": "New Delhi-IN",
+      "name": "Delhi"
     },
-    "state217": {
-      "name": "Baden-Wurttemberg",
-      "R519": "Sindelfingen"
+    "state1159": {
+      "R744": "Mumbai-IN",
+      "name": "Maharashtra"
+    }
+  },
+  "🇮🇹": {
+    "state1096": {
+      "R454": "Centro Sicilia",
+      "name": "Sicily"
     },
-    "state212": {
-      "name": "Lower Saxony-Niedersachsen",
-      "R455": "Hannover"
+    "state1098": {
+      "R365": "Carosello",
+      "R418": "Oriocenter",
+      "R441": "Fiordaliso",
+      "R547": "il Leone",
+      "R667": "Piazza Liberty",
+      "name": "Lombardy"
     },
-    "state218": {
-      "name": "Bavaria-Bayern",
-      "R045": "Rosenstrasse",
-      "R431": "City-Galerie",
-      "R521": "OEZ"
+    "state1106": {
+      "R427": "Via Rizzoli",
+      "R564": "Le Befane",
+      "name": "Emilia-Romagna"
     },
-    "state215": {
-      "name": "Hesse",
-      "R352": "Grosse Bockenheimer Strasse",
-      "R434": "MTZ"
+    "state1107": {
+      "R453": "Campania",
+      "name": "Campania"
     },
-    "state211": {
-      "name": "Hamburg",
-      "R366": "Alstertal",
-      "R396": "Jungfernstieg"
+    "state1108": {
+      "R449": "I Gigli",
+      "R602": "Florence",
+      "name": "Tuscany"
     },
-    "state223": {
-      "name": "Saxony-Sachsen",
-      "R430": "Altmarkt-Galerie"
+    "state1109": {
+      "R038": "RomaEst",
+      "R381": "Porta di Roma",
+      "R382": "Via del Corso",
+      "R562": "Euroma2",
+      "name": "Lazio"
     },
-    "state214": {
-      "name": "North Rhine-Westphalia",
-      "R331": "Düsseldorf",
-      "R403": "CentrO",
-      "R520": "Rhein Center",
-      "R559": "Schildergasse"
+    "state1110": {
+      "R278": "Le Gru",
+      "R442": "Via Roma",
+      "name": "Piedmont"
+    },
+    "state652": {
+      "R625": "Nave de Vero",
+      "name": "Venice"
+    }
+  },
+  "🇯🇵": {
+    "state671": {
+      "R079": "Ginza",
+      "R119": "Shibuya",
+      "R128": "Shinjuku",
+      "R224": "Omotesando",
+      "R710": "Kawasaki",
+      "R718": "Marunouchi",
+      "name": "Tokyo-to"
+    },
+    "state681": {
+      "R005": "Nagoya Sakae",
+      "name": "Aichi-ken"
+    },
+    "state684": {
+      "R711": "Kyoto",
+      "name": "Kyoto-fu"
+    },
+    "state685": {
+      "R091": "Shinsaibashi",
+      "name": "Osaka-fu"
+    },
+    "state698": {
+      "R048": "Fukuoka Tenjin",
+      "name": "Fukuoka-ken"
+    }
+  },
+  "🇰🇷": {
+    "state1112": {
+      "R692": "Garosugil",
+      "R738": "Myeongdong",
+      "R747": "Seoul - Yeouido",
+      "R751": "Seoul East - KR",
+      "R760": "Seoul South - KR",
+      "name": "Seoul-si"
+    }
+  },
+  "🇲🇴": {
+    "state745": {
+      "R672": "Galaxy Macau",
+      "R697": "Cotai Central",
+      "name": "Macao Region"
+    }
+  },
+  "🇲🇽": {
+    "state762": {
+      "R708": "Via Sante Fe",
+      "R740": "Antara",
+      "name": "Federal District"
+    }
+  },
+  "🇳🇱": {
+    "state805": {
+      "R408": "Amsterdam",
+      "R539": "Haarlem",
+      "R540": "Den Haag",
+      "name": "Holland"
+    }
+  },
+  "🇸🇪": {
+    "state1099": {
+      "R505": "Taby Centrum",
+      "name": "Stockholm"
+    },
+    "state1100": {
+      "R503": "Emporia",
+      "R593": "Väla Centrum",
+      "name": "Skane"
+    }
+  },
+  "🇸🇬": {
+    "state909": {
+      "R669": "Orchard Road",
+      "R736": "Jewel Changi Airport",
+      "name": "Singapore"
+    }
+  },
+  "🇹🇭": {
+    "state928": {
+      "R728": "Iconsiam",
+      "R733": "Central World",
+      "name": "Bangkok"
+    }
+  },
+  "🇹🇷": {
+    "state940": {
+      "R583": "Zorlu Center",
+      "R588": "Akasya",
+      "R724": "Bagdat Caddesi",
+      "name": "Turkey Region"
     }
   },
   "🇹🇼": {
     "state943": {
-      "name": "Taiwan",
       "R694": "Taipei Xinyi A13",
-      "R713": "Taipei 101"
+      "R713": "Taipei 101",
+      "name": "Taiwan"
     }
   },
   "🇺🇸": {
-    "state949": {
-      "name": "Alabama",
-      "R225": "The Summit",
-      "R266": "Bridge Street"
+    "state1000": {
+      "R003": "Bellevue Square",
+      "R072": "University Village",
+      "R100": "Alderwood",
+      "R106": "Southcenter",
+      "R339": "Tacoma Mall",
+      "R420": "River Park Square",
+      "name": "Washington"
     },
-    "state956": {
-      "name": "District of Columbia",
-      "R287": "Georgetown",
-      "R516": "Carnegie Library"
-    },
-    "state984": {
-      "name": "Nevada",
-      "R064": "Fashion Show",
-      "R161": "The Forum Shops",
-      "R186": "Summit Sierra",
-      "R219": "Town Square",
-      "R650": "Summerlin"
-    },
-    "state950": {
-      "name": "Arkansas",
-      "R286": "The Promenade at Chenal"
-    },
-    "state973": {
-      "name": "Minnesota",
-      "R007": "Mall of America",
-      "R022": "Rosedale Center",
-      "R054": "Southdale",
-      "R183": "Ridgedale"
-    },
-    "state970": {
-      "name": "Maryland",
-      "R063": "Towson Town Center",
-      "R084": "Montgomery Mall",
-      "R112": "Bethesda Row",
-      "R142": "Annapolis",
-      "R168": "Columbia"
-    },
-    "state963": {
-      "name": "Idaho",
-      "R303": "Boise Towne Square"
-    },
-    "state959": {
-      "name": "Georgia",
-      "R006": "Lenox Square",
-      "R080": "Avalon",
-      "R184": "Perimeter",
-      "R259": "Mall of Georgia",
-      "R364": "Augusta",
-      "R591": "Cumberland Mall"
-    },
-    "state980": {
-      "name": "Nebraska",
-      "R190": "Village Pointe"
-    },
-    "state972": {
-      "name": "Michigan",
-      "R041": "Twelve Oaks",
-      "R055": "Somerset",
-      "R132": "Woodland",
-      "R218": "Partridge Creek",
-      "R230": "Briarwood",
-      "R616": "Eastwood Towne Center"
-    },
-    "state967": {
-      "name": "Kentucky",
-      "R264": "Oxmoor",
-      "R288": "Fritz Farm"
+    "state1001": {
+      "R059": "Mayfair",
+      "R229": "Hilldale",
+      "R257": "Bayshore",
+      "name": "Wisconsin"
     },
     "state948": {
-      "name": "Alaska",
-      "R262": "Anchorage 5th Avenue Mall"
+      "R262": "Anchorage 5th Avenue Mall",
+      "name": "Alaska"
     },
-    "state969": {
-      "name": "Massachusetts",
-      "R011": "MarketStreet",
-      "R021": "CambridgeSide",
-      "R076": "Chestnut Hill",
-      "R110": "South Shore",
-      "R137": "Derby Street",
-      "R149": "Boylston Street",
-      "R155": "Burlington",
-      "R191": "Holyoke",
-      "R232": "Natick Collection",
-      "R346": "Legacy Place",
-      "R622": "Solomon Pond Mall"
+    "state949": {
+      "R225": "The Summit",
+      "R266": "Bridge Street",
+      "name": "Alabama"
     },
-    "state976": {
-      "name": "Mississippi",
-      "R324": "Renaissance at Colony Park"
+    "state950": {
+      "R286": "The Promenade at Chenal",
+      "name": "Arkansas"
     },
-    "state968": {
-      "name": "Louisiana",
-      "R235": "Lakeside Shopping Center",
-      "R263": "Mall of Louisiana"
-    },
-    "state982": {
-      "name": "New Jersey",
-      "R013": "Tice's Corner",
-      "R043": "Short Hills",
-      "R067": "Menlo Park",
-      "R088": "Sagemore",
-      "R103": "Rockaway",
-      "R104": "Bridgewater",
-      "R117": "Garden State Plaza",
-      "R138": "Freehold Raceway Mall",
-      "R173": "The Pier",
-      "R206": "Cherry Hill",
-      "R325": "Willowbrook",
-      "R549": "Quaker Bridge",
-      "R755": "East Rutherford-NJ"
+    "state952": {
+      "R026": "Chandler Fashion Center",
+      "R031": "Scottsdale Fashion Square",
+      "R086": "La Encantada",
+      "R247": "Arrowhead",
+      "R267": "SanTan Village",
+      "R292": "Scottsdale Quarter",
+      "name": "Arizona"
     },
     "state953": {
-      "name": "California",
       "R001": "Glendale Galleria",
       "R002": "Palo Alto",
       "R004": "South Coast Plaza",
@@ -349,73 +745,39 @@
       "R451": "The Americana at Brand",
       "R462": "Valencia Town Center",
       "R550": "Valley Plaza",
+      "R720": "Tower Theatre",
       "R824": "Apple Park Visitor Center",
-      "R720": "Tower Theatre"
+      "name": "California"
     },
-    "state981": {
-      "name": "New Hampshire",
-      "R027": "Rockingham Park",
-      "R354": "Pheasant Lane",
-      "R631": "The Mall of New Hampshire"
-    },
-    "state966": {
-      "name": "Kansas",
-      "R283": "Leawood"
-    },
-    "state957": {
-      "name": "Delaware",
-      "R102": "Christiana Mall"
-    },
-    "state961": {
-      "name": "Hawaii",
-      "R073": "Ala Moana",
-      "R198": "Royal Hawaiian",
-      "R210": "Kahala"
-    },
-    "state952": {
-      "name": "Arizona",
-      "R026": "Chandler Fashion Center",
-      "R031": "Scottsdale Fashion Square",
-      "R086": "La Encantada",
-      "R247": "Arrowhead",
-      "R267": "SanTan Village",
-      "R292": "Scottsdale Quarter"
+    "state954": {
+      "R030": "Aspen Grove",
+      "R047": "Cherry Creek",
+      "R172": "Twenty Ninth Street",
+      "R182": "FlatIron Crossing",
+      "R228": "Park Meadows",
+      "R338": "Promenade Shops at Briargate",
+      "name": "Colorado"
     },
     "state955": {
-      "name": "Connecticut",
       "R025": "Westfarms",
       "R093": "Danbury Fair Mall",
       "R202": "Norwalk",
       "R282": "Greenwich Avenue",
       "R446": "New Haven",
       "R613": "Evergreen Walk",
-      "R629": "Trumbull"
+      "R629": "Trumbull",
+      "name": "Connecticut"
     },
-    "state974": {
-      "name": "Missouri",
-      "R062": "West County",
-      "R097": "Country Club Plaza",
-      "R114": "Saint Louis Galleria"
+    "state956": {
+      "R287": "Georgetown",
+      "R516": "Carnegie Library",
+      "name": "District of Columbia"
     },
-    "state965": {
-      "name": "Indiana",
-      "R066": "The Fashion Mall at Keystone",
-      "R360": "University Park Mall"
-    },
-    "state964": {
-      "name": "Illinois",
-      "R018": "Woodfield",
-      "R035": "Michigan Avenue",
-      "R056": "Oakbrook",
-      "R089": "Old Orchard",
-      "R141": "Northbrook",
-      "R237": "Orland Square Mall",
-      "R258": "Deer Park",
-      "R284": "Lincoln Park",
-      "R348": "Main Place"
+    "state957": {
+      "R102": "Christiana Mall",
+      "name": "Delaware"
     },
     "state958": {
-      "name": "Florida",
       "R012": "The Falls",
       "R019": "International Plaza",
       "R024": "Wellington Green",
@@ -433,136 +795,162 @@
       "R291": "Altamonte",
       "R312": "Dadeland",
       "R615": "University Town Center",
-      "R623": "Brickell City Centre"
+      "R623": "Brickell City Centre",
+      "name": "Florida"
     },
-    "state971": {
-      "name": "Maine",
-      "R307": "Maine Mall"
+    "state959": {
+      "R006": "Lenox Square",
+      "R080": "Avalon",
+      "R184": "Perimeter",
+      "R259": "Mall of Georgia",
+      "R364": "Augusta",
+      "R591": "Cumberland Mall",
+      "name": "Georgia"
+    },
+    "state961": {
+      "R073": "Ala Moana",
+      "R198": "Royal Hawaiian",
+      "R210": "Kahala",
+      "name": "Hawaii"
     },
     "state962": {
-      "name": "Iowa",
-      "R109": "Jordan Creek"
+      "R109": "Jordan Creek",
+      "name": "Iowa"
     },
-    "state983": {
-      "name": "New Mexico",
-      "R177": "ABQ Uptown"
+    "state963": {
+      "R303": "Boise Towne Square",
+      "name": "Idaho"
+    },
+    "state964": {
+      "R018": "Woodfield",
+      "R035": "Michigan Avenue",
+      "R056": "Oakbrook",
+      "R089": "Old Orchard",
+      "R141": "Northbrook",
+      "R237": "Orland Square Mall",
+      "R258": "Deer Park",
+      "R284": "Lincoln Park",
+      "R348": "Main Place",
+      "name": "Illinois"
+    },
+    "state965": {
+      "R066": "The Fashion Mall at Keystone",
+      "R360": "University Park Mall",
+      "name": "Indiana"
+    },
+    "state966": {
+      "R283": "Leawood",
+      "name": "Kansas"
+    },
+    "state967": {
+      "R264": "Oxmoor",
+      "R288": "Fritz Farm",
+      "name": "Kentucky"
+    },
+    "state968": {
+      "R235": "Lakeside Shopping Center",
+      "R263": "Mall of Louisiana",
+      "name": "Louisiana"
+    },
+    "state969": {
+      "R011": "MarketStreet",
+      "R021": "CambridgeSide",
+      "R076": "Chestnut Hill",
+      "R110": "South Shore",
+      "R137": "Derby Street",
+      "R149": "Boylston Street",
+      "R155": "Burlington",
+      "R191": "Holyoke",
+      "R232": "Natick Collection",
+      "R346": "Legacy Place",
+      "R622": "Solomon Pond Mall",
+      "name": "Massachusetts"
+    },
+    "state970": {
+      "R063": "Towson Town Center",
+      "R084": "Montgomery Mall",
+      "R112": "Bethesda Row",
+      "R142": "Annapolis",
+      "R168": "Columbia",
+      "name": "Maryland"
+    },
+    "state971": {
+      "R307": "Maine Mall",
+      "name": "Maine"
+    },
+    "state972": {
+      "R041": "Twelve Oaks",
+      "R055": "Somerset",
+      "R132": "Woodland",
+      "R218": "Partridge Creek",
+      "R230": "Briarwood",
+      "R616": "Eastwood Towne Center",
+      "name": "Michigan"
+    },
+    "state973": {
+      "R007": "Mall of America",
+      "R022": "Rosedale Center",
+      "R054": "Southdale",
+      "R183": "Ridgedale",
+      "name": "Minnesota"
+    },
+    "state974": {
+      "R062": "West County",
+      "R097": "Country Club Plaza",
+      "R114": "Saint Louis Galleria",
+      "name": "Missouri"
+    },
+    "state976": {
+      "R324": "Renaissance at Colony Park",
+      "name": "Mississippi"
     },
     "state978": {
-      "name": "North Carolina",
       "R049": "Southpoint",
       "R083": "Southpark",
       "R116": "Crabtree Valley Mall",
       "R293": "Friendly Center",
-      "R463": "Northlake Mall"
+      "R463": "Northlake Mall",
+      "name": "North Carolina"
     },
-    "state991": {
-      "name": "Rhode Island",
-      "R167": "Providence Place"
+    "state980": {
+      "R190": "Village Pointe",
+      "name": "Nebraska"
     },
-    "state987": {
-      "name": "Oklahoma",
-      "R130": "Penn Square",
-      "R233": "Woodland Hills"
+    "state981": {
+      "R027": "Rockingham Park",
+      "R354": "Pheasant Lane",
+      "R631": "The Mall of New Hampshire",
+      "name": "New Hampshire"
     },
-    "state988": {
-      "name": "Oregon",
-      "R077": "Pioneer Place",
-      "R090": "Washington Square",
-      "R134": "Bridgeport Village"
+    "state982": {
+      "R013": "Tice's Corner",
+      "R043": "Short Hills",
+      "R067": "Menlo Park",
+      "R088": "Sagemore",
+      "R103": "Rockaway",
+      "R104": "Bridgewater",
+      "R117": "Garden State Plaza",
+      "R138": "Freehold Raceway Mall",
+      "R173": "The Pier",
+      "R206": "Cherry Hill",
+      "R325": "Willowbrook",
+      "R549": "Quaker Bridge",
+      "R755": "East Rutherford-NJ",
+      "name": "New Jersey"
     },
-    "state986": {
-      "name": "Ohio",
-      "R009": "Easton Town Center",
-      "R028": "Kenwood Towne Centre",
-      "R081": "Eton",
-      "R192": "Crocker Park",
-      "R299": "Franklin Park Mall",
-      "R353": "Summit Mall",
-      "R417": "Polaris Fashion Place",
-      "R518": "The Greene"
+    "state983": {
+      "R177": "ABQ Uptown",
+      "name": "New Mexico"
     },
-    "state995": {
-      "name": "Texas",
-      "R042": "Knox Street",
-      "R058": "Houston Galleria",
-      "R085": "Barton Creek",
-      "R126": "The Woodlands",
-      "R131": "La Cantera",
-      "R144": "NorthPark Center",
-      "R151": "Southlake Town Square",
-      "R164": "Memorial City",
-      "R204": "Baybrook",
-      "R205": "First Colony Mall",
-      "R216": "Domain Northside",
-      "R290": "North Star",
-      "R316": "University Park Village",
-      "R321": "Willowbrook Mall",
-      "R437": "Highland Village",
-      "R492": "Cielo Vista Mall",
-      "R746": "Galleria Dallas"
-    },
-    "state954": {
-      "name": "Colorado",
-      "R030": "Aspen Grove",
-      "R047": "Cherry Creek",
-      "R172": "Twenty Ninth Street",
-      "R182": "FlatIron Crossing",
-      "R228": "Park Meadows",
-      "R338": "Promenade Shops at Briargate"
-    },
-    "state994": {
-      "name": "Tennessee",
-      "R020": "Saddle Creek",
-      "R123": "Green Hills",
-      "R203": "West Town Mall",
-      "R513": "CoolSprings Galleria",
-      "R133": "Downtown Nashville"
-    },
-    "state989": {
-      "name": "Pennsylvania",
-      "R065": "King of Prussia",
-      "R096": "Shadyside",
-      "R147": "South Hills Village",
-      "R162": "Walnut Street",
-      "R166": "Suburban Square",
-      "R234": "Willow Grove Park",
-      "R281": "Lehigh Valley",
-      "R304": "Park City",
-      "R413": "Ross Park"
-    },
-    "state1000": {
-      "name": "Washington",
-      "R003": "Bellevue Square",
-      "R072": "University Village",
-      "R100": "Alderwood",
-      "R106": "Southcenter",
-      "R339": "Tacoma Mall",
-      "R420": "River Park Square"
-    },
-    "state997": {
-      "name": "Virginia",
-      "R010": "Tysons Corner",
-      "R036": "Clarendon",
-      "R078": "Short Pump Town Center",
-      "R129": "Pentagon City",
-      "R221": "Fair Oaks",
-      "R271": "Reston",
-      "R598": "Potomac Town Center",
-      "R614": "Lynnhaven Mall"
-    },
-    "state996": {
-      "name": "Utah",
-      "R125": "City Creek Center",
-      "R461": "Fashion Place",
-      "R599": "Station Park"
-    },
-    "state992": {
-      "name": "South Carolina",
-      "R318": "Charleston",
-      "R355": "Haywood Mall"
+    "state984": {
+      "R064": "Fashion Show",
+      "R161": "The Forum Shops",
+      "R186": "Summit Sierra",
+      "R219": "Town Square",
+      "R650": "Summerlin",
+      "name": "Nevada"
     },
     "state985": {
-      "name": "New York",
       "R016": "Walden Galleria",
       "R017": "Crossgates",
       "R032": "SoHo",
@@ -585,484 +973,96 @@
       "R612": "Queens Center",
       "R654": "World Trade Center",
       "R715": "Downtown Brooklyn",
-      "R753": "The Mall at Bay Plaza"
+      "R753": "The Mall at Bay Plaza",
+      "name": "New York"
     },
-    "state1001": {
-      "name": "Wisconsin",
-      "R059": "Mayfair",
-      "R229": "Hilldale",
-      "R257": "Bayshore"
-    }
-  },
-  "🇲🇽": {
-    "state762": {
-      "name": "Federal District",
-      "R708": "Via Sante Fe",
-      "R740": "Antara"
-    }
-  },
-  "🇨🇭": {
-    "state131": {
-      "name": "Basel-Stadt",
-      "R439": "Freie Strasse"
+    "state986": {
+      "R009": "Easton Town Center",
+      "R028": "Kenwood Towne Centre",
+      "R081": "Eton",
+      "R192": "Crocker Park",
+      "R299": "Franklin Park Mall",
+      "R353": "Summit Mall",
+      "R417": "Polaris Fashion Place",
+      "R518": "The Greene",
+      "name": "Ohio"
     },
-    "state133": {
-      "name": "Geneva",
-      "R275": "Rue de Rive"
+    "state987": {
+      "R130": "Penn Square",
+      "R233": "Woodland Hills",
+      "name": "Oklahoma"
     },
-    "state151": {
-      "name": "Zurich",
-      "R159": "Bahnhofstrasse",
-      "R309": "Glattzentrum"
-    }
-  },
-  "🇧🇪": {
-    "state1139": {
-      "name": "Brussels-Capital Region",
-      "R486": "Brussels"
-    }
-  },
-  "🇳🇱": {
-    "state805": {
-      "name": "Holland",
-      "R408": "Amsterdam",
-      "R539": "Haarlem",
-      "R540": "Den Haag"
-    }
-  },
-  "🇪🇸": {
-    "state284": {
-      "name": "Zaragoza",
-      "R377": "Puerto Venecia"
+    "state988": {
+      "R077": "Pioneer Place",
+      "R090": "Washington Square",
+      "R134": "Bridgeport Village",
+      "name": "Oregon"
     },
-    "state263": {
-      "name": "Malaga",
-      "R468": "La Canada"
+    "state989": {
+      "R065": "King of Prussia",
+      "R096": "Shadyside",
+      "R147": "South Hills Village",
+      "R162": "Walnut Street",
+      "R166": "Suburban Square",
+      "R234": "Willow Grove Park",
+      "R281": "Lehigh Valley",
+      "R304": "Park City",
+      "R413": "Ross Park",
+      "name": "Pennsylvania"
     },
-    "state242": {
-      "name": "Barcelona",
-      "R368": "Passeig de Gracia",
-      "R406": "La Maquinista"
+    "state991": {
+      "R167": "Providence Place",
+      "name": "Rhode Island"
     },
-    "state280": {
-      "name": "Valencia",
-      "R419": "Valencia"
+    "state992": {
+      "R318": "Charleston",
+      "R355": "Haywood Mall",
+      "name": "South Carolina"
     },
-    "state262": {
-      "name": "Madrid",
-      "R397": "Xanadu",
-      "R435": "Gran Plaza 2",
-      "R436": "Parquesur",
-      "R450": "Puerta del Sol"
+    "state994": {
+      "R020": "Saddle Creek",
+      "R123": "Green Hills",
+      "R133": "Downtown Nashville",
+      "R203": "West Town Mall",
+      "R513": "CoolSprings Galleria",
+      "name": "Tennessee"
     },
-    "state264": {
-      "name": "Murcia",
-      "R507": "Nueva Condomina"
+    "state995": {
+      "R042": "Knox Street",
+      "R058": "Houston Galleria",
+      "R085": "Barton Creek",
+      "R126": "The Woodlands",
+      "R131": "La Cantera",
+      "R144": "NorthPark Center",
+      "R151": "Southlake Town Square",
+      "R164": "Memorial City",
+      "R204": "Baybrook",
+      "R205": "First Colony Mall",
+      "R216": "Domain Northside",
+      "R290": "North Star",
+      "R316": "University Park Village",
+      "R321": "Willowbrook Mall",
+      "R437": "Highland Village",
+      "R492": "Cielo Vista Mall",
+      "R746": "Galleria Dallas",
+      "name": "Texas"
     },
-    "state281": {
-      "name": "Valladolid",
-      "R538": "Rio Shopping"
-    }
-  },
-  "🇭🇰": {
-    "state492": {
-      "name": "Hong Kong Region",
-      "R409": "Causeway Bay",
-      "R428": "ifc mall",
-      "R485": "Festival Walk",
-      "R499": "Canton Road",
-      "R610": "New Town Plaza",
-      "R673": "apm Hong Kong"
-    }
-  },
-  "🇸🇪": {
-    "state1100": {
-      "name": "Skane",
-      "R503": "Emporia",
-      "R593": "Väla Centrum"
+    "state996": {
+      "R125": "City Creek Center",
+      "R461": "Fashion Place",
+      "R599": "Station Park",
+      "name": "Utah"
     },
-    "state1099": {
-      "name": "Stockholm",
-      "R505": "Taby Centrum"
-    }
-  },
-  "🇨🇳": {
-    "state173": {
-      "name": "Henan",
-      "R572": "MixC Zhengzhou"
-    },
-    "state171": {
-      "name": "Hunan",
-      "R617": "Changsha"
-    },
-    "state176": {
-      "name": "Guangxi",
-      "R571": "MixC Nanning"
-    },
-    "state179": {
-      "name": "Yunnan",
-      "R670": "Kunming"
-    },
-    "state170": {
-      "name": "Fujian",
-      "R644": "Xiamen Lifestyle Center",
-      "R646": "Tahoe Plaza"
-    },
-    "state174": {
-      "name": "Guangdong",
-      "R484": "Holiday Plaza Shenzhen",
-      "R577": "Parc Central",
-      "R639": "Zhujiang New Town",
-      "R761": "Shenzhen East-CN"
-    },
-    "state167": {
-      "name": "Shandong",
-      "R557": "MixC Qingdao",
-      "R648": "Parc 66 Jinan"
-    },
-    "state165": {
-      "name": "Jiangsu",
-      "R493": "Nanjing IST",
-      "R574": "Center 66 Wuxi",
-      "R643": "Wonder City",
-      "R688": "Suzhou",
-      "R703": "Nanjing Jinmao Place"
-    },
-    "state178": {
-      "name": "Sichuan",
-      "R502": "MixC Chengdu",
-      "R580": "Taikoo Li Chengdu"
-    },
-    "state162": {
-      "name": "Liaoning",
-      "R478": "Parkland",
-      "R534": "Zhongjie Joy City",
-      "R576": "MixC Shenyang",
-      "R609": "Olympia 66 Dalian"
-    },
-    "state156": {
-      "name": "Beijing",
-      "R320": "Sanlitun",
-      "R388": "Xidan Joy City",
-      "R448": "Wangfujing",
-      "R479": "China Central Mall",
-      "R645": "Chaoyang Joy City"
-    },
-    "state1058": {
-      "name": "Chongqing",
-      "R476": "Paradise Walk",
-      "R480": "Jiefangbei",
-      "R573": "MixC Chongqing"
-    },
-    "state158": {
-      "name": "Tianjin",
-      "R579": "Riverside 66 Tianjin",
-      "R637": "Tianjin Joy City",
-      "R638": "MixC Tianjin"
-    },
-    "state157": {
-      "name": "Shanghai",
-      "R359": "Nanjing East",
-      "R389": "Pudong",
-      "R390": "Hong Kong Plaza",
-      "R401": "Shanghai iapm",
-      "R581": "Wujiaochang",
-      "R683": "Global Harbor",
-      "R705": "Qibao",
-      "R678": "Shanghai-CN"
-    },
-    "state168": {
-      "name": "Zhejiang",
-      "R471": "West Lake",
-      "R531": "Tianyi Square",
-      "R532": "MixC Hangzhou"
-    },
-    "state172": {
-      "name": "Hubei",
-      "R575": "Wuhan International Plaza"
-    }
-  },
-  "🇫🇷": {
-    "state295": {
-      "name": "Alpes-Maritimes",
-      "R395": "CAP 3000"
-    },
-    "state332": {
-      "name": "Loire-Atlantique",
-      "R470": "Atlantis"
-    },
-    "state355": {
-      "name": "Bas-Rhin",
-      "R394": "Strasbourg"
-    },
-    "state322": {
-      "name": "Herault",
-      "R367": "Odysseum"
-    },
-    "state381": {
-      "name": "Seine-Saint-Denis",
-      "R536": "Rosny 2"
-    },
-    "state321": {
-      "name": "Gironde",
-      "R424": "Sainte-Catherine"
-    },
-    "state380": {
-      "name": "Hauts-de-Seine",
-      "R178": "Les Quatre Temps"
-    },
-    "state347": {
-      "name": "Nord",
-      "R376": "Lille"
-    },
-    "state302": {
-      "name": "Bouches-du-Rhone",
-      "R357": "Marseille",
-      "R477": "Aix-en-Provence"
-    },
-    "state366": {
-      "name": "Yvelines",
-      "R315": "Velizy 2",
-      "R374": "Parly 2"
-    },
-    "state363": {
-      "name": "Paris Region",
-      "R277": "Opéra",
-      "R566": "Marché Saint-Germain",
-      "R675": "Champs Élysées"
-    },
-    "state365": {
-      "name": "Seine-et-Marne",
-      "R425": "Val d'Europe",
-      "R438": "Carre Senart"
-    },
-    "state357": {
-      "name": "Rhone",
-      "R373": "Part-Dieu",
-      "R469": "Confluence"
-    },
-    "state1030": {
-      "name": "Cote-d'Or",
-      "R522": "La Toison d'Or"
-    }
-  },
-  "🇦🇺": {
-    "state44": {
-      "name": "South Australia",
-      "R405": "Rundle Place"
-    },
-    "state43": {
-      "name": "Queensland",
-      "R351": "Robina",
-      "R384": "Chermside",
-      "R466": "Brisbane",
-      "R509": "Carindale"
-    },
-    "state46": {
-      "name": "Victoria",
-      "R180": "Chadstone",
-      "R342": "Doncaster",
-      "R343": "Southland",
-      "R530": "Fountain Gate",
-      "R504": "Highpoint"
-    },
-    "state47": {
-      "name": "Western Australia",
-      "R386": "Perth City",
-      "R508": "Booragoon"
-    },
-    "state40": {
-      "name": "Australian Capital Territory",
-      "R483": "Canberra"
-    },
-    "state41": {
-      "name": "New South Wales",
-      "R238": "Sydney",
-      "R253": "Chatswood Chase",
-      "R254": "Bondi",
-      "R344": "Castle Towers",
-      "R385": "Charlestown",
-      "R440": "Penrith",
-      "R458": "Hornsby",
-      "R523": "Broadway",
-      "R606": "Miranda"
-    }
-  },
-  "🇮🇹": {
-    "state1109": {
-      "name": "Lazio",
-      "R038": "RomaEst",
-      "R381": "Porta di Roma",
-      "R562": "Euroma2",
-      "R382": "Via del Corso"
-    },
-    "state1110": {
-      "name": "Piedmont",
-      "R278": "Le Gru",
-      "R442": "Via Roma"
-    },
-    "state652": {
-      "name": "Venice",
-      "R625": "Nave de Vero"
-    },
-    "state1096": {
-      "name": "Sicily",
-      "R454": "Centro Sicilia"
-    },
-    "state1098": {
-      "name": "Lombardy",
-      "R365": "Carosello",
-      "R418": "Oriocenter",
-      "R441": "Fiordaliso",
-      "R547": "il Leone",
-      "R667": "Piazza Liberty"
-    },
-    "state1108": {
-      "name": "Tuscany",
-      "R449": "I Gigli",
-      "R602": "Florence"
-    },
-    "state1107": {
-      "name": "Campania",
-      "R453": "Campania"
-    },
-    "state1106": {
-      "name": "Emilia-Romagna",
-      "R427": "Via Rizzoli",
-      "R564": "Le Befane"
-    }
-  },
-  "🇲🇴": {
-    "state745": {
-      "name": "Macao Region",
-      "R672": "Galaxy Macau",
-      "R697": "Cotai Central"
-    }
-  },
-  "🇧🇷": {
-    "state95": {
-      "name": "Sao Paulo",
-      "R608": "Morumbi"
-    },
-    "state88": {
-      "name": "Rio de Janeiro",
-      "R567": "VillageMall"
-    }
-  },
-  "🇯🇵": {
-    "state698": {
-      "name": "Fukuoka-ken",
-      "R048": "Fukuoka Tenjin"
-    },
-    "state685": {
-      "name": "Osaka-fu",
-      "R091": "Shinsaibashi"
-    },
-    "state684": {
-      "name": "Kyoto-fu",
-      "R711": "Kyoto"
-    },
-    "state681": {
-      "name": "Aichi-ken",
-      "R005": "Nagoya Sakae"
-    },
-    "state671": {
-      "name": "Tokyo-to",
-      "R079": "Ginza",
-      "R119": "Shibuya",
-      "R128": "Shinjuku",
-      "R224": "Omotesando",
-      "R710": "Kawasaki",
-      "R718": "Marunouchi"
-    }
-  },
-  "🇰🇷": {
-    "state1112": {
-      "name": "Seoul-si",
-      "R692": "Garosugil",
-      "R747": "Seoul - Yeouido",
-      "R738": "Myeongdong",
-      "R751": "Seoul East - KR",
-      "R760": "Seoul South - KR"
-    }
-  },
-  "🇨🇦": {
-    "state112": {
-      "name": "Manitoba",
-      "R369": "Polo Park"
-    },
-    "state111": {
-      "name": "British Columbia",
-      "R280": "Pacific Centre",
-      "R362": "Oakridge Centre",
-      "R421": "Richmond Centre",
-      "R460": "Metrotown",
-      "R488": "Coquitlam Centre",
-      "R601": "Guildford Town Centre"
-    },
-    "state110": {
-      "name": "Alberta",
-      "R209": "Chinook Centre",
-      "R273": "West Edmonton",
-      "R301": "Market Mall",
-      "R411": "Southgate Centre"
-    },
-    "state117": {
-      "name": "Ontario",
-      "R120": "Yorkdale",
-      "R121": "Eaton Centre",
-      "R208": "Sherway Gardens",
-      "R332": "Rideau",
-      "R333": "Fairview",
-      "R350": "Square One",
-      "R429": "Upper Canada Mall",
-      "R447": "Mapleview Centre",
-      "R464": "Conestoga",
-      "R489": "Masonville",
-      "R490": "Bayshore Shopping Centre",
-      "R515": "Markville Shopping Centre"
-    },
-    "state115": {
-      "name": "Nova Scotia",
-      "R514": "Halifax Shopping Centre"
-    },
-    "state119": {
-      "name": "Quebec",
-      "R207": "Carrefour Laval",
-      "R248": "Sainte-Catherine",
-      "R392": "Fairview Pointe-Claire",
-      "R412": "Place Ste-Foy",
-      "R512": "DIX30"
-    }
-  },
-  "🇦🇹": {
-    "state39": {
-      "name": "Vienna",
-      "R687": "Kärntner Straße"
-    }
-  },
-  "🇸🇬": {
-    "state909": {
-      "name": "Singapore",
-      "R669": "Orchard Road",
-      "R736": "Jewel Changi Airport"
-    }
-  },
-  "🇹🇭": {
-    "state928": {
-      "name": "Bangkok",
-      "R728": "Iconsiam",
-      "R733": "Central World"
-    }
-  },
-  "🇮🇳": {
-    "state1067": {
-      "name": "Delhi",
-      "R756": "New Delhi-IN"
-    },
-    "state1159": {
-      "name": "Maharashtra",
-      "R744": "Mumbai-IN"
+    "state997": {
+      "R010": "Tysons Corner",
+      "R036": "Clarendon",
+      "R078": "Short Pump Town Center",
+      "R129": "Pentagon City",
+      "R221": "Fair Oaks",
+      "R271": "Reston",
+      "R598": "Potomac Town Center",
+      "R614": "Lynnhaven Mall",
+      "name": "Virginia"
     }
   }
 }
