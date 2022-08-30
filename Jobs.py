@@ -4,140 +4,192 @@ import os
 import logging
 from sys import argv
 from datetime import datetime, timezone
+from collections import OrderedDict
 
 from bot import chat_ids
 from sdk_aliyun import async_post
-from modules.constants import RecruitDict, userAgent
+from modules.constants import allRegions, userAgent
 from modules.util import request, setLogger, disMarkdown, session_func
 
 API = {
 	"state": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/stateProvinceList",
 	"province": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/storeLocations",
-	"image": "https://www.apple.com/careers/images/retail/fy22/hero_hotspot/default@2x.png"
+	"image": "https://www.apple.com/careers/images/retail/fy22/hero_hotspot/default@2x.png",
+	"frame": "https://www.apple.com/careers/global/media/flow/retail/hero-hotspot/retail_large_startframe.jpg"
 }
 
 TASKS = []
 RESULTS = []
 
-async def province(session, semaphore, saved, s, p):
-	global RESULTS
+def sortOD(od):
+    res = OrderedDict()
+    for k, v in sorted(od.items()):
+        if isinstance(v, dict):
+            res[k] = sortOD(v)
+        else:
+            res[k] = v
+    return res
 
-	async with semaphore:
-		# logging.info(", ".join(["开始下载 province", s, p["code"], p["stateProvince"]]))
-		r = await request(
-			session = session, ssl = False, headers = userAgent, timeout = 3, retryNum = 3, 
-			url = API["province"].format(JOBID = RecruitDict[s]["code"]),
-			params = dict(searchField = "stateProvince", fieldValue = p["id"]))
+class Store:
 
-	try:
-		a = json.loads(r)
-	except json.decoder.JSONDecodeError:
-		if "Maintenance" in r:
-			logging.error("Apple 招贤纳才维护中")
-			return -1
-		else:
-			logging.warning(", ".join(["下载失败 province", s, p["code"], p["stateProvince"]]))
-			return 0
-	except:
-		logging.warning(", ".join(["下载失败 province", s, p["code"], p["stateProvince"]]))
-		return 0
+	def __init__(self, **kwargs):
+		for k in ["state", "city", "sid", "name"]:
+			self.__dict__[k] = kwargs.get(k, None)
+		self.flag = self.state.flag
+		self.stateName = self.state.name
+		self.stateCode = self.state.code
 
-	for c in a:
-		n = [s, p["code"], p["stateProvince"], c["city"], c["name"], c["code"]]
-		RESULTS.append(n)
+	def __repr__(self):
+		args = ["None" if i == None else i for i in [self.flag, self.stateName, self.sid, self.name]]
+		return f'<Store: {", ".join(args)}>'
 
-	return 1
+	def __hash__(self):
+		return hash("Store" + self.sid)
 
-async def state(session, semaphore, s):
-	global TASKS
+	def __eq__(self, other):
+		return self.__hash__() == other.__hash__()
 
-	async with semaphore:
-		logging.info(", ".join(["开始下载 state", s, str(RecruitDict[s]["code"])]))
-		r = await request(
-			session = session, ssl = False, headers = userAgent, timeout = 3, retryNum = 3, 
-			url = API["state"].format(JOBID = RecruitDict[s]["code"]))
-		
-	try:
-		a = json.loads(r)
-	except json.decoder.JSONDecodeError:
-		if "Maintenance" in r:
-			logging.error("Apple 招贤纳才维护中")
-			return -1
-		else:
-			logging.warning(", ".join(["下载失败 state", s, str(RecruitDict[s]["code"])]))
-			return 0
-	except:
-		logging.warning(", ".join(["下载失败 state", s, str(RecruitDict[s]["code"])]))
-		return 0
+	def teleInfo(self):
+		city = f"{self.city}, " if self.city != None else f"{self.stateCode}: "
+		return f"*{self.flag} {city}{self.stateName}*\n{self.sid} - {self.name}"
 
-	for p in a["searchResults"]:
-		TASKS.append(["province", s, p])
+class State:
 
-	return 1
+	def __init__(self, **kwargs):
+		for k in ["region", "fieldID", "code", "name", "session", "semaphore"]:
+			self.__dict__[k] = kwargs.get(k, None)
+		self.flag = self.region.flag
+		self.regionCode = self.region.code
 
-def rec(dct, ter):
-	for i in dct:
-		if type(dct[i]) != str:
-			rec(dct[i], ter)
-		else:
-			ter.append(i)
-	return ter
+	def __repr__(self):
+		args = ["None" if i == None else i for i in [self.flag, self.code, self.name]]
+		return f'<State: {", ".join(args)}>'
+
+	def __hash__(self):
+		return hash("State" + self.code)
+
+	def __eq__(self, other):
+		return self.__hash__() == other.__hash__()
+
+	async def runner(self):
+		global RESULTS
+
+		async with self.semaphore:
+			# logging.info(", ".join(["开始下载 province", str(self)]))
+			r = await request(session = self.session, ssl = False, headers = userAgent, 
+				timeout = 3, retryNum = 3, url = API["province"].format(JOBID = self.regionCode),
+				params = dict(searchField = "stateProvince", fieldValue = self.fieldID))
+
+		try:
+			a = json.loads(r)
+		except json.decoder.JSONDecodeError:
+			if "Maintenance" in r:
+				logging.error("Apple 招贤纳才维护中")
+				TASKS = []
+			else:
+				logging.warning(", ".join(["下载失败", str(self)]))
+				TASKS.append(self)
+		except:
+			logging.warning(", ".join(["下载失败", str(self)]))
+			TASKS.append(self)
+
+		for c in a:
+			RESULTS.append(Store(state = self, city = c["city"], name = c["name"], sid = c["code"]))
+
+class Region:
+
+	def __init__(self, **kwargs):
+		for k in ["flag", "session", "semaphore"]:
+			self.__dict__[k] = kwargs.get(k, None)
+		self.code = allRegions[self.flag]["jobCode"]
+
+	def __repr__(self):
+		args = ["None" if i == None else i for i in [self.flag, self.code]]
+		return f'<Region: {", ".join(args)}>'
+
+	def __hash__(self):
+		return hash("Region" + self.flag)
+
+	def __eq__(self, other):
+		return self.__hash__() == other.__hash__()
+
+	async def runner(self):
+		global TASKS
+
+		async with self.semaphore:
+			logging.info(", ".join(["开始下载", str(self)]))
+			r = await request(session = self.session, ssl = False, headers = userAgent, 
+				timeout = 3, retryNum = 3, url = API["state"].format(JOBID = self.code))
+
+		try:
+			a = json.loads(r)
+		except json.decoder.JSONDecodeError:
+			if "Maintenance" in r:
+				logging.error("Apple 招贤纳才维护中")
+				TASKS = []
+			else:
+				logging.warning(", ".join(["下载失败", str(self)]))
+				TASKS.append(self)
+				return
+		except:
+			logging.warning(", ".join(["下载失败", str(self)]))
+			TASKS.append(self)
+			return
+
+		for p in a["searchResults"]:
+			TASKS.append(State(region = self, fieldID = p["id"], code = p["code"], name = p["stateProvince"],
+				session = self.session, semaphore = self.semaphore))
 
 @session_func
-async def main(targets, session, limit = None):
-	global TASKS
-	FAILED = {}
+async def main(targets, session):
 
 	with open("Retail/savedJobs.json") as r:
 		SAVED = eval(r.read())
-		saved = rec(SAVED, [])
-
-	for s in targets:
-		if (limit != None) and (s not in limit):
+	
+	STORES = []
+	for flag in SAVED:
+		if flag == "update":
 			continue
-		TASKS.append(["state", s])
+		for stateCode in SAVED[flag]:
+			if flag not in targets:
+				continue
+			stateName = None
+			for store in SAVED[flag][stateCode]:
+				stateName = SAVED[flag][stateCode]["name"]
+				if store == "name":
+					continue
+				STORES.append(Store(state = State(region = Region(flag = flag), name = stateName, code = stateCode), 
+					sid = store, name = SAVED[flag][stateCode][store]))
 
+	global TASKS
+	RECORD = {}
 	semaphore = asyncio.Semaphore(30)
 
-	while len(TASKS):
-		tasks = TASKS.copy()
-		coros = []
-		for l in tasks:
-			if l[0] == "state":
-				coros.append(state(session, semaphore, *l[1:]))
-			elif l[0] == "province":
-				coros.append(province(session, semaphore, saved, *l[1:]))
-		results = await asyncio.gather(*coros)
+	TASKS = [Region(flag = i, session = session, semaphore = semaphore) for i in targets if i != "TW"]
 
-		for t, r in zip(tasks, results):
-			if r == 1:
-				TASKS.remove(t)
-			elif r == -1:
-				TASKS = []
-			elif r == 0:
-				if t[0] == "state":
-					taskID = ", ".join(["state", t[1]])
-				elif t[0] == "province":
-					taskID = ", ".join(["province", t[1], t[2]["code"], t[2]["stateProvince"]])
-				FAILED[taskID] = FAILED.get(taskID, 0) + 1
-				if FAILED[taskID] > 3:
-					logging.error(", ".join(["放弃下载", taskID]))
-					TASKS.remove(t)
+	while len(TASKS):
+		tasks, coros = TASKS.copy(), []
+		for t in tasks:
+			RECORD[id(t)] = RECORD.get(id(t), 0) + 1
+			if RECORD[id(t)] > 3:
+				logging.error(", ".join(["放弃下载", str(t)]))
+				continue
+			coros.append(t.runner())
+
+		await asyncio.gather(*coros)
+		_ = [TASKS.remove(t) for t in tasks]
 
 	append = False
 
-	for flag, pid, pname, city, name, code in RESULTS:
-
-		if code not in saved:
+	for store in RESULTS:
+		if store not in STORES:
 			append = True
-			logging.info(f"记录到新地点 {flag} {pname} {code} {name}")
-
-			SAVED[flag][pid] = SAVED[flag].get(pid, {"name": pname})
-			SAVED[flag][pid][code] = name
-
-			linkURL = f"https://jobs.apple.com/zh-cn/details/{RecruitDict[flag]['code']}"
-			pushAns = f"#新店新机遇\n\n*{flag} {city}, {pname}*\n{code} - {name}\n\n{linkURL}"
-				
+			logging.info(f"记录到新地点 {store.flag} {store.stateName} {store.sid} {store.name}")
+			SAVED[store.flag][store.stateCode] = SAVED[store.flag].get(store.stateCode, {"name": store.stateName})
+			SAVED[store.flag][store.stateCode][store.sid] = store.name
+			SAVED[store.flag][store.stateCode]
+			linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
+			pushAns = f"#新店新机遇\n\n{store.teleInfo()}\n\n{linkURL}"	
 			push = {
 				"mode": "photo-text",
 				"text": disMarkdown(pushAns),
@@ -145,25 +197,41 @@ async def main(targets, session, limit = None):
 				"parse": "MARK",
 				"image": API["image"]
 			}
-
 			await async_post(push, session = session)
+		elif SAVED[store.flag][store.stateCode]["name"] != store.stateName:
+			append = True
+			logging.info(f"更改名称 {SAVED[store.flag][store.stateCode]['name']} 为 {store.stateName}")
+			SAVED[store.flag][store.stateCode]["name"] = store.stateName
+		elif SAVED[store.flag][store.stateCode][store.sid] != store.name:
+			append = True
+			logging.info(f"更改名称 {SAVED[store.flag][store.stateCode][store.sid]} 为 {store.name}")
+			SAVED[store.flag][store.stateCode][store.sid] = store.name
 
-		elif SAVED[flag][pid]["name"] != pname:
+	for store in STORES:
+		if store not in RESULTS:
+			if store.name.startswith("~"):
+				continue
 			append = True
-			logging.info(f"更改名称 {SAVED[flag][pid]['name']} 为 {pname}")
-			SAVED[flag][pid]["name"] = pname
-		elif SAVED[flag][pid][code] != name:
-			append = True
-			logging.info(f"更改名称 {SAVED[flag][pid][code]} 为 {name}")
-			SAVED[flag][pid][code] = name
+			logging.info(f"记录到地点已停止招聘 {store.flag} {store.stateName} {store.sid} {store.name}")
+			SAVED[store.flag][store.stateCode][store.sid] = "~" + store.name
+			linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
+			pushAns = f"#新店新机遇\n\n已停止招聘\n{store.teleInfo()}\n\n{linkURL}"	
+			push = {
+				"mode": "photo-text",
+				"text": disMarkdown(pushAns),
+				"chat_id": chat_ids[0],
+				"parse": "MARK",
+				"image": API["frame"]
+			}
+			await async_post(push, session = session)
 
 	if append:
 		SAVED["update"] = datetime.now(timezone.utc).strftime("%F %T GMT")
 		with open("Retail/savedJobs.json", "w") as w:
-			w.write(json.dumps(SAVED, ensure_ascii = False, indent = 2))
+			w.write(json.dumps(sortOD(SAVED), ensure_ascii = False, indent = 2))
 
 setLogger(logging.INFO, os.path.basename(__file__))
 logging.info("程序启动")
-limit = argv[1:] if len(argv) > 1 else None
-asyncio.run(main(targets = RecruitDict, limit = limit))
+targets = argv[1:] if len(argv) > 1 else list(allRegions)
+asyncio.run(main(targets = targets))
 logging.info("程序结束")
