@@ -8,7 +8,6 @@
 
 #### 代码
 
-* allStoresInfoLite.py: 取得 Apple Store 零售店服务器信息
 * Hours.py: 取得 Apple Store 特别营业时间信息
 * Jobs.py: 取得全球 Apple 零售招聘情况以获得未来新店
 * Rtl.py: 取得 Apple Store 零售店服务器图片更新
@@ -185,12 +184,6 @@
 2022 年 3 月：使用 asyncio、aiohttp 异步化核心代码，极大幅度的提高运行速度。[[commit]](https://github.com/junyilou/asaduplex/commit/6c7e3b729ab1ced4a8ae8888a5930fc55df8319e)
 
 2022 年 4 月：使用面向对象的思想，极高的提升了 Today at Apple 对象的多样性。[[commit]](https://github.com/junyilou/asaduplex/commit/4d98ae7f00312630479243184e715c929afd5b7a)
-
-## ~~已移除的代码~~
-
-* inStock.py: 根据产品部件号码查寻指定产品在指定零售店的库存情况，为避免滥用移除
-* onlineCrawl.py: 通过访问 Apple 官网以寻找新上架的产品部件号码，为避免滥用移除
-* IFTTT.py: 起初为了 IFTTT Webhooks 推送创建的辅助程序，现已不再需要
 
 ## 底注
 
