@@ -1,14 +1,3 @@
-asaVersion = "5.17.0"
-asaAgent = ".".join(asaVersion.split(".")[:2])
-asaHeaders = {
-	"User-Agent": f"ASA/{asaAgent} (iPhone) ss/3.00",
-	"x-ma-pcmh":  f"REL-{asaVersion}",
-	"X-MALang":   "zh-CN",
-	"X-Apple-I-TimeZone": "GMT+8",
-	"X-Apple-I-Locale":   "zh_CN",
-	"X-MMe-Client-Info": f"<iPhone13,2> <iPhone OS;15.5;19F77> <com.apple.AuthKit/1 (com.apple.store.Jolly/{asaVersion})>",
-	"X-DeviceConfiguration":  f"ss=3.00;dim=1170x2532;m=iPhone;v=iPhone13,2;vv={asaAgent};sv=15.5"}
-
 userAgent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \
 AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15"}
 
