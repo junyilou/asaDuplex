@@ -26,7 +26,6 @@
 * savedEvent.json: 由 Today.py 生成的，已经检测到并保存的 Today at Apple 活动列表
 * savedJobs.json: 由 Jobs.py 生成的，已经在检测到招聘的零售店编号
 * storeInfo.json: 全球 Apple Store 名称（包含部分曾用名、ASCII 兼容名等以便于更广的匹配）、店号、国家或地区旗帜、开店时间、官网图片最后修改时间、URL 标签、全球各国地区零售店按行政区划字典、用于模糊搜索的关键字 alias 等
-* storeList.json 和 storeList-format.json: 由 allStoresInfoLite.py 获得的零售店详细信息
 
 #### 代码依赖
 
@@ -47,7 +46,7 @@
   ```python
   >>> storeReturn("480，Los Angeles, 招聘，江浙沪", needSplit = True)
   
-  [('359', '南京东路'), ('389', '浦东'), ('390', '香港广场'), ('401', '上海环贸 iapm'), ('581', '五角场'), ('678', 'Store in Shanghai'), ('683', '环球港'), ('705', '七宝'), ('493', '南京艾尚天地'), ('574', '无锡恒隆广场'), ('643', '虹悦城'), ('688', '苏州'), ('703', '玄武湖'), ('471', '西湖'), ('531', '天一广场'), ('532', '杭州万象城'), ('575', 'Store in Wuhan'), ('480', '解放碑'), ('329', 'Store in London'), ('756', 'Store in New Delhi'), ('744', 'Store in Mumbai'), ('738', 'Store in Seoul'), ('751', 'Store in Seoul East'), ('050', 'The Grove'), ('108', 'Century City'), ('124', 'Beverly Center'), ('720', 'Tower Theatre')]
+  [('359', '南京东路'), ('389', '浦东'), ('390', '香港广场'), ('401', '上海环贸 iapm'), ('581', '五角场'), ('678', 'Store in Shanghai'), ('683', '环球港'), ('705', '七宝'), ('761', 'Store in Shenzhen East'), ('493', '南京艾尚天地'), ('574', '无锡恒隆广场'), ('643', '虹悦城'), ('688', '苏州'), ('703', '玄武湖'), ('471', '西湖'), ('531', '天一广场'), ('532', '杭州万象城'), ('480', '解放碑'), ('756', 'Store in New Delhi'), ('744', 'Store in Mumbai'), ('760', 'Store in Seoul South'), ('050', 'The Grove'), ('108', 'Century City'), ('124', 'Beverly Center'), ('720', 'Tower Theatre'), ('755', 'Store in East Rutherford')]
   ```
 
   * function `stateReplace(rstores)`
@@ -60,17 +59,17 @@
   ['重庆 (3)', '580', '云南 (1)']
   ```
 
-  * coroutine `storeDict(storeid = None, sif = None, session = None, mode = "dict")`
+  * coroutine `storeDict(sid = None, sif = None, session = None, mode = "dict")`
 
   传入零售店店号，联网从 Apple 官网获取零售店基本信息简单处理后返回。
 
   ```python
-  >>> await storeDict(storeid = 480)
+  >>> await storeDict(sid = 480)
   
   {'latitude': 29.560981, 'longitude': 106.572272, 'timezone': 'Asia/Shanghai', 'telephone': '400-617-1224', 'address': '重庆市渝中区邹容路 108 号', 'province': '重庆, 重庆, 400010', 'isnso': False, 'regular': [{'name': 'Saturday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Wednesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Friday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Monday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Tuesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Thursday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Sunday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}], 'special': []}
   ```
   
-  * function `storeInfo(storeid)`
+  * function `storeInfo(sid)`
   
   传入零售店店号，不联网从本地返回基本零售店信息。
   
