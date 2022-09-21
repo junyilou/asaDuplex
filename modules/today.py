@@ -1,6 +1,7 @@
 import re
 import json
 import asyncio
+import aiohttp
 import pytz
 import atexit
 
@@ -762,6 +763,7 @@ lang = {
 		"INTRO_COURSE": "*课程简介*",
 		"SIGN_UP": "预约课程",
 		"GENERAL_STORE": "Apple Store 零售店",
+		"TOO_MANY_STORE": "{COUNT} 家 Apple Store 零售店",
 		"IN_COLLECTION": "{NAME} 系列课程\n",
 		"START_FROM": "{START} – {END}{TZTEXT}",
 		"START_FROM_ALL": "{START} – {END}{TZTEXT} 起，共 {AMOUNT} 次排课",
@@ -788,10 +790,11 @@ lang = {
 		"LEARN_COLLECTION": "Learn More",
 		"DOWNLOAD_IMAGE": "Poster",
 		"LEARN_COURSE": "Learn More",
-		"INTRO_COLLECTION": "*Introduction*",
-		"INTRO_COURSE": "*Introduction*",
+		"INTRO_COLLECTION": "*Description*",
+		"INTRO_COURSE": "*Description*",
 		"SIGN_UP": "Sign Up",
 		"GENERAL_STORE": "Apple Store",
+		"TOO_MANY_STORE": "{COUNT} Apple Store{PLURAL}",
 		"IN_COLLECTION": "In Collection {NAME}\n",
 		"START_FROM": "{START} – {END}{TZTEXT}",
 		"START_FROM_ALL": "{AMOUNT} Schedule{PLURAL}, starting {START} – {END}{TZTEXT}",
@@ -845,7 +848,10 @@ def teleinfo(course = None, schedules = None, collection = None, mode = "new", u
 		for a in textStore:
 			if a.isdigit():
 				textStore[textStore.index(a)] = actualName(storeInfo(a)["name"])
-		courseStore = "、".join(textStore)
+		courseStore = lang[userLang]["JOINT"].join(textStore)
+		if len(courseStore) > 200:
+			courseStore = lang[userLang]["TOO_MANY_STORE"].format(COUNT = len(availableStore), 
+				PLURAL = "s" if len(availableStore) > 1 else "")
 	else:
 		courseStore = lang[userLang]["GENERAL_STORE"]
 
