@@ -7,7 +7,7 @@ from datetime import datetime, date
 from storeInfo import *
 from modules.special import speHours
 from modules.constants import DIFFhead, DIFFfoot
-from modules.util import setLogger
+from modules.util import setLogger, session_func
 from sdk_aliyun import async_post
 from bot import chat_ids
 
@@ -71,7 +71,8 @@ async def entry(session, sid, sn):
 		stdout(comp.strip())
 		diffStore.append(sn)
 
-async def main():
+@session_func
+async def main(session):
 	global orgjson, allSpecial, comparison, diffStore, calendar
 
 	stores = storeReturn(include, needSplit = True, remove_closed = True, remove_future = True)
@@ -87,10 +88,8 @@ async def main():
 			w.write(r"{}")
 
 	allSpecial = {**orgjson, "created": runtime}
-
-	async with aiohttp.ClientSession() as session:
-		tasks = [entry(session, sid, sn) for sid, sn in stores]
-		await asyncio.gather(*tasks)
+	tasks = [entry(session, sid, sn) for sid, sn in stores]
+	await asyncio.gather(*tasks)
 
 	for s in list(allSpecial):
 		if s == "created":
@@ -121,7 +120,7 @@ async def main():
 日历:\n{calendar}\n\n
 原始 JSON:\n{jOut}
 {DIFFfoot}"""
-		with open("/root/html/storeHours.html", "w") as w:
+		with open("/home/ecs-user/html/storeHours.html", "w") as w:
 		#with open("storeHours.html", "w") as w:
 			w.write(fileDiff)
 		stdout("已生成对比文件 storeHours.html")
