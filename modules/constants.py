@@ -2,9 +2,9 @@ userAgent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \
 AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15"}
 
 partRuleBase = r"[FGHMNPS][0-9A-Z]{3}[0-9]"
-partRuleFull = r".*([FGHMNPS][0-9A-Z]{3}[0-9][A-Z]{1,2}/[A-Z]).*"
-partRuleCheck = r".*([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?).*"
-partSpecialProduct = r".*(Z[0-9A-Z]{3}&(.*)?).*"
+partRuleFull = r"([FGHMNPS][0-9A-Z]{3}[0-9][A-Z]{1,2}/[A-Z])"
+partRuleCheck = r"([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?)"
+partSpecialProduct = r"(Z[0-9A-Z]{3}&(.*)?)"
 
 DIFFhead = """
 <!DOCTYPE html>
@@ -98,7 +98,8 @@ allRegions = {
     "partSample": "FE",
     "jobCode": "114438311",
     "altername": [
-      "ROC"
+      "ROC",
+      "中华民国"
     ]
   },
   "TW": {
@@ -113,7 +114,8 @@ allRegions = {
     "partSample": "FE",
     "jobCode": "114438311",
     "altername": [
-      "ROC"
+      "ROC",
+      "中华民国"
     ]
   },
   "🇺🇸": {
@@ -207,11 +209,11 @@ allRegions = {
     "name": "香港",
     "nameEng": "Hong Kong",
     "abbr": "HK",
-    "mobileApp": "p/hk-zh",
+    "mobileApp": "p/hk",
     "storeURL": "/hk",
     "shopURL": "/hk",
     "rootPath": "/hk",
-    "rspLocale": "zh_HK",
+    "rspLocale": "en_HK",
     "partSample": "FE",
     "jobCode": "114438082",
     "altername": []
