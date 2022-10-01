@@ -1,5 +1,5 @@
 {
-  "update": "2022-09-18 01:00:04 GMT",
+  "update": "2022-09-27 01:00:03 GMT",
   "today": {
     "6443617454119551373": {
       "slug": "art-skills-getting-started-procreate",
@@ -42,7 +42,8 @@
       "🇰🇷": "코딩 기본기: Swift Playgrounds 시작하기",
       "🇲🇴": "編碼技巧：Swift Playgrounds 使用入門",
       "🇸🇬": "Coding Skills: Getting Started with Swift Playgrounds",
-      "🇹🇭": "พื้นฐานเขียนโค้ด: เริ่มต้นใช้งาน Swift Playgrounds"
+      "🇹🇭": "พื้นฐานเขียนโค้ด: เริ่มต้นใช้งาน Swift Playgrounds",
+      "🇹🇼": "編碼技巧：Swift Playgrounds 入門"
     },
     "6443987539032113545": {
       "slug": "art-skills-sketching-ideas-notes",
@@ -116,7 +117,8 @@
       "🇰🇷": "아이를 위한 포토 연구소: 재미있는 가족사진",
       "🇲🇴": "兒童攝影實驗室：有趣的家庭照",
       "🇸🇬": "Photo Lab for Kids: Fun Family Portraits",
-      "🇹🇭": "การทดลองถ่ายภาพสำหรับเด็ก: ถ่ายภาพครอบครัวสุดสนุก"
+      "🇹🇭": "การทดลองถ่ายภาพสำหรับเด็ก: ถ่ายภาพครอบครัวสุดสนุก",
+      "🇹🇼": "孩童攝影研究室：有趣的全家福照片"
     },
     "6455123986703286881": {
       "slug": "art-lab-kids-drawing-emoji",
@@ -443,6 +445,7 @@
       "slug": "photo-tour-portraits-on-location",
       "🇨🇳": "光影漫游：外景人像摄影",
       "🇯🇵": "フォトツアー：屋外でポートレート写真を撮ろう",
+      "🇰🇷": "포토 산책: 야외에서 찍어보는 인물 사진",
       "🇲🇴": "攝影漫遊：外景人像攝影",
       "🇸🇬": "Photo Tour: Taking Portraits on Location",
       "🇹🇭": "พาทัวร์ถ่ายรูป: ถ่ายภาพบุคคลนอกสถานที่"
