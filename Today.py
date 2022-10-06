@@ -59,54 +59,47 @@ async def main(mode):
 				courses[j.course] = courses.get(j.course, [])
 				if j not in courses[j.course]:
 					courses[j.course].append(j)
+			else:
+				courses[j] = courses.get(j, [])
 
 	for course in courses:
-		collection = course.collection
-		cond1, cond2 = [course.courseId in saved[cond] for cond in ["today", "sitemap"]]
-		cond3 = isinstance(collection, Collection)
-		cond4 = cond3 and collection.slug in saved["collection"]
-		
-		if cond1 and cond2:
-			tempo = None
-		elif cond1 and not cond2:
-			tempo = "today"
-		elif not cond1:
-			append = True
-			tempo = "sitemap"
-			if courses[course] != []:
-				saved["today"][course.courseId] = {
-					"slug": course.slug,
-					course.flag: course.name
-				}
-				if cond2:
-					del saved["sitemap"][course.courseId][course.flag]
-					if len(saved["sitemap"][course.courseId].keys()) == 1:
-						del saved["sitemap"][course.courseId]
-					tempo = None
 
+		doSend = False
+		belongs = "today" if len(courses[course]) else "sitemap"
+		if course.courseId in saved[belongs]:
+			if course.flag not in saved[belongs][course.courseId]["names"]:
+				append = True
+				saved[belongs][course.courseId]["names"][course.flag] = course.name
+			if belongs == "today" and course.courseId in saved["sitemap"]:
+				if course.flag in saved["sitemap"][course.courseId]["names"]:
+					del saved["sitemap"][course.courseId]["names"][course.flag]
+					append = doSend = True
+					if not saved["sitemap"][course.courseId]["names"]:
+						del saved["sitemap"][course.courseId]
+
+		elif course.courseId not in saved["today"]:
+			append = doSend = True
+			saved[belongs][course.courseId] = {
+				"slug": course.slug,
+				"names": {course.flag: course.name}
+			}
+
+		if doSend:
 			logging.info(str(course))
-			schedules = [j for i in (courses[c] for c in courses if c.courseId == course.courseId) for j in i]
+			schedules = [i for j in (courses[c] for c in courses if c.courseId == course.courseId) for i in j]
 			text, image, keyboard = teleinfo(course = course, schedules = sorted(schedules))
 			await async_post(text, image, keyboard)
 
-		if tempo != None:
-			if course.courseId in saved[tempo]:
-				if course.flag not in saved[tempo][course.courseId]:
-					append = True
-					saved[tempo][course.courseId][course.flag] = course.name
-
-		if cond3 and not cond4:
-			append = True
-			saved["collection"][collection.slug] = {course.flag: collection.name}
-			logging.info(str(collection))
-			text, image, keyboard = teleinfo(collection = collection)
-			await async_post(text, image, keyboard)
-
-		elif cond3 and cond4:
-			if course.flag not in saved["collection"][collection.slug]:
+		if isinstance(course.collection, Collection):
+			if course.collection.slug in saved["collection"]:
+				if course.flag not in saved["collection"][course.collection.slug]:
+					saved["collection"][course.collection.slug][course.flag] = collection.name
+			else:
 				append = True
-				saved["collection"][collection.slug][course.flag] = collection.name
-
+				saved["collection"][course.collection.slug] = {course.flag: collection.name}
+				logging.info(str(collection))
+				text, image, keyboard = teleinfo(collection = collection)
+				await async_post(text, image, keyboard)
 
 if __name__ == "__main__":
 	args = {

@@ -1,711 +1,988 @@
 {
-  "update": "2022-09-27 01:00:03 GMT",
+  "update": "2022-10-06 14:48:43 GMT",
   "today": {
     "6443617454119551373": {
-      "slug": "art-skills-getting-started-procreate",
-      "🇨🇳": "艺术技巧：Procreate 使用入门",
-      "🇭🇰": "藝術技巧：Procreate 使用入門",
-      "🇯🇵": "アートスキル：Procreateではじめよう",
-      "🇰🇷": "아트 기본기: Procreate로 스케치 시작하기",
-      "🇲🇴": "藝術技巧：Procreate 使用入門",
-      "🇸🇬": "Art Skills: Getting Started with Procreate",
-      "🇹🇭": "พื้นฐานศิลปะ: เริ่มต้นใช้งาน Procreate",
-      "🇹🇼": "藝術技巧：Procreate 使用入門"
+      "names": {
+        "🇨🇳": "艺术技巧：Procreate 使用入门",
+        "🇭🇰": "藝術技巧：Procreate 使用入門",
+        "🇯🇵": "アートスキル：Procreateではじめよう",
+        "🇰🇷": "아트 기본기: Procreate로 스케치 시작하기",
+        "🇲🇴": "藝術技巧：Procreate 使用入門",
+        "🇸🇬": "Art Skills: Getting Started with Procreate",
+        "🇹🇭": "พื้นฐานศิลปะ: เริ่มต้นใช้งาน Procreate",
+        "🇹🇼": "藝術技巧：Procreate 使用入門"
+      },
+      "slug": "art-skills-getting-started-procreate"
     },
     "6443623163745894793": {
-      "slug": "music-skills-getting-started-garageband",
-      "🇨🇳": "音乐技巧：库乐队使用入门",
-      "🇭🇰": "音樂技巧：GarageBand 使用入門",
-      "🇯🇵": "ミュージックスキル：GarageBandではじめよう",
-      "🇰🇷": "뮤직 기본기: GarageBand 시작하기",
-      "🇲🇴": "音樂技巧：GarageBand 使用入門",
-      "🇸🇬": "Music Skills: Getting Started with GarageBand",
-      "🇹🇭": "พื้นฐานการดนตรี: เริ่มต้นใช้งาน GarageBand",
-      "🇹🇼": "音樂技巧：GarageBand 使用入門"
+      "names": {
+        "🇨🇳": "音乐技巧：库乐队使用入门",
+        "🇭🇰": "音樂技巧：GarageBand 使用入門",
+        "🇯🇵": "ミュージックスキル：GarageBandではじめよう",
+        "🇰🇷": "뮤직 기본기: GarageBand 시작하기",
+        "🇲🇴": "音樂技巧：GarageBand 使用入門",
+        "🇸🇬": "Music Skills: Getting Started with GarageBand",
+        "🇹🇭": "พื้นฐานการดนตรี: เริ่มต้นใช้งาน GarageBand",
+        "🇹🇼": "音樂技巧：GarageBand 使用入門"
+      },
+      "slug": "music-skills-getting-started-garageband"
     },
     "6443626861192643469": {
-      "slug": "photo-skills-photography-iphone",
-      "🇨🇳": "光影技巧：用 iPhone 拍摄照片",
-      "🇭🇰": "攝影技巧：用 iPhone 拍照",
-      "🇯🇵": "フォトスキル：iPhoneで写真を撮ろう",
-      "🇰🇷": "포토 기본기: iPhone으로 사진 찍기",
-      "🇲🇴": "攝影技巧：用 iPhone 拍照",
-      "🇸🇬": "Photo Skills: Photography on iPhone",
-      "🇹🇭": "พื้นฐานการถ่ายภาพ: วิธีถ่ายรูปด้วย iPhone",
-      "🇹🇼": "攝影技巧：用 iPhone 拍照"
+      "names": {
+        "🇨🇳": "光影技巧：用 iPhone 拍摄照片",
+        "🇭🇰": "攝影技巧：用 iPhone 拍照",
+        "🇯🇵": "フォトスキル：iPhoneで写真を撮ろう",
+        "🇰🇷": "포토 기본기: iPhone으로 사진 찍기",
+        "🇲🇴": "攝影技巧：用 iPhone 拍照",
+        "🇸🇬": "Photo Skills: Photography on iPhone",
+        "🇹🇭": "พื้นฐานการถ่ายภาพ: วิธีถ่ายรูปด้วย iPhone",
+        "🇹🇼": "攝影技巧：用 iPhone 拍照"
+      },
+      "slug": "photo-skills-photography-iphone"
     },
     "6443627468649497481": {
-      "slug": "coding-skills-getting-started-swift-playgrounds",
-      "🇨🇳": "编程技巧：Swift Playgrounds 使用入门",
-      "🇭🇰": "編碼技巧：Swift Playgrounds 使用入門",
-      "🇯🇵": "コーディングスキル：Swift Playgroundsではじめよう",
-      "🇰🇷": "코딩 기본기: Swift Playgrounds 시작하기",
-      "🇲🇴": "編碼技巧：Swift Playgrounds 使用入門",
-      "🇸🇬": "Coding Skills: Getting Started with Swift Playgrounds",
-      "🇹🇭": "พื้นฐานเขียนโค้ด: เริ่มต้นใช้งาน Swift Playgrounds",
-      "🇹🇼": "編碼技巧：Swift Playgrounds 入門"
+      "names": {
+        "🇨🇳": "编程技巧：Swift Playgrounds 使用入门",
+        "🇭🇰": "編碼技巧：Swift Playgrounds 使用入門",
+        "🇯🇵": "コーディングスキル：Swift Playgroundsではじめよう",
+        "🇰🇷": "코딩 기본기: Swift Playgrounds 시작하기",
+        "🇲🇴": "編碼技巧：Swift Playgrounds 使用入門",
+        "🇸🇬": "Coding Skills: Getting Started with Swift Playgrounds",
+        "🇹🇭": "พื้นฐานเขียนโค้ด: เริ่มต้นใช้งาน Swift Playgrounds",
+        "🇹🇼": "編碼技巧：Swift Playgrounds 入門"
+      },
+      "slug": "coding-skills-getting-started-swift-playgrounds"
     },
     "6443987539032113545": {
-      "slug": "art-skills-sketching-ideas-notes",
-      "🇨🇳": "艺术技巧：在备忘录中描绘想法",
-      "🇭🇰": "藝術技巧：在「備忘錄」繪畫構思",
-      "🇯🇵": "アートスキル：アイデアをメモにスケッチしよう",
-      "🇰🇷": "아트 기본기: 메모 앱으로 아이디어 스케치",
-      "🇲🇴": "藝術技巧：在「備忘錄」繪畫構思",
-      "🇸🇬": "Art Skills: Sketching Ideas in Notes",
-      "🇹🇭": "พื้นฐานศิลปะ: สเก็ตช์ไอเดียใหม่ๆ ลงในโน้ต",
-      "🇹🇼": "藝術技巧：在「備忘錄」中繪製靈感"
+      "names": {
+        "🇨🇳": "艺术技巧：在备忘录中描绘想法",
+        "🇭🇰": "藝術技巧：在「備忘錄」繪畫構思",
+        "🇯🇵": "アートスキル：アイデアをメモにスケッチしよう",
+        "🇰🇷": "아트 기본기: 메모 앱으로 아이디어 스케치",
+        "🇲🇴": "藝術技巧：在「備忘錄」繪畫構思",
+        "🇸🇬": "Art Skills: Sketching Ideas in Notes",
+        "🇹🇭": "พื้นฐานศิลปะ: สเก็ตช์ไอเดียใหม่ๆ ลงในโน้ต",
+        "🇹🇼": "藝術技巧：在「備忘錄」中繪製靈感"
+      },
+      "slug": "art-skills-sketching-ideas-notes"
     },
     "6444981287350272389": {
-      "slug": "photo-skills-editing-techniques",
-      "🇨🇳": "光影技巧：用 iPhone 编辑照片",
-      "🇭🇰": "攝影技巧：用 iPhone 編輯相片",
-      "🇯🇵": "フォトスキル：iPhoneで写真を編集しよう",
-      "🇰🇷": "포토 기본기: iPhone으로 사진 편집하기",
-      "🇲🇴": "攝影技巧：用 iPhone 編輯相片",
-      "🇸🇬": "Photo Skills: Editing on iPhone",
-      "🇹🇭": "พื้นฐานการถ่ายภาพ: แต่งภาพให้โดนใจด้วย iPhone",
-      "🇹🇼": "攝影技巧：用 iPhone 編輯照片"
+      "names": {
+        "🇨🇳": "光影技巧：用 iPhone 编辑照片",
+        "🇭🇰": "攝影技巧：用 iPhone 編輯相片",
+        "🇯🇵": "フォトスキル：iPhoneで写真を編集しよう",
+        "🇰🇷": "포토 기본기: iPhone으로 사진 편집하기",
+        "🇲🇴": "攝影技巧：用 iPhone 編輯相片",
+        "🇸🇬": "Photo Skills: Editing on iPhone",
+        "🇹🇭": "พื้นฐานการถ่ายภาพ: แต่งภาพให้โดนใจด้วย iPhone",
+        "🇹🇼": "攝影技巧：用 iPhone 編輯照片"
+      },
+      "slug": "photo-skills-editing-techniques"
     },
     "6444982776110088837": {
-      "slug": "video-skills-getting-started-imovie",
-      "🇨🇳": "视频技巧： iMovie 剪辑 使用入门",
-      "🇭🇰": "影片技巧：iMovie 使用入門",
-      "🇯🇵": "ビデオスキル：iMovieではじめよう",
-      "🇰🇷": "동영상 기본기: iMovie 시작하기",
-      "🇲🇴": "影片技巧：iMovie 使用入門",
-      "🇸🇬": "Video Skills: Getting Started with iMovie",
-      "🇹🇭": "พื้นฐานการถ่ายวิดีโอ: เริ่มต้นใช้งาน iMovie",
-      "🇹🇼": "影片技巧：iMovie 使用入門"
+      "names": {
+        "🇨🇳": "视频技巧： iMovie 剪辑 使用入门",
+        "🇭🇰": "影片技巧：iMovie 使用入門",
+        "🇯🇵": "ビデオスキル：iMovieではじめよう",
+        "🇰🇷": "동영상 기본기: iMovie 시작하기",
+        "🇲🇴": "影片技巧：iMovie 使用入門",
+        "🇸🇬": "Video Skills: Getting Started with iMovie",
+        "🇹🇭": "พื้นฐานการถ่ายวิดีโอ: เริ่มต้นใช้งาน iMovie",
+        "🇹🇼": "影片技巧：iMovie 使用入門"
+      },
+      "slug": "video-skills-getting-started-imovie"
     },
     "6444985410678260613": {
-      "slug": "video-skills-recording-techniques-iphone",
-      "🇨🇳": "视频技巧：用 iPhone 拍摄视频",
-      "🇭🇰": "影片技巧：用 iPhone 攝錄的竅門",
-      "🇯🇵": "ビデオスキル：iPhoneを使ったビデオ撮影テクニック",
-      "🇰🇷": "동영상 기본기: iPhone으로 동영상 잘 찍는 법",
-      "🇲🇴": "影片技巧：用 iPhone 攝錄的竅門",
-      "🇸🇬": "Video Skills: Recording Techniques with iPhone",
-      "🇹🇭": "พื้นฐานการถ่ายวิดีโอ: เทคนิคการบันทึกวิดีโอด้วย iPhone",
-      "🇹🇼": "影片技巧：用 iPhone 錄影的訣竅"
+      "names": {
+        "🇨🇳": "视频技巧：用 iPhone 拍摄视频",
+        "🇭🇰": "影片技巧：用 iPhone 攝錄的竅門",
+        "🇯🇵": "ビデオスキル：iPhoneを使ったビデオ撮影テクニック",
+        "🇰🇷": "동영상 기본기: iPhone으로 동영상 잘 찍는 법",
+        "🇲🇴": "影片技巧：用 iPhone 攝錄的竅門",
+        "🇸🇬": "Video Skills: Recording Techniques with iPhone",
+        "🇹🇭": "พื้นฐานการถ่ายวิดีโอ: เทคนิคการบันทึกวิดีโอด้วย iPhone",
+        "🇹🇼": "影片技巧：用 iPhone 錄影的訣竅"
+      },
+      "slug": "video-skills-recording-techniques-iphone"
     },
     "6447624726684467553": {
-      "slug": "music-labs-making-theme-song",
-      "🇨🇳": "儿童音乐实验室：创作一首主题曲",
-      "🇭🇰": "兒童音樂實驗室：創作主題曲",
-      "🇯🇵": "ミュージックラボ - 子ども向け：テーマソングを作曲しよう",
-      "🇰🇷": "아이를 위한 뮤직 연구소: 주제가 만들기",
-      "🇲🇴": "兒童音樂實驗室：創作主題曲",
-      "🇸🇬": "Music Lab for Kids: Making a Theme Song",
-      "🇹🇭": "การทดลองงานดนตรีสำหรับเด็ก: แต่งเพลงประกอบ"
+      "names": {
+        "🇨🇳": "儿童音乐实验室：创作一首主题曲",
+        "🇭🇰": "兒童音樂實驗室：創作主題曲",
+        "🇯🇵": "ミュージックラボ - 子ども向け：テーマソングを作曲しよう",
+        "🇰🇷": "아이를 위한 뮤직 연구소: 주제가 만들기",
+        "🇲🇴": "兒童音樂實驗室：創作主題曲",
+        "🇸🇬": "Music Lab for Kids: Making a Theme Song",
+        "🇹🇭": "การทดลองงานดนตรีสำหรับเด็ก: แต่งเพลงประกอบ"
+      },
+      "slug": "music-labs-making-theme-song"
     },
     "6453335803162362249": {
-      "slug": "video-lab-making-movie-trailer",
-      "🇨🇳": "儿童视频实验室：制作一部电影预告片",
-      "🇭🇰": "兒童影片實驗室：製作電影預告片",
-      "🇯🇵": "ビデオラボ - 子ども向け：映画の予告編を作ろう",
-      "🇰🇷": "아이를 위한 동영상 연구소: 영화 예고편 만들기",
-      "🇲🇴": "兒童影片實驗室：製作電影預告片",
-      "🇸🇬": "Video Lab for Kids: Making a Movie Trailer",
-      "🇹🇭": "การทดลองถ่ายวิดีโอสำหรับเด็ก: สร้างตัวอย่างภาพยนตร์"
+      "names": {
+        "🇨🇳": "儿童视频实验室：制作一部电影预告片",
+        "🇭🇰": "兒童影片實驗室：製作電影預告片",
+        "🇯🇵": "ビデオラボ - 子ども向け：映画の予告編を作ろう",
+        "🇰🇷": "아이를 위한 동영상 연구소: 영화 예고편 만들기",
+        "🇲🇴": "兒童影片實驗室：製作電影預告片",
+        "🇸🇬": "Video Lab for Kids: Making a Movie Trailer",
+        "🇹🇭": "การทดลองถ่ายวิดีโอสำหรับเด็ก: สร้างตัวอย่างภาพยนตร์"
+      },
+      "slug": "video-lab-making-movie-trailer"
     },
     "6453337069221413229": {
-      "slug": "photo-lab-fun-family-portraits",
-      "🇨🇳": "儿童光影实验室：趣味家庭合影",
-      "🇭🇰": "兒童攝影實驗室：有趣的家庭照",
-      "🇯🇵": "フォトラボ - 子ども向け：家族で楽しいポートレート写真を撮ろう",
-      "🇰🇷": "아이를 위한 포토 연구소: 재미있는 가족사진",
-      "🇲🇴": "兒童攝影實驗室：有趣的家庭照",
-      "🇸🇬": "Photo Lab for Kids: Fun Family Portraits",
-      "🇹🇭": "การทดลองถ่ายภาพสำหรับเด็ก: ถ่ายภาพครอบครัวสุดสนุก",
-      "🇹🇼": "孩童攝影研究室：有趣的全家福照片"
+      "names": {
+        "🇨🇳": "儿童光影实验室：趣味家庭合影",
+        "🇭🇰": "兒童攝影實驗室：有趣的家庭照",
+        "🇯🇵": "フォトラボ - 子ども向け：家族で楽しいポートレート写真を撮ろう",
+        "🇰🇷": "아이를 위한 포토 연구소: 재미있는 가족사진",
+        "🇲🇴": "兒童攝影實驗室：有趣的家庭照",
+        "🇸🇬": "Photo Lab for Kids: Fun Family Portraits",
+        "🇹🇭": "การทดลองถ่ายภาพสำหรับเด็ก: ถ่ายภาพครอบครัวสุดสนุก",
+        "🇹🇼": "孩童攝影研究室：有趣的全家福照片"
+      },
+      "slug": "photo-lab-fun-family-portraits"
     },
     "6455123986703286881": {
-      "slug": "art-lab-kids-drawing-emoji",
-      "🇨🇳": "儿童艺术实验室：制作属于自己的表情符号",
-      "🇭🇰": "兒童藝術實驗室：製作屬於自己的表情符號",
-      "🇯🇵": "アートラボ - 子ども向け：オリジナルの絵文字を作ろう",
-      "🇰🇷": "아이를 위한 아트 연구소: 이모티콘 만들기",
-      "🇲🇴": "兒童藝術實驗室：製作屬於自己的表情符號",
-      "🇸🇬": "Art Lab for Kids: Make Your Own Emoji",
-      "🇹🇭": "การทดลองงานศิลปะสำหรับเด็ก: สร้างสรรค์อิโมจิสุดสดใส"
+      "names": {
+        "🇨🇳": "儿童艺术实验室：制作属于自己的表情符号",
+        "🇭🇰": "兒童藝術實驗室：製作屬於自己的表情符號",
+        "🇯🇵": "アートラボ - 子ども向け：オリジナルの絵文字を作ろう",
+        "🇰🇷": "아이를 위한 아트 연구소: 이모티콘 만들기",
+        "🇲🇴": "兒童藝術實驗室：製作屬於自己的表情符號",
+        "🇸🇬": "Art Lab for Kids: Make Your Own Emoji",
+        "🇹🇭": "การทดลองงานศิลปะสำหรับเด็ก: สร้างสรรค์อิโมจิสุดสดใส",
+        "🇹🇼": "孩童藝術研究室︰打造自己的表情符號"
+      },
+      "slug": "art-lab-kids-drawing-emoji"
     },
     "6456668175656125061": {
-      "slug": "product-skills-accessibility-vision-loss",
-      "🇨🇳": "技巧：适用于视障人士的辅助功能"
+      "names": {
+        "🇨🇳": "技巧：适用于视障人士的辅助功能"
+      },
+      "slug": "product-skills-accessibility-vision-loss"
     },
     "6456668939250140553": {
-      "slug": "product-skills-learning-literacy",
-      "🇨🇳": "技巧：学习与读写功能"
+      "names": {
+        "🇨🇳": "技巧：学习与读写功能"
+      },
+      "slug": "product-skills-learning-literacy"
     },
     "6456669721362006917": {
-      "slug": "product-skills-accessibility-reduced-mobility",
-      "🇨🇳": "技巧：适用于行动不便人士的辅助功能"
+      "names": {
+        "🇨🇳": "技巧：适用于行动不便人士的辅助功能"
+      },
+      "slug": "product-skills-accessibility-reduced-mobility"
     },
     "6456670232358257769": {
-      "slug": "product-skills-accessibility-hard-of-hearing",
-      "🇨🇳": "技巧：适用于听障人士的辅助功能"
+      "names": {
+        "🇨🇳": "技巧：适用于听障人士的辅助功能"
+      },
+      "slug": "product-skills-accessibility-hard-of-hearing"
     },
     "6456670804285162629": {
-      "slug": "product-skills-accessibility-deaf-community",
-      "🇨🇳": "技巧：适用于失聪人士的辅助功能"
+      "names": {
+        "🇨🇳": "技巧：适用于失聪人士的辅助功能"
+      },
+      "slug": "product-skills-accessibility-deaf-community"
     },
     "6456671562162341225": {
-      "slug": "product-skills-using-voiceover-iphone-ipad",
-      "🇨🇳": "技巧：使用 iPhone 和 iPad 的旁白功能",
-      "🇯🇵": "スキル：iPhoneやiPadでVoiceOverを使ってみよう"
+      "names": {
+        "🇨🇳": "技巧：使用 iPhone 和 iPad 的旁白功能",
+        "🇯🇵": "スキル：iPhoneやiPadでVoiceOverを使ってみよう"
+      },
+      "slug": "product-skills-using-voiceover-iphone-ipad"
     },
     "6456672052476478305": {
-      "slug": "product-skills-voiceover-mac",
-      "🇨🇳": "技巧：使用 Mac 的旁白功能"
+      "names": {
+        "🇨🇳": "技巧：使用 Mac 的旁白功能"
+      },
+      "slug": "product-skills-voiceover-mac"
     },
     "6587404808071512425": {
-      "slug": "music-skills-getting-started-podcasting",
-      "🇨🇳": "音乐技巧：播客制作入门",
-      "🇭🇰": "音樂技巧：Podcast 製作入門",
-      "🇯🇵": "ミュージックスキル：Podcastをはじめよう",
-      "🇰🇷": "뮤직 기본기: 팟캐스트 제작 시작하기",
-      "🇲🇴": "音樂技巧：Podcast 製作入門",
-      "🇸🇬": "Music Skills: Getting Started with Podcasting",
-      "🇹🇭": "พื้นฐานการดนตรี: เริ่มต้น สร้าง พ็อดคาสท์",
-      "🇹🇼": "音樂技巧：Podcast 製作入門"
+      "names": {
+        "🇨🇳": "音乐技巧：播客制作入门",
+        "🇭🇰": "音樂技巧：Podcast 製作入門",
+        "🇯🇵": "ミュージックスキル：Podcastをはじめよう",
+        "🇰🇷": "뮤직 기본기: 팟캐스트 제작 시작하기",
+        "🇲🇴": "音樂技巧：Podcast 製作入門",
+        "🇸🇬": "Music Skills: Getting Started with Podcasting",
+        "🇹🇭": "พื้นฐานการดนตรี: เริ่มต้น สร้าง พ็อดคาสท์",
+        "🇹🇼": "音樂技巧：Podcast 製作入門"
+      },
+      "slug": "music-skills-getting-started-podcasting"
     },
     "6587430270160175497": {
-      "slug": "design-lab-draw-your-astronaut",
-      "🇭🇰": "設計實驗室：以《史諾比上太空》為靈感繪畫你的太空人",
-      "🇯🇵": "デザインラボ：『スヌーピー 宇宙への道』で活躍する宇宙飛行士を描こう",
-      "🇰🇷": "디자인 연구소: ‘우주로 간 스누피' 스타일의 우주 비행사 그려보기",
-      "🇲🇴": "設計實驗室：以《史諾比上太空》為靈感繪畫你的太空人",
-      "🇸🇬": "Design Lab: Draw Your Astronaut Inspired by Snoopy in Space",
-      "🇹🇭": "ทดลองงานดีไซน์: วาดตัวการ์ตูนจากสนูปี้ท่องอวกาศ"
+      "names": {
+        "🇭🇰": "設計實驗室：以《史諾比上太空》為靈感繪畫你的太空人",
+        "🇯🇵": "デザインラボ：『スヌーピー 宇宙への道』で活躍する宇宙飛行士を描こう",
+        "🇰🇷": "디자인 연구소: ‘우주로 간 스누피' 스타일의 우주 비행사 그려보기",
+        "🇲🇴": "設計實驗室：以《史諾比上太空》為靈感繪畫你的太空人",
+        "🇸🇬": "Design Lab: Draw Your Astronaut Inspired by Snoopy in Space",
+        "🇹🇭": "ทดลองงานดีไซน์: วาดตัวการ์ตูนจากสนูปี้ท่องอวกาศ"
+      },
+      "slug": "design-lab-draw-your-astronaut"
     },
     "6630673279987057293": {
-      "slug": "art-lab-playful-portraits",
-      "🇨🇳": "艺术实验室：趣玩人像",
-      "🇭🇰": "藝術實驗室：趣味人像照",
-      "🇯🇵": "アートラボ：遊び心あふれるポートレート",
-      "🇰🇷": "아트 연구소: 인물 사진에 재미 더하기",
-      "🇸🇬": "Art Lab: Playful Portraits",
-      "🇹🇭": "ทดลองงานศิลปะ: ตกแต่งภาพบุคคลสุดอาร์ต",
-      "🇹🇼": "藝術研究室：趣玩人像照"
+      "names": {
+        "🇨🇳": "艺术实验室：趣玩人像",
+        "🇭🇰": "藝術實驗室：趣味人像照",
+        "🇯🇵": "アートラボ：遊び心あふれるポートレート",
+        "🇰🇷": "아트 연구소: 인물 사진에 재미 더하기",
+        "🇸🇬": "Art Lab: Playful Portraits",
+        "🇹🇭": "ทดลองงานศิลปะ: ตกแต่งภาพบุคคลสุดอาร์ต",
+        "🇹🇼": "藝術研究室：趣玩人像照"
+      },
+      "slug": "art-lab-playful-portraits"
     },
     "6635235077318869345": {
-      "slug": "photo-lab-directing-portrait",
-      "🇨🇳": "光影实验室：执导拍摄人像",
-      "🇭🇰": "攝影實驗室：指導拍攝人像照",
-      "🇯🇵": "フォトラボ：ポートレートを演出しよう",
-      "🇰🇷": "포토 연구소: 인물 사진 연출하기",
-      "🇲🇴": "攝影實驗室：指導拍攝人像照",
-      "🇸🇬": "Photo Lab: Directing the Portrait",
-      "🇹🇭": "ทดลองถ่ายภาพ: กำกับการถ่ายภาพบุคคล",
-      "🇹🇼": "攝影研究室：指導拍攝人像"
+      "names": {
+        "🇨🇳": "光影实验室：执导拍摄人像",
+        "🇭🇰": "攝影實驗室：指導拍攝人像照",
+        "🇯🇵": "フォトラボ：ポートレートを演出しよう",
+        "🇰🇷": "포토 연구소: 인물 사진 연출하기",
+        "🇲🇴": "攝影實驗室：指導拍攝人像照",
+        "🇸🇬": "Photo Lab: Directing the Portrait",
+        "🇹🇭": "ทดลองถ่ายภาพ: กำกับการถ่ายภาพบุคคล",
+        "🇹🇼": "攝影研究室：指導拍攝人像"
+      },
+      "slug": "photo-lab-directing-portrait"
     },
     "6716848989256122737": {
-      "slug": "skills-simplifying-your-day-with-iphone",
-      "🇨🇳": "技巧：用 iPhone 简化生活",
-      "🇭🇰": "技巧：用 iPhone 簡化日常事務",
-      "🇯🇵": "スキル：iPhoneで1日を効率よく過ごそう",
-      "🇰🇷": "기본기: 일상이 가뿐해지는 iPhone 활용법",
-      "🇲🇴": "技巧：用 iPhone 簡化日常事務",
-      "🇸🇬": "Skills: Simplifying Your Day with iPhone",
-      "🇹🇭": "พื้นฐานใช้งาน: ค้นพบตัวช่วยการทำงานบน iPhone"
+      "names": {
+        "🇨🇳": "技巧：用 iPhone 简化生活",
+        "🇭🇰": "技巧：用 iPhone 簡化日常事務",
+        "🇯🇵": "スキル：iPhoneで1日を効率よく過ごそう",
+        "🇰🇷": "기본기: 일상이 가뿐해지는 iPhone 활용법",
+        "🇲🇴": "技巧：用 iPhone 簡化日常事務",
+        "🇸🇬": "Skills: Simplifying Your Day with iPhone",
+        "🇹🇭": "พื้นฐานใช้งาน: ค้นพบตัวช่วยการทำงานบน iPhone"
+      },
+      "slug": "skills-simplifying-your-day-with-iphone"
     },
     "6716852117049278813": {
-      "slug": "skills-getting-started-with-iphone",
-      "🇨🇳": "技巧：iPhone 使用入门",
-      "🇭🇰": "技巧：iPhone 使用入門",
-      "🇯🇵": "スキル：iPhoneではじめよう",
-      "🇰🇷": "기본기: iPhone 사용 시작하기",
-      "🇲🇴": "技巧：iPhone 使用入門",
-      "🇸🇬": "Skills: Getting Started with iPhone",
-      "🇹🇭": "พื้นฐานใช้งาน: เริ่มต้นใช้งาน iPhone",
-      "🇹🇼": "技巧：iPhone 使用入門"
+      "names": {
+        "🇨🇳": "技巧：iPhone 使用入门",
+        "🇭🇰": "技巧：iPhone 使用入門",
+        "🇯🇵": "スキル：iPhoneではじめよう",
+        "🇰🇷": "기본기: iPhone 사용 시작하기",
+        "🇲🇴": "技巧：iPhone 使用入門",
+        "🇸🇬": "Skills: Getting Started with iPhone",
+        "🇹🇭": "พื้นฐานใช้งาน: เริ่มต้นใช้งาน iPhone",
+        "🇹🇼": "技巧：iPhone 使用入門"
+      },
+      "slug": "skills-getting-started-with-iphone"
     },
     "6716854827433689485": {
-      "slug": "skills-personalizing-your-apple-watch",
-      "🇨🇳": "技巧：Apple Watch 个性化设置",
-      "🇭🇰": "技巧：Apple Watch 個人化設定",
-      "🇯🇵": "スキル：Apple Watchを使いこなそう",
-      "🇰🇷": "기본기: Apple Watch 맞춤 설정하기",
-      "🇲🇴": "技巧：Apple Watch 個人化設定",
-      "🇹🇭": "พื้นฐานใช้งาน: ออกแบบ Apple Watch สไตล์คุณ",
-      "🇹🇼": "技巧：打造個人化 Apple Watch"
+      "names": {
+        "🇨🇳": "技巧：Apple Watch 个性化设置",
+        "🇭🇰": "技巧：Apple Watch 個人化設定",
+        "🇯🇵": "スキル：Apple Watchを使いこなそう",
+        "🇰🇷": "기본기: Apple Watch 맞춤 설정하기",
+        "🇲🇴": "技巧：Apple Watch 個人化設定",
+        "🇹🇭": "พื้นฐานใช้งาน: ออกแบบ Apple Watch สไตล์คุณ",
+        "🇹🇼": "技巧：打造個人化 Apple Watch"
+      },
+      "slug": "skills-personalizing-your-apple-watch"
     },
     "6716855655825506649": {
-      "slug": "skills-managing-family-devices",
-      "🇨🇳": "技巧：管理家人设备",
-      "🇭🇰": "技巧：管理家人的裝置",
-      "🇯🇵": "スキル：家族のデバイスを管理しよう",
-      "🇲🇴": "技巧：管理家人的裝置",
-      "🇸🇬": "Skills: Managing Family Devices",
-      "🇹🇭": "พื้นฐานใช้งาน: จัดการอุปกรณ์บุตรหลาน"
+      "names": {
+        "🇨🇳": "技巧：管理家人设备",
+        "🇭🇰": "技巧：管理家人的裝置",
+        "🇯🇵": "スキル：家族のデバイスを管理しよう",
+        "🇲🇴": "技巧：管理家人的裝置",
+        "🇸🇬": "Skills: Managing Family Devices",
+        "🇹🇭": "พื้นฐานใช้งาน: จัดการอุปกรณ์บุตรหลาน"
+      },
+      "slug": "skills-managing-family-devices"
     },
     "6716856769744568921": {
-      "slug": "skills-managing-your-screen-time",
-      "🇨🇳": "技巧：管理你的屏幕使用时间",
-      "🇭🇰": "技巧：管理你的螢幕使用時間",
-      "🇯🇵": "スキル：スクリーンタイムを管理しよう",
-      "🇰🇷": "기본기: 스크린 타임 관리하기",
-      "🇲🇴": "技巧：管理你的螢幕使用時間",
-      "🇸🇬": "Skills: Managing Your Screen Time",
-      "🇹🇭": "พื้นฐานใช้งาน: บริหารจัดการเวลาหน้าจอ"
+      "names": {
+        "🇨🇳": "技巧：管理你的屏幕使用时间",
+        "🇭🇰": "技巧：管理你的螢幕使用時間",
+        "🇯🇵": "スキル：スクリーンタイムを管理しよう",
+        "🇰🇷": "기본기: 스크린 타임 관리하기",
+        "🇲🇴": "技巧：管理你的螢幕使用時間",
+        "🇸🇬": "Skills: Managing Your Screen Time",
+        "🇹🇭": "พื้นฐานใช้งาน: บริหารจัดการเวลาหน้าจอ"
+      },
+      "slug": "skills-managing-your-screen-time"
     },
     "6716857638150046053": {
-      "slug": "skills-getting-started-with-magic-keyboard-for-ipad",
-      "🇨🇳": "技巧：iPad 妙控键盘使用入门",
-      "🇭🇰": "技巧：iPad 精妙鍵盤使用入門",
-      "🇯🇵": "スキル：iPadのためのMagic Keyboardを使ってみよう",
-      "🇰🇷": "기본기: iPad용 Magic Keyboard 사용 시작하기",
-      "🇲🇴": "技巧：iPad 精妙鍵盤入門",
-      "🇸🇬": "Skills: Getting Started with Magic Keyboard for iPad",
-      "🇹🇭": "พื้นฐานใช้งาน: เริ่มต้นใช้งาน Magic Keyboard กับ iPad"
+      "names": {
+        "🇨🇳": "技巧：iPad 妙控键盘使用入门",
+        "🇭🇰": "技巧：iPad 精妙鍵盤使用入門",
+        "🇯🇵": "スキル：iPadのためのMagic Keyboardを使ってみよう",
+        "🇰🇷": "기본기: iPad용 Magic Keyboard 사용 시작하기",
+        "🇲🇴": "技巧：iPad 精妙鍵盤入門",
+        "🇸🇬": "Skills: Getting Started with Magic Keyboard for iPad",
+        "🇹🇭": "พื้นฐานใช้งาน: เริ่มต้นใช้งาน Magic Keyboard กับ iPad"
+      },
+      "slug": "skills-getting-started-with-magic-keyboard-for-ipad"
     },
     "6716859444112491109": {
-      "slug": "skills-getting-started-with-ipad",
-      "🇨🇳": "技巧：iPad 使用入门",
-      "🇭🇰": "技巧：iPad 使用入門",
-      "🇯🇵": "スキル：iPadではじめよう",
-      "🇰🇷": "기본기: iPad 사용 시작하기",
-      "🇲🇴": "技巧：iPad 使用入門",
-      "🇸🇬": "Skills: Getting Started with iPad",
-      "🇹🇭": "พื้นฐานใช้งาน: เริ่มต้นใช้งาน iPad",
-      "🇹🇼": "技巧：iPad 使用入門"
+      "names": {
+        "🇨🇳": "技巧：iPad 使用入门",
+        "🇭🇰": "技巧：iPad 使用入門",
+        "🇯🇵": "スキル：iPadではじめよう",
+        "🇰🇷": "기본기: iPad 사용 시작하기",
+        "🇲🇴": "技巧：iPad 使用入門",
+        "🇸🇬": "Skills: Getting Started with iPad",
+        "🇹🇭": "พื้นฐานใช้งาน: เริ่มต้นใช้งาน iPad",
+        "🇹🇼": "技巧：iPad 使用入門"
+      },
+      "slug": "skills-getting-started-with-ipad"
     },
     "6716861058294579581": {
-      "slug": "skills-getting-started-with-mac",
-      "🇨🇳": "技巧：Mac 使用入门",
-      "🇭🇰": "技巧：Mac 使用入門",
-      "🇯🇵": "スキル：Macではじめよう",
-      "🇰🇷": "기본기: Mac 사용 시작하기",
-      "🇲🇴": "技巧：Mac 使用入門",
-      "🇸🇬": "Skills: Getting Started with Mac",
-      "🇹🇭": "พื้นฐานใช้งาน: เริ่มต้นใช้งาน Mac",
-      "🇹🇼": "技巧：Mac 使用入門"
+      "names": {
+        "🇨🇳": "技巧：Mac 使用入门",
+        "🇭🇰": "技巧：Mac 使用入門",
+        "🇯🇵": "スキル：Macではじめよう",
+        "🇰🇷": "기본기: Mac 사용 시작하기",
+        "🇲🇴": "技巧：Mac 使用入門",
+        "🇸🇬": "Skills: Getting Started with Mac",
+        "🇹🇭": "พื้นฐานใช้งาน: เริ่มต้นใช้งาน Mac",
+        "🇹🇼": "技巧：Mac 使用入門"
+      },
+      "slug": "skills-getting-started-with-mac"
     },
     "6724453755280785785": {
-      "slug": "skills-personalizing-your-apple-watch-sg",
-      "🇸🇬": "Skills: Personalising Your Apple Watch"
+      "names": {
+        "🇸🇬": "Skills: Personalising Your Apple Watch"
+      },
+      "slug": "skills-personalizing-your-apple-watch-sg"
     },
     "6798858643464618637": {
-      "slug": "video-lab-kids-adventures-in-moviemaking",
-      "🇨🇳": "儿童视频实验室：视频制作的奥秘",
-      "🇭🇰": "兒童影片實驗室：電影製作之旅",
-      "🇰🇷": "아이를 위한 동영상 연구소: 영화 만들기 체험",
-      "🇲🇴": "兒童影片實驗室：電影製作之旅",
-      "🇸🇬": "Video Lab for Kids: Adventures in Moviemaking",
-      "🇹🇭": "การทดลองถ่ายวิดีโอสำหรับเด็ก: ผจญภัยในโลกแห่งการสร้างภาพยนตร์"
+      "names": {
+        "🇨🇳": "儿童视频实验室：视频制作的奥秘",
+        "🇭🇰": "兒童影片實驗室：電影製作之旅",
+        "🇯🇵": "ビデオラボ - 子ども向け：ムービーづくりの冒険に出かけよう",
+        "🇰🇷": "아이를 위한 동영상 연구소: 영화 만들기 체험",
+        "🇲🇴": "兒童影片實驗室：電影製作之旅",
+        "🇸🇬": "Video Lab for Kids: Adventures in Moviemaking",
+        "🇹🇭": "การทดลองถ่ายวิดีโอสำหรับเด็ก: ผจญภัยในโลกแห่งการสร้างภาพยนตร์"
+      },
+      "slug": "video-lab-kids-adventures-in-moviemaking"
     },
     "6858951078987006409": {
-      "slug": "virtual-session-for-kids-learn-to-code-1",
-      "🇯🇵": "オンラインセッション - 子ども向け：コードを学ぼう1",
-      "🇰🇷": "아이를 위한 온라인 세션: 코딩 배우기 1",
-      "🇸🇬": "Virtual Session for Kids: Learn to Code 1",
-      "🇹🇭": "เซสชั่นออนไลน์สำหรับเด็ก: เรียนรู้วิธีเขียนโค้ด 1"
+      "names": {
+        "🇯🇵": "オンラインセッション - 子ども向け：コードを学ぼう1",
+        "🇰🇷": "아이를 위한 온라인 세션: 코딩 배우기 1",
+        "🇸🇬": "Virtual Session for Kids: Learn to Code 1",
+        "🇹🇭": "เซสชั่นออนไลน์สำหรับเด็ก: เรียนรู้วิธีเขียนโค้ด 1"
+      },
+      "slug": "virtual-session-for-kids-learn-to-code-1"
     },
     "6858953608756298441": {
-      "slug": "virtual-session-for-kids-learn-to-code-2",
-      "🇯🇵": "オンラインセッション - 子ども向け：コードを学ぼう2",
-      "🇰🇷": "아이를 위한 온라인 세션: 코딩 배우기 2",
-      "🇸🇬": "Virtual Session for Kids: Learn to Code 2",
-      "🇹🇭": "เซสชั่นออนไลน์สำหรับเด็ก: เรียนรู้วิธีเขียนโค้ด 2"
+      "names": {
+        "🇯🇵": "オンラインセッション - 子ども向け：コードを学ぼう2",
+        "🇰🇷": "아이를 위한 온라인 세션: 코딩 배우기 2",
+        "🇸🇬": "Virtual Session for Kids: Learn to Code 2",
+        "🇹🇭": "เซสชั่นออนไลน์สำหรับเด็ก: เรียนรู้วิธีเขียนโค้ด 2"
+      },
+      "slug": "virtual-session-for-kids-learn-to-code-2"
     },
     "6858954953836036449": {
-      "slug": "virtual-session-for-kids-lights-camera-code",
-      "🇯🇵": "オンラインセッション - 子ども向け：ライト、カメラ、コード",
-      "🇰🇷": "아이를 위한 온라인 세션: 조명, 카메라, 코드",
-      "🇸🇬": "Virtual Session for Kids: Lights, Camera, Code",
-      "🇹🇭": "เซสชั่นออนไลน์สำหรับเด็ก: แสง กล้อง โค้ด"
+      "names": {
+        "🇯🇵": "オンラインセッション - 子ども向け：ライト、カメラ、コード",
+        "🇰🇷": "아이를 위한 온라인 세션: 조명, 카메라, 코드",
+        "🇸🇬": "Virtual Session for Kids: Lights, Camera, Code",
+        "🇹🇭": "เซสชั่นออนไลน์สำหรับเด็ก: แสง กล้อง โค้ด"
+      },
+      "slug": "virtual-session-for-kids-lights-camera-code"
     },
     "6871610251075748217": {
-      "slug": "skills-your-kids-and-their-devices",
-      "🇨🇳": "技巧：孩子与设备",
-      "🇭🇰": "技巧：小朋友與裝置",
-      "🇯🇵": "スキル：子どもたちとデバイス",
-      "🇲🇴": "技巧：小朋友與裝置",
-      "🇸🇬": "Skills: Your Kids and Their Devices",
-      "🇹🇭": "พื้นฐานใช้งาน: วิธีควบคุมดูแลอุปกรณ์ของเด็กๆ"
+      "names": {
+        "🇨🇳": "技巧：孩子与设备",
+        "🇭🇰": "技巧：小朋友與裝置",
+        "🇯🇵": "スキル：子どもたちとデバイス",
+        "🇲🇴": "技巧：小朋友與裝置",
+        "🇸🇬": "Skills: Your Kids and Their Devices",
+        "🇹🇭": "พื้นฐานใช้งาน: วิธีควบคุมดูแลอุปกรณ์ของเด็กๆ"
+      },
+      "slug": "skills-your-kids-and-their-devices"
     },
     "6896277336452071821": {
-      "slug": "learn-the-basics-iphone",
-      "🇨🇳": "在线课程：上手使用 iPhone",
-      "🇯🇵": "バーチャルセッション：iPhoneの紹介",
-      "🇰🇷": "온라인 세션: iPhone 첫걸음",
-      "🇲🇴": "網上課程：iPhone 入門",
-      "🇸🇬": "Virtual Session: Intro to iPhone",
-      "🇹🇭": "เซสชั่นออนไลน์: iPhone เบื้องต้น",
-      "🇹🇼": "線上課程：上手 iPhone"
+      "names": {
+        "🇨🇳": "在线课程：上手使用 iPhone",
+        "🇯🇵": "バーチャルセッション：iPhoneの紹介",
+        "🇰🇷": "온라인 세션: iPhone 첫걸음",
+        "🇲🇴": "網上課程：iPhone 入門",
+        "🇸🇬": "Virtual Session: Intro to iPhone",
+        "🇹🇭": "เซสชั่นออนไลน์: iPhone เบื้องต้น",
+        "🇹🇼": "線上課程：上手 iPhone"
+      },
+      "slug": "learn-the-basics-iphone"
     },
     "6896279062584328569": {
-      "slug": "learn-the-basics-ipad",
-      "🇨🇳": "在线课程：上手使用 iPad",
-      "🇯🇵": "バーチャルセッション：iPadの紹介",
-      "🇰🇷": "온라인 세션: iPad 첫걸음",
-      "🇲🇴": "網上課程：iPad 入門",
-      "🇸🇬": "Virtual Session: Intro to iPad",
-      "🇹🇭": "เซสชั่นออนไลน์: iPad เบื้องต้น",
-      "🇹🇼": "線上課程：上手 iPad"
+      "names": {
+        "🇨🇳": "在线课程：上手使用 iPad",
+        "🇯🇵": "バーチャルセッション：iPadの紹介",
+        "🇰🇷": "온라인 세션: iPad 첫걸음",
+        "🇲🇴": "網上課程：iPad 入門",
+        "🇸🇬": "Virtual Session: Intro to iPad",
+        "🇹🇭": "เซสชั่นออนไลน์: iPad เบื้องต้น",
+        "🇹🇼": "線上課程：上手 iPad"
+      },
+      "slug": "learn-the-basics-ipad"
     },
     "6896659661354533277": {
-      "slug": "learn-the-basics-mac",
-      "🇨🇳": "在线课程：上手使用 Mac",
-      "🇯🇵": "バーチャルセッション：Macの紹介",
-      "🇰🇷": "온라인 세션: Mac 첫걸음",
-      "🇲🇴": "網上課程：Mac 入門",
-      "🇸🇬": "Virtual Session: Intro to Mac",
-      "🇹🇭": "เซสชั่นออนไลน์: Mac เบื้องต้น",
-      "🇹🇼": "線上課程：上手 Mac"
+      "names": {
+        "🇨🇳": "在线课程：上手使用 Mac",
+        "🇯🇵": "バーチャルセッション：Macの紹介",
+        "🇰🇷": "온라인 세션: Mac 첫걸음",
+        "🇲🇴": "網上課程：Mac 入門",
+        "🇸🇬": "Virtual Session: Intro to Mac",
+        "🇹🇭": "เซสชั่นออนไลน์: Mac เบื้องต้น",
+        "🇹🇼": "線上課程：上手 Mac"
+      },
+      "slug": "learn-the-basics-mac"
     },
     "6909772840410383037": {
-      "slug": "remix-seventeen-kr",
-      "🇰🇷": "뮤직 연구소: 세븐틴 리믹스"
+      "names": {
+        "🇰🇷": "뮤직 연구소: 세븐틴 리믹스"
+      },
+      "slug": "remix-seventeen-kr"
     },
     "6909774038467183001": {
-      "slug": "remix-seventeen-mo",
-      "🇲🇴": "音樂實驗室：混音創作 SEVENTEEN 歌曲"
+      "names": {
+        "🇲🇴": "音樂實驗室：混音創作 SEVENTEEN 歌曲"
+      },
+      "slug": "remix-seventeen-mo"
     },
     "6909774521797804457": {
-      "slug": "remix-seventeen-cn",
-      "🇨🇳": "音乐实验室：SEVENTEEN 新曲重混"
+      "names": {
+        "🇨🇳": "音乐实验室：SEVENTEEN 新曲重混"
+      },
+      "slug": "remix-seventeen-cn"
     },
     "6912248753085579522": {
-      "slug": "remix-seventeen-sg",
-      "🇸🇬": "Music Lab: Remix SEVENTEEN"
+      "names": {
+        "🇸🇬": "Music Lab: Remix SEVENTEEN"
+      },
+      "slug": "remix-seventeen-sg"
     },
     "6912249394763759906": {
-      "slug": "remix-seventeen-jp",
-      "🇯🇵": "ミュージックラボ：SEVENTEENをリミックスしよう"
+      "names": {
+        "🇯🇵": "ミュージックラボ：SEVENTEENをリミックスしよう"
+      },
+      "slug": "remix-seventeen-jp"
     },
     "6912252055659577681": {
-      "slug": "remix-seventeen-th",
-      "🇹🇭": "ทดลองทำดนตรี: รีมิกซ์เพลง SEVENTEEN"
+      "names": {
+        "🇹🇭": "ทดลองทำดนตรี: รีมิกซ์เพลง SEVENTEEN"
+      },
+      "slug": "remix-seventeen-th"
     },
     "6912285356256493941": {
-      "slug": "remix-seventeen-tw",
-      "🇹🇼": "音樂研究室：混音創作 SEVENTEEN"
+      "names": {
+        "🇹🇼": "音樂研究室：混音創作 SEVENTEEN"
+      },
+      "slug": "remix-seventeen-tw"
     },
     "6924807604569735613": {
-      "slug": "art-lab-comic-book-adventure",
-      "🇨🇳": "艺术实验室：和家人一起创作漫画书",
-      "🇭🇰": "藝術實驗室：與家人展開漫畫書歷奇",
-      "🇯🇵": "アートラボ：家族で楽しむコミックアドベンチャー",
-      "🇰🇷": "아트 연구소: 가족과 함께 만화책 만들기 대모험",
-      "🇲🇴": "藝術實驗室：與家人展開漫畫書歷奇",
-      "🇸🇬": "Art Lab: Comic Book Adventure with Your Family",
-      "🇹🇭": "ทดลองงานศิลปะ: ผจญภัยไปในหนังสือการ์ตูนกับครอบครัว"
+      "names": {
+        "🇨🇳": "艺术实验室：和家人一起创作漫画书",
+        "🇭🇰": "藝術實驗室：與家人展開漫畫書歷奇",
+        "🇯🇵": "アートラボ：家族で楽しむコミックアドベンチャー",
+        "🇰🇷": "아트 연구소: 가족과 함께 만화책 만들기 대모험",
+        "🇲🇴": "藝術實驗室：與家人展開漫畫書歷奇",
+        "🇸🇬": "Art Lab: Comic Book Adventure with Your Family",
+        "🇹🇭": "ทดลองงานศิลปะ: ผจญภัยไปในหนังสือการ์ตูนกับครอบครัว"
+      },
+      "slug": "art-lab-comic-book-adventure"
     },
     "6933522692730356065": {
-      "slug": "virtual-session-create-powerful-presentations-keynote",
-      "🇨🇳": "在线课程：用 Keynote 讲演制作有感染力的演示文稿",
-      "🇭🇰": "網上課程：用 Keynote 製作超強簡報",
-      "🇲🇴": "網上課程：用 Keynote 製作超強簡報",
-      "🇸🇬": "Virtual Session: Create Powerful Presentations in Keynote",
-      "🇹🇭": "เซสชั่นออนไลน์: เพิ่มพลังให้งานนำเสนอด้วย Keynote",
-      "🇹🇼": "線上課程：用 Keynote 打造超強簡報"
+      "names": {
+        "🇨🇳": "在线课程：用 Keynote 讲演制作有感染力的演示文稿",
+        "🇭🇰": "網上課程：用 Keynote 製作超強簡報",
+        "🇲🇴": "網上課程：用 Keynote 製作超強簡報",
+        "🇸🇬": "Virtual Session: Create Powerful Presentations in Keynote",
+        "🇹🇭": "เซสชั่นออนไลน์: เพิ่มพลังให้งานนำเสนอด้วย Keynote",
+        "🇹🇼": "線上課程：用 Keynote 打造超強簡報"
+      },
+      "slug": "virtual-session-create-powerful-presentations-keynote"
     },
     "6933532087828709785": {
-      "slug": "skills-create-powerful-presentations-keynote",
-      "🇨🇳": "技巧：用 Keynote 讲演制作有感染力的演示文稿",
-      "🇭🇰": "技巧：用 Keynote 製作超強簡報",
-      "🇲🇴": "技巧：用 Keynote 製作超強簡報",
-      "🇸🇬": "Skills: Create Powerful Presentations in Keynote",
-      "🇹🇭": "พื้นฐานใช้งาน: เพิ่มพลังให้งานนำเสนอด้วย Keynote",
-      "🇹🇼": "技巧：用 Keynote 打造超強簡報"
+      "names": {
+        "🇨🇳": "技巧：用 Keynote 讲演制作有感染力的演示文稿",
+        "🇭🇰": "技巧：用 Keynote 製作超強簡報",
+        "🇲🇴": "技巧：用 Keynote 製作超強簡報",
+        "🇸🇬": "Skills: Create Powerful Presentations in Keynote",
+        "🇹🇭": "พื้นฐานใช้งาน: เพิ่มพลังให้งานนำเสนอด้วย Keynote",
+        "🇹🇼": "技巧：用 Keynote 打造超強簡報"
+      },
+      "slug": "skills-create-powerful-presentations-keynote"
     },
     "6933537308407595453": {
-      "slug": "virtual-skills-transform-your-lecture-notes",
-      "🇨🇳": "在线课程：焕新你的课堂笔记",
-      "🇭🇰": "網上課程：課堂筆記大變身",
-      "🇲🇴": "網上課程：課堂筆記大變身",
-      "🇸🇬": "Virtual Session: Transform Your Lecture Notes",
-      "🇹🇭": "เซสชั่นออนไลน์: พลิกวิธีการจดเลคเชอร์",
-      "🇹🇼": "線上課程：課堂筆記大變身"
+      "names": {
+        "🇨🇳": "在线课程：焕新你的课堂笔记",
+        "🇭🇰": "網上課程：課堂筆記大變身",
+        "🇲🇴": "網上課程：課堂筆記大變身",
+        "🇸🇬": "Virtual Session: Transform Your Lecture Notes",
+        "🇹🇭": "เซสชั่นออนไลน์: พลิกวิธีการจดเลคเชอร์",
+        "🇹🇼": "線上課程：課堂筆記大變身"
+      },
+      "slug": "virtual-skills-transform-your-lecture-notes"
     },
     "6935143355421393229": {
-      "slug": "video-tour-capturing-cinematic-shots",
-      "🇨🇳": "视频漫游：拍出电影级画面",
-      "🇯🇵": "ビデオツアー：映画のようなショットを撮影しよう",
-      "🇰🇷": "동영상 산책: 영화 속 장면처럼 찍어보기",
-      "🇲🇴": "影片漫遊：拍出電影級畫面",
-      "🇸🇬": "Video Tour: Capturing Cinematic Shots",
-      "🇹🇭": "พาทัวร์ถ่ายวิดีโอ: สร้างสรรค์ช็อตแนวภาพยนตร์"
+      "names": {
+        "🇨🇳": "视频漫游：拍出电影级画面",
+        "🇯🇵": "ビデオツアー：映画のようなショットを撮影しよう",
+        "🇰🇷": "동영상 산책: 영화 속 장면처럼 찍어보기",
+        "🇲🇴": "影片漫遊：拍出電影級畫面",
+        "🇸🇬": "Video Tour: Capturing Cinematic Shots",
+        "🇹🇭": "พาทัวร์ถ่ายวิดีโอ: สร้างสรรค์ช็อตแนวภาพยนตร์"
+      },
+      "slug": "video-tour-capturing-cinematic-shots"
     },
     "6936095622542754253": {
-      "slug": "photo-tour-uncover-story-emerald-hill",
-      "🇸🇬": "Photo Tour: Uncover the Story of Emerald Hill"
+      "names": {
+        "🇸🇬": "Photo Tour: Uncover the Story of Emerald Hill"
+      },
+      "slug": "photo-tour-uncover-story-emerald-hill"
     },
     "6936189932005065129": {
-      "slug": "photo-tour-explore-magic-jewel-changi-airport",
-      "🇸🇬": "Photo Tour: Explore the Magic of Jewel Changi Airport"
+      "names": {
+        "🇸🇬": "Photo Tour: Explore the Magic of Jewel Changi Airport"
+      },
+      "slug": "photo-tour-explore-magic-jewel-changi-airport"
     },
     "6936192354391786061": {
-      "slug": "photo-tour-capture-marina-bay-after-dark",
-      "🇸🇬": "Photo Tour: Capture Marina Bay After Dark"
+      "names": {
+        "🇸🇬": "Photo Tour: Capture Marina Bay After Dark"
+      },
+      "slug": "photo-tour-capture-marina-bay-after-dark"
     },
     "6937477895578026701": {
-      "slug": "photo-tour-portraits-on-location",
-      "🇨🇳": "光影漫游：外景人像摄影",
-      "🇯🇵": "フォトツアー：屋外でポートレート写真を撮ろう",
-      "🇰🇷": "포토 산책: 야외에서 찍어보는 인물 사진",
-      "🇲🇴": "攝影漫遊：外景人像攝影",
-      "🇸🇬": "Photo Tour: Taking Portraits on Location",
-      "🇹🇭": "พาทัวร์ถ่ายรูป: ถ่ายภาพบุคคลนอกสถานที่"
+      "names": {
+        "🇨🇳": "光影漫游：外景人像摄影",
+        "🇯🇵": "フォトツアー：屋外でポートレート写真を撮ろう",
+        "🇰🇷": "포토 산책: 야외에서 찍어보는 인물 사진",
+        "🇲🇴": "攝影漫遊：外景人像攝影",
+        "🇸🇬": "Photo Tour: Taking Portraits on Location",
+        "🇹🇭": "พาทัวร์ถ่ายรูป: ถ่ายภาพบุคคลนอกสถานที่"
+      },
+      "slug": "photo-tour-portraits-on-location"
     },
     "6937533011857343165": {
-      "slug": "art-tour-drawing-observation",
-      "🇨🇳": "艺术漫游：观察与写生",
-      "🇯🇵": "アートツアー：観察スケッチをしよう",
-      "🇰🇷": "아트 산책: 관찰에서 시작하는 드로잉",
-      "🇲🇴": "藝術漫遊：觀察作畫",
-      "🇸🇬": "Art Tour: Drawing from Observation",
-      "🇹🇭": "พาทัวร์สร้างงานศิลปะ: วาดภาพจากการสังเกต"
+      "names": {
+        "🇨🇳": "艺术漫游：观察与写生",
+        "🇯🇵": "アートツアー：観察スケッチをしよう",
+        "🇰🇷": "아트 산책: 관찰에서 시작하는 드로잉",
+        "🇲🇴": "藝術漫遊：觀察作畫",
+        "🇸🇬": "Art Tour: Drawing from Observation",
+        "🇹🇭": "พาทัวร์สร้างงานศิลปะ: วาดภาพจากการสังเกต"
+      },
+      "slug": "art-tour-drawing-observation"
     },
     "6937538497499464109": {
-      "slug": "art-tour-discovering-color",
-      "🇨🇳": "艺术漫游：探索色彩",
-      "🇯🇵": "アートツアー：街に出かけてあなたの色を見つけよう",
-      "🇲🇴": "藝術漫遊：探索色彩",
-      "🇸🇬": "Art Tour: Discovering Colour",
-      "🇹🇭": "พาทัวร์สร้างงานศิลปะ: การค้นพบสี"
+      "names": {
+        "🇨🇳": "艺术漫游：探索色彩",
+        "🇯🇵": "アートツアー：街に出かけてあなたの色を見つけよう",
+        "🇰🇷": "아트 산책: 컬러의 발견",
+        "🇲🇴": "藝術漫遊：探索色彩",
+        "🇸🇬": "Art Tour: Discovering Colour",
+        "🇹🇭": "พาทัวร์สร้างงานศิลปะ: การค้นพบสี"
+      },
+      "slug": "art-tour-discovering-color"
     },
     "6937543655042154953": {
-      "slug": "photo-tour-framing-architecture",
-      "🇨🇳": "光影漫游：建筑物的取景构图",
-      "🇯🇵": "フォトツアー：建築物をフレームに収めよう",
-      "🇰🇷": "포토 산책: 건축 사진을 위한 프레이밍",
-      "🇲🇴": "攝影漫遊：建築物取景構圖"
+      "names": {
+        "🇨🇳": "光影漫游：建筑物的取景构图",
+        "🇯🇵": "フォトツアー：建築物をフレームに収めよう",
+        "🇰🇷": "포토 산책: 건축 사진을 위한 프레이밍",
+        "🇲🇴": "攝影漫遊：建築物取景構圖"
+      },
+      "slug": "photo-tour-framing-architecture"
     },
     "6937546101541929673": {
-      "slug": "video-tour-manipulating-time",
-      "🇨🇳": "视频漫游：操控时间",
-      "🇯🇵": "ビデオツアー：速度をコントロールしよう",
-      "🇲🇴": "影片漫遊：操控時間"
+      "names": {
+        "🇨🇳": "视频漫游：操控时间",
+        "🇯🇵": "ビデオツアー：速度をコントロールしよう",
+        "🇲🇴": "影片漫遊：操控時間"
+      },
+      "slug": "video-tour-manipulating-time"
     },
     "6944593753454051769": {
-      "slug": "virtual-studio-zy-cheng-072822",
-      "🇸🇬": "Virtual Studio: Standout Video Assignments with ZY Cheng"
+      "names": {
+        "🇸🇬": "Virtual Studio: Standout Video Assignments with ZY Cheng"
+      },
+      "slug": "virtual-studio-zy-cheng-072822"
     },
     "6945681577217524637": {
-      "slug": "virtual-studio-alicia-santoso-081822",
-      "🇸🇬": "Virtual Studio: Taking Great Notes with Alicia Santoso"
+      "names": {
+        "🇸🇬": "Virtual Studio: Taking Great Notes with Alicia Santoso"
+      },
+      "slug": "virtual-studio-alicia-santoso-081822"
     },
     "6945687514493911506": {
-      "slug": "design-lab-natt-teangchatapun-073022",
-      "🇹🇭": "ทดลองงานดีไซน์: ออกแบบโปสเตอร์ให้สะดุดตา กับ Peanut Butter"
+      "names": {
+        "🇹🇭": "ทดลองงานดีไซน์: ออกแบบโปสเตอร์ให้สะดุดตา กับ Peanut Butter"
+      },
+      "slug": "design-lab-natt-teangchatapun-073022"
     },
     "6946040903773881501": {
-      "slug": "virtual-studio-jan-curious-071322",
-      "🇭🇰": "網上創作坊：跟阿水創作你的一人樂隊音樂"
+      "names": {
+        "🇭🇰": "網上創作坊：跟阿水創作你的一人樂隊音樂"
+      },
+      "slug": "virtual-studio-jan-curious-071322"
     },
     "6946051534032306650": {
-      "slug": "music-skills-remix-katy-perry",
-      "🇨🇳": "音乐技巧：重混 Katy Perry 歌曲",
-      "🇭🇰": "音樂技巧：混音創作 Katy Perry 歌曲",
-      "🇯🇵": "ミュージックスキル：ケイティ・ペリーをリミックスしよう",
-      "🇰🇷": "뮤직 기본기: Katy Perry 리믹스",
-      "🇲🇴": "音樂技巧：混音創作 Katy Perry 歌曲",
-      "🇸🇬": "Music Skills: Remix Katy Perry",
-      "🇹🇭": "พื้นฐานการดนตรี: รีมิกซ์เพลง Katy Perry",
-      "🇹🇼": "音樂技巧：混音創作 Katy Perry"
+      "names": {
+        "🇨🇳": "音乐技巧：重混 Katy Perry 歌曲",
+        "🇭🇰": "音樂技巧：混音創作 Katy Perry 歌曲",
+        "🇯🇵": "ミュージックスキル：ケイティ・ペリーをリミックスしよう",
+        "🇰🇷": "뮤직 기본기: Katy Perry 리믹스",
+        "🇲🇴": "音樂技巧：混音創作 Katy Perry 歌曲",
+        "🇸🇬": "Music Skills: Remix Katy Perry",
+        "🇹🇭": "พื้นฐานการดนตรี: รีมิกซ์เพลง Katy Perry",
+        "🇹🇼": "音樂技巧：混音創作 Katy Perry"
+      },
+      "slug": "music-skills-remix-katy-perry"
     },
     "6947910354026791761": {
-      "slug": "art-lab-slimy-oddity-073022",
-      "🇸🇬": "Art Lab: Drawing Out Positivity with Slimy Oddity"
+      "names": {
+        "🇸🇬": "Art Lab: Drawing Out Positivity with Slimy Oddity"
+      },
+      "slug": "art-lab-slimy-oddity-073022"
     },
     "6948185456904077689": {
-      "slug": "design-lab-luck",
-      "🇭🇰": "設計實驗室：以《天降奇運》AR 角色創作訊息",
-      "🇯🇵": "デザインラボ：『ラック～幸運を探す旅～』のARキャラクターと一緒にメッセージを作ろう",
-      "🇰🇷": "디자인 연구소: ‘럭’ - Luck의 AR 캐릭터로 메시지 만들기",
-      "🇲🇴": "設計實驗室：以《天降奇運》AR 角色創作訊息",
-      "🇸🇬": "Design Lab: Create a Message with AR Characters from Luck",
-      "🇹🇭": "ทดลองงานดีไซน์: สร้างสรรค์ข้อความดีๆ กับตัวการ์ตูน AR จาก Luck",
-      "🇹🇼": "設計研究室：用《開運奇遇記》AR 角色創作幸運小語"
+      "names": {
+        "🇭🇰": "設計實驗室：以《天降奇運》AR 角色創作訊息",
+        "🇯🇵": "デザインラボ：『ラック～幸運を探す旅～』のARキャラクターと一緒にメッセージを作ろう",
+        "🇰🇷": "디자인 연구소: ‘럭’ - Luck의 AR 캐릭터로 메시지 만들기",
+        "🇲🇴": "設計實驗室：以《天降奇運》AR 角色創作訊息",
+        "🇸🇬": "Design Lab: Create a Message with AR Characters from Luck",
+        "🇹🇭": "ทดลองงานดีไซน์: สร้างสรรค์ข้อความดีๆ กับตัวการ์ตูน AR จาก Luck",
+        "🇹🇼": "設計研究室：用《開運奇遇記》AR 角色創作幸運小語"
+      },
+      "slug": "design-lab-luck"
     },
     "6949677988636426637": {
-      "slug": "virtual-studio-natt-teangchatapun-081822",
-      "🇹🇭": "สตูดิโอเสมือน: สร้างงานนำเสนอสนุกๆ กับ Peanut Butter"
+      "names": {
+        "🇹🇭": "สตูดิโอเสมือน: สร้างงานนำเสนอสนุกๆ กับ Peanut Butter"
+      },
+      "slug": "virtual-studio-natt-teangchatapun-081822"
     },
     "6949709927187644749": {
-      "slug": "virtual-studio-mafueng-080622",
-      "🇹🇭": "สตูดิโอเสมือน: จดโน้ตด้วยภาพให้ปัง กับ มะเฟือง"
+      "names": {
+        "🇹🇭": "สตูดิโอเสมือน: จดโน้ตด้วยภาพให้ปัง กับ มะเฟือง"
+      },
+      "slug": "virtual-studio-mafueng-080622"
     },
     "6950064873586196853": {
-      "slug": "virtual-studio-lol-mobile-072222",
-      "🇨🇳": "在线创意空间：跟着英雄联盟手游团队探索星之守护者宇宙"
+      "names": {
+        "🇨🇳": "在线创意空间：跟着英雄联盟手游团队探索星之守护者宇宙"
+      },
+      "slug": "virtual-studio-lol-mobile-072222"
     },
     "6950376357591679565": {
-      "slug": "art-lab-saki-072322",
-      "🇰🇷": "아트 연구소: 사키와 함께 여름날의 기억 조각을 콜라주하기"
+      "names": {
+        "🇰🇷": "아트 연구소: 사키와 함께 여름날의 기억 조각을 콜라주하기"
+      },
+      "slug": "art-lab-saki-072322"
     },
     "6950452389883576673": {
-      "slug": "music-lab-zhang-yijing-072922",
-      "🇨🇳": "音乐实验室：跟着张议井制作声音日志"
+      "names": {
+        "🇨🇳": "音乐实验室：跟着张议井制作声音日志"
+      },
+      "slug": "music-lab-zhang-yijing-072922"
     },
     "6950461140581647017": {
-      "slug": "virtual-studio-xiaoxiao-081722",
-      "🇨🇳": "在线创意空间：跟着学姐潇潇设计你的学习手账"
+      "names": {
+        "🇨🇳": "在线创意空间：跟着学姐潇潇设计你的学习手账"
+      },
+      "slug": "virtual-studio-xiaoxiao-081722"
     },
     "6950741486539801185": {
-      "slug": "virtual-studio-elena-lin-082522",
-      "🇨🇳": "在线创意空间：跟着 ElenaLin_青青让生活变得更高效"
+      "names": {
+        "🇨🇳": "在线创意空间：跟着 ElenaLin_青青让生活变得更高效"
+      },
+      "slug": "virtual-studio-elena-lin-082522"
     },
     "6952529369160384969": {
-      "slug": "virtual-studio-joanne-081422",
-      "🇹🇼": "線上創作坊：和黑嘉嘉一起用「備忘錄」鍛鍊思考力"
+      "names": {
+        "🇹🇼": "線上創作坊：和黑嘉嘉一起用「備忘錄」鍛鍊思考力"
+      },
+      "slug": "virtual-studio-joanne-081422"
     },
     "6952538587263304617": {
-      "slug": "photo-lab-su-dike-081322",
-      "🇨🇳": "光影实验室：跟着苏镝坷用镜头发现世界的奇特一面"
+      "names": {
+        "🇨🇳": "光影实验室：跟着苏镝坷用镜头发现世界的奇特一面"
+      },
+      "slug": "photo-lab-su-dike-081322"
     },
     "6952559321280840313": {
-      "slug": "virtual-studio-cao-zhang-yi-081822",
-      "🇨🇳": "在线创意空间：跟着曹张仪开启文创产品设计之旅"
+      "names": {
+        "🇨🇳": "在线创意空间：跟着曹张仪开启文创产品设计之旅"
+      },
+      "slug": "virtual-studio-cao-zhang-yi-081822"
     },
     "6952563883928617405": {
-      "slug": "video-lab-louis-shen-and-ifanr-072922",
-      "🇨🇳": "视频实验室：跟着沈煜傑和爱范儿拍摄人文纪录短片"
+      "names": {
+        "🇨🇳": "视频实验室：跟着沈煜傑和爱范儿拍摄人文纪录短片"
+      },
+      "slug": "video-lab-louis-shen-and-ifanr-072922"
     },
     "6952572391617102521": {
-      "slug": "virtual-studio-louis-shen-and-ifanr-073022",
-      "🇨🇳": "在线创意空间：跟着沈煜傑和爱范儿探索人文纪录短片的创作"
+      "names": {
+        "🇨🇳": "在线创意空间：跟着沈煜傑和爱范儿探索人文纪录短片的创作"
+      },
+      "slug": "virtual-studio-louis-shen-and-ifanr-073022"
     },
     "6952622437582668237": {
-      "slug": "virtual-studio-marcus-cheu-082522",
-      "🇸🇬": "Virtual Studio: Building Productivity with Marcus Cheu"
+      "names": {
+        "🇸🇬": "Virtual Studio: Building Productivity with Marcus Cheu"
+      },
+      "slug": "virtual-studio-marcus-cheu-082522"
     },
     "6952908390125699785": {
-      "slug": "design-lab-the-astronauts-collective-081322",
-      "🇸🇬": "Design Lab: Worlds of Work with The Astronauts Collective"
+      "names": {
+        "🇸🇬": "Design Lab: Worlds of Work with The Astronauts Collective"
+      },
+      "slug": "design-lab-the-astronauts-collective-081322"
     },
     "6953286746042171729": {
-      "slug": "virtual-studio-dadagolab-090122",
-      "🇨🇳": "在线创意空间：跟着 dadagolab 制定切实可行的全年计划"
+      "names": {
+        "🇨🇳": "在线创意空间：跟着 dadagolab 制定切实可行的全年计划"
+      },
+      "slug": "virtual-studio-dadagolab-090122"
     },
     "6953295706203784361": {
-      "slug": "virtual-studio-byejack-080322",
-      "🇭🇰": "網上創作坊：跟 Byejack 創造屬於你的節拍"
+      "names": {
+        "🇭🇰": "網上創作坊：跟 Byejack 創造屬於你的節拍"
+      },
+      "slug": "virtual-studio-byejack-080322"
     },
     "6953305495713514121": {
-      "slug": "video-lab-li-zihui-081922",
-      "🇨🇳": "视频实验室：跟着李紫辉创作定格动画短片"
+      "names": {
+        "🇨🇳": "视频实验室：跟着李紫辉创作定格动画短片"
+      },
+      "slug": "video-lab-li-zihui-081922"
     },
     "6953330200965186381": {
-      "slug": "virtual-studio-9m88-080722",
-      "🇹🇼": "線上創作坊：和 9m88 一起探索自我的追尋"
+      "names": {
+        "🇹🇼": "線上創作坊：和 9m88 一起探索自我的追尋"
+      },
+      "slug": "virtual-studio-9m88-080722"
     },
     "6953655099759952973": {
-      "slug": "photo-lab-ye-zi-073022",
-      "🇨🇳": "光影实验室：跟着叶梓学习拍摄城市风光大片"
+      "names": {
+        "🇨🇳": "光影实验室：跟着叶梓学习拍摄城市风光大片"
+      },
+      "slug": "photo-lab-ye-zi-073022"
     },
     "6954705054821942393": {
-      "slug": "virtual-studio-zy-cheng-090322",
-      "🇸🇬": "Virtual Studio: Unforgettable Presentations with ZY Cheng"
+      "names": {
+        "🇸🇬": "Virtual Studio: Unforgettable Presentations with ZY Cheng"
+      },
+      "slug": "virtual-studio-zy-cheng-090322"
     },
     "6954720705830027661": {
-      "slug": "photo-tour-framing-architecture-sanlitun",
-      "🇨🇳": "光影漫游: 用镜头捕捉三里屯暮色中的建筑⻛貌"
+      "names": {
+        "🇨🇳": "光影漫游: 用镜头捕捉三里屯暮色中的建筑⻛貌"
+      },
+      "slug": "photo-tour-framing-architecture-sanlitun"
     },
     "6954748515818308449": {
-      "slug": "video-lab-cinessay21-081422",
-      "🇨🇳": "视频实验室：跟着西21映画学习创作纪实短片"
+      "names": {
+        "🇨🇳": "视频实验室：跟着西21映画学习创作纪实短片"
+      },
+      "slug": "video-lab-cinessay21-081422"
     },
     "6954760941896893577": {
-      "slug": "photo-lab-meng-xiangguang-080622",
-      "🇨🇳": "光影实验室：跟着孟祥光用镜头讲述平凡生活中的非凡故事"
+      "names": {
+        "🇨🇳": "光影实验室：跟着孟祥光用镜头讲述平凡生活中的非凡故事"
+      },
+      "slug": "photo-lab-meng-xiangguang-080622"
     },
     "6955078802955731613": {
-      "slug": "video-lab-capcut-081222",
-      "🇨🇳": "视频实验室：跟着剪映制作环保主题Vlog"
+      "names": {
+        "🇨🇳": "视频实验室：跟着剪映制作环保主题Vlog"
+      },
+      "slug": "video-lab-capcut-081222"
     },
     "6955099083501896109": {
-      "slug": "photo-lab-xu-jian-080522",
-      "🇨🇳": "光影实验室：跟着徐健用镜头记录野性大自然的瑰丽奇观"
+      "names": {
+        "🇨🇳": "光影实验室：跟着徐健用镜头记录野性大自然的瑰丽奇观"
+      },
+      "slug": "photo-lab-xu-jian-080522"
     },
     "6955498438528500669": {
-      "slug": "design-lab-ak007-082622",
-      "🇨🇳": "设计实验室：跟着 Ak007 制作环保主题海报"
+      "names": {
+        "🇨🇳": "设计实验室：跟着 Ak007 制作环保主题海报"
+      },
+      "slug": "design-lab-ak007-082622"
     },
     "6955829547409769929": {
-      "slug": "video-lab-yuta-hiraoka-073022",
-      "🇯🇵": "ビデオラボ：平岡雄太と一緒に手書きで動画を変身させよう"
+      "names": {
+        "🇯🇵": "ビデオラボ：平岡雄太と一緒に手書きで動画を変身させよう"
+      },
+      "slug": "video-lab-yuta-hiraoka-073022"
     },
     "6955870848440239817": {
-      "slug": "exclusive-douyin-090222",
-      "🇨🇳": "独家呈献：跟着抖音探讨用社交媒体助力环保"
+      "names": {
+        "🇨🇳": "独家呈献：跟着抖音探讨用社交媒体助力环保"
+      },
+      "slug": "exclusive-douyin-090222"
     },
     "6955886025076278369": {
-      "slug": "coding-lab-gam-082522",
-      "🇹🇭": "สตูดิโอเสมือน: เขียนโค้ดไม่ยากอย่างที่คิด กับ แก้ม-ปรีณาพรรณ"
+      "names": {
+        "🇹🇭": "สตูดิโอเสมือน: เขียนโค้ดไม่ยากอย่างที่คิด กับ แก้ม-ปรีณาพรรณ"
+      },
+      "slug": "coding-lab-gam-082522"
     },
     "6956228387614917821": {
-      "slug": "video-lab-mu-chayanop-090322",
-      "🇹🇭": "ทดลองถ่ายวิดีโอ: เปลี่ยนชีวิตประจำวันเป็นหนังสั้นแบบครบรสกับหมู-ชยนพ"
+      "names": {
+        "🇹🇭": "ทดลองถ่ายวิดีโอ: เปลี่ยนชีวิตประจำวันเป็นหนังสั้นแบบครบรสกับหมู-ชยนพ"
+      },
+      "slug": "video-lab-mu-chayanop-090322"
     },
     "6957347447018783313": {
-      "slug": "virtual-studio-moon-tang-081722",
-      "🇭🇰": "網上創作坊：跟 moon tang 創作夢幻的混音作品"
+      "names": {
+        "🇭🇰": "網上創作坊：跟 moon tang 創作夢幻的混音作品"
+      },
+      "slug": "virtual-studio-moon-tang-081722"
     },
     "6957631571763823005": {
-      "slug": "virtual-studio-nakrob-moonmanas-090122",
-      "🇹🇭": "สตูดิโอเสมือน: ออกแบบปกหนังสือชวนฝัน กับ นักรบ มูลมานัส"
+      "names": {
+        "🇹🇭": "สตูดิโอเสมือน: ออกแบบปกหนังสือชวนฝัน กับ นักรบ มูลมานัส"
+      },
+      "slug": "virtual-studio-nakrob-moonmanas-090122"
     },
     "6957640343655711389": {
-      "slug": "video-lab-capcut-090322",
-      "🇨🇳": "视频实验室：跟着剪映产品经理玩转视频剪辑"
+      "names": {
+        "🇨🇳": "视频实验室：跟着剪映产品经理玩转视频剪辑"
+      },
+      "slug": "video-lab-capcut-090322"
     },
     "6957681297162928525": {
-      "slug": "music-lab-tulegur-091022",
-      "🇨🇳": "音乐实验室：跟着图利古尔刚子为影像注入声音的力量"
+      "names": {
+        "🇨🇳": "音乐实验室：跟着图利古尔刚子为影像注入声音的力量"
+      },
+      "slug": "music-lab-tulegur-091022"
     },
     "6957692538816201357": {
-      "slug": "video-lab-zhu-qiao-082722",
-      "🇨🇳": "视频实验室：跟着猪侨破译 Vlog 的创作密码"
+      "names": {
+        "🇨🇳": "视频实验室：跟着猪侨破译 Vlog 的创作密码"
+      },
+      "slug": "video-lab-zhu-qiao-082722"
     },
     "6958049918959649693": {
-      "slug": "virtual-studio-yellow-082722",
-      "🇹🇼": "線上創作坊：和黃宣一起開發你心中的音樂魂"
+      "names": {
+        "🇹🇼": "線上創作坊：和黃宣一起開發你心中的音樂魂"
+      },
+      "slug": "virtual-studio-yellow-082722"
     },
     "6958082803565494729": {
-      "slug": "virtual-studio-polin-081922",
-      "🇹🇼": "線上創作坊：和柏霖一起譜出夢想的舞曲"
+      "names": {
+        "🇹🇼": "線上創作坊：和柏霖一起譜出夢想的舞曲"
+      },
+      "slug": "virtual-studio-polin-081922"
     },
     "6958362509720322457": {
-      "slug": "design-lab-mafueng-082722",
-      "🇹🇭": "ทดลองงานดีไซน์: เพิ่มบาลานซ์การเรียนด้วยบันทึกสุดสร้างสรรค์ กับ มะเฟือง"
+      "names": {
+        "🇹🇭": "ทดลองงานดีไซน์: เพิ่มบาลานซ์การเรียนด้วยบันทึกสุดสร้างสรรค์ กับ มะเฟือง"
+      },
+      "slug": "design-lab-mafueng-082722"
     },
     "6961271123560792461": {
-      "slug": "art-lab-noh-sangho-082522",
-      "🇰🇷": "아트 연구소: 노상호와 함께 자신만의 움직이는 GIF 세계 만들기"
+      "names": {
+        "🇰🇷": "아트 연구소: 노상호와 함께 자신만의 움직이는 GIF 세계 만들기"
+      },
+      "slug": "art-lab-noh-sangho-082522"
     },
     "6962363810955297181": {
-      "slug": "virtual-studio-takako-kansai-082722",
-      "🇯🇵": "バーチャルスタジオ：閑歳孝子に学ぶアプリのアイデアを形にする方法"
+      "names": {
+        "🇯🇵": "バーチャルスタジオ：閑歳孝子に学ぶアプリのアイデアを形にする方法"
+      },
+      "slug": "virtual-studio-takako-kansai-082722"
     },
     "6963455867576811945": {
-      "slug": "photo-lab-xi-zhinong-082122",
-      "🇨🇳": "光影实验室：跟着奚志农用影像的力量促进自然保护"
+      "names": {
+        "🇨🇳": "光影实验室：跟着奚志农用影像的力量促进自然保护"
+      },
+      "slug": "photo-lab-xi-zhinong-082122"
     },
     "6963463115510284665": {
-      "slug": "video-lab-txy-lxy-091822",
-      "🇨🇳": "视频实验室：跟着唐忻妤和梁馨尹拍出高分短片作业"
+      "names": {
+        "🇨🇳": "视频实验室：跟着唐忻妤和梁馨尹拍出高分短片作业"
+      },
+      "slug": "video-lab-txy-lxy-091822"
     },
     "6963862957097124521": {
-      "slug": "virtual-studio-matt-force-090522",
-      "🇭🇰": "網上創作坊：與 Matt Force 還原 90 年代 Hip-Hop 節拍"
+      "names": {
+        "🇭🇰": "網上創作坊：與 Matt Force 還原 90 年代 Hip-Hop 節拍"
+      },
+      "slug": "virtual-studio-matt-force-090522"
     },
     "6965586468169744717": {
-      "slug": "exclusive-namon-and-kim-kyuha-090122",
-      "🇰🇷": "독점: 나몬과 김규하가 함께하는 ‘iPad로 만들다’ 캠페인 메이킹 스토리"
+      "names": {
+        "🇰🇷": "독점: 나몬과 김규하가 함께하는 ‘iPad로 만들다’ 캠페인 메이킹 스토리"
+      },
+      "slug": "exclusive-namon-and-kim-kyuha-090122"
     },
     "6971416807349846717": {
-      "slug": "virtual-studio-pong-nan-092822",
-      "🇭🇰": "網上創作坊：與藍奕邦譜寫你情感的一闕歌"
+      "names": {
+        "🇭🇰": "網上創作坊：與藍奕邦譜寫你情感的一闕歌"
+      },
+      "slug": "virtual-studio-pong-nan-092822"
     }
   },
   "sitemap": {
-    "6950439457820934585": {
-      "slug": "art-lab-lol-072322",
-      "🇨🇳": "艺术实验室：跟着英雄联盟手游团队勇闯游戏世界"
+    "6978267057884660649": {
+      "names": {
+        "🇨🇳": "设计实验室：跟着刘治治制作宣传海报探索设计奥义"
+      },
+      "slug": "design-lab-liu-zhizhi-111922"
+    },
+    "6983060957002367353": {
+      "names": {
+        "🇸🇬": "Virtual Studio: Social Media Strategy with Elizabeth Taylor"
+      },
+      "slug": "virtual-studio-elizabeth-taylor-110322"
+    },
+    "6983072819177751417": {
+      "names": {
+        "🇰🇷": "동영상 연구소: Peaches.와 함께 임팩트 넘치는 브랜드 영상 제작하기"
+      },
+      "slug": "video-lab-peaches-102622"
+    },
+    "6983082386708136621": {
+      "names": {
+        "🇹🇭": "ทดลองถ่ายภาพ: รังสรรค์ภาพถ่ายสินค้าแบบมืออาชีพ กับ อุ้มซ่า"
+      },
+      "slug": "photo-lab-aumza-111222"
+    },
+    "6983337300789199501": {
+      "names": {
+        "🇰🇷": "디자인 연구소: Peaches.와 함께 콜라보 로고 제작하기"
+      },
+      "slug": "design-lab-peaches-102922"
+    },
+    "6983421293945586573": {
+      "names": {
+        "🇸🇬": "App Lab: Prototyping Made Simple with Jonathan Oen-Lee"
+      },
+      "slug": "app-lab-jonathan-oen-lee-112422"
+    },
+    "6983696951045161549": {
+      "names": {
+        "🇹🇭": "สตูดิโอเสมือน: เปลี่ยนงานศิลป์ให้เป็นผลิตภัณฑ์ กับ give.me.museums"
+      },
+      "slug": "virtual-studio-give-me-museums-110322"
+    },
+    "6983742638436811617": {
+      "names": {
+        "🇹🇭": "สตูดิโอเสมือน: ออกแบบชุดเครื่องมือสร้างแบรนด์ กับ ครูน้ำ DesignMeee"
+      },
+      "slug": "virtual-studio-kru-namm-designmeee-111722"
+    },
+    "6983749954909405885": {
+      "names": {
+        "🇹🇭": "สตูดิโอเสมือน: โปรโมทธุรกิจด้วยวิดีโอ กับ CapCut"
+      },
+      "slug": "virtual-studio-capcut-112422"
     }
   },
   "collection": {
