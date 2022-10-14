@@ -1,5 +1,5 @@
 {
-  "update": "2022-10-06 14:48:43 GMT",
+  "update": "2022-10-13 01:00:03 GMT",
   "today": {
     "6443617454119551373": {
       "names": {
@@ -228,6 +228,7 @@
         "🇭🇰": "藝術實驗室：趣味人像照",
         "🇯🇵": "アートラボ：遊び心あふれるポートレート",
         "🇰🇷": "아트 연구소: 인물 사진에 재미 더하기",
+        "🇲🇴": "藝術實驗室：趣味人像照",
         "🇸🇬": "Art Lab: Playful Portraits",
         "🇹🇭": "ทดลองงานศิลปะ: ตกแต่งภาพบุคคลสุดอาร์ต",
         "🇹🇼": "藝術研究室：趣玩人像照"
@@ -927,6 +928,18 @@
         "🇭🇰": "網上創作坊：與藍奕邦譜寫你情感的一闕歌"
       },
       "slug": "virtual-studio-pong-nan-092822"
+    },
+    "6981652160753074769": {
+      "names": {
+        "🇯🇵": "デザインラボ：板坂諭に学ぶビジネスに活かせるデザインコンセプト"
+      },
+      "slug": "design-lab-concept-design-for-business-with-satoshi-itasaka-10272022"
+    },
+    "6981751082813129333": {
+      "names": {
+        "🇯🇵": "デザインラボ：秋山かおりに学ぶ色と素材の魅力"
+      },
+      "slug": "design-lab-exploring-color-and-texture-with-kaori-akiyama-10252022"
     }
   },
   "sitemap": {
@@ -935,6 +948,12 @@
         "🇨🇳": "设计实验室：跟着刘治治制作宣传海报探索设计奥义"
       },
       "slug": "design-lab-liu-zhizhi-111922"
+    },
+    "6981000573298835897": {
+      "names": {
+        "🇹🇭": "ทดลองงานดีไซน์: สร้างคอนเทนต์โซเชียลโดนใจ กับ แพร์ จิราธิวัฒน์"
+      },
+      "slug": "design-lab-pimpisa-chirathivat-102922"
     },
     "6983060957002367353": {
       "names": {
@@ -983,6 +1002,30 @@
         "🇹🇭": "สตูดิโอเสมือน: โปรโมทธุรกิจด้วยวิดีโอ กับ CapCut"
       },
       "slug": "virtual-studio-capcut-112422"
+    },
+    "6983770381195051853": {
+      "names": {
+        "🇸🇬": "Design Lab: Content Hacks in Keynote with Jade Amar"
+      },
+      "slug": "design-lab-jade-amar-111922"
+    },
+    "6985174412027135373": {
+      "names": {
+        "🇰🇷": "온라인 스튜디오: Peaches.와 함께 임팩트 넘치는 브랜드 영상 제작하기"
+      },
+      "slug": "virtual-studio-peaches-110222"
+    },
+    "6985581349730420365": {
+      "names": {
+        "🇨🇳": "在线创意空间：跟着唐兆瑞和罗经学习提升创业品牌的经营管理"
+      },
+      "slug": "virtual-studio-tang-zaorui-and-aviva-luo-110922"
+    },
+    "6985590276744446909": {
+      "names": {
+        "🇨🇳": "在线创意空间：跟着柳毅和梁逸伦为品牌构建 App 原型"
+      },
+      "slug": "virtual-studio-tom-liu-and-alen-liang-111722"
     }
   },
   "collection": {

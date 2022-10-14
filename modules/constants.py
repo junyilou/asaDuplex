@@ -4,7 +4,6 @@ AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15"}
 partRuleBase = r"[FGHMNPS][0-9A-Z]{3}[0-9]"
 partRuleFull = r"([FGHMNPS][0-9A-Z]{3}[0-9][A-Z]{1,2}/[A-Z])"
 partRuleCheck = r"([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?)"
-partSpecialProduct = r"(Z[0-9A-Z]{3}&(.*)?)"
 
 DIFFhead = """
 <!DOCTYPE html>
@@ -343,6 +342,7 @@ allRegions = {
     "partSample": "FE",
     "jobCode": "114438326",
     "altername": [
+      "Korea",
       "ROK",
       "南韩",
       "大韩民国"
