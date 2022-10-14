@@ -14,7 +14,7 @@ __session_pool = {}
 
 TIMEOUT, RETRYNUM, SEMAPHORE_LIMIT = 5, 5, 50
 API_ROOT = "https://www.apple.com/today-bff/"
-VALIDATES = r"([0-9A-Za-z\-]*-([0-9]{6,8}))"
+VALIDDATES = r"([0-9A-Za-z\-]*-([0-9]{6,8}))"
 ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
 todayNation = dict([(allRegions[i]["rootPath"], i) for i in allRegions if i != "TW"])
 
@@ -895,7 +895,7 @@ def teleinfo(course = None, schedules = [], collection = None, mode = "new", use
 		keyboard = [[[lang[userLang]["SIGN_UP"], schedule.url]]]
 	else:
 		try:
-			date = re.findall(VALIDATES, course.slug)[0][1]
+			date = re.findall(VALIDDATES, course.slug)[0][1]
 			vals = validDates(date, runtime)
 			valid = f' {lang[userLang]["OR"]} '.join([i.strftime(lang[userLang]["FORMAT_DATE"]) for i in vals])
 		except IndexError:
