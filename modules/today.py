@@ -14,6 +14,7 @@ __session_pool = {}
 
 TIMEOUT, RETRYNUM, SEMAPHORE_LIMIT = 5, 5, 50
 API_ROOT = "https://www.apple.com/today-bff/"
+VALIDATES = r"([0-9A-Za-z\-]*-([0-9]{6,8}))"
 ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
 todayNation = dict([(allRegions[i]["rootPath"], i) for i in allRegions if i != "TW"])
 
@@ -93,6 +94,28 @@ def resolution(vids, direction = None):
 			fil = [i for i in vids if res[i][0] > res[i][1]]
 		return fil[0] if fil else None
 
+def validDates(ex, runtime):
+	v = []
+	if len(ex) == 6:
+		possible = ["%y%m%d", "%d%m%y", "%m%d%y"]
+	elif len(ex) == 8:
+		possible = ["%Y%m%d", "%d%m%Y", "%m%d%Y"]
+	else:
+		possible = []
+	for pattern in possible:
+		try:
+			date = datetime.strptime(ex, pattern).date()
+		except ValueError:
+			pass
+		else:
+			delta = abs(date.year - runtime.year)
+			if delta > 1:
+				continue
+			delta = (date - runtime.date()).days
+			if delta > -7 and date not in v:
+				v.append(date)
+	return v
+
 class asyncObject(object):
 	async def __new__(cls, *args, **kwargs):
 		instance = super().__new__(cls)
@@ -132,6 +155,7 @@ class Store():
 			self.url = storeURL(sif = sif)
 		else:
 			raise ValueError("sid, raw 至少提供一个")
+		self.today = self.url.replace("/retail/", "/today/")
 		self.calendar = self.url.replace("/retail/", "/today/calendar/")
 		self.serial = dict(sid = self.sid)
 		self.raw = dict((i, self.__dict__[i]) for i in self.__dict__ if i != "raw")
@@ -666,8 +690,8 @@ async def Sitemap(rootPath):
 
 	slugs = {}
 	for i in urls:
-		matches = re.findall(r"/event/([0-9A-Za-z\-]*-([0-9]{6}))", i)
-		if matches and validDates(matches[0][1], runtime, False) != []:
+		matches = re.findall(f"/event/{VALIDDATES}", i)
+		if matches and validDates(matches[0][1], runtime) != []:
 			slugs[matches[0][0]] = slugs.get(matches[0][0], []) + [i]
 
 	tasks = [
@@ -728,25 +752,6 @@ def parseURL(url, coro = False):
 			parse = None
 	return parse
 
-def validDates(ex, runtime, process = True):
-	v = []
-	for pattern in ["%y%m%d", "%d%m%y", "%m%d%y"]:
-		try:
-			date = datetime.strptime(ex, pattern).date()
-		except ValueError:
-			pass
-		else:
-			delta = abs(date.year - runtime.year)
-			if delta > 1:
-				continue
-			delta = (date - runtime.date()).days
-			if delta > -7:
-				v.append(date)
-	if process:
-		return " (或) ".join([i.strftime("%Y 年 %-m 月 %-d 日") for i in v])
-	else:
-		return v
-
 lang = {
 	True: {
 		"OR": "或",
@@ -776,6 +781,7 @@ lang = {
 		"SIGN_UP_STATUS": "*可预约状态*",
 		"FORMAT_START": "%-m 月 %-d 日 %-H:%M",
 		"FORMAT_END": "%-H:%M",
+		"FORMAT_DATE": "%Y 年 %-m 月 %-d 日",
 		"MAIN1": "#TodayatApple {NEW}{TYPE}\n\n*{NAME}*\n\n{INTROTITLE}\n{INTRO}",
 		"MAIN2": "#TodayatApple {NEW}{TYPE}\n\n{PREFIX}*{NAME}*\n\n🗺️ {LOCATION}\n🕘 {TIME}\n\n{INTROTITLE}\n{INTRO}\n\n{SIGNPREFIX}\n{SIGN}"
 	},
@@ -807,12 +813,13 @@ lang = {
 		"SIGN_UP_STATUS": "*Sign Up status*",
 		"FORMAT_START": "%b %-d, %-H:%M",
 		"FORMAT_END": "%-H:%M",
+		"FORMAT_DATE": "%Y/%-m/%-d",
 		"MAIN1": "#TodayatApple {NEW}{TYPE}\n\n*{NAME}*\n\n{INTROTITLE}\n{INTRO}",
 		"MAIN2": "#TodayatApple {NEW}{TYPE}\n\n{PREFIX}*{NAME}*\n\n🗺️ {LOCATION}\n🕘 {TIME}\n\n{INTROTITLE}\n{INTRO}\n\n{SIGNPREFIX}\n{SIGN}"
 	}
 }
 
-def teleinfo(course = None, schedules = None, collection = None, mode = "new", userLang = True):
+def teleinfo(course = None, schedules = [], collection = None, mode = "new", userLang = True):
 	runtime = datetime.now()
 	offset = runtime.astimezone().utcoffset().total_seconds() / 3600
 
@@ -888,8 +895,9 @@ def teleinfo(course = None, schedules = None, collection = None, mode = "new", u
 		keyboard = [[[lang[userLang]["SIGN_UP"], schedule.url]]]
 	else:
 		try:
-			date = re.findall(r"[0-9]{6}", course.slug)[-1]
-			valid = validDates(date, runtime)
+			date = re.findall(VALIDATES, course.slug)[0][1]
+			vals = validDates(date, runtime)
+			valid = f' {lang[userLang]["OR"]} '.join([i.strftime(lang[userLang]["FORMAT_DATE"]) for i in vals])
 		except IndexError:
 			valid = ""
 		timing = lang[userLang]["GENERAL_TIMING"] if valid == "" else valid
@@ -897,9 +905,9 @@ def teleinfo(course = None, schedules = None, collection = None, mode = "new", u
 
 	keyboard[0].append([lang[userLang]["DOWNLOAD_IMAGE"], course.images["landscape"]])
 
-	if mode == "new":
+	if mode == "new" or schedules == []:
 		signing = signingPrefix = ""
-	elif schedules != []:
+	else:
 		rsvp = [i.status for i in schedules]
 		upCount = rsvp.count(True)
 		seCount = len(schedules)
@@ -914,8 +922,6 @@ def teleinfo(course = None, schedules = None, collection = None, mode = "new", u
 		else:
 			signing = lang[userLang]["SIGN_UP_SINGLE"] if upCount else lang[userLang]["SIGN_UP_NOT"]
 		signingPrefix = lang[userLang]["SIGN_UP_STATUS"]
-	else:
-		signing = signingPrefix = ""
 
 	text = disMarkdown(lang[userLang]["MAIN2"].format(
 		NEW = lang[userLang]["NEW"] if mode == "new" else '',
