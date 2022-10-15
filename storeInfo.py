@@ -1,9 +1,5 @@
 import re
 import json
-import asyncio
-import aiohttp
-import logging
-from functools import partial
 
 from modules.util import request
 from modules.constants import userAgent, allRegions
@@ -17,14 +13,14 @@ Order = []
 def StoreID(sid, fuzzy = False, include_coeff = False):
 	stores = []
 	if fuzzy:
-		sid = str(sid).upper().replace("R", "")
+		sid = str(sid).upper().removeprefix("R")
 		ids = [i for i in LIBRARY]
 		for i in ids:
 			if sid in i:
 				coeff = (round(len(sid) / 3, 3), ) if include_coeff else ()
 				stores.append((i, actualName(infoJSON["name"][i]), *coeff))
 	else:
-		sid = f"{str(sid).upper().replace('R', ''):0>3}"
+		sid = f"{str(sid).upper().removeprefix('R'):0>3}"
 		if sid in LIBRARY:
 			coeff = (1.0, ) if include_coeff else ()
 			stores = [(sid, actualName(infoJSON["name"][sid]), *coeff)]
@@ -193,7 +189,7 @@ def storeReturn(args, sort = True, sort_coeff = False,
 			continue
 		if a == "all":
 			a = ""
-		digit = a.isdigit() or a.upper().replace("R", "").isdigit()
+		digit = a.isdigit() or a.upper().removeprefix("R").isdigit()
 		stores = (StoreID(a, fuzzy, sort_coeff) + StoreMatch(a, fuzzy, sort_coeff)) if digit else StoreMatch(a, fuzzy, sort_coeff)
 		for s in stores:
 			if s and s not in ans:

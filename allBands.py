@@ -56,7 +56,7 @@ def commonWords(nameList):
 		for j in list(i):
 			if (not j.isalnum()) or (not j.isascii()):
 				i = i.replace(j, f"${j}$")
-		words.append([k.strip("- ") for k in i.split("$") if k.strip("- ") != ""])
+		words.append([strip for k in i.split("$") if (strip := k.strip("- ")) != ""])
 
 	common = words[0]
 	for word in words[1:]:
