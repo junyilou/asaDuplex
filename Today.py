@@ -35,13 +35,14 @@ async def async_post(text, image, keyboard):
 
 async def main(mode):
 	global append
-	if mode == "today":
-		stores = storeReturn(args["today"], needSplit = True, remove_closed = True, remove_future = True)
-		tasks = [Store(sid = sid).getSchedules() for sid, sn in stores]
-	elif mode == "sitemap":
-		tasks = [Sitemap(rootPath = i) for i in args["sitemap"]]
-	else:
-		return
+	match mode:
+		case "today":
+			stores = storeReturn(args["today"], needSplit = True, remove_closed = True, remove_future = True)
+			tasks = [Store(sid = sid).getSchedules() for sid, sn in stores]
+		case "sitemap":
+			tasks = [Sitemap(rootPath = i) for i in args["sitemap"]]
+		case _:
+			return
 	results = await asyncio.gather(*tasks, return_exceptions = True)
 
 	courses = {}

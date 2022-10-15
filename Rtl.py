@@ -108,44 +108,43 @@ async def down(session, rtl, isSpecial, semaphore = None):
 @session_func
 async def main(session):
 	global specialist
-	if len(sys.argv) == 1:
-		print("请指定一种运行模式: normal, special 或 single")
-		return
-
 	semaphore = asyncio.Semaphore(50)
 
-	if sys.argv[1] == "normal":
-		setLogger(logging.INFO, os.path.basename(__file__))
-		logging.info("开始枚举零售店")
-			
-		runFlag = False
-		tasks = [down(session, f"{j:0>3d}", False, semaphore) for j in range(1, 901)]
-		runFlag = any(await asyncio.gather(*tasks)) or runFlag
-
-	elif sys.argv[1] == "special":
-		with open("Retail/specialist.txt") as l:
-			specialist = eval(f"[{l.read()}]")
-		specialist = [str(i) for i in specialist]
-
-		if len(specialist):
-			setLogger(logging.INFO, os.path.basename(__file__))
-			logging.info("开始特别观察模式: " + ", ".join(specialist))
-
-			tasks = [down(session, i, True, semaphore) for i in specialist]
-			runFlag = any(await asyncio.gather(*tasks))
-		else:
+	match sys.argv:
+		case [_]:
+			print("请指定一种运行模式: normal, special 或 single")
 			return
+		case [_, "normal"]:
+			setLogger(logging.INFO, os.path.basename(__file__))
+			logging.info("开始枚举零售店")
+				
+			runFlag = False
+			tasks = [down(session, f"{j:0>3d}", False, semaphore) for j in range(1, 901)]
+			runFlag |= any(await asyncio.gather(*tasks))
 
-	elif sys.argv[1] == "single" and len(sys.argv) > 2:
-		setLogger(logging.INFO, os.path.basename(__file__))
-		logging.info("开始单独调用模式: " + ", ".join(sys.argv[2:]))
-			
-		tasks = [down(session, i, False, semaphore) for i in sys.argv[2:]]
-		runFlag = any(await asyncio.gather(*tasks))
+		case [_, "special"]:
+			with open("Retail/specialist.txt") as l:
+				specialist = eval(f"[{l.read()}]")
+			specialist = [str(i) for i in specialist]
 
-	else:
-		print("请指定一种运行模式: normal, special 或 single")
-		return
+			if len(specialist):
+				setLogger(logging.INFO, os.path.basename(__file__))
+				logging.info("开始特别观察模式: " + ", ".join(specialist))
+
+				tasks = [down(session, i, True, semaphore) for i in specialist]
+				runFlag = any(await asyncio.gather(*tasks))
+			else:
+				return
+
+		case [_, "single", *targets]:
+			setLogger(logging.INFO, os.path.basename(__file__))
+			logging.info("开始单独调用模式: " + ", ".join(targets))
+			tasks = [down(session, i, False, semaphore) for i in targets]
+			runFlag = any(await asyncio.gather(*tasks))
+
+		case [_, mode, *_]:
+			print("指定了错误的运行模式: normal, special 或 single")
+			return
 
 	if runFlag:
 		logging.info("正在更新 storeInfo.json")

@@ -88,20 +88,24 @@ def resolution(vids, direction = None):
 	if not direction:
 		return vids[0]
 	else:
-		if direction == "p":
-			fil = [i for i in vids if res[i][0] < res[i][1]]
-		elif direction == "l":
-			fil = [i for i in vids if res[i][0] > res[i][1]]
-		return fil[0] if fil else None
+		match direction:
+			case "p":
+				fil = [i for i in vids if res[i][0] < res[i][1]]
+			case "l":
+				fil = [i for i in vids if res[i][0] > res[i][1]]
+			case _: 
+				fil = [None]
+		return fil[0]
 
 def validDates(ex, runtime):
 	v = []
-	if len(ex) == 6:
-		possible = ["%y%m%d", "%d%m%y", "%m%d%y"]
-	elif len(ex) == 8:
-		possible = ["%Y%m%d", "%d%m%Y", "%m%d%Y"]
-	else:
-		possible = []
+	match len(ex):
+		case 6:
+			possible = ["%y%m%d", "%d%m%y", "%m%d%y"]
+		case 8:
+			possible = ["%Y%m%d", "%d%m%Y", "%m%d%Y"]
+		case _:
+			possible = []
 	for pattern in possible:
 		try:
 			date = datetime.strptime(ex, pattern).date()
@@ -278,11 +282,11 @@ class Course(asyncObject):
 
 			self.collection = None
 			if moreAbout != None:
-				if type(moreAbout) == Collection:
+				if typeMoreAbout := type(moreAbout) == Collection:
 					self.collection = moreAbout
-				elif type(moreAbout) == dict:
-					moreAbout = [moreAbout]
-				if type(moreAbout) == list:
+				elif typeMoreAbout == dict:
+						moreAbout = [moreAbout]
+				if typeMoreAbout == list:
 					for moreDict in moreAbout:
 						try:
 							if "title" in moreDict and raw["collectionName"] == moreDict["title"]:
@@ -880,10 +884,7 @@ def teleinfo(course = None, schedules = [], collection = None, mode = "new", use
 		scheduleTimezone = schedule.tzinfo
 		if scheduleTimezone != None:
 			delta = schedule.timeStart.utcoffset().total_seconds() / 3600
-			if delta == offset:
-				tzText = ""
-			else:
-				tzText = " " + timezoneText(schedule.timeStart)
+			tzText = "" if delta == offset else (" " + timezoneText(schedule.timeStart))
 		else:
 			tzText = ""
 		

@@ -63,27 +63,18 @@ def storeURL(sid = None, sif = None, mode = None):
 	else:
 		raise ValueError("Expect either `Store ID` or `sif dictionary` provided")
 	try:
-		website = sif["key"]["website"]
-		if website == "-":
-			website = actualName(sif["name"]).lower().replace(" ", "")
-		if mode == "slug":
-			return website
-		else:
-			return f"https://www.apple.com{allRegions[sif['flag']]['storeURL']}/retail/{website}"
+		website = actualName(sif["name"]).lower().replace(" ", "") if (website := sif["key"]["website"]) == "-" else website
+		return website if mode == "slug" else f"https://www.apple.com{allRegions[sif['flag']]['storeURL']}/retail/{website}"
 	except KeyError:
 		return ""
 
 async def storeDict(sid = None, sif = None, session = None, mode = "dict"):
-	if sid:
-		sif = storeInfo(sid)
-	elif sif:
-		pass
-	else:
-		raise ValueError("Expect either `Store ID` or `sif dictionary` provided")
 	try:
-		website = sif["key"]["website"]
-		if website == "-":
-			website = actualName(sif["name"]).lower().replace(" ", "")
+		website = storeURL(sid = sid, sif = sif, mode = "slug")
+		if website == "":
+			raise ValueError()
+
+		sif = sif if sif != None else storeInfo(sid)
 		url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={website}&locale={allRegions[sif['flag']]['rspLocale']}&sc=false"
 		if mode == "url":
 			return url
@@ -92,32 +83,31 @@ async def storeDict(sid = None, sif = None, session = None, mode = "dict"):
 			headers = userAgent, ensureAns = False, retryNum = 3, timeout = 5)
 		r = json.loads(r)
 
-		if mode == "raw":
-			return r
-		try:
-			hours = {
-				"isnso": r["hours"]["isNSO"],
-				"regular": r["hours"]["hoursData"],
-				"special": r["hours"]["specialHoursData"]
-			}
-		except:
-			hours = {}
-		if mode == "hours":
-			return hours
-		if mode == "dict":
-			add = r["address"]
-			address = add["address1"].rstrip(" ")
-			address += f', {add["address2"]}' if add["address2"] else ""
-			prov = add["city"]
-			prov += f', {add["stateName"]}' if add["stateName"] else ""
-			prov += f', {add["postal"]}' if add["postal"] else ""
+		hours = {
+			"isnso": r["hours"]["isNSO"],
+			"regular": r["hours"]["hoursData"],
+			"special": r["hours"]["specialHoursData"]
+		}
 
-			page = r["geolocation"] | {
-				"timezone": r["timezone"],
-				"telephone": r["telephone"],
-				"address": address,
-				"province": prov} | hours
-		return page
+		match mode:
+			case "raw":
+				return r
+			case "hours":
+				return hours
+			case "dict":
+				add = r["address"]
+				address = add["address1"].rstrip(" ")
+				address += f', {add["address2"]}' if add["address2"] else ""
+				prov = add["city"]
+				prov += f', {add["stateName"]}' if add["stateName"] else ""
+				prov += f', {add["postal"]}' if add["postal"] else ""
+				info = {
+					"timezone": r["timezone"],
+					"telephone": r["telephone"],
+					"address": address,
+					"province": prov
+				}
+				return r["geolocation"] | info | hours
 	except:
 		return {}
 
@@ -181,8 +171,7 @@ def storeReturn(args, sort = True, sort_coeff = False,
 	if type(args) in [int, str]:
 		args = [f"{args}"]
 	for a in args:
-		a = a.strip()
-		if not a:
+		if not (a := a.strip()):
 			continue
 		if a == "all":
 			a = ""
@@ -246,20 +235,19 @@ def library():
 	for i in infoJSON["key"]:
 		keys = []
 		for j in infoJSON["key"][i]:
-			if j == "website":
-				if infoJSON["key"][i][j] == "-":
-					keys.append(actualName(infoJSON["name"][i]).lower().replace(" ", ""))
-				else:
-					keys.append(infoJSON["key"][i][j])
-			elif j == "alter":
-				keys += infoJSON["key"][i][j].split(" ")
-			else:
-				keys += [infoJSON["key"][i][j], infoJSON["key"][i][j].replace(" ", "")]
+			k = infoJSON["key"][i][j]
+			match j:
+				case "website":
+					keys.append(actualName(infoJSON["name"][i]).lower().replace(" ", "") if k == "-" else k)
+				case "alter":
+					keys += k.split(" ")
+				case _:
+					keys += [k] + ([k.replace(" ", "")] if " " in k else [])
 		LIBRARY[i] = LIBRARY.get(i, []) + keys
 	for i in infoJSON["flag"]:
 		flag = infoJSON["flag"][i]
 		LIBRARY[i] = LIBRARY.get(i, []) + [flag, allRegions[flag]["name"], allRegions[flag]["nameEng"]] + allRegions[flag]["altername"]
-	Order = sorted([i for i in infoJSON["key"]], key = lambda k: f"{storeInfo(k)['flag']} {getState(k, stateOnly = True)}")
+	Order = sorted([i for i in infoJSON["key"]], key = lambda k: f'{infoJSON["flag"][k]} {infoJSON["key"][k]["state"]}')
 
 library()
 def reloadJSON(filename = "storeInfo.json"):
