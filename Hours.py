@@ -17,11 +17,9 @@ if "logging" in argv:
 	stdout = logging.info
 	argv.remove("logging")
 if len(argv) > 1:
-	include = " ".join(argv[1:])
-	exclude = ""
+	include, exclude = " ".join(argv[1:]), ""
 else:
-	include = "🇨🇳"
-	exclude = ""
+	include, exclude = "🇨🇳", ""
 
 today = date.today()
 runtime = str(today)
@@ -36,7 +34,7 @@ async def entry(session, sid, sn):
 	storeDiff = ""
 
 	if len(specialHours):
-		allSpecial[sid] = {"storename": sn, **allSpecial.get(sid, {}), **specialHours}
+		allSpecial[sid] = {"storename": sn} | allSpecial.get(sid, {}) | specialHours
 
 	for s in specialHours:
 		fSpecial = specialHours[s]["special"]
@@ -87,7 +85,7 @@ async def main(session):
 		with open("Retail/storeHours.json", "w") as w:
 			w.write(r"{}")
 
-	allSpecial = {**orgjson, "created": runtime}
+	allSpecial = orgjson | {"created": runtime}
 	tasks = [entry(session, sid, sn) for sid, sn in stores]
 	await asyncio.gather(*tasks)
 

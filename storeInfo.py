@@ -112,14 +112,11 @@ async def storeDict(sid = None, sif = None, session = None, mode = "dict"):
 			prov += f', {add["stateName"]}' if add["stateName"] else ""
 			prov += f', {add["postal"]}' if add["postal"] else ""
 
-			page = {
-				**r["geolocation"],
+			page = r["geolocation"] | {
 				"timezone": r["timezone"],
 				"telephone": r["telephone"],
 				"address": address,
-				"province": prov,
-				**hours
-			}
+				"province": prov} | hours
 		return page
 	except:
 		return {}
