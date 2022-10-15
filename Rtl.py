@@ -13,6 +13,9 @@ from modules.util import request, disMarkdown, setLogger, session_func
 from sdk_aliyun import async_post
 
 specialist = []
+INVALIDDATE = datetime(2001, 5, 19)
+INVALIDREMOTE = [date(2021, 7, 13), date(2021, 8, 28), date(2021, 8, 29), date(2022, 1, 7)]
+
 with open("storeInfo.json") as s:
 	storejson = json.loads(s.read())
 
@@ -44,10 +47,10 @@ async def down(session, rtl, isSpecial, semaphore = None):
 			logging.info(f"R{rtl} 文件不存在或获取失败")
 		return False
 	elif not savedDatetime:
-		savedDatetime = datetime(2001, 5, 19)
+		savedDatetime = INVALIDDATE
 
 	if remoteDatetime > savedDatetime:
-		if remoteDatetime.date() in [date(2021, 7, 13), date(2021, 8, 28), date(2021, 8, 29), date(2022, 1, 7)]:
+		if remoteDatetime.date() in INVALIDREMOTE:
 			logging.info(f"R{rtl} 找到了更佳的远端无效时间")
 			storejson['last'][rtl] = remote
 			storejson['update'] = datetime.now(timezone.utc).strftime("%F %T GMT")
@@ -70,10 +73,10 @@ async def down(session, rtl, isSpecial, semaphore = None):
 		info = f"*{sif['flag']} Apple {name}* (R{rtl})"
 		if "nso" in sif:
 			info += f'\n首次开幕于 {datetime.strptime(sif["nso"], "%Y-%m-%d").strftime("%Y 年 %-m 月 %-d 日")}'
-		info += f"\n*修改标签* {remote}"
 		if saved:
-			info += f"\n*原始标签* {saved}"
-		
+			info += f"\n*本地标签* {saved}"
+		info += f"\n*远程标签* {remote}"
+	
 		if isSpecial: 
 			logging.info("正在更新 specialist.txt")
 			specialist.remove(str(int(rtl)))
@@ -81,7 +84,7 @@ async def down(session, rtl, isSpecial, semaphore = None):
 				w.write(", ".join(specialist))
 
 		storejson['last'][rtl] = remote
-		if savedDatetime == datetime(2001, 5, 19):
+		if savedDatetime == INVALIDDATE:
 			storejson['last'] = dict([(k, storejson['last'][k]) for k in sorted(storejson['last'].keys())])
 		storejson['update'] = datetime.now(timezone.utc).strftime("%F %T GMT")
 

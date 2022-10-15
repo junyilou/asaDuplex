@@ -20,7 +20,7 @@ if len(argv) > 1:
 	include = " ".join(argv[1:])
 	exclude = ""
 else:
-	include = "🇨🇳, Ginza"
+	include = "🇨🇳"
 	exclude = ""
 
 today = date.today()
@@ -125,7 +125,7 @@ async def main(session):
 			w.write(fileDiff)
 		stdout("已生成对比文件 storeHours.html")
 
-		pushStore = "Apple " + "、Apple ".join(diffStore[:2]) + (f" 等 {len(diffStore)} 家零售店" if len(diffStore) > 2 else "")
+		pushStore = "Apple " + "、Apple ".join(diffStore[:2]) + (f" 等 {lendiff} 家零售店" if (lendiff := len(diffStore)) > 2 else "")
 
 		push = {
 			"mode": "photo-text",

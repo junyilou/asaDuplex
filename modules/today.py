@@ -211,22 +211,24 @@ class Store():
 		tasks = [
 			getSchedule(
 				scheduleId = i, 
-				raw = raw["schedules"][i], 
+				raw = schedules[i], 
 				rootPath = self.rootPath, 
 				slug = self.slug, 
 				store = getStore(
-					sid = raw["schedules"][i]["storeNum"],
-					raw = raw["stores"][raw["schedules"][i]["storeNum"]] if \
-						raw["schedules"][i]["storeNum"] in raw["stores"] else None,
-					rootPath = self.rootPath), 
+					sid = storeNum, 
+					rootPath = self.rootPath,
+					raw = raw["stores"][storeNum] if storeNum in raw["stores"] else None),
 				course = await getCourse(
-					courseId = raw["schedules"][i]["courseId"], 
-					raw = raw["courses"][raw["schedules"][i]["courseId"]], 
+					courseId = schedules[i]["courseId"], 
+					raw = raw["courses"][schedules[i]["courseId"]], 
 					rootPath = self.rootPath,
 					moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
 					fuzzy = False)
-				) for i in raw["schedules"] if (raw["schedules"][i]["storeNum"] == self.sid)
-					 or ("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"]) or (not ensure)
+				) for i in (raw["schedules"]) if (
+					((schedules := raw["schedules"]) != {}) and 
+					((not ensure) or ((storeNum := schedules[i]["storeNum"]) == self.sid) or 
+					("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"]))
+				)
 			]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
@@ -392,12 +394,12 @@ class Course(asyncObject):
 		tasks = [
 			getSchedule(
 				scheduleId = i, 
-				raw = raw["schedules"][i], 
+				raw = schedules[i], 
 				rootPath = store.rootPath, 
 				slug = self.slug, 
 				store = getStore(
-					sid = raw["schedules"][i]["storeNum"], 
-					raw = raw["stores"][raw["schedules"][i]["storeNum"]],
+					sid = storeNum, 
+					raw = raw["stores"][storeNum],
 					rootPath = store.rootPath), 
 				course = await getCourse(
 					raw = raw["courses"][self.courseId], 
@@ -405,10 +407,12 @@ class Course(asyncObject):
 					rootPath = store.rootPath,
 					moreAbout = raw["moreAbout"],
 					fuzzy = False),
-				) for i in raw["schedules"] if 
-					(raw["schedules"][i]["courseId"] == self.courseId) and 
-					((raw["schedules"][i]["storeNum"] == store.sid) or 
-					("VIRTUAL" in raw["courses"][self.courseId]["type"]) or (not ensure))
+				) for i in raw["schedules"] if (
+					((schedules := raw["schedules"]) != {}) and
+					((schedules[i]["courseId"] == self.courseId) and 
+					(((storeNum := schedules[i]["storeNum"]) == store.sid) or 
+					("VIRTUAL" in raw["courses"][self.courseId]["type"]) or (not ensure)))
+				)
 			]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
@@ -639,24 +643,24 @@ class Collection(asyncObject):
 		tasks = [
 			getSchedule(
 				scheduleId = i, 
-				raw = raw["schedules"][i], 
+				raw = schedules[i], 
 				rootPath = store.rootPath, 
 				slug = self.slug, 
 				store = getStore(
-					sid = raw["schedules"][i]["storeNum"],
-					raw = raw["stores"][raw["schedules"][i]["storeNum"]] if \
-						raw["schedules"][i]["storeNum"] in raw["stores"] else None,
+					sid = storeNum,
+					raw = raw["stores"][storeNum] if storeNum in raw["stores"] else None,
 					rootPath = store.rootPath), 
 				course = await getCourse(
-					raw = raw["courses"][raw["schedules"][i]["courseId"]], 
-					courseId = raw["schedules"][i]["courseId"], 
+					raw = raw["courses"][courseId], 
+					courseId = courseId, 
 					rootPath = store.rootPath,
 					moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
 					fuzzy = False)
 				) for i in raw["schedules"] if 
-					self.slug in [m["collId"] for m in raw["heroGallery"] if m["heroType"] == "TAG"] and 
-					((raw["schedules"][i]["storeNum"] == store.sid) or 
-					("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"]) or (not ensure))
+					((schedules := raw["schedules"]) != {}) and (courseId := schedules[i]["courseId"]) and 
+					((self.slug in [m["collId"] for m in raw["heroGallery"] if m["heroType"] == "TAG"]) and 
+					(((storeNum := schedules[i]["storeNum"]) == store.sid) or (not ensure) or
+					("VIRTUAL" in raw["courses"][courseId]["type"])))
 			]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
@@ -857,8 +861,9 @@ def teleinfo(course = None, schedules = [], collection = None, mode = "new", use
 				textStore[textStore.index(a)] = actualName(storeInfo(a)["name"])
 		courseStore = lang[userLang]["JOINT"].join(textStore)
 		if len(courseStore) > 200:
-			courseStore = lang[userLang]["TOO_MANY_STORE"].format(COUNT = len(availableStore), 
-				PLURAL = "s" if len(availableStore) > 1 else "")
+			courseStore = lang[userLang]["TOO_MANY_STORE"].format(
+				COUNT = (lenAvail := len(availableStore)), 
+				PLURAL = "s" if lenAvail > 1 else "")
 	else:
 		courseStore = lang[userLang]["GENERAL_STORE"]
 
@@ -882,16 +887,15 @@ def teleinfo(course = None, schedules = [], collection = None, mode = "new", use
 		else:
 			tzText = ""
 		
-		if len(schedules) > 1:
+		if (lenSchedules := len(schedules)) > 1:
 			timing = lang[userLang]["START_FROM_ALL"].format(
 				START = schedule.datetimeStart(form = lang[userLang]["FORMAT_START"]),
 				END = schedule.datetimeEnd(form = lang[userLang]["FORMAT_END"]),
-				TZTEXT = tzText, AMOUNT = len(schedules), PLURAL = "s" if len(schedules) > 1 else "")
+				TZTEXT = tzText, AMOUNT = len(schedules), PLURAL = "s" if lenSchedules > 1 else "")
 		else:
 			timing = lang[userLang]["START_FROM"].format(
 				START = schedule.datetimeStart(form = lang[userLang]["FORMAT_START"]),
-				END = schedule.datetimeEnd(form = lang[userLang]["FORMAT_END"]),
-				TZTEXT = tzText)
+				END = schedule.datetimeEnd(form = lang[userLang]["FORMAT_END"]), TZTEXT = tzText)
 		keyboard = [[[lang[userLang]["SIGN_UP"], schedule.url]]]
 	else:
 		try:

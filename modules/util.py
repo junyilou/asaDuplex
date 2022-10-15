@@ -20,17 +20,26 @@ def timezoneText(dtime):
 		tzText = f"GMT{int(dx):+}:{60 * float('.' + dy):0>2.0f}"
 	return tzText
 
+def bitsize(integer, width = 8, precision = 2, ks = 1e3):
+	order = [" B", "KB", "MB", "GB", "TB"]
+	unit = 0
+	while integer > ks:
+		integer /= ks
+		unit += 1
+	return f"{integer:{width}.{precision}f} {order[unit]}"
+
 async def request(session = None, url = None, ident = None, mode = None, retryNum = 1, ensureAns = True, **kwargs):
 	method = kwargs.get("method", "GET")
 	pop = kwargs.pop("method") if "method" in kwargs else None
+	logger = logging.getLogger("util.request")
 
 	close_session = False
 	if session == None:
-		logging.getLogger("constants.request").debug("Created new Session")
+		logger.debug("已创建新的 aiohttp 线程")
 		session = aiohttp.ClientSession()
 		close_session = True
 
-	logging.getLogger("constants.request").debug(f"[{'MTH ' + method:^9}] '{url}', [ident] {ident}, [mode] {mode}, [args] {kwargs}, [retry] {retryNum}")
+	logger.debug(f"[{method}] '{url}', [标识] {ident}, [模式] {mode}, [参数] {kwargs}, [重试] {retryNum}")
 	while retryNum:
 		try:
 			async with session.request(url = url, method = method, **kwargs) as resp:
@@ -48,13 +57,13 @@ async def request(session = None, url = None, ident = None, mode = None, retryNu
 						r = json.loads(r)
 				else:
 					r = await resp.text()
-			logging.getLogger("constants.request").debug(f"[Status {resp.status}] '{url}'")
+			logger.debug(f"[状态{resp.status}] '{url}'")
 			if close_session:
 				await session.close()
 			return (r, ident) if ident else r
 		except Exception as exp:
 			if retryNum == 1:
-				logging.getLogger("constants.request").debug(f"[Abandoned] '{url}', [ident] {ident}, [exp] {exp}")
+				logger.debug(f"[丢弃] '{url}', [标识] {ident}, [异常] {exp}")
 				if close_session:
 					await session.close()
 				if ensureAns:
@@ -63,7 +72,7 @@ async def request(session = None, url = None, ident = None, mode = None, retryNu
 					raise exp
 			else:
 				retryNum -= 1
-				logging.getLogger("constants.request").debug(f"[Exception] '{url}', [ident] {ident}, [exp] {exp}, [retry] {retryNum} left")
+				logger.debug(f"[异常] '{url}', [标识] {ident}, [异常] {exp}, [重试剩余] {retryNum}")
 
 def session_func(func, **kwargs):
 	async def wrapper(**kwargs):

@@ -191,7 +191,6 @@ async def main(targets, session):
 			logging.info(f"记录到新地点 {store.flag} {store.stateName} {store.sid} {store.name}")
 			SAVED[store.flag][store.stateCode] = SAVED[store.flag].get(store.stateCode, {"name": store.stateName})
 			SAVED[store.flag][store.stateCode][store.sid] = store.name
-			SAVED[store.flag][store.stateCode]
 			linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
 			pushAns = f"#新店新机遇\n\n{store.teleInfo()}\n\n{linkURL}"	
 			push = {
@@ -202,13 +201,13 @@ async def main(targets, session):
 				"image": API["image"]
 			}
 			await async_post(push, session = session)
-		elif SAVED[store.flag][store.stateCode]["name"] != store.stateName:
+		elif (oldName := SAVED[store.flag][store.stateCode]["name"]) != store.stateName:
 			append = True
-			logging.info(f"更改名称 {SAVED[store.flag][store.stateCode]['name']} 为 {store.stateName}")
+			logging.info(f"更改名称 {oldName} 为 {store.stateName}")
 			SAVED[store.flag][store.stateCode]["name"] = store.stateName
-		elif SAVED[store.flag][store.stateCode][store.sid] != store.name:
+		elif (oldName := SAVED[store.flag][store.stateCode][store.sid]) != store.name:
 			append = True
-			logging.info(f"更改名称 {SAVED[store.flag][store.stateCode][store.sid]} 为 {store.name}")
+			logging.info(f"更改名称 {oldName} 为 {store.name}")
 			SAVED[store.flag][store.stateCode][store.sid] = store.name
 
 	for store in STORES:
