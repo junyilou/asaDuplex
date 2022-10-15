@@ -29,11 +29,28 @@
 * savedJobs.json: 由 Jobs.py 生成的，已经在检测到招聘的零售店编号
 * storeInfo.json: 全球 Apple Store 名称（包含部分曾用名、ASCII 兼容名等以便于更广的匹配）、店号、国家或地区旗帜、开店时间、官网图片最后修改时间、URL 标签、全球各国地区零售店按行政区划字典、用于模糊搜索的关键字 alias 等
 
-#### 代码依赖
+
+
+## 代码依赖
 
 本库中的部分代码使用了 Python 3.10、Python 3.9、Python 3.8 的部分特性，建议使用最新版 Python 3 运行。
 
-本代码的网络 I/O 请求依赖 [aiohttp](https://github.com/aio-libs/aiohttp)，可通过 pip 安装，库中需要网络请求的函数全部为协程函数，需要使用 `await` 关键字等待，但也提供了简单的异步转同步方法 `sync()`，可在复杂度不高的代码中使用
+本代码的网络 I/O 请求依赖 [aiohttp](https://github.com/aio-libs/aiohttp)，可通过 pip 安装，库中需要网络请求的函数全部为协程函数，需要使用 `await` 关键字等待，但也提供了简单的异步转同步方法 `sync()`，可在复杂度不高的代码中使用。
+
+```python
+from modules.special import speHours
+from modules.util import sync
+
+>>> await speHours(session=None, sid=688) # 异步
+
+{'2022-10-15': {'regular': '10:00 - 23:00', 'special': '10:00 - 22:00', 'reason': '[COVID Related]'}}
+
+>>> sync(speHours(session=None, sid=688)) # 同步，不建议
+
+{'2022-10-15': {'regular': '10:00 - 23:00', 'special': '10:00 - 22:00', 'reason': '[COVID Related]'}}
+```
+
+
 
 ## 如何利用
 
@@ -41,17 +58,17 @@
 
 * storeInfo.py 包装了大量函数对 storeInfo.json 进行处理，这包括：
 
-  * function `storeReturn(args, sort = True, remove_closed = False, remove_future = False, fuzzy = False, needSplit = False):`
+  * **_func_** `storeReturn(args, sort=True, remove_closed=False, remove_future=False, fuzzy=False, needSplit=False):`
 
   传入关键字，包括店号、店名、城市、国家或地区可搜索零售店，默认自动按照行政区划进行排序，还可配置启用模糊搜索、移除未开业零售店、移除已关闭零售店等。
 
   ```python
-  >>> storeReturn("480，Los Angeles, 招聘，江浙沪", needSplit = True)
+  >>> storeReturn("480，Los Angeles, 招聘，江浙沪", needSplit=True)
   
   [('359', '南京东路'), ('389', '浦东'), ('390', '香港广场'), ('401', '上海环贸 iapm'), ('581', '五角场'), ('678', 'Store in Shanghai'), ('683', '环球港'), ('705', '七宝'), ('761', 'Store in Shenzhen East'), ('493', '南京艾尚天地'), ('574', '无锡恒隆广场'), ('643', '虹悦城'), ('688', '苏州'), ('703', '玄武湖'), ('471', '西湖'), ('531', '天一广场'), ('532', '杭州万象城'), ('480', '解放碑'), ('756', 'Store in New Delhi'), ('744', 'Store in Mumbai'), ('760', 'Store in Seoul South'), ('050', 'The Grove'), ('108', 'Century City'), ('124', 'Beverly Center'), ('720', 'Tower Theatre'), ('755', 'Store in East Rutherford')]
   ```
 
-  * function `stateReplace(rstores)`
+  * **_func_** `stateReplace(rstores)`
 
   传入零售店店号数组，将按照行政区划进行压缩，便于一次性输出多个零售店。
 
@@ -61,17 +78,17 @@
   ['重庆 (3)', '580', '云南 (1)']
   ```
 
-  * coroutine `storeDict(sid = None, sif = None, session = None, mode = "dict")`
+  * **_coro_** `storeDict(sid=None, sif=None, session=None, mode="dict")`
 
   传入零售店店号，联网从 Apple 官网获取零售店基本信息简单处理后返回。
 
   ```python
-  >>> await storeDict(sid = 480)
+  >>> await storeDict(sid=480)
   
   {'latitude': 29.560981, 'longitude': 106.572272, 'timezone': 'Asia/Shanghai', 'telephone': '400-617-1224', 'address': '重庆市渝中区邹容路 108 号', 'province': '重庆, 重庆, 400010', 'isnso': False, 'regular': [{'name': 'Saturday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Wednesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Friday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Monday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Tuesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Thursday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Sunday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}], 'special': []}
   ```
   
-  * function `storeInfo(sid)`
+  * **_func_** `storeInfo(sid)`
   
   传入零售店店号，不联网从本地返回基本零售店信息。
   
@@ -87,11 +104,11 @@
 
   ```python
   # 零售店对象
-  >>> Store(sid = 480)
+  >>> Store(sid=480)
   <Store "解放碑" (R480), "jiefangbei", "/cn">
   
   # 获得零售店课程
-  >>> await Store(sid = 480).getCourses()
+  >>> await Store(sid=480).getCourses()
   [
     <Course 6635235077318869345 "光影实验室：执导拍摄人像", "photo-lab-directing-portrait">, 
     <Course 6443623163745894793 "音乐技巧：库乐队使用入门", "music-skills-getting-started-garageband">, 
@@ -100,7 +117,7 @@
   ]
   
   # 获得零售店排课
-  >>> await Store(sid = 480).getSchedules()
+  >>> await Store(sid=480).getSchedules()
   [
     <Schedule 6917310504008783289 of 6444985410678260613, 4/15 17:30-18:00 @ R480>, 
     <Schedule 6917310552016813261 of 6443623163745894793, 4/15 18:00-18:30 @ R480>, 
@@ -113,7 +130,7 @@
   
   ```python
   # 从 URL 获得课程，也可以手动创建课程对象
-  >>> course = await parseURL("https://www.apple.com.cn/today/event/photo-lab-directing-portrait/", coro = True)
+  >>> course = await parseURL("https://www.apple.com.cn/today/event/photo-lab-directing-portrait/", coro=True)
   
   >>> course
   <Course 6635235077318869345 "光影实验室：执导拍摄人像", "photo-lab-directing-portrait">
@@ -124,7 +141,7 @@
     'landscape': 'https://digitalassets-taa.cdn-apple.com/prod/image/photo-lab-directing-portrait-ww/2020-03/09bc55d1-0a62-4eed-8cd5-3f4511e857ab__16x9.jpg'
   }
   
-  >>> course.getSchedules(Store(sid = 480))
+  >>> course.getSchedules(Store(sid=480))
   [
     <Schedule 6918024654175448253 of 6635235077318869345, 4/17 14:00-15:00 @ R480>, 
     <Schedule 6918027046157664333 of 6635235077318869345, 4/22 14:00-15:00 @ R480>, 
@@ -136,7 +153,7 @@
   
   ```python
   # 从 URL 获得课程，也可以手动创建课程对象
-  >>> schedule = await parseURL("https://www.apple.com.cn/today/event/photo-lab-directing-portrait/6911594146335944905/?sn=R645", coro = True)
+  >>> schedule = await parseURL("https://www.apple.com.cn/today/event/photo-lab-directing-portrait/6911594146335944905/?sn=R645", coro=True)
   
   >>> schedule
   <Schedule 6911594146335944905 of 6635235077318869345, 4/18 18:30-19:30 @ R645>
@@ -166,6 +183,8 @@
 
   这是我个人对结果推送的实现方式，`sdk_aliyun` 和 `bot` 并未在此库中给出。代码运行到输出阶段会产生一个包含文本、图片、链接等内容的字典，您可以通过编写适合您自己的推送结果的方式以获取代码结果，例如将内容推送至 Telegram Channel、微信公众号、其他第三方 iOS 推送 app 等。
 
+
+
 ## 库历史
 
 2019 年 6 月：迁移库并命名 asaDuplex。[[commit]](https://github.com/junyilou/asaduplex/commit/e405a00ab74969a7dcacb719bdab2847e59becb8)
@@ -185,6 +204,8 @@
 2022 年 3 月：使用 asyncio、aiohttp 异步化核心代码，极大幅度的提高运行速度。[[commit]](https://github.com/junyilou/asaduplex/commit/6c7e3b729ab1ced4a8ae8888a5930fc55df8319e)
 
 2022 年 4 月：使用面向对象的思想，极高的提升了 Today at Apple 对象的多样性。[[commit]](https://github.com/junyilou/asaduplex/commit/4d98ae7f00312630479243184e715c929afd5b7a)
+
+
 
 ## 底注
 
