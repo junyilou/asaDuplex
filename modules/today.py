@@ -2,10 +2,10 @@ import re
 import json
 import asyncio
 import aiohttp
-import pytz
 import atexit
 
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from storeInfo import *
 from modules.constants import allRegions, userAgent
 from modules.util import request, disMarkdown, timezoneText
@@ -488,7 +488,7 @@ class Schedule(asyncObject):
 			self.store = store
 			self.timezone = store.timezone
 			try:
-				self.tzinfo = pytz.timezone(self.timezone)
+				self.tzinfo = ZoneInfo(self.timezone)
 				self.timeStart = datetime.fromtimestamp(raw["startTime"] / 1000, self.tzinfo)
 				self.timeEnd = datetime.fromtimestamp(raw["endTime"] / 1000, self.tzinfo)
 			except:

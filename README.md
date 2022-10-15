@@ -31,9 +31,9 @@
 
 #### 代码依赖
 
-本代码的网络 I/O 请求依赖 [aiohttp](https://github.com/aio-libs/aiohttp)，可通过 pip 安装，库中需要网络请求的函数全部为协程函数，需要使用 `await` 关键字等待，但也提供了简单的异步转同步方法 `sync()`，可在复杂度不高的代码中使用
+本库中的部分代码使用了 Python 3.10、Python 3.9、Python 3.8 的部分特性，建议使用最新版 Python 3 运行。
 
-为了合理获取时区信息，依赖 [pytz](https://pythonhosted.org/pytz/)，可通过 pip 安装
+本代码的网络 I/O 请求依赖 [aiohttp](https://github.com/aio-libs/aiohttp)，可通过 pip 安装，库中需要网络请求的函数全部为协程函数，需要使用 `await` 关键字等待，但也提供了简单的异步转同步方法 `sync()`，可在复杂度不高的代码中使用
 
 ## 如何利用
 
