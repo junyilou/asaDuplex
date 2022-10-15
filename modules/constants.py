@@ -5,17 +5,16 @@ partRuleBase = r"[FGHMNPS][0-9A-Z]{3}[0-9]"
 partRuleFull = r"([FGHMNPS][0-9A-Z]{3}[0-9][A-Z]{1,2}/[A-Z])"
 partRuleCheck = r"([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?)"
 
-DIFFhead = """
-<!DOCTYPE html>
-
+DIFFHTML = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DIFF HEAD</title>
+<title>{DIFFTITLE}</title>
 </head>
-
-<body><pre><code>\n"""
-DIFFfoot = "</code></pre></body></html>"
+<body><pre><code>
+{DIFFCONTENT}
+</code></pre></body>
+</html>"""
 
 editStart = "### *** EDIT START *** ###\n"
 editEnd   = "\n### *** EDIT  END  *** ###"

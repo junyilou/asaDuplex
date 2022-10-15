@@ -6,7 +6,7 @@ from datetime import datetime, date
 
 from storeInfo import *
 from modules.special import speHours
-from modules.constants import DIFFhead, DIFFfoot
+from modules.constants import DIFFHTML
 from modules.util import setLogger, session_func
 from sdk_aliyun import async_post
 from bot import chat_ids
@@ -112,18 +112,13 @@ async def main(session):
 		w.write(jOut)
 
 	if len(comparison):
-		fileDiff = f"""{DIFFhead.replace('DIFF HEAD', 'Special Hours')}Apple Store 特别营业时间
-生成于 {runtime}\n\n
-变化:\n{comparison}\n
-日历:\n{calendar}\n\n
-原始 JSON:\n{jOut}
-{DIFFfoot}"""
-		with open("/home/ecs-user/html/storeHours.html", "w") as w:
-		#with open("storeHours.html", "w") as w:
-			w.write(fileDiff)
-		stdout("已生成对比文件 storeHours.html")
-
+		title = "Special Hours"
+		content = f"Apple Store 特别营业时间\n生成于 {runtime}\n\n\n变化:\n{comparison}\n\n日历:\n{calendar}\n\n\n原始 JSON:\n{jOut}"
 		pushStore = "Apple " + "、Apple ".join(diffStore[:2]) + (f" 等 {lendiff} 家零售店" if (lendiff := len(diffStore)) > 2 else "")
+
+		with open("/home/ecs-user/html/storeHours.html", "w") as w:
+			w.write(DIFFHTML.format(DIFFTITLE = title, DIFFCONTENT = content))
+		stdout("已生成对比文件 storeHours.html")
 
 		push = {
 			"mode": "photo-text",
