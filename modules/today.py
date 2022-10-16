@@ -281,12 +281,14 @@ class Course(asyncObject):
 			self.serial = dict(slug = self.slug, rootPath = self.rootPath)
 
 			self.collection = None
-			if moreAbout != None:
-				if typeMoreAbout := type(moreAbout) == Collection:
+			if type(moreAbout) == dict:
+				moreAbout = [moreAbout]
+			match moreAbout:
+				case None:
+					pass
+				case Collection():
 					self.collection = moreAbout
-				elif typeMoreAbout == dict:
-						moreAbout = [moreAbout]
-				if typeMoreAbout == list:
+				case list():
 					for moreDict in moreAbout:
 						try:
 							if "title" in moreDict and raw["collectionName"] == moreDict["title"]:
