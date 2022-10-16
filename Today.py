@@ -40,7 +40,7 @@ async def main(mode):
 			stores = storeReturn(args["today"], needSplit = True, remove_closed = True, remove_future = True)
 			tasks = [Store(sid = sid).getSchedules() for sid, sn in stores]
 		case "sitemap":
-			tasks = [Sitemap(rootPath = i) for i in args["sitemap"]]
+			tasks = [Sitemap(rootPath = i).getObjects() for i in args["sitemap"]]
 		case _:
 			return
 	results = await asyncio.gather(*tasks, return_exceptions = True)

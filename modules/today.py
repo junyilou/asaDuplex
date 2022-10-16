@@ -13,9 +13,11 @@ from modules.util import request, disMarkdown, timezoneText
 __session_pool = {}
 
 TIMEOUT, RETRYNUM, SEMAPHORE_LIMIT = 5, 5, 50
-API_ROOT = "https://www.apple.com/today-bff/"
-VALIDDATES = r"([0-9A-Za-z\-]*-([0-9]{6,8}))"
 ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
+API_ROOT = "https://www.apple.com/today-bff/"
+ASSURED_JSON = "Retail/savedEvent.json"
+VALIDDATES = r"(-([0-9]{6,8}))"
+
 todayNation = dict([(allRegions[i]["rootPath"], i) for i in allRegions if i != "TW"])
 
 API = {
@@ -37,6 +39,13 @@ API = {
 }
 
 savedToday = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}
+
+try:
+	with open(ASSURED_JSON) as r:
+		assure = json.loads(r.read())
+	knownSlugs = [assure["today"][i]["slug"] for i in assure["assure"]]
+except FileNotFoundError:
+	knownSlugs = []
 
 def set_session(session):
 	loop = asyncio.get_running_loop()
@@ -690,30 +699,73 @@ async def getCollection(slug, rootPath = None):
 	savedToday["Collection"][keyword] = get
 	return get
 
-async def Sitemap(rootPath):
-	runtime = datetime.now()
-	r = await request(
-		session = get_session(), 
-		url = f"https://www.apple.com{rootPath}/today/sitemap.xml",
-		ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM, headers = userAgent)
-	urls = re.findall(r"<loc>\s*(\S*)\s*</loc>", r)
+class Sitemap():
 
-	slugs = {}
-	for i in urls:
-		matches = re.findall(f"/event/{VALIDDATES}", i)
-		if matches and validDates(matches[0][1], runtime) != []:
-			slugs[matches[0][0]] = slugs.get(matches[0][0], []) + [i]
+	def match_by_assure(self, slug):
+		for s in knownSlugs:
+			if s == slug:
+				return False
+		return True
 
-	tasks = [
-		parseURL(
-			url = sorted(slugs[i], reverse = True)[0], 
-			coro = True) for i in slugs
-		]
-	return await asyncio.gather(*tasks, return_exceptions = True)
+	def match_by_valid(self, slug):
+		matches = re.findall(VALIDDATES, slug)
+		return matches and validDates(matches[0][1], self.runtime) != []
+
+	def __init__(self, rootPath = None, flag = None):
+		match rootPath, flag:
+			case None, None:
+				raise ValueError("rootPath 和 flag 必须提供一个")
+			case _, fl if fl != None:
+				self.urlPath = allRegions[fl]["storeURL"]
+			case rp, _ if rp != None:
+				self.urlPath = rp.replace("/cn", ".cn")
+		if knownSlugs == []:
+			self.using = self.match_by_valid
+		else:
+			self.using = self.match_by_assure
+		self.runtime = datetime.now()
+
+	def __hash__(self):
+		return hash(self.urlPath)
+
+	def __eq__(self, other):
+		try:
+			return self.urlPath == other.urlPath
+		except:
+			return False
+
+	def __repr__(self):
+		return f'<Sitemap "{self.urlPath}">'
+
+	async def getObjects(self):
+		r = await request(
+			session = get_session(), 
+			url = f"https://www.apple.com{self.urlPath}/today/sitemap.xml",
+			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM, headers = userAgent)
+		urls = re.findall(r"<loc>\s*(\S*)\s*</loc>", r)
+
+		slugs = {}
+		for url in urls:
+			if "/event/" not in url:
+				continue
+			slug = url.split("/event/")[1].split("/")[0].split("?")[0]
+			if self.using(slug):
+				slugs[slug] = slugs.get(slug, []) + [url]
+
+		objects = []
+		for slug in slugs:
+			slugs[slug].sort()
+			if self.using == self.match_by_valid or self.match_by_valid(slug):
+				parsing = slugs[slug][-1]
+			else:
+				parsing = slugs[slug][0]
+			objects.append(parseURL(parsing, coro = True))
+
+		return await asyncio.gather(*objects, return_exceptions = True)
 
 def parseURL(url, coro = False):
 	coursePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*))"
-	schedulePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*)/(6[0-9]{18})(\/\?sn\=([R0-9]{4}))?)"
+	schedulePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*)/(6[0-9]{18})(\/\?sn\=(R[0-9]{3}))?)"
 	collectionPattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/collection/([a-z0-9\-]*))(/\S*)?"
 	
 	course = re.findall(coursePattern, url, re.I)
@@ -733,7 +785,7 @@ def parseURL(url, coro = False):
 				"slug": schedule[0][2],
 				"scheduleId": schedule[0][3],
 				"sid": schedule[0][5],
-				"url": f"https://www.apple.com{schedule[0][1]}/today/event/{schedule[0][2]}/{schedule[0][3]}/?sn=R{schedule[0][5]}"
+				"url": f"https://www.apple.com{schedule[0][1]}/today/event/{schedule[0][2]}/{schedule[0][3]}/?sn={schedule[0][5]}"
 			}
 	elif course:
 		if coro:
