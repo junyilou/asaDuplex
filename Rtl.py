@@ -85,7 +85,8 @@ async def down(session, rtl, isSpecial, semaphore = None):
 
 		storejson['last'][rtl] = remote
 		if savedDatetime == INVALIDDATE:
-			storejson['last'] = dict([(k, storejson['last'][k]) for k in sorted(storejson['last'].keys())])
+			storejson["last"] = dict(sorted(storejson["last"].items(), key = lambda k: k[0]))
+
 		storejson['update'] = datetime.now(timezone.utc).strftime("%F %T GMT")
 
 		with open(savename, "rb") as r:

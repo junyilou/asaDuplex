@@ -34,7 +34,7 @@ class Store:
 
 	def __init__(self, **kwargs):
 		for k in ["state", "city", "sid", "name"]:
-			self.__dict__[k] = kwargs.get(k, None)
+			setattr(self, k, kwargs.get(k, None))
 		self.flag = self.state.flag
 		self.stateName = self.state.name
 		self.stateCode = self.state.code
@@ -57,7 +57,7 @@ class State:
 
 	def __init__(self, **kwargs):
 		for k in ["region", "fieldID", "code", "name", "session", "semaphore"]:
-			self.__dict__[k] = kwargs.get(k, None)
+			setattr(self, k, kwargs.get(k, None))
 		self.flag = self.region.flag
 		self.regionCode = self.region.code
 
@@ -101,7 +101,7 @@ class Region:
 
 	def __init__(self, **kwargs):
 		for k in ["flag", "session", "semaphore"]:
-			self.__dict__[k] = kwargs.get(k, None)
+			setattr(self, k, kwargs.get(k, None))
 		self.code = allRegions[self.flag]["jobCode"]
 
 	def __repr__(self):

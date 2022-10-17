@@ -51,7 +51,7 @@ def storeInfo(sid):
 	sid = f"{sid}"
 	try:
 		sid = StoreID(sid)[0][0]
-		return dict([(t, infoJSON[t][sid]) for t in infoJSON if (sid in infoJSON[t]) and (type(infoJSON[t]) == dict)])
+		return {t: infoJSON[t][sid] for t in infoJSON if (sid in infoJSON[t]) and (type(infoJSON[t]) == dict)}
 	except IndexError:
 		return {}
 

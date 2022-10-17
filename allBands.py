@@ -30,17 +30,16 @@ class Band:
 		detailProperty + [(i + "Localized") for i in detailProperty]
 
 	def __init__(self, **kwargs):
-		for k in kwargs:
-			self.__dict__[k] = kwargs[k]
+		_ = [setattr(self, k, kwargs[k]) for k in kwargs]
 
 	def __repr__(self):
 		basic = [self.partNumber, self.name]
-		detail = [self.__dict__[d] for d in Band.detailProperty] if self.isChecked else []
+		detail = [getattr(self, d) for d in self.detailProperty] if self.isChecked else []
 		return ", ".join(basic + detail)
 
 	@property
 	def isChecked(self):
-		return all([i in self.__dict__ for i in Band.detailProperty])
+		return all([hasattr(self, i) for i in self.detailProperty])
 
 	@property
 	def url(self):
@@ -48,7 +47,7 @@ class Band:
 
 	@property
 	def dict(self):
-		return dict([(i, self.__dict__.get(i, None)) for i in Band.dictProperty])
+		return {i: getattr(self, i, None) for i in self.dictProperty}
 
 def commonWords(nameList):
 	words = []

@@ -18,7 +18,7 @@ API_ROOT = "https://www.apple.com/today-bff/"
 ASSURED_JSON = "Retail/savedEvent.json"
 VALIDDATES = r"(-([0-9]{6,8}))"
 
-todayNation = dict([(allRegions[i]["rootPath"], i) for i in allRegions if i != "TW"])
+todayNation = {allRegions[i]["rootPath"]: i for i in allRegions if i != "TW"}
 
 API = {
 	"landing": {
@@ -171,7 +171,7 @@ class Store():
 		self.today = self.url.replace("/retail/", "/today/")
 		self.calendar = self.url.replace("/retail/", "/today/calendar/")
 		self.serial = dict(sid = self.sid)
-		self.raw = dict((i, self.__dict__[i]) for i in self.__dict__ if i != "raw")
+		self.raw = vars(self) | {"raw": None}
 
 	def __hash__(self):
 		return hash(self.sid)
@@ -495,7 +495,7 @@ class Schedule(asyncObject):
 			raw = raw["schedules"][scheduleId]
 
 		if all([scheduleId, raw, rootPath != None, course, store]):
-			self.__dict__ = course.__dict__.copy()
+			_ = [setattr(self, key, getattr(course, key)) for key in vars(course)]
 			self.course = course
 			self.scheduleId = scheduleId
 			self.rootPath = rootPath
