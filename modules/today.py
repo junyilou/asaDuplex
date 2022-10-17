@@ -238,8 +238,9 @@ class Store():
 					moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
 					fuzzy = False)
 				) for i in (raw["schedules"]) if (
-					((schedules := raw["schedules"]) != {}) and 
-					((not ensure) or ((storeNum := schedules[i]["storeNum"]) == self.sid) or 
+					(schedules := raw["schedules"]) and 
+					(storeNum := schedules[i]["storeNum"]) and
+					((not ensure) or (storeNum == self.sid) or 
 					("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"]))
 				)
 			]
@@ -423,10 +424,11 @@ class Course(asyncObject):
 					moreAbout = raw["moreAbout"],
 					fuzzy = False),
 				) for i in raw["schedules"] if (
-					((schedules := raw["schedules"]) != {}) and
+					(schedules := raw["schedules"]) and
+					(storeNum := schedules[i]["storeNum"]) and 
 					((schedules[i]["courseId"] == self.courseId) and 
-					(((storeNum := schedules[i]["storeNum"]) == store.sid) or 
-					("VIRTUAL" in raw["courses"][self.courseId]["type"]) or (not ensure)))
+					((storeNum == store.sid) or (not ensure) or
+					("VIRTUAL" in raw["courses"][self.courseId]["type"])))
 				)
 			]
 		return await asyncio.gather(*tasks, return_exceptions = True)
@@ -672,9 +674,11 @@ class Collection(asyncObject):
 					moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
 					fuzzy = False)
 				) for i in raw["schedules"] if 
-					((schedules := raw["schedules"]) != {}) and (courseId := schedules[i]["courseId"]) and 
+					(schedules := raw["schedules"]) and 
+					(courseId := schedules[i]["courseId"]) and
+					(storeNum := schedules[i]["storeNum"]) and 
 					((self.slug in [m["collId"] for m in raw["heroGallery"] if m["heroType"] == "TAG"]) and 
-					(((storeNum := schedules[i]["storeNum"]) == store.sid) or (not ensure) or
+					((storeNum == store.sid) or (not ensure) or
 					("VIRTUAL" in raw["courses"][courseId]["type"])))
 			]
 		return await asyncio.gather(*tasks, return_exceptions = True)
