@@ -71,19 +71,19 @@ async def main(mode):
 			if course.flag not in saved[belongs][course.courseId]["names"]:
 				append = True
 				saved[belongs][course.courseId]["names"][course.flag] = course.name
-			if belongs == "today" and course.courseId in saved["sitemap"]:
-				if course.flag in saved["sitemap"][course.courseId]["names"]:
-					del saved["sitemap"][course.courseId]["names"][course.flag]
-					append = doSend = True
-					if not saved["sitemap"][course.courseId]["names"]:
-						del saved["sitemap"][course.courseId]
-
-		elif course.courseId not in saved["today"]:
+		else:
 			append = doSend = True
 			saved[belongs][course.courseId] = {
 				"slug": course.slug,
 				"names": {course.flag: course.name}
 			}
+
+		if belongs == "today" and course.courseId in saved["sitemap"]:
+			if course.flag in saved["sitemap"][course.courseId]["names"]:
+				del saved["sitemap"][course.courseId]["names"][course.flag]
+				append = doSend = True
+				if not saved["sitemap"][course.courseId]["names"]:
+					del saved["sitemap"][course.courseId]
 
 		if doSend:
 			logging.info(str(course))
@@ -91,13 +91,13 @@ async def main(mode):
 			text, image, keyboard = teleinfo(course = course, schedules = sorted(schedules))
 			await async_post(text, image, keyboard)
 
-		if isinstance(course.collection, Collection):
-			if course.collection.slug in saved["collection"]:
-				if course.flag not in saved["collection"][course.collection.slug]:
-					saved["collection"][course.collection.slug][course.flag] = collection.name
+		if isinstance((collection := course.collection), Collection):
+			if collection.slug in saved["collection"]:
+				if course.flag not in saved["collection"][collection.slug]:
+					saved["collection"][collection.slug][collection.flag] = collection.name
 			else:
 				append = True
-				saved["collection"][course.collection.slug] = {course.flag: collection.name}
+				saved["collection"][collection.slug] = {collection.flag: collection.name}
 				logging.info(str(collection))
 				text, image, keyboard = teleinfo(collection = collection)
 				await async_post(text, image, keyboard)
