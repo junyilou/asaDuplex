@@ -1,5 +1,5 @@
 {
-  "update": "2022-10-17 03:40:49 GMT",
+  "update": "2022-10-18 05:11:33 GMT",
   "today": {
     "6443617454119551373": {
       "names": {
@@ -956,6 +956,12 @@
       },
       "slug": "virtual-studio-pong-nan-092822"
     },
+    "6978267057884660649": {
+      "names": {
+        "🇨🇳": "设计实验室：跟着刘治治制作宣传海报探索设计奥义"
+      },
+      "slug": "design-lab-liu-zhizhi-111922"
+    },
     "6980220449524122013": {
       "names": {
         "🇨🇳": "在线课程：用 Keynote 讲演制作有感染力的演示文稿",
@@ -1011,6 +1017,12 @@
       },
       "slug": "design-lab-exploring-color-and-texture-with-kaori-akiyama-10252022"
     },
+    "6982811933179544009": {
+      "names": {
+        "🇨🇳": "App 实验室：跟着柳毅和梁逸伦为品牌构建 App 原型"
+      },
+      "slug": "virtual-studio-build-an-app-prototype-for-brand-with-tom-liu-and-alen-jiang-11192022"
+    },
     "6983060957002367353": {
       "names": {
         "🇸🇬": "Virtual Studio: Social Media Strategy with Elizabeth Taylor"
@@ -1041,6 +1053,12 @@
       },
       "slug": "design-lab-peaches-102922"
     },
+    "6983421293945586573": {
+      "names": {
+        "🇸🇬": "App Lab: Prototyping Made Simple with Jonathan Oen-Lee"
+      },
+      "slug": "app-lab-jonathan-oen-lee-112422"
+    },
     "6983696951045161549": {
       "names": {
         "🇹🇭": "สตูดิโอเสมือน: เปลี่ยนงานศิลป์ให้เป็นผลิตภัณฑ์ กับ give.me.museums"
@@ -1058,6 +1076,12 @@
         "🇹🇭": "สตูดิโอเสมือน: โปรโมทธุรกิจด้วยวิดีโอ กับ CapCut"
       },
       "slug": "virtual-studio-capcut-112422"
+    },
+    "6983770381195051853": {
+      "names": {
+        "🇸🇬": "Design Lab: Content Hacks in Keynote with Jade Amar"
+      },
+      "slug": "design-lab-jade-amar-111922"
     },
     "6985174412027135373": {
       "names": {
@@ -1157,29 +1181,11 @@
     }
   },
   "sitemap": {
-    "6978267057884660649": {
-      "names": {
-        "🇨🇳": "设计实验室：跟着刘治治制作宣传海报探索设计奥义"
-      },
-      "slug": "design-lab-liu-zhizhi-111922"
-    },
-    "6982811933179544009": {
-      "names": {
-        "🇨🇳": "在线创意空间：跟着柳毅和梁逸伦为品牌构建 App 原型"
-      },
-      "slug": "virtual-studio-build-an-app-prototype-for-brand-with-tom-liu-and-alen-jiang-11192022"
-    },
     "6983421293945586573": {
       "names": {
         "🇸🇬": "App Lab: Prototyping Made Simple with Jonathan Oen-Lee"
       },
       "slug": "app-lab-jonathan-oen-lee-112422"
-    },
-    "6983770381195051853": {
-      "names": {
-        "🇸🇬": "Design Lab: Content Hacks in Keynote with Jade Amar"
-      },
-      "slug": "design-lab-jade-amar-111922"
     },
     "6986758313623324329": {
       "names": {

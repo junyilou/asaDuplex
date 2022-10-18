@@ -66,20 +66,33 @@ async def main(mode):
 	for course in courses:
 
 		doSend = False
-		belongs = "today" if len(courses[course]) else "sitemap"
-		if course.courseId in saved[belongs]:
-			if course.flag not in saved[belongs][course.courseId]["names"]:
-				append = True
-				saved[belongs][course.courseId]["names"][course.flag] = course.name
-		else:
-			append = doSend = True
-			saved[belongs][course.courseId] = {
-				"slug": course.slug,
-				"names": {course.flag: course.name}
-			}
+		conditions = [len(courses[course]) > 0] + [course.courseId in saved[s] for s in ["today", "sitemap"]]
 
-		if belongs == "today" and course.courseId in saved["sitemap"]:
-			if course.flag in saved["sitemap"][course.courseId]["names"]:
+		match conditions:
+			case True, True, _:
+				if course.flag not in saved["today"][course.courseId]["names"]:
+					append = True
+					saved["today"][course.courseId]["names"][course.flag] = course.name
+			case True, False, _:
+				append = doSend = True
+				saved["today"][course.courseId] = {
+					"slug": course.slug,
+					"names": {course.flag: course.name}
+				}
+			case False, False, True:
+				append = doSend = True
+				saved["today"][course.courseId] = {
+					"slug": course.slug,
+					"names": {course.flag: course.name}
+				}
+			case False, False, False:
+				append = doSend = True
+				saved["sitemap"][course.courseId] = {
+					"slug": course.slug,
+					"names": {course.flag: course.name}
+				}
+		match conditions:
+			case True, _, True:
 				del saved["sitemap"][course.courseId]["names"][course.flag]
 				append = doSend = True
 				if not saved["sitemap"][course.courseId]["names"]:
