@@ -13,14 +13,26 @@ from modules.util import setLogger, sync
 from bot import chat_ids
 from sdk_aliyun import async_post as raw_post
 
-def sortOD(od, topLevel = True):
-    res = OrderedDict()
-    for k, v in sorted(od.items(), reverse = topLevel):
-        if isinstance(v, dict):
-            res[k] = sortOD(v, False)
-        else:
-            res[k] = v
-    return res
+def sortOD(od, reverse = True):
+	res = OrderedDict()
+	for k, v in sorted(od.items(), reverse = reverse):
+		if isinstance(v, dict):
+			res[k] = sortOD(v, False)
+		else:
+			res[k] = v
+	return res
+
+def rec(lst, rst):
+	for i in lst:
+		match i:
+			case list():
+				rec(i, rst)
+			case Exception():
+				logging.error(str(i.args) if i.args else str(i))
+			case _:
+				if i not in rst:
+					rst.append(i)
+	return rst
 
 async def async_post(text, image, keyboard):
 	push = {
@@ -43,29 +55,22 @@ async def main(mode):
 			tasks = [Sitemap(rootPath = i).getObjects() for i in args["sitemap"]]
 		case _:
 			return
-	results = await asyncio.gather(*tasks, return_exceptions = True)
-
+	
 	courses = {}
-	for i in results:
-		if isinstance(i, Exception):
-			logging.error(str(i.args) if i.args else str(i))
-			continue
-		
-		for j in i:
-			if isinstance(j, Exception):
-				logging.error(str(j.args) if j.args else str(j))
-				continue
+	results = await asyncio.gather(*tasks, return_exceptions = True)
+	results = rec(results, [])
 
-			if hasattr(j, "scheduleId"):
-				courses[j.course] = courses.get(j.course, [])
-				if j not in courses[j.course]:
-					courses[j.course].append(j)
-			else:
-				courses[j] = courses.get(j, [])
+	for j in results:
+		if hasattr(j, "scheduleId"):
+			courses[j.course] = courses.get(j.course, [])
+			if j not in courses[j.course]:
+				courses[j.course].append(j)
+		else:
+			courses[j] = courses.get(j, [])
 
 	for course in courses:
-
 		doSend = False
+		toSave = {"slug": course.slug, "names": {course.flag: course.name}}
 		conditions = [len(courses[course]) > 0] + [course.courseId in saved[s] for s in ["today", "sitemap"]]
 
 		match conditions:
@@ -75,22 +80,13 @@ async def main(mode):
 					saved["today"][course.courseId]["names"][course.flag] = course.name
 			case True, False, _:
 				append = doSend = True
-				saved["today"][course.courseId] = {
-					"slug": course.slug,
-					"names": {course.flag: course.name}
-				}
+				saved["today"][course.courseId] = toSave
 			case False, False, True:
 				append = doSend = True
-				saved["today"][course.courseId] = {
-					"slug": course.slug,
-					"names": {course.flag: course.name}
-				}
+				saved["today"][course.courseId] = toSave
 			case False, False, False:
 				append = doSend = True
-				saved["sitemap"][course.courseId] = {
-					"slug": course.slug,
-					"names": {course.flag: course.name}
-				}
+				saved["sitemap"][course.courseId] = toSave
 		match conditions:
 			case True, _, True:
 				del saved["sitemap"][course.courseId]["names"][course.flag]
