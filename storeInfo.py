@@ -111,6 +111,9 @@ async def storeDict(sid = None, sif = None, session = None, mode = "dict"):
 	except:
 		return {}
 
+def getCity(sid):
+	return infoJSON["key"][f"{str(sid).upper().removeprefix('R'):0>3}"]["city"]
+
 def getState(sid, stateOnly = False):
 	sid = f"{sid}"
 	state = infoJSON["key"][sid]["state"]
