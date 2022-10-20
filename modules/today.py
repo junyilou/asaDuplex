@@ -18,7 +18,7 @@ API_ROOT = "https://www.apple.com/today-bff/"
 ASSURED_JSON = "Retail/savedEvent.json"
 VALIDDATES = r"(-([0-9]{6,8}))"
 
-todayNation = {allRegions[i]["rootPath"]: i for i in allRegions if i != "TW"}
+todayNation = {allRegions[i]["rootPath"]: i for i in allRegions}
 
 API = {
 	"landing": {
@@ -145,7 +145,6 @@ class Store():
 			self.name = raw["name"]
 			self.sid = raw["storeNum"]
 			self.timezone = raw["timezone"]["name"]
-			self.timezoneFlag = True
 			self.slug = raw["slug"]
 			if rootPath == None:
 				sif = storeInfo(self.sid)
@@ -154,7 +153,9 @@ class Store():
 			else:
 				self.rootPath = rootPath
 			self.flag = todayNation[self.rootPath]
-			self.url = f"https://www.apple.com{'.cn' if self.rootPath == '/cn' else ''}{raw['path']}"
+			self.url = f"https://www.apple.com{raw['path']}" if self.rootPath != "/cn" \
+				else f"https://www.apple.com.cn{raw['path']}"
+			self.coord = [raw["lat"], raw["long"]]
 		elif sid != None:
 			store = StoreID(sid)[0]
 			self.sid = "R" + store[0]
@@ -163,9 +164,9 @@ class Store():
 			self.slug = storeURL(sif = sif, mode = "slug")
 			self.rootPath = allRegions[sif["flag"]]["rootPath"]
 			self.timezone = sif["timezone"]
-			self.timezoneFlag = False
-			self.flag = sif["flag"]
+			self.flag = todayNation[self.rootPath]
 			self.url = storeURL(sif = sif)
+			self.coord = None
 		else:
 			raise ValueError("sid, raw 至少提供一个")
 		self.today = self.url.replace("/retail/", "/today/")
@@ -191,7 +192,7 @@ class Store():
 			session = get_session(),
 			url = (API["landing"]["store"] if ensure else API["landing"]["nearby"]).format(
 				STORESLUG = self.slug, ROOTPATH = self.rootPath),
-			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM, headers = userAgent)
+			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
 		
 		try:
 			raw = json.loads(_separate(r))
@@ -204,7 +205,8 @@ class Store():
 				raw = raw["courses"][i], 
 				rootPath = self.rootPath, 
 				moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
-				fuzzy = False
+				fuzzy = False,
+				stores = raw["stores"]
 			) for i in raw["courses"]]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
@@ -214,7 +216,7 @@ class Store():
 			session = get_session(),
 			url = (API["landing"]["store"] if ensure else API["landing"]["nearby"]).format(
 				STORESLUG = self.slug, ROOTPATH = self.rootPath),
-			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM, headers = userAgent)
+			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
 		
 		try:
 			raw = json.loads(_separate(r))
@@ -246,8 +248,15 @@ class Store():
 			]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
+	async def getCoord(self):
+		d = await storeDict(sid = self.sid, mode = "raw", session = get_session())
+		self.coord = [i[1] for i in sorted(d["geolocation"].items())]
+		return self.coord
+
 def getStore(sid, raw = None, rootPath = None):
 	global savedToday
+	if type(sid) != str or not sid.startswith("R"):
+		sid = f"R{sid:0>3}"
 	if sid in savedToday["Store"]:
 		if raw != None:
 			get = Store(raw = raw, rootPath = rootPath)
@@ -257,8 +266,21 @@ def getStore(sid, raw = None, rootPath = None):
 		savedToday["Store"][sid] = get
 	return savedToday["Store"][sid]
 
+class Talent():
+	def __init__(self, raw):
+		self.raw = raw
+		self.name = raw["name"].strip()
+		self.title = raw["title"].strip() if "title" in raw else None
+		self.description = raw["description"].strip()
+		self.image = raw.get("backgroundImage", None)
+		self.links = ({"Website": raw["websiteUrl"]} if "websiteUrl" in raw else {}) | \
+			{social["name"].capitalize(): social["url"] for social in raw["socialLinks"]}
+
+	def __repr__(self):
+		return f"<Talent {self.name}" + (f', "{self.title}"' if self.title else "") + ">"
+
 class Course(asyncObject):
-	async def __init__(self, courseId = None, raw = None, rootPath = None, slug = None, moreAbout = None):
+	async def __init__(self, courseId = None, raw = None, rootPath = None, slug = None, moreAbout = None, talents = None):
 		
 		if raw == None:
 			if not all([slug, rootPath != None]):
@@ -279,6 +301,7 @@ class Course(asyncObject):
 
 			courseId = [i for i in raw["courses"] if raw["courses"][i]["urlTitle"] == slug][0]
 			moreAbout = raw["moreAbout"]
+			talents = raw["talents"]
 			raw = raw["courses"][courseId]
 
 		if all([courseId, raw, rootPath != None]):
@@ -349,6 +372,7 @@ class Course(asyncObject):
 
 			self.virtual = "VIRTUAL" in raw["type"]
 			self.special = "SPECIAL" in raw["type"] or "HIGH" in raw["talentType"]
+			self.talents = [Talent(raw = t) for t in talents] if talents != None else None
 			self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}"
 			self.raw = raw
 
@@ -422,6 +446,7 @@ class Course(asyncObject):
 					courseId = self.courseId, 
 					rootPath = store.rootPath,
 					moreAbout = raw["moreAbout"],
+					talents = raw["talents"],
 					fuzzy = False),
 				) for i in raw["schedules"] if (
 					(schedules := raw["schedules"]) and
@@ -439,7 +464,7 @@ class Course(asyncObject):
 		tasks = [self.getSchedules(getStore(sid = i[0]), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
-async def getCourse(courseId, rootPath = None, raw = None, moreAbout = None, fuzzy = True):
+async def getCourse(courseId = None, rootPath = None, slug = None, raw = None, moreAbout = None, talents = None, fuzzy = True, stores = []):
 	global savedToday
 	saved = list(savedToday["Course"])
 	if rootPath == "":
@@ -453,12 +478,12 @@ async def getCourse(courseId, rootPath = None, raw = None, moreAbout = None, fuz
 	for i in saved:
 		if keyword in i:
 			return savedToday["Course"][i]
-	
-	if rootPath == None:
-		raise ValueError("没有找到匹配，需要提供 rootPath")
+	if rootPath == None and courseId == None:
+		raise ValueError("没有找到匹配，需要提供 slug, rootPath")
+	_ = [getStore(store, raw = stores[store]) for store in stores]
 
-	get = await Course(raw = raw, courseId = courseId, rootPath = rootPath.replace("/us", ""), moreAbout = moreAbout)
-	savedToday["Course"][f"{rootPath}/{courseId}"] = get
+	get = await Course(raw = raw, courseId = courseId, rootPath = rootPath.replace("/us", ""), slug = slug, moreAbout = moreAbout, talents = talents)
+	savedToday["Course"][f"{rootPath}/{get.courseId}"] = get
 	return get
 
 class Schedule(asyncObject):
@@ -491,6 +516,7 @@ class Schedule(asyncObject):
 				courseId = raw["schedules"][scheduleId]["courseId"], 
 				rootPath = self.rootPath,
 				moreAbout = raw["moreAbout"],
+				talents = raw["talents"],
 				fuzzy = False)
 			raw = raw["schedules"][scheduleId]
 
@@ -741,11 +767,11 @@ class Sitemap():
 	def __repr__(self):
 		return f'<Sitemap "{self.urlPath}">'
 
-	async def getObjects(self):
+	async def getObjects(self, ensure = False):
 		r = await request(
 			session = get_session(), 
 			url = f"https://www.apple.com{self.urlPath}/today/sitemap.xml",
-			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM, headers = userAgent)
+			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
 		urls = re.findall(r"<loc>\s*(\S*)\s*</loc>", r)
 
 		slugs = {}
@@ -759,8 +785,8 @@ class Sitemap():
 		objects = []
 		for slug in slugs:
 			slugs[slug].sort()
-			if self.using == self.match_by_valid or self.match_by_valid(slug):
-				parsing = slugs[slug][-1]
+			if ensure or self.using == self.match_by_valid or self.match_by_valid(slug):
+				parsing = slugs[slug][1 if len(slugs[slug]) > 1 else 0]
 			else:
 				parsing = slugs[slug][0]
 			objects.append(parseURL(parsing, coro = True))
