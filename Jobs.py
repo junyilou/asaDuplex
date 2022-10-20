@@ -167,7 +167,7 @@ async def main(targets, session):
 	RECORD = {}
 	semaphore = asyncio.Semaphore(30)
 
-	TASKS = [Region(flag = i, session = session, semaphore = semaphore) for i in targets if i != "TW"]
+	TASKS = [Region(flag = i, session = session, semaphore = semaphore) for i in targets if not i.isalpha()]
 
 	while len(TASKS):
 		tasks, coros = TASKS.copy(), []

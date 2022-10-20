@@ -20,398 +20,411 @@ editStart = "### *** EDIT START *** ###\n"
 editEnd   = "\n### *** EDIT  END  *** ###"
 
 allRegions = {
-  "🇹🇷": {
-    "name": "土耳其",
-    "nameEng": "Turkey",
-    "abbr": "TR",
-    "mobileApp": "e/tr",
-    "storeURL": "/tr",
-    "shopURL": "/tr",
-    "rootPath": "/tr",
-    "rspLocale": "tr_TR",
-    "partSample": "ZM",
-    "jobCode": "114438164",
+  "HK": {
+    "abbr": "HKEN",
+    "altername": [],
+    "jobCode": "114438082",
+    "mobileApp": "p/hk",
+    "name": "香港 (English)",
+    "nameEng": "Hong Kong",
+    "partSample": "FE",
+    "rootPath": "/hk/en",
+    "rspLocale": "en_HK",
+    "shopURL": "/hk",
+    "storeURL": "/hk/en"
+  },
+  "TW": {
+    "abbr": "TW",
     "altername": [
-      "Türkiye"
-    ]
+      "ROC",
+      "中华民国"
+    ],
+    "jobCode": "114438311",
+    "mobileApp": "p/tw",
+    "name": "台湾",
+    "nameEng": "Taiwan",
+    "partSample": "FE",
+    "rootPath": "/tw",
+    "rspLocale": "zh_TW",
+    "shopURL": "/tw",
+    "storeURL": "/tw"
   },
   "🇦🇪": {
-    "name": "阿联酋",
-    "nameEng": "United Arab Emirates",
     "abbr": "AE",
-    "mobileApp": "e/ae",
-    "storeURL": "/ae",
-    "shopURL": "/ae",
-    "rootPath": "/ae",
-    "rspLocale": "en_AE",
-    "partSample": "ZE",
-    "jobCode": "114438225",
     "altername": [
       "UAE",
       "阿拉伯联合酋长国",
       "阿拉伯联合大公国"
-    ]
+    ],
+    "jobCode": "114438225",
+    "mobileApp": "e/ae",
+    "name": "阿联酋",
+    "nameEng": "United Arab Emirates",
+    "partSample": "ZE",
+    "rootPath": "/ae",
+    "rspLocale": "en_AE",
+    "shopURL": "/ae",
+    "storeURL": "/ae"
+  },
+  "🇦🇹": {
+    "abbr": "AT",
+    "altername": [],
+    "jobCode": "114438333",
+    "mobileApp": "e/at",
+    "name": "奥地利",
+    "nameEng": "Austria",
+    "partSample": "ZM",
+    "rootPath": "/at",
+    "rspLocale": "de_AT",
+    "shopURL": "/at",
+    "storeURL": "/at"
+  },
+  "🇦🇺": {
+    "abbr": "AU",
+    "altername": [
+      "澳洲"
+    ],
+    "jobCode": "114437991",
+    "mobileApp": "p/au",
+    "name": "澳大利亚",
+    "nameEng": "Australia",
+    "partSample": "FE",
+    "rootPath": "/au",
+    "rspLocale": "en_AU",
+    "shopURL": "/au",
+    "storeURL": "/au"
+  },
+  "🇧🇪": {
+    "abbr": "BE",
+    "altername": [],
+    "jobCode": "114438251",
+    "mobileApp": "e/be-fr",
+    "name": "比利时",
+    "nameEng": "Belgium",
+    "partSample": "ZM",
+    "rootPath": "/befr",
+    "rspLocale": "fr_BE",
+    "shopURL": "/be-fr",
+    "storeURL": "/befr"
+  },
+  "🇧🇷": {
+    "abbr": "BR",
+    "altername": [],
+    "jobCode": "114438176",
+    "mobileApp": "a/br",
+    "name": "巴西",
+    "nameEng": "Brazil",
+    "partSample": "AM",
+    "rootPath": "/br",
+    "rspLocale": "pt_BR",
+    "shopURL": "/br",
+    "storeURL": "/br"
+  },
+  "🇨🇦": {
+    "abbr": "CA",
+    "altername": [],
+    "jobCode": "114438004",
+    "mobileApp": "a/ca",
+    "name": "加拿大",
+    "nameEng": "Canada",
+    "partSample": "AM",
+    "rootPath": "/ca",
+    "rspLocale": "en_CA",
+    "shopURL": "/ca",
+    "storeURL": "/ca"
+  },
+  "🇨🇭": {
+    "abbr": "CH",
+    "altername": [
+      "Swiss"
+    ],
+    "jobCode": "114438017",
+    "mobileApp": "e/ch-de",
+    "name": "瑞士",
+    "nameEng": "Switzerland",
+    "partSample": "ZM",
+    "rootPath": "/chde",
+    "rspLocale": "de_CH",
+    "shopURL": "/ch-de",
+    "storeURL": "/chde"
+  },
+  "🇨🇳": {
+    "abbr": "CN",
+    "altername": [
+      "PRC"
+    ],
+    "jobCode": "114438030",
+    "mobileApp": "p/cn",
+    "name": "中国",
+    "nameEng": "China",
+    "partSample": "FE",
+    "rootPath": "/cn",
+    "rspLocale": "zh_CN",
+    "shopURL": ".cn",
+    "storeURL": ".cn"
+  },
+  "🇩🇪": {
+    "abbr": "DE",
+    "altername": [
+      "Deutschland"
+    ],
+    "jobCode": "114438043",
+    "mobileApp": "e/de",
+    "name": "德国",
+    "nameEng": "Germany",
+    "partSample": "ZM",
+    "rootPath": "/de",
+    "rspLocale": "de_DE",
+    "shopURL": "/de",
+    "storeURL": "/de"
+  },
+  "🇪🇸": {
+    "abbr": "ES",
+    "altername": [
+      "España"
+    ],
+    "jobCode": "114438056",
+    "mobileApp": "e/es",
+    "name": "西班牙",
+    "nameEng": "Spain",
+    "partSample": "ZM",
+    "rootPath": "/es",
+    "rspLocale": "es_ES",
+    "shopURL": "/es",
+    "storeURL": "/es"
+  },
+  "🇫🇷": {
+    "abbr": "FR",
+    "altername": [],
+    "jobCode": "114438069",
+    "mobileApp": "e/fr",
+    "name": "法国",
+    "nameEng": "France",
+    "partSample": "ZM",
+    "rootPath": "/fr",
+    "rspLocale": "fr_FR",
+    "shopURL": "/fr",
+    "storeURL": "/fr"
   },
   "🇬🇧": {
-    "name": "英国",
-    "nameEng": "United Kingdom",
     "abbr": "GB",
-    "mobileApp": "e/uk",
-    "storeURL": "/uk",
-    "shopURL": "/uk",
-    "rootPath": "/uk",
-    "rspLocale": "en_GB",
-    "partSample": "ZM",
-    "jobCode": "114438145",
     "altername": [
       "UK",
       "Great Britain",
       "大英帝国"
-    ]
-  },
-  "🇩🇪": {
-    "name": "德国",
-    "nameEng": "Germany",
-    "abbr": "DE",
-    "mobileApp": "e/de",
-    "storeURL": "/de",
-    "shopURL": "/de",
-    "rootPath": "/de",
-    "rspLocale": "de_DE",
+    ],
+    "jobCode": "114438145",
+    "mobileApp": "e/uk",
+    "name": "英国",
+    "nameEng": "United Kingdom",
     "partSample": "ZM",
-    "jobCode": "114438043",
-    "altername": [
-      "Deutschland"
-    ]
-  },
-  "🇹🇼": {
-    "name": "台湾",
-    "nameEng": "Taiwan",
-    "abbr": "TW",
-    "mobileApp": "p/tw",
-    "storeURL": "/tw",
-    "shopURL": "/tw",
-    "rootPath": "/tw",
-    "rspLocale": "zh_TW",
-    "partSample": "FE",
-    "jobCode": "114438311",
-    "altername": [
-      "ROC",
-      "中华民国"
-    ]
-  },
-  "TW": {
-    "name": "台湾",
-    "nameEng": "Taiwan",
-    "abbr": "TW",
-    "mobileApp": "p/tw",
-    "storeURL": "/tw",
-    "shopURL": "/tw",
-    "rootPath": "/tw",
-    "rspLocale": "zh_TW",
-    "partSample": "FE",
-    "jobCode": "114438311",
-    "altername": [
-      "ROC",
-      "中华民国"
-    ]
-  },
-  "🇺🇸": {
-    "name": "美国",
-    "nameEng": "United States",
-    "abbr": "US",
-    "mobileApp": "a/us",
-    "storeURL": "",
-    "shopURL": "",
-    "rootPath": "",
-    "rspLocale": "en_US",
-    "partSample": "AM",
-    "jobCode": "114438158",
-    "altername": [
-      "America",
-      "U.S."
-    ]
-  },
-  "🇲🇽": {
-    "name": "墨西哥",
-    "nameEng": "Mexico",
-    "abbr": "MX",
-    "mobileApp": "a/mx",
-    "storeURL": "/mx",
-    "shopURL": "/mx",
-    "rootPath": "/mx",
-    "rspLocale": "es_MX",
-    "partSample": "AM",
-    "jobCode": "114438297",
-    "altername": []
-  },
-  "🇨🇭": {
-    "name": "瑞士",
-    "nameEng": "Switzerland",
-    "abbr": "CH",
-    "mobileApp": "e/ch-de",
-    "storeURL": "/chde",
-    "shopURL": "/ch-de",
-    "rootPath": "/chde",
-    "rspLocale": "de_CH",
-    "partSample": "ZM",
-    "jobCode": "114438017",
-    "altername": [
-      "Swiss"
-    ]
-  },
-  "🇧🇪": {
-    "name": "比利时",
-    "nameEng": "Belgium",
-    "abbr": "BE",
-    "mobileApp": "e/be-fr",
-    "storeURL": "/befr",
-    "shopURL": "/be-fr",
-    "rootPath": "/befr",
-    "rspLocale": "fr_BE",
-    "partSample": "ZM",
-    "jobCode": "114438251",
-    "altername": []
-  },
-  "🇳🇱": {
-    "name": "荷兰",
-    "nameEng": "Netherlands",
-    "abbr": "NL",
-    "mobileApp": "e/nl",
-    "storeURL": "/nl",
-    "shopURL": "/nl",
-    "rootPath": "/nl",
-    "rspLocale": "nl_NL",
-    "partSample": "ZM",
-    "jobCode": "114438119",
-    "altername": [
-      "Holland"
-    ]
-  },
-  "🇪🇸": {
-    "name": "西班牙",
-    "nameEng": "Spain",
-    "abbr": "ES",
-    "mobileApp": "e/es",
-    "storeURL": "/es",
-    "shopURL": "/es",
-    "rootPath": "/es",
-    "rspLocale": "es_ES",
-    "partSample": "ZM",
-    "jobCode": "114438056",
-    "altername": [
-      "España"
-    ]
+    "rootPath": "/uk",
+    "rspLocale": "en_GB",
+    "shopURL": "/uk",
+    "storeURL": "/uk"
   },
   "🇭🇰": {
+    "abbr": "HK",
+    "altername": [],
+    "jobCode": "114438082",
+    "mobileApp": "p/hk-zh",
     "name": "香港",
     "nameEng": "Hong Kong",
-    "abbr": "HK",
-    "mobileApp": "p/hk",
-    "storeURL": "/hk",
-    "shopURL": "/hk",
+    "partSample": "FE",
     "rootPath": "/hk",
-    "rspLocale": "en_HK",
-    "partSample": "FE",
-    "jobCode": "114438082",
-    "altername": []
+    "rspLocale": "zh_HK",
+    "shopURL": "/hk-zh",
+    "storeURL": "/hk"
   },
-  "🇸🇪": {
-    "name": "瑞典",
-    "nameEng": "Sweden",
-    "abbr": "SE",
-    "mobileApp": "e/se",
-    "storeURL": "/se",
-    "shopURL": "/se",
-    "rootPath": "/se",
-    "rspLocale": "sv_SE",
+  "🇮🇳": {
+    "abbr": "IN",
+    "altername": [],
+    "jobCode": "200314117",
+    "mobileApp": None,
+    "name": "印度",
+    "nameEng": "India",
     "partSample": "ZM",
-    "jobCode": "114438132",
-    "altername": []
-  },
-  "🇨🇳": {
-    "name": "中国",
-    "nameEng": "China",
-    "abbr": "CN",
-    "mobileApp": "p/cn",
-    "storeURL": ".cn",
-    "shopURL": ".cn",
-    "rootPath": "/cn",
-    "rspLocale": "zh_CN",
-    "partSample": "FE",
-    "jobCode": "114438030",
-    "altername": [
-      "PRC"
-    ]
-  },
-  "🇫🇷": {
-    "name": "法国",
-    "nameEng": "France",
-    "abbr": "FR",
-    "mobileApp": "e/fr",
-    "storeURL": "/fr",
-    "shopURL": "/fr",
-    "rootPath": "/fr",
-    "rspLocale": "fr_FR",
-    "partSample": "ZM",
-    "jobCode": "114438069",
-    "altername": []
-  },
-  "🇦🇺": {
-    "name": "澳大利亚",
-    "nameEng": "Australia",
-    "abbr": "AU",
-    "mobileApp": "p/au",
-    "storeURL": "/au",
-    "shopURL": "/au",
-    "rootPath": "/au",
-    "rspLocale": "en_AU",
-    "partSample": "FE",
-    "jobCode": "114437991",
-    "altername": [
-      "澳洲"
-    ]
+    "rootPath": "/in",
+    "rspLocale": "en_IN",
+    "shopURL": "/in",
+    "storeURL": "/in"
   },
   "🇮🇹": {
-    "name": "意大利",
-    "nameEng": "Italy",
     "abbr": "IT",
-    "mobileApp": "e/it",
-    "storeURL": "/it",
-    "shopURL": "/it",
-    "rootPath": "/it",
-    "rspLocale": "it_IT",
-    "partSample": "ZM",
-    "jobCode": "114438095",
     "altername": [
       "Italia",
       "义大利"
-    ]
-  },
-  "🇲🇴": {
-    "name": "澳门",
-    "nameEng": "Macau",
-    "abbr": "MO",
-    "mobileApp": None,
-    "storeURL": "/mo",
-    "shopURL": None,
-    "rootPath": "/mo",
-    "rspLocale": "zh_MO",
-    "partSample": None,
-    "jobCode": "114438282",
-    "altername": [
-      "Macao"
-    ]
-  },
-  "🇧🇷": {
-    "name": "巴西",
-    "nameEng": "Brazil",
-    "abbr": "BR",
-    "mobileApp": "a/br",
-    "storeURL": "/br",
-    "shopURL": "/br",
-    "rootPath": "/br",
-    "rspLocale": "pt_BR",
-    "partSample": "AM",
-    "jobCode": "114438176",
-    "altername": []
+    ],
+    "jobCode": "114438095",
+    "mobileApp": "e/it",
+    "name": "意大利",
+    "nameEng": "Italy",
+    "partSample": "ZM",
+    "rootPath": "/it",
+    "rspLocale": "it_IT",
+    "shopURL": "/it",
+    "storeURL": "/it"
   },
   "🇯🇵": {
+    "abbr": "JP",
+    "altername": [],
+    "jobCode": "114438107",
+    "mobileApp": "j/jp",
     "name": "日本",
     "nameEng": "Japan",
-    "abbr": "JP",
-    "mobileApp": "j/jp",
-    "storeURL": "/jp",
-    "shopURL": "/jp",
+    "partSample": "FE",
     "rootPath": "/jp",
     "rspLocale": "ja_JP",
-    "partSample": "FE",
-    "jobCode": "114438107",
-    "altername": []
+    "shopURL": "/jp",
+    "storeURL": "/jp"
   },
   "🇰🇷": {
-    "name": "韩国",
-    "nameEng": "South Korea",
     "abbr": "KR",
-    "mobileApp": "p/kr",
-    "storeURL": "/kr",
-    "shopURL": "/kr",
-    "rootPath": "/kr",
-    "rspLocale": "ko_KR",
-    "partSample": "FE",
-    "jobCode": "114438326",
     "altername": [
       "Korea",
       "ROK",
       "南韩",
       "大韩民国"
-    ]
+    ],
+    "jobCode": "114438326",
+    "mobileApp": "p/kr",
+    "name": "韩国",
+    "nameEng": "South Korea",
+    "partSample": "FE",
+    "rootPath": "/kr",
+    "rspLocale": "ko_KR",
+    "shopURL": "/kr",
+    "storeURL": "/kr"
   },
-  "🇨🇦": {
-    "name": "加拿大",
-    "nameEng": "Canada",
-    "abbr": "CA",
-    "mobileApp": "a/ca",
-    "storeURL": "/ca",
-    "shopURL": "/ca",
-    "rootPath": "/ca",
-    "rspLocale": "en_CA",
+  "🇲🇴": {
+    "abbr": "MO",
+    "altername": [
+      "Macao"
+    ],
+    "jobCode": "114438282",
+    "mobileApp": None,
+    "name": "澳门",
+    "nameEng": "Macau",
+    "partSample": None,
+    "rootPath": "/mo",
+    "rspLocale": "zh_MO",
+    "shopURL": None,
+    "storeURL": "/mo"
+  },
+  "🇲🇽": {
+    "abbr": "MX",
+    "altername": [],
+    "jobCode": "114438297",
+    "mobileApp": "a/mx",
+    "name": "墨西哥",
+    "nameEng": "Mexico",
     "partSample": "AM",
-    "jobCode": "114438004",
-    "altername": []
+    "rootPath": "/mx",
+    "rspLocale": "es_MX",
+    "shopURL": "/mx",
+    "storeURL": "/mx"
   },
-  "🇦🇹": {
-    "name": "奥地利",
-    "nameEng": "Austria",
-    "abbr": "AT",
-    "mobileApp": "e/at",
-    "storeURL": "/at",
-    "shopURL": "/at",
-    "rootPath": "/at",
-    "rspLocale": "de_AT",
+  "🇳🇱": {
+    "abbr": "NL",
+    "altername": [
+      "Holland"
+    ],
+    "jobCode": "114438119",
+    "mobileApp": "e/nl",
+    "name": "荷兰",
+    "nameEng": "Netherlands",
     "partSample": "ZM",
-    "jobCode": "114438333",
-    "altername": []
+    "rootPath": "/nl",
+    "rspLocale": "nl_NL",
+    "shopURL": "/nl",
+    "storeURL": "/nl"
+  },
+  "🇸🇪": {
+    "abbr": "SE",
+    "altername": [],
+    "jobCode": "114438132",
+    "mobileApp": "e/se",
+    "name": "瑞典",
+    "nameEng": "Sweden",
+    "partSample": "ZM",
+    "rootPath": "/se",
+    "rspLocale": "sv_SE",
+    "shopURL": "/se",
+    "storeURL": "/se"
   },
   "🇸🇬": {
-    "name": "新加坡",
-    "nameEng": "Singapore",
     "abbr": "SG",
-    "mobileApp": "p/sg",
-    "storeURL": "/sg",
-    "shopURL": "/sg",
-    "rootPath": "/sg",
-    "rspLocale": "en_SG",
-    "partSample": "FE",
-    "jobCode": "114438238",
     "altername": [
       "星加坡"
-    ]
+    ],
+    "jobCode": "114438238",
+    "mobileApp": "p/sg",
+    "name": "新加坡",
+    "nameEng": "Singapore",
+    "partSample": "FE",
+    "rootPath": "/sg",
+    "rspLocale": "en_SG",
+    "shopURL": "/sg",
+    "storeURL": "/sg"
   },
   "🇹🇭": {
+    "abbr": "TH",
+    "altername": [],
+    "jobCode": "114438346",
+    "mobileApp": "p/th-en",
     "name": "泰国",
     "nameEng": "Thailand",
-    "abbr": "TH",
-    "mobileApp": "p/th-en",
-    "storeURL": "/th",
-    "shopURL": "/th",
+    "partSample": "FE",
     "rootPath": "/th",
     "rspLocale": "th_TH",
-    "partSample": "FE",
-    "jobCode": "114438346",
-    "altername": []
+    "shopURL": "/th",
+    "storeURL": "/th"
   },
-  "🇮🇳": {
-    "name": "印度",
-    "nameEng": "India",
-    "abbr": "IN",
-    "mobileApp": None,
-    "storeURL": "/in",
-    "shopURL": "/in",
-    "rootPath": "/in",
-    "rspLocale": "en_IN",
+  "🇹🇷": {
+    "abbr": "TR",
+    "altername": [
+      "Türkiye"
+    ],
+    "jobCode": "114438164",
+    "mobileApp": "e/tr",
+    "name": "土耳其",
+    "nameEng": "Turkey",
     "partSample": "ZM",
-    "jobCode": "200314117",
-    "altername": []
+    "rootPath": "/tr",
+    "rspLocale": "tr_TR",
+    "shopURL": "/tr",
+    "storeURL": "/tr"
+  },
+  "🇹🇼": {
+    "abbr": "TW",
+    "altername": [
+      "ROC",
+      "中华民国"
+    ],
+    "jobCode": "114438311",
+    "mobileApp": "p/tw",
+    "name": "台湾",
+    "nameEng": "Taiwan",
+    "partSample": "FE",
+    "rootPath": "/tw",
+    "rspLocale": "zh_TW",
+    "shopURL": "/tw",
+    "storeURL": "/tw"
+  },
+  "🇺🇸": {
+    "abbr": "US",
+    "altername": [
+      "America",
+      "U.S."
+    ],
+    "jobCode": "114438158",
+    "mobileApp": "a/us",
+    "name": "美国",
+    "nameEng": "United States",
+    "partSample": "AM",
+    "rootPath": "",
+    "rspLocale": "en_US",
+    "shopURL": "",
+    "storeURL": ""
   }
 }
