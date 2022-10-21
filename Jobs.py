@@ -209,6 +209,17 @@ async def main(targets, session):
 			append = True
 			logging.info(f"更改名称 {oldName} 为 {store.name}")
 			SAVED[store.flag][store.stateCode][store.sid] = store.name
+			if oldName.startswith("~"):
+				linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
+				pushAns = f"#新店新机遇\n\n已恢复招聘\n{store.teleInfo()}\n\n{linkURL}"	
+				push = {
+					"mode": "photo-text",
+					"text": disMarkdown(pushAns),
+					"chat_id": chat_ids[0],
+					"parse": "MARK",
+					"image": API["frame"]
+				}
+				await async_post(push, session = session)
 
 	for store in STORES:
 		if store not in RESULTS:

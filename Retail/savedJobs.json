@@ -1,5 +1,5 @@
 {
-  "update": "2022-09-28 17:00:11 GMT",
+  "update": "2022-10-21 02:41:28 GMT",
   "🇦🇪": {
     "state1049": {
       "ABUA": "Al Maryah Island",
@@ -587,7 +587,7 @@
       "R738": "Myeongdong",
       "R747": "Seoul - Yeouido",
       "R751": "Jamsil",
-      "R760": "Seoul South - KR",
+      "R760": "~Seoul South - KR",
       "name": "Seoul-si"
     }
   },
