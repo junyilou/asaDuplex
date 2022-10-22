@@ -12,7 +12,7 @@ from modules.util import request, disMarkdown, timezoneText
 
 __session_pool = {}
 
-TIMEOUT, RETRYNUM, SEMAPHORE_LIMIT = 5, 5, 50
+TIMEOUT, RETRYNUM, SEMAPHORE_LIMIT = 5, 5, 25
 ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
 API_ROOT = "https://www.apple.com/today-bff/"
 ASSURED_JSON = "Retail/savedEvent.json"
@@ -95,7 +95,7 @@ def resolution(vids, direction = None):
 	vids.sort(key = lambda k: res[k][0] * res[k][1], reverse = True)
 	
 	if not direction:
-		return vids[0]
+		return vids
 	else:
 		match direction:
 			case "p":
@@ -104,7 +104,7 @@ def resolution(vids, direction = None):
 				fil = [i for i in vids if res[i][0] > res[i][1]]
 			case _: 
 				fil = [None]
-		return fil[0]
+		return fil
 
 def validDates(ex, runtime):
 	v = []
@@ -346,7 +346,7 @@ class Course(asyncObject):
 			if raw["modalVideo"]:
 				self.intro = {
 					"poster": raw["modalVideo"]["poster"]["source"],
-					"video": resolution(raw["modalVideo"]["sources"]),
+					"video": resolution(raw["modalVideo"]["sources"])[0],
 				}
 			else:
 				self.intro = {}
@@ -360,11 +360,11 @@ class Course(asyncObject):
 				self.videos = {
 					"portrait": {
 						"poster": media["ambientVideo"]["poster"][0]["portrait"]["source"],
-						"video": resolution(media["ambientVideo"]["sources"], "p"),
+						"videos": resolution(media["ambientVideo"]["sources"], "p")
 					},
 					"landscape": {
 						"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
-						"video": resolution(media["ambientVideo"]["sources"], "l"),
+						"videos": resolution(media["ambientVideo"]["sources"], "l")
 					}
 				}
 			else:
@@ -626,11 +626,11 @@ class Collection(asyncObject):
 			self.videos = {
 				"portrait": {
 					"poster": media["ambientVideo"]["poster"][0]["portrait"]["source"],
-					"video": resolution(media["ambientVideo"]["sources"], "p"),
+					"videos": resolution(media["ambientVideo"]["sources"], "p")
 				},
 				"landscape": {
 					"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
-					"video": resolution(media["ambientVideo"]["sources"], "l"),
+					"videos": resolution(media["ambientVideo"]["sources"], "l")
 				}
 			}
 		else:
@@ -767,7 +767,7 @@ class Sitemap():
 	def __repr__(self):
 		return f'<Sitemap "{self.urlPath}">'
 
-	async def getObjects(self, ensure = False):
+	async def getObjects(self):
 		r = await request(
 			session = get_session(), 
 			url = f"https://www.apple.com{self.urlPath}/today/sitemap.xml",
@@ -785,7 +785,7 @@ class Sitemap():
 		objects = []
 		for slug in slugs:
 			slugs[slug].sort()
-			if ensure or self.using == self.match_by_valid or self.match_by_valid(slug):
+			if self.using == self.match_by_valid or self.match_by_valid(slug):
 				parsing = slugs[slug][1 if len(slugs[slug]) > 1 else 0]
 			else:
 				parsing = slugs[slug][0]

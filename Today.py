@@ -81,9 +81,6 @@ async def main(mode):
 			case True, False, _:
 				append = doSend = True
 				saved["today"][course.courseId] = toSave
-			case False, False, True:
-				append = doSend = True
-				saved["today"][course.courseId] = toSave
 			case False, False, False:
 				append = doSend = True
 				saved["sitemap"][course.courseId] = toSave
