@@ -73,6 +73,17 @@ async def main(mode):
 		toSave = {"slug": course.slug, "names": {course.flag: course.name}}
 		conditions = [len(courses[course]) > 0] + [course.courseId in saved[s] for s in ["today", "sitemap"]]
 
+		if isinstance((collection := course.collection), Collection):
+			if collection.slug in saved["collection"]:
+				if course.flag not in saved["collection"][collection.slug]:
+					saved["collection"][collection.slug][collection.flag] = collection.name
+			else:
+				append = True
+				saved["collection"][collection.slug] = {collection.flag: collection.name}
+				logging.info(str(collection))
+				text, image, keyboard = teleinfo(collection = collection)
+				await async_post(text, image, keyboard)
+
 		match conditions:
 			case True, True, _:
 				if course.flag not in saved["today"][course.courseId]["names"]:
@@ -96,17 +107,6 @@ async def main(mode):
 			schedules = [i for j in (courses[c] for c in courses if c.courseId == course.courseId) for i in j]
 			text, image, keyboard = teleinfo(course = course, schedules = sorted(schedules))
 			await async_post(text, image, keyboard)
-
-		if isinstance((collection := course.collection), Collection):
-			if collection.slug in saved["collection"]:
-				if course.flag not in saved["collection"][collection.slug]:
-					saved["collection"][collection.slug][collection.flag] = collection.name
-			else:
-				append = True
-				saved["collection"][collection.slug] = {collection.flag: collection.name}
-				logging.info(str(collection))
-				text, image, keyboard = teleinfo(collection = collection)
-				await async_post(text, image, keyboard)
 
 if __name__ == "__main__":
 	args = {
