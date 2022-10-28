@@ -6,7 +6,7 @@ import aiohttp
 
 def disMarkdown(text):
 	temp = text
-	signs = "\\|_{}[]()#+-.!=<>~"
+	signs = "\\|_{}[]()#@+-.!=<>~"
 	for s in signs:
 		temp = temp.replace(s, f"\\{s}")
 	return temp
@@ -74,10 +74,10 @@ async def request(session = None, url = None, ident = None, mode = None, retryNu
 				retryNum -= 1
 				logger.debug(f"[异常] '{url}', [标识] {ident}, [异常] {exp}, [重试剩余] {retryNum}")
 
-def session_func(func, **kwargs):
-	async def wrapper(**kwargs):
+def session_func(func, *args, **kwargs):
+	async def wrapper(*args, **kwargs):
 		async with aiohttp.ClientSession() as session:
-			return await func(session = session, **kwargs)
+			return await func(session = session, *args, **kwargs)
 	return wrapper
 
 def sync(coroutine = None, loop = None):
