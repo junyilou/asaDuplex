@@ -300,7 +300,7 @@ class Course(asyncObject):
 				raise ValueError(f"获取课程 {rootPath}/{self.slug} 数据失败") from None
 
 			courseId = [i for i in raw["courses"] if raw["courses"][i]["urlTitle"] == slug][0]
-			moreAbout = raw["moreAbout"]
+			moreAbout = raw.get("moreAbout", None)
 			talents = raw["talents"]
 			raw = raw["courses"][courseId]
 
@@ -445,7 +445,7 @@ class Course(asyncObject):
 					raw = raw["courses"][self.courseId], 
 					courseId = self.courseId, 
 					rootPath = store.rootPath,
-					moreAbout = raw["moreAbout"],
+					moreAbout = raw.get("moreAbout", None),
 					talents = raw["talents"],
 					fuzzy = False),
 				) for i in raw["schedules"] if (
@@ -515,7 +515,7 @@ class Schedule(asyncObject):
 				raw = raw["courses"][raw["schedules"][scheduleId]["courseId"]], 
 				courseId = raw["schedules"][scheduleId]["courseId"], 
 				rootPath = self.rootPath,
-				moreAbout = raw["moreAbout"],
+				moreAbout = raw.get("moreAbout", None),
 				talents = raw["talents"],
 				fuzzy = False)
 			raw = raw["schedules"][scheduleId]
