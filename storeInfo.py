@@ -1,6 +1,6 @@
 import re
 import json
-
+from datetime import datetime
 from modules.util import request
 from modules.constants import userAgent, allRegions
 
@@ -79,8 +79,7 @@ async def storeDict(sid = None, sif = None, session = None, mode = "dict"):
 		if mode == "url":
 			return url
 
-		r = await request(session = session, url = url, ident = None, 
-			headers = userAgent, ensureAns = False, retryNum = 3, timeout = 5)
+		r = await request(session = session, url = url, headers = userAgent, ensureAns = False, retryNum = 3, timeout = 5)
 		r = json.loads(r)
 
 		hours = {
@@ -225,6 +224,31 @@ async def DieterHeader(rtl, session = None):
 		return r['Last-Modified'][5:-4]
 	except:
 		return None
+
+def nsoString(sid = None, sif = None, userLang = True):
+	if sid:
+		sif = storeInfo(sid)
+	elif sif:
+		pass
+	else:
+		raise ValueError("Expect either `Store ID` or `sif dictionary` provided")
+
+	lang = {True: {"OPENED": "首次开幕于 {DATE}", "MOVED": "搬迁换址于 {DATE}", "CLOSED": "结束营业于 {DATE}", "FORMAT": "%Y 年 %-m 月 %-d 日"},
+		False: {"OPENED": "Opened on {DATE}", "MOVED": "Moved on {DATE}", "CLOSED": "Closed on {DATE}", "FORMAT": "%b %-d, %Y"}}
+	localize = lambda dt, userLang: datetime.strptime(dt, "%Y-%m-%d").strftime(lang[userLang]["FORMAT"])
+
+	info = []
+	if "nso" in sif:
+		if type(sif["nso"]) == str:
+			return lang[userLang]["OPENED"].format(DATE = localize(sif["nso"], userLang))
+		
+		info.append(lang[userLang]["OPENED"].format(DATE = localize(sif["nso"][0], userLang)))
+		for d in sif["nso"][1 : -1 if sif["key"]["state"] == "Closed" else None]:
+			info.append(lang[userLang]["MOVED"].format(DATE = localize(d, userLang)))
+		if sif["key"]["state"] == "Closed":
+			info.append(lang[userLang]["CLOSED"].format(DATE = localize(sif["nso"][-1], userLang)))
+		return "\n".join(info)
+	return ""
 
 def library():
 	global LIBRARY, Order

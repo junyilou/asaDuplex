@@ -4,10 +4,10 @@ import json
 import logging
 import asyncio
 from base64 import b64encode
-from datetime import datetime, timezone, date
+from datetime import datetime, date, UTC
 
 from bot import chat_ids
-from storeInfo import storeInfo, actualName, dieterURL, DieterHeader
+from storeInfo import storeInfo, actualName, dieterURL, DieterHeader, nsoString
 from modules.constants import userAgent
 from modules.util import request, disMarkdown, setLogger, session_func
 from sdk_aliyun import async_post
@@ -53,7 +53,7 @@ async def down(session, rtl, isSpecial, semaphore = None):
 		if remoteDatetime.date() in INVALIDREMOTE:
 			logging.info(f"R{rtl} 找到了更佳的远端无效时间")
 			storejson['last'][rtl] = remote
-			storejson['update'] = datetime.now(timezone.utc).strftime("%F %T GMT")
+			storejson['update'] = datetime.now(UTC).strftime("%F %T GMT")
 			return True
 
 		logging.info(f"R{rtl} 更新，标签为 {remote}")
@@ -61,7 +61,7 @@ async def down(session, rtl, isSpecial, semaphore = None):
 
 		try:
 			r = await request(session = session, url = dieterURL(rtl), headers = userAgent, 
-				ssl = False, ident = None, mode = "raw", ensureAns = False)
+				ssl = False, mode = "raw", ensureAns = False)
 			with open(savename, "wb") as w:
 				w.write(r)
 		except:
@@ -70,12 +70,12 @@ async def down(session, rtl, isSpecial, semaphore = None):
 
 		sif = storeInfo(rtl)
 		name = actualName(sif["name"])
-		info = f"*{sif['flag']} Apple {name}* (R{rtl})"
+		info = [f"*{sif['flag']} Apple {name}* (R{rtl})", "", f"*远程标签* {remote}"]
 		if "nso" in sif:
-			info += f'\n首次开幕于 {datetime.strptime(sif["nso"], "%Y-%m-%d").strftime("%Y 年 %-m 月 %-d 日")}'
+			info.insert(1, nsoString(sif = sif))
 		if saved:
-			info += f"\n*本地标签* {saved}"
-		info += f"\n*远程标签* {remote}"
+			info.insert(-1, f"*本地标签* {saved}")
+		info = "\n".join(info)
 	
 		if isSpecial: 
 			logging.info("正在更新 specialist.txt")
@@ -87,7 +87,7 @@ async def down(session, rtl, isSpecial, semaphore = None):
 		if savedDatetime == INVALIDDATE:
 			storejson["last"] = dict(sorted(storejson["last"].items(), key = lambda k: k[0]))
 
-		storejson['update'] = datetime.now(timezone.utc).strftime("%F %T GMT")
+		storejson['update'] = datetime.now(UTC).strftime("%F %T GMT")
 
 		with open(savename, "rb") as r:
 			img = b64encode(r.read()).decode()
