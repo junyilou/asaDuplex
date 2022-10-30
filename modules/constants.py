@@ -26,7 +26,7 @@ allRegions = {
     "jobCode": "114438082",
     "mobileApp": "p/hk",
     "name": "香港 (English)",
-    "nameEng": "Hong Kong",
+    "nameEng": "Hong Kong (English)",
     "partSample": "FE",
     "rootPath": "/hk/en",
     "rspLocale": "en_HK",
