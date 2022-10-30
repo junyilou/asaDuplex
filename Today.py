@@ -3,7 +3,7 @@ import re
 import json
 import asyncio
 import logging
-from datetime import datetime, timezone
+from datetime import datetime, UTC
 from sys import argv
 from collections import OrderedDict
 
@@ -134,7 +134,7 @@ if __name__ == "__main__":
 
 	if append:
 		logging.info("正在更新 savedEvent 文件")
-		saved["update"] = datetime.now(timezone.utc).strftime("%F %T GMT")
+		saved["update"] = datetime.now(UTC).strftime("%F %T GMT")
 		with open("Retail/savedEvent.json", "w") as w:
 			w.write(json.dumps(sortOD(saved), ensure_ascii = False, indent = 2))
 

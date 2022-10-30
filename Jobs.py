@@ -3,7 +3,7 @@ import json
 import os
 import logging
 from sys import argv
-from datetime import datetime, timezone
+from datetime import datetime, UTC
 from collections import OrderedDict
 
 from bot import chat_ids
@@ -240,7 +240,7 @@ async def main(targets, session):
 			await async_post(push, session = session)
 
 	if append:
-		SAVED["update"] = datetime.now(timezone.utc).strftime("%F %T GMT")
+		SAVED["update"] = datetime.now(UTC).strftime("%F %T GMT")
 		with open("Retail/savedJobs.json", "w") as w:
 			w.write(json.dumps(sortOD(SAVED), ensure_ascii = False, indent = 2))
 
