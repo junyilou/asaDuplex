@@ -1,4 +1,4 @@
-# asaDuplex ![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)
+# asaDuplex ![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
 
 ![bot](Retail/bot.jpg)
 
@@ -33,7 +33,7 @@
 
 ## 代码依赖
 
-本库中的部分代码使用了 Python 3.10、Python 3.9、Python 3.8 的部分特性，建议使用最新版 Python 3 运行。
+本库中的部分代码使用了 Python 3.8 至 Python 3.11 的部分特性，建议使用尽可能新的 Python 3 运行。
 
 本代码的网络 I/O 请求依赖 [aiohttp](https://github.com/aio-libs/aiohttp)，可通过 pip 安装，库中需要网络请求的函数全部为协程函数，需要使用 `await` 关键字等待，但也提供了简单的异步转同步方法 `sync()`，可在复杂度不高的代码中使用。
 
@@ -42,11 +42,9 @@ from modules.special import speHours
 from modules.util import sync
 
 >>> await speHours(session=None, sid=688) # 异步
-
 {'2022-10-15': {'regular': '10:00 - 23:00', 'special': '10:00 - 22:00', 'reason': '[COVID Related]'}}
 
 >>> sync(speHours(session=None, sid=688)) # 同步，不建议
-
 {'2022-10-15': {'regular': '10:00 - 23:00', 'special': '10:00 - 22:00', 'reason': '[COVID Related]'}}
 ```
 
@@ -74,17 +72,15 @@ from modules.util import sync
 
   ```python
   >>> stateReplace(['480', '476', '573', '580', '670'])
-  
   ['重庆 (3)', '580', '云南 (1)']
   ```
-
+  
   * **_coro_** `storeDict(sid=None, sif=None, session=None, mode="dict")`
-
+  
   传入零售店店号，联网从 Apple 官网获取零售店基本信息简单处理后返回。
-
+  
   ```python
   >>> await storeDict(sid=480)
-  
   {'latitude': 29.560981, 'longitude': 106.572272, 'timezone': 'Asia/Shanghai', 'telephone': '400-617-1224', 'address': '重庆市渝中区邹容路 108 号', 'province': '重庆, 重庆, 400010', 'isnso': False, 'regular': [{'name': 'Saturday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Wednesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Friday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Monday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Tuesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Thursday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Sunday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}], 'special': []}
   ```
   
@@ -93,12 +89,11 @@ from modules.util import sync
   传入零售店店号，不联网从本地返回基本零售店信息。
   
   ```python
-  >>> storeInfo(580)
-  
-  {'name': ['成都太古里', 'Taikoo Li Chengdu'], 'flag': '🇨🇳', 'nso': '2015-11-21', 'last': '07 Jan 2022 08:59:07', 'website': 'taikoolichengdu', 'key': {'state': '四川', 'city': '成都', 'alter': 'Sichuan Chengdu'}}
+  >>> storeInfo(79)
+  {'name': ['銀座', '银座', 'Ginza'], 'flag': '🇯🇵', 'nso': ['2003-11-30', '2022-08-30'], 'last': '31 Aug 2022 13:40:51', 'key': {'state': '東京都', 'city': '中央区', 'alter': 'Tokyo Chuo', 'website': 'ginza'}, 'timezone': 'Asia/Tokyo'}
   ```
   
-* today.py 定义了 Today at Apple 的对象，每个课程、排课均为一个 `class`，具有丰富的属性和方法
+* modules/today.py 定义了 Today at Apple 的各种对象，具有丰富的属性和方法
 
   * 零售店对象定义了获得课程和排课方法等
 
@@ -106,7 +101,9 @@ from modules.util import sync
   # 零售店对象
   >>> Store(sid=480)
   <Store "解放碑" (R480), "jiefangbei", "/cn">
+  ```
   
+  ```python
   # 获得零售店课程
   >>> await Store(sid=480).getCourses()
   [
@@ -115,7 +112,9 @@ from modules.util import sync
     <Course 6448288470942974313 "视频漫步：拍出电影级画面", "video-walks-capturing-cinematic-shots">, 
     <Course 6716856769744568921 "技巧：管理你的屏幕使用时间", "skills-managing-your-screen-time">
   ]
+  ```
   
+  ```python
   # 获得零售店排课
   >>> await Store(sid=480).getSchedules()
   [
@@ -130,58 +129,82 @@ from modules.util import sync
   
   ```python
   # 从 URL 获得课程，也可以手动创建课程对象
-  >>> course = await parseURL("https://www.apple.com.cn/today/event/photo-lab-directing-portrait/", coro=True)
+  >>> course = await parseURL("https://www.apple.com.cn/today/event/design-lab-liu-zhizhi-111922", coro=True)
   
+  # 对象的字符串输出形式
   >>> course
-  <Course 6635235077318869345 "光影实验室：执导拍摄人像", "photo-lab-directing-portrait">
-  
-  >>> course.images
-  {
-    'portrait': 'https://digitalassets-taa.cdn-apple.com/prod/image/photo-lab-directing-portrait-ww/2020-03/29a29970-2a6c-49e3-9fb4-8b146f3df6f8__4x5.jpg', 
-    'landscape': 'https://digitalassets-taa.cdn-apple.com/prod/image/photo-lab-directing-portrait-ww/2020-03/09bc55d1-0a62-4eed-8cd5-3f4511e857ab__16x9.jpg'
-  }
-  
-  >>> course.getSchedules(Store(sid=480))
-  [
-    <Schedule 6918024654175448253 of 6635235077318869345, 4/17 14:00-15:00 @ R480>, 
-    <Schedule 6918027046157664333 of 6635235077318869345, 4/22 14:00-15:00 @ R480>, 
-    <Schedule 6918027087207317837 of 6635235077318869345, 4/22 16:00-17:00 @ R480>
-  ]
+  <Course 6978267057884660649 "设计实验室：跟着刘治治制作宣传海报探索设计奥义", "design-lab-liu-zhizhi-111922", Collection <好创意，好生意>>
   ```
   
-  * 排课对象包含每次排课的属性，包括所在零售店（`Store` 对象）、所属课程（`Course` 对象），开始和结束时间等
+  ```python
+  # 宽屏幕宣传图
+  >>> course.images["landscape"]
+  'https://digitalassets-taa.cdn-apple.com/zh/cn/design-lab-liu-zhizhi-111922-wwdesign-lab-liu-zhizhi-111922-wwdesign-lab-liu-zhizhi-111922_16x9.jpg'
+  ```
+  
+  ```python
+  # 所在课程合集 Collection 对象
+  >>> course.collection 
+  <Collection "好创意，好生意", "creativity-for-business", "/cn">
+  ```
+  
+  ```python
+  # 课程嘉宾信息 Talent 对象
+  >>> course.talents
+  [<Talent 刘治治, "平面设计师">, <Talent 卷宗Wallpaper＊, "媒体">]
+  
+  >>> course.talents[0].description
+  '毕业于中央美术学院平面设计专业，国际平面设计师联盟 (AGI) 会员，设计工作室“立入禁止”联合创始人，任教于中央美院设计学院。'
+  ```
+  
+  ```python
+  # 获得课程在某个零售店的排课
+  >>> await course.getSchedules(Store(sid=320))
+  [<Schedule 6978267057884660649 of 6978267057884660649, 11/19 15:00-16:30 @ R320>]
+  ```
+  
+  * 排课对象包含每次排课的属性，并可链接对应的 `Course` 和 `Store` 对象
   
   ```python
   # 从 URL 获得课程，也可以手动创建课程对象
-  >>> schedule = await parseURL("https://www.apple.com.cn/today/event/photo-lab-directing-portrait/6911594146335944905/?sn=R645", coro=True)
+  >>> schedule = await parseURL("https://www.apple.com.cn/today/event/exclusive-xiong-xiaomo-110422/6986163410879022413/?sn=R320", coro=True)
+  ```
   
+  ```python
   >>> schedule
-  <Schedule 6911594146335944905 of 6635235077318869345, 4/18 18:30-19:30 @ R645>
+  <Schedule 6986163410879022413 of 6986163410879022413, 11/4 20:00-21:30 @ Online>
+  
+  >>> schedule.store
+  <Store "三里屯" (R320), "sanlitun", "/cn">
   
   >>> schedule.course
-  <Course 6635235077318869345 "光影实验室：执导拍摄人像", "photo-lab-directing-portrait">
-  
-  >>> schedule.timeStart
-  datetime.datetime(2022, 4, 18, 18, 30, tzinfo=<DstTzInfo 'Asia/Shanghai' CST+8:00:00 STD>)
-  
-  >>> schedule.url
-  'https://www.apple.com.cn/today/event/photo-lab-directing-portrait/6911594146335944905/?sn=R645'
+  <Course 6986163410879022413 "独家呈献：跟着熊小默感受品牌故事的力量", "exclusive-xiong-xiaomo-110422", Collection <好创意，好生意>>
   ```
   
-  此外，还提供了将 `Course` 和 `Schedule` 对象的信息进行提取，并综合至一条 Telegram 消息中的函数（效果如下图）；分析 Today at Apple 网站地图 XML Sitemap 的 `Sitemap` 对象等。
-  
-* Hours.py、Today.py 等代码设计为可以比较本地已经保存的结果（例如已经记录的 Today at Apple 活动）寻找差异并输出图文结果，这些数据也被用到了果铺知道 Bot 和果铺知道 Channel 中。
-
-  ![today](Retail/today.jpg)
-
-  在代码的顶部，可能包含类似如下代码：
-
   ```python
-  from sdk_aliyun import async_post
-  from bot import tokens
+  # 带有时区信息的课程时间对象
+  >>> schedule.timeStart
+  datetime.datetime(2022, 11, 4, 20, 0, tzinfo=zoneinfo.ZoneInfo(key='Asia/Shanghai'))
+  
+  # 按照预设或给定格式格式化课程时间
+  >>> schedule.datetimeStart(form = "Starting %B %-d, %-I:%M %p")
+  'Starting November 4, 8:00 PM'
   ```
+  
+  该代码中还设计了 `Talent` 对象、`Sitemap` 对象，以及将 `Course`、`Schedule` 输出为适用于 Telegram 输出的 `teleinfo` 函数。
 
-  这是我个人对结果推送的实现方式，`sdk_aliyun` 和 `bot` 并未在此库中给出。代码运行到输出阶段会产生一个包含文本、图片、链接等内容的字典，您可以通过编写适合您自己的推送结果的方式以获取代码结果，例如将内容推送至 Telegram Channel、微信公众号、其他第三方 iOS 推送 app 等。
+
+
+### 结果推送
+
+许多代码设计为可以和本地记录的信息进行比较，在有新结果时推送通知。在这些代码的顶部，可能有：
+
+```python
+from sdk_aliyun import async_post
+from bot import tokens
+```
+
+这是我个人对结果推送的实现方式，`sdk_aliyun` 和 `bot` 并未在此库中给出。代码运行到输出阶段会产生一个包含文本、图片、链接等内容的字典，您可以通过编写适合您自己的推送结果的方式以获取代码结果，例如将内容推送至 Telegram Channel、微信公众号、其他第三方 iOS 推送 app 等。
 
 
 
@@ -205,7 +228,7 @@ from modules.util import sync
 
 2022 年 4 月：使用面向对象的思想，极高的提升了 Today at Apple 对象的多样性。[[commit]](https://github.com/junyilou/asaduplex/commit/4d98ae7f00312630479243184e715c929afd5b7a)
 
-2022 年 10 月：改进代码使用 Python 3.8 [[commit]](https://github.com/junyilou/asaduplex/commit/2e7511ed22c38b7272f5b3e041ed6d66f8dcf21c)、Python 3.9 [[commit]](https://github.com/junyilou/asaduplex/commit/dcfa943e543c157ca14a7e14cf98c98732ffc400)、Python 3.10 [[commit]](https://github.com/junyilou/asaduplex/commit/78543f98a8c22b3aa6b93d6bc14d76b5f217e027)、Python 3.11 _[待更新]_ 的部分特性。
+2022 年 10 月：改进代码使用 Python 3.8 [[commit]](https://github.com/junyilou/asaduplex/commit/2e7511ed22c38b7272f5b3e041ed6d66f8dcf21c)、Python 3.9 [[commit]](https://github.com/junyilou/asaduplex/commit/dcfa943e543c157ca14a7e14cf98c98732ffc400)、Python 3.10 [[commit]](https://github.com/junyilou/asaduplex/commit/78543f98a8c22b3aa6b93d6bc14d76b5f217e027)、Python 3.11 的部分特性。
 
 
 
