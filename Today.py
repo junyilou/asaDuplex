@@ -9,7 +9,7 @@ from collections import OrderedDict
 
 from storeInfo import *
 from modules.today import Store, Sitemap, Collection, teleinfo, clean
-from modules.util import setLogger, sync
+from modules.util import setLogger
 from bot import chat_ids
 from sdk_aliyun import async_post as raw_post
 
@@ -127,7 +127,7 @@ if __name__ == "__main__":
 
 	setLogger(logging.INFO, os.path.basename(__file__))
 	logging.info("程序启动")
-	loop = sync(None)
+	loop = asyncio.new_event_loop()
 	asyncio.set_event_loop(loop)
 	loop.run_until_complete(main(argv[1]))
 	clean(loop)
