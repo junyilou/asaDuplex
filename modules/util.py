@@ -28,7 +28,7 @@ def bitsize(integer, width = 8, precision = 2, ks = 1e3):
 		unit += 1
 	return f"{integer:{width}.{precision}f} {order[unit]}"
 
-async def request(session = None, url = None, ident = None, mode = None, retryNum = 1, ensureAns = True, **kwargs):
+async def request(session = None, url = None, mode = None, retryNum = 1, ensureAns = True, **kwargs):
 	method = kwargs.get("method", "GET")
 	pop = kwargs.pop("method") if "method" in kwargs else None
 	logger = logging.getLogger("util.request")
@@ -39,7 +39,7 @@ async def request(session = None, url = None, ident = None, mode = None, retryNu
 		session = aiohttp.ClientSession()
 		close_session = True
 
-	logger.debug(f"[{method}] '{url}', [标识] {ident}, [模式] {mode}, [参数] {kwargs}, [重试] {retryNum}")
+	logger.debug(f"[{method}] '{url}', [模式] {mode}, [参数] {kwargs}, [重试] {retryNum}")
 	while retryNum:
 		try:
 			async with session.request(url = url, method = method, **kwargs) as resp:
@@ -60,19 +60,18 @@ async def request(session = None, url = None, ident = None, mode = None, retryNu
 			logger.debug(f"[状态{resp.status}] '{url}'")
 			if close_session:
 				await session.close()
-			return (r, ident) if ident else r
+			return r
 		except Exception as exp:
 			if retryNum == 1:
-				logger.debug(f"[丢弃] '{url}', [标识] {ident}, [异常] {exp}")
+				logger.debug(f"[丢弃] '{url}', [异常] {exp}")
 				if close_session:
 					await session.close()
 				if ensureAns:
-					return (exp, ident) if ident else exp
-				else:
-					raise exp
+					return exp
+				raise exp
 			else:
 				retryNum -= 1
-				logger.debug(f"[异常] '{url}', [标识] {ident}, [异常] {exp}, [重试剩余] {retryNum}")
+				logger.debug(f"[异常] '{url}', [异常] {exp}, [重试剩余] {retryNum}")
 
 def session_func(func, *args, **kwargs):
 	async def wrapper(*args, **kwargs):
