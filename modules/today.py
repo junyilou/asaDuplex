@@ -199,16 +199,15 @@ class Store():
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
 
-		tasks = [
-			getCourse(
-				courseId = i, 
-				raw = raw["courses"][i], 
-				rootPath = self.rootPath, 
-				moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
-				fuzzy = False,
-				stores = raw["stores"]
-			) for i in raw["courses"]]
-		return await asyncio.gather(*tasks, return_exceptions = True)
+		tasks = []
+		async with asyncio.TaskGroup() as tg:
+			for i in raw["courses"]:
+				tasks.append(tg.create_task(getCourse(
+					courseId = i, raw = raw["courses"][i], 
+					rootPath = self.rootPath, stores = raw["stores"],
+					moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
+					fuzzy = False, ensure = True)))
+		return [t.result() for t in tasks]
 
 	async def getSchedules(self, ensure = True):
 
@@ -223,30 +222,29 @@ class Store():
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
 
-		tasks = [
-			getSchedule(
-				scheduleId = i, 
-				raw = schedules[i], 
-				rootPath = self.rootPath, 
-				slug = self.slug, 
-				store = getStore(
-					sid = storeNum, 
-					rootPath = self.rootPath,
-					raw = raw["stores"][storeNum] if storeNum in raw["stores"] else None),
-				course = await getCourse(
-					courseId = schedules[i]["courseId"], 
-					raw = raw["courses"][schedules[i]["courseId"]], 
-					rootPath = self.rootPath,
-					moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
-					fuzzy = False)
-				) for i in (raw["schedules"]) if (
-					(schedules := raw["schedules"]) and 
-					(storeNum := schedules[i]["storeNum"]) and
-					((not ensure) or (storeNum == self.sid) or 
-					("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"]))
-				)
-			]
-		return await asyncio.gather(*tasks, return_exceptions = True)
+		tasks = []
+		async with asyncio.TaskGroup() as tg:
+			schedules = raw["schedules"]
+			for i in raw["schedules"]:
+				storeNum = schedules[i]["storeNum"]
+				if (not ensure) or (storeNum == self.sid) or \
+				("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"]):
+					tasks.append(tg.create_task(getSchedule(
+						scheduleId = i, 
+						raw = schedules[i], 
+						rootPath = self.rootPath, 
+						slug = self.slug, 
+						store = getStore(
+							sid = storeNum, 
+							rootPath = self.rootPath,
+							raw = raw["stores"][storeNum] if storeNum in raw["stores"] else None),
+						course = await getCourse(
+							courseId = schedules[i]["courseId"], 
+							raw = raw["courses"][schedules[i]["courseId"]], 
+							rootPath = self.rootPath,
+							moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
+							fuzzy = False, ensure = True), ensure = True)))
+		return [t.result() for t in tasks]
 
 	async def getCoord(self):
 		d = await storeDict(sid = self.sid, mode = "raw", session = get_session())
@@ -431,32 +429,27 @@ class Course(asyncObject):
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取课次 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
 
-		tasks = [
-			getSchedule(
-				scheduleId = i, 
-				raw = schedules[i], 
-				rootPath = store.rootPath, 
-				slug = self.slug, 
-				store = getStore(
-					sid = storeNum, 
-					raw = raw["stores"][storeNum],
-					rootPath = store.rootPath), 
-				course = await getCourse(
-					raw = raw["courses"][self.courseId], 
-					courseId = self.courseId, 
-					rootPath = store.rootPath,
-					moreAbout = raw.get("moreAbout", None),
-					talents = raw["talents"],
-					fuzzy = False),
-				) for i in raw["schedules"] if (
-					(schedules := raw["schedules"]) and
-					(storeNum := schedules[i]["storeNum"]) and 
-					((schedules[i]["courseId"] == self.courseId) and 
-					((storeNum == store.sid) or (not ensure) or
-					("VIRTUAL" in raw["courses"][self.courseId]["type"])))
-				)
-			]
-		return await asyncio.gather(*tasks, return_exceptions = True)
+		tasks = []
+		async with asyncio.TaskGroup() as tg:
+			schedules = raw["schedules"]
+			for i in raw["schedules"]:
+				storeNum = schedules[i]["storeNum"]
+				if (schedules[i]["courseId"] == self.courseId) and \
+				((not ensure) or (storeNum == store.sid) or ("VIRTUAL" in raw["courses"][self.courseId]["type"])):
+					tasks.append(tg.create_task(getSchedule(
+						scheduleId = i, raw = schedules[i], 
+						rootPath = store.rootPath, slug = self.slug, 
+						store = getStore(
+							sid = storeNum, raw = raw["stores"][storeNum],
+							rootPath = store.rootPath), 
+						course = await getCourse(
+							raw = raw["courses"][self.courseId], 
+							courseId = self.courseId, 
+							rootPath = store.rootPath,
+							moreAbout = raw.get("moreAbout", None),
+							talents = raw["talents"],
+							fuzzy = False, ensure = True), ensure = True)))
+		return [t.result() for t in tasks]
 
 	async def getRootSchedules(self):
 		stores = storeReturn(todayNation.get(self.rootPath, ""), remove_closed = True, remove_future = True)
@@ -464,7 +457,8 @@ class Course(asyncObject):
 		tasks = [self.getSchedules(getStore(sid = i[0]), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
-async def getCourse(courseId = None, rootPath = None, slug = None, raw = None, moreAbout = None, talents = None, fuzzy = True, stores = []):
+async def getCourse(courseId = None, rootPath = None, slug = None, raw = None, 
+	moreAbout = None, talents = None, fuzzy = True, stores = [], ensure = False):
 	global savedToday
 	saved = list(savedToday["Course"])
 	if rootPath == "":
@@ -482,8 +476,13 @@ async def getCourse(courseId = None, rootPath = None, slug = None, raw = None, m
 		raise ValueError("没有找到匹配，需要提供 slug, rootPath")
 	_ = [getStore(store, raw = stores[store]) for store in stores]
 
-	get = await Course(raw = raw, courseId = courseId, rootPath = rootPath.replace("/us", ""), slug = slug, moreAbout = moreAbout, talents = talents)
-	savedToday["Course"][f"{rootPath}/{get.courseId}"] = get
+	try:
+		get = await Course(raw = raw, courseId = courseId, rootPath = rootPath.replace("/us", ""), slug = slug, moreAbout = moreAbout, talents = talents)
+		savedToday["Course"][f"{rootPath}/{get.courseId}"] = get
+	except Exception as e:
+		if ensure:
+			return e
+		raise e
 	return get
 
 class Schedule(asyncObject):
@@ -580,12 +579,17 @@ class Schedule(asyncObject):
 		else:
 			return self.rawStart > other.rawStart
 
-async def getSchedule(scheduleId, raw = None, rootPath = None, slug = None, store = None, course = None):
+async def getSchedule(scheduleId, raw = None, rootPath = None, slug = None, store = None, course = None, ensure = False):
 	global savedToday
 	scheduleId = f"{scheduleId}"
 	if any([raw, rootPath, slug]):
-		get = await Schedule(scheduleId = scheduleId, raw = raw, rootPath = rootPath, slug = slug, store = store, course = course)
-		savedToday["Schedule"][scheduleId] = get
+		try:
+			get = await Schedule(scheduleId = scheduleId, raw = raw, rootPath = rootPath, slug = slug, store = store, course = course)
+			savedToday["Schedule"][scheduleId] = get
+		except Exception as e:
+			if ensure:
+				return e
+			raise e
 	return savedToday["Schedule"][scheduleId]
 
 class Collection(asyncObject):
@@ -683,31 +687,26 @@ class Collection(asyncObject):
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取课次 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
 
-		tasks = [
-			getSchedule(
-				scheduleId = i, 
-				raw = schedules[i], 
-				rootPath = store.rootPath, 
-				slug = self.slug, 
-				store = getStore(
-					sid = storeNum,
-					raw = raw["stores"][storeNum] if storeNum in raw["stores"] else None,
-					rootPath = store.rootPath), 
-				course = await getCourse(
-					raw = raw["courses"][courseId], 
-					courseId = courseId, 
-					rootPath = store.rootPath,
-					moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
-					fuzzy = False)
-				) for i in raw["schedules"] if 
-					(schedules := raw["schedules"]) and 
-					(courseId := schedules[i]["courseId"]) and
-					(storeNum := schedules[i]["storeNum"]) and 
-					((self.slug in [m["collId"] for m in raw["heroGallery"] if m["heroType"] == "TAG"]) and 
-					((storeNum == store.sid) or (not ensure) or
-					("VIRTUAL" in raw["courses"][courseId]["type"])))
-			]
-		return await asyncio.gather(*tasks, return_exceptions = True)
+		tasks = []
+		async with asyncio.TaskGroup() as tg:
+			schedules = raw["schedules"]
+			for i in raw["schedules"]:
+				courseId = schedules[i]["courseId"]
+				storeNum = schedules[i]["storeNum"]
+				if (self.slug in [m["collId"] for m in raw["heroGallery"] if m["heroType"] == "TAG"]) and \
+				((not ensure) or (storeNum == store.sid) or ("VIRTUAL" in raw["courses"][courseId]["type"])):
+					tasks.append(tg.create_task(getSchedule(
+						scheduleId = i, raw = schedules[i], 
+						rootPath = store.rootPath, slug = self.slug, 
+						store = getStore(
+							sid = storeNum, rootPath = store.rootPath,
+							raw = raw["stores"][storeNum] if storeNum in raw["stores"] else None), 
+						course = await getCourse(
+							raw = raw["courses"][courseId], 
+							courseId = courseId, rootPath = store.rootPath,
+							moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
+							fuzzy = False, ensure = True), ensure = True)))
+		return [t.result() for t in tasks]
 
 	async def getRootSchedules(self):
 		stores = storeReturn(todayNation.get(self.rootPath, ""), remove_closed = True, remove_future = True)

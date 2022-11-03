@@ -85,8 +85,7 @@ class State:
 		except json.decoder.JSONDecodeError:
 			if "Maintenance" in r:
 				logging.error("Apple 招贤纳才维护中")
-				TASKS = []
-				return -1
+				raise NameError("SERVER")
 			else:
 				logging.warning(", ".join(["下载失败", str(self)]))
 				TASKS.append(self)
@@ -127,8 +126,7 @@ class Region:
 		except json.decoder.JSONDecodeError:
 			if "Maintenance" in r:
 				logging.error("Apple 招贤纳才维护中")
-				TASKS = []
-				return -1
+				raise NameError("SERVER")
 			else:
 				logging.warning(", ".join(["下载失败", str(self)]))
 				TASKS.append(self)
@@ -170,18 +168,19 @@ async def main(targets, session):
 	TASKS = [Region(flag = i, session = session, semaphore = semaphore) for i in targets if not i.isalpha()]
 
 	while len(TASKS):
-		tasks, coros = TASKS.copy(), []
-		for t in tasks:
-			RECORD[id(t)] = RECORD.get(id(t), 0) + 1
-			if RECORD[id(t)] > 3:
-				logging.error(", ".join(["放弃下载", str(t)]))
-				continue
-			coros.append(t.runner())
-
-		r = await asyncio.gather(*coros)
-		if -1 in r:
+		tasks = TASKS.copy()
+		try:
+			async with asyncio.TaskGroup() as tg:
+				for t in tasks:
+					RECORD[id(t)] = RECORD.get(id(t), 0) + 1
+					if RECORD[id(t)] > 3:
+						logging.error(", ".join(["放弃下载", str(t)]))
+						continue
+					tg.create_task(t.runner())
+			_ = [TASKS.remove(t) for t in tasks]
+		except* NameError:
+			TASKS = []
 			return
-		_ = [TASKS.remove(t) for t in tasks]
 
 	append = False
 
