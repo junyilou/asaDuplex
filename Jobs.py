@@ -72,7 +72,7 @@ class State:
 		return self.__hash__() == other.__hash__()
 
 	async def runner(self):
-		global RESULTS
+		global TASKS, RESULTS
 
 		async with self.semaphore:
 			# logging.info(", ".join(["开始下载 province", str(self)]))
