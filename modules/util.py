@@ -31,7 +31,7 @@ def bitsize(integer, width = 8, precision = 2, ks = 1e3):
 async def request(session = None, url = None, mode = None, retryNum = 1, ensureAns = True, **kwargs):
 	method = kwargs.get("method", "GET")
 	pop = kwargs.pop("method") if "method" in kwargs else None
-	logger = logging.getLogger("util.request")
+	logger = logging.getLogger("async_request")
 
 	close_session = False
 	if session == None:

@@ -180,7 +180,6 @@ async def main(targets, session):
 			_ = [TASKS.remove(t) for t in tasks]
 		except* NameError:
 			TASKS = []
-			return
 
 	append = False
 
