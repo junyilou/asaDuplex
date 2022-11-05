@@ -14,7 +14,35 @@ from bot import chat_ids
 
 INCLUDE = "🇨🇳"
 EXCLUDE = "609"
+WORKFILE = "Retail/storeHours.json"
+USERLANG = "ZH"
+
 TODAY = (RUNTIME := datetime.now()).date()
+LOGSTRING = {
+	"ZH": {
+		"START": "程序启动",
+		"END": "程序结束",
+		"NEW": f"{'':8}{{DATE}} 新增: {{HOURS}}",
+		"CHANGE": f"{'':8}{{DATE}} 变更: 由 {{HOURS1}} 改为 {{HOURS2}}",
+		"CANCEL": f"{'':8}{{DATE}} 取消: {{HOURS}}",
+		"WRITE": "写入新的 storeHours.json",
+		"NODIFF": "没有发现 storeHours 文件更新",
+		"DIFFGEN": "已生成对比文件 storeHours.html",
+		"DIFFCONTENT": "Apple Store 特别营业时间\n生成于 {RUNTIME}\n\n变化:\n{DIFF}\n\n日历:\n{CALENDAR}\n\n原始 JSON:\n{JSON}"
+	},
+	"EN": {
+		"START": "Program Started",
+		"END": "Program Ended",
+		"NEW": f"{'':8}{{DATE}} New: {{HOURS}}",
+		"CHANGE": f"{'':8}{{DATE}} Changed: from {{HOURS1}} to {{HOURS2}}",
+		"CANCEL": f"{'':8}{{DATE}} Canceled: {{HOURS}}",
+		"WRITE": "Generating new storeHours.json",
+		"NODIFF": "No updates found",
+		"DIFFGEN": "DIFF storeHours.html generated",
+		"DIFFCONTENT": "Apple Store Special Hours\nGenerated {RUNTIME}\n\nChanges:\n{DIFF}\n\nCalendar:\n{CALENDAR}\n\nRaw JSON:\n{JSON}"
+	}
+}
+LANG = LOGSTRING[USERLANG]
 
 def sortOD(od):
 	res = OrderedDict()
@@ -24,16 +52,18 @@ def sortOD(od):
 
 async def entry(session, semaphore, sid, sn, saved):
 	async with semaphore:
-		special = await speHours(session = session, sid = sid, runtime = TODAY, askComment = False)
+		special = await speHours(session = session, sid = sid, 
+			runtime = TODAY, askComment = False, userLang = USERLANG == "ZH")
 	
 	diff = []
 	hours = saved | {"storename": sn} | special
 
 	for date in special:
+		spe = special[date]["special"]
 		if date not in saved:
-			diff.append(f"{'':8}{date}: 新增 {special[date]['special']}")
-		elif (svd := saved[date]["special"]) != (spe := special[date]["special"]):
-			diff.append(f"{'':8}{date}: 由 {svd} 改为 {spe}")
+			diff.append(LANG["NEW"].format(DATE = date, HOURS = spe))
+		elif (svd := saved[date]["special"]) != spe:
+			diff.append(LANG["CHANGE"].format(DATE = date, HOURS1 = svd, HOURS2 = spe))
 
 	for date in list(saved):
 		if date == "storename":
@@ -43,7 +73,8 @@ async def entry(session, semaphore, sid, sn, saved):
 			hours.pop(date)
 			continue
 		if date not in special:
-			diff.append(f"{'':8}{date}: 取消 {saved[date]['special']}")
+			hours.pop(date)
+			diff.append(LANG["CANCEL"].format(DATE = date, HOURS = saved[date]["special"]))
 
 	if diff:
 		logging.info(f"[Apple {sn}] " + ", ".join([i.lstrip() for i in diff]))
@@ -58,14 +89,13 @@ async def main(session):
 	includes = storeReturn(INCLUDE, **args)
 	excludes = storeReturn(EXCLUDE, **args)
 	stores = [i for i in includes if i not in excludes]
-	workfile = "Retail/storeHours.json"
 
-	if os.path.isfile(workfile):
-		with open(workfile) as o:
+	if os.path.isfile(WORKFILE):
+		with open(WORKFILE) as o:
 			saved = json.loads(o.read())
 	else:
 		saved = {}
-		with open(workfile, "w") as w:
+		with open(WORKFILE, "w") as w:
 			w.write(r"{}")
 
 	semaphore = asyncio.Semaphore(20)
@@ -76,7 +106,8 @@ async def main(session):
 
 	results, calendar = {}, {}
 	diffs, targets = [], []
-	comments = saved.get("comments", {})
+	comments = {i: j for i, j in {sid: {d: k for d, k in saved["comments"][sid].items() if 
+		datetime.strptime(d, '%Y-%m-%d').date() >= TODAY} for sid in saved.get("comments", {})}.items() if j}
 
 	for store, item in tasks.items():
 		sid, sn = store
@@ -97,28 +128,26 @@ async def main(session):
 		sid = comm_store.pop(0)
 		comm = await comment(session, sid)
 		for cid in comm:
-			comments[cid] = {d: k for d, k in comments.get(cid, {}).items() if datetime.strptime(d, '%Y-%m-%d').date() >= TODAY}
-			comments[cid] |= {datetime.strftime(d, '%Y-%m-%d'): k for d, k in comm[cid].items()}
+			comments[cid] = comments.get(cid, {}) | {datetime.strftime(d, '%Y-%m-%d'): k for d, k in comm[cid].items()}
 			_ = comm_store.remove(cid) if cid in comm_store else None
 
 	results, calendar, comments = map(sortOD, [results, calendar, comments])
 	output = {"update": RUNTIME.strftime("%F %T")} | results | {"comments": comments}
-	oldfile = workfile.replace(".json", f"-{RUNTIME.strftime('%y%m%d%H%M')}.json")
-	os.rename(workfile, oldfile)
-	logging.info("写入新的 storeHours.json")
-	with open(workfile, "w") as w:
+	oldfile = WORKFILE.replace(".json", f"-{RUNTIME.strftime('%y%m%d%H%M')}.json")
+	os.rename(WORKFILE, oldfile)
+	logging.info(LANG["WRITE"])
+	with open(WORKFILE, "w") as w:
 		w.write(json.dumps(output, ensure_ascii = False, indent = 2))
 
 	if not diffs:
-		logging.info("没有发现 storeHours 文件更新")
+		logging.info(LANG["NODIFF"])
 		return os.remove(oldfile)
 
-	content = "Apple Store 特别营业时间\n生成于 {RUNTIME}\n\n变化:\n{DIFF}\n\n日历:\n{CALENDAR}\n\n原始 JSON:\n{JSON}".format(
-		RUNTIME = RUNTIME.strftime("%F %T"), DIFF = "\n".join(diffs),
+	content = LANG["DIFFCONTENT"].format(RUNTIME = RUNTIME.strftime("%F %T"), DIFF = "\n".join(diffs),
 		CALENDAR = json.dumps(calendar, **pref), JSON = json.dumps(output, **pref))
 	with open("html/storeHours.html", "w") as w:
 		w.write(DIFFHTML.format(DIFFTITLE = "Special Hours", DIFFCONTENT = content))
-	logging.info("已生成对比文件 storeHours.html")
+	logging.info(LANG["DIFFGEN"])
 
 	text = ", Apple ".join(["", *[i[1] for i in targets]]).removeprefix(", ")
 	push = {
