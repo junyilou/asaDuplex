@@ -1,62 +1,73 @@
 import logging
-import aiohttp
-from datetime import timedelta, date, datetime
+import asyncio
+from random import choice
+from datetime import timedelta, datetime
 from storeInfo import storeInfo, storeDict, StoreID
-from modules.constants import userAgent, allRegions
+from modules.constants import allRegions, userAgent
 from modules.util import request
 
 COMMENTS = {}
+SLEEPER = list(range(2, 16, 2))
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
-def textConvert(strdict, userLang = True):
-	if strdict["closed"]:
-		return "不营业" if userLang else "Closed"
-	elif strdict["openTime"] == "00:00" and strdict["closeTime"] == "23:59":
-		return "24 小时营业" if userLang else "Always Open"
-	else:
-		return f'{strdict["openTime"]} - {strdict["closeTime"]}'
+def textConvert(dct, userLang = True):
+	match dct:
+		case {"closed": True}:
+			return "不营业" if userLang else "Closed"
+		case {"openTime": "00:00", "closeTime": "23:59"}:
+			return "24 小时营业" if userLang else "Always Open"
+		case {"openTime": opt, "closeTime": clt}:
+			return f'{opt} - {clt}'
+	return "未知时间" if userLang else "Unknown Hours"
+
+async def apu(session, s, t):
+	retry = 3
+	flag = storeInfo(s)['flag']
+	baseURL = f"https://www.apple.com{allRegions[flag]['shopURL']}"
+	url = f"{baseURL}/shop/fulfillment-messages"
+	referer = userAgent | {"Referer": f"{baseURL}/shop/product/{t}"}	
+	params = {"searchNearby": "true", "store": f"R{s}", "parts.0": t}
+
+	stores = []
+	while retry:
+		try:
+			r = await request(session = session, url = url, headers = referer, 
+				params = params, ensureAns = False, raise_for_status = True, mode = "json")
+			stores = r["body"]["content"]["pickupMessage"]["stores"]
+			break
+		except:
+			retry -= 1
+			await asyncio.sleep(choice(SLEEPER))
+
+	for store in stores:
+		astore = store["storeNumber"].removeprefix("R")
+		for ind, holiday in enumerate(store["retailStore"]["storeHolidays"]):
+			sDay = datetime.strptime(f'2000 {holiday["date"]}', "%Y %b %d").date()
+			cDay = datetime(2000, (today := datetime.now().today()).month, today.day).date() - timedelta(weeks = 1)
+			sYear = today.year if sDay >= cDay else today.year + 1
+			sDay = datetime(sYear, sDay.month, sDay.day).date()
+			sTxt = (f"[{holiday['description']}]" if holiday["description"] else "") + (f" {holiday['comments']}" if holiday["comments"] else "")
+			yield (astore, sDay, sTxt)
 
 async def comment(session, sid, sif = None):
 	global COMMENTS
-
 	sif = storeInfo(sid) if sif == None else sif
-	sid = StoreID(sid)[0][0]
-	partNumber = f'MM0A3{allRegions[sif["flag"]]["partSample"]}/A'
-	baseURL = f"https://www.apple.com{allRegions[sif['flag']]['shopURL']}/shop"
-
-	if allRegions[sif['flag']]['shopURL'] == None:
-		return COMMENTS
-	referer = {**userAgent, "Referer": f"{baseURL}/product/MM0A3"}
-	url = f"{baseURL}/fulfillment-messages?searchNearby=true&parts.0={partNumber}&store=R{sid}"
-
-	try:
-		r = await request(session = session, url = url, headers = userAgent, 
-			ident = None, ensureAns = False, mode = "json")
-		j = r["body"]["content"]["pickupMessage"]["stores"]
-	except:
-		return COMMENTS
-
-	for s in j:
-		for h in s["retailStore"]["storeHolidays"]:
-			aid = s["retailStore"]["storeNumber"].lstrip("R")
-			sDay = datetime.strptime(h["date"], "%b %d")
-			sDay = date(date.today().year, sDay.month, sDay.day)
-			sTxt = (f"[{h['description']}]" if h["description"] else "") + (f" {h['comments']}" if h["comments"] else "")
-			COMMENTS[aid] = COMMENTS.get(aid, {})
-			COMMENTS[aid][sDay] = sTxt
+	async for i in apu(session, sid, f'MM0A3{allRegions[sif["flag"]]["partSample"]}/A'):
+		astore, sDay, sTxt = i
+		COMMENTS[astore] = COMMENTS.get(astore, {})
+		COMMENTS[astore][sDay] = sTxt
 	return COMMENTS
 
-async def speHours(session, sid, limit = 14, userLang = True):
+async def speHours(sid, session = None, runtime = None, limit = 14, askComment = True, userLang = True):
 	sif = storeInfo(sid)
 	sid = StoreID(sid)[0][0]
+	runtime = datetime.now().date() if runtime is None else runtime
 	try:
 		j = await storeDict(session = session, mode = "hours", sif = sif)
 		if not j:
 			raise ValueError()
 	except:
-		logging.getLogger("special").error(f"未能获得 R{sid} 营业时间信息")
-		return {}
-	if not j:
+		logging.getLogger(__name__).error(f"未能获得 R{sid} 营业时间信息" if userLang else f"Failed getting store hours for R{sid}")
 		return {}
 
 	regularHours = {}
@@ -64,27 +75,19 @@ async def speHours(session, sid, limit = 14, userLang = True):
 		dayIndex = dayOfWeek.index(regular["name"])
 		regularHours[dayIndex] = textConvert(regular, userLang = userLang)
 	
-	specialHours = {}
-	specialToday = date.today()
-	if j["special"]:
-		specialReasons = await comment(session = session, sid = sid, sif = sif)
-	j["special"].sort(key = lambda k: k["date"])
-	for special in j["special"]:
-		if len(specialHours) == limit:
+	specialHours, specialReasons = {}, {}
+	for special in sorted(j["special"], key = lambda k: k["date"]):
+		if len(specialHours) >= limit:
 			break
-
 		validDate = datetime.strptime(special["date"], "%Y-%m-%d").date()
+		if validDate < runtime:
+			continue
+		if askComment:
+			specialReasons = await comment(session = session, sid = sid, sif = sif)
+			askComment = False
 		regular = regularHours[validDate.weekday()]
 		spetext = textConvert(special, userLang = userLang)
-
-		if validDate < specialToday:# or regular == spetext:
-			continue
-		if validDate in specialReasons.get(sid, {}):
-			reason = {"reason": specialReasons[sid][validDate]}
-		else:
-			reason = {}
-		
-		regular = regularHours[validDate.weekday()]
-		specialHours[str(validDate)] = {"regular": regular, "special": spetext, **reason}
+		comm = {"comment": specialReasons[sid][validDate]} if validDate in specialReasons.get(sid, {}) else {}
+		specialHours[str(validDate)] = {"regular": regular, "special": spetext} | comm
 	specialHours = dict(sorted(specialHours.items(), key = lambda k: k[0]))
 	return specialHours
