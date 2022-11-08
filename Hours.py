@@ -53,7 +53,7 @@ def sortOD(od):
 async def entry(session, semaphore, sid, sn, saved):
 	async with semaphore:
 		special = await speHours(session = session, sid = sid, 
-			runtime = TODAY, askComment = False, userLang = USERLANG == "ZH")
+			runtime = TODAY, userLang = USERLANG == "ZH")
 	
 	diff = []
 	hours = saved | {"storename": sn} | special
@@ -105,9 +105,7 @@ async def main(session):
 		for store in stores}
 
 	results, calendar = {}, {}
-	diffs, targets = [], []
-	comments = {i: j for i, j in {sid: {d: k for d, k in saved["comments"][sid].items() if 
-		datetime.strptime(d, '%Y-%m-%d').date() >= TODAY} for sid in saved.get("comments", {})}.items() if j}
+	targets, diffs = [], []
 
 	for store, item in tasks.items():
 		sid, sn = store
@@ -123,16 +121,8 @@ async def main(session):
 			calendar[date] = calendar.get(date, {})
 			calendar[date][sn] = result["hours"][date]["special"]
 
-	comm_store = [i[0] for i in targets]
-	while len(comm_store):
-		sid = comm_store.pop(0)
-		comm = await comment(session, sid)
-		for cid in comm:
-			comments[cid] = comments.get(cid, {}) | {datetime.strftime(d, '%Y-%m-%d'): k for d, k in comm[cid].items()}
-			_ = comm_store.remove(cid) if cid in comm_store else None
-
-	results, calendar, comments = map(sortOD, [results, calendar, comments])
-	output = {"update": RUNTIME.strftime("%F %T")} | results | {"comments": comments}
+	results, calendar = map(sortOD, [results, calendar])
+	output = {"update": RUNTIME.strftime("%F %T")} | results
 	oldfile = WORKFILE.replace(".json", f"-{RUNTIME.strftime('%y%m%d%H%M')}.json")
 	os.rename(WORKFILE, oldfile)
 	logging.info(LANG["WRITE"])
@@ -160,6 +150,6 @@ async def main(session):
 	await async_post(push)
 
 setLogger(logging.INFO, os.path.basename(__file__))
-logging.info("程序启动")
+logging.info(LANG["START"])
 asyncio.run(main())
-logging.info("程序结束")
+logging.info(LANG["END"])

@@ -20,7 +20,7 @@ def textConvert(dct, userLang = True):
 			return f'{opt} - {clt}'
 	return "未知时间" if userLang else "Unknown Hours"
 
-async def apu(session, s, t):
+async def apu(session, s, t, userLang):
 	retry = 3
 	flag = storeInfo(s)['flag']
 	baseURL = f"https://www.apple.com{allRegions[flag]['shopURL']}"
@@ -37,7 +37,8 @@ async def apu(session, s, t):
 			break
 		except:
 			retry -= 1
-			await asyncio.sleep(choice(SLEEPER))
+			logging.debug(("等待 {SEC} 秒" if userLang else "Wait for {SEC} sec").format(SEC = (sec := choice(SLEEPER))))
+			await asyncio.sleep(choice(sec))
 
 	for store in stores:
 		astore = store["storeNumber"].removeprefix("R")
@@ -49,10 +50,10 @@ async def apu(session, s, t):
 			sTxt = (f"[{holiday['description']}]" if holiday["description"] else "") + (f" {holiday['comments']}" if holiday["comments"] else "")
 			yield (astore, sDay, sTxt)
 
-async def comment(session, sid, sif = None):
+async def comment(session, sid, sif = None, userLang = True):
 	global COMMENTS
 	sif = storeInfo(sid) if sif == None else sif
-	async for i in apu(session, sid, f'MM0A3{allRegions[sif["flag"]]["partSample"]}/A'):
+	async for i in apu(session, sid, f'MM0A3{allRegions[sif["flag"]]["partSample"]}/A', userLang):
 		astore, sDay, sTxt = i
 		COMMENTS[astore] = COMMENTS.get(astore, {})
 		COMMENTS[astore][sDay] = sTxt
@@ -64,8 +65,7 @@ async def speHours(sid, session = None, runtime = None, limit = 14, askComment =
 	runtime = datetime.now().date() if runtime is None else runtime
 	try:
 		j = await storeDict(session = session, mode = "hours", sif = sif)
-		if not j:
-			raise ValueError()
+		assert j
 	except:
 		logging.getLogger(__name__).error(f"未能获得 R{sid} 营业时间信息" if userLang else f"Failed getting store hours for R{sid}")
 		return {}
@@ -76,15 +76,14 @@ async def speHours(sid, session = None, runtime = None, limit = 14, askComment =
 		regularHours[dayIndex] = textConvert(regular, userLang = userLang)
 	
 	specialHours, specialReasons = {}, {}
+	if j["special"] and askComment:
+		specialReasons = await comment(session = session, sid = sid, sif = sif, userLang = True)
 	for special in sorted(j["special"], key = lambda k: k["date"]):
 		if len(specialHours) >= limit:
 			break
 		validDate = datetime.strptime(special["date"], "%Y-%m-%d").date()
 		if validDate < runtime:
 			continue
-		if askComment:
-			specialReasons = await comment(session = session, sid = sid, sif = sif)
-			askComment = False
 		regular = regularHours[validDate.weekday()]
 		spetext = textConvert(special, userLang = userLang)
 		comm = {"comment": specialReasons[sid][validDate]} if validDate in specialReasons.get(sid, {}) else {}
