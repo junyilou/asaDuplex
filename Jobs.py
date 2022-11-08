@@ -1,8 +1,8 @@
 import asyncio
 import json
-import os
 import logging
 from sys import argv
+from os.path import basename
 from datetime import datetime, UTC
 from collections import OrderedDict
 
@@ -242,7 +242,7 @@ async def main(targets, session):
 		with open("Retail/savedJobs.json", "w") as w:
 			w.write(json.dumps(sortOD(SAVED), ensure_ascii = False, indent = 2))
 
-setLogger(logging.INFO, os.path.basename(__file__))
+setLogger(logging.INFO, basename(__file__))
 logging.info("程序启动")
 targets = argv[1:] if len(argv) > 1 else list(allRegions)
 asyncio.run(main(targets = targets))

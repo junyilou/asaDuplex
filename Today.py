@@ -1,10 +1,10 @@
-import os
 import re
 import json
 import asyncio
 import logging
 from datetime import datetime, UTC
 from sys import argv
+from os.path import basename
 from collections import OrderedDict
 
 from storeInfo import *
@@ -125,7 +125,7 @@ if __name__ == "__main__":
 	if len(argv) == 1:
 		argv = ["", "today"]
 
-	setLogger(logging.INFO, os.path.basename(__file__))
+	setLogger(logging.INFO, basename(__file__))
 	logging.info("程序启动")
 	loop = asyncio.new_event_loop()
 	asyncio.set_event_loop(loop)
