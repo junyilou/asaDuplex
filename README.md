@@ -192,6 +192,15 @@ from modules.util import sync
   ```
   
   该代码中还设计了 `Talent` 对象、`Sitemap` 对象，以及将 `Course`、`Schedule` 输出为适用于 Telegram 输出的 `teleinfo` 函数。
+  
+* bannerMessage.py 作为一个示例
+
+  由于在 storeInfo.py 当中已经包装了大量实用函数，假设案例是获取 Apple Store 零售店官网的提示信息（常用于特别营业时间、搬迁、临时关闭、特别活动等展示），在主函数代码中，只需要：
+
+  * 指定要查询的零售店（通过 `storeReturn` 函数可以轻松的指定）
+  * 查询所需要的信息（通过并发 `storeDict` 可以极快的速度获得信息）
+  * 对结果进行格式化（通过 `storeReturn` 获得的零售店默认已经按照行政区划进行排序，还可以通过 `Order` 顺序表、`stateReplace` 拼合一个城市的多家零售店、`getCity` `getState` `getNation` `storeInfo` 获取零售店信息等）
+  * 产生输出（代码最末端的 `push` 字典，可按照需求推送至 app 等）
 
 
 
