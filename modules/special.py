@@ -38,7 +38,7 @@ async def apu(session, s, t, userLang):
 		except:
 			retry -= 1
 			logging.debug(("等待 {SEC} 秒" if userLang else "Wait for {SEC} sec").format(SEC = (sec := choice(SLEEPER))))
-			await asyncio.sleep(choice(sec))
+			await asyncio.sleep(sec)
 
 	for store in stores:
 		astore = store["storeNumber"].removeprefix("R")
