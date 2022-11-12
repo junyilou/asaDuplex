@@ -65,7 +65,7 @@ async def entry(session, semaphore, sid, sn, saved):
 		elif (svd := saved[date]["special"]) != spe:
 			diff.append(LANG["CHANGE"].format(DATE = date, HOURS1 = svd, HOURS2 = spe))
 
-	for date in list(saved):
+	for date in saved:
 		if date == "storename":
 			continue
 		dateobj = datetime.strptime(date, '%Y-%m-%d').date()
