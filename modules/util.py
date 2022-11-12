@@ -1,15 +1,15 @@
-import os
 import json
 import logging
 import asyncio
 import aiohttp
+from os.path import isdir
 
-def disMarkdown(text):
+def disMarkdown(text, wrap = ""):
 	temp = text
 	signs = "\\|_{}[]()#@+-.!=<>~"
 	for s in signs:
 		temp = temp.replace(s, f"\\{s}")
-	return temp
+	return wrap + temp + wrap[::-1]
 
 def timezoneText(dtime):
 	delta = dtime.utcoffset().total_seconds() / 3600
@@ -39,28 +39,34 @@ async def request(session = None, url = None, mode = None, retryNum = 1, ensureA
 		session = aiohttp.ClientSession()
 		close_session = True
 
+	mode = [mode] if type(mode) != list else mode
 	logger.debug(f"[{method}] '{url}', [模式] {mode}, [参数] {kwargs}, [重试] {retryNum}")
 	while retryNum:
 		try:
 			async with session.request(url = url, method = method, **kwargs) as resp:
-				if mode == "raw":
-					r = await resp.read()
-				elif mode == "head":
-					r = resp.headers
-				elif mode == "status":
-					r = resp.status
-				elif mode == "json":
-					try:
-						r = await resp.json()
-					except:
-						r = await resp.text()
-						r = json.loads(r)
-				else:
-					r = await resp.text()
+				results = {}
+				for m in mode:
+					match m:
+						case "raw":
+							results[m] = await resp.read()
+						case "head":
+							results[m] = resp.headers
+						case "status":
+							results[m] = resp.status
+						case "json":
+							try:
+								results[m] = await resp.json()
+							except:
+								r = await resp.text()
+								results[m] = json.loads(r)
+						case _:
+							results[m] = await resp.text()
 			logger.debug(f"[状态{resp.status}] '{url}'")
 			if close_session:
 				await session.close()
-			return r
+			if len(mode) == 1:
+				return results[mode[0]]
+			return results
 		except Exception as exp:
 			if retryNum == 1:
 				logger.debug(f"[丢弃] '{url}', [异常] {exp}")
@@ -87,8 +93,8 @@ def sync(coroutine = None, loop = None):
 	else:
 		return loop
 
-def setLogger(level, name):
-	if os.path.isdir('logs'):
+def setLogger(level, name, force_print = False):
+	if isdir('logs') and not force_print:
 		logging.basicConfig(
 			filename = f"logs/{name}.log",
 			format = '[%(asctime)s %(name)s %(levelname)s] %(message)s',
