@@ -4,7 +4,6 @@ import logging
 from sys import argv
 from os.path import basename
 from datetime import datetime, UTC
-from collections import OrderedDict
 
 from bot import chat_ids
 from sdk_aliyun import async_post
@@ -14,21 +13,11 @@ from modules.util import request, setLogger, disMarkdown, session_func
 API = {
 	"state": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/stateProvinceList",
 	"province": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/storeLocations",
-	"image": "https://www.apple.com/careers/images/retail/fy22/hero_hotspot/default@2x.png",
-	"frame": "https://www.apple.com/careers/global/media/flow/retail/hero-hotspot/retail_large_startframe.jpg"
+	"image": "https://www.apple.com/careers/images/retail/fy22/hero_hotspot/default@2x.png"
 }
 
 TASKS = []
 RESULTS = []
-
-def sortOD(od):
-    res = OrderedDict()
-    for k, v in sorted(od.items()):
-        if isinstance(v, dict):
-            res[k] = sortOD(v)
-        else:
-            res[k] = v
-    return res
 
 class Store:
 
@@ -182,6 +171,7 @@ async def main(targets, session):
 			TASKS = []
 
 	append = False
+	pushes = [[], [], []]
 
 	for store in RESULTS:
 		if store not in STORES:
@@ -190,15 +180,7 @@ async def main(targets, session):
 			SAVED[store.flag][store.stateCode] = SAVED[store.flag].get(store.stateCode, {"name": store.stateName})
 			SAVED[store.flag][store.stateCode][store.sid] = store.name
 			linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
-			pushAns = f"#新店新机遇\n\n{store.teleInfo()}\n\n{linkURL}"	
-			push = {
-				"mode": "photo-text",
-				"text": disMarkdown(pushAns),
-				"chat_id": chat_ids[0],
-				"parse": "MARK",
-				"image": API["image"]
-			}
-			await async_post(push, session = session)
+			pushes[0].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
 		elif (oldName := SAVED[store.flag][store.stateCode]["name"]) != store.stateName:
 			append = True
 			logging.info(f"更改名称 {oldName} 为 {store.stateName}")
@@ -209,15 +191,7 @@ async def main(targets, session):
 			SAVED[store.flag][store.stateCode][store.sid] = store.name
 			if oldName.startswith("~"):
 				linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
-				pushAns = f"#新店新机遇\n\n已恢复招聘\n{store.teleInfo()}\n\n{linkURL}"	
-				push = {
-					"mode": "photo-text",
-					"text": disMarkdown(pushAns),
-					"chat_id": chat_ids[0],
-					"parse": "MARK",
-					"image": API["frame"]
-				}
-				await async_post(push, session = session)
+				pushes[1].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
 
 	for store in STORES:
 		if store not in RESULTS:
@@ -227,20 +201,23 @@ async def main(targets, session):
 			logging.info(f"记录到地点已停止招聘 {store.flag} {store.stateName} {store.sid} {store.name}")
 			SAVED[store.flag][store.stateCode][store.sid] = "~" + store.name
 			linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
-			pushAns = f"#新店新机遇\n\n已停止招聘\n{store.teleInfo()}\n\n{linkURL}"	
+			pushes[2].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
+
+	for p, t in zip(pushes, ["已开始招聘", "已恢复招聘", "已停止招聘"]):
+		if (content := "\n".join(p)):
 			push = {
 				"mode": "photo-text",
-				"text": disMarkdown(pushAns),
+				"text": f"\\#新店新机遇\n{t}\n\n{content}",
 				"chat_id": chat_ids[0],
 				"parse": "MARK",
-				"image": API["frame"]
+				"image": API["image"]
 			}
 			await async_post(push, session = session)
 
 	if append:
 		SAVED["update"] = datetime.now(UTC).strftime("%F %T GMT")
 		with open("Retail/savedJobs.json", "w") as w:
-			w.write(json.dumps(sortOD(SAVED), ensure_ascii = False, indent = 2))
+			json.dump(SAVED, w, ensure_ascii = False, indent = 2, sort_keys = True)
 
 setLogger(logging.INFO, basename(__file__))
 logging.info("程序启动")
