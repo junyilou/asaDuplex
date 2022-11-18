@@ -138,6 +138,17 @@ class asyncObject(object):
 	async def __init__(self):
 		pass
 
+class TodayEncoder(json.JSONEncoder):
+	def __init__(self, **kwargs):
+		super().__init__(**(kwargs | {"ensure_ascii": False}))
+
+	def default(self, o):
+		match o:
+			case Store() | Course() | Schedule() | Collection() | Talent():
+				return o.raw
+			case _:
+				return super().default(o)
+
 class Store():
 	def __init__(self, raw = None, sid = None, rootPath = None):
 
@@ -172,7 +183,7 @@ class Store():
 		self.today = self.url.replace("/retail/", "/today/")
 		self.calendar = self.url.replace("/retail/", "/today/calendar/")
 		self.serial = dict(sid = self.sid)
-		self.raw = vars(self) | {"raw": None}
+		self.raw = {k: v for k, v in vars(self).items() if k != "raw"}
 
 	def __hash__(self):
 		return hash(self.sid)
@@ -372,7 +383,7 @@ class Course(asyncObject):
 			self.special = "SPECIAL" in raw["type"] or "HIGH" in raw["talentType"]
 			self.talents = [Talent(raw = t) for t in talents] if talents != None else None
 			self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}"
-			self.raw = raw
+			self.raw = raw | {"serial": self.serial}
 
 	def __repr__(self):
 		col = (f', Collection <{self.collection.name}>' if type(self.collection) == Collection \
@@ -400,16 +411,13 @@ class Course(asyncObject):
 		else:
 			return self.courseId > other.courseId
 
-	def json(self):
-		return json.dumps(self.raw, ensure_ascii = False)
-
 	def elements(self, accept = None):
 		if accept == None:
 			accept = ACCEPT
 		
 		result, accept = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
-			"))+[\'\"]?", self.json()) if i[0] not in result]
+			"))+[\'\"]?", json.dumps(self, cls = TodayEncoder)) if i[0] not in result]
 		return result
 
 	async def getSchedules(self, store, ensure = True, semaphore = None):
@@ -539,7 +547,7 @@ class Schedule(asyncObject):
 			self.rawEnd = datetime.fromtimestamp(raw["endTime"] / 1000)
 			self.status = raw["status"] == "RSVP"
 			self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}/{self.scheduleId}/?sn={self.store.sid}"
-			self.raw = raw
+			self.raw = raw | {"serial": self.serial}
 
 	def datetimeStart(self, form = "%-m 月 %-d 日 %-H:%M"):
 		if self.tzinfo != None:
@@ -550,9 +558,6 @@ class Schedule(asyncObject):
 		if self.tzinfo != None:
 			return self.timeEnd.astimezone(self.tzinfo).strftime(form)
 		return self.rawEnd.strftime(form)
-
-	def json(self):
-		return json.dumps(self.raw, ensure_ascii = False)
 
 	def __repr__(self):
 		loc = self.store.sid if not self.course.virtual else "Online"
@@ -644,7 +649,7 @@ class Collection(asyncObject):
 			self.collaboration = raw["inCollaborationWith"]["partners"]
 		else:
 			self.collaboration = None
-		self.raw = raw
+		self.raw = raw | {"serial": self.serial}
 
 	def __repr__(self):
 		return f'<Collection "{self.name}", "{self.slug}", "{self.rootPath}">'
@@ -658,16 +663,13 @@ class Collection(asyncObject):
 		except:
 			return False
 
-	def json(self):
-		return json.dumps(self.raw, ensure_ascii = False)
-
 	def elements(self, accept = None):
 		if accept == None:
 			accept = ACCEPT
 		
 		result, accept = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
-			"))+[\'\"]?", self.json()) if i[0] not in result]
+			"))+[\'\"]?", json.dumps(self, cls = TodayEncoder)) if i[0] not in result]
 		return result
 
 	async def getSchedules(self, store, ensure = True, semaphore = None):
