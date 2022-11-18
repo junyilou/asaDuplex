@@ -16,10 +16,7 @@ from sdk_aliyun import async_post as raw_post
 def sortOD(od, reverse = True):
 	res = OrderedDict()
 	for k, v in sorted(od.items(), reverse = reverse):
-		if isinstance(v, dict):
-			res[k] = sortOD(v, False)
-		else:
-			res[k] = v
+		res[k] = sortOD(v, reverse = False) if isinstance(v, dict) else v
 	return res
 
 def rec(lst, rst):

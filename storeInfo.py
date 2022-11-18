@@ -71,8 +71,7 @@ def storeURL(sid = None, sif = None, mode = None):
 async def storeDict(sid = None, sif = None, session = None, mode = "dict"):
 	try:
 		website = storeURL(sid = sid, sif = sif, mode = "slug")
-		if website == "":
-			raise ValueError()
+		assert website
 
 		sif = sif if sif != None else storeInfo(sid)
 		url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={website}&locale={allRegions[sif['flag']]['rspLocale']}&sc=false"
