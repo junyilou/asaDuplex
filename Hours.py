@@ -12,7 +12,7 @@ from modules.constants import DIFFHTML
 from sdk_aliyun import async_post
 from bot import chat_ids
 
-INCLUDE = "🇨🇳"
+INCLUDE = "🇨🇳, 🇯🇵"
 EXCLUDE = "609"
 WORKFILE = "Retail/storeHours.json"
 USERLANG = "ZH"
@@ -123,7 +123,7 @@ async def main(session):
 
 	results, calendar = map(sortOD, [results, calendar])
 	output = {"update": RUNTIME.strftime("%F %T")} | results
-	oldfile = WORKFILE.replace(".json", f"-{RUNTIME.strftime('%y%m%d%H%M')}.json")
+	oldfile = WORKFILE.replace(".json", f"-{RUNTIME:%y%m%d%H%M}.json")
 	os.rename(WORKFILE, oldfile)
 	logging.info(LANG["WRITE"])
 	with open(WORKFILE, "w") as w:

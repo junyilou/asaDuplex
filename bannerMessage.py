@@ -90,7 +90,7 @@ async def main(session):
 	if not criticals:
 		return logging.info(LANG["NODIFF"])
 
-	oldfile = WORKFILE.replace(".json", f"-{RUNTIME.strftime('%y%m%d%H%M')}.json")
+	oldfile = WORKFILE.replace(".json", f"-{RUNTIME:%y%m%d%H%M}.json")
 	os.rename(WORKFILE, oldfile)
 	with open(WORKFILE, "w") as w:
 		w.write(json.dumps(results, ensure_ascii = False, indent = 2))
