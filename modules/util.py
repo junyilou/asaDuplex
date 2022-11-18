@@ -4,9 +4,9 @@ import asyncio
 import aiohttp
 from os.path import isdir
 
-def disMarkdown(text, wrap = ""):
+def disMarkdown(text, wrap = "", extra = ""):
 	temp = text
-	signs = "\\|_{}[]()#@+-.!=<>~"
+	signs = "\\|_{}[]()#@+-.!=<>~" + extra
 	for s in signs:
 		temp = temp.replace(s, f"\\{s}")
 	return wrap + temp + wrap[::-1]
