@@ -1,5 +1,5 @@
 {
-  "update": "2022-11-08 15:57:28 GMT",
+  "update": "2022-11-16 08:05:05 GMT",
   "name": {
     "001": "Glendale Galleria",
     "002": "Palo Alto",
@@ -779,6 +779,7 @@
     ],
     "622": "Solomon Pond Mall",
     "623": "Brickell City Centre",
+    "624": "Store in Madrid",
     "625": "Nave de Vero",
     "629": "Trumbull",
     "631": "The Mall of New Hampshire",
@@ -859,6 +860,7 @@
       "苏州",
       "Suzhou"
     ],
+    "691": "Store in Seoul South",
     "692": [
       "가로수길",
       "Garosugil"
@@ -933,7 +935,7 @@
       "Jamsil"
     ],
     "753": "The Mall at Bay Plaza",
-    "755": "Store in East Rutherford",
+    "755": "American Dream",
     "756": "Store in New Delhi",
     "760": "Store in Seoul South",
     "761": "Store in Shenzhen East",
@@ -1443,6 +1445,7 @@
     "617": "🇨🇳",
     "622": "🇺🇸",
     "623": "🇺🇸",
+    "624": "🇪🇸",
     "625": "🇮🇹",
     "629": "🇺🇸",
     "631": "🇺🇸",
@@ -1469,6 +1472,7 @@
     "683": "🇨🇳",
     "687": "🇦🇹",
     "688": "🇨🇳",
+    "691": "🇰🇷",
     "692": "🇰🇷",
     "694": "🇹🇼",
     "697": "🇲🇴",
@@ -2308,7 +2312,7 @@
     "131": "07 Mar 2022 21:41:59",
     "132": "07 Jan 2022 08:59:06",
     "133": "07 Jan 2022 08:59:07",
-    "134": "07 Jan 2022 08:59:09",
+    "134": "14 Nov 2022 19:36:48",
     "135": "07 Jan 2022 08:59:06",
     "136": "07 Jan 2022 08:59:07",
     "137": "07 Jan 2022 08:59:07",
@@ -3929,6 +3933,7 @@
     "275": {
       "state": "Genève",
       "city": "Genève",
+      "alter": "Geneve Geneva",
       "website": "-"
     },
     "276": {
@@ -4082,7 +4087,7 @@
     "309": {
       "state": "Zürich",
       "city": "Wallisellen",
-      "alter": "Zurich",
+      "alter": "Zurich Glattzentrum bei",
       "website": "-"
     },
     "312": {
@@ -4775,7 +4780,7 @@
     "486": {
       "state": "Région de Bruxelles-Capitale",
       "city": "Bruxelles",
-      "alter": "Region Bruxelles Capitale",
+      "alter": "Brussel Region Bruxelles Capitale",
       "website": "-"
     },
     "488": {
@@ -5207,6 +5212,11 @@
       "city": "Miami",
       "website": "-"
     },
+    "624": {
+      "state": "Madrid",
+      "city": "Madrid",
+      "alter": "招聘 Hiring"
+    },
     "625": {
       "state": "Venezia",
       "city": "Mestre",
@@ -5348,6 +5358,11 @@
       "city": "苏州",
       "alter": "Jiangsu Suzhou 江浙沪",
       "website": "suzhou"
+    },
+    "691": {
+      "state": "서울",
+      "city": "서울",
+      "alter": "Seoul 招聘 Hiring"
     },
     "692": {
       "state": "서울",
@@ -5501,7 +5516,7 @@
     "755": {
       "state": "New Jersey",
       "city": "East Rutherford",
-      "alter": "招聘 Hiring"
+      "website": "-"
     },
     "756": {
       "state": "Delhi",
@@ -6047,6 +6062,7 @@
     "617": "Asia/Shanghai",
     "622": "America/New_York",
     "623": "America/New_York",
+    "624": "Europe/Madrid",
     "625": "Europe/Rome",
     "629": "America/New_York",
     "631": "America/New_York",
@@ -6071,6 +6087,7 @@
     "683": "Asia/Shanghai",
     "687": "Europe/Vienna",
     "688": "Asia/Shanghai",
+    "691": "Asia/Seoul",
     "692": "Asia/Seoul",
     "694": "Asia/Taipei",
     "697": "Asia/Macau",

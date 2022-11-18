@@ -1,5 +1,5 @@
 {
-  "update": "2022-10-21 02:41:28 GMT",
+  "update": "2022-11-16 17:00:13 GMT",
   "🇦🇪": {
     "state1049": {
       "ABUA": "Al Maryah Island",
@@ -289,6 +289,7 @@
       "R435": "Gran Plaza 2",
       "R436": "Parquesur",
       "R450": "Puerta del Sol",
+      "R624": "Madrid-SP",
       "name": "Madrid"
     },
     "state263": {
@@ -583,6 +584,7 @@
   },
   "🇰🇷": {
     "state1112": {
+      "R691": "Seoul South - KR",
       "R692": "Garosugil",
       "R738": "Myeongdong",
       "R747": "Seoul - Yeouido",
