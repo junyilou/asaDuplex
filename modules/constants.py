@@ -139,14 +139,14 @@ allRegions = {
       "Swiss"
     ],
     "jobCode": "114438017",
-    "mobileApp": "e/ch-de",
+    "mobileApp": "e/ch-fr",
     "name": "瑞士",
     "nameEng": "Switzerland",
     "partSample": "ZM",
-    "rootPath": "/chde",
-    "rspLocale": "de_CH",
-    "shopURL": "/ch-de",
-    "storeURL": "/chde"
+    "rootPath": "/chfr",
+    "rspLocale": "fr_CH",
+    "shopURL": "/ch-fr",
+    "storeURL": "/chfr"
   },
   "🇨🇳": {
     "abbr": "CN",
