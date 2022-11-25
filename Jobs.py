@@ -76,10 +76,10 @@ class State:
 				logging.error("Apple 招贤纳才维护中")
 				raise NameError("SERVER")
 			else:
-				logging.warning(", ".join(["下载失败", str(self)]))
+				logging.warning(", ".join(["下载失败", "等待重试", str(self)]))
 				TASKS.append(self)
 		except:
-			logging.warning(", ".join(["下载失败", str(self)]))
+			logging.error(", ".join(["下载失败", "放弃下载", str(self)]))
 			TASKS.append(self)
 
 		for c in a:
@@ -117,11 +117,11 @@ class Region:
 				logging.error("Apple 招贤纳才维护中")
 				raise NameError("SERVER")
 			else:
-				logging.warning(", ".join(["下载失败", str(self)]))
+				logging.warning(", ".join(["下载失败", "等待重试", str(self)]))
 				TASKS.append(self)
 				return
 		except:
-			logging.warning(", ".join(["下载失败", str(self)]))
+			logging.error(", ".join(["下载失败", "放弃下载", str(self)]))
 			TASKS.append(self)
 			return
 
@@ -130,7 +130,7 @@ class Region:
 				session = self.session, semaphore = self.semaphore))
 
 @session_func
-async def main(targets, session):
+async def main(targets, session, check_cancel):
 
 	with open("Retail/savedJobs.json") as r:
 		SAVED = eval(r.read())
@@ -193,15 +193,16 @@ async def main(targets, session):
 				linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
 				pushes[1].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
 
-	for store in STORES:
-		if store not in RESULTS:
-			if store.name.startswith("~"):
-				continue
-			append = True
-			logging.info(f"记录到地点已停止招聘 {store.flag} {store.stateName} {store.sid} {store.name}")
-			SAVED[store.flag][store.stateCode][store.sid] = "~" + store.name
-			linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
-			pushes[2].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
+	if check_cancel:
+		for store in STORES:
+			if store not in RESULTS:
+				if store.name.startswith("~"):
+					continue
+				append = True
+				logging.info(f"记录到地点已停止招聘 {store.flag} {store.stateName} {store.sid} {store.name}")
+				SAVED[store.flag][store.stateCode][store.sid] = "~" + store.name
+				linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
+				pushes[2].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
 
 	for p, t in zip(pushes, ["已开始招聘", "已恢复招聘", "已停止招聘"]):
 		if (content := "\n".join(p)):
@@ -221,6 +222,12 @@ async def main(targets, session):
 
 setLogger(logging.INFO, basename(__file__))
 logging.info("程序启动")
+
+check_cancel = False
+if "cancel" in argv:
+	argv.remove("cancel")
+	check_cancel = True
 targets = argv[1:] if len(argv) > 1 else list(allRegions)
-asyncio.run(main(targets = targets))
+asyncio.run(main(targets = targets, check_cancel = check_cancel))
+
 logging.info("程序结束")
