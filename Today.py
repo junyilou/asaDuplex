@@ -5,19 +5,12 @@ import logging
 from datetime import datetime, UTC
 from sys import argv
 from os.path import basename
-from collections import OrderedDict
 
-from storeInfo import *
-from modules.today import Store, Sitemap, Collection, teleinfo, clean
-from modules.util import setLogger
+from storeInfo import storeReturn
+from modules.today import Store, Sitemap, Collection, teleinfo
+from modules.util import setLogger, sortOD
 from bot import chat_ids
 from sdk_aliyun import async_post as raw_post
-
-def sortOD(od, reverse = True):
-	res = OrderedDict()
-	for k, v in sorted(od.items(), reverse = reverse):
-		res[k] = sortOD(v, reverse = False) if isinstance(v, dict) else v
-	return res
 
 def rec(lst, rst):
 	for i in lst:
@@ -127,12 +120,11 @@ if __name__ == "__main__":
 	loop = asyncio.new_event_loop()
 	asyncio.set_event_loop(loop)
 	loop.run_until_complete(main(argv[1]))
-	clean(loop)
 
 	if append:
 		logging.info("正在更新 savedEvent 文件")
 		saved["update"] = datetime.now(UTC).strftime("%F %T GMT")
 		with open("Retail/savedEvent.json", "w") as w:
-			w.write(json.dumps(sortOD(saved), ensure_ascii = False, indent = 2))
+			json.dump(sortOD(saved, reverse = [True, False]), w, ensure_ascii = False, indent = 2)
 
 	logging.info("程序结束")

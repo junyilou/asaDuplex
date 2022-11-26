@@ -6,7 +6,7 @@ import atexit
 
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from storeInfo import *
+from storeInfo import StoreID, actualName, storeInfo, storeURL, storeDict, stateReplace, storeReturn
 from modules.constants import allRegions, userAgent
 from modules.util import request, disMarkdown, timezoneText
 
