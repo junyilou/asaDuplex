@@ -23,10 +23,22 @@ def timezoneText(dtime):
 def bitsize(integer, width = 8, precision = 2, ks = 1e3):
 	order = [" B", "KB", "MB", "GB", "TB"]
 	unit = 0
-	while integer > ks:
+	while integer > ks and unit < len(order) - 1:
 		integer /= ks
 		unit += 1
 	return f"{integer:{width}.{precision}f} {order[unit]}"
+
+def sortOD(od, reverse = [False], key = None, level = 0):
+	res = {}
+	for k, v in sorted(od.items(), reverse = reverse[min(level, len(reverse) - 1)], key = key):
+		match v:
+			case dict():
+				res[k] = sortOD(v, reverse = reverse, key = key, level = level + 1)
+			case list():
+				res[k] = sorted(v)
+			case _:
+				res[k] = v
+	return res
 
 async def request(session = None, url = None, mode = None, retryNum = 1, ensureAns = True, **kwargs):
 	method = kwargs.get("method", "GET")
@@ -70,6 +82,7 @@ async def request(session = None, url = None, mode = None, retryNum = 1, ensureA
 		except Exception as exp:
 			if retryNum == 1:
 				logger.debug(f"[丢弃] '{url}', [异常] {exp}")
+				logger.debug(exp.__repr__())
 				if close_session:
 					await session.close()
 				if ensureAns:
@@ -78,6 +91,7 @@ async def request(session = None, url = None, mode = None, retryNum = 1, ensureA
 			else:
 				retryNum -= 1
 				logger.debug(f"[异常] '{url}', [异常] {exp}, [重试剩余] {retryNum}")
+				logger.debug(exp.__repr__())
 
 def session_func(func, *args, **kwargs):
 	async def wrapper(*args, **kwargs):

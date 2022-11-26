@@ -3,10 +3,9 @@ import asyncio
 import json
 import logging
 from datetime import datetime
-from collections import OrderedDict
 
-from storeInfo import storeReturn, dieterURL
-from modules.util import session_func, setLogger
+from storeInfo import storeReturn, dieterURL, Order, StoreID
+from modules.util import session_func, setLogger, sortOD
 from modules.special import speHours, comment
 from modules.constants import DIFFHTML
 from sdk_aliyun import async_post
@@ -44,16 +43,12 @@ LOGSTRING = {
 }
 LANG = LOGSTRING[USERLANG]
 
-def sortOD(od):
-	res = OrderedDict()
-	for k, v in sorted(od.items()):
-		res[k] = sortOD(v) if isinstance(v, dict) else v
-	return res
-
 async def entry(session, semaphore, sid, sn, saved):
 	async with semaphore:
 		special = await speHours(session = session, sid = sid, 
 			runtime = TODAY, userLang = USERLANG == "ZH")
+	if special == []:
+		return {"hours": saved, "diff": []}
 	
 	diff = []
 	hours = saved | {"storename": sn} | special
@@ -121,7 +116,11 @@ async def main(session):
 			calendar[date] = calendar.get(date, {})
 			calendar[date][sn] = result["hours"][date]["special"]
 
-	results, calendar = map(sortOD, [results, calendar])
+	ORDER = list(map(lambda s: StoreID(s)[0][1], Order))
+	SORTKEY = lambda k, o: f"-{o.index(k[0]):0>3}" if k[0] in o else k[0]
+	results = sortOD(results, key = lambda k: SORTKEY(k, Order))
+	calendar = sortOD(calendar, key = lambda k: SORTKEY(k, ORDER))
+
 	output = {"update": RUNTIME.strftime("%F %T")} | results
 	oldfile = WORKFILE.replace(".json", f"-{RUNTIME:%y%m%d%H%M}.json")
 	os.rename(WORKFILE, oldfile)
