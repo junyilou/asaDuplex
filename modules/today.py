@@ -6,7 +6,7 @@ import atexit
 
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from storeInfo import StoreID, actualName, storeInfo, storeURL, storeDict, stateReplace, storeReturn
+from storeInfo import StoreID, nameReplace, storeReturn
 from modules.constants import allRegions, userAgent
 from modules.util import request, disMarkdown, timezoneText
 
@@ -150,33 +150,28 @@ class TodayEncoder(json.JSONEncoder):
 				return super().default(o)
 
 class Store():
-	def __init__(self, raw = None, sid = None, rootPath = None):
+	def __init__(self, raw = None, sid = None, store = None, rootPath = None):
 
 		if raw != None:
 			self.name = raw["name"]
 			self.sid = raw["storeNum"]
+			self.raw_store = StoreID(self.sid)[0]
 			self.timezone = raw["timezone"]["name"]
 			self.slug = raw["slug"]
-			if rootPath == None:
-				sif = storeInfo(self.sid)
-				slug = storeURL(sid = self.sid, mode = "slug")
-				self.rootPath = allRegions[sif["flag"]]["rootPath"]
-			else:
-				self.rootPath = rootPath
+			self.rootPath = self.raw_store.region["rootPath"] if rootPath == None else rootPath
 			self.flag = todayNation[self.rootPath]
 			self.url = f"https://www.apple.com{raw['path']}" if self.rootPath != "/cn" \
 				else f"https://www.apple.com.cn{raw['path']}"
 			self.coord = [raw["lat"], raw["long"]]
-		elif sid != None:
-			store = StoreID(sid)[0]
-			self.sid = "R" + store[0]
-			self.name = store[1]
-			sif = storeInfo(self.sid)
-			self.slug = storeURL(sif = sif, mode = "slug")
-			self.rootPath = allRegions[sif["flag"]]["rootPath"]
-			self.timezone = sif["timezone"]
-			self.flag = todayNation[self.rootPath]
-			self.url = storeURL(sif = sif)
+		elif sid != None or store != None:
+			self.raw_store = store if store != None else StoreID(sid)[0]
+			self.sid = self.raw_store.rid
+			self.name = self.raw_store.name
+			self.slug = self.raw_store.slug
+			self.rootPath = self.raw_store.region["rootPath"]
+			self.timezone = self.raw_store.timezone
+			self.flag = self.raw_store.flag
+			self.url = self.raw_store.url
 			self.coord = None
 		else:
 			raise ValueError("sid, raw 至少提供一个")
@@ -258,20 +253,19 @@ class Store():
 		return [t.result() for t in tasks]
 
 	async def getCoord(self):
-		d = await storeDict(sid = self.sid, mode = "raw", session = get_session())
+		d = await self.raw_store.detail(session = get_session(), mode = "raw")
 		self.coord = [i[1] for i in sorted(d["geolocation"].items())]
 		return self.coord
 
-def getStore(sid, raw = None, rootPath = None):
+def getStore(sid, store = None, raw = None, rootPath = None):
 	global savedToday
 	if type(sid) != str or not sid.startswith("R"):
 		sid = f"R{sid:0>3}"
-	if sid in savedToday["Store"]:
-		if raw != None:
-			get = Store(raw = raw, rootPath = rootPath)
-			savedToday["Store"][sid] = get
+	if sid in savedToday["Store"] and raw != None:
+		get = Store(raw = raw, rootPath = rootPath)
+		savedToday["Store"][sid] = get
 	else:
-		get = Store(sid = sid, raw = raw, rootPath = rootPath)
+		get = Store(sid = sid, store = store, raw = raw, rootPath = rootPath)
 		savedToday["Store"][sid] = get
 	return savedToday["Store"][sid]
 
@@ -460,9 +454,9 @@ class Course(asyncObject):
 		return [t.result() for t in tasks]
 
 	async def getRootSchedules(self):
-		stores = storeReturn(todayNation.get(self.rootPath, ""), remove_closed = True, remove_future = True)
+		stores = storeReturn(self.flag, remove_closed = True, remove_future = True)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
-		tasks = [self.getSchedules(getStore(sid = i[0]), semaphore = semaphore) for i in stores]
+		tasks = [self.getSchedules(getStore(sid = i.sid, store = i), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
 async def getCourse(courseId = None, rootPath = None, slug = None, raw = None, 
@@ -711,9 +705,9 @@ class Collection(asyncObject):
 		return [t.result() for t in tasks]
 
 	async def getRootSchedules(self):
-		stores = storeReturn(todayNation.get(self.rootPath, ""), remove_closed = True, remove_future = True)
+		stores = storeReturn(self.flag, remove_closed = True, remove_future = True)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
-		tasks = [self.getSchedules(getStore(sid = i[0]), semaphore = semaphore) for i in stores]
+		tasks = [self.getSchedules(getStore(sid = i.sid, store = i), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
 async def getCollection(slug, rootPath = None):
@@ -939,15 +933,8 @@ def teleinfo(course = None, schedules = [], collection = None, mode = "new", use
 	if course.virtual:
 		courseStore = lang[userLang]["VIRTUAL"]
 	elif schedules != []:
-		availableStore = []
-		for schedule in schedules:
-			if schedule.store.sid[1:] not in availableStore:
-				availableStore.append(schedule.store.sid[1:])
-		availableStore = [i[0] for i in storeReturn(availableStore)]
-		textStore = stateReplace(availableStore, userLang = userLang)
-		for a in textStore:
-			if a.isdigit():
-				textStore[textStore.index(a)] = actualName(storeInfo(a)["name"])
+		availableStore = set([i.store.raw_store for i in schedules])
+		textStore = nameReplace(availableStore, userLang = userLang, number = False)
 		courseStore = lang[userLang]["JOINT"].join(textStore)
 		if len(courseStore) > 200:
 			courseStore = lang[userLang]["TOO_MANY_STORE"].format(
