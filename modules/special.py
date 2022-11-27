@@ -2,7 +2,7 @@ import logging
 import asyncio
 from random import choice
 from datetime import timedelta, datetime
-from storeInfo import storeInfo, storeDict, StoreID
+from storeInfo import StoreID, Store
 from modules.constants import allRegions, userAgent
 from modules.util import request
 
@@ -20,13 +20,12 @@ def textConvert(dct, userLang = True):
 			return f'{opt} - {clt}'
 	return "未知时间" if userLang else "Unknown Hours"
 
-async def apu(session, s, t, userLang):
+async def apu(session, store: Store, target, userLang):
 	retry = 3
-	flag = storeInfo(s)['flag']
-	baseURL = f"https://www.apple.com{allRegions[flag]['shopURL']}"
+	baseURL = f"https://www.apple.com{store.region['shopURL']}"
 	url = f"{baseURL}/shop/fulfillment-messages"
-	referer = userAgent | {"Referer": f"{baseURL}/shop/product/{t}"}	
-	params = {"searchNearby": "true", "store": f"R{s}", "parts.0": t}
+	referer = userAgent | {"Referer": f"{baseURL}/shop/product/{target}"}	
+	params = {"searchNearby": "true", "store": store.rid, "parts.0": target}
 
 	stores = []
 	while retry:
@@ -50,25 +49,23 @@ async def apu(session, s, t, userLang):
 			sTxt = (f"[{holiday['description']}]" if holiday["description"] else "") + (f" {holiday['comments']}" if holiday["comments"] else "")
 			yield (astore, sDay, sTxt)
 
-async def comment(session, sid, sif = None, userLang = True):
+async def comment(session, store: Store, userLang = True):
 	global COMMENTS
-	sif = storeInfo(sid) if sif == None else sif
-	async for i in apu(session, sid, f'MM0A3{allRegions[sif["flag"]]["partSample"]}/A', userLang):
+	async for i in apu(session, store, f'MM0A3{store.region["partSample"]}/A', userLang):
 		astore, sDay, sTxt = i
 		COMMENTS[astore] = COMMENTS.get(astore, {})
 		COMMENTS[astore][sDay] = sTxt
 	return COMMENTS
 
 async def speHours(sid, session = None, runtime = None, limit = 14, askComment = True, userLang = True):
-	sif = storeInfo(sid)
-	sid = StoreID(sid)[0][0]
+	store = StoreID(sid)[0]
 	runtime = datetime.now().date() if runtime is None else runtime
 	try:
-		j = await storeDict(session = session, mode = "hours", sif = sif)
+		j = await store.detail(session = session, mode = "hours")
 		assert j
 	except:
-		logging.getLogger(__name__).error(f"未能获得 R{sid} 营业时间信息" if userLang else f"Failed getting store hours for R{sid}")
-		return {}
+		logging.getLogger(__name__).error(f"未能获得 {store.rid} 营业时间信息" if userLang else f"Failed getting store hours for {store.rid}")
+		return []
 
 	regularHours = {}
 	for regular in j["regular"]:
@@ -77,7 +74,7 @@ async def speHours(sid, session = None, runtime = None, limit = 14, askComment =
 	
 	specialHours, specialReasons = {}, {}
 	if j["special"] and askComment:
-		specialReasons = await comment(session = session, sid = sid, sif = sif, userLang = True)
+		specialReasons = await comment(session = session, store = store, userLang = userLang)
 	for special in sorted(j["special"], key = lambda k: k["date"]):
 		if len(specialHours) >= limit:
 			break
@@ -86,7 +83,7 @@ async def speHours(sid, session = None, runtime = None, limit = 14, askComment =
 			continue
 		regular = regularHours[validDate.weekday()]
 		spetext = textConvert(special, userLang = userLang)
-		comm = {"comment": specialReasons[sid][validDate]} if validDate in specialReasons.get(sid, {}) else {}
+		comm = {"comment": specialReasons[store.sid][validDate]} if validDate in specialReasons.get(store.sid, {}) else {}
 		specialHours[str(validDate)] = {"regular": regular, "special": spetext} | comm
 	specialHours = dict(sorted(specialHours.items(), key = lambda k: k[0]))
 	return specialHours

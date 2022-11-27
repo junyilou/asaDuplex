@@ -39,8 +39,8 @@ async def main(mode):
 	global append
 	match mode:
 		case "today":
-			stores = storeReturn(args["today"], needSplit = True, remove_closed = True, remove_future = True)
-			tasks = [Store(sid = sid).getSchedules() for sid, sn in stores]
+			stores = storeReturn(args["today"], split = True, remove_closed = True, remove_future = True)
+			tasks = [Store(store = store).getSchedules() for store in stores]
 		case "sitemap":
 			tasks = [Sitemap(rootPath = i).getObjects() for i in args["sitemap"]]
 		case _:

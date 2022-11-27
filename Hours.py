@@ -4,7 +4,7 @@ import json
 import logging
 from datetime import datetime
 
-from storeInfo import storeReturn, dieterURL, Order, StoreID
+from storeInfo import storeReturn, Store
 from modules.util import session_func, setLogger, sortOD
 from modules.special import speHours, comment
 from modules.constants import DIFFHTML
@@ -43,15 +43,15 @@ LOGSTRING = {
 }
 LANG = LOGSTRING[USERLANG]
 
-async def entry(session, semaphore, sid, sn, saved):
+async def entry(session, semaphore, store, saved):
 	async with semaphore:
-		special = await speHours(session = session, sid = sid, 
+		special = await speHours(session = session, sid = store.sid, 
 			runtime = TODAY, userLang = USERLANG == "ZH")
 	if special == []:
 		return {"hours": saved, "diff": []}
 	
 	diff = []
-	hours = saved | {"storename": sn} | special
+	hours = saved | {"storename": store.name} | special
 
 	for date in special:
 		spe = special[date]["special"]
@@ -72,13 +72,13 @@ async def entry(session, semaphore, sid, sn, saved):
 			diff.append(LANG["CANCEL"].format(DATE = date, HOURS = saved[date]["special"]))
 
 	if diff:
-		logging.info(f"[Apple {sn}] " + ", ".join([i.lstrip() for i in diff]))
+		logging.info(f"[{store.telename(sid = False)}]] " + ", ".join([i.lstrip() for i in diff]))
 
 	return {"hours": hours, "diff": diff}
 
 @session_func
 async def main(session):
-	args = dict(needSplit = True, remove_closed = True, remove_future = True)
+	args = dict(split = True, remove_closed = True, remove_future = True)
 	pref = dict(ensure_ascii = False, indent = 2)
 	
 	includes = storeReturn(INCLUDE, **args)
@@ -96,30 +96,27 @@ async def main(session):
 	semaphore = asyncio.Semaphore(20)
 	async with asyncio.TaskGroup() as tg:
 		tasks = {store: tg.create_task(
-			entry(session, semaphore, *store, saved.get(store[0], {})))
+			entry(session, semaphore, store, saved.get(store.sid, {})))
 		for store in stores}
 
 	results, calendar = {}, {}
 	targets, diffs = [], []
 
 	for store, item in tasks.items():
-		sid, sn = store
 		result = item.result()
 		if len(result["hours"]) > 1:
-			results[sid] = result["hours"]
+			results[store] = result["hours"]
 		if result["diff"]:
-			diffs += [f"{'':4}Apple {sn}"] + result["diff"]
+			diffs += [f"{'':4}{store.telename(sid = False)}"] + result["diff"]
 			targets.append(store)
 		for date in result["hours"]:
 			if date == "storename":
 				continue
 			calendar[date] = calendar.get(date, {})
-			calendar[date][sn] = result["hours"][date]["special"]
+			calendar[date][store] = result["hours"][date]["special"]
 
-	ORDER = list(map(lambda s: StoreID(s)[0][1], Order))
-	SORTKEY = lambda k, o: f"-{o.index(k[0]):0>3}" if k[0] in o else k[0]
-	results = sortOD(results, key = lambda k: SORTKEY(k, Order))
-	calendar = sortOD(calendar, key = lambda k: SORTKEY(k, ORDER))
+	results = {k.sid if isinstance(k, Store) else k: v for k, v in sortOD(results).items()}
+	calendar = {k: {i.name: j for i, j in v.items()} for k, v in sortOD(calendar).items()}
 
 	output = {"update": RUNTIME.strftime("%F %T")} | results
 	oldfile = WORKFILE.replace(".json", f"-{RUNTIME:%y%m%d%H%M}.json")
@@ -138,11 +135,11 @@ async def main(session):
 		w.write(DIFFHTML.format(DIFFTITLE = "Special Hours", DIFFCONTENT = content))
 	logging.info(LANG["DIFFGEN"])
 
-	text = ", Apple ".join(["", *[i[1] for i in targets]]).removeprefix(", ")
+	text = ", ".join([i.telename(sid = False) for i in targets])
 	push = {
 		"mode": "photo-text",
 		"chat_id": chat_ids[0],
-		"image": dieterURL(targets[0][0]).split("?")[0],
+		"image": targets[0].dieter.split("?")[0],
 		"text": f'*来自 Hours 的通知*\n{text} 有特别营业时间更新 [↗](http://aliy.un/html/storeHours.html)',
 		"parse": "MARK"
 	}
