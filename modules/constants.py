@@ -33,22 +33,6 @@ allRegions = {
     "shopURL": "/hk",
     "storeURL": "/hk/en"
   },
-  "TW": {
-    "abbr": "TW",
-    "altername": [
-      "ROC",
-      "中华民国"
-    ],
-    "jobCode": "114438311",
-    "mobileApp": "p/tw",
-    "name": "台湾",
-    "nameEng": "Taiwan",
-    "partSample": "FE",
-    "rootPath": "/tw",
-    "rspLocale": "zh_TW",
-    "shopURL": "/tw",
-    "storeURL": "/tw"
-  },
   "🇦🇪": {
     "abbr": "AE",
     "altername": [
@@ -151,6 +135,7 @@ allRegions = {
   "🇨🇳": {
     "abbr": "CN",
     "altername": [
+      "China mainland",
       "PRC"
     ],
     "jobCode": "114438030",
