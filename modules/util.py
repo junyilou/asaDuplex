@@ -93,7 +93,7 @@ async def request(session = None, url = None, mode = None, retryNum = 1, ensureA
 				logger.debug(f"[异常] '{url}', [异常] {exp}, [重试剩余] {retryNum}")
 				logger.debug(exp.__repr__())
 
-def session_func(func, *args, **kwargs):
+def session_func(func):
 	async def wrapper(*args, **kwargs):
 		async with aiohttp.ClientSession() as session:
 			return await func(session = session, *args, **kwargs)
