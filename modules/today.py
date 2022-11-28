@@ -158,7 +158,7 @@ class Store():
 			self.raw_store = StoreID(self.sid)[0]
 			self.timezone = raw["timezone"]["name"]
 			self.slug = raw["slug"]
-			self.rootPath = self.raw_store.region["rootPath"] if rootPath == None else rootPath
+			self.rootPath = rootPath or self.raw_store.region["rootPath"]
 			self.flag = todayNation[self.rootPath]
 			self.url = f"https://www.apple.com{raw['path']}" if self.rootPath != "/cn" \
 				else f"https://www.apple.com.cn{raw['path']}"
@@ -168,9 +168,9 @@ class Store():
 			self.sid = self.raw_store.rid
 			self.name = self.raw_store.name
 			self.slug = self.raw_store.slug
-			self.rootPath = self.raw_store.region["rootPath"]
+			self.rootPath = rootPath or self.raw_store.region["rootPath"]
 			self.timezone = self.raw_store.timezone
-			self.flag = self.raw_store.flag
+			self.flag = todayNation[self.rootPath]
 			self.url = self.raw_store.url
 			self.coord = None
 		else:
@@ -337,9 +337,8 @@ class Course(asyncObject):
 							break
 						except:
 							pass
-			if self.collection == None:
-				self.collection = raw["collectionName"]
-
+			
+			self.collection = self.collection or raw["collectionName"]
 			self.description = {
 				"long": raw["longDescription"].strip(),
 				"medium": raw["mediumDescription"].strip(),
@@ -406,9 +405,7 @@ class Course(asyncObject):
 			return self.courseId > other.courseId
 
 	def elements(self, accept = None):
-		if accept == None:
-			accept = ACCEPT
-		
+		accept = accept or ACCEPT
 		result, accept = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
 			"))+[\'\"]?", json.dumps(self, cls = TodayEncoder)) if i[0] not in result]
@@ -456,7 +453,7 @@ class Course(asyncObject):
 	async def getRootSchedules(self):
 		stores = storeReturn(self.flag, remove_closed = True, remove_future = True)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
-		tasks = [self.getSchedules(getStore(sid = i.sid, store = i), semaphore = semaphore) for i in stores]
+		tasks = [self.getSchedules(getStore(sid = i.sid, store = i, rootPath = self.rootPath), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
 async def getCourse(courseId = None, rootPath = None, slug = None, raw = None, 
@@ -658,9 +655,7 @@ class Collection(asyncObject):
 			return False
 
 	def elements(self, accept = None):
-		if accept == None:
-			accept = ACCEPT
-		
+		accept = accept or ACCEPT
 		result, accept = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
 			"))+[\'\"]?", json.dumps(self, cls = TodayEncoder)) if i[0] not in result]
@@ -707,7 +702,7 @@ class Collection(asyncObject):
 	async def getRootSchedules(self):
 		stores = storeReturn(self.flag, remove_closed = True, remove_future = True)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
-		tasks = [self.getSchedules(getStore(sid = i.sid, store = i), semaphore = semaphore) for i in stores]
+		tasks = [self.getSchedules(getStore(sid = i.sid, store = i, rootPath = self.rootPath), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
 async def getCollection(slug, rootPath = None):
