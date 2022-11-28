@@ -906,7 +906,7 @@ lang = {
 	}
 }
 
-def teleinfo(course = None, schedules = [], collection = None, mode = "new", userLang = True):
+def teleinfo(course = None, schedules = [], collection = None, mode = "new", userLang = True, prior = None):
 	runtime = datetime.now()
 	offset = runtime.astimezone().utcoffset().total_seconds() / 3600
 
@@ -934,7 +934,7 @@ def teleinfo(course = None, schedules = [], collection = None, mode = "new", use
 		courseStore = lang[userLang]["VIRTUAL"]
 	elif schedules != []:
 		availableStore = set([i.store.raw_store for i in schedules])
-		textStore = nameReplace(availableStore, userLang = userLang, number = False)
+		textStore = nameReplace(availableStore, userLang = [None, userLang], number = False)
 		courseStore = lang[userLang]["JOINT"].join(textStore)
 		if len(courseStore) > 200:
 			courseStore = lang[userLang]["TOO_MANY_STORE"].format(
@@ -952,24 +952,28 @@ def teleinfo(course = None, schedules = [], collection = None, mode = "new", use
 
 	schedules.sort()
 	if schedules != []:
-		schedule = schedules[0]
-		scheduleTimezone = schedule.tzinfo
+		firstSchedule = schedules[0]
+		priorSchedule = firstSchedule if prior == None else \
+			sorted(schedules, key = lambda k: prior.index(k.flag) if k.flag in prior else len(prior))[0]
+
+		scheduleTimezone = firstSchedule.tzinfo
 		if scheduleTimezone != None:
-			delta = schedule.timeStart.utcoffset().total_seconds() / 3600
-			tzText = "" if delta == offset else (" " + timezoneText(schedule.timeStart))
+			delta = firstSchedule.timeStart.utcoffset().total_seconds() / 3600
+			tzText = "" if delta == offset else (" " + timezoneText(firstSchedule.timeStart))
 		else:
 			tzText = ""
 		
 		if (lenSchedules := len(schedules)) > 1:
 			timing = lang[userLang]["START_FROM_ALL"].format(
-				START = schedule.datetimeStart(form = lang[userLang]["FORMAT_START"]),
-				END = schedule.datetimeEnd(form = lang[userLang]["FORMAT_END"]),
+				START = firstSchedule.datetimeStart(form = lang[userLang]["FORMAT_START"]),
+				END = firstSchedule.datetimeEnd(form = lang[userLang]["FORMAT_END"]),
 				TZTEXT = tzText, AMOUNT = len(schedules), PLURAL = "s" if lenSchedules > 1 else "")
 		else:
 			timing = lang[userLang]["START_FROM"].format(
-				START = schedule.datetimeStart(form = lang[userLang]["FORMAT_START"]),
-				END = schedule.datetimeEnd(form = lang[userLang]["FORMAT_END"]), TZTEXT = tzText)
-		keyboard = [[[lang[userLang]["SIGN_UP"], schedule.url]]]
+				START = firstSchedule.datetimeStart(form = lang[userLang]["FORMAT_START"]),
+				END = firstSchedule.datetimeEnd(form = lang[userLang]["FORMAT_END"]), TZTEXT = tzText)
+
+		keyboard = [[[lang[userLang]["SIGN_UP"], priorSchedule.url]]]
 	else:
 		try:
 			date = re.findall(VALIDDATES, course.slug)[0][1]

@@ -30,7 +30,7 @@ async def apu(session, store: Store, target, userLang):
 	stores = []
 	while retry:
 		try:
-			r = await request(session = session, url = url, headers = referer, 
+			r = await request(session = session, url = url, headers = referer, timeout = 5,
 				params = params, ensureAns = False, raise_for_status = True, mode = "json")
 			stores = r["body"]["content"]["pickupMessage"]["stores"]
 			break
