@@ -6,7 +6,7 @@ from modules.constants import allRegions, userAgent
 from modules.util import request
 
 STORES = {}
-DEFAULTFILE = "storeInfoObj.json"
+DEFAULTFILE = "storeInfo.json"
 
 @total_ordering
 class Store:
@@ -56,7 +56,7 @@ class Store:
 		self.keys = ((dct["alter"].split(" ") if "alter" in dct else []) + 
 			[self.name, self.state, self.city, self.flag] + self.altname + 
 			([self.slug] if hasattr(self, "slug") else []) + 
-			[self.region["name"], self.region["nameEng"]] + self.region["altername"] + 
+			[self.region["name"], self.region["nameEng"], self.region["abbr"]] + self.region["altername"] + 
 			(["招聘", "Hiring"] if self.isFuture else []) + 
 			(["关闭", "Closed"] if self.isClosed else []))
 		self.keys += [k.replace(" ", "") for k in self.keys if " " in k]
@@ -175,12 +175,13 @@ def StoreMatch(keyword: str, fuzzy = False) -> list[Store]:
 		stores = [i for i in STORES.values() if keyword.lower() in [k.lower() for k in i.keys]]
 	return stores
 
-def nameReplace(rstores: [Store], bold = False, number = True, final = "name", userLang = None) -> list[str]:
+def nameReplace(rstores: [Store], bold = False, number = True, final = "name", userLang = [None]) -> list[str]:
 	if not rstores:
 		return rstores
 	stores = set(rstores)
 	results = []
 	bold = "*" if bold else ""
+	userLang = [userLang] if not isinstance(userLang, list) else userLang
 	
 	for store in stores:
 		for level in ["flag", "state", "city"]:
@@ -188,15 +189,11 @@ def nameReplace(rstores: [Store], bold = False, number = True, final = "name", u
 				not (s.isClosed or s.isFuture or s.isIntern)])
 			if ast and ast.issubset(stores):
 				stores = stores.symmetric_difference(ast)
-				match level, userLang:
-					case "flag", None:
-						attr = store.flag
-					case "flag", True:
-						attr = store.region["name"]
-					case "flag", False:
-						attr = store.region["nameEng"]
-					case _, _:
-						attr = getattr(store, level)
+				if level == "flag":
+					attrs = {None: store.flag, True: store.region["name"], False: store.region["nameEng"]}
+					attr = " ".join([attrs[i] for i in userLang])
+				else:
+					attr = getattr(store, level)
 				num = f" ({len(ast)})" if number else ""
 				results.append(f"{bold}{attr}{bold}{num}")
 	results += [getattr(s, final) for s in stores]
