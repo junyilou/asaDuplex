@@ -12,6 +12,8 @@ from modules.util import setLogger, sortOD
 from bot import chat_ids
 from sdk_aliyun import async_post as raw_post
 
+TODAYARGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼", "🇯🇵", "🇰🇷", "🇸🇬", "🇹🇭"]
+
 def rec(lst, rst):
 	for i in lst:
 		match i:
@@ -39,7 +41,7 @@ async def main(mode):
 	global append
 	match mode:
 		case "today":
-			stores = storeReturn(args["today"], split = True, remove_closed = True, remove_future = True)
+			stores = storeReturn(args["today"], remove_closed = True, remove_future = True)
 			tasks = [Store(store = store).getSchedules() for store in stores]
 		case "sitemap":
 			tasks = [Sitemap(rootPath = i).getObjects() for i in args["sitemap"]]
@@ -95,12 +97,12 @@ async def main(mode):
 		if doSend:
 			logging.info(str(course))
 			schedules = [i for j in (courses[c] for c in courses if c.courseId == course.courseId) for i in j]
-			text, image, keyboard = teleinfo(course = course, schedules = sorted(schedules))
+			text, image, keyboard = teleinfo(course = course, schedules = sorted(schedules), prior = TODAYARGS)
 			await async_post(text, image, keyboard)
 
 if __name__ == "__main__":
 	args = {
-		"today": "🇨🇳,🇭🇰,🇲🇴,🇹🇼,🇯🇵,🇰🇷,🇸🇬,🇹🇭",
+		"today": TODAYARGS,
 		"sitemap": ".cn /hk /mo /tw /jp /kr /sg /th".split(" ")
 	}
 
