@@ -1,5 +1,5 @@
 {
-  "update": "2022-11-26 14:55:32 GMT",
+  "update": "2022-11-28 16:56:32 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -515,15 +515,14 @@
     "website": "-"
   },
   "045": {
-    "alter": "Munich Munchen Muenchen Bavaria",
+    "alter": "Munich Munchen Muenchen Bavaria Rosenstrabe",
     "city": "München",
     "dates": "2008-12-06",
     "flag": "🇩🇪",
     "modified": "07 Jan 2022 08:59:07",
     "name": [
       "Rosenstraße",
-      "Rosenstrasse",
-      "Rosenstrabe"
+      "Rosenstrasse"
     ],
     "state": "Bayern",
     "timezone": "Europe/Berlin",
@@ -559,7 +558,7 @@
     "website": "-"
   },
   "048": {
-    "city": "福岡市 Fukuoka-shi",
+    "city": "福岡市 Fukuoka-shi 福冈 福冈天神",
     "dates": [
       "2005-12-03",
       "2019-09-28"
@@ -568,10 +567,8 @@
     "modified": "07 Jan 2022 08:59:08",
     "name": [
       "福岡",
-      "福冈",
       "Fukuoka",
       "福岡天神",
-      "福冈天神",
       "Fukuoka Tenjin"
     ],
     "state": "福岡県",
@@ -947,7 +944,7 @@
     "website": "-"
   },
   "079": {
-    "alter": "Tokyo Chuo Chuo-ku",
+    "alter": "Tokyo Chuo Chuo-ku 银座",
     "city": "中央区",
     "dates": [
       "2003-11-30",
@@ -957,7 +954,6 @@
     "modified": "31 Aug 2022 13:40:51",
     "name": [
       "銀座",
-      "银座",
       "Ginza"
     ],
     "state": "東京都",
@@ -1106,14 +1102,13 @@
     "website": "-"
   },
   "091": {
-    "alter": "Osaka Osaka-shi",
+    "alter": "Osaka Osaka-shi 心斋桥",
     "city": "大阪市",
     "dates": "2004-08-28",
     "flag": "🇯🇵",
     "modified": "13 Sep 2022 20:58:56",
     "name": [
       "心斎橋",
-      "心斋桥",
       "Shinsaibashi"
     ],
     "state": "大阪府",
@@ -1454,14 +1449,13 @@
     "website": "-"
   },
   "119": {
-    "alter": "Tokyo Shibuya Shibuya-ku",
+    "alter": "Tokyo Shibuya Shibuya-ku 涩谷",
     "city": "渋谷区",
     "dates": "2005-08-06",
     "flag": "🇯🇵",
     "modified": "07 Jan 2022 08:59:07",
     "name": [
       "渋谷",
-      "涩谷",
       "Shibuya"
     ],
     "state": "東京都",
@@ -2467,7 +2461,11 @@
   },
   "226": {
     "city": "London",
-    "dates": "2008-10-30",
+    "dates": [
+      "2008-10-30",
+      "2021-09-10",
+      "2022-12-08"
+    ],
     "flag": "🇬🇧",
     "modified": "07 Jan 2022 08:59:07",
     "name": "White City",
@@ -3430,8 +3428,7 @@
     "modified": "07 Jan 2022 08:59:09",
     "name": [
       "Düsseldorf",
-      "Duesseldorf",
-      "Dusseldorf"
+      "Duesseldorf"
     ],
     "state": "Nordrhein-Westfalen",
     "timezone": "Europe/Berlin",
@@ -3607,14 +3604,13 @@
     "website": "-"
   },
   "352": {
-    "city": "Frankfurt",
+    "city": "Frankfurt Grobe Strabe",
     "dates": "2010-01-23",
     "flag": "🇩🇪",
     "modified": "07 Jan 2022 08:59:07",
     "name": [
       "Große Bockenheimer Straße",
-      "Grosse Bockenheimer Strasse",
-      "Grobe Bockenheimer Strabe"
+      "Grosse Bockenheimer Strasse"
     ],
     "state": "Hessen",
     "timezone": "Europe/Berlin",
@@ -3662,14 +3658,14 @@
     "website": "-"
   },
   "358": {
+    "alter": "Kurfurstendamm",
     "city": "Berlin",
     "dates": "2013-05-03",
     "flag": "🇩🇪",
     "modified": "07 Jan 2022 08:59:08",
     "name": [
       "Kurfürstendamm",
-      "Kurfuerstendamm",
-      "Kurfurstendamm"
+      "Kurfuerstendamm"
     ],
     "state": "Berlin",
     "timezone": "Europe/Berlin",
@@ -4226,8 +4222,7 @@
     "modified": "17 May 2022 18:40:35",
     "name": [
       "Val d’Europe",
-      "Val d'Europe",
-      "Val dEurope"
+      "Val d'Europe"
     ],
     "state": "Seine-et-Marne",
     "timezone": "Europe/Paris",
@@ -4381,14 +4376,14 @@
     "website": "-"
   },
   "443": {
+    "alter": "Strabe",
     "city": "Berlin",
     "dates": "2021-12-02",
     "flag": "🇩🇪",
     "modified": "07 Jan 2022 08:59:07",
     "name": [
       "Rosenthaler Straße",
-      "Rosenthaler Strasse",
-      "Rosenthaler Strabe"
+      "Rosenthaler Strasse"
     ],
     "state": "Berlin",
     "timezone": "Europe/Berlin",
@@ -4992,8 +4987,7 @@
     "modified": "07 Jan 2022 08:59:07",
     "name": [
       "La Toison d’Or",
-      "La Toison d'Or",
-      "La Toison dOr"
+      "La Toison d'Or"
     ],
     "state": "Côte d’Or",
     "timezone": "Europe/Paris",
@@ -5924,8 +5918,7 @@
     "modified": "07 Jan 2022 08:59:09",
     "name": [
       "Champs-Élysées",
-      "Champs-Elysees",
-      "Champs Elysees"
+      "Champs-Elysees"
     ],
     "state": "Paris",
     "timezone": "Europe/Paris",
@@ -5955,14 +5948,14 @@
     "website": "globalharbor"
   },
   "687": {
+    "alter": "Strabe",
     "city": "Wien",
     "dates": "2018-02-24",
     "flag": "🇦🇹",
     "modified": "07 Jan 2022 08:59:07",
     "name": [
       "Kärntner Straße",
-      "Kaerntner Strasse",
-      "Karntner Strabe"
+      "Kaerntner Strasse"
     ],
     "state": "Vienna",
     "timezone": "Europe/Vienna",
@@ -6316,10 +6309,10 @@
   },
   "755": {
     "city": "East Rutherford",
+    "dates": "2022-12-03",
     "flag": "🇺🇸",
     "name": "American Dream",
     "state": "New Jersey",
-    "status": "future",
     "timezone": "America/New_York",
     "website": "-"
   },
