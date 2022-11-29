@@ -2,40 +2,24 @@
 
 ![bot](Retail/bot.jpg)
 
-\* asaDuplex 尚不开源 Telegram Bot 的运行代码，您可以在[这里](https://t.me/guopuzdbot)进行体验。
+一个以**异步**和**面向对象**思想编写的 Apple Store 零售店 Python 库。
 
-## 仓库内容
+**asaDuplex 提供了全球超过 500 家零售店的详细信息**，并对他们进行 Python 包装。你可以：
 
-#### 代码
+* 模糊、精确按城市、国家、名称、编号搜索全球已开业、关闭、内部 Apple Store 零售店
+* 以极高效的方式查询 Apple Store 零售店的详细信息，包括开业和搬迁或关闭日期、营业时间和特别营业时间、当地时区和现在时间、详细地址和经纬度坐标等
+* 以极快的速度查询 Today at Apple 课程、排课信息，包括轻松获取课程介绍、配图和视频地址，跨店、跨国查询排课，搜索还未排课的未来特别活动等
+* 通过模块化设计的各种函数，实现信息的定时追踪，例如定期查询指定零售店的特别营业时间、定期查询零售店官方照片的变更、获取新 Today at Apple 课程详细信息、获取正在招聘的未开业零售店等
 
-* allBands.py: 获得全部在售 Apple Watch 表带基本信息
-* Hours.py: 取得 Apple Store 特别营业时间信息
-* Jobs.py: 取得全球 Apple 零售招聘情况以获得未来新店
-* Rtl.py: 取得 Apple Store 零售店服务器图片更新
-* Today.py: 取得最新 Today at Apple 活动
+详细的操作方法详见本库提供的 Wiki。
 
-#### 模块
-
-* storeInfo.py: 处理 storeInfo.json 的数据，提供强大的通用函数
-* modules/special.py: 分析 Apple Store 零售店营业时间，并尝试获得特别营业时间内部备忘录
-* modules/today.py: 一个定义了 Today at Apple 课程、排课、零售店对象的模块
-* modules/constants.py: 保存部分常量
-* modules/util.py: 保存部分通用函数
-
-#### 文本
-
-* allBands.json: 由 allBands.py 生成的找到的表带信息
-* savedEvent.json: 由 Today.py 生成的，已经检测到并保存的 Today at Apple 活动列表
-* savedJobs.json: 由 Jobs.py 生成的，已经在检测到招聘的零售店编号
-* storeInfo.json: 全球 Apple Store 名称（包含部分曾用名、ASCII 兼容名等以便于更广的匹配）、店号、国家或地区旗帜、开店时间、官网图片最后修改时间、URL 标签、全球各国地区零售店按行政区划字典、用于模糊搜索的关键字 alias 等
+果铺知道通过库中的代码实现了 Telegram 果铺知道 Bot，您可以在[这里](https://t.me/guopuzdbot)进行体验。
 
 
 
-## 代码依赖
+### 代码依赖
 
-本库中的部分代码使用了 Python 3.8 至 Python 3.11 的部分特性，建议使用尽可能新的 Python 3 运行。
-
-本代码的网络 I/O 请求依赖 [aiohttp](https://github.com/aio-libs/aiohttp)，可通过 pip 安装，库中需要网络请求的函数全部为协程函数，需要使用 `await` 关键字等待，但也提供了简单的异步转同步方法 `sync()`，可在复杂度不高的代码中使用。
+本库中的部分代码使用了 Python 3.8 至 Python 3.11 的部分特性，使用旧版本的 Python 可能导致缺失部分函数从而导致无法运行。网络 I/O 请求依赖 [aiohttp](https://github.com/aio-libs/aiohttp)，可通过 pip 安装，库中需要网络请求的函数全部为协程函数，需要使用 `await` 关键字等待，但也提供了简单的异步转同步方法 `sync()`，可在复杂度不高的代码中使用。
 
 ```python
 from modules.special import speHours
@@ -47,151 +31,6 @@ from modules.util import sync
 >>> sync(speHours(session=None, sid=688)) # 同步，不建议
 {'2022-10-15': {'regular': '10:00 - 23:00', 'special': '10:00 - 22:00', 'reason': '[COVID Related]'}}
 ```
-
-
-
-## 如何利用
-
-* storeInfo.json 提供了极为丰富的 Apple Store 零售店信息，可供查阅
-
-* storeInfo.py 包装了大量函数对 storeInfo.json 进行处理，这包括：
-
-  * **_func_** `storeReturn(args, sort=True, remove_closed=False, remove_future=False, fuzzy=False, needSplit=False):`
-
-  传入关键字，包括店号、店名、城市、国家或地区可搜索零售店，默认自动按照行政区划进行排序，还可配置启用模糊搜索、移除未开业零售店、移除已关闭零售店等。
-
-  ```python
-  >>> storeReturn("480，Los Angeles, 招聘，江浙沪", needSplit=True)
-  
-  [('359', '南京东路'), ('389', '浦东'), ('390', '香港广场'), ('401', '上海环贸 iapm'), ('581', '五角场'), ('678', 'Store in Shanghai'), ('683', '环球港'), ('705', '七宝'), ('761', 'Store in Shenzhen East'), ('493', '南京艾尚天地'), ('574', '无锡恒隆广场'), ('643', '虹悦城'), ('688', '苏州'), ('703', '玄武湖'), ('471', '西湖'), ('531', '天一广场'), ('532', '杭州万象城'), ('480', '解放碑'), ('756', 'Store in New Delhi'), ('744', 'Store in Mumbai'), ('760', 'Store in Seoul South'), ('050', 'The Grove'), ('108', 'Century City'), ('124', 'Beverly Center'), ('720', 'Tower Theatre'), ('755', 'Store in East Rutherford')]
-  ```
-
-  * **_func_** `stateReplace(rstores)`
-
-  传入零售店店号数组，将按照行政区划进行压缩，便于一次性输出多个零售店。
-
-  ```python
-  >>> stateReplace(['480', '476', '573', '580', '670'])
-  ['重庆 (3)', '580', '云南 (1)']
-  ```
-  
-  * **_coro_** `storeDict(sid=None, sif=None, session=None, mode="dict")`
-  
-  传入零售店店号，联网从 Apple 官网获取零售店基本信息简单处理后返回。
-  
-  ```python
-  >>> await storeDict(sid=480)
-  {'latitude': 29.560981, 'longitude': 106.572272, 'timezone': 'Asia/Shanghai', 'telephone': '400-617-1224', 'address': '重庆市渝中区邹容路 108 号', 'province': '重庆, 重庆, 400010', 'isnso': False, 'regular': [{'name': 'Saturday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Wednesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Friday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Monday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Tuesday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Thursday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}, {'name': 'Sunday', 'openTime': '10:00', 'closeTime': '22:00', 'closed': False}], 'special': []}
-  ```
-  
-  * **_func_** `storeInfo(sid)`
-  
-  传入零售店店号，不联网从本地返回基本零售店信息。
-  
-  ```python
-  >>> storeInfo(79)
-  {'name': ['銀座', '银座', 'Ginza'], 'flag': '🇯🇵', 'nso': ['2003-11-30', '2022-08-30'], 'last': '31 Aug 2022 13:40:51', 'key': {'state': '東京都', 'city': '中央区', 'alter': 'Tokyo Chuo', 'website': 'ginza'}, 'timezone': 'Asia/Tokyo'}
-  ```
-  
-* modules/today.py 定义了 Today at Apple 的各种对象，具有丰富的属性和方法
-
-  * 零售店对象定义了获得课程和排课方法等
-
-  ```python
-  # 零售店对象
-  >>> Store(sid=480)
-  <Store "解放碑" (R480), "jiefangbei", "/cn">
-  ```
-  
-  ```python
-  # 获得零售店课程
-  >>> await Store(sid=480).getCourses()
-  [
-    <Course 6635235077318869345 "光影实验室：执导拍摄人像", "photo-lab-directing-portrait">, 
-    <Course 6443623163745894793 "音乐技巧：库乐队使用入门", "music-skills-getting-started-garageband">, 
-    <Course 6448288470942974313 "视频漫步：拍出电影级画面", "video-walks-capturing-cinematic-shots">, 
-    <Course 6716856769744568921 "技巧：管理你的屏幕使用时间", "skills-managing-your-screen-time">
-  ]
-  ```
-  
-  ```python
-  # 获得零售店排课
-  >>> await Store(sid=480).getSchedules()
-  [
-    <Schedule 6917310504008783289 of 6444985410678260613, 4/15 17:30-18:00 @ R480>, 
-    <Schedule 6917310552016813261 of 6443623163745894793, 4/15 18:00-18:30 @ R480>, 
-    <Schedule 6917310598451930025 of 6716861058294579581, 4/15 19:00-20:00 @ R480>, 
-    <Schedule 6918023706237569673 of 6444985410678260613, 4/15 11:00-11:30 @ R480>
-  ]
-  ```
-  
-  * 课程对象包含课程的各项属性（如课程名、封面图片 URL、介绍）等，并提供获得排课的方法
-  
-  ```python
-  # 从 URL 获得课程，也可以手动创建课程对象
-  >>> course = await parseURL("https://www.apple.com.cn/today/event/design-lab-liu-zhizhi-111922", coro=True)
-  
-  # 对象的字符串输出形式
-  >>> course
-  <Course 6978267057884660649 "设计实验室：跟着刘治治制作宣传海报探索设计奥义", "design-lab-liu-zhizhi-111922", Collection <好创意，好生意>>
-  ```
-  
-  ```python
-  # 宽屏幕宣传图
-  >>> course.images["landscape"]
-  'https://digitalassets-taa.cdn-apple.com/zh/cn/design-lab-liu-zhizhi-111922-wwdesign-lab-liu-zhizhi-111922-wwdesign-lab-liu-zhizhi-111922_16x9.jpg'
-  ```
-  
-  ```python
-  # 所在课程合集 Collection 对象
-  >>> course.collection 
-  <Collection "好创意，好生意", "creativity-for-business", "/cn">
-  ```
-  
-  ```python
-  # 课程嘉宾信息 Talent 对象
-  >>> course.talents
-  [<Talent 刘治治, "平面设计师">, <Talent 卷宗Wallpaper＊, "媒体">]
-  
-  >>> course.talents[0].description
-  '毕业于中央美术学院平面设计专业，国际平面设计师联盟 (AGI) 会员，设计工作室“立入禁止”联合创始人，任教于中央美院设计学院。'
-  ```
-  
-  ```python
-  # 获得课程在某个零售店的排课
-  >>> await course.getSchedules(Store(sid=320))
-  [<Schedule 6978267057884660649 of 6978267057884660649, 11/19 15:00-16:30 @ R320>]
-  ```
-  
-  * 排课对象包含每次排课的属性，并可链接对应的 `Course` 和 `Store` 对象
-  
-  ```python
-  # 从 URL 获得课程，也可以手动创建课程对象
-  >>> schedule = await parseURL("https://www.apple.com.cn/today/event/exclusive-xiong-xiaomo-110422/6986163410879022413/?sn=R320", coro=True)
-  ```
-  
-  ```python
-  >>> schedule
-  <Schedule 6986163410879022413 of 6986163410879022413, 11/4 20:00-21:30 @ Online>
-  
-  >>> schedule.store
-  <Store "三里屯" (R320), "sanlitun", "/cn">
-  
-  >>> schedule.course
-  <Course 6986163410879022413 "独家呈献：跟着熊小默感受品牌故事的力量", "exclusive-xiong-xiaomo-110422", Collection <好创意，好生意>>
-  ```
-  
-  ```python
-  # 带有时区信息的课程时间对象
-  >>> schedule.timeStart
-  datetime.datetime(2022, 11, 4, 20, 0, tzinfo=zoneinfo.ZoneInfo(key='Asia/Shanghai'))
-  
-  # 按照预设或给定格式格式化课程时间
-  >>> schedule.datetimeStart(form = "Starting %B %-d, %-I:%M %p")
-  'Starting November 4, 8:00 PM'
-  ```
-  
-  该代码中还设计了 `Talent` 对象、`Sitemap` 对象，以及将 `Course`、`Schedule` 输出为适用于 Telegram 输出的 `teleinfo` 函数。
 
 
 
@@ -208,7 +47,7 @@ from bot import tokens
 
 
 
-## 库历史
+### 库历史
 
 2019 年 6 月：迁移库并命名 asaDuplex。[[commit]](https://github.com/junyilou/asaduplex/commit/e405a00ab74969a7dcacb719bdab2847e59becb8)
 
@@ -228,16 +67,14 @@ from bot import tokens
 
 2022 年 4 月：使用面向对象的思想，极高的提升了 Today at Apple 对象的多样性。[[commit]](https://github.com/junyilou/asaduplex/commit/4d98ae7f00312630479243184e715c929afd5b7a)
 
-2022 年 10 月：改进代码使用 Python 3.8 [[commit]](https://github.com/junyilou/asaduplex/commit/2e7511ed22c38b7272f5b3e041ed6d66f8dcf21c)、Python 3.9 [[commit]](https://github.com/junyilou/asaduplex/commit/dcfa943e543c157ca14a7e14cf98c98732ffc400)、Python 3.10 [[commit]](https://github.com/junyilou/asaduplex/commit/78543f98a8c22b3aa6b93d6bc14d76b5f217e027)、Python 3.11 的部分特性。
+2022 年 10 月：改进代码使用 Python 3.8 [[commit]](https://github.com/junyilou/asaduplex/commit/2e7511ed22c38b7272f5b3e041ed6d66f8dcf21c)、Python 3.9 [[commit]](https://github.com/junyilou/asaduplex/commit/dcfa943e543c157ca14a7e14cf98c98732ffc400)、Python 3.10 [[commit]](https://github.com/junyilou/asaduplex/commit/78543f98a8c22b3aa6b93d6bc14d76b5f217e027)、Python 3.11 [[commit]](https://github.com/junyilou/asaduplex/commit/9a3cf1cb049f0587b9dbb5a85500b26b6d77704e) 的部分特性。
+
+2022 年 11 月：完成核心 storeInfo 的面向对象化，所有零售店均为一个对象，包含基本信息属性和简单的操作方法。 [[commit]](https://github.com/junyilou/asaduplex/commit/49ee12f2785bd4a12637321abc72808d859e585b)
 
 
 
-## 底注
+##### 免责声明 | Disclaimer
 
-免责声明：
+果铺知道是完全个人性质的微博账户和 Telegram Channel，果铺知道不受美国苹果公司授权、许可或赞助。未经特别授权应仅作个人兴趣用途。有关更多 Apple 商标和内容使用细则，请参见 Apple 法律信息及其知识产权页面。
 
-果铺知道是完全个人性质的微博账户和 Telegram Channel，果铺知道不受美国苹果公司授权、许可或赞助。以上代码中的数据，包括但不限于 storeInfo.json、storeList.json，均来自公开的 Apple 官方网站及其其它服务器。未经特别注明内容均有其版权。未经特别授权，所涉及到的任何文本、图片应仅作个人兴趣用途。有关更多 Apple 商标和内容使用细则，请参见 Apple Legal 及其 Intellectual Property 页面。
-
-Disclaimer:
-
-果铺知道, or 'Guo Pu Zhi Dao' is a completely personal-background Weibo Account and Telegram Channel. Guo Pu Zhi Dao is in no way authorized, approved, or endorsed by Apple, Inc. All data used in the code, including but not limited to 'storeInfo.json', 'storeList.json', were from Apple's official websites or its other public servers. Unless otherwise indicated, all materials are copyrighted. No part, unless explicit authorization, either text or images may be used for any purpose other than personal interests. For further information about policies on using Apple's trademarks and contents, please visit Apple Legal and its Intellectual Property webpages.
+果铺知道, or 'Guo Pu Zhi Dao' is a completely personal-background Weibo Account and Telegram Channel. Guo Pu Zhi Dao is in no way authorized, approved, or endorsed by Apple, Inc. No part unless explicit authorizations should be used for any purpose other than personal interests. For further information about policies on using Apple's trademarks and contents, please visit Apple Legal and its IP websites.
