@@ -14,7 +14,7 @@ class Store:
 		for e in ["name", "flag", "state", "city"]:
 			assert e in dct
 
-		self.sid = f"{sid}"
+		self.sid = f"{sid:0>3}"
 		self.rid = f"R{sid}"
 		self.iid = int(sid)
 		self.flag = dct["flag"]
@@ -67,7 +67,7 @@ class Store:
 	def telename(self, bold = False, flag = False, sid = True):
 		bold = "*" if bold else ""
 		flag = f"{self.flag} " if flag else ""
-		sid = f" (R{self.sid})" if sid else ""
+		sid = f" ({self.rid})" if sid else ""
 		return f"{flag}{bold}Apple {self.name}{bold}{sid}"
 
 	def nsoString(self, userLang = True):
@@ -179,12 +179,13 @@ def nameReplace(rstores: [Store], bold = False, number = True, final = "name", u
 	if not rstores:
 		return rstores
 	stores = set(rstores)
+	levels = ["flag", "state", "city"]
 	results = []
 	bold = "*" if bold else ""
 	userLang = [userLang] if not isinstance(userLang, list) else userLang
 	
 	for store in stores:
-		for level in ["flag", "state", "city"]:
+		for level in levels:
 			ast = set([s for s in STORES.values() if getattr(s, level) == getattr(store, level) and 
 				not (s.isClosed or s.isFuture or s.isIntern)])
 			if ast and ast.issubset(stores):
@@ -195,7 +196,8 @@ def nameReplace(rstores: [Store], bold = False, number = True, final = "name", u
 				else:
 					attr = getattr(store, level)
 				num = f" ({len(ast)})" if number else ""
-				results.append(f"{bold}{attr}{bold}{num}")
+				results.append((f"{bold}{attr}{bold}{num}", level))
+	results = [s[0] for s in sorted(results, key = lambda k: (levels.index(k[1]), k[0]))]
 	results += [getattr(s, final) for s in stores]
 	return results
 
@@ -231,7 +233,7 @@ def reloadJSON(filename = DEFAULTFILE) -> str:
 	STORES = {k: v for k, v in sorted(STORES.items(), key = lambda s: s[1].sortkey)}
 	return infoJSON["update"]
 
-def getStore(sid) -> Store:
+def getStore(sid: int | str) -> Store:
 	f = f"{str(sid).upper().removeprefix('R'):0>3}"
 	return STORES[f] if f in STORES else None
 
