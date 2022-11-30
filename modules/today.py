@@ -103,7 +103,7 @@ def resolution(vids, direction = None):
 			case "l":
 				fil = [i for i in vids if res[i][0] > res[i][1]]
 			case _: 
-				fil = [None]
+				fil = []
 		return fil
 
 def validDates(ex, runtime):
@@ -164,7 +164,7 @@ class Store():
 				else f"https://www.apple.com.cn{raw['path']}"
 			self.coord = [raw["lat"], raw["long"]]
 		elif sid != None or store != None:
-			self.raw_store = store if store != None else StoreID(sid)[0]
+			self.raw_store = store or StoreID(sid)[0]
 			self.sid = self.raw_store.rid
 			self.name = self.raw_store.name
 			self.slug = self.raw_store.slug
@@ -348,7 +348,7 @@ class Course(asyncObject):
 			if raw["modalVideo"]:
 				self.intro = {
 					"poster": raw["modalVideo"]["poster"]["source"],
-					"video": resolution(raw["modalVideo"]["sources"])[0],
+					"video": resolution(raw["modalVideo"]["sources"])
 				}
 			else:
 				self.intro = {}
@@ -450,10 +450,11 @@ class Course(asyncObject):
 							fuzzy = False, ensure = True), ensure = True)))
 		return [t.result() for t in tasks]
 
-	async def getRootSchedules(self):
-		stores = storeReturn(self.flag, remove_closed = True, remove_future = True)
+	async def getRootSchedules(self, rootPath = None):
+		rootPath = rootPath or self.rootPath
+		stores = storeReturn(todayNation[rootPath], remove_closed = True, remove_future = True)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
-		tasks = [self.getSchedules(getStore(sid = i.sid, store = i, rootPath = self.rootPath), semaphore = semaphore) for i in stores]
+		tasks = [self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
 async def getCourse(courseId = None, rootPath = None, slug = None, raw = None, 
@@ -699,10 +700,11 @@ class Collection(asyncObject):
 							fuzzy = False, ensure = True), ensure = True)))
 		return [t.result() for t in tasks]
 
-	async def getRootSchedules(self):
-		stores = storeReturn(self.flag, remove_closed = True, remove_future = True)
+	async def getRootSchedules(self, rootPath = None):
+		rootPath = rootPath or self.rootPath
+		stores = storeReturn(todayNation[rootPath], remove_closed = True, remove_future = True)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
-		tasks = [self.getSchedules(getStore(sid = i.sid, store = i, rootPath = self.rootPath), semaphore = semaphore) for i in stores]
+		tasks = [self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
 async def getCollection(slug, rootPath = None):
@@ -795,44 +797,34 @@ def parseURL(url, coro = False):
 	async def nothing():
 		return None
 
-	if schedule:
-		if coro:
-			parse = getSchedule(slug = schedule[0][2], scheduleId = schedule[0][3], rootPath = schedule[0][1].replace(".cn", "/cn"))
-		else:
-			parse = {
-				"type": "schedule",
-				"rootPath": schedule[0][1].replace(".cn", "/cn"),
-				"slug": schedule[0][2],
-				"scheduleId": schedule[0][3],
-				"sid": schedule[0][5],
-				"url": f"https://www.apple.com{schedule[0][1]}/today/event/{schedule[0][2]}/{schedule[0][3]}/?sn={schedule[0][5]}"
-			}
-	elif course:
-		if coro:
-			parse = Course(slug = course[0][2], rootPath = course[0][1].replace(".cn", "/cn"))
-		else:
-			parse = {
-				"type": "course",
-				"rootPath": course[0][1].replace(".cn", "/cn"),
-				"slug": course[0][2],
-				"url": f"https://www.apple.com{course[0][1]}/today/event/{course[0][2]}"
-			}
-	elif collection:
-		if coro:
-			parse = Collection(slug = collection[0][2], rootPath = collection[0][1].replace(".cn", "/cn"))
-		else:
-			parse = {
-				"type": "collection",
-				"rootPath": collection[0][1].replace(".cn", "/cn"),
-				"slug": collection[0][2],
-				"url": f"https://www.apple.com{collection[0][1]}/today/collection/{collection[0][2]}"
-			}
-	else:
-		if coro:
-			parse = nothing()
-		else:
-			parse = None
-	return parse
+	match [schedule, course, collection]:
+		case [[s, *_], _, _]:
+			matched = {"parse": {
+				"type": "schedule", "rootPath": s[1].replace(".cn", "/cn"), 
+				"slug": s[2], "scheduleId": s[3], "sid": s[5],
+				"url": f"https://www.apple.com{s[1]}/today/event/{s[2]}/{s[3]}/?sn={s[5]}"
+			}}
+			matched["coroutine"] = getSchedule
+		case [_, [c, *_], _]:
+			matched = {"parse": {
+				"type": "course", "rootPath": c[1].replace(".cn", "/cn"),
+				"slug": c[2], "url": f"https://www.apple.com{c[1]}/today/event/{c[2]}"
+			}}
+			matched["coroutine"] = getCourse
+		case [_, _, [c, *_]]:
+			matched = {"parse": {
+				"type": "collection", "rootPath": c[1].replace(".cn", "/cn"),
+				"slug": c[2], "url": f"https://www.apple.com{c[1]}/today/collection/{c[2]}"
+			}}
+			matched["coroutine"] = getCourse
+		case _:
+			matched = {"parse": None}
+
+	if not coro:
+		return matched["parse"]
+	if not matched["parse"]:
+		return nothing()
+	return matched["coroutine"](**{k: v for k, v in matched["parse"].items() if k not in ["type", "url", "sid"]})
 
 lang = {
 	True: {
