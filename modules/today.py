@@ -7,6 +7,7 @@ import atexit
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from storeInfo import StoreID, nameReplace, storeReturn
+from storeInfo import Store as Raw_Store
 from modules.constants import allRegions, userAgent
 from modules.util import request, disMarkdown, timezoneText
 
@@ -144,7 +145,7 @@ class TodayEncoder(json.JSONEncoder):
 
 	def default(self, o):
 		match o:
-			case Store() | Course() | Schedule() | Collection() | Talent():
+			case Store() | Raw_Store() | Course() | Schedule() | Collection() | Talent():
 				return o.raw
 			case _:
 				return super().default(o)
