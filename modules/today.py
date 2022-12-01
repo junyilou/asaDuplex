@@ -374,7 +374,7 @@ class Course(asyncObject):
 
 			self.virtual = "VIRTUAL" in raw["type"]
 			self.special = "SPECIAL" in raw["type"] or "HIGH" in raw["talentType"]
-			self.talents = [Talent(raw = t) for t in talents] if talents != None else None
+			self.talents = [Talent(raw = t) for t in talents] if talents else []
 			self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}"
 			self.raw = raw | {"serial": self.serial}
 
@@ -638,9 +638,9 @@ class Collection(asyncObject):
 			self.videos = {}
 
 		if "inCollaborationWith" in raw:
-			self.collaboration = raw["inCollaborationWith"]["partners"]
+			self.collaborations = raw["inCollaborationWith"]["partners"]
 		else:
-			self.collaboration = None
+			self.collaborations = []
 		self.raw = raw | {"serial": self.serial}
 
 	def __repr__(self):
@@ -816,7 +816,7 @@ def parseURL(url, coro = False):
 				"type": "collection", "rootPath": c[1].replace(".cn", "/cn"),
 				"slug": c[2], "url": f"https://www.apple.com{c[1]}/today/collection/{c[2]}"
 			}}
-			matched["coroutine"] = getCourse
+			matched["coroutine"] = getCollection
 		case _:
 			matched = {"parse": None}
 
@@ -905,9 +905,9 @@ def teleinfo(course = None, schedules = [], collection = None, mode = "new", use
 			INTROTITLE = lang[userLang]["INTRO_COLLECTION"],
 			INTRO = collection.description['long'],
 		))
-		if collection.collaboration != None:
+		if collection.collaborations != []:
 			collab = []
-			for i in collection.collaboration:
+			for i in collection.collaborations:
 				name = disMarkdown(i["name"])
 				collab.append(f"[{name}]({i['url']})" if "url" in i else name)
 			text += f"\n\n{lang[userLang]['COLLAB_WITH']}\n{lang[userLang]['JOINT'].join(collab)}"
