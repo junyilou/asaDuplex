@@ -24,8 +24,6 @@ async def down(session, sid, storejson, specialist, semaphore):
 		saved = savedDatetime = None
 	try:
 		async with semaphore:
-			if store.sid.endswith("00"):
-				logging.info(f"开始下载 {store.rid}")
 			remote = await store.header(session = session)
 		remoteDatetime = datetime.strptime(remote, "%d %b %Y %H:%M:%S")
 	except:
@@ -40,6 +38,7 @@ async def down(session, sid, storejson, specialist, semaphore):
 
 	if remoteDatetime > savedDatetime:
 		storejson[store.sid]["modified"] = remote
+		storejson[store.sid] = dict(sorted(storejson[store.sid].items()))
 		if remoteDatetime.date() in INVALIDREMOTE:
 			logging.info(f"{store.rid} 找到了更佳的远端无效时间")
 			return True
@@ -102,28 +101,24 @@ async def main(session):
 				specialist = eval(f"[{r.read()}]")
 			specialist = [str(i) for i in specialist]
 			locallist = specialist.copy()
-
-			if len(specialist):
-				setLogger(logging.INFO, os.path.basename(__file__))
-				logging.info("开始特别观察模式: " + ", ".join(specialist))
-				tasks = [down(session, i, storejson, specialist, semaphore) for i in locallist]
-				runFlag = any(await asyncio.gather(*tasks))
-				if locallist != specialist:
-					logging.info("正在更新特别观察列表")
-					with open("Retail/specialist.txt", "w") as w:
-						w.write(str(list(map(int, specialist))).strip("[]"))
-			else:
+			if not len(specialist):
 				return
+			setLogger(logging.INFO, os.path.basename(__file__))
+			logging.info("开始特别观察模式: " + ", ".join(specialist))
+			tasks = [down(session, i, storejson, specialist, semaphore) for i in locallist]
+			runFlag = any(await asyncio.gather(*tasks))
+			if locallist != specialist:
+				logging.info("正在更新特别观察列表")
+				with open("Retail/specialist.txt", "w") as w:
+					w.write(str(list(map(int, specialist))).strip("[]"))
 		case _:
 			return print("指定了错误的运行模式: normal, special 或 single")
 
 	if runFlag:
 		logging.info(f"正在更新 {DEFAULTFILE}")
 		storejson["update"] = datetime.now(UTC).strftime("%F %T GMT")
-		sOut = json.dumps(storejson, ensure_ascii = False, indent = 2)
 		with open(DEFAULTFILE, "w") as w:
-			w.write(sOut)
-
+			json.dump(storejson, w, ensure_ascii = False, indent = 2)
 	logging.info("程序结束")
 
 asyncio.run(main())
