@@ -1,5 +1,5 @@
 {
-  "update": "2022-11-28 17:22:10 GMT",
+  "update": "2022-12-01 02:20:06 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -2467,7 +2467,7 @@
       "2022-12-08"
     ],
     "flag": "🇬🇧",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "28 Nov 2022 10:31:59",
     "name": "White City",
     "state": "Greater London",
     "timezone": "Europe/London",
@@ -6311,6 +6311,7 @@
     "city": "East Rutherford",
     "dates": "2022-12-03",
     "flag": "🇺🇸",
+    "modified": "01 Dec 2022 02:06:03",
     "name": "American Dream",
     "state": "New Jersey",
     "timezone": "America/New_York",
