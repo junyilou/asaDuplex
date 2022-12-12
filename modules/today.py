@@ -6,6 +6,7 @@ import atexit
 
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from functools import total_ordering
 from storeInfo import StoreID, nameReplace, storeReturn
 from storeInfo import Store as Raw_Store
 from modules.constants import allRegions, userAgent
@@ -79,14 +80,14 @@ def clean(loop = None):
 		else:
 			loop.create_task(__clean_task(loop))
 
-def _separate(text):
+def _separate(text: str) -> str:
 	for i in ["\u200B", "\u200C", "\u2060"]:
 		text = text.replace(i, "")
 	for i in ["\u00A0"]:
 		text = text.replace(i, " ")
 	return text
 
-def resolution(vids, direction = None):
+def resolution(vids: list[str], direction: str = None) -> str:
 	res = {}
 	for v in vids:
 		f = re.findall(r"([0-9]+)x([0-9]+)\.[a-zA-Z0-9]+", v)
@@ -107,7 +108,7 @@ def resolution(vids, direction = None):
 				fil = []
 		return fil
 
-def validDates(ex, runtime):
+def validDates(ex: str, runtime: datetime) -> list[datetime]:
 	v = []
 	match len(ex):
 		case 6:
@@ -150,50 +151,58 @@ class TodayEncoder(json.JSONEncoder):
 			case _:
 				return super().default(o)
 
+class Course:
+	pass
+class Schedule:
+	pass
+class Collection:
+	pass
+class Talent:
+	pass
+
+@total_ordering
 class Store():
-	def __init__(self, raw = None, sid = None, store = None, rootPath = None):
+	def __init__(self, sid: str = None, raw: dict = None, store: Raw_Store = None, rootPath: str = None):
 
 		if raw != None:
-			self.name = raw["name"]
-			self.sid = raw["storeNum"]
-			self.raw_store = StoreID(self.sid)[0]
-			self.timezone = raw["timezone"]["name"]
-			self.slug = raw["slug"]
-			self.rootPath = rootPath or self.raw_store.region["rootPath"]
-			self.flag = todayNation[self.rootPath]
-			self.url = f"https://www.apple.com{raw['path']}" if self.rootPath != "/cn" \
+			self.name: str = raw["name"]
+			self.sid: str = raw["storeNum"]
+			self.raw_store: Raw_Store = StoreID(self.sid)[0]
+			self.timezone: str = raw["timezone"]["name"]
+			self.slug: str = raw["slug"]
+			self.rootPath: str = rootPath or self.raw_store.region["rootPath"]
+			self.flag: str = todayNation[self.rootPath]
+			self.url: str = f"https://www.apple.com{raw['path']}" if self.rootPath != "/cn" \
 				else f"https://www.apple.com.cn{raw['path']}"
-			self.coord = [raw["lat"], raw["long"]]
+			self.coord: list[float] = [raw["lat"], raw["long"]]
 		elif sid != None or store != None:
-			self.raw_store = store or StoreID(sid)[0]
-			self.sid = self.raw_store.rid
-			self.name = self.raw_store.name
-			self.slug = self.raw_store.slug
-			self.rootPath = rootPath or self.raw_store.region["rootPath"]
-			self.timezone = self.raw_store.timezone
-			self.flag = todayNation[self.rootPath]
-			self.url = self.raw_store.url
-			self.coord = None
+			self.raw_store: Raw_Store = store or StoreID(sid)[0]
+			self.sid: str = self.raw_store.rid
+			self.name: str = self.raw_store.name
+			self.slug: str = self.raw_store.slug
+			self.rootPath: str = rootPath or self.raw_store.region["rootPath"]
+			self.timezone: str = self.raw_store.timezone
+			self.flag: str = todayNation[self.rootPath]
+			self.url: str = self.raw_store.url
+			self.coord: list[float] = None
 		else:
 			raise ValueError("sid, raw 至少提供一个")
-		self.today = self.url.replace("/retail/", "/today/")
-		self.calendar = self.url.replace("/retail/", "/today/calendar/")
-		self.serial = dict(sid = self.sid)
-		self.raw = {k: v for k, v in vars(self).items() if k != "raw"}
-
-	def __hash__(self):
-		return hash(self.sid)
-
-	def __eq__(self, other):
-		try:
-			return self.sid == other.sid
-		except:
-			return False
+		self.today: str = self.url.replace("/retail/", "/today/")
+		self.calendar: str = self.url.replace("/retail/", "/today/calendar/")
+		self.serial: dict = dict(sid = self.sid)
+		self.raw: dict = {k: v for k, v in vars(self).items() if k != "raw"}
 
 	def __repr__(self):
 		return f'<Store "{self.name}" ({self.sid}), "{self.slug}", "{self.rootPath}">'
 
-	async def getCourses(self, ensure = True):
+	def __hash__(self):
+		return hash(self.sid)
+
+	def __ge__(self, other):
+		assert isinstance(other, Store)
+		return self.raw_store.sortkey >= other.raw_store.sortkey
+
+	async def getCourses(self, ensure: bool = True) -> list[Course]:
 
 		r = await request(
 			session = get_session(),
@@ -210,13 +219,12 @@ class Store():
 		async with asyncio.TaskGroup() as tg:
 			for i in raw["courses"]:
 				tasks.append(tg.create_task(getCourse(
-					courseId = i, raw = raw["courses"][i], 
-					rootPath = self.rootPath, stores = raw["stores"],
+					courseId = i, raw = raw["courses"][i], rootPath = self.rootPath, 
 					moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
-					fuzzy = False, ensure = True)))
+					stores = raw["stores"], fuzzy = False)))
 		return [t.result() for t in tasks]
 
-	async def getSchedules(self, ensure = True):
+	async def getSchedules(self, ensure: bool = True) -> list[Schedule]:
 
 		r = await request(
 			session = get_session(),
@@ -237,28 +245,25 @@ class Store():
 				if (not ensure) or (storeNum == self.sid) or \
 				("VIRTUAL" in raw["courses"][raw["schedules"][i]["courseId"]]["type"]):
 					tasks.append(tg.create_task(getSchedule(
-						scheduleId = i, 
-						raw = schedules[i], 
-						rootPath = self.rootPath, 
-						slug = self.slug, 
+						scheduleId = i, raw = schedules[i], 
+						rootPath = self.rootPath, slug = self.slug, 
 						store = getStore(
-							sid = storeNum, 
-							rootPath = self.rootPath,
+							sid = storeNum, rootPath = self.rootPath,
 							raw = raw["stores"][storeNum] if storeNum in raw["stores"] else None),
 						course = await getCourse(
 							courseId = schedules[i]["courseId"], 
 							raw = raw["courses"][schedules[i]["courseId"]], 
 							rootPath = self.rootPath,
 							moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
-							fuzzy = False, ensure = True), ensure = True)))
+							fuzzy = False))))
 		return [t.result() for t in tasks]
 
-	async def getCoord(self):
+	async def getCoord(self) -> list[float]:
 		d = await self.raw_store.detail(session = get_session(), mode = "raw")
 		self.coord = [i[1] for i in sorted(d["geolocation"].items())]
 		return self.coord
 
-def getStore(sid, store = None, raw = None, rootPath = None):
+def getStore(sid: int | str, raw: dict = None, store: Raw_Store = None, rootPath: str = None) -> Store:
 	global savedToday
 	if type(sid) != str or not sid.startswith("R"):
 		sid = f"R{sid:0>3}"
@@ -271,37 +276,37 @@ def getStore(sid, store = None, raw = None, rootPath = None):
 	return savedToday["Store"][sid]
 
 class Talent():
-	def __init__(self, raw):
-		self.raw = raw
-		self.name = raw["name"].strip()
-		self.title = raw["title"].strip() if "title" in raw else None
-		self.description = raw["description"].strip()
-		self.image = raw.get("backgroundImage", None)
-		self.links = ({"Website": raw["websiteUrl"]} if "websiteUrl" in raw else {}) | \
-			{social["name"].capitalize(): social["url"] for social in raw["socialLinks"]}
+	def __init__(self, raw: dict):
+		self.raw: dict = raw
+		self.name: str = raw["name"].strip()
+		self.title: str = raw["title"].strip() if "title" in raw else None
+		self.description: str = raw["description"].strip()
+		self.image: str = raw.get("backgroundImage", None) or raw.get("logo", None)
+		self.links: dict = ({"Website": raw["websiteUrl"]} if "websiteUrl" in raw else {} |
+			{"URL": raw["url"]} if "url" in raw else {} |
+			{social["name"].capitalize(): social["url"] for social in raw.get("socialLinks", {})})
 
 	def __repr__(self):
-		return f"<Talent {self.name}" + (f', "{self.title}"' if self.title else "") + ">"
+		return f'<Talent "{self.name}"' + (f', "{self.title}"' if self.title else "") + ">"
 
+@total_ordering
 class Course(asyncObject):
-	async def __init__(self, courseId = None, raw = None, rootPath = None, slug = None, moreAbout = None, talents = None):
+	async def __init__(self, courseId: str = None, raw: dict = None, rootPath: str = None, 
+		slug: str = None, moreAbout: list | dict = None, talents: list[dict] = None):
 		
 		if raw == None:
 			if not all([slug, rootPath != None]):
-				raise ValueError("slug, rootPath 必须全部提供")
-			else:
-				self.slug = slug
-				self.rootPath = rootPath
+				raise ValueError("slug, rootPath 必须全部提供") from None
 
 			r = await request(
 				session = get_session(),
-				url = API["session"]["course"].format(COURSESLUG = self.slug, ROOTPATH = self.rootPath),
+				url = API["session"]["course"].format(COURSESLUG = slug, ROOTPATH = rootPath),
 				ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
 
 			try:
 				raw = json.loads(_separate(r))
 			except json.decoder.JSONDecodeError:
-				raise ValueError(f"获取课程 {rootPath}/{self.slug} 数据失败") from None
+				raise ValueError(f"获取课程 {rootPath}/{slug} 数据失败") from None
 
 			courseId = [i for i in raw["courses"] if raw["courses"][i]["urlTitle"] == slug][0]
 			moreAbout = raw.get("moreAbout", None)
@@ -309,43 +314,29 @@ class Course(asyncObject):
 			raw = raw["courses"][courseId]
 
 		if all([courseId, raw, rootPath != None]):
-			self.rootPath = rootPath
-			self.flag = todayNation[self.rootPath]
-			self.courseId = courseId
-			self.name = raw["name"].strip()
-			self.title = raw["title"]
-			self.slug = raw["urlTitle"]
-			self.serial = dict(slug = self.slug, rootPath = self.rootPath)
+			self.rootPath: str = rootPath
+			self.flag: str = todayNation[self.rootPath]
+			self.courseId: str = courseId
+			self.name: str = raw["name"].strip()
+			self.title: str = raw["title"]
+			self.slug: str = raw["urlTitle"]
+			self.serial: dict = dict(slug = self.slug, rootPath = self.rootPath)
 
-			self.collection = None
-			if type(moreAbout) == dict:
-				moreAbout = [moreAbout]
-			match moreAbout:
-				case None:
-					pass
-				case Collection():
-					self.collection = moreAbout
-				case list():
-					for moreDict in moreAbout:
-						try:
-							if "title" in moreDict and raw["collectionName"] == moreDict["title"]:
-								pass
-							elif "name" in moreDict and raw["collectionName"] == moreDict["name"]:
-								pass
-							else:
-								continue
-							self.collection = await getCollection(rootPath = self.rootPath, slug = moreDict["collId"])
-							break
-						except:
-							pass
-			
-			self.collection = self.collection or raw["collectionName"]
-			self.description = {
+			self.collection: Collection = raw["collectionName"]
+			if moreAbout != None:
+				moreAbout = [moreAbout] if isinstance(moreAbout, dict) else moreAbout
+				for moreDict in moreAbout:
+					if raw["collectionName"] in [moreDict.get("title", "title"), moreDict.get("name", "name")]:
+						self.collection = await getCollection(rootPath = self.rootPath, slug = moreDict["collId"])
+						break
+
+			self.description: dict = {
 				"long": raw["longDescription"].strip(),
 				"medium": raw["mediumDescription"].strip(),
 				"short": raw["shortDescription"].strip()
 			}
 
+			self.intro: dict
 			if raw["modalVideo"]:
 				self.intro = {
 					"poster": raw["modalVideo"]["poster"]["source"],
@@ -355,10 +346,11 @@ class Course(asyncObject):
 				self.intro = {}
 
 			media = raw["backgroundMedia"]
-			self.images = {
+			self.images: dict = {
 				"portrait": media["images"][0]["portrait"]["source"],
 				"landscape": media["images"][0]["landscape"]["source"]
 			}
+			self.videos: dict
 			if "ambientVideo" in media:
 				self.videos = {
 					"portrait": {
@@ -373,11 +365,11 @@ class Course(asyncObject):
 			else:
 				self.videos = {}
 
-			self.virtual = "VIRTUAL" in raw["type"]
-			self.special = "SPECIAL" in raw["type"] or "HIGH" in raw["talentType"]
-			self.talents = [Talent(raw = t) for t in talents] if talents else []
-			self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}"
-			self.raw = raw | {"serial": self.serial}
+			self.virtual: bool = "VIRTUAL" in raw["type"]
+			self.special: bool = "SPECIAL" in raw["type"] or "HIGH" in raw["talentType"]
+			self.talents: list[Talent] = [Talent(raw = t) for t in talents] if talents else []
+			self.url: str = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}"
+			self.raw: dict = raw | {"serial": self.serial}
 
 	def __repr__(self):
 		col = (f', Collection <{self.collection.name}>' if type(self.collection) == Collection \
@@ -387,32 +379,18 @@ class Course(asyncObject):
 	def __hash__(self):
 		return hash(f"{self.rootPath}/{self.courseId}")
 
-	def __eq__(self, other):
-		try:
-			return self.courseId == other.courseId and self.rootPath == other.rootPath
-		except:
-			return False
+	def __ge__(self, other):
+		assert isinstance(other, Course)
+		return (self.courseId, self.rootPath) >= (other.courseId, other.rootPath)
 
-	def __lt__(self, other):
-		if self.courseId == other.courseId:
-			return self.rootPath < other.rootPath
-		else:
-			return self.courseId < other.courseId
-
-	def __gt__(self, other):
-		if self.courseId == other.courseId:
-			return self.rootPath > other.rootPath
-		else:
-			return self.courseId > other.courseId
-
-	def elements(self, accept = None):
+	def elements(self, accept: list[str] = None) -> list[str]:
 		accept = accept or ACCEPT
 		result, accept = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
 			"))+[\'\"]?", json.dumps(self, cls = TodayEncoder)) if i[0] not in result]
 		return result
 
-	async def getSchedules(self, store, ensure = True, semaphore = None):
+	async def getSchedules(self, store: Store, ensure: bool = True, semaphore: asyncio.Semaphore = None) -> list[Schedule]:
 
 		if semaphore != None:
 			await semaphore.acquire()
@@ -443,23 +421,20 @@ class Course(asyncObject):
 							sid = storeNum, raw = raw["stores"][storeNum],
 							rootPath = store.rootPath), 
 						course = await getCourse(
-							raw = raw["courses"][self.courseId], 
-							courseId = self.courseId, 
-							rootPath = store.rootPath,
-							moreAbout = raw.get("moreAbout", None),
-							talents = raw["talents"],
-							fuzzy = False, ensure = True), ensure = True)))
+							courseId = self.courseId, raw = raw["courses"][self.courseId],
+							rootPath = store.rootPath, moreAbout = raw.get("moreAbout", None),
+							talents = raw["talents"], fuzzy = False))))
 		return [t.result() for t in tasks]
 
-	async def getRootSchedules(self, rootPath = None):
+	async def getRootSchedules(self, rootPath: str = None) -> list[list[Schedule]]:
 		rootPath = rootPath or self.rootPath
 		stores = storeReturn(todayNation[rootPath], remove_closed = True, remove_future = True)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		tasks = [self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
-async def getCourse(courseId = None, rootPath = None, slug = None, raw = None, 
-	moreAbout = None, talents = None, fuzzy = True, stores = [], ensure = False):
+async def getCourse(courseId: int | str = None, raw: dict = None, rootPath: str = None, slug: str = None, 
+	moreAbout: list | dict = None, talents: list[dict] = None, fuzzy: bool = True, stores: list[dict] = []) -> Course:
 	global savedToday
 	saved = list(savedToday["Course"])
 	if rootPath == "":
@@ -477,77 +452,71 @@ async def getCourse(courseId = None, rootPath = None, slug = None, raw = None,
 		raise ValueError("没有找到匹配，需要提供 slug, rootPath")
 	_ = [getStore(store, raw = stores[store]) for store in stores]
 
-	try:
-		get = await Course(raw = raw, courseId = courseId, rootPath = rootPath.replace("/us", ""), slug = slug, moreAbout = moreAbout, talents = talents)
-		savedToday["Course"][f"{rootPath}/{get.courseId}"] = get
-	except Exception as e:
-		if ensure:
-			return e
-		raise e
+	get = await Course(raw = raw, courseId = courseId, rootPath = rootPath.replace("/us", ""), slug = slug, moreAbout = moreAbout, talents = talents)
+	savedToday["Course"][f"{rootPath}/{get.courseId}"] = get
 	return get
 
+@total_ordering
 class Schedule(asyncObject):
-	async def __init__(self, scheduleId = None, raw = None, rootPath = None, slug = None, store = None, course = None):
+	async def __init__(self, scheduleId: str = None, raw: dict = None, rootPath: str = None, 
+		slug: str = None, store: Store = None, course: Course = None):
 
 		if raw == None:
 			if not all([slug, scheduleId, rootPath != None]):
 				raise ValueError("slug, scheduleId, rootPath 必须全部提供")
 			else:
-				self.slug = slug
-				self.scheduleId = scheduleId = f"{scheduleId}"
-				self.rootPath = rootPath
+				self.slug: str = slug
+				scheduleId = f"{scheduleId}"
 
 			r = await request(
 				session = get_session(),
-				url = API["session"]["schedule"].format(COURSESLUG = self.slug, SCHEDULEID = self.scheduleId, ROOTPATH = self.rootPath),
+				url = API["session"]["schedule"].format(COURSESLUG = self.slug, SCHEDULEID = scheduleId, ROOTPATH = rootPath),
 				ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
 
 			try:
 				raw = json.loads(_separate(r))
 			except json.decoder.JSONDecodeError:
-				raise ValueError(f"获取课次 {self.rootPath}/{self.slug}/{self.scheduleId} 数据失败") from None
+				raise ValueError(f"获取课次 {rootPath}/{self.slug}/{scheduleId} 数据失败") from None
 
 			store = getStore(
 				sid = raw["schedules"][scheduleId]["storeNum"],
 				raw = raw["stores"][raw["schedules"][scheduleId]["storeNum"]], 
-				rootPath = self.rootPath)
+				rootPath = rootPath)
 			course = await getCourse(
-				raw = raw["courses"][raw["schedules"][scheduleId]["courseId"]], 
 				courseId = raw["schedules"][scheduleId]["courseId"], 
-				rootPath = self.rootPath,
-				moreAbout = raw.get("moreAbout", None),
-				talents = raw["talents"],
-				fuzzy = False)
+				raw = raw["courses"][raw["schedules"][scheduleId]["courseId"]], 
+				rootPath = rootPath, moreAbout = raw.get("moreAbout", None),
+				talents = raw["talents"], fuzzy = False)
 			raw = raw["schedules"][scheduleId]
 
 		if all([scheduleId, raw, rootPath != None, course, store]):
 			_ = [setattr(self, key, getattr(course, key)) for key in vars(course)]
-			self.course = course
-			self.scheduleId = scheduleId
-			self.rootPath = rootPath
-			self.flag = todayNation[self.rootPath]
-			self.serial = dict(slug = self.slug, scheduleId = self.scheduleId, rootPath = self.rootPath)
+			self.course: Course = course
+			self.scheduleId: str = scheduleId
+			self.rootPath: str = rootPath
+			self.flag: str = todayNation[self.rootPath]
+			self.serial: dict = dict(slug = self.slug, scheduleId = scheduleId, rootPath = self.rootPath)
 
-			self.store = store
-			self.timezone = store.timezone
+			self.store: Store = store
+			self.timezone: str = store.timezone
 			try:
-				self.tzinfo = ZoneInfo(self.timezone)
-				self.timeStart = datetime.fromtimestamp(raw["startTime"] / 1000, self.tzinfo)
-				self.timeEnd = datetime.fromtimestamp(raw["endTime"] / 1000, self.tzinfo)
+				self.tzinfo: ZoneInfo = ZoneInfo(self.timezone)
+				self.timeStart: datetime = datetime.fromtimestamp(raw["startTime"] / 1000, self.tzinfo)
+				self.timeEnd: datetime = datetime.fromtimestamp(raw["endTime"] / 1000, self.tzinfo)
 			except:
 				self.tzinfo = self.timeStart = self.timeEnd = None
-			self.rawStart = datetime.fromtimestamp(raw["startTime"] / 1000)
-			self.rawEnd = datetime.fromtimestamp(raw["endTime"] / 1000)
-			self.status = raw["status"] == "RSVP"
-			self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}/{self.scheduleId}/?sn={self.store.sid}"
-			self.raw = raw | {"serial": self.serial}
+			self.rawStart: datetime = datetime.fromtimestamp(raw["startTime"] / 1000)
+			self.rawEnd: datetime = datetime.fromtimestamp(raw["endTime"] / 1000)
+			self.status: bool = raw["status"] == "RSVP"
+			self.url: str = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}/{scheduleId}/?sn={self.store.sid}"
+			self.raw: dict = raw | {"serial": self.serial}
 
-	def datetimeStart(self, form = "%-m 月 %-d 日 %-H:%M"):
+	def datetimeStart(self, form: str = "%-m 月 %-d 日 %-H:%M") -> str:
 		if self.tzinfo != None:
 			return self.timeStart.astimezone(self.tzinfo).strftime(form)
 		return self.rawStart.strftime(form)
 
-	def datetimeEnd(self, form = "%-H:%M"):
+	def datetimeEnd(self, form: str = "%-H:%M") -> str:
 		if self.tzinfo != None:
 			return self.timeEnd.astimezone(self.tzinfo).strftime(form)
 		return self.rawEnd.strftime(form)
@@ -559,48 +528,30 @@ class Schedule(asyncObject):
 	def __hash__(self):
 		return hash(self.scheduleId)
 
-	def __eq__(self, other):
-		try:
-			return self.scheduleId == other.scheduleId
-		except:
-			return False
+	def __ge__(self, other):
+		assert isinstance(other, Schedule)
+		return (self.rawStart, self.scheduleId) >= (other.rawStart, other.scheduleId)
 
-	def __lt__(self, other):
-		if self.rawStart == other.rawStart:
-			return self.scheduleId < other.scheduleId
-		else:
-			return self.rawStart < other.rawStart
-
-	def __gt__(self, other):
-		if self.rawStart == other.rawStart:
-			return self.scheduleId > other.scheduleId
-		else:
-			return self.rawStart > other.rawStart
-
-async def getSchedule(scheduleId, raw = None, rootPath = None, slug = None, store = None, course = None, ensure = False):
+async def getSchedule(scheduleId: int | str, raw: dict = None, rootPath: str = None, 
+	slug: str = None, store: Store = None, course: Course = None) -> Schedule:
 	global savedToday
 	scheduleId = f"{scheduleId}"
 	if any([raw, rootPath, slug]):
-		try:
-			get = await Schedule(scheduleId = scheduleId, raw = raw, rootPath = rootPath, slug = slug, store = store, course = course)
-			savedToday["Schedule"][scheduleId] = get
-		except Exception as e:
-			if ensure:
-				return e
-			raise e
+		get = await Schedule(scheduleId = scheduleId, raw = raw, rootPath = rootPath, slug = slug, store = store, course = course)
+		savedToday["Schedule"][scheduleId] = get
 	return savedToday["Schedule"][scheduleId]
 
 class Collection(asyncObject):
-	async def __init__(self, rootPath = None, slug = None):
+	async def __init__(self, rootPath: str = None, slug: str = None):
 		
 		if not all([rootPath != None, slug]):
 			raise ValueError("slug, rootPath 必须全部提供")
 
-		self.slug = slug
-		self.rootPath = rootPath
-		self.flag = todayNation[self.rootPath]
-		self.url = f"https://www.apple.com{rootPath.replace('/cn', '.cn')}/today/collection/{slug}/"
-		self.serial = dict(slug = slug, rootPath = rootPath)
+		self.slug: str = slug
+		self.rootPath: str = rootPath
+		self.flag: str = todayNation[self.rootPath]
+		self.url: str = f"https://www.apple.com{rootPath.replace('/cn', '.cn')}/today/collection/{slug}/"
+		self.serial: dict = dict(slug = slug, rootPath = rootPath)
 
 		r = await request(
 			session = get_session(),
@@ -609,21 +560,22 @@ class Collection(asyncObject):
 
 		try:
 			raw = json.loads(_separate(r))
-			self.name = raw["name"].strip()
+			self.name: str = raw["name"].strip()
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取系列 {rootPath}/{slug} 数据失败") from None
 
-		self.description = {
+		self.description: dict = {
 			"long": raw["longDescription"].strip(),
 			"medium": raw["mediumDescription"].strip(),
 			"short": raw["shortDescription"].strip()
 		}
 
 		media = raw["heroGallery"][0]["backgroundMedia"]
-		self.images = {
+		self.images: dict = {
 			"portrait": media["images"][0]["portrait"]["source"],
 			"landscape": media["images"][0]["landscape"]["source"]
 		}
+		self.videos: dict
 		if "ambientVideo" in media:
 			self.videos = {
 				"portrait": {
@@ -638,11 +590,12 @@ class Collection(asyncObject):
 		else:
 			self.videos = {}
 
+		self.collaborations: list[Talent]
 		if "inCollaborationWith" in raw:
-			self.collaborations = raw["inCollaborationWith"]["partners"]
+			self.collaborations = [Talent(raw = t) for t in raw["inCollaborationWith"]["partners"]]
 		else:
 			self.collaborations = []
-		self.raw = raw | {"serial": self.serial}
+		self.raw: dict = raw | {"serial": self.serial}
 
 	def __repr__(self):
 		return f'<Collection "{self.name}", "{self.slug}", "{self.rootPath}">'
@@ -656,14 +609,14 @@ class Collection(asyncObject):
 		except:
 			return False
 
-	def elements(self, accept = None):
+	def elements(self, accept: list[str] = None) -> list[str]:
 		accept = accept or ACCEPT
 		result, accept = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
 			"))+[\'\"]?", json.dumps(self, cls = TodayEncoder)) if i[0] not in result]
 		return result
 
-	async def getSchedules(self, store, ensure = True, semaphore = None):
+	async def getSchedules(self, store: Store, ensure: bool = True, semaphore: asyncio.Semaphore = None) -> list[Schedule]:
 
 		if semaphore != None:
 			await semaphore.acquire()
@@ -695,20 +648,27 @@ class Collection(asyncObject):
 							sid = storeNum, rootPath = store.rootPath,
 							raw = raw["stores"][storeNum] if storeNum in raw["stores"] else None), 
 						course = await getCourse(
-							raw = raw["courses"][courseId], 
-							courseId = courseId, rootPath = store.rootPath,
-							moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"],
-							fuzzy = False, ensure = True), ensure = True)))
+							courseId = courseId, raw = raw["courses"][courseId], rootPath = store.rootPath,
+							moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"], fuzzy = False))))
 		return [t.result() for t in tasks]
 
-	async def getRootSchedules(self, rootPath = None):
+	async def getRootSchedules(self, rootPath: str = None) -> list[list[Schedule]]:
 		rootPath = rootPath or self.rootPath
 		stores = storeReturn(todayNation[rootPath], remove_closed = True, remove_future = True)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		tasks = [self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
-async def getCollection(slug, rootPath = None):
+	async def getCourses(self, rootPath: str = None) -> list[Course]:
+		courses = []
+		schedules = await self.getRootSchedules(rootPath = rootPath)
+		for store in schedules:
+			for schedule in store:
+				if schedule.course not in courses:
+					courses.append(schedule.course)
+		return courses
+
+async def getCollection(slug: str, rootPath: str = None) -> Collection:
 	global savedToday
 	saved = list(savedToday["Collection"])
 	if rootPath == None:
@@ -724,17 +684,17 @@ async def getCollection(slug, rootPath = None):
 
 class Sitemap():
 
-	def match_by_assure(self, slug):
+	def match_by_assure(self, slug: str) -> bool:
 		for s in knownSlugs:
 			if s == slug:
 				return False
 		return True
 
-	def match_by_valid(self, slug):
+	def match_by_valid(self, slug: str) -> bool:
 		matches = re.findall(VALIDDATES, slug)
 		return matches and validDates(matches[0][1], self.runtime) != []
 
-	def __init__(self, rootPath = None, flag = None):
+	def __init__(self, rootPath: str = None, flag: str = None):
 		match rootPath, flag:
 			case None, None:
 				raise ValueError("rootPath 和 flag 必须提供一个")
@@ -760,7 +720,7 @@ class Sitemap():
 	def __repr__(self):
 		return f'<Sitemap "{self.urlPath}">'
 
-	async def getObjects(self):
+	async def getObjects(self) -> list[Course | Schedule]:
 		r = await request(
 			session = get_session(), 
 			url = f"https://www.apple.com{self.urlPath}/today/sitemap.xml",
@@ -786,19 +746,15 @@ class Sitemap():
 
 		return await asyncio.gather(*objects, return_exceptions = True)
 
-def parseURL(url, coro = False):
+def parseURL(url: str, coro: bool = False) -> dict | Course | Schedule | Collection:
 	coursePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*))"
 	schedulePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*)/([67][0-9]{18})(\/\?sn\=(R[0-9]{3}))?)"
 	collectionPattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/collection/([a-z0-9\-]*))(/\S*)?"
 	
-	course = re.findall(coursePattern, url, re.I)
-	schedule = re.findall(schedulePattern, url, re.I)
-	collection = re.findall(collectionPattern, url, re.I)
-
 	async def nothing():
 		return None
 
-	match [schedule, course, collection]:
+	match [re.findall(p, url, re.I) for p in [schedulePattern, coursePattern, collectionPattern]]:
 		case [[s, *_], _, _]:
 			matched = {"parse": {
 				"type": "schedule", "rootPath": s[1].replace(".cn", "/cn"), 
@@ -894,7 +850,8 @@ lang = {
 	}
 }
 
-def teleinfo(course = None, schedules = [], collection = None, mode = "new", userLang = True, prior = None):
+def teleinfo(course: Course = None, schedules: list[Schedule] = [], collection: Collection = None, 
+	mode: str = "new", userLang: bool = True, prior: list[str] = None) -> tuple[str, str, list[list[list[str, str]]]]:
 	runtime = datetime.now()
 	offset = runtime.astimezone().utcoffset().total_seconds() / 3600
 
@@ -908,9 +865,9 @@ def teleinfo(course = None, schedules = [], collection = None, mode = "new", use
 		))
 		if collection.collaborations != []:
 			collab = []
-			for i in collection.collaborations:
-				name = disMarkdown(i["name"])
-				collab.append(f"[{name}]({i['url']})" if "url" in i else name)
+			for c in collection.collaborations:
+				name = disMarkdown(c.name)
+				collab.append(f"[{name}]({c.links['URL']})" if "URL" in c.links else name)
 			text += f"\n\n{lang[userLang]['COLLAB_WITH']}\n{lang[userLang]['JOINT'].join(collab)}"
 
 		image = collection.images["landscape"] + "?output-format=jpg&output-quality=80&resize=1280:*"
