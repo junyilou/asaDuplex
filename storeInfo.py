@@ -14,12 +14,13 @@ class Store:
 		for e in ["name", "flag", "state", "city"]:
 			assert e in dct, f"key {e} not exist"
 
-		self.sid = f"{sid:0>3}"
-		self.rid = f"R{sid}"
-		self.iid = int(sid)
-		self.flag = dct["flag"]
+		self.sid: str = f"{sid:0>3}"
+		self.rid: str = f"R{sid}"
+		self.iid: str = int(sid)
+		self.flag: str = dct["flag"]
 
-		self.name = dct["name"]
+		self.name: str = dct["name"]
+		self.altname: list[str]
 		if isinstance(self.name, list):
 			self.altname = self.name
 			self.name = self.altname.pop(0)
@@ -27,18 +28,20 @@ class Store:
 			self.altname = []
 
 		if "timezone" in dct:
-			self.timezone = dct["timezone"]
+			self.timezone: str = dct["timezone"]
 
+		self.dates: list[str]
 		if "dates" in dct:
 			self.dates = self.nso = dct["dates"]
 			if isinstance(self.nso, list):
-				self.nso = self.nso[0]
+				self.nso: str = self.nso[0]
 			else:
 				self.dates = [self.dates]
 
 		if "modified" in dct:
-			self.modified = dct["modified"]
+			self.modified: str = dct["modified"]
 
+		self.isFuture: bool; self.isClosed: bool; self.isIntern: bool
 		if "status" in dct:
 			self.isFuture = dct["status"] == "future"
 			self.isClosed = dct["status"] == "closed"
@@ -46,14 +49,14 @@ class Store:
 		else:
 			self.isFuture = self.isClosed = self.isIntern = False
 
-		self.state = dct["state"]
-		self.city = dct["city"]
-		self.region = allRegions[self.flag]
+		self.state: str = dct["state"]
+		self.city: str = dct["city"]
+		self.region: dict = allRegions[self.flag]
 		if "website" in dct:
-			self.slug = self.name.lower().replace(" ", "") if dct["website"] == "-" else dct["website"]
-			self.url = f"https://www.apple.com{self.region['storeURL']}/retail/{self.slug}"
+			self.slug: str = self.name.lower().replace(" ", "") if dct["website"] == "-" else dct["website"]
+			self.url: str = f"https://www.apple.com{self.region['storeURL']}/retail/{self.slug}"
 
-		self.keys = [
+		self.keys: list[str] = [
 			*dct.get("alter", "").split(" "),
 			self.name, self.state, self.city, self.flag,
 			*self.altname,
@@ -66,8 +69,8 @@ class Store:
 		self.keys = [k for k in self.keys if k]
 		self.keys += [k.replace(" ", "") for k in self.keys if " " in k]
 
-		self.sortkey = (self.flag, self.state, self.sid)
-		self.raw = dct
+		self.sortkey: tuple[str] = (self.flag, self.state, self.sid)
+		self.raw: dict = dct
 
 	def telename(self, bold: bool = False, flag: bool = False, sid: bool = True) -> str:
 		bold = "*" if bold else ""
