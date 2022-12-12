@@ -1,5 +1,5 @@
 {
-  "update": "2022-11-16 17:00:13 GMT",
+  "update": "2022-12-10 00:20:10 GMT",
   "🇦🇪": {
     "state1049": {
       "ABUA": "Al Maryah Island",
@@ -628,6 +628,7 @@
   },
   "🇸🇬": {
     "state909": {
+      "R633": "Marina Bay Sands",
       "R669": "Orchard Road",
       "R736": "Jewel Changi Airport",
       "name": "Singapore"
@@ -937,7 +938,7 @@
       "R206": "Cherry Hill",
       "R325": "Willowbrook",
       "R549": "Quaker Bridge",
-      "R755": "East Rutherford-NJ",
+      "R755": "American Dream",
       "name": "New Jersey"
     },
     "state983": {
