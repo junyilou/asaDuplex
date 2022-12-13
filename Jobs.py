@@ -154,7 +154,8 @@ async def entry(targets, session, check_cancel):
 	RECORD = {}
 	semaphore = asyncio.Semaphore(30)
 
-	TASKS = [Region(flag = i, session = session, semaphore = semaphore) for i in targets if not i.isalpha()]
+	TASKS = [Region(flag = i, session = session, semaphore = semaphore) for i in targets if (
+		(not i.isalpha()) and (allRegions[i]["jobCode"] is not None))]
 
 	while len(TASKS):
 		tasks = TASKS.copy()
@@ -244,7 +245,7 @@ async def main(session, targets, futures, check_cancel):
 		if r["searchResults"]:
 			reference = r["searchResults"][0]
 			logging.info(f"找到一个新职位信息: {reference['positionId']} {reference['postingTitle']}")
-			allRegions[flag] = {"jobCode": reference["positionId"]}
+			allRegions[flag] = allRegions.get(flag, {}) | {"jobCode": reference["positionId"]}
 			targets.append(flag)
 
 	await entry(targets, session, check_cancel)

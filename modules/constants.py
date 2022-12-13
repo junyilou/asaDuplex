@@ -37,7 +37,9 @@ allRegions = {
     "abbr": "AE",
     "altername": [
       "UAE",
+      "阿聯酋",
       "阿拉伯联合酋长国",
+      "阿拉伯聯合酋長國"
       "阿拉伯联合大公国"
     ],
     "jobCode": "114438225",
@@ -80,7 +82,9 @@ allRegions = {
   },
   "🇧🇪": {
     "abbr": "BE",
-    "altername": [],
+    "altername": [
+      "比利時"
+    ],
     "jobCode": "114438251",
     "mobileApp": "e/be-fr",
     "name": "比利时",
@@ -135,6 +139,8 @@ allRegions = {
   "🇨🇳": {
     "abbr": "CN",
     "altername": [
+      "中华人民共和国",
+      "中華人民共和國",
       "China mainland",
       "PRC"
     ],
@@ -151,6 +157,7 @@ allRegions = {
   "🇩🇪": {
     "abbr": "DE",
     "altername": [
+      "德國",
       "Deutschland"
     ],
     "jobCode": "114438043",
@@ -180,7 +187,11 @@ allRegions = {
   },
   "🇫🇷": {
     "abbr": "FR",
-    "altername": [],
+    "altername": [
+      "法國",
+      "法兰西共和国",
+      "法蘭西共和國"
+    ],
     "jobCode": "114438069",
     "mobileApp": "e/fr",
     "name": "法国",
@@ -196,7 +207,8 @@ allRegions = {
     "altername": [
       "UK",
       "Great Britain",
-      "大英帝国"
+      "大英帝国",
+      "大英帝國"
     ],
     "jobCode": "114438145",
     "mobileApp": "e/uk",
@@ -210,7 +222,10 @@ allRegions = {
   },
   "🇭🇰": {
     "abbr": "HK",
-    "altername": [],
+    "altername": [
+      "香港特别行政区",
+      "香港特別行政區"
+    ],
     "jobCode": "114438082",
     "mobileApp": "p/hk-zh",
     "name": "香港",
@@ -269,7 +284,9 @@ allRegions = {
       "Korea",
       "ROK",
       "南韩",
-      "大韩民国"
+      "南韓",
+      "大韩民国",
+      "大韓民國"
     ],
     "jobCode": "114438326",
     "mobileApp": "p/kr",
@@ -284,6 +301,9 @@ allRegions = {
   "🇲🇴": {
     "abbr": "MO",
     "altername": [
+      "澳門",
+      "澳门特别行政区",
+      "澳門特別行政區",
       "Macao"
     ],
     "jobCode": "114438282",
@@ -309,9 +329,26 @@ allRegions = {
     "shopURL": "/mx",
     "storeURL": "/mx"
   },
+  "🇲🇾": {
+    "abbr": "MY",
+    "altername": [
+      "馬來西亞",
+      "大马"
+    ],
+    "jobCode": None,
+    "mobileApp": "p/my",
+    "name": "马来西亚",
+    "nameEng": "Malaysia",
+    "partSample": "FE",
+    "rootPath": "/my",
+    "rspLocale": "en_MY",
+    "shopURL": "/my",
+    "storeURL": "/my"
+  },
   "🇳🇱": {
     "abbr": "NL",
     "altername": [
+      "荷蘭",
       "Holland"
     ],
     "jobCode": "114438119",
@@ -354,7 +391,9 @@ allRegions = {
   },
   "🇹🇭": {
     "abbr": "TH",
-    "altername": [],
+    "altername": [
+      "泰國"
+    ],
     "jobCode": "114438346",
     "mobileApp": "p/th-en",
     "name": "泰国",
@@ -367,9 +406,7 @@ allRegions = {
   },
   "🇹🇷": {
     "abbr": "TR",
-    "altername": [
-      "Türkiye"
-    ],
+    "altername": [],
     "jobCode": "114438164",
     "mobileApp": "e/tr",
     "name": "土耳其",
@@ -384,7 +421,8 @@ allRegions = {
     "abbr": "TW",
     "altername": [
       "ROC",
-      "中华民国"
+      "中华民国",
+      "中華民國"
     ],
     "jobCode": "114438311",
     "mobileApp": "p/tw",
@@ -399,6 +437,7 @@ allRegions = {
   "🇺🇸": {
     "abbr": "US",
     "altername": [
+      "美國",
       "America",
       "U.S."
     ],
