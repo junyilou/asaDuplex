@@ -18,6 +18,7 @@ API = {
 
 TASKS = []
 RESULTS = []
+FUTURES = {"🇲🇾": "postLocation-MYS"}
 
 class Store:
 
@@ -129,8 +130,7 @@ class Region:
 			TASKS.append(State(region = self, fieldID = p["id"], code = p["code"], name = p["stateProvince"],
 				session = self.session, semaphore = self.semaphore))
 
-@session_func
-async def main(targets, session, check_cancel):
+async def entry(targets, session, check_cancel):
 
 	with open("Retail/savedJobs.json") as r:
 		SAVED = eval(r.read())
@@ -174,6 +174,8 @@ async def main(targets, session, check_cancel):
 	pushes = [[], [], []]
 
 	for store in RESULTS:
+		if store.flag not in SAVED:
+			SAVED[store.flag] = {}
 		if store not in STORES:
 			append = True
 			logging.info(f"记录到新地点 {store.flag} {store.stateName} {store.sid} {store.name}")
@@ -220,6 +222,33 @@ async def main(targets, session, check_cancel):
 		with open("Retail/savedJobs.json", "w") as w:
 			json.dump(SAVED, w, ensure_ascii = False, indent = 2, sort_keys = True)
 
+@session_func
+async def main(session, targets, futures, check_cancel):
+	FUTURE = {
+		"filters": {
+			"keyword": ["specialist"],
+			"postingpostLocation": None,
+			"teams": [{"teams.teamID": "teamsAndSubTeams-APPST", "teams.subTeamID": "subTeam-ARSS"}]},
+		"page": 1, "locale": "en-us", "sort": "relevance"
+	}
+
+	for flag, pipe in futures.items():
+		FUTURE["filters"]["postingpostLocation"] = [pipe]
+		try:
+			r = await request(session = session, url = "https://jobs.apple.com/api/role/search", 
+				method = "POST", json = FUTURE, mode = "json", ssl = False)
+			assert "searchResults" in r
+		except:
+			logging.warning(f"尝试搜索地区 {flag} 失败")
+			continue
+		if r["searchResults"]:
+			reference = r["searchResults"][0]
+			logging.info(f"找到一个新职位信息: {reference['positionId']} {reference['postingTitle']}")
+			allRegions[flag] = {"jobCode": reference["positionId"]}
+			targets.append(flag)
+
+	await entry(targets, session, check_cancel)
+
 setLogger(logging.INFO, basename(__file__))
 logging.info("程序启动")
 
@@ -228,6 +257,6 @@ if "cancel" in argv:
 	argv.remove("cancel")
 	check_cancel = True
 targets = argv[1:] if len(argv) > 1 else list(allRegions)
-asyncio.run(main(targets = targets, check_cancel = check_cancel))
+asyncio.run(main(targets = targets, futures = FUTURES, check_cancel = check_cancel))
 
 logging.info("程序结束")
