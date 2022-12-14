@@ -1,5 +1,5 @@
 {
-  "update": "2022-12-01 02:20:06 GMT",
+  "update": "2022-12-14 18:30:44 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -2467,7 +2467,7 @@
       "2022-12-08"
     ],
     "flag": "🇬🇧",
-    "modified": "28 Nov 2022 10:31:59",
+    "modified": "12 Dec 2022 17:16:42",
     "name": "White City",
     "state": "Greater London",
     "timezone": "Europe/London",
@@ -5925,10 +5925,14 @@
     "website": "champs-elysees"
   },
   "678": {
-    "alter": "Shanghai 静安寺 江浙沪",
+    "alter": "Shanghai 江浙沪",
     "city": "上海",
     "flag": "🇨🇳",
-    "name": "Store in Shanghai",
+    "name": [
+      "Store in Shanghai",
+      "静安寺",
+      "Jingan Temple"
+    ],
     "state": "上海",
     "status": "future",
     "timezone": "Asia/Shanghai"
@@ -6230,6 +6234,14 @@
     "timezone": "Mexico/General",
     "website": "-"
   },
+  "742": {
+    "city": "Kuala Lumpur",
+    "flag": "🇲🇾",
+    "name": "Store in Kuala Lumpur",
+    "state": "Kuala Lumpur",
+    "status": "future",
+    "timezone": "Asia/Singapore"
+  },
   "744": {
     "city": "Mumbai",
     "flag": "🇮🇳",
@@ -6311,7 +6323,7 @@
     "city": "East Rutherford",
     "dates": "2022-12-03",
     "flag": "🇺🇸",
-    "modified": "01 Dec 2022 02:06:03",
+    "modified": "05 Dec 2022 20:27:05",
     "name": "American Dream",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -6338,7 +6350,11 @@
     "alter": "Guangdong Shenzhen 深圳东 深圳东部",
     "city": "深圳",
     "flag": "🇨🇳",
-    "name": "Store in Shenzhen East",
+    "name": [
+      "Store in Shenzhen East",
+      "深圳万象城",
+      "MixC Shenzhen"
+    ],
     "state": "广东",
     "status": "future",
     "timezone": "Asia/Shanghai"

@@ -335,7 +335,7 @@ allRegions = {
       "馬來西亞",
       "大马"
     ],
-    "jobCode": None,
+    "jobCode": "200450003",
     "mobileApp": "p/my",
     "name": "马来西亚",
     "nameEng": "Malaysia",

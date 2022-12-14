@@ -18,7 +18,7 @@ API = {
 
 TASKS = []
 RESULTS = []
-FUTURES = {"🇲🇾": "postLocation-MYS"}
+FUTURES = {}
 
 class Store:
 
