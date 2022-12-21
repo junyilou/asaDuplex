@@ -1,16 +1,17 @@
-import logging
 import asyncio
-from random import choice
-from datetime import timedelta, datetime
-from storeInfo import StoreID, Store
+import logging
+from datetime import datetime, timedelta
 from modules.constants import allRegions, userAgent
 from modules.util import request
+from random import choice
+from typing import AsyncGenerator
+from storeInfo import Store, StoreID
 
-COMMENTS = {}
+COMMENTS: dict[str, dict[datetime, str]] = {}
 SLEEPER = list(range(2, 16, 2))
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
-def textConvert(dct, userLang = True):
+def textConvert(dct: dict, userLang: bool = True) -> str:
 	match dct:
 		case {"closed": True}:
 			return "不营业" if userLang else "Closed"
@@ -20,7 +21,7 @@ def textConvert(dct, userLang = True):
 			return f'{opt} - {clt}'
 	return "未知时间" if userLang else "Unknown Hours"
 
-async def apu(session, store: Store, target, userLang):
+async def apu(session, store: Store, target: str, userLang: bool) -> AsyncGenerator[tuple[str, datetime, str], None]:
 	retry = 3
 	baseURL = f"https://www.apple.com{store.region['shopURL']}"
 	url = f"{baseURL}/shop/fulfillment-messages"
@@ -49,7 +50,7 @@ async def apu(session, store: Store, target, userLang):
 			sTxt = (f"[{holiday['description']}]" if holiday["description"] else "") + (f" {holiday['comments']}" if holiday["comments"] else "")
 			yield (astore, sDay, sTxt)
 
-async def comment(session, store: Store, userLang = True):
+async def comment(session, store: Store, userLang: bool = True) -> dict:
 	global COMMENTS
 	async for i in apu(session, store, f'MM0A3{store.region["partSample"]}/A', userLang):
 		astore, sDay, sTxt = i
@@ -57,7 +58,8 @@ async def comment(session, store: Store, userLang = True):
 		COMMENTS[astore][sDay] = sTxt
 	return COMMENTS
 
-async def speHours(sid, session = None, runtime = None, limit = 14, askComment = True, userLang = True):
+async def speHours(sid: int | str, session = None, runtime: datetime = None, 
+	limit: int = 14, askComment: bool = True, userLang: bool = True) -> dict[str, dict[str, str]]:
 	store = StoreID(sid)[0]
 	runtime = datetime.now().date() if runtime is None else runtime
 	try:
