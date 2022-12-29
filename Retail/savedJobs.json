@@ -1,5 +1,5 @@
 {
-  "update": "2022-12-10 00:20:10 GMT",
+  "update": "2022-12-14 18:20:09 GMT",
   "🇦🇪": {
     "state1049": {
       "ABUA": "Al Maryah Island",
@@ -605,6 +605,12 @@
       "R708": "Via Sante Fe",
       "R740": "Antara",
       "name": "Federal District"
+    }
+  },
+  "🇲🇾": {
+    "state1105": {
+      "R742": "Kuala Lumpur-MY",
+      "name": "Kuala Lumpur"
     }
   },
   "🇳🇱": {
