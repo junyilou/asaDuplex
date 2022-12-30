@@ -195,9 +195,13 @@ class Store():
 	def __hash__(self):
 		return hash(self.sid)
 
-	def __ge__(self, other):
+	def __gt__(self, other):
 		assert isinstance(other, Store)
-		return self.raw_store.sortkey >= other.raw_store.sortkey
+		return self.raw_store.sortkey > other.raw_store.sortkey
+
+	def __eq__(self, other):
+		assert isinstance(other, Store)
+		return self.raw_store.sortkey == other.raw_store.sortkey
 
 	async def getCourses(self, ensure: bool = True) -> list[Course]:
 
@@ -377,9 +381,13 @@ class Course(asyncObject):
 	def __hash__(self):
 		return hash(f"{self.rootPath}/{self.courseId}")
 
-	def __ge__(self, other):
+	def __gt__(self, other):
 		assert isinstance(other, Course)
-		return (self.courseId, self.rootPath) >= (other.courseId, other.rootPath)
+		return (self.courseId, self.rootPath) > (other.courseId, other.rootPath)
+
+	def __eq__(self, other):
+		assert isinstance(other, Course)
+		return (self.courseId, self.rootPath) == (other.courseId, other.rootPath)
 
 	def elements(self, accept: list[str] = None) -> list[str]:
 		accept = accept or ACCEPT
@@ -522,9 +530,13 @@ class Schedule(asyncObject):
 	def __hash__(self):
 		return hash(self.scheduleId)
 
-	def __ge__(self, other):
+	def __gt__(self, other):
 		assert isinstance(other, Schedule)
-		return (self.rawStart, self.scheduleId) >= (other.rawStart, other.scheduleId)
+		return (self.rawStart, self.scheduleId) > (other.rawStart, other.scheduleId)
+
+	def __eq__(self, other):
+		assert isinstance(other, Schedule)
+		return (self.rawStart, self.scheduleId) == (other.rawStart, other.scheduleId)
 
 async def getSchedule(scheduleId: int | str, raw: dict = None, rootPath: str = None, 
 	slug: str = None, store: Store = None, course: Course = None) -> Schedule:
@@ -869,6 +881,7 @@ def teleinfo(course: Course = None, schedules: list[Schedule] = [], collection: 
 	if course.virtual:
 		courseStore = lang[userLang]["VIRTUAL"]
 	elif schedules != []:
+		schedules = sorted(set(schedules))
 		availableStore = set([i.store.raw_store for i in schedules])
 		textStore = nameReplace(availableStore, userLang = [None, userLang], number = False)
 		courseStore = lang[userLang]["JOINT"].join(textStore)

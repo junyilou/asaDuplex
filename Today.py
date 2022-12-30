@@ -97,7 +97,7 @@ async def main(mode):
 		if doSend:
 			logging.info(str(course))
 			schedules = [i for j in (courses[c] for c in courses if c.courseId == course.courseId) for i in j]
-			text, image, keyboard = teleinfo(course = course, schedules = sorted(schedules), prior = TODAYARGS)
+			text, image, keyboard = teleinfo(course = course, schedules = schedules, prior = TODAYARGS)
 			await async_post(text, image, keyboard)
 
 if __name__ == "__main__":
