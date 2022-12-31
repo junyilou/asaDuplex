@@ -5,7 +5,6 @@ import json
 import re
 
 from datetime import datetime
-from functools import total_ordering
 from modules.constants import allRegions, userAgent
 from modules.util import disMarkdown, request, timezoneText
 from storeInfo import StoreID, nameReplace, storeReturn
@@ -158,7 +157,6 @@ class Collection:
 class Talent:
 	pass
 
-@total_ordering
 class Store():
 	def __init__(self, sid: str = None, raw: dict = None, store: Raw_Store = None, rootPath: str = None):
 
@@ -195,13 +193,14 @@ class Store():
 	def __hash__(self):
 		return hash(self.sid)
 
+	def __lt__(self, other):
+		return type(other) is type(self) & self.raw_store.sortkey < other.raw_store.sortkey
+
 	def __gt__(self, other):
-		assert isinstance(other, Store)
-		return self.raw_store.sortkey > other.raw_store.sortkey
+		return type(other) is type(self) & self.raw_store.sortkey > other.raw_store.sortkey
 
 	def __eq__(self, other):
-		assert isinstance(other, Store)
-		return self.raw_store.sortkey == other.raw_store.sortkey
+		return type(other) is type(self) and self.raw_store.sortkey == other.raw_store.sortkey
 
 	async def getCourses(self, ensure: bool = True) -> list[Course]:
 
@@ -292,7 +291,6 @@ class Talent():
 	def __repr__(self):
 		return f'<Talent "{self.name}"' + (f', "{self.title}"' if self.title else "") + ">"
 
-@total_ordering
 class Course(asyncObject):
 	async def __init__(self, courseId: str = None, raw: dict = None, rootPath: str = None, 
 		slug: str = None, moreAbout: list | dict = None, talents: list[dict] = None):
@@ -381,13 +379,14 @@ class Course(asyncObject):
 	def __hash__(self):
 		return hash(f"{self.rootPath}/{self.courseId}")
 
+	def __lt__(self, other):
+		return type(other) is type(self) and (self.courseId, self.rootPath) < (other.courseId, other.rootPath)
+
 	def __gt__(self, other):
-		assert isinstance(other, Course)
-		return (self.courseId, self.rootPath) > (other.courseId, other.rootPath)
+		return type(other) is type(self) and (self.courseId, self.rootPath) > (other.courseId, other.rootPath)
 
 	def __eq__(self, other):
-		assert isinstance(other, Course)
-		return (self.courseId, self.rootPath) == (other.courseId, other.rootPath)
+		return type(other) is type(self) and (self.courseId, self.rootPath) == (other.courseId, other.rootPath)
 
 	def elements(self, accept: list[str] = None) -> list[str]:
 		accept = accept or ACCEPT
@@ -460,7 +459,6 @@ async def getCourse(courseId: int | str = None, raw: dict = None, rootPath: str 
 	savedToday["Course"][f"{rootPath}/{get.courseId}"] = get
 	return get
 
-@total_ordering
 class Schedule(asyncObject):
 	async def __init__(self, scheduleId: str = None, raw: dict = None, rootPath: str = None, 
 		slug: str = None, store: Store = None, course: Course = None):
@@ -530,13 +528,14 @@ class Schedule(asyncObject):
 	def __hash__(self):
 		return hash(self.scheduleId)
 
+	def __lt__(self, other):
+		return type(other) is type(self) and (self.rawStart, self.scheduleId) < (other.rawStart, other.scheduleId)
+
 	def __gt__(self, other):
-		assert isinstance(other, Schedule)
-		return (self.rawStart, self.scheduleId) > (other.rawStart, other.scheduleId)
+		return type(other) is type(self) and (self.rawStart, self.scheduleId) > (other.rawStart, other.scheduleId)
 
 	def __eq__(self, other):
-		assert isinstance(other, Schedule)
-		return (self.rawStart, self.scheduleId) == (other.rawStart, other.scheduleId)
+		return type(other) is type(self) and (self.rawStart, self.scheduleId) == (other.rawStart, other.scheduleId)
 
 async def getSchedule(scheduleId: int | str, raw: dict = None, rootPath: str = None, 
 	slug: str = None, store: Store = None, course: Course = None) -> Schedule:
