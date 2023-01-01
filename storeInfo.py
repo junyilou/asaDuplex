@@ -98,9 +98,15 @@ class Store:
 			"isIntern": " (internal)"}.items() if getattr(self, i)])
 		return f"<Store {self.telename(flag = True)}>{state}"
 
-	def __ge__(self, other):
-		assert isinstance(other, Store)
-		return self.sortkey >= other.sortkey
+	def __gt__(self, other):
+		if type(other) is not type(self):
+			return NotImplemented
+		return self.sortkey > other.sortkey
+
+	def __eq__(self, other):
+		if type(other) is not type(self):
+			return NotImplemented
+		return self.sortkey == other.sortkey
 
 	def __hash__(self):
 		return hash(self.sid)
