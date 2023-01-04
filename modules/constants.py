@@ -66,7 +66,7 @@ allRegions = {
   "HK": {
     "abbr": "HKEN",
     "altername": [],
-    "jobCode": "114438082",
+    "jobCode": None,
     "mobileApp": "p/hk",
     "name": "香港 (英语)",
     "nameEng": "Hong Kong (English)",
