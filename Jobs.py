@@ -257,7 +257,7 @@ check_cancel = False
 if "cancel" in argv:
 	argv.remove("cancel")
 	check_cancel = True
-targets = argv[1:] if len(argv) > 1 else list(allRegions)
+targets = argv[1:] if len(argv) > 1 else [i for i in allRegions if i.isalpha()]
 asyncio.run(main(targets = targets, futures = FUTURES, check_cancel = check_cancel))
 
 logging.info("程序结束")

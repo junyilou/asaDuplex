@@ -20,12 +20,55 @@ editStart = "### *** EDIT START *** ###\n"
 editEnd   = "\n### *** EDIT  END  *** ###"
 
 allRegions = {
+  "BE": {
+    "abbr": "BENL",
+    "altername": [
+      "比利時"
+    ],
+    "jobCode": None,
+    "mobileApp": "e/be-nl",
+    "name": "比利时 (荷兰语)",
+    "nameEng": "Belgium (Dutch)",
+    "partSample": "ZM",
+    "rootPath": "/benl",
+    "rspLocale": "nl_BE",
+    "shopURL": "/be-nl",
+    "storeURL": "/benl"
+  },
+  "CA": {
+    "abbr": "CAFR",
+    "altername": [],
+    "jobCode": None,
+    "mobileApp": "a/xf",
+    "name": "加拿大 (法语)",
+    "nameEng": "Canada (French)",
+    "partSample": "AM",
+    "rootPath": "/ca/fr",
+    "rspLocale": "fr_CA",
+    "shopURL": "/xf",
+    "storeURL": "/ca/fr"
+  },
+  "CH": {
+    "abbr": "CHDE",
+    "altername": [
+      "Swiss"
+    ],
+    "jobCode": None,
+    "mobileApp": "e/ch-de",
+    "name": "瑞士 (德语)",
+    "nameEng": "Switzerland (German)",
+    "partSample": "ZM",
+    "rootPath": "/chde",
+    "rspLocale": "de_CH",
+    "shopURL": "/ch-de",
+    "storeURL": "/chde"
+  },
   "HK": {
     "abbr": "HKEN",
     "altername": [],
     "jobCode": "114438082",
     "mobileApp": "p/hk",
-    "name": "香港 (English)",
+    "name": "香港 (英语)",
     "nameEng": "Hong Kong (English)",
     "partSample": "FE",
     "rootPath": "/hk/en",
