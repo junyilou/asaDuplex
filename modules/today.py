@@ -12,15 +12,18 @@ from storeInfo import Store as Raw_Store
 from zoneinfo import ZoneInfo
 
 __session_pool = {}
-
-TIMEOUT, RETRYNUM, SEMAPHORE_LIMIT = 5, 5, 25
-ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
-API_ROOT = "https://www.apple.com/today-bff/"
-ASSURED_JSON = "Retail/savedEvent.json"
-VALIDDATES = r"(-([0-9]{6,8}))"
-
+savedToday = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}
 todayNation = {allRegions[i]["rootPath"]: i for i in allRegions}
 
+_RETRYNUM = 5
+_SEMAPHORE_LIMIT = 25
+_TIMEOUT = 5
+
+_ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
+_ASSURED_JSON = "Retail/savedEvent.json"
+_VALIDDATES = r"(-([0-9]{6,8}))"
+
+API_ROOT = "https://www.apple.com/today-bff/"
 API = {
 	"landing": {
 		"store": API_ROOT + "landing/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}",
@@ -39,26 +42,12 @@ API = {
 	}
 }
 
-savedToday = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}
-
 try:
-	with open(ASSURED_JSON) as r:
+	with open(_ASSURED_JSON) as r:
 		assure = json.loads(r.read())
 	knownSlugs = [assure["today"][i]["slug"] for i in assure["assure"]]
 except FileNotFoundError:
 	knownSlugs = []
-
-def set_session(session):
-	loop = asyncio.get_running_loop()
-	__session_pool[loop] = session
-
-def get_session():
-	loop = asyncio.get_running_loop()
-	session = __session_pool.get(loop, None)
-	if session is None:
-		session = aiohttp.ClientSession(loop = loop, headers = userAgent)
-		__session_pool[loop] = session
-	return session
 
 @atexit.register
 def clean(loop = None):
@@ -79,14 +68,15 @@ def clean(loop = None):
 		else:
 			loop.create_task(__clean_task(loop))
 
-def _separate(text: str) -> str:
-	for i in ["\u200B", "\u200C", "\u2060"]:
-		text = text.replace(i, "")
-	for i in ["\u00A0"]:
-		text = text.replace(i, " ")
-	return text
+def _get_session():
+	loop = asyncio.get_running_loop()
+	session = __session_pool.get(loop, None)
+	if session is None:
+		session = aiohttp.ClientSession(loop = loop, headers = userAgent)
+		__session_pool[loop] = session
+	return session
 
-def resolution(vids: list[str], direction: str = None) -> str:
+def _resolution(vids: list[str], direction: str = None) -> str:
 	res = {}
 	for v in vids:
 		f = re.findall(r"([0-9]+)x([0-9]+)\.[a-zA-Z0-9]+", v)
@@ -107,7 +97,13 @@ def resolution(vids: list[str], direction: str = None) -> str:
 				fil = []
 		return fil
 
-def validDates(ex: str, runtime: datetime) -> list[datetime]:
+def _separate(text: str) -> str:
+	rep = {"\u200B": "", "\u200C": "", "\u2060": "", "\u00A0": " "}
+	for i, j in rep.items():
+		text = text.replace(i, j)
+	return text
+
+def _validDates(ex: str, runtime: datetime) -> list[datetime]:
 	v = []
 	match len(ex):
 		case 6:
@@ -123,9 +119,8 @@ def validDates(ex: str, runtime: datetime) -> list[datetime]:
 			pass
 		else:
 			delta = (date - runtime.date()).days
-			if delta > -7 and delta < 70:
-				if date not in v:
-					v.append(date)
+			if date not in v and delta > -7 and delta < 70:
+				v.append(date)
 	return v
 
 class asyncObject(object):
@@ -147,15 +142,6 @@ class TodayEncoder(json.JSONEncoder):
 				return o.raw
 			case _:
 				return super().default(o)
-
-class Course:
-	pass
-class Schedule:
-	pass
-class Collection:
-	pass
-class Talent:
-	pass
 
 class Store():
 	def __init__(self, sid: str = None, raw: dict = None, store: Raw_Store = None, rootPath: str = None):
@@ -202,13 +188,13 @@ class Store():
 	def __eq__(self, other):
 		return type(other) is type(self) and self.raw_store.sortkey == other.raw_store.sortkey
 
-	async def getCourses(self, ensure: bool = True) -> list[Course]:
+	async def getCourses(self, ensure: bool = True) -> list["Course"]:
 
 		r = await request(
-			session = get_session(),
+			session = _get_session(),
 			url = (API["landing"]["store"] if ensure else API["landing"]["nearby"]).format(
 				STORESLUG = self.slug, ROOTPATH = self.rootPath),
-			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
+			ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
 		
 		try:
 			raw = json.loads(_separate(r))
@@ -224,13 +210,13 @@ class Store():
 					stores = raw["stores"], fuzzy = False)))
 		return [t.result() for t in tasks]
 
-	async def getSchedules(self, ensure: bool = True) -> list[Schedule]:
+	async def getSchedules(self, ensure: bool = True) -> list["Schedule"]:
 
 		r = await request(
-			session = get_session(),
+			session = _get_session(),
 			url = (API["landing"]["store"] if ensure else API["landing"]["nearby"]).format(
 				STORESLUG = self.slug, ROOTPATH = self.rootPath),
-			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
+			ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
 		
 		try:
 			raw = json.loads(_separate(r))
@@ -261,7 +247,7 @@ class Store():
 		return [t.result() for t in tasks]
 
 	async def getCoord(self) -> list[float]:
-		d = await self.raw_store.detail(session = get_session(), mode = "raw")
+		d = await self.raw_store.detail(session = _get_session(), mode = "raw")
 		self.coord = [i[1] for i in sorted(d["geolocation"].items())]
 		return self.coord
 
@@ -299,9 +285,9 @@ class Course(asyncObject):
 			assert slug and rootPath is not None, "slug, rootPath 必须全部提供"
 
 			r = await request(
-				session = get_session(),
+				session = _get_session(),
 				url = API["session"]["course"].format(COURSESLUG = slug, ROOTPATH = rootPath),
-				ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
+				ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
 
 			try:
 				raw = json.loads(_separate(r))
@@ -340,7 +326,7 @@ class Course(asyncObject):
 			if raw["modalVideo"]:
 				self.intro = {
 					"poster": raw["modalVideo"]["poster"]["source"],
-					"video": resolution(raw["modalVideo"]["sources"])
+					"video": _resolution(raw["modalVideo"]["sources"])
 				}
 			else:
 				self.intro = {}
@@ -355,11 +341,11 @@ class Course(asyncObject):
 				self.videos = {
 					"portrait": {
 						"poster": media["ambientVideo"]["poster"][0]["portrait"]["source"],
-						"videos": resolution(media["ambientVideo"]["sources"], "p")
+						"videos": _resolution(media["ambientVideo"]["sources"], "p")
 					},
 					"landscape": {
 						"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
-						"videos": resolution(media["ambientVideo"]["sources"], "l")
+						"videos": _resolution(media["ambientVideo"]["sources"], "l")
 					}
 				}
 			else:
@@ -389,21 +375,21 @@ class Course(asyncObject):
 		return type(other) is type(self) and (self.courseId, self.rootPath) == (other.courseId, other.rootPath)
 
 	def elements(self, accept: list[str] = None) -> list[str]:
-		accept = accept or ACCEPT
+		accept = accept or _ACCEPT
 		result, accept = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
 			"))+[\'\"]?", json.dumps(self, cls = TodayEncoder)) if i[0] not in result]
 		return result
 
-	async def getSchedules(self, store: Store, ensure: bool = True, semaphore: asyncio.Semaphore = None) -> list[Schedule]:
+	async def getSchedules(self, store: Store, ensure: bool = True, semaphore: asyncio.Semaphore = None) -> list["Schedule"]:
 
 		if semaphore is not None:
 			await semaphore.acquire()
 		r = await request(
-			session = get_session(),
+			session = _get_session(),
 			url = (API["session"]["store"] if ensure else API["session"]["nearby"]).format(
 				STORESLUG = store.slug, COURSESLUG = self.slug, ROOTPATH = store.rootPath),
-			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
+			ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
 		if semaphore is not None:
 			semaphore.release()
 		
@@ -431,10 +417,10 @@ class Course(asyncObject):
 							talents = raw["talents"], fuzzy = False))))
 		return [t.result() for t in tasks]
 
-	async def getRootSchedules(self, rootPath: str = None) -> list[list[Schedule]]:
+	async def getRootSchedules(self, rootPath: str = None) -> list[list["Schedule"]]:
 		rootPath = rootPath or self.rootPath
 		stores = storeReturn(todayNation[rootPath], remove_closed = True, remove_future = True)
-		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
+		semaphore = asyncio.Semaphore(_SEMAPHORE_LIMIT)
 		tasks = [self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
@@ -469,9 +455,9 @@ class Schedule(asyncObject):
 			scheduleId = f"{scheduleId}"
 
 			r = await request(
-				session = get_session(),
+				session = _get_session(),
 				url = API["session"]["schedule"].format(COURSESLUG = self.slug, SCHEDULEID = scheduleId, ROOTPATH = rootPath),
-				ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
+				ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
 
 			try:
 				raw = json.loads(_separate(r))
@@ -558,9 +544,9 @@ class Collection(asyncObject):
 		self.serial: dict[str, str] = dict(slug = slug, rootPath = rootPath)
 
 		r = await request(
-			session = get_session(),
+			session = _get_session(),
 			url = API["collection"]["geo"].format(COLLECTIONSLUG = slug, ROOTPATH = rootPath),
-			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
+			ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
 
 		try:
 			raw = json.loads(_separate(r))
@@ -584,11 +570,11 @@ class Collection(asyncObject):
 			self.videos = {
 				"portrait": {
 					"poster": media["ambientVideo"]["poster"][0]["portrait"]["source"],
-					"videos": resolution(media["ambientVideo"]["sources"], "p")
+					"videos": _resolution(media["ambientVideo"]["sources"], "p")
 				},
 				"landscape": {
 					"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
-					"videos": resolution(media["ambientVideo"]["sources"], "l")
+					"videos": _resolution(media["ambientVideo"]["sources"], "l")
 				}
 			}
 		else:
@@ -614,7 +600,7 @@ class Collection(asyncObject):
 			return False
 
 	def elements(self, accept: list[str] = None) -> list[str]:
-		accept = accept or ACCEPT
+		accept = accept or _ACCEPT
 		result, accept = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + accept + 
 			"))+[\'\"]?", json.dumps(self, cls = TodayEncoder)) if i[0] not in result]
@@ -625,10 +611,10 @@ class Collection(asyncObject):
 		if semaphore is not None:
 			await semaphore.acquire()
 		r = await request(
-			session = get_session(),
+			session = _get_session(),
 			url = (API["collection"]["store"] if ensure else API["collection"]["nearby"]).format(
 				STORESLUG = store.slug, COLLECTIONSLUG = self.slug, ROOTPATH = store.rootPath),
-			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
+			ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
 		if semaphore is not None:
 			semaphore.release()
 		
@@ -659,7 +645,7 @@ class Collection(asyncObject):
 	async def getRootSchedules(self, rootPath: str = None) -> list[list[Schedule]]:
 		rootPath = rootPath or self.rootPath
 		stores = storeReturn(todayNation[rootPath], remove_closed = True, remove_future = True)
-		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
+		semaphore = asyncio.Semaphore(_SEMAPHORE_LIMIT)
 		tasks = [self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores]
 		return await asyncio.gather(*tasks, return_exceptions = True)
 
@@ -694,8 +680,8 @@ class Sitemap():
 		return True
 
 	def match_by_valid(self, slug: str) -> bool:
-		matches = re.findall(VALIDDATES, slug)
-		return matches and validDates(matches[0][1], self.runtime) != []
+		matches = re.findall(_VALIDDATES, slug)
+		return matches and _validDates(matches[0][1], self.runtime) != []
 
 	def __init__(self, rootPath: str = None, flag: str = None):
 		assert rootPath is not None or flag, "rootPath 和 flag 必须提供一个"
@@ -724,9 +710,9 @@ class Sitemap():
 
 	async def getObjects(self) -> list[Course | Schedule]:
 		r = await request(
-			session = get_session(), 
+			session = _get_session(), 
 			url = f"https://www.apple.com{self.urlPath}/today/sitemap.xml",
-			ensureAns = False, timeout = TIMEOUT, retryNum = RETRYNUM)
+			ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
 		urls = re.findall(r"<loc>\s*(\S*)\s*</loc>", r)
 
 		slugs = {}
@@ -924,8 +910,8 @@ def teleinfo(course: Course = None, schedules: list[Schedule] = [], collection: 
 		keyboard = [[[lang[userLang]["SIGN_UP"], priorSchedule.url]]]
 	else:
 		try:
-			date = re.findall(VALIDDATES, course.slug)[0][1]
-			vals = validDates(date, runtime)
+			date = re.findall(_VALIDDATES, course.slug)[0][1]
+			vals = _validDates(date, runtime)
 			valid = f' {lang[userLang]["OR"]} '.join([i.strftime(lang[userLang]["FORMAT_DATE"]) for i in vals])
 		except IndexError:
 			valid = ""
