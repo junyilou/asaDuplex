@@ -5,7 +5,7 @@ from functools import total_ordering
 from modules.constants import allRegions, userAgent
 from modules.util import request
 
-STORES = {}
+STORES: dict[str, "Store"] = {}
 DEFAULTFILE = "storeInfo.json"
 
 @total_ordering
@@ -69,6 +69,7 @@ class Store:
 			*self.region["altername"],
 			*(["招聘", "Hiring"] if self.isFuture else []),
 			*(["关闭", "Closed"] if self.isClosed else []),
+			*(["内部", "Internal"] if self.isIntern else [])
 		])))
 		self.keys += [k.replace(" ", "") for k in self.keys if " " in k]
 

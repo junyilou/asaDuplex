@@ -1,26 +1,12 @@
+import aiohttp
+import asyncio
 import json
 import logging
-import asyncio
-import aiohttp
+from datetime import datetime
+from typing import Callable, Awaitable
 from os.path import isdir
 
-def disMarkdown(text, wrap = "", extra = ""):
-	temp = text
-	signs = "\\|_{}[]()#@+-.!=<>~" + extra
-	for s in signs:
-		temp = temp.replace(s, f"\\{s}")
-	return wrap + temp + wrap[::-1]
-
-def timezoneText(dtime):
-	delta = dtime.utcoffset().total_seconds() / 3600
-	dx, dy = str(delta).split(".")
-	if dy == "0":
-		tzText = f"GMT{int(dx):+}"
-	else:
-		tzText = f"GMT{int(dx):+}:{60 * float('.' + dy):0>2.0f}"
-	return tzText
-
-def bitsize(integer, width = 8, precision = 2, ks = 1e3):
+def bitsize(integer: int | float, width: int = 8, precision: int = 2, ks: float = 1e3) -> str:
 	order = [" B", "KB", "MB", "GB", "TB"]
 	unit = 0
 	while integer > ks and unit < len(order) - 1:
@@ -28,7 +14,14 @@ def bitsize(integer, width = 8, precision = 2, ks = 1e3):
 		unit += 1
 	return f"{integer:{width}.{precision}f} {order[unit]}"
 
-def sortOD(od, reverse = [False], key = None, level = 0):
+def disMarkdown(text: str, wrap: str = "", extra: str = "") -> str:
+	temp = str(text)
+	signs = "\\|_{}[]()#@+-.!=<>~" + extra
+	for s in signs:
+		temp = temp.replace(s, "\\" + s)
+	return wrap + temp + wrap[::-1]
+
+def sortOD(od: dict, reverse: list[bool] = [False], key: Callable = None, level: int = 0) -> dict:
 	res = {}
 	for k, v in sorted(od.items(), reverse = reverse[min(level, len(reverse) - 1)], key = key):
 		match v:
@@ -40,13 +33,19 @@ def sortOD(od, reverse = [False], key = None, level = 0):
 				res[k] = v
 	return res
 
-async def request(session = None, url = None, mode = None, retryNum = 1, ensureAns = True, **kwargs):
+def timezoneText(dtime: datetime) -> str:
+	delta = dtime.utcoffset().total_seconds() / 3600
+	dx, dy = str(delta).split(".")
+	return f"GMT{int(dx):+}" + (f":{60 * float('.' + dy):0>2.0f}" if dy != "0" else "")
+
+async def request(session: aiohttp.ClientSession = None, url: str = None, mode: str | list[str] = None, 
+	retryNum: int = 1, ensureAns: bool = True, **kwargs) -> int | str | dict | bytes | Exception:
 	method = kwargs.get("method", "GET")
 	pop = kwargs.pop("method") if "method" in kwargs else None
 	logger = logging.getLogger("async_request")
 
 	close_session = False
-	if session == None:
+	if session is None:
 		logger.debug("已创建新的 aiohttp 线程")
 		session = aiohttp.ClientSession()
 		close_session = True
@@ -99,15 +98,14 @@ def session_func(func):
 			return await func(session = session, *args, **kwargs)
 	return wrapper
 
-def sync(coroutine = None, loop = None):
-	if loop == None:
+def sync(coroutine: Awaitable = None, loop: asyncio.AbstractEventLoop = None):
+	if loop is None:
 		loop = asyncio.new_event_loop()
-	if coroutine != None:
+	if coroutine is not None:
 		return loop.run_until_complete(coroutine)
-	else:
-		return loop
+	return loop
 
-def setLogger(level, name, force_print = False):
+def setLogger(level: int, name: str, force_print: bool = False):
 	if isdir('logs') and not force_print:
 		logging.basicConfig(
 			filename = f"logs/{name}.log",
