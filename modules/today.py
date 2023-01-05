@@ -308,7 +308,7 @@ class Course(asyncObject):
 			self.slug: str = raw["urlTitle"]
 			self.serial: dict[str, str] = dict(slug = self.slug, rootPath = self.rootPath)
 
-			self.collection: Collection = raw["collectionName"]
+			self.collection: str | Collection = raw["collectionName"]
 			if moreAbout is not None:
 				moreAbout = [moreAbout] if isinstance(moreAbout, dict) else moreAbout
 				for moreDict in moreAbout:
@@ -879,7 +879,7 @@ def teleinfo(course: Course = None, schedules: list[Schedule] = [], collection: 
 
 	if course.collection is None:
 		specialPrefix = ""
-	elif hasattr(course.collection, "slug"):
+	elif isinstance(course.collection, Collection):
 		specialPrefix = lang[userLang]["IN_COLLECTION"].format(NAME = course.collection.name)
 	else:
 		specialPrefix = lang[userLang]["IN_COLLECTION"].format(NAME = course.collection)
@@ -890,8 +890,7 @@ def teleinfo(course: Course = None, schedules: list[Schedule] = [], collection: 
 		priorSchedule = firstSchedule if prior is None else \
 			sorted(schedules, key = lambda k: prior.index(k.flag) if k.flag in prior else len(prior))[0]
 
-		scheduleTimezone = firstSchedule.tzinfo
-		if scheduleTimezone is not None:
+		if firstSchedule.tzinfo is not None:
 			delta = firstSchedule.timeStart.utcoffset().total_seconds() / 3600
 			tzText = "" if delta == offset else (" " + timezoneText(firstSchedule.timeStart))
 		else:
