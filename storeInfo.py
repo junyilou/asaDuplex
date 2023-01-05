@@ -30,24 +30,28 @@ class Store:
 		if "timezone" in dct:
 			self.timezone: str = dct["timezone"]
 
+		self.nso: str
 		self.dates: list[str]
 		if "dates" in dct:
 			self.dates = self.nso = dct["dates"]
 			if isinstance(self.nso, list):
-				self.nso: str = self.nso[0]
+				self.nso = self.nso[0]
 			else:
 				self.dates = [self.dates]
 
 		if "modified" in dct:
 			self.modified: str = dct["modified"]
 
-		self.isFuture: bool; self.isClosed: bool; self.isIntern: bool
+		self.isClosed: bool
+		self.isFuture: bool
+		self.isIntern: bool
 		if "status" in dct:
-			self.isFuture = dct["status"] == "future"
 			self.isClosed = dct["status"] == "closed"
+			self.isFuture = dct["status"] == "future"
 			self.isIntern = dct["status"] == "internal"
 		else:
-			self.isFuture = self.isClosed = self.isIntern = False
+			self.isClosed = self.isFuture = self.isIntern = False
+		self.isNormal: bool = not any([self.isClosed, self.isFuture, self.isIntern])
 
 		self.state: str = dct["state"]
 		self.city: str = dct["city"]
@@ -56,7 +60,7 @@ class Store:
 			self.slug: str = self.name.lower().replace(" ", "") if dct["website"] == "-" else dct["website"]
 			self.url: str = f"https://www.apple.com{self.region['storeURL']}/retail/{self.slug}"
 
-		self.keys: list[str] = [
+		self.keys: list[str] = sorted(set(filter(None, [
 			*dct.get("alter", "").split(" "),
 			self.name, self.state, self.city, self.flag,
 			*self.altname,
@@ -65,8 +69,7 @@ class Store:
 			*self.region["altername"],
 			*(["招聘", "Hiring"] if self.isFuture else []),
 			*(["关闭", "Closed"] if self.isClosed else []),
-		]
-		self.keys = [k for k in self.keys if k]
+		])))
 		self.keys += [k.replace(" ", "") for k in self.keys if " " in k]
 
 		self.sortkey: tuple[str] = (self.flag, self.state, self.sid)
@@ -94,9 +97,9 @@ class Store:
 		return "\n".join(info)
 
 	def __repr__(self):
-		state = "".join([j for i, j in {"isFuture": " (future)", "isClosed": " (closed)", 
+		status = "".join([j for i, j in {"isFuture": " (future)", "isClosed": " (closed)", 
 			"isIntern": " (internal)"}.items() if getattr(self, i)])
-		return f"<Store {self.telename(flag = True)}>{state}"
+		return f"<Store {self.telename(flag = True)}>{status}"
 
 	def __gt__(self, other):
 		if type(other) is not type(self):
@@ -129,10 +132,9 @@ class Store:
 					return hours
 				case "dict":
 					add = r["address"]
-					address = ", ".join([a.strip() for a in [add["address1"], add["address2"]] if a])
-					province = ", ".join([a.strip() for a in [add["city"], add["stateName"], add["postal"]] if a])
-					info = {"timezone": r["timezone"], "telephone": r["telephone"],
-						"address": address, "province": province}
+					address = ", ".join([a.strip() for a in filter(None, [add["address1"], add["address2"]])])
+					province = ", ".join([a.strip() for a in filter(None, [add["city"], add["stateName"], add["postal"]])])
+					info = {"timezone": r["timezone"], "telephone": r["telephone"], "address": address, "province": province}
 					return r["geolocation"] | info | hours
 		except:
 			return {}
@@ -180,10 +182,14 @@ def StoreMatch(keyword: str, fuzzy: bool = False) -> list[Store]:
 		stores = [i for i in STORES.values() if keyword.lower() in [k.lower() for k in i.keys]]
 	return stores
 
+def getStore(sid: int | str) -> Store:
+	f = f"{str(sid).upper().removeprefix('R'):0>3}"
+	return STORES.get(f, None)
+
 def nameReplace(rstores: [Store], bold: bool = False, number: bool = True, 
 	final: str = "name", userLang: list[bool] = [None]) -> list[str]:
 	if not rstores:
-		return rstores
+		return []
 	stores = set(rstores)
 	levels = ["flag", "state", "city"]
 	results = []
@@ -192,8 +198,7 @@ def nameReplace(rstores: [Store], bold: bool = False, number: bool = True,
 	
 	for store in stores:
 		for level in levels:
-			ast = set([s for s in STORES.values() if getattr(s, level) == getattr(store, level) and 
-				not (s.isClosed or s.isFuture or s.isIntern)])
+			ast = set([s for s in STORES.values() if getattr(s, level) == getattr(store, level) and s.isNormal])
 			if ast and ast.issubset(stores):
 				stores = stores.symmetric_difference(ast)
 				if level == "flag":
@@ -206,6 +211,14 @@ def nameReplace(rstores: [Store], bold: bool = False, number: bool = True,
 	results = [s[0] for s in sorted(results, key = lambda k: (levels.index(k[1]), k[0]))]
 	results += [getattr(s, final) for s in stores]
 	return results
+
+def reloadJSON(filename: str = DEFAULTFILE) -> str:
+	global STORES
+	with open(filename) as r:
+		infoJSON = json.load(r)
+	STORES = {sid: Store(sid = sid, dct = dct) for sid, dct in infoJSON.items() if sid != "update"}
+	STORES = {k: v for k, v in sorted(STORES.items(), key = lambda s: s[1])}
+	return infoJSON["update"]
 
 def storeReturn(args: int | str | list, remove_closed: bool = False, remove_future: bool = False, 
 	fuzzy: bool = False, split: bool = False, sort: bool = True) -> list[Store]:
@@ -228,20 +241,5 @@ def storeReturn(args: int | str | list, remove_closed: bool = False, remove_futu
 	if sort:
 		ans.sort()
 	return ans
-
-def reloadJSON(filename: str = DEFAULTFILE) -> str:
-	global STORES
-	with open(filename) as r:
-		infoJSON = json.load(r)
-	for sid, dct in infoJSON.items():
-		if sid == "update":
-			continue
-		STORES[sid] = Store(sid = sid, dct = dct)
-	STORES = {k: v for k, v in sorted(STORES.items(), key = lambda s: s[1])}
-	return infoJSON["update"]
-
-def getStore(sid: int | str) -> Store:
-	f = f"{str(sid).upper().removeprefix('R'):0>3}"
-	return STORES[f] if f in STORES else None
 
 reloadJSON()
