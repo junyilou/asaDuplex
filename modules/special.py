@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
 from modules.constants import allRegions, userAgent
 from modules.util import request
 from random import choice
@@ -58,8 +58,8 @@ async def comment(session, store: Store, userLang: bool = True) -> dict:
 		COMMENTS[astore][sDay] = sTxt
 	return COMMENTS
 
-async def speHours(sid: int | str, session = None, runtime: datetime = None, 
-	limit: int = 14, askComment: bool = True, userLang: bool = True) -> dict[str, dict[str, str]]:
+async def speHours(sid: int | str, session = None, runtime: date = None, limit: int = 14, 
+	askComment: bool = True, userLang: bool = True) -> dict[str, dict[str, str]]:
 	store = StoreID(sid)[0]
 	runtime = datetime.now().date() if runtime is None else runtime
 	try:
