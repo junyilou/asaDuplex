@@ -1,5 +1,5 @@
 {
-  "update": "2022-12-14 18:30:44 GMT",
+  "update": "2023-01-05 08:00:39 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -6275,21 +6275,21 @@
     "website": "yeouido"
   },
   "748": {
-    "city": "Dallas",
+    "city": "Plano",
     "flag": "🇺🇸",
     "name": "Dallas Market",
     "state": "Texas",
     "status": "internal"
   },
   "749": {
-    "city": "Los Angeles",
+    "city": "Inglewood",
     "flag": "🇺🇸",
     "name": "Los Angeles Market",
     "state": "California",
     "status": "internal"
   },
   "750": {
-    "city": "San Francisco",
+    "city": "Burlingame",
     "flag": "🇺🇸",
     "name": "Bay Area Market",
     "state": "California",
@@ -6385,21 +6385,21 @@
     "status": "internal"
   },
   "851": {
-    "city": "New York",
+    "city": "Jamaica",
     "flag": "🇺🇸",
     "name": "NYC",
     "state": "New York",
     "status": "internal"
   },
   "852": {
-    "city": "Miami",
+    "city": "Boca Raton",
     "flag": "🇺🇸",
     "name": "Miami",
     "state": "Florida",
     "status": "internal"
   },
   "853": {
-    "city": "Washington",
+    "city": "Lorton",
     "flag": "🇺🇸",
     "name": "Washington DC",
     "state": "District of Columbia",
@@ -6413,7 +6413,7 @@
     "status": "internal"
   },
   "855": {
-    "city": "Atlanta",
+    "city": "Tucker",
     "flag": "🇺🇸",
     "name": "Atlanta",
     "state": "Georgia",
@@ -6427,7 +6427,7 @@
     "status": "internal"
   },
   "857": {
-    "city": "Philadelphia",
+    "city": "Norristown",
     "flag": "🇺🇸",
     "name": "Philly Market",
     "state": "Pennsylvania",
@@ -6441,14 +6441,14 @@
     "status": "internal"
   },
   "859": {
-    "city": "Seattle",
+    "city": "Seatac",
     "flag": "🇺🇸",
     "name": "Seattle Market",
     "state": "Washington",
     "status": "internal"
   },
   "860": {
-    "city": "Portland",
+    "city": "Wilsonville",
     "flag": "🇺🇸",
     "name": "Portland",
     "state": "Oregon",
