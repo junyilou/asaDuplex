@@ -81,7 +81,7 @@ async def request(session: aiohttp.ClientSession = None, url: str = None, mode: 
 		except Exception as exp:
 			if retryNum == 1:
 				logger.debug(f"[丢弃] '{url}', [异常] {exp}")
-				logger.debug(exp.__repr__())
+				logger.debug(f"{exp!r}")
 				if close_session:
 					await session.close()
 				if ensureAns:
@@ -90,7 +90,7 @@ async def request(session: aiohttp.ClientSession = None, url: str = None, mode: 
 			else:
 				retryNum -= 1
 				logger.debug(f"[异常] '{url}', [异常] {exp}, [重试剩余] {retryNum}")
-				logger.debug(exp.__repr__())
+				logger.debug(f"{exp!r}")
 
 def session_func(func):
 	async def wrapper(*args, **kwargs):
