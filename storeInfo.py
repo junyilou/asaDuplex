@@ -16,7 +16,7 @@ class Store:
 
 		self.sid: str = f"{sid:0>3}"
 		self.rid: str = f"R{sid}"
-		self.iid: str = int(sid)
+		self.iid: int = int(sid)
 		self.flag: str = dct["flag"]
 
 		self.name: str = dct["name"]
@@ -227,7 +227,7 @@ def storeReturn(args: list[str], remove_closed: bool = False, remove_future: boo
 		case list(), False:
 			pass
 		case _, _:
-			args = list(args)
+			args = [args]
 
 	for a in map(lambda s: str(s).strip(), args):
 		for stores in (StoreID(a, fuzzy = fuzzy), StoreMatch(a, fuzzy = fuzzy)):
