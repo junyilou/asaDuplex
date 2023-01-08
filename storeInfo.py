@@ -69,18 +69,15 @@ class Store:
 			*self.region["altername"],
 			*(["招聘", "Hiring"] if self.isFuture else []),
 			*(["关闭", "Closed"] if self.isClosed else []),
-			*(["内部", "Internal"] if self.isIntern else [])
-		])))
+			*(["内部", "Internal"] if self.isIntern else [])])))
 		self.keys += [k.replace(" ", "") for k in self.keys if " " in k]
 
 		self.sortkey: tuple[str] = (self.flag, self.state, self.sid)
 		self.raw: dict = dct
 
 	def telename(self, bold: bool = False, flag: bool = False, sid: bool = True) -> str:
-		bold = "*" if bold else ""
-		flag = f"{self.flag} " if flag else ""
-		sid = f" ({self.rid})" if sid else ""
-		return f"{flag}{bold}Apple {self.name}{bold}{sid}"
+		c = ((flag, f"{self.flag} "), (bold, "*"), (True, f"Apple {self.name}"), (bold, "*"), (sid, f" ({self.rid})"))
+		return "".join([j for i, j in c if i])
 
 	def nsoString(self, userLang: bool = True) -> str:
 		if not hasattr(self, "dates"):
@@ -98,9 +95,9 @@ class Store:
 		return "\n".join(info)
 
 	def __repr__(self):
-		status = "".join([j for i, j in {"isFuture": " (future)", "isClosed": " (closed)", 
-			"isIntern": " (internal)"}.items() if getattr(self, i)])
-		return f"<Store {self.telename(flag = True)}>{status}"
+		name = [f"<Store {self.telename(flag = True)}>"]
+		status = [f"({s[2:].capitalize()})" for s in ["isClosed", "isFuture", "isIntern"] if getattr(self, s)]
+		return " ".join(name + status)
 
 	def __gt__(self, other):
 		if type(other) is not type(self):
@@ -113,7 +110,7 @@ class Store:
 		return self.sortkey == other.sortkey
 
 	def __hash__(self):
-		return hash(self.sid)
+		return hash(self.sortkey)
 
 	async def detail(self, session = None, mode: str = "dict") -> dict:
 		try:
@@ -221,24 +218,27 @@ def reloadJSON(filename: str = DEFAULTFILE) -> str:
 	STORES = {k: v for k, v in sorted(STORES.items(), key = lambda s: s[1])}
 	return infoJSON["update"]
 
-def storeReturn(args: int | str | list, remove_closed: bool = False, remove_future: bool = False, 
+def storeReturn(args: list[str], remove_closed: bool = False, remove_future: bool = False, 
 	fuzzy: bool = False, split: bool = False, sort: bool = True) -> list[Store]:
 	ans = []
-	if split:
-		args = re.split(",|，", args)
-	if type(args) in [int, str]:
-		args = [f"{args}"]
-	for a in args:
-		a = str(a).strip()
-		stores = StoreID(a, fuzzy = fuzzy) + StoreMatch(a, fuzzy = fuzzy)
-		for s in stores:
-			if s in ans:
-				continue
-			if remove_closed and (s.isClosed or s.isIntern):
-				continue
-			if remove_future and (s.isFuture or s.isIntern):
-				continue
-			ans.append(s)
+	match args, split:
+		case _, True:
+			args = re.split(",|，", args)
+		case list(), _:
+			args = [f"{a}" for a in args]
+		case _, _:
+			args = [f"{args}"]
+
+	for a in map(lambda s: s.strip(), args):
+		for stores in (StoreID(a, fuzzy = fuzzy), StoreMatch(a, fuzzy = fuzzy)):
+			for s in stores:
+				try:
+					assert s not in ans
+					assert not remove_closed or not s.isClosed and not s.isIntern
+					assert not remove_future or not s.isFuture and not s.isIntern
+				except AssertionError:
+					continue
+				ans.append(s)
 	if sort:
 		ans.sort()
 	return ans
