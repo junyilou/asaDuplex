@@ -177,7 +177,7 @@ class Store():
 		return f'<Store "{self.name}" ({self.sid}), "{self.slug}", "{self.rootPath}">'
 
 	def __hash__(self):
-		return hash(self.sid)
+		return hash(self.serial)
 
 	def __lt__(self, other):
 		return type(other) is type(self) & self.raw_store.sortkey < other.raw_store.sortkey
@@ -363,7 +363,7 @@ class Course(asyncObject):
 		return f'<Course {self.courseId} "{self.name}", "{self.slug}"{col}>'
 
 	def __hash__(self):
-		return hash(f"{self.rootPath}/{self.courseId}")
+		return hash((self.rootPath, self.courseId))
 
 	def __lt__(self, other):
 		return type(other) is type(self) and (self.courseId, self.rootPath) < (other.courseId, other.rootPath)
@@ -591,11 +591,11 @@ class Collection(asyncObject):
 		return f'<Collection "{self.name}", "{self.slug}", "{self.rootPath}">'
 
 	def __hash__(self):
-		return hash(f"{self.rootPath}/{self.slug}")
+		return hash((self.rootPath, self.slug))
 
 	def __eq__(self, other):
 		try:
-			return self.__hash__() == other.__hash__()
+			return self.serial == other.serial
 		except:
 			return False
 
