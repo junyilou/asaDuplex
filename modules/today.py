@@ -98,10 +98,8 @@ def _resolution(vids: list[str], direction: str = None) -> str:
 		return fil
 
 def _separate(text: str) -> str:
-	rep = {"\u200B": "", "\u200C": "", "\u2060": "", "\u00A0": " "}
-	for i, j in rep.items():
-		text = text.replace(i, j)
-	return text
+	rep = {0xa0: 0x20, 0x200b: None, 0x200c: None, 0x2060: None}
+	return text.translate(rep)
 
 def _validDates(ex: str, runtime: datetime) -> list[datetime]:
 	v = []
