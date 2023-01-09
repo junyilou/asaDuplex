@@ -218,7 +218,7 @@ def reloadJSON(filename: str = DEFAULTFILE) -> str:
 	STORES = {k: v for k, v in sorted(STORES.items(), key = lambda s: s[1])}
 	return infoJSON["update"]
 
-def storeReturn(args: list[str], remove_closed: bool = False, remove_future: bool = False, 
+def storeReturn(args: list[str], *, remove_closed: bool = False, remove_future: bool = False, 
 	fuzzy: bool = False, split: bool = False, sort: bool = True) -> list[Store]:
 	ans = []
 	match args, split:
