@@ -1,9 +1,10 @@
-import re
 import json
+import re
 from datetime import datetime
 from functools import total_ordering
 from modules.constants import allRegions, userAgent
 from modules.util import request
+from typing import Any, Optional
 
 STORES: dict[str, "Store"] = {}
 DEFAULTFILE = "storeInfo.json"
@@ -60,7 +61,7 @@ class Store:
 			self.slug: str = self.name.lower().replace(" ", "") if dct["website"] == "-" else dct["website"]
 			self.url: str = f"https://www.apple.com{self.region['storeURL']}/retail/{self.slug}"
 
-		self.keys: list[str] = sorted(set(filter(None, [
+		self.keys: list[str] = list(filter(None, [
 			*dct.get("alter", "").split(" "),
 			self.name, self.state, self.city, self.flag,
 			*self.altname,
@@ -69,10 +70,10 @@ class Store:
 			*self.region["altername"],
 			*(["招聘", "Hiring"] if self.isFuture else []),
 			*(["关闭", "Closed"] if self.isClosed else []),
-			*(["内部", "Internal"] if self.isIntern else [])])))
+			*(["内部", "Internal"] if self.isIntern else [])]))
 		self.keys += [k.replace(" ", "") for k in self.keys if " " in k]
 
-		self.sortkey: tuple[str] = (self.flag, self.state, self.sid)
+		self.sortkey: tuple[str, str, str] = (self.flag, self.state, self.sid)
 		self.raw: dict = dct
 
 	def telename(self, bold: bool = False, flag: bool = False, sid: bool = True) -> str:
@@ -82,7 +83,7 @@ class Store:
 	def nsoString(self, userLang: bool = True) -> str:
 		if not hasattr(self, "dates"):
 			return ""
-		
+
 		lang = {True: {"OPENED": "首次开幕于 {DATE}", "MOVED": "搬迁换址于 {DATE}", "CLOSED": "结束营业于 {DATE}", "FORMAT": "%Y 年 %-m 月 %-d 日"},
 			False: {"OPENED": "Opened on {DATE}", "MOVED": "Moved on {DATE}", "CLOSED": "Closed on {DATE}", "FORMAT": "%b %-d, %Y"}}
 		localize = lambda dt, userLang: datetime.strptime(dt, "%Y-%m-%d").strftime(lang[userLang]["FORMAT"])
@@ -112,14 +113,14 @@ class Store:
 	def __hash__(self):
 		return hash(self.sortkey)
 
-	async def detail(self, session = None, mode: str = "dict") -> dict:
+	async def detail(self, session = None, mode: str = "dict") -> Optional[str | dict[str, Any]]:
 		try:
 			assert hasattr(self, "slug")
 			url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={self.slug}&locale={self.region['rspLocale']}&sc=false"
 			if mode == "url":
 				return url
 
-			r = await request(session = session, url = url, headers = userAgent, 
+			r: dict[str, Any] = await request(session = session, url = url, headers = userAgent,
 				ensureAns = False, retryNum = 3, timeout = 5, mode = "json")
 			hours = {"isnso": r["hours"]["isNSO"], "regular": r["hours"]["hoursData"], "special": r["hours"]["specialHoursData"]}
 
@@ -141,14 +142,14 @@ class Store:
 	def dieter(self) -> str:
 		args = "crop=1"
 		'''
-			Akamai Image Server Refrence: 
+			Akamai Image Server Refrence:
 			https://developer.goacoustic.com/acoustic-content/docs/how-to-optimize-and-transform-your-images-automatically-with-akamai-1
 		'''
 		return f"https://rtlimages.apple.com/cmc/dieter/store/16_9/{self.rid}.png?{args}"
 
-	async def header(self, session = None) -> str:
+	async def header(self, session = None) -> Optional[str]:
 		try:
-			r = await request(session = session, url = self.dieter, headers = userAgent, ssl = False,
+			r: dict[str, Any] = await request(session = session, url = self.dieter, headers = userAgent, ssl = False,
 				method = "HEAD", allow_redirects = False, raise_for_status = True, mode = "head", timeout = 5)
 			return r['Last-Modified'][5:-4]
 		except:
@@ -180,20 +181,20 @@ def StoreMatch(keyword: str, fuzzy: bool = False) -> list[Store]:
 		stores = [i for i in STORES.values() if keyword.lower() in [k.lower() for k in i.keys]]
 	return stores
 
-def getStore(sid: int | str) -> Store:
+def getStore(sid: int | str) -> Optional[Store]:
 	f = f"{str(sid).upper().removeprefix('R'):0>3}"
 	return STORES.get(f, None)
 
-def nameReplace(rstores: [Store], bold: bool = False, number: bool = True, 
-	final: str = "name", userLang: list[bool] = [None]) -> list[str]:
+def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
+	final: str = "name", userLang: Optional[list[bool | None]] = [None]) -> list[str]:
 	if not rstores:
 		return []
 	stores = set(rstores)
 	levels = ["flag", "state", "city"]
 	results = []
-	bold = "*" if bold else ""
+	boldmark = "*" if bold else ""
 	userLang = [userLang] if not isinstance(userLang, list) else userLang
-	
+
 	for store in stores:
 		for level in levels:
 			ast = set([s for s in STORES.values() if getattr(s, level) == getattr(store, level) and s.isNormal])
@@ -205,7 +206,7 @@ def nameReplace(rstores: [Store], bold: bool = False, number: bool = True,
 				else:
 					attr = getattr(store, level)
 				num = f" ({len(ast)})" if number else ""
-				results.append((f"{bold}{attr}{bold}{num}", level))
+				results.append((f"{boldmark}{attr}{boldmark}{num}", level))
 	results = [s[0] for s in sorted(results, key = lambda k: (levels.index(k[1]), k[0]))]
 	results += [getattr(s, final) for s in stores]
 	return results
@@ -218,7 +219,7 @@ def reloadJSON(filename: str = DEFAULTFILE) -> str:
 	STORES = {k: v for k, v in sorted(STORES.items(), key = lambda s: s[1])}
 	return infoJSON["update"]
 
-def storeReturn(args: list[str], *, remove_closed: bool = False, remove_future: bool = False, 
+def storeReturn(args: str | list[str], *, remove_closed: bool = False, remove_future: bool = False,
 	fuzzy: bool = False, split: bool = False, sort: bool = True) -> list[Store]:
 	ans = []
 	match args, split:

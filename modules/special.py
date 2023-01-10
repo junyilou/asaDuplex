@@ -4,10 +4,10 @@ from datetime import date, datetime, timedelta
 from modules.constants import allRegions, userAgent
 from modules.util import request
 from random import choice
-from typing import AsyncGenerator
+from typing import AsyncGenerator, Optional
 from storeInfo import Store, StoreID
 
-COMMENTS: dict[str, dict[datetime, str]] = {}
+COMMENTS: dict[str, dict[date, str]] = {}
 SLEEPER = list(range(2, 16, 2))
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
@@ -21,14 +21,14 @@ def textConvert(dct: dict, userLang: bool = True) -> str:
 			return f'{opt} - {clt}'
 	return "未知时间" if userLang else "Unknown Hours"
 
-async def apu(session, store: Store, target: str, userLang: bool) -> AsyncGenerator[tuple[str, datetime, str], None]:
+async def apu(session, store: Store, target: str, userLang: bool) -> AsyncGenerator[tuple[str, date, str], None]:
 	retry = 3
 	baseURL = f"https://www.apple.com{store.region['shopURL']}"
 	url = f"{baseURL}/shop/fulfillment-messages"
-	referer = userAgent | {"Referer": f"{baseURL}/shop/product/{target}"}	
+	referer = userAgent | {"Referer": f"{baseURL}/shop/product/{target}"}
 	params = {"searchNearby": "true", "store": store.rid, "parts.0": target}
 
-	stores = []
+	stores: list[dict] = []
 	while retry:
 		try:
 			r = await request(session = session, url = url, headers = referer, timeout = 5,
@@ -40,9 +40,9 @@ async def apu(session, store: Store, target: str, userLang: bool) -> AsyncGenera
 			logging.debug(("等待 {SEC} 秒" if userLang else "Wait for {SEC} sec").format(SEC = (sec := choice(SLEEPER))))
 			await asyncio.sleep(sec)
 
-	for store in stores:
-		astore = store["storeNumber"].removeprefix("R")
-		for ind, holiday in enumerate(store["retailStore"]["storeHolidays"]):
+	for rstore in stores:
+		astore = rstore["storeNumber"].removeprefix("R")
+		for ind, holiday in enumerate(rstore["retailStore"]["storeHolidays"]):
 			sDay = datetime.strptime(f'2000 {holiday["date"]}', "%Y %b %d").date()
 			cDay = datetime(2000, (today := datetime.now().today()).month, today.day).date() - timedelta(weeks = 1)
 			sYear = today.year if sDay >= cDay else today.year + 1
@@ -58,13 +58,13 @@ async def comment(session, store: Store, userLang: bool = True) -> dict:
 		COMMENTS[astore][sDay] = sTxt
 	return COMMENTS
 
-async def speHours(sid: int | str, session = None, runtime: date = None, limit: int = 14, 
-	askComment: bool = True, userLang: bool = True) -> dict[str, dict[str, str]]:
+async def speHours(sid: int | str, session = None, runtime: Optional[date] = None, limit: int = 14,
+	askComment: bool = True, userLang: bool = True) -> list | dict[str, dict[str, str]]:
 	store = StoreID(sid)[0]
 	runtime = datetime.now().date() if runtime is None else runtime
 	try:
 		j = await store.detail(session = session, mode = "hours")
-		assert j
+		assert isinstance(j, dict)
 	except:
 		logging.getLogger(__name__).error(f"未能获得 {store.rid} 营业时间信息" if userLang else f"Failed getting store hours for {store.rid}")
 		return []
@@ -73,7 +73,7 @@ async def speHours(sid: int | str, session = None, runtime: date = None, limit: 
 	for regular in j["regular"]:
 		dayIndex = dayOfWeek.index(regular["name"])
 		regularHours[dayIndex] = textConvert(regular, userLang = userLang)
-	
+
 	specialHours, specialReasons = {}, {}
 	if j["special"] and askComment:
 		specialReasons = await comment(session = session, store = store, userLang = userLang)
