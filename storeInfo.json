@@ -1,5 +1,5 @@
 {
-  "update": "2023-01-05 08:00:39 GMT",
+  "update": "2023-01-11 06:40:13 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -4572,7 +4572,7 @@
     "city": "Lyon",
     "dates": "2012-04-04",
     "flag": "🇫🇷",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "06 Jan 2023 23:13:30",
     "name": "Confluence",
     "state": "Rhône",
     "timezone": "Europe/Paris",
@@ -6356,6 +6356,19 @@
       "MixC Shenzhen"
     ],
     "state": "广东",
+    "status": "future",
+    "timezone": "Asia/Shanghai"
+  },
+  "766": {
+    "alter": "Zhejiang Wenzhou 温州",
+    "city": "温州",
+    "flag": "🇨🇳",
+    "name": [
+      "Store in Wenzhou",
+      "温州万象城",
+      "MixC Wenzhou"
+    ],
+    "state": "浙江",
     "status": "future",
     "timezone": "Asia/Shanghai"
   },
