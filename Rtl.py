@@ -7,16 +7,22 @@ from base64 import b64encode
 from datetime import datetime, date, UTC
 
 from bot import chat_ids
-from storeInfo import DEFAULTFILE, StoreID
+from storeInfo import DEFAULTFILE, Store, StoreID
 from modules.constants import userAgent
 from modules.util import request, disMarkdown, setLogger, session_func
 from sdk_aliyun import async_post
 
+DUMMYDICT = {"name": "Store", "flag": "🇺🇸", "state": "California", "city": "Cupertino"}
 INVALIDDATE = datetime(2001, 5, 19)
 INVALIDREMOTE = [date(2021, 7, 13), date(2021, 8, 28), date(2021, 8, 29), date(2022, 1, 7)]
 
 async def down(session, sid, storejson, specialist, semaphore):
-	store = StoreID(sid)[0]
+	try:
+		store = StoreID(sid)[0]
+	except IndexError:
+		logging.warning(f"请求搜索 {sid} 零售店数据不存在")
+		sid = str(sid).upper().removeprefix('R')
+		store = Store(sid = sid, dct = DUMMYDICT)
 	if hasattr(store, "modified"):
 		saved = store.modified
 		savedDatetime = datetime.strptime(saved, "%d %b %Y %H:%M:%S")
@@ -47,7 +53,7 @@ async def down(session, sid, storejson, specialist, semaphore):
 		savename = f"Retail/{store.rid}_{remote.replace(' ', '').replace(':', '')}.png"
 
 		try:
-			r = await request(session = session, url = store.dieter, headers = userAgent, 
+			r = await request(session = session, url = store.dieter, headers = userAgent,
 				ssl = False, mode = "raw", ensureAns = False)
 			with open(savename, "wb") as w:
 				w.write(r)
@@ -61,7 +67,7 @@ async def down(session, sid, storejson, specialist, semaphore):
 		if saved:
 			info.insert(-1, f"*本地标签* {saved}")
 		info = "\n".join(info)
-	
+
 		if specialist != None:
 			toPop = str(store.iid)
 			_ = specialist.remove(toPop) if toPop in specialist else None

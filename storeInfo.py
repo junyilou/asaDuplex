@@ -16,8 +16,8 @@ class Store:
 			assert e in dct, f"key {e} not exist"
 
 		self.sid: str = f"{sid:0>3}"
-		self.rid: str = f"R{sid}"
-		self.iid: int = int(sid)
+		self.rid: str = f"R{self.sid}"
+		self.iid: int = int(self.sid)
 		self.flag: str = dct["flag"]
 
 		self.name: str = dct["name"]
