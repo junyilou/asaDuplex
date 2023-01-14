@@ -1,14 +1,15 @@
 import asyncio
 import json
 import logging
-from sys import argv
+from datetime import UTC, datetime
 from os.path import basename
-from datetime import datetime, UTC
+from sys import argv
+from typing import Optional, Union
 
 from bot import chat_ids
-from sdk_aliyun import async_post
 from modules.constants import allRegions, userAgent
-from modules.util import request, setLogger, disMarkdown, session_func
+from modules.util import disMarkdown, request, session_func, setLogger
+from sdk_aliyun import async_post
 
 API = {
 	"state": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/stateProvinceList",
@@ -16,57 +17,65 @@ API = {
 	"image": "https://www.apple.com/careers/images/retail/fy22/hero_hotspot/default@2x.png"
 }
 
-TASKS = []
-RESULTS = []
-FUTURES = {}
+TASKS: list[Union["Region", "State"]] = []
+RESULTS: list["Store"] = []
+FUTURES: dict[str, str] = {}
 
 class Store:
 
 	def __init__(self, **kwargs):
 		for k in ["state", "city", "sid", "name"]:
 			setattr(self, k, kwargs.get(k, None))
+		self.sid: str = kwargs["sid"]
+		self.name: str = kwargs["name"]
+		self.city: Optional[str] = kwargs.get("city", None)
+		self.state: "State" = kwargs["state"]
 		self.flag = self.state.flag
 		self.stateName = self.state.name
 		self.stateCode = self.state.code
 
 	def __repr__(self):
-		args = ["None" if i == None else i for i in [self.flag, self.stateName, self.sid, self.name]]
+		args = filter(None, [self.flag, self.stateName, self.sid, self.name])
 		return f'<Store: {", ".join(args)}>'
 
 	def __hash__(self):
-		return hash("Store" + self.sid)
+		return hash(("Store", self.sid))
 
 	def __eq__(self, other):
-		return self.__hash__() == other.__hash__()
+		return (type(self), hash(self)) == (type(other), hash(other))
 
-	def teleInfo(self):
-		city = f"{self.city}, " if self.city != None else f"{self.stateCode}: "
+	def teleInfo(self) -> str:
+		city = f"{self.city}, " if self.city is not None else f"{self.stateCode}: "
 		return f"*{self.flag} {city}{self.stateName}*\n{self.sid} - {self.name}"
 
 class State:
 
 	def __init__(self, **kwargs):
-		for k in ["region", "fieldID", "code", "name", "session", "semaphore"]:
-			setattr(self, k, kwargs.get(k, None))
+		self.region: "Region" = kwargs["region"]
+		self.fieldID: Optional[str] = kwargs.get("fieldID", None)
+		self.code: str = kwargs["code"]
+		self.name: str = kwargs["name"]
+		self.session = kwargs.get("session", None)
+		self.semaphore: Optional[asyncio.Semaphore] = kwargs.get("semaphore", None)
 		self.flag = self.region.flag
 		self.regionCode = self.region.code
 
 	def __repr__(self):
-		args = ["None" if i == None else i for i in [self.flag, self.code, self.name]]
+		args = filter(None, [self.flag, self.code, self.name])
 		return f'<State: {", ".join(args)}>'
 
 	def __hash__(self):
-		return hash("State" + self.code)
+		return hash(("State", self.code))
 
 	def __eq__(self, other):
-		return self.__hash__() == other.__hash__()
+		return (type(self), hash(self)) == (type(other), hash(other))
 
-	async def runner(self):
+	async def runner(self) -> None:
 		global TASKS, RESULTS
 
 		async with self.semaphore:
 			# logging.info(", ".join(["开始下载 province", str(self)]))
-			r = await request(session = self.session, ssl = False, headers = userAgent, 
+			r = await request(session = self.session, ssl = False, headers = userAgent,
 				timeout = 3, retryNum = 3, url = API["province"].format(JOBID = self.regionCode),
 				params = dict(searchField = "stateProvince", fieldValue = self.fieldID))
 
@@ -89,26 +98,26 @@ class State:
 class Region:
 
 	def __init__(self, **kwargs):
-		for k in ["flag", "session", "semaphore"]:
-			setattr(self, k, kwargs.get(k, None))
-		self.code = allRegions[self.flag]["jobCode"]
+		self.flag: str = kwargs["flag"]
+		self.session = kwargs.get("session", None)
+		self.semaphore: Optional[asyncio.Semaphore] = kwargs.get("semaphore", None)
+		self.code: str = allRegions[self.flag]["jobCode"]
 
 	def __repr__(self):
-		args = ["None" if i == None else i for i in [self.flag, self.code]]
-		return f'<Region: {", ".join(args)}>'
+		return f'<Region: {", ".join([self.flag, self.code])}>'
 
 	def __hash__(self):
-		return hash("Region" + self.flag)
+		return hash(("Region", self.flag))
 
 	def __eq__(self, other):
-		return self.__hash__() == other.__hash__()
+		return (type(self), hash(self)) == (type(other), hash(other))
 
-	async def runner(self):
+	async def runner(self) -> None:
 		global TASKS
 
 		async with self.semaphore:
 			logging.info(", ".join(["开始下载", str(self)]))
-			r = await request(session = self.session, ssl = False, headers = userAgent, 
+			r = await request(session = self.session, ssl = False, headers = userAgent,
 				timeout = 3, retryNum = 3, url = API["state"].format(JOBID = self.code))
 
 		try:
@@ -127,27 +136,29 @@ class Region:
 			return
 
 		for p in a["searchResults"]:
-			TASKS.append(State(region = self, fieldID = p["id"], code = p["code"], name = p["stateProvince"],
+			TASKS.append(State(
+				region = self, fieldID = p["id"], code = p["code"], name = p["stateProvince"],
 				session = self.session, semaphore = self.semaphore))
 
-async def entry(targets, session, check_cancel):
+async def entry(session, targets: list[str], check_cancel: bool):
 
 	with open("Retail/savedJobs.json") as r:
 		SAVED = eval(r.read())
-	
-	STORES = []
+
+	STORES: list[Store] = []
 	for flag in SAVED:
 		if flag == "update":
 			continue
 		for stateCode in SAVED[flag]:
 			if flag not in targets:
 				continue
-			stateName = None
+			stateName: str = ""
 			for store in SAVED[flag][stateCode]:
 				stateName = SAVED[flag][stateCode]["name"]
 				if store == "name":
 					continue
-				STORES.append(Store(state = State(region = Region(flag = flag), name = stateName, code = stateCode), 
+				STORES.append(Store(
+					state = State(region = Region(flag = flag), name = stateName, code = stateCode),
 					sid = store, name = SAVED[flag][stateCode][store]))
 
 	global TASKS
@@ -224,7 +235,7 @@ async def entry(targets, session, check_cancel):
 			json.dump(SAVED, w, ensure_ascii = False, indent = 2, sort_keys = True)
 
 @session_func
-async def main(session, targets, futures, check_cancel):
+async def main(session, targets: list[str], futures: dict[str, str], check_cancel: bool):
 	FUTURE = {
 		"filters": {
 			"keyword": ["specialist"],
@@ -236,7 +247,7 @@ async def main(session, targets, futures, check_cancel):
 	for flag, pipe in futures.items():
 		FUTURE["filters"]["postingpostLocation"] = [pipe]
 		try:
-			r = await request(session = session, url = "https://jobs.apple.com/api/role/search", 
+			r = await request(session = session, url = "https://jobs.apple.com/api/role/search",
 				method = "POST", json = FUTURE, mode = "json", ssl = False)
 			assert "searchResults" in r
 		except:
@@ -248,7 +259,7 @@ async def main(session, targets, futures, check_cancel):
 			allRegions[flag] = allRegions.get(flag, {}) | {"jobCode": reference["positionId"]}
 			targets.append(flag)
 
-	await entry(targets, session, check_cancel)
+	await entry(session, targets, check_cancel)
 
 setLogger(logging.INFO, basename(__file__))
 logging.info("程序启动")
