@@ -7,9 +7,9 @@ from sys import argv
 from typing import Optional, Union
 
 from bot import chat_ids
+from botpost import async_post
 from modules.constants import allRegions, userAgent
 from modules.util import disMarkdown, request, session_func, setLogger
-from sdk_aliyun import async_post
 
 API = {
 	"state": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/stateProvinceList",

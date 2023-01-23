@@ -1,5 +1,2 @@
-bot.py
-.DS_Store
-__pycache__/
-Retail/.DS_Store
-sdk_aliyun.py
+*.DS_Store
+*__pycache__/

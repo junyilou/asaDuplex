@@ -10,7 +10,7 @@ from storeInfo import storeReturn
 from modules.today import Store, Sitemap, Collection, teleinfo
 from modules.util import setLogger, sortOD
 from bot import chat_ids
-from sdk_aliyun import async_post as raw_post
+from botpost import async_post as raw_post
 
 TODAYARGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼", "🇯🇵", "🇰🇷", "🇸🇬", "🇹🇭"]
 
@@ -47,7 +47,7 @@ async def main(mode):
 			tasks = [Sitemap(rootPath = i).getObjects() for i in args["sitemap"]]
 		case _:
 			return
-	
+
 	courses = {}
 	results = await asyncio.gather(*tasks, return_exceptions = True)
 	results = rec(results, [])
@@ -109,7 +109,7 @@ if __name__ == "__main__":
 	append = False
 	savedID = {}
 
-	with open("Retail/savedEvent.json") as m: 
+	with open("Retail/savedEvent.json") as m:
 		saved = json.loads(m.read())
 		for m in saved:
 			savedID[m] = [i for i in saved[m]]

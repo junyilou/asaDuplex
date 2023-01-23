@@ -10,7 +10,7 @@ from bot import chat_ids
 from storeInfo import DEFAULTFILE, Store, StoreID
 from modules.constants import userAgent
 from modules.util import request, disMarkdown, setLogger, session_func
-from sdk_aliyun import async_post
+from botpost import async_post
 
 DUMMYDICT = {"name": "Store", "flag": "🇺🇸", "state": "California", "city": "Cupertino"}
 INVALIDDATE = datetime(2001, 5, 19)

@@ -8,7 +8,7 @@ from storeInfo import storeReturn, Store
 from modules.util import session_func, setLogger, sortOD
 from modules.special import speHours, comment
 from modules.constants import DIFFHTML
-from sdk_aliyun import async_post
+from botpost import async_post
 from bot import chat_ids
 
 INCLUDE = "🇨🇳, 🇯🇵"
@@ -45,11 +45,11 @@ LANG = LOGSTRING[USERLANG]
 
 async def entry(session, semaphore, store, saved):
 	async with semaphore:
-		special = await speHours(session = session, sid = store.sid, 
+		special = await speHours(session = session, sid = store.sid,
 			runtime = TODAY, userLang = USERLANG == "ZH")
 	if special == []:
 		return {"hours": saved, "diff": []}
-	
+
 	diff = []
 	hours = saved | {"storename": store.name} | special
 
@@ -80,7 +80,7 @@ async def entry(session, semaphore, store, saved):
 async def main(session):
 	args = dict(split = True, remove_closed = True, remove_future = True)
 	pref = dict(ensure_ascii = False, indent = 2)
-	
+
 	includes = storeReturn(INCLUDE, **args)
 	excludes = storeReturn(EXCLUDE, **args)
 	stores = [i for i in includes if i not in excludes]

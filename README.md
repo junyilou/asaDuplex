@@ -39,11 +39,11 @@ from modules.util import sync
 许多代码设计为可以和本地记录的信息进行比较，在有新结果时推送通知。在这些代码的顶部，可能有：
 
 ```python
-from sdk_aliyun import async_post
 from bot import tokens
+from botpost import async_post
 ```
 
-这是我个人对结果推送的实现方式，`sdk_aliyun` 和 `bot` 并未在此库中给出。代码运行到输出阶段会产生一个包含文本、图片、链接等内容的字典，您可以通过编写适合您自己的推送结果的方式以获取代码结果，例如将内容推送至 Telegram Channel、微信公众号、其他第三方 iOS 推送 app 等。
+这是我个人对结果推送的实现方式，`bot` 和 `botpost` 并未在此库中给出。代码运行到输出阶段会产生一个包含文本、图片、链接等内容的字典，您可以通过编写适合您自己的推送结果的方式以获取代码结果，例如将内容推送至 Telegram Channel、微信公众号、其他第三方 iOS 推送 app 等。
 
 
 
