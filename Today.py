@@ -20,7 +20,7 @@ def rec(lst, rst):
 			case list():
 				rec(i, rst)
 			case Exception():
-				logging.error(str(i.args) if i.args else str(i))
+				logging.error(f"{i!r}")
 			case _:
 				if i not in rst:
 					rst.append(i)
