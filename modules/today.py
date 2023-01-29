@@ -485,6 +485,7 @@ class Schedule(asyncObject):
 		self.serial: dict[str, str] = dict(slug = self.slug, scheduleId = scheduleId, rootPath = self.rootPath)
 
 		self.store: Store = store
+		self.raw_store: Raw_Store = self.store.raw_store
 		self.timezone: str = store.timezone
 		try:
 			self.tzinfo: Optional[ZoneInfo] = ZoneInfo(self.timezone)
@@ -779,6 +780,7 @@ lang = {
 		"JOINT": "、",
 		"COURSE": "课程",
 		"COLLECTION": "系列",
+		"STORES": "家",
 		"VIRTUAL": "线上活动",
 		"COLLAB_WITH": "*合作机构*",
 		"DOWNLOAD_IMAGE": "下载图片",
@@ -788,10 +790,9 @@ lang = {
 		"INTRO_COURSE": "*课程简介*",
 		"SIGN_UP": "预约课程",
 		"GENERAL_STORE": "Apple Store 零售店",
-		"TOO_MANY_STORE": "{COUNT} 家 Apple Store 零售店",
 		"IN_COLLECTION": "{NAME} 系列课程\n",
 		"START_FROM": "{START} – {END}{TZTEXT}",
-		"START_FROM_ALL": "{START} – {END}{TZTEXT} 起，共 {AMOUNT} 次排课",
+		"START_FROM_ALL": "{START} – {END}{TZTEXT} 起",
 		"GENERAL_TIMING": "尚无可确定的课程时间",
 		"SIGN_UP_ALL": "所有场次均可预约",
 		"SIGN_UP_NONE": "所有场次均不可预约",
@@ -811,6 +812,7 @@ lang = {
 		"JOINT": ", ",
 		"COURSE": "Course",
 		"COLLECTION": "Collection",
+		"STORES": "Store{PLURAL}",
 		"VIRTUAL": "Virtual Event",
 		"COLLAB_WITH": "*In collaboration with*",
 		"LEARN_COLLECTION": "Learn More",
@@ -819,11 +821,10 @@ lang = {
 		"INTRO_COLLECTION": "*Description*",
 		"INTRO_COURSE": "*Description*",
 		"SIGN_UP": "Sign Up",
-		"GENERAL_STORE": "Apple Store",
-		"TOO_MANY_STORE": "{COUNT} Apple Store{PLURAL}",
+		"GENERAL_STORE": "Apple Retail Store",
 		"IN_COLLECTION": "In Collection {NAME}\n",
 		"START_FROM": "{START} – {END}{TZTEXT}",
-		"START_FROM_ALL": "{AMOUNT} Schedule{PLURAL}, starting {START} – {END}{TZTEXT}",
+		"START_FROM_ALL": "Starting {START} – {END}{TZTEXT}",
 		"GENERAL_TIMING": "Indeterminable Time",
 		"SIGN_UP_ALL": "All available for sign up",
 		"SIGN_UP_NONE": "Not available for sign up",
@@ -840,9 +841,10 @@ lang = {
 }
 
 def teleinfo(course: Optional[Course] = None, schedules: list[Schedule] = [], collection: Optional[Collection] = None,
-	mode: str = "new", userLang: bool = True, prior: Optional[list[str]] = None) -> tuple[str, str, list[list[list[str]]]]:
+	mode: str = "new", userLang: bool = True, prior: list[str] = []) -> tuple[str, str, list[list[list[str]]]]:
 	runtime = datetime.now()
 	offset = runtime.astimezone().utcoffset().total_seconds() / 3600
+	priorlist = prior + list(allRegions)
 
 	if collection is not None:
 		text = disMarkdown(lang[userLang]["MAIN1"].format(
@@ -865,19 +867,20 @@ def teleinfo(course: Optional[Course] = None, schedules: list[Schedule] = [], co
 		return text, image, keyboard
 
 	assert course is not None
+	schedules = sorted(set(schedules))
+
 	if course.virtual:
 		courseStore = lang[userLang]["VIRTUAL"]
-	elif schedules != []:
-		schedules = sorted(set(schedules))
-		availableStore = sorted(set([i.store.raw_store for i in schedules]))
-		textStore = nameReplace(availableStore, userLang = [None, userLang], number = False)
-		courseStore = lang[userLang]["JOINT"].join(textStore)
-		if len(courseStore) > 200:
-			courseStore = lang[userLang]["TOO_MANY_STORE"].format(
-				COUNT = (lenAvail := len(availableStore)),
-				PLURAL = "s" if lenAvail > 1 else "")
-	else:
+	elif schedules == []:
 		courseStore = lang[userLang]["GENERAL_STORE"]
+	elif len(schedules) == 1:
+		courseStore = schedules[0].raw_store.telename(sid = False)
+	else:
+		storeSets = set([i.raw_store for i in schedules])
+		storeCounts = {r: len(list(filter(lambda s: s.flag == r, storeSets))) for r in priorlist}
+		textStore = [f"{k} ({v} {lang[userLang]['STORES'].format(PLURAL = 's' if v > 1 else '')})"
+			for k, v in storeCounts.items() if v]
+		courseStore = lang[userLang]["JOINT"].join(textStore)
 
 	if course.collection is None:
 		specialPrefix = ""
@@ -886,37 +889,26 @@ def teleinfo(course: Optional[Course] = None, schedules: list[Schedule] = [], co
 	else:
 		specialPrefix = lang[userLang]["IN_COLLECTION"].format(NAME = course.collection)
 
-	schedules.sort()
 	if schedules != []:
-		firstSchedule = schedules[0]
-		priorSchedule = firstSchedule if prior is None else \
-			sorted(schedules, key = lambda k: prior.index(k.flag) if k.flag in prior else len(prior))[0]
+		priorSchedule = schedules[0] if prior == [] else sorted(
+			schedules, key = lambda k: priorlist.index(k.flag))[0]
 
-		if isinstance(firstSchedule.timeStart, datetime):
-			delta = firstSchedule.timeStart.utcoffset().total_seconds() / 3600
-			tzText = "" if delta == offset else (" " + timezoneText(firstSchedule.timeStart))
-		else:
-			tzText = ""
+		tzText = ""
+		if isinstance(priorSchedule.timeStart, datetime):
+			if priorSchedule.timeStart.utcoffset().total_seconds() / 3600 != offset:
+				tzText = " " + timezoneText(priorSchedule.timeStart)
 
-		if (lenSchedules := len(schedules)) > 1:
-			timing = lang[userLang]["START_FROM_ALL"].format(
-				START = firstSchedule.datetimeStart(form = lang[userLang]["FORMAT_START"]),
-				END = firstSchedule.datetimeEnd(form = lang[userLang]["FORMAT_END"]),
-				TZTEXT = tzText, AMOUNT = len(schedules), PLURAL = "s" if lenSchedules > 1 else "")
-		else:
-			timing = lang[userLang]["START_FROM"].format(
-				START = firstSchedule.datetimeStart(form = lang[userLang]["FORMAT_START"]),
-				END = firstSchedule.datetimeEnd(form = lang[userLang]["FORMAT_END"]), TZTEXT = tzText)
-
+		timing = lang[userLang]["START_FROM" if len(schedules) == 1 else "START_FROM_ALL"].format(
+			START = priorSchedule.datetimeStart(form = lang[userLang]["FORMAT_START"]),
+			END = priorSchedule.datetimeEnd(form = lang[userLang]["FORMAT_END"]), TZTEXT = tzText)
 		keyboard = [[[lang[userLang]["SIGN_UP"], priorSchedule.url]]]
 	else:
 		try:
 			date = re.findall(_VALIDDATES, course.slug)[0][1]
 			vals = _validDates(date, runtime)
-			valid = f' {lang[userLang]["OR"]} '.join([i.strftime(lang[userLang]["FORMAT_DATE"]) for i in vals])
+			timing = f' {lang[userLang]["OR"]} '.join([i.strftime(lang[userLang]["FORMAT_DATE"]) for i in vals])
 		except IndexError:
-			valid = ""
-		timing = lang[userLang]["GENERAL_TIMING"] if valid == "" else valid
+			timing = lang[userLang]["GENERAL_TIMING"]
 		keyboard = [[[lang[userLang]["LEARN_COURSE"], course.url]]]
 
 	keyboard[0].append([lang[userLang]["DOWNLOAD_IMAGE"], course.images["landscape"]])
