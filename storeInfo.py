@@ -100,6 +100,9 @@ class Store:
 		status = [f"({s[2:].capitalize()})" for s in ["isClosed", "isFuture", "isIntern"] if getattr(self, s)]
 		return " ".join(name + status)
 
+	def __str__(self):
+		return self.telename(sid = False)
+
 	def __gt__(self, other):
 		if type(other) is not type(self):
 			return NotImplemented
@@ -159,11 +162,11 @@ def StoreID(sid: int | str, fuzzy: bool = False) -> list[Store]:
 	try:
 		assert sid
 		if fuzzy:
-			sid = str(sid).upper().removeprefix("R")
+			sid = sidify(sid, fill = False)
 			assert sid.isdigit()
 			stores = [i for i in STORES.values() if sid in i.sid]
 		else:
-			sid = f"{str(sid).upper().removeprefix('R'):0>3}"
+			sid = sidify(sid)
 			assert sid.isdigit()
 			stores = [STORES[sid]] if sid in STORES else []
 	except AssertionError:
@@ -182,8 +185,7 @@ def StoreMatch(keyword: str, fuzzy: bool = False) -> list[Store]:
 	return stores
 
 def getStore(sid: int | str) -> Optional[Store]:
-	f = f"{str(sid).upper().removeprefix('R'):0>3}"
-	return STORES.get(f, None)
+	return STORES.get(sidify(sid), None)
 
 def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 	final: str = "name", userLang: Optional[list[bool | None]] = [None]) -> list[str]:
@@ -215,9 +217,13 @@ def reloadJSON(filename: str = DEFAULTFILE) -> str:
 	global STORES
 	with open(filename) as r:
 		infoJSON = json.load(r)
-	STORES = {sid: Store(sid = sid, dct = dct) for sid, dct in infoJSON.items() if sid != "update"}
-	STORES = {k: v for k, v in sorted(STORES.items(), key = lambda s: s[1])}
-	return infoJSON["update"]
+	update = infoJSON.pop("update")
+	STORES = {sid: Store(sid = sid, dct = dct) for sid, dct in infoJSON.items()}
+	infoJSON["update"] = update
+	return update
+
+def sidify(sid: int | str, *, R: bool = False, fill: bool = True) -> str:
+	return f"{'R' if R and fill else ''}{str(sid).upper().removeprefix('R'):{'0>3' if fill else ''}}"
 
 def storeReturn(args: str | list[str], *, remove_closed: bool = False, remove_future: bool = False,
 	fuzzy: bool = False, split: bool = False, sort: bool = True) -> list[Store]:

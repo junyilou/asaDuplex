@@ -3,8 +3,8 @@ import asyncio
 import json
 import logging
 from datetime import datetime
-from typing import Awaitable, Callable, Optional
 from os.path import isdir
+from typing import Awaitable, Callable, Optional
 
 def bitsize(integer: int | float, width: int = 8, precision: int = 2, ks: float = 1e3) -> str:
 	order = [" B", "KB", "MB", "GB", "TB"]

@@ -7,8 +7,7 @@ import re
 from datetime import datetime
 from modules.constants import allRegions, userAgent
 from modules.util import disMarkdown, request, timezoneText
-from storeInfo import StoreID, nameReplace, storeReturn
-from storeInfo import Store as Raw_Store
+from storeInfo import Store as Raw_Store, getStore as getRaw_Store, storeReturn
 from typing import Any, Optional
 from zoneinfo import ZoneInfo
 
@@ -150,7 +149,7 @@ class Store():
 		if raw:
 			self.name: str = raw["name"]
 			self.sid: str = raw["storeNum"]
-			self.raw_store: Raw_Store = StoreID(self.sid)[0]
+			self.raw_store: Raw_Store = getRaw_Store(self.sid)
 			self.timezone: str = raw["timezone"]["name"]
 			self.slug: str = raw["slug"]
 			self.rootPath: str = rootPath or self.raw_store.region["rootPath"]
@@ -159,7 +158,7 @@ class Store():
 				else f"https://www.apple.com.cn{raw['path']}"
 			self.coord: list[float] = [raw["lat"], raw["long"]]
 		elif sid or store:
-			self.raw_store: Raw_Store = store or StoreID(sid)[0]
+			self.raw_store: Raw_Store = store or getRaw_Store(self.sid)
 			self.sid: str = self.raw_store.rid
 			self.name: str = self.raw_store.name
 			self.slug: str = self.raw_store.slug

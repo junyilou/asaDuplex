@@ -1,16 +1,16 @@
-import os
-import sys
+import asyncio
 import json
 import logging
-import asyncio
+import os
+import sys
 from base64 import b64encode
 from datetime import datetime, date, UTC
 
 from bot import chat_ids
-from storeInfo import DEFAULTFILE, Store, StoreID
-from modules.constants import userAgent
-from modules.util import request, disMarkdown, setLogger, session_func
 from botpost import async_post
+from modules.constants import userAgent
+from modules.util import disMarkdown, request, session_func, setLogger
+from storeInfo import DEFAULTFILE, Store, getStore, sidify
 
 DUMMYDICT = {"name": "Store", "flag": "🇺🇸", "state": "California", "city": "Cupertino"}
 INVALIDDATE = datetime(2001, 5, 19)
@@ -18,16 +18,15 @@ INVALIDREMOTE = [date(2021, 7, 13), date(2021, 8, 28), date(2021, 8, 29), date(2
 
 async def down(session, sid, storejson, specialist, semaphore):
 	try:
-		store = StoreID(sid)[0]
-	except IndexError:
+		store = getStore(sid)
+		assert store is not None
+	except AssertionError:
 		logging.warning(f"请求搜索 {sid} 零售店数据不存在")
-		sid = str(sid).upper().removeprefix('R')
-		store = Store(sid = sid, dct = DUMMYDICT)
+		store = Store(sid = sidify(sid), dct = DUMMYDICT)
+	saved = savedDatetime = None
 	if hasattr(store, "modified"):
 		saved = store.modified
 		savedDatetime = datetime.strptime(saved, "%d %b %Y %H:%M:%S")
-	else:
-		saved = savedDatetime = None
 	try:
 		async with semaphore:
 			remote = await store.header(session = session)

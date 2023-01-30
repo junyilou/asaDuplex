@@ -5,7 +5,7 @@ from modules.constants import allRegions, userAgent
 from modules.util import request
 from random import choice
 from typing import AsyncGenerator, Optional
-from storeInfo import Store, StoreID
+from storeInfo import Store, getStore
 
 COMMENTS: dict[str, dict[date, str]] = {}
 SLEEPER = list(range(2, 16, 2))
@@ -60,7 +60,8 @@ async def comment(session, store: Store, userLang: bool = True) -> dict:
 
 async def speHours(sid: int | str, session = None, runtime: Optional[date] = None, limit: int = 14,
 	askComment: bool = True, userLang: bool = True) -> list | dict[str, dict[str, str]]:
-	store = StoreID(sid)[0]
+	store = getStore(sid)
+	assert store is not None, f"没有零售店数据: {sid}" if userLang else f"No such store: {sid}"
 	runtime = datetime.now().date() if runtime is None else runtime
 	try:
 		j = await store.detail(session = session, mode = "hours")

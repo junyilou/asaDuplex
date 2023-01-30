@@ -1,16 +1,15 @@
-import re
-import json
 import asyncio
+import json
 import logging
-from datetime import datetime, UTC
-from sys import argv
+from datetime import UTC, datetime
 from os.path import basename
+from sys import argv
 
-from storeInfo import storeReturn
-from modules.today import Store, Sitemap, Collection, teleinfo
-from modules.util import setLogger, sortOD
 from bot import chat_ids
 from botpost import async_post as raw_post
+from modules.today import Collection, Sitemap, Store, teleinfo
+from modules.util import setLogger, sortOD
+from storeInfo import storeReturn
 
 TODAYARGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼", "🇯🇵", "🇰🇷", "🇸🇬", "🇹🇭"]
 
