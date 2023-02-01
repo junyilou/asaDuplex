@@ -1,13 +1,14 @@
 import aiohttp
 import asyncio
 import atexit
+import itertools
 import json
 import re
 
 from datetime import datetime
 from modules.constants import allRegions, userAgent
 from modules.util import disMarkdown, request, timezoneText
-from storeInfo import Store as Raw_Store, getStore as getRaw_Store, storeReturn
+from storeInfo import Store as Raw_Store, getStore as getRaw_Store, sidify, storeReturn
 from typing import Any, Optional
 from zoneinfo import ZoneInfo
 
@@ -157,8 +158,9 @@ class Store():
 			self.url: str = f"https://www.apple.com{raw['path']}" if self.rootPath != "/cn" \
 				else f"https://www.apple.com.cn{raw['path']}"
 			self.coord: list[float] = [raw["lat"], raw["long"]]
-		elif sid or store:
-			self.raw_store: Raw_Store = store or getRaw_Store(self.sid)
+		else:
+			self.raw_store: Raw_Store = store or getRaw_Store(sid)
+			assert self.raw_store is not None, f"本地数据库中无法匹配关键字 {sid!r}"
 			self.sid: str = self.raw_store.rid
 			self.name: str = self.raw_store.name
 			self.slug: str = self.raw_store.slug
@@ -252,7 +254,7 @@ class Store():
 
 def getStore(sid: int | str, raw: Optional[dict] = None, store: Optional[Raw_Store] = None, rootPath: Optional[str] = None) -> Store:
 	global savedToday
-	sid = f"R{str(sid).removeprefix('R'):0>3}"
+	sid = "R" + sidify(sid)
 	if sid in savedToday["Store"] and raw is not None:
 		get = Store(raw = raw, rootPath = rootPath)
 		savedToday["Store"][sid] = get
@@ -416,12 +418,13 @@ class Course(asyncObject):
 							talents = raw["talents"], fuzzy = False))))
 		return [t.result() for t in tasks]
 
-	async def getRootSchedules(self, rootPath: Optional[str] = None) -> list[list["Schedule"]]:
+	async def getRootSchedules(self, rootPath: Optional[str] = None) -> list["Schedule"]:
 		rootPath = rootPath or self.rootPath
 		stores = storeReturn(todayNation[rootPath], remove_closed = True, remove_future = True)
 		semaphore = asyncio.Semaphore(_SEMAPHORE_LIMIT)
-		tasks = [self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores]
-		return await asyncio.gather(*tasks, return_exceptions = True)
+		tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores)
+		results = await asyncio.gather(*tasks, return_exceptions = True)
+		return sorted(itertools.chain.from_iterable(results))
 
 async def getCourse(courseId: Optional[int | str] = None, raw: Optional[dict] = None, rootPath: Optional[str] = None, slug: Optional[str] = None,
 	moreAbout: Optional[list | dict] = None, talents: Optional[list[dict]] = None, fuzzy: bool = True, stores: dict[str, dict] = {}) -> Course:
@@ -643,21 +646,17 @@ class Collection(asyncObject):
 							moreAbout = [m for m in raw["heroGallery"] if m["heroType"] == "TAG"], fuzzy = False))))
 		return [t.result() for t in tasks]
 
-	async def getRootSchedules(self, rootPath: Optional[str] = None) -> list[list[Schedule]]:
+	async def getRootSchedules(self, rootPath: Optional[str] = None) -> list[Schedule]:
 		rootPath = rootPath or self.rootPath
 		stores = storeReturn(todayNation[rootPath], remove_closed = True, remove_future = True)
 		semaphore = asyncio.Semaphore(_SEMAPHORE_LIMIT)
-		tasks = [self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores]
-		return await asyncio.gather(*tasks, return_exceptions = True)
+		tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores)
+		results = await asyncio.gather(*tasks, return_exceptions = True)
+		return sorted(itertools.chain.from_iterable(results))
 
 	async def getCourses(self, rootPath: Optional[str] = None) -> list[Course]:
-		courses = []
 		schedules = await self.getRootSchedules(rootPath = rootPath)
-		for store in schedules:
-			for schedule in store:
-				if schedule.course not in courses:
-					courses.append(schedule.course)
-		return courses
+		return sorted(set((schedule.course for schedule in schedules)))
 
 async def getCollection(slug: str, rootPath: Optional[str] = None) -> Collection:
 	global savedToday
