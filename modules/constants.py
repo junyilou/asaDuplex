@@ -246,6 +246,24 @@ allRegions = {
     "shopURL": "/fr",
     "storeURL": "/fr"
   },
+  "🇬🇧": {
+    "abbr": "GB",
+    "altername": [
+      "UK",
+      "Great Britain",
+      "大英帝国",
+      "大英帝國"
+    ],
+    "jobCode": "114438145",
+    "mobileApp": "e/uk",
+    "name": "英国",
+    "nameEng": "United Kingdom",
+    "partSample": "ZM",
+    "rootPath": "/uk",
+    "rspLocale": "en_GB",
+    "shopURL": "/uk",
+    "storeURL": "/uk"
+  },
   "🇭🇰": {
     "abbr": "HK",
     "altername": [
@@ -459,24 +477,6 @@ allRegions = {
     "rspLocale": "zh_TW",
     "shopURL": "/tw",
     "storeURL": "/tw"
-  },
-  "🇬🇧": {
-    "abbr": "UK",
-    "altername": [
-      "GB",
-      "Great Britain",
-      "大英帝国",
-      "大英帝國"
-    ],
-    "jobCode": "114438145",
-    "mobileApp": "e/uk",
-    "name": "英国",
-    "nameEng": "United Kingdom",
-    "partSample": "ZM",
-    "rootPath": "/uk",
-    "rspLocale": "en_GB",
-    "shopURL": "/uk",
-    "storeURL": "/uk"
   },
   "🇺🇸": {
     "abbr": "US",
