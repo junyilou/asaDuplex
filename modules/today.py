@@ -254,7 +254,7 @@ class Store():
 
 def getStore(sid: int | str, raw: Optional[dict] = None, store: Optional[Raw_Store] = None, rootPath: Optional[str] = None) -> Store:
 	global savedToday
-	sid = "R" + sidify(sid)
+	sid = sidify(sid, R = True)
 	if sid in savedToday["Store"] and raw is not None:
 		get = Store(raw = raw, rootPath = rootPath)
 		savedToday["Store"][sid] = get
