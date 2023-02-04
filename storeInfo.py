@@ -230,13 +230,13 @@ def storeReturn(args: str | list[str], *, remove_closed: bool = False, remove_fu
 	ans = []
 	match args, split:
 		case str(), True:
-			args = re.split(",|，", args)
+			splits = re.split(",|，", args)
 		case list(), False:
-			pass
+			splits = args
 		case _, _:
-			args = [args]
+			splits = [args]
 
-	for a in map(lambda s: str(s).strip(), args):
+	for a in map(lambda s: str(s).strip(), splits):
 		for stores in (StoreID(a, fuzzy = fuzzy), StoreMatch(a, fuzzy = fuzzy)):
 			for s in stores:
 				try:

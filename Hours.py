@@ -1,22 +1,24 @@
-import os
 import asyncio
 import json
 import logging
+import os
 from datetime import datetime
+from typing import Any
 
-from storeInfo import storeReturn, Store
-from modules.util import session_func, setLogger, sortOD
-from modules.special import speHours, comment
-from modules.constants import DIFFHTML
-from botpost import async_post
 from bot import chat_ids
+from botpost import async_post
+from modules.util import SemaphoreType, SessionType, session_func, setLogger, sortOD
+from modules.special import speHours
+from modules.constants import DIFFHTML
+from storeInfo import Store, storeReturn
 
 INCLUDE = "🇨🇳, 🇯🇵"
 EXCLUDE = "609"
 WORKFILE = "Retail/storeHours.json"
 USERLANG = "ZH"
 
-TODAY = (RUNTIME := datetime.now()).date()
+RUNTIME = datetime.now()
+TODAY = RUNTIME.date()
 LOGSTRING = {
 	"ZH": {
 		"START": "程序启动",
@@ -27,8 +29,7 @@ LOGSTRING = {
 		"WRITE": "写入新的 storeHours.json",
 		"NODIFF": "没有发现 storeHours 文件更新",
 		"DIFFGEN": "已生成对比文件 storeHours.html",
-		"DIFFCONTENT": "Apple Store 特别营业时间\n生成于 {RUNTIME}\n\n变化:\n{DIFF}\n\n日历:\n{CALENDAR}\n\n原始 JSON:\n{JSON}"
-	},
+		"DIFFCONTENT": "Apple Store 特别营业时间\n生成于 {RUNTIME}\n\n变化:\n{DIFF}\n\n日历:\n{CALENDAR}\n\n原始 JSON:\n{JSON}"},
 	"EN": {
 		"START": "Program Started",
 		"END": "Program Ended",
@@ -38,29 +39,29 @@ LOGSTRING = {
 		"WRITE": "Generating new storeHours.json",
 		"NODIFF": "No updates found",
 		"DIFFGEN": "DIFF storeHours.html generated",
-		"DIFFCONTENT": "Apple Store Special Hours\nGenerated {RUNTIME}\n\nChanges:\n{DIFF}\n\nCalendar:\n{CALENDAR}\n\nRaw JSON:\n{JSON}"
-	}
-}
+		"DIFFCONTENT": "Apple Store Special Hours\nGenerated {RUNTIME}\n\nChanges:\n{DIFF}\n\nCalendar:\n{CALENDAR}\n\nRaw JSON:\n{JSON}"}}
 LANG = LOGSTRING[USERLANG]
 
-async def entry(session, semaphore, store, saved):
+async def entry(session: SessionType, semaphore: SemaphoreType,
+	store: Store, saved: dict[str, dict[str, str]]) -> dict[str, Any]:
 	async with semaphore:
 		special = await speHours(session = session, sid = store.sid,
 			runtime = TODAY, userLang = USERLANG == "ZH")
 	if special == []:
 		return {"hours": saved, "diff": []}
+	assert isinstance(special, dict)
 
 	diff = []
 	hours = saved | {"storename": store.name} | special
 
-	for date in special:
-		spe = special[date]["special"]
+	for date, detail in special.items():
+		spe = detail["special"]
 		if date not in saved:
 			diff.append(LANG["NEW"].format(DATE = date, HOURS = spe))
 		elif (svd := saved[date]["special"]) != spe:
 			diff.append(LANG["CHANGE"].format(DATE = date, HOURS1 = svd, HOURS2 = spe))
 
-	for date in saved:
+	for date, detail in saved.items():
 		if date == "storename":
 			continue
 		dateobj = datetime.strptime(date, '%Y-%m-%d').date()
@@ -69,7 +70,7 @@ async def entry(session, semaphore, store, saved):
 			continue
 		if date not in special:
 			hours.pop(date)
-			diff.append(LANG["CANCEL"].format(DATE = date, HOURS = saved[date]["special"]))
+			diff.append(LANG["CANCEL"].format(DATE = date, HOURS = detail["special"]))
 
 	if diff:
 		logging.info(f"[{store.telename(sid = False)}] " + ", ".join([i.lstrip() for i in diff]))
@@ -77,7 +78,7 @@ async def entry(session, semaphore, store, saved):
 	return {"hours": hours, "diff": diff}
 
 @session_func
-async def main(session):
+async def main(session: SessionType) -> None:
 	args = dict(split = True, remove_closed = True, remove_future = True)
 	pref = dict(ensure_ascii = False, indent = 2)
 
@@ -87,7 +88,10 @@ async def main(session):
 
 	if os.path.isfile(WORKFILE):
 		with open(WORKFILE) as o:
-			saved = json.loads(o.read())
+			saved = json.load(o)
+		for v in saved.values():
+			if isinstance(v, dict) and "storename" in v:
+				del v["storename"]
 	else:
 		saved = {}
 		with open(WORKFILE, "w") as w:
@@ -95,8 +99,8 @@ async def main(session):
 
 	semaphore = asyncio.Semaphore(20)
 	async with asyncio.TaskGroup() as tg:
-		tasks = {store: tg.create_task(
-			entry(session, semaphore, store, saved.get(store.sid, {})))
+		tasks = {store: tg.create_task(entry(
+			session, semaphore, store, saved.get(store.sid, {})))
 		for store in stores}
 
 	results, calendar = {}, {}
@@ -141,8 +145,7 @@ async def main(session):
 		"chat_id": chat_ids[0],
 		"image": targets[0].dieter.split("?")[0],
 		"text": f'*来自 Hours 的通知*\n{text} 有特别营业时间更新 [↗](http://aliy.un/html/storeHours.html)',
-		"parse": "MARK"
-	}
+		"parse": "MARK"}
 	await async_post(push)
 
 setLogger(logging.INFO, os.path.basename(__file__))

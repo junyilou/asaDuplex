@@ -1,8 +1,8 @@
 import asyncio
 import logging
 from datetime import date, datetime, timedelta
-from modules.constants import allRegions, userAgent
-from modules.util import request
+from modules.constants import userAgent
+from modules.util import SessionType, request
 from random import choice
 from typing import AsyncGenerator, Optional
 from storeInfo import Store, getStore
@@ -21,7 +21,7 @@ def textConvert(dct: dict, userLang: bool = True) -> str:
 			return f'{opt} - {clt}'
 	return "未知时间" if userLang else "Unknown Hours"
 
-async def apu(session, store: Store, target: str, userLang: bool) -> AsyncGenerator[tuple[str, date, str], None]:
+async def apu(session: Optional[SessionType], store: Store, target: str, userLang: bool) -> AsyncGenerator[tuple[str, date, str], None]:
 	retry = 3
 	baseURL = f"https://www.apple.com{store.region['shopURL']}"
 	url = f"{baseURL}/shop/fulfillment-messages"
@@ -42,7 +42,7 @@ async def apu(session, store: Store, target: str, userLang: bool) -> AsyncGenera
 
 	for rstore in stores:
 		astore = rstore["storeNumber"].removeprefix("R")
-		for ind, holiday in enumerate(rstore["retailStore"]["storeHolidays"]):
+		for holiday in rstore["retailStore"]["storeHolidays"]:
 			sDay = datetime.strptime(f'2000 {holiday["date"]}', "%Y %b %d").date()
 			cDay = datetime(2000, (today := datetime.now().today()).month, today.day).date() - timedelta(weeks = 1)
 			sYear = today.year if sDay >= cDay else today.year + 1
@@ -50,7 +50,7 @@ async def apu(session, store: Store, target: str, userLang: bool) -> AsyncGenera
 			sTxt = (f"[{holiday['description']}]" if holiday["description"] else "") + (f" {holiday['comments']}" if holiday["comments"] else "")
 			yield (astore, sDay, sTxt)
 
-async def comment(session, store: Store, userLang: bool = True) -> dict:
+async def comment(session: Optional[SessionType], store: Store, userLang: bool = True) -> dict:
 	global COMMENTS
 	async for i in apu(session, store, f'MM0A3{store.region["partSample"]}/A', userLang):
 		astore, sDay, sTxt = i
@@ -58,7 +58,7 @@ async def comment(session, store: Store, userLang: bool = True) -> dict:
 		COMMENTS[astore][sDay] = sTxt
 	return COMMENTS
 
-async def speHours(sid: int | str, session = None, runtime: Optional[date] = None, limit: int = 14,
+async def speHours(sid: int | str, session: Optional[SessionType] = None, runtime: Optional[date] = None, limit: int = 14,
 	askComment: bool = True, userLang: bool = True) -> list | dict[str, dict[str, str]]:
 	store = getStore(sid)
 	assert store is not None, f"没有零售店数据: {sid}" if userLang else f"No such store: {sid}"

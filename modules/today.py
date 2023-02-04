@@ -5,11 +5,11 @@ import itertools
 import json
 import re
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from modules.constants import allRegions, userAgent
-from modules.util import disMarkdown, request, timezoneText
+from modules.util import SessionType, disMarkdown, request, timezoneText
 from storeInfo import Store as Raw_Store, getStore as getRaw_Store, sidify, storeReturn
-from typing import Any, Optional
+from typing import Any, Callable, Optional
 from zoneinfo import ZoneInfo
 
 __session_pool = {}
@@ -28,20 +28,16 @@ API_ROOT = "https://www.apple.com/today-bff/"
 API = {
 	"landing": {
 		"store": API_ROOT + "landing/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}",
-		"nearby": API_ROOT + "landing/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&nearby=true",
-	},
+		"nearby": API_ROOT + "landing/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&nearby=true"},
 	"session": {
 		"course": API_ROOT + "session/course?stageRootPath={ROOTPATH}&courseSlug={COURSESLUG}",
 		"schedule": API_ROOT + "session/schedule?stageRootPath={ROOTPATH}&courseSlug={COURSESLUG}&scheduleId={SCHEDULEID}",
 		"store": API_ROOT + "session/course/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&courseSlug={COURSESLUG}",
-		"nearby": API_ROOT + "session/course/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&courseSlug={COURSESLUG}",
-	},
+		"nearby": API_ROOT + "session/course/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&courseSlug={COURSESLUG}"},
 	"collection": {
 		"geo": API_ROOT + "collection/geo?stageRootPath={ROOTPATH}&collectionSlug={COLLECTIONSLUG}",
 		"store": API_ROOT + "collection/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&collectionSlug={COLLECTIONSLUG}",
-		"nearby": API_ROOT + "collection/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&collectionSlug={COLLECTIONSLUG}",
-	}
-}
+		"nearby": API_ROOT + "collection/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&collectionSlug={COLLECTIONSLUG}"}}
 
 try:
 	with open(_ASSURED_JSON) as r:
@@ -51,7 +47,7 @@ except FileNotFoundError:
 	knownSlugs = []
 
 @atexit.register
-def clean(loop = None):
+def clean(loop: Optional[asyncio.AbstractEventLoop] = None):
 	try:
 		l = [asyncio.get_running_loop()] if loop is None else [loop]
 	except:
@@ -69,7 +65,7 @@ def clean(loop = None):
 		else:
 			loop.create_task(__clean_task(loop))
 
-def _get_session():
+def _get_session() -> SessionType:
 	loop = asyncio.get_running_loop()
 	session = __session_pool.get(loop, None)
 	if session is None:
@@ -150,17 +146,20 @@ class Store():
 		if raw:
 			self.name: str = raw["name"]
 			self.sid: str = raw["storeNum"]
-			self.raw_store: Raw_Store = getRaw_Store(self.sid)
+			raw_store = getRaw_Store(self.sid)
+			assert raw_store is not None, f"本地数据库中无法匹配关键字 {sid!r}"
+			self.raw_store: Raw_Store = raw_store
 			self.timezone: str = raw["timezone"]["name"]
 			self.slug: str = raw["slug"]
 			self.rootPath: str = rootPath or self.raw_store.region["rootPath"]
 			self.flag: str = todayNation[self.rootPath]
 			self.url: str = f"https://www.apple.com{raw['path']}" if self.rootPath != "/cn" \
 				else f"https://www.apple.com.cn{raw['path']}"
-			self.coord: list[float] = [raw["lat"], raw["long"]]
+			self.coord: Optional[list[float]] = [raw["lat"], raw["long"]]
 		else:
-			self.raw_store: Raw_Store = store or getRaw_Store(sid)
-			assert self.raw_store is not None, f"本地数据库中无法匹配关键字 {sid!r}"
+			raw_store = store or getRaw_Store(sid) # type: ignore
+			assert raw_store is not None, f"本地数据库中无法匹配关键字 {sid!r}"
+			self.raw_store: Raw_Store = raw_store
 			self.sid: str = self.raw_store.rid
 			self.name: str = self.raw_store.name
 			self.slug: str = self.raw_store.slug
@@ -249,6 +248,7 @@ class Store():
 
 	async def getCoord(self) -> list[float]:
 		d = await self.raw_store.detail(session = _get_session(), mode = "raw")
+		assert isinstance(d, dict)
 		self.coord = [i[1] for i in sorted(d["geolocation"].items())]
 		return self.coord
 
@@ -290,14 +290,14 @@ class Course(asyncObject):
 				ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
 
 			try:
-				raw = json.loads(_separate(r))
+				remote = json.loads(_separate(r))
 			except json.decoder.JSONDecodeError:
 				raise ValueError(f"获取课程 {rootPath}/{slug} 数据失败") from None
 
-			courseId = [i for i in raw["courses"] if raw["courses"][i]["urlTitle"] == slug][0]
-			moreAbout = raw.get("moreAbout", None)
-			talents = raw["talents"]
-			raw = raw["courses"][courseId]
+			courseId = [i for i in remote["courses"] if remote["courses"][i]["urlTitle"] == slug][0]
+			moreAbout = remote.get("moreAbout", None)
+			talents = remote["talents"]
+			raw = remote["courses"][courseId]
 
 		assert courseId and raw and rootPath is not None
 
@@ -320,35 +320,29 @@ class Course(asyncObject):
 		self.description: dict[str, str] = {
 			"long": raw["longDescription"].strip(),
 			"medium": raw["mediumDescription"].strip(),
-			"short": raw["shortDescription"].strip()
-		}
+			"short": raw["shortDescription"].strip()}
 
 		self.intro: dict[str, str | list[str]]
 		if raw["modalVideo"]:
 			self.intro = {
 				"poster": raw["modalVideo"]["poster"]["source"],
-				"video": _resolution(raw["modalVideo"]["sources"])
-			}
+				"video": _resolution(raw["modalVideo"]["sources"])}
 		else:
 			self.intro = {}
 
 		media = raw["backgroundMedia"]
 		self.images: dict[str, str] = {
 			"portrait": media["images"][0]["portrait"]["source"],
-			"landscape": media["images"][0]["landscape"]["source"]
-		}
+			"landscape": media["images"][0]["landscape"]["source"]}
 		self.videos: dict[str, dict[str, str | list[str]]]
 		if "ambientVideo" in media:
 			self.videos = {
 				"portrait": {
 					"poster": media["ambientVideo"]["poster"][0]["portrait"]["source"],
-					"videos": _resolution(media["ambientVideo"]["sources"], "p")
-				},
+					"videos": _resolution(media["ambientVideo"]["sources"], "p")},
 				"landscape": {
 					"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
-					"videos": _resolution(media["ambientVideo"]["sources"], "l")
-				}
-			}
+					"videos": _resolution(media["ambientVideo"]["sources"], "l")}}
 		else:
 			self.videos = {}
 
@@ -426,10 +420,11 @@ class Course(asyncObject):
 		results = await asyncio.gather(*tasks, return_exceptions = True)
 		return sorted(itertools.chain.from_iterable(results))
 
-async def getCourse(courseId: Optional[int | str] = None, raw: Optional[dict] = None, rootPath: Optional[str] = None, slug: Optional[str] = None,
+async def getCourse(courseId: str = "", raw: Optional[dict] = None, rootPath: Optional[str] = None, slug: Optional[str] = None,
 	moreAbout: Optional[list | dict] = None, talents: Optional[list[dict]] = None, fuzzy: bool = True, stores: dict[str, dict] = {}) -> Course:
 	global savedToday
 	saved = list(savedToday["Course"])
+	courseId = str(courseId) if not isinstance(courseId, str) else courseId
 	if rootPath == "":
 		rootPath = "/us"
 	if not fuzzy:
@@ -440,7 +435,7 @@ async def getCourse(courseId: Optional[int | str] = None, raw: Optional[dict] = 
 	for i in saved:
 		if keyword in i:
 			return savedToday["Course"][i]
-	assert rootPath is not None or courseId is not None, "没有找到匹配，需要提供 slug, rootPath"
+	assert rootPath is not None, "没有找到匹配，需要提供 rootPath"
 	_ = [getStore(store, raw = raw) for store, raw in stores.items()]
 
 	get = await Course(raw = raw, courseId = courseId, rootPath = rootPath.replace("/us", ""), slug = slug, moreAbout = moreAbout, talents = talents)
@@ -462,20 +457,20 @@ class Schedule(asyncObject):
 				ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
 
 			try:
-				raw = json.loads(_separate(r))
+				remote = json.loads(_separate(r))
 			except json.decoder.JSONDecodeError:
 				raise ValueError(f"获取课次 {rootPath}/{self.slug}/{scheduleId} 数据失败") from None
 
 			store = getStore(
-				sid = raw["schedules"][scheduleId]["storeNum"],
-				raw = raw["stores"][raw["schedules"][scheduleId]["storeNum"]],
+				sid = remote["schedules"][scheduleId]["storeNum"],
+				raw = remote["stores"][remote["schedules"][scheduleId]["storeNum"]],
 				rootPath = rootPath)
 			course = await getCourse(
-				courseId = raw["schedules"][scheduleId]["courseId"],
-				raw = raw["courses"][raw["schedules"][scheduleId]["courseId"]],
-				rootPath = rootPath, moreAbout = raw.get("moreAbout", None),
-				talents = raw["talents"], fuzzy = False)
-			raw = raw["schedules"][scheduleId]
+				courseId = remote["schedules"][scheduleId]["courseId"],
+				raw = remote["courses"][remote["schedules"][scheduleId]["courseId"]],
+				rootPath = rootPath, moreAbout = remote.get("moreAbout", None),
+				talents = remote["talents"], fuzzy = False)
+			raw = remote["schedules"][scheduleId]
 
 		assert scheduleId and raw and rootPath is not None and course and store
 
@@ -561,26 +556,21 @@ class Collection(asyncObject):
 		self.description: dict[str, str] = {
 			"long": raw["longDescription"].strip(),
 			"medium": raw["mediumDescription"].strip(),
-			"short": raw["shortDescription"].strip()
-		}
+			"short": raw["shortDescription"].strip()}
 
 		media = raw["heroGallery"][0]["backgroundMedia"]
 		self.images: dict[str, str] = {
 			"portrait": media["images"][0]["portrait"]["source"],
-			"landscape": media["images"][0]["landscape"]["source"]
-		}
+			"landscape": media["images"][0]["landscape"]["source"]}
 		self.videos: dict[str, dict[str, str | list[str]]]
 		if "ambientVideo" in media:
 			self.videos = {
 				"portrait": {
 					"poster": media["ambientVideo"]["poster"][0]["portrait"]["source"],
-					"videos": _resolution(media["ambientVideo"]["sources"], "p")
-				},
+					"videos": _resolution(media["ambientVideo"]["sources"], "p")},
 				"landscape": {
 					"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
-					"videos": _resolution(media["ambientVideo"]["sources"], "l")
-				}
-			}
+					"videos": _resolution(media["ambientVideo"]["sources"], "l")}}
 		else:
 			self.videos = {}
 
@@ -681,7 +671,7 @@ class Sitemap():
 
 	def match_by_valid(self, slug: str) -> bool:
 		matches = re.findall(_VALIDDATES, slug)
-		return matches and _validDates(matches[0][1], self.runtime) != []
+		return bool(matches and _validDates(matches[0][1], self.runtime) != [])
 
 	def __init__(self, rootPath: Optional[str] = None, flag: Optional[str] = None):
 		assert rootPath is not None or flag, "rootPath 和 flag 必须提供一个"
@@ -734,7 +724,7 @@ class Sitemap():
 
 		return await asyncio.gather(*objects, return_exceptions = True)
 
-def parseURL(url: str, coro: bool = False) -> dict:
+def parseURL(url: str, coro: bool = False) -> Any:
 	coursePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*))"
 	schedulePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*)/([67][0-9]{18})(\/\?sn\=(R[0-9]{3}))?)"
 	collectionPattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/collection/([a-z0-9\-]*))(/\S*)?"
@@ -769,7 +759,9 @@ def parseURL(url: str, coro: bool = False) -> dict:
 		return matched["parse"]
 	if not matched["parse"]:
 		return nothing()
-	return matched["coroutine"](**{k: v for k, v in matched["parse"].items() if k not in ["type", "url", "sid"]})
+	assert isinstance(matched["coroutine"], Callable)
+	return matched["coroutine"](**{k: v for k, v in matched["parse"].items()
+		if k not in ["type", "url", "sid"]})
 
 lang = {
 	True: {
@@ -802,8 +794,7 @@ lang = {
 		"FORMAT_END": "%-H:%M",
 		"FORMAT_DATE": "%Y 年 %-m 月 %-d 日",
 		"MAIN1": "#TodayatApple {NEW}{TYPE}\n\n*{NAME}*\n\n{INTROTITLE}\n{INTRO}",
-		"MAIN2": "#TodayatApple {NEW}{TYPE}\n\n{PREFIX}*{NAME}*\n\n🗺️ {LOCATION}\n🕘 {TIME}\n\n{INTROTITLE}\n{INTRO}\n\n{SIGNPREFIX}\n{SIGN}"
-	},
+		"MAIN2": "#TodayatApple {NEW}{TYPE}\n\n{PREFIX}*{NAME}*\n\n🗺️ {LOCATION}\n🕘 {TIME}\n\n{INTROTITLE}\n{INTRO}\n\n{SIGNPREFIX}\n{SIGN}"},
 	False: {
 		"OR": "/",
 		"NEW": "",
@@ -834,14 +825,12 @@ lang = {
 		"FORMAT_END": "%-H:%M",
 		"FORMAT_DATE": "%Y/%-m/%-d",
 		"MAIN1": "#TodayatApple {NEW}{TYPE}\n\n*{NAME}*\n\n{INTROTITLE}\n{INTRO}",
-		"MAIN2": "#TodayatApple {NEW}{TYPE}\n\n{PREFIX}*{NAME}*\n\n🗺️ {LOCATION}\n🕘 {TIME}\n\n{INTROTITLE}\n{INTRO}\n\n{SIGNPREFIX}\n{SIGN}"
-	}
-}
+		"MAIN2": "#TodayatApple {NEW}{TYPE}\n\n{PREFIX}*{NAME}*\n\n🗺️ {LOCATION}\n🕘 {TIME}\n\n{INTROTITLE}\n{INTRO}\n\n{SIGNPREFIX}\n{SIGN}"}}
 
 def teleinfo(course: Optional[Course] = None, schedules: list[Schedule] = [], collection: Optional[Collection] = None,
 	mode: str = "new", userLang: bool = True, prior: list[str] = []) -> tuple[str, str, list[list[list[str]]]]:
 	runtime = datetime.now()
-	offset = runtime.astimezone().utcoffset().total_seconds() / 3600
+	offset = (runtime.astimezone().utcoffset() or timedelta()).total_seconds() / 3600
 	priorlist = prior + list(allRegions)
 
 	if collection is not None:
@@ -850,8 +839,7 @@ def teleinfo(course: Optional[Course] = None, schedules: list[Schedule] = [], co
 			TYPE = lang[userLang]["COLLECTION"],
 			NAME = collection.name,
 			INTROTITLE = lang[userLang]["INTRO_COLLECTION"],
-			INTRO = collection.description['long'],
-		))
+			INTRO = collection.description['long']))
 		if collection.collaborations != []:
 			collab = []
 			for c in collection.collaborations:
@@ -893,7 +881,7 @@ def teleinfo(course: Optional[Course] = None, schedules: list[Schedule] = [], co
 
 		tzText = ""
 		if isinstance(priorSchedule.timeStart, datetime):
-			if priorSchedule.timeStart.utcoffset().total_seconds() / 3600 != offset:
+			if (priorSchedule.timeStart.utcoffset() or timedelta()).total_seconds() / 3600 != offset:
 				tzText = " " + timezoneText(priorSchedule.timeStart)
 
 		timing = lang[userLang]["START_FROM" if len(schedules) == 1 else "START_FROM_ALL"].format(
@@ -914,8 +902,7 @@ def teleinfo(course: Optional[Course] = None, schedules: list[Schedule] = [], co
 	if mode == "new" or schedules == []:
 		signing = signingPrefix = ""
 	else:
-		rsvp = [i.status for i in schedules]
-		upCount = rsvp.count(True)
+		upCount = len(tuple(filter(lambda i: i.status is True, schedules)))
 		seCount = len(schedules)
 		if seCount > 1:
 			if upCount:
@@ -925,8 +912,10 @@ def teleinfo(course: Optional[Course] = None, schedules: list[Schedule] = [], co
 					signing = lang[userLang]["SIGN_UP_SOME"].format(AOK = upCount, AALL = seCount)
 			else:
 				signing = lang[userLang]["SIGN_UP_NONE"]
+		elif upCount:
+			signing = lang[userLang]["SIGN_UP_SINGLE"]
 		else:
-			signing = lang[userLang]["SIGN_UP_SINGLE"] if upCount else lang[userLang]["SIGN_UP_NOT"]
+			signing = lang[userLang]["SIGN_UP_NOT"]
 		signingPrefix = lang[userLang]["SIGN_UP_STATUS"]
 
 	text = disMarkdown(lang[userLang]["MAIN2"].format(
@@ -939,8 +928,7 @@ def teleinfo(course: Optional[Course] = None, schedules: list[Schedule] = [], co
 		INTROTITLE = lang[userLang]["INTRO_COURSE"],
 		INTRO = course.description["long"],
 		SIGNPREFIX = signingPrefix,
-		SIGN = signing
-	)).strip("\n")
+		SIGN = signing)).strip("\n")
 
 	image = course.images["landscape"] + "?output-format=jpg&output-quality=80&resize=1280:*"
 

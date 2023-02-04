@@ -9,14 +9,15 @@ from datetime import datetime, date, UTC
 from bot import chat_ids
 from botpost import async_post
 from modules.constants import userAgent
-from modules.util import disMarkdown, request, session_func, setLogger
+from modules.util import SemaphoreType, SessionType, disMarkdown, request, session_func, setLogger
 from storeInfo import DEFAULTFILE, Store, getStore, sidify
 
 DUMMYDICT = {"name": "Store", "flag": "🇺🇸", "state": "California", "city": "Cupertino"}
 INVALIDDATE = datetime(2001, 5, 19)
 INVALIDREMOTE = [date(2021, 7, 13), date(2021, 8, 28), date(2021, 8, 29), date(2022, 1, 7)]
 
-async def down(session, sid, storejson, specialist, semaphore):
+async def down(session: SessionType, semaphore: SemaphoreType, sid: str,
+	storejson: dict, specialist: list[str]) -> bool:
 	try:
 		store = getStore(sid)
 		assert store is not None
@@ -30,12 +31,13 @@ async def down(session, sid, storejson, specialist, semaphore):
 	try:
 		async with semaphore:
 			remote = await store.header(session = session)
+		assert isinstance(remote, str)
 		remoteDatetime = datetime.strptime(remote, "%d %b %Y %H:%M:%S")
 	except:
-		remote = remoteDatetime = None
+		remote, remoteDatetime = "", None
 
 	if not remoteDatetime:
-		if specialist != None:
+		if specialist is not None:
 			logging.info(f"{store.rid} 文件不存在或获取失败")
 		return False
 	elif not savedDatetime:
@@ -56,9 +58,10 @@ async def down(session, sid, storejson, specialist, semaphore):
 				ssl = False, mode = "raw", ensureAns = False)
 			with open(savename, "wb") as w:
 				w.write(r)
+			img = "BASE64" + b64encode(r).decode()
 		except:
 			logging.error(f"下载文件到 {savename} 失败")
-			pass
+			img = store.dieter
 
 		info = [store.telename(flag = True, bold = True, sid = True), "", f"*远程标签* {remote}"]
 		if hasattr(store, "dates"):
@@ -67,26 +70,24 @@ async def down(session, sid, storejson, specialist, semaphore):
 			info.insert(-1, f"*本地标签* {saved}")
 		info = "\n".join(info)
 
-		if specialist != None:
+		if specialist is not None:
 			toPop = str(store.iid)
 			_ = specialist.remove(toPop) if toPop in specialist else None
 
-		img = b64encode(r).decode()
 		push = {
 			"chat_id": chat_ids[0],
 			"mode": "photo-text",
-			"image": "BASE64" + img,
+			"image": img,
 			"text": disMarkdown(f'*来自 Rtl 的通知*\n\n{info}'),
-			"parse": "MARK"
-		}
+			"parse": "MARK"}
 		await async_post(push)
 		return True
-	elif specialist != None:
+	elif specialist is not None:
 		logging.info(f"{store.rid} 图片没有更新")
 	return False
 
 @session_func
-async def main(session):
+async def main(session: SessionType):
 	semaphore = asyncio.Semaphore(50)
 	with open(DEFAULTFILE) as r:
 		storejson = json.load(r)
@@ -99,7 +100,7 @@ async def main(session):
 			if mode == "normal":
 				targets = [i for i in storejson if i != "update"]
 			logging.info(f"开始查询 {len(targets)} 家零售店")
-			tasks = [down(session, i, storejson, None, semaphore) for i in targets]
+			tasks = [down(session, semaphore, i, storejson, []) for i in targets]
 			runFlag = any(await asyncio.gather(*tasks))
 		case ["special"]:
 			with open("Retail/specialist.txt") as r:
@@ -110,7 +111,7 @@ async def main(session):
 				return
 			setLogger(logging.INFO, os.path.basename(__file__))
 			logging.info("开始特别观察模式: " + ", ".join(specialist))
-			tasks = [down(session, i, storejson, specialist, semaphore) for i in locallist]
+			tasks = [down(session, semaphore, i, storejson, specialist) for i in locallist]
 			runFlag = any(await asyncio.gather(*tasks))
 			if locallist != specialist:
 				logging.info("正在更新特别观察列表")
