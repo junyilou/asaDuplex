@@ -2,17 +2,20 @@ import aiohttp
 import asyncio
 import json
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
+from functools import wraps
 from os.path import isdir
-from typing import Awaitable, Callable, Optional
+from typing import Any, Awaitable, Callable, Concatenate, Coroutine, Optional, ParamSpec, TypeVar
+
+SemaphoreType = asyncio.Semaphore
+SessionType = aiohttp.ClientSession
 
 def bitsize(integer: int | float, width: int = 8, precision: int = 2, ks: float = 1e3) -> str:
-	order = [" B", "KB", "MB", "GB", "TB"]
-	unit = 0
+	unit, order = 0, ["B", "KB", "MB", "GB", "TB"]
 	while integer > ks and unit < len(order) - 1:
 		integer /= ks
 		unit += 1
-	return f"{integer:{width}.{precision}f} {order[unit]}"
+	return f"{integer:{width}.{precision}f} {order[unit]:>2}"
 
 def disMarkdown(text: str, wrap: str = "", extra: str = "") -> str:
 	temp = str(text)
@@ -33,7 +36,8 @@ def sortOD(od: dict, reverse: list[bool] = [False], key: Optional[Callable] = No
 				res[k] = v
 	return res
 
-def timeDelta(*, seconds: int = 0, dt1: Optional[datetime] = None, dt2: Optional[datetime] = None, items: int = 5) -> str:
+def timeDelta(*, seconds: int = 0, dt1: datetime = datetime.min,
+	dt2: datetime = datetime.min, items: int = 5) -> str:
 	ans, base = [], 1
 	s = seconds or (dt2 - dt1).total_seconds()
 	comp = [(60, "秒"), (60, "分钟"), (24, "小时"), (7, "天"), (0, "周")]
@@ -47,15 +51,16 @@ def timeDelta(*, seconds: int = 0, dt1: Optional[datetime] = None, dt2: Optional
 	return " ".join(ans[-1:-1-items:-1])
 
 def timezoneText(dtime: datetime) -> str:
-	delta = dtime.utcoffset().total_seconds() / 3600
+	delta = (dtime.utcoffset() or timedelta()).total_seconds() / 3600
 	dx, dy = str(delta).split(".")
 	return f"GMT{int(dx):+}" + (f":{60 * float('.' + dy):0>2.0f}" if dy != "0" else "")
 
-async def request(session: Optional[aiohttp.ClientSession] = None, url: str = "", mode: Optional[str | list[str]] = None,
-	retryNum: int = 1, ensureAns: bool = True, **kwargs) -> int | str | dict | bytes | Exception:
+async def request(session: Optional[SessionType] = None,
+	url: str = "", mode: str | list[str] = ["text"],
+	retryNum: int = 1, ensureAns: bool = True, **kwargs) -> Any:
 	assert url != "", "URL 不合法"
 	method = kwargs.get("method", "GET")
-	pop = kwargs.pop("method") if "method" in kwargs else None
+	_ = kwargs.pop("method") if "method" in kwargs else None
 	logger = logging.getLogger("async_request")
 
 	close_session = False
@@ -64,13 +69,13 @@ async def request(session: Optional[aiohttp.ClientSession] = None, url: str = ""
 		session = aiohttp.ClientSession()
 		close_session = True
 
-	mode: list[str] = [mode] if type(mode) != list else mode
+	modes: list = mode if isinstance(mode, list) else [mode]
 	logger.debug(f"[{method}] '{url}', [模式] {mode}, [参数] {kwargs}, [重试] {retryNum}")
 	while retryNum:
 		try:
 			async with session.request(url = url, method = method, **kwargs) as resp:
 				results = {}
-				for m in mode:
+				for m in set(modes):
 					match m:
 						case "raw":
 							results[m] = await resp.read()
@@ -89,8 +94,8 @@ async def request(session: Optional[aiohttp.ClientSession] = None, url: str = ""
 			logger.debug(f"[状态{resp.status}] '{url}'")
 			if close_session:
 				await session.close()
-			if len(mode) == 1:
-				return results[mode[0]]
+			if len(modes) == 1:
+				return results[modes[0]]
 			return results
 		except Exception as exp:
 			if retryNum == 1:
@@ -106,10 +111,14 @@ async def request(session: Optional[aiohttp.ClientSession] = None, url: str = ""
 				logger.debug(f"[异常] '{url}', [异常] {exp}, [重试剩余] {retryNum}")
 				logger.debug(f"{exp!r}")
 
-def session_func(func):
-	async def wrapper(*args, **kwargs):
+P = ParamSpec('P')
+R = TypeVar('R')
+def session_func(func: Callable[Concatenate[SessionType, P],
+	Awaitable[R]]) -> Callable[P, Coroutine[None, None, R]]:
+	@wraps(func)
+	async def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
 		async with aiohttp.ClientSession() as session:
-			return await func(session = session, *args, **kwargs)
+			return await func(session, *args, **kwargs)
 	return wrapper
 
 def sync(coroutine: Optional[Awaitable] = None, loop: Optional[asyncio.AbstractEventLoop] = None):
