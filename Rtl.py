@@ -37,7 +37,7 @@ async def down(session: SessionType, semaphore: SemaphoreType, sid: str,
 		remote, remoteDatetime = "", None
 
 	if not remoteDatetime:
-		if specialist is not None:
+		if specialist != []:
 			logging.info(f"{store.rid} 文件不存在或获取失败")
 		return False
 	elif not savedDatetime:
@@ -70,7 +70,7 @@ async def down(session: SessionType, semaphore: SemaphoreType, sid: str,
 			info.insert(-1, f"*本地标签* {saved}")
 		info = "\n".join(info)
 
-		if specialist is not None:
+		if specialist != []:
 			toPop = str(store.iid)
 			_ = specialist.remove(toPop) if toPop in specialist else None
 
@@ -82,7 +82,7 @@ async def down(session: SessionType, semaphore: SemaphoreType, sid: str,
 			"parse": "MARK"}
 		await async_post(push)
 		return True
-	elif specialist is not None:
+	elif specialist != []:
 		logging.info(f"{store.rid} 图片没有更新")
 	return False
 
