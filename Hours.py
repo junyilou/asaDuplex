@@ -26,6 +26,7 @@ LOGSTRING = {
 		"NEW": f"{'':8}{{DATE}} 新增: {{HOURS}}",
 		"CHANGE": f"{'':8}{{DATE}} 变更: 由 {{HOURS1}} 改为 {{HOURS2}}",
 		"CANCEL": f"{'':8}{{DATE}} 取消: {{HOURS}}",
+		"COMMENT": f"{'':8}{{DATE}} 有新的评论:\n{'':12}{{COMMENT}}",
 		"WRITE": "写入新的 storeHours.json",
 		"NODIFF": "没有发现 storeHours 文件更新",
 		"DIFFGEN": "已生成对比文件 storeHours.html",
@@ -36,6 +37,7 @@ LOGSTRING = {
 		"NEW": f"{'':8}{{DATE}} New: {{HOURS}}",
 		"CHANGE": f"{'':8}{{DATE}} Changed: from {{HOURS1}} to {{HOURS2}}",
 		"CANCEL": f"{'':8}{{DATE}} Canceled: {{HOURS}}",
+		"COMMENT": f"{'':8}{{DATE}} New Comment:\n{'':12}{{COMMENT}}",
 		"WRITE": "Generating new storeHours.json",
 		"NODIFF": "No updates found",
 		"DIFFGEN": "DIFF storeHours.html generated",
@@ -60,6 +62,8 @@ async def entry(session: SessionType, semaphore: SemaphoreType,
 			diff.append(LANG["NEW"].format(DATE = date, HOURS = spe))
 		elif (svd := saved[date]["special"]) != spe:
 			diff.append(LANG["CHANGE"].format(DATE = date, HOURS1 = svd, HOURS2 = spe))
+		elif saved[date].get("comment", "") == "" and detail["comment"] != "":
+			diff.append(LANG["COMMENT"].format(DATE = date, COMMENT = detail["comment"]))
 
 	for date, detail in saved.items():
 		if date == "storename":
