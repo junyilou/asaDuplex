@@ -62,7 +62,7 @@ async def entry(session: SessionType, semaphore: SemaphoreType,
 			diff.append(LANG["NEW"].format(DATE = date, HOURS = spe))
 		elif (svd := saved[date]["special"]) != spe:
 			diff.append(LANG["CHANGE"].format(DATE = date, HOURS1 = svd, HOURS2 = spe))
-		elif saved[date].get("comment", "") == "" and detail["comment"] != "":
+		elif saved[date].get("comment", "") == "" and detail.get("comment", "") != "":
 			diff.append(LANG["COMMENT"].format(DATE = date, COMMENT = detail["comment"]))
 
 	for date, detail in saved.items():
