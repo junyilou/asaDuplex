@@ -52,8 +52,9 @@ def timeDelta(*, seconds: int = 0, dt1: datetime = datetime.min,
 
 def timezoneText(dtime: datetime) -> str:
 	delta = (dtime.utcoffset() or timedelta()).total_seconds() / 3600
-	dx, dy = str(delta).split(".")
-	return f"GMT{int(dx):+}" + (f":{60 * float('.' + dy):0>2.0f}" if dy != "0" else "")
+	time_min = delta % 1
+	time_h = delta - time_min
+	return f"GMT{time_h:+.0f}" + (f":{60 * time_min:0>2.0f}" if time_min else "")
 
 async def request(session: Optional[SessionType] = None,
 	url: str = "", mode: str | list[str] = ["text"],
