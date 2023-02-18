@@ -1,5 +1,5 @@
 {
-  "update": "2023-01-11 06:40:13 GMT",
+  "update": "2023-02-18 00:10:17 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -2975,7 +2975,7 @@
       "2022-11-18"
     ],
     "flag": "🇨🇦",
-    "modified": "19 Nov 2022 05:43:49",
+    "modified": "12 Jan 2023 19:13:12",
     "name": "Pacific Centre",
     "state": "British Columbia",
     "timezone": "Canada/Pacific",
@@ -4081,7 +4081,7 @@
     "city": "London",
     "dates": "2011-09-13",
     "flag": "🇬🇧",
-    "modified": "07 Jan 2022 08:59:08",
+    "modified": "17 Feb 2023 17:57:22",
     "name": "Stratford City",
     "state": "Greater London",
     "timezone": "Europe/London",
@@ -6358,6 +6358,15 @@
     "state": "广东",
     "status": "future",
     "timezone": "Asia/Shanghai"
+  },
+  "764": {
+    "alter": "Seoul",
+    "city": "서울",
+    "flag": "🇰🇷",
+    "name": "Store in Seoul West",
+    "state": "서울",
+    "status": "future",
+    "timezone": "Asia/Seoul"
   },
   "766": {
     "alter": "Zhejiang Wenzhou 温州",
