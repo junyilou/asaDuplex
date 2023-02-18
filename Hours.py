@@ -77,7 +77,8 @@ async def entry(session: SessionType, semaphore: SemaphoreType,
 			diff.append(LANG["CANCEL"].format(DATE = date, HOURS = detail["special"]))
 
 	if diff:
-		logging.info(f"[{store.telename(sid = False)}] " + ", ".join([i.lstrip() for i in diff]))
+		logging.info(f"[{store.telename(sid = False)}] " + ", ".join(
+			i.lstrip() for i in "\n".join(diff).split("\n")))
 
 	return {"hours": hours, "diff": diff}
 
