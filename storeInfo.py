@@ -78,7 +78,7 @@ class Store:
 
 	def telename(self, bold: bool = False, flag: bool = False, sid: bool = True) -> str:
 		c = ((flag, f"{self.flag} "), (bold, "*"), (True, f"Apple {self.name}"), (bold, "*"), (sid, f" ({self.rid})"))
-		return "".join([j for i, j in c if i])
+		return "".join(j for i, j in c if i)
 
 	def nsoString(self, userLang: bool = True) -> str:
 		if not hasattr(self, "dates"):
@@ -134,8 +134,8 @@ class Store:
 					return hours
 				case "dict":
 					add = r["address"]
-					address = ", ".join([a.strip() for a in filter(None, [add["address1"], add["address2"]])])
-					province = ", ".join([a.strip() for a in filter(None, [add["city"], add["stateName"], add["postal"]])])
+					address = ", ".join(a.strip() for a in filter(None, [add["address1"], add["address2"]]))
+					province = ", ".join(a.strip() for a in filter(None, [add["city"], add["stateName"], add["postal"]]))
 					info = {"timezone": r["timezone"], "telephone": r["telephone"], "address": address, "province": province}
 					return r["geolocation"] | info | hours
 		except:
@@ -204,7 +204,7 @@ def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 				stores = stores.symmetric_difference(ast)
 				if level == "flag":
 					attrs = {None: store.flag, True: store.region["name"], False: store.region["nameEng"]}
-					attr = " ".join([attrs[i] for i in userLang])
+					attr = " ".join(attrs[i] for i in userLang)
 				else:
 					attr = getattr(store, level)
 				num = f" ({len(ast)})" if number else ""

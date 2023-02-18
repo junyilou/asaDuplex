@@ -144,7 +144,7 @@ async def main(session: SessionType) -> None:
 		w.write(DIFFHTML.format(DIFFTITLE = "Special Hours", DIFFCONTENT = content))
 	logging.info(LANG["DIFFGEN"])
 
-	text = ", ".join([i.telename(sid = False) for i in targets])
+	text = ", ".join(i.telename(sid = False) for i in targets)
 	push = {
 		"mode": "photo-text",
 		"chat_id": chat_ids[0],

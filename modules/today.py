@@ -17,8 +17,8 @@ savedToday = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}
 todayNation: dict[str, Any] = {allRegions[i]["rootPath"]: i for i in allRegions}
 
 _RETRYNUM = 5
-_SEMAPHORE_LIMIT = 25
-_TIMEOUT = 5
+_SEMAPHORE_LIMIT = 20
+_TIMEOUT = 25
 
 _ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
 _ASSURED_JSON = "Retail/savedEvent.json"
@@ -908,7 +908,7 @@ def teleinfo(
 		try:
 			date = re.findall(_VALIDDATES, course.slug)[0][1]
 			vals = _validDates(date, runtime)
-			timing = f' {lang[userLang]["OR"]} '.join([i.strftime(lang[userLang]["FORMAT_DATE"]) for i in vals])
+			timing = f' {lang[userLang]["OR"]} '.join(i.strftime(lang[userLang]["FORMAT_DATE"]) for i in vals)
 		except IndexError:
 			timing = lang[userLang]["GENERAL_TIMING"]
 		keyboard = [[[lang[userLang]["LEARN_COURSE"], course.url]]]
