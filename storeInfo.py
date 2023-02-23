@@ -11,7 +11,7 @@ DEFAULTFILE = "storeInfo.json"
 
 @total_ordering
 class Store:
-	def __init__(self, sid: int | str, dct: dict):
+	def __init__(self, sid: int | str, dct: dict) -> None:
 		for e in ["name", "flag", "state", "city"]:
 			assert e in dct, f"key {e} not exist"
 
@@ -95,12 +95,12 @@ class Store:
 			info.append(lang[userLang]["CLOSED"].format(DATE = localize(self.dates[-1], userLang)))
 		return "\n".join(info)
 
-	def __repr__(self):
+	def __repr__(self) -> str:
 		name = [f"<Store {self.telename(flag = True)}>"]
 		status = [f"({s[2:].capitalize()})" for s in ["isClosed", "isFuture", "isIntern"] if getattr(self, s)]
 		return " ".join(name + status)
 
-	def __str__(self):
+	def __str__(self) -> str:
 		return self.telename(sid = False)
 
 	def __gt__(self, other):
@@ -113,7 +113,7 @@ class Store:
 			return NotImplemented
 		return self.sortkey == other.sortkey
 
-	def __hash__(self):
+	def __hash__(self) -> int:
 		return hash(self.sortkey)
 
 	async def detail(self, session = None, mode: str = "dict") -> Optional[str | dict[str, Any]]:
@@ -230,7 +230,7 @@ def storeReturn(args: str | list[str], *, remove_closed: bool = False, remove_fu
 	ans = []
 	match args, split:
 		case str(), True:
-			splits = re.split(",|，", args)
+			splits = re.split(",|，", args) # type: ignore
 		case list(), False:
 			splits = args
 		case _, _:
