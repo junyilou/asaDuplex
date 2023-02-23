@@ -188,7 +188,7 @@ def getStore(sid: int | str) -> Optional[Store]:
 	return STORES.get(sidify(sid), None)
 
 def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
-	final: str = "name", userLang: Optional[list[bool | None]] = [None]) -> list[str]:
+	final: str = "name", userLang: Optional[bool | list[Optional[bool]]] = [None]) -> list[str]:
 	if not rstores:
 		return []
 	stores = set(rstores)
