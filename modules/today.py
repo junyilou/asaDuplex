@@ -84,15 +84,14 @@ def _resolution(vids: list[str], direction: Optional[Literal["l"] | Literal["p"]
 
 	if not direction:
 		return vids
-	else:
-		match direction:
-			case "p":
-				fil = [i for i in vids if res[i][0] < res[i][1]]
-			case "l":
-				fil = [i for i in vids if res[i][0] > res[i][1]]
-			case _:
-				fil = []
-		return fil
+	match direction:
+		case "p":
+			fil = [i for i in vids if res[i][0] < res[i][1]]
+		case "l":
+			fil = [i for i in vids if res[i][0] > res[i][1]]
+		case _:
+			fil = []
+	return fil
 
 def _separate(text: str) -> str:
 	rep = {0xa0: 0x20, 0x200b: None, 0x200c: None, 0x2060: None}
@@ -106,7 +105,7 @@ def _validDates(ex: str, runtime: datetime) -> list[datetime]:
 		case 8:
 			possible = ["%Y%m%d", "%d%m%Y", "%m%d%Y"]
 		case _:
-			possible = []
+			return []
 	for pattern in possible:
 		try:
 			date = datetime.strptime(ex, pattern).date()
@@ -118,18 +117,41 @@ def _validDates(ex: str, runtime: datetime) -> list[datetime]:
 				v.append(date)
 	return v
 
+class TodayObject:
+	hashattr: list[str] = []
+	sortkeys: list[str] = []
+	raw: dict = {}
+
+	def _sort_tuple(self) -> tuple[Any, ...]:
+		return tuple(getattr(self, key) for key in self.sortkeys)
+
+	def __hash__(self) -> int:
+		return hash((self.__class__.__name__, *(getattr(self, attr) for attr in self.hashattr)))
+
+	def __lt__(self, other) -> bool:
+		return type(other) is type(self) and self._sort_tuple() < other._sort_tuple()
+
+	def __gt__(self, other) -> bool:
+		return type(other) is type(self) and self._sort_tuple() > other._sort_tuple()
+
+	def __eq__(self, other) -> bool:
+		return type(other) is type(self) and self._sort_tuple() == other._sort_tuple()
+
 class TodayEncoder(json.JSONEncoder):
 	def __init__(self, **kwargs):
 		super().__init__(**(kwargs | {"ensure_ascii": False}))
 
 	def default(self, o):
 		match o:
-			case Store() | Raw_Store() | Course() | Schedule() | Collection() | Talent():
+			case TodayObject() | Raw_Store():
 				return o.raw
 			case _:
 				return super().default(o)
 
-class Store:
+class Store(TodayObject):
+	hashattr: list[str] = ["sid"]
+	sortkeys: list[str] = ["raw_store"]
+
 	def __init__(self,
 		raw: Optional[dict] = None,
 		rootPath: Optional[str] = None,
@@ -164,23 +186,11 @@ class Store:
 			self.coord: Optional[list[float]] = None
 		self.today: str = self.url.replace("/retail/", "/today/")
 		self.calendar: str = self.url.replace("/retail/", "/today/calendar/")
-		self.serial: dict[str, str] = dict(sid = self.sid)
+		self.serial: dict[str, str] = {"sid": self.sid}
 		self.raw: dict = {k: v for k, v in vars(self).items() if k != "raw"}
 
 	def __repr__(self) -> str:
 		return f'<Store "{self.name}" ({self.sid}), "{self.slug}", "{self.rootPath}">'
-
-	def __hash__(self) -> int:
-		return hash(self.serial)
-
-	def __lt__(self, other) -> bool:
-		return type(other) is type(self) and self.raw_store.sortkey < other.raw_store.sortkey
-
-	def __gt__(self, other) -> bool:
-		return type(other) is type(self) and self.raw_store.sortkey > other.raw_store.sortkey
-
-	def __eq__(self, other) -> bool:
-		return type(other) is type(self) and self.raw_store.sortkey == other.raw_store.sortkey
 
 	async def getCourses(self, ensure: bool = True) -> list["Course"]:
 		r = await request(
@@ -244,22 +254,29 @@ def getStore(
 	savedToday["Store"][sid] = get
 	return get
 
-class Talent:
+class Talent(TodayObject):
+	hashattr: list[str] = ["name"]
+	sortkeys: list[str] = ["name"]
+
 	def __init__(self,
 	    raw: dict) -> None:
 		self.raw: dict = raw
 		self.name: str = raw["name"].strip()
 		self.title: Optional[str] = raw["title"].strip() if "title" in raw else None
 		self.description: str = raw["description"].strip()
-		self.image: str = raw.get("backgroundImage", None) or raw.get("logo", None)
-		self.links: dict[str, str] = ({"Website": raw["websiteUrl"]} if "websiteUrl" in raw else {} |
-			{"URL": raw["url"]} if "url" in raw else {} |
-			{social["name"].capitalize(): social["url"] for social in raw.get("socialLinks", {})})
+		self.image: Optional[str] = raw.get("backgroundImage", None) or raw.get("logo", None)
+		self.links: dict[str, str] = (
+			({"Website": raw["websiteUrl"]} if "websiteUrl" in raw else {}) |
+			({"URL": raw["url"]} if "url" in raw else {}) |
+			({social["name"].capitalize(): social["url"] for social in raw.get("socialLinks", {})}))
 
 	def __repr__(self) -> str:
 		return f'<Talent "{self.name}"' + (f', "{self.title}"' if self.title else "") + ">"
 
-class Course:
+class Course(TodayObject):
+	hashattr: list[str] = ["rootPath", "slug"]
+	sortkeys: list[str] = ["courseId", "rootPath"]
+
 	@classmethod
 	async def get(cls,
 	    rootPath: str,
@@ -305,7 +322,7 @@ class Course:
 		self.name: str = raw["name"].strip()
 		self.title: str = raw["title"]
 		self.slug: str = raw["urlTitle"]
-		self.serial: dict[str, str] = dict(slug = self.slug, rootPath = self.rootPath)
+		self.serial: dict[str, str] = {"slug": self.slug, "rootPath": self.rootPath}
 		self.collection: Optional[str | Collection] = collection
 
 		self.description: dict[str, str] = {
@@ -313,19 +330,17 @@ class Course:
 			"medium": raw["mediumDescription"].strip(),
 			"short": raw["shortDescription"].strip()}
 
-		self.intro: dict[str, str | list[str]]
+		self.intro: dict[str, str | list[str]] = {}
 		if raw["modalVideo"]:
 			self.intro = {
 				"poster": raw["modalVideo"]["poster"]["source"],
 				"video": _resolution(raw["modalVideo"]["sources"])}
-		else:
-			self.intro = {}
 
 		media = raw["backgroundMedia"]
 		self.images: dict[str, str] = {
 			"portrait": media["images"][0]["portrait"]["source"],
 			"landscape": media["images"][0]["landscape"]["source"]}
-		self.videos: dict[str, dict[str, str | list[str]]]
+		self.videos: dict[str, dict[str, str | list[str]]] = {}
 		if "ambientVideo" in media:
 			self.videos = {
 				"portrait": {
@@ -334,8 +349,6 @@ class Course:
 				"landscape": {
 					"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
 					"videos": _resolution(media["ambientVideo"]["sources"], "l")}}
-		else:
-			self.videos = {}
 
 		self.virtual: bool = "VIRTUAL" in raw["type"]
 		self.special: bool = "SPECIAL" in raw["type"] or "HIGH" in raw["talentType"]
@@ -347,18 +360,6 @@ class Course:
 		col = (f', Collection <{self.collection.name}>' if isinstance(self.collection, Collection) \
 			else f', Collection "{self.collection}"') if self.collection is not None else ""
 		return f'<Course {self.courseId} "{self.name}", "{self.slug}"{col}>'
-
-	def __hash__(self) -> int:
-		return hash((self.rootPath, self.courseId))
-
-	def __lt__(self, other) -> bool:
-		return type(other) is type(self) and (self.courseId, self.rootPath) < (other.courseId, other.rootPath)
-
-	def __gt__(self, other) -> bool:
-		return type(other) is type(self) and (self.courseId, self.rootPath) > (other.courseId, other.rootPath)
-
-	def __eq__(self, other) -> bool:
-		return type(other) is type(self) and (self.courseId, self.rootPath) == (other.courseId, other.rootPath)
 
 	def elements(self, accept: Optional[list[str]] = None) -> list[str]:
 		accept = accept or _ACCEPT
@@ -431,7 +432,10 @@ async def getCourse(
 	savedToday["Course"][f"{obj.rootPath}/{obj.courseId}"] = obj
 	return obj
 
-class Schedule:
+class Schedule(TodayObject):
+	hashattr: list[str] = ["rootPath", "scheduleId", "slug"]
+	sortkeys: list[str] = ["rawStart", "scheduleId"]
+
 	@classmethod
 	async def get(cls,
 		rootPath: str,
@@ -474,7 +478,7 @@ class Schedule:
 		self.scheduleId: str = scheduleId
 		self.rootPath: str = rootPath
 		self.flag: str = todayNation[self.rootPath]
-		self.serial: dict[str, str] = dict(slug = self.slug, scheduleId = scheduleId, rootPath = self.rootPath)
+		self.serial: dict[str, str] = {"slug": self.slug, "scheduleId": scheduleId, "rootPath": self.rootPath}
 
 		self.store: Store = store
 		self.raw_store: Raw_Store = self.store.raw_store
@@ -505,18 +509,6 @@ class Schedule:
 		loc = self.store.sid if not self.course.virtual else "Online"
 		return f'<Schedule {self.scheduleId} of {self.course.courseId}, {self.datetimeStart("%-m/%-d %-H:%M")}-{self.datetimeEnd()} @ {loc}>'
 
-	def __hash__(self) -> int:
-		return hash(self.scheduleId)
-
-	def __lt__(self, other) -> bool:
-		return type(other) is type(self) and (self.rawStart, self.scheduleId) < (other.rawStart, other.scheduleId)
-
-	def __gt__(self, other) -> bool:
-		return type(other) is type(self) and (self.rawStart, self.scheduleId) > (other.rawStart, other.scheduleId)
-
-	def __eq__(self, other) -> bool:
-		return type(other) is type(self) and (self.rawStart, self.scheduleId) == (other.rawStart, other.scheduleId)
-
 async def getSchedule(
 	scheduleId: int | str,
 	remote: Optional[dict] = None,
@@ -540,7 +532,10 @@ async def getSchedule(
 	savedToday["Schedule"][obj.scheduleId] = obj
 	return obj
 
-class Collection:
+class Collection(TodayObject):
+	hashattr: list[str] = ["rootPath", "slug"]
+	sortkeys: list[str] = ["rootPath", "slug"]
+
 	@classmethod
 	async def get(cls,
 	    rootPath: str,
@@ -569,7 +564,7 @@ class Collection:
 		self.rootPath: str = rootPath
 		self.flag: str = todayNation[self.rootPath]
 		self.url: str = f"https://www.apple.com{rootPath.replace('/cn', '.cn')}/today/collection/{slug}/"
-		self.serial: dict[str, str] = dict(slug = slug, rootPath = rootPath)
+		self.serial: dict[str, str] = {"slug": slug, "rootPath": rootPath}
 
 		self.description: dict[str, str] = {
 			"long": raw["longDescription"].strip(),
@@ -580,7 +575,7 @@ class Collection:
 		self.images: dict[str, str] = {
 			"portrait": media["images"][0]["portrait"]["source"],
 			"landscape": media["images"][0]["landscape"]["source"]}
-		self.videos: dict[str, dict[str, str | list[str]]]
+		self.videos: dict[str, dict[str, str | list[str]]] = {}
 		if "ambientVideo" in media:
 			self.videos = {
 				"portrait": {
@@ -589,8 +584,6 @@ class Collection:
 				"landscape": {
 					"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
 					"videos": _resolution(media["ambientVideo"]["sources"], "l")}}
-		else:
-			self.videos = {}
 
 		self.collaborations: list[Talent]
 		if "inCollaborationWith" in raw:
@@ -601,15 +594,6 @@ class Collection:
 
 	def __repr__(self) -> str:
 		return f'<Collection "{self.name}", "{self.slug}", "{self.rootPath}">'
-
-	def __hash__(self) -> int:
-		return hash((self.rootPath, self.slug))
-
-	def __eq__(self, other) -> bool:
-		try:
-			return self.serial == other.serial
-		except:
-			return False
 
 	def elements(self, accept: Optional[list[str]] = None) -> list[str]:
 		accept = accept or _ACCEPT
@@ -672,12 +656,16 @@ async def getCollection(
 	savedToday["Collection"][keyword] = obj
 	return obj
 
-class Sitemap:
+class Sitemap(TodayObject):
+	hashattr: list[str] = ["urlPath"]
+	sortkeys: list[str] = ["urlPath"]
+
 	def match_by_assure(self, slug: str) -> bool:
 		for s in _known_slugs:
 			if s == slug:
 				return False
 		return True
+
 	def match_by_valid(self, slug: str) -> bool:
 		matches = re.findall(_VALIDDATES, slug)
 		return bool(matches and _validDates(matches[0][1], self.runtime) != [])
@@ -689,20 +677,9 @@ class Sitemap:
 				self.urlPath = allRegions[fl]["storeURL"]
 			case rp, _ if rp is not None:
 				self.urlPath = rp.replace("/cn", ".cn")
-		if _known_slugs == []:
-			self.using = self.match_by_valid
-		else:
-			self.using = self.match_by_assure
+		self.using = self.match_by_valid if _known_slugs == [] else self.match_by_assure
 		self.runtime = datetime.now()
-
-	def __hash__(self) -> int:
-		return hash(self.urlPath)
-
-	def __eq__(self, other) -> bool:
-		try:
-			return self.urlPath == other.urlPath
-		except:
-			return False
+		self.raw = {"urlPath": self.urlPath}
 
 	def __repr__(self) -> str:
 		return f'<Sitemap "{self.urlPath}">'
