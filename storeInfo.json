@@ -1,5 +1,5 @@
 {
-  "update": "2023-02-18 00:10:17 GMT",
+  "update": "2023-03-11 00:10:17 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -2330,7 +2330,7 @@
     "city": "Honolulu",
     "dates": "2007-02-10",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "02 Mar 2023 05:43:49",
     "name": "Kahala",
     "state": "Hawaii",
     "timezone": "Pacific/Honolulu",
@@ -2644,7 +2644,7 @@
     "city": "Grays",
     "dates": "2007-10-20",
     "flag": "🇬🇧",
-    "modified": "07 Jan 2022 08:59:09",
+    "modified": "07 Mar 2023 22:45:17",
     "name": "Lakeside",
     "state": "Essex",
     "timezone": "Europe/London",
@@ -2869,7 +2869,7 @@
     "city": "Cambridge",
     "dates": "2008-03-27",
     "flag": "🇬🇧",
-    "modified": "07 Jan 2022 08:59:08",
+    "modified": "02 Mar 2023 15:04:42",
     "name": "Grand Arcade",
     "state": "Cambridgeshire",
     "timezone": "Europe/London",
@@ -3574,7 +3574,7 @@
     "city": "Naperville",
     "dates": "2009-08-15",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:06",
+    "modified": "21 Feb 2023 22:03:15",
     "name": "Main Place",
     "state": "Illinois",
     "timezone": "America/Chicago",
@@ -4324,7 +4324,7 @@
     "city": "Lieusaint",
     "dates": "2011-08-27",
     "flag": "🇫🇷",
-    "modified": "07 Jan 2022 08:59:08",
+    "modified": "02 Mar 2023 05:40:56",
     "name": [
       "Carré Sénart",
       "Carre Senart"
@@ -4525,11 +4525,15 @@
   },
   "463": {
     "city": "Charlotte",
-    "dates": "2011-08-27",
+    "dates": [
+      "2011-08-27",
+      "2023-03-01"
+    ],
     "flag": "🇺🇸",
-    "modified": "07 Sep 2022 19:37:17",
+    "modified": "07 Mar 2023 22:46:52",
     "name": "Northlake Mall",
     "state": "North Carolina",
+    "status": "closed",
     "timezone": "America/New_York",
     "website": "-"
   },
@@ -4537,7 +4541,7 @@
     "city": "Waterloo",
     "dates": "2011-08-13",
     "flag": "🇨🇦",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "02 Mar 2023 05:45:34",
     "name": "Conestoga",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -4784,7 +4788,7 @@
     "city": "Bromley",
     "dates": "2012-09-29",
     "flag": "🇬🇧",
-    "modified": "07 Jan 2022 08:59:08",
+    "modified": "02 Mar 2023 05:48:47",
     "name": [
       "Bromley",
       "The Glades"
@@ -4951,7 +4955,7 @@
     "city": "Sindelfingen",
     "dates": "2012-09-21",
     "flag": "🇩🇪",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "10 Mar 2023 18:25:21",
     "name": "Sindelfingen",
     "state": "Baden-Württemberg",
     "timezone": "Europe/Berlin",
@@ -4984,7 +4988,7 @@
     "city": "Dijon",
     "dates": "2012-09-21",
     "flag": "🇫🇷",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "02 Mar 2023 05:47:13",
     "name": [
       "La Toison d’Or",
       "La Toison d'Or"
@@ -5141,7 +5145,7 @@
     "city": "Lawrence Township",
     "dates": "2013-06-29",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:09",
+    "modified": "21 Feb 2023 22:04:34",
     "name": "Quaker Bridge",
     "state": "New Jersey",
     "timezone": "America/New_York",

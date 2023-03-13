@@ -3,11 +3,12 @@ import re
 from datetime import datetime
 from functools import total_ordering
 from modules.constants import allRegions, userAgent
-from modules.util import request
-from typing import Any, Optional
+from modules.util import SessionType, request
+from typing import Any, Literal, Optional
 
 STORES: dict[str, "Store"] = {}
 DEFAULTFILE = "storeInfo.json"
+STATUSTRANS = {"closed": "关闭", "future": "招聘", "internal": "内部"}
 
 @total_ordering
 class Store:
@@ -34,11 +35,11 @@ class Store:
 		self.nso: str
 		self.dates: list[str]
 		if "dates" in dct:
-			self.dates = self.nso = dct["dates"]
-			if isinstance(self.nso, list):
-				self.nso = self.nso[0]
+			raw_dates = dct["dates"]
+			if isinstance(raw_dates, list):
+				self.dates, self.nso = raw_dates, raw_dates[0]
 			else:
-				self.dates = [self.dates]
+				self.dates, self.nso = [raw_dates], raw_dates
 
 		if "modified" in dct:
 			self.modified: str = dct["modified"]
@@ -61,16 +62,13 @@ class Store:
 			self.slug: str = self.name.lower().replace(" ", "") if dct["website"] == "-" else dct["website"]
 			self.url: str = f"https://www.apple.com{self.region['storeURL']}/retail/{self.slug}"
 
-		self.keys: list[str] = list(filter(None, [
+		keys = [
+			self.name, self.state, self.city, self.flag, *self.altname,
 			*dct.get("alter", "").split(" "),
-			self.name, self.state, self.city, self.flag,
-			*self.altname,
 			getattr(self, "slug", ""),
-			self.region["name"], self.region["nameEng"], self.region["abbr"],
-			*self.region["altername"],
-			*(["招聘", "Hiring"] if self.isFuture else []),
-			*(["关闭", "Closed"] if self.isClosed else []),
-			*(["内部", "Internal"] if self.isIntern else [])]))
+			self.region["name"], self.region["nameEng"], self.region["abbr"], *self.region["altername"],
+			*([dct["status"].capitalize(), STATUSTRANS[dct["status"]]] if "status" in dct else [])]
+		self.keys: list[str] = list(filter(None, keys))
 		self.keys += [k.replace(" ", "") for k in self.keys if " " in k]
 
 		self.sortkey: tuple[str, str, str] = (self.flag, self.state, self.sid)
@@ -104,28 +102,32 @@ class Store:
 		return self.telename(sid = False)
 
 	def __gt__(self, other):
-		if type(other) is not type(self):
+		if not type(other) is type(self):
 			return NotImplemented
 		return self.sortkey > other.sortkey
 
 	def __eq__(self, other):
-		if type(other) is not type(self):
+		if not type(other) is type(self):
 			return NotImplemented
 		return self.sortkey == other.sortkey
 
 	def __hash__(self) -> int:
 		return hash(self.sortkey)
 
-	async def detail(self, session = None, mode: str = "dict") -> Optional[str | dict[str, Any]]:
+	async def detail(self, session: Optional[SessionType] = None,
+		mode: Literal["dict", "hours", "raw", "url"] = "dict") -> Any:
 		try:
 			assert hasattr(self, "slug")
 			url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={self.slug}&locale={self.region['rspLocale']}&sc=false"
 			if mode == "url":
 				return url
 
-			r: dict[str, Any] = await request(session = session, url = url, headers = userAgent,
+			r = await request(session = session, url = url, headers = userAgent,
 				ensureAns = False, retryNum = 3, timeout = 5, mode = "json")
-			hours = {"isnso": r["hours"]["isNSO"], "regular": r["hours"]["hoursData"], "special": r["hours"]["specialHoursData"]}
+			hours = {
+				"isnso": r["hours"]["isNSO"],
+				"regular": r["hours"]["hoursData"],
+				"special": r["hours"]["specialHoursData"]}
 
 			match mode:
 				case "raw":
@@ -138,6 +140,8 @@ class Store:
 					province = ", ".join(a.strip() for a in filter(None, [add["city"], add["stateName"], add["postal"]]))
 					info = {"timezone": r["timezone"], "telephone": r["telephone"], "address": address, "province": province}
 					return r["geolocation"] | info | hours
+				case _:
+					return {}
 		except:
 			return {}
 
@@ -150,9 +154,9 @@ class Store:
 		'''
 		return f"https://rtlimages.apple.com/cmc/dieter/store/16_9/{self.rid}.png?{args}"
 
-	async def header(self, session = None) -> Optional[str]:
+	async def header(self, session: Optional[SessionType] = None) -> Optional[str]:
 		try:
-			r: dict[str, Any] = await request(session = session, url = self.dieter, headers = userAgent, ssl = False,
+			r = await request(session = session, url = self.dieter, headers = userAgent, ssl = False,
 				method = "HEAD", allow_redirects = False, raise_for_status = True, mode = "head", timeout = 5)
 			return r['Last-Modified'][5:-4]
 		except:
@@ -179,9 +183,9 @@ def StoreMatch(keyword: str, fuzzy: bool = False) -> list[Store]:
 	if keyword == "all" and fuzzy:
 		return list(STORES.values())
 	if fuzzy:
-		stores = [i for i in STORES.values() if any([keyword.lower() in k.lower() for k in i.keys])]
+		stores = [i for i in STORES.values() if any(keyword.lower() in k.lower() for k in i.keys)]
 	else:
-		stores = [i for i in STORES.values() if keyword.lower() in [k.lower() for k in i.keys]]
+		stores = [i for i in STORES.values() if keyword.lower() in (k.lower() for k in i.keys)]
 	return stores
 
 def getStore(sid: int | str) -> Optional[Store]:
@@ -199,7 +203,7 @@ def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 
 	for store in stores:
 		for level in levels:
-			ast = set([s for s in STORES.values() if getattr(s, level) == getattr(store, level) and s.isNormal])
+			ast = set(s for s in STORES.values() if getattr(s, level) == getattr(store, level) and s.isNormal)
 			if ast and ast.issubset(stores):
 				stores = stores.symmetric_difference(ast)
 				if level == "flag":
