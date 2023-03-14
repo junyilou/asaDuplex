@@ -1,5 +1,5 @@
 {
-  "update": "2023-03-11 00:10:17 GMT",
+  "update": "2023-03-14 03:10:17 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -4955,7 +4955,7 @@
     "city": "Sindelfingen",
     "dates": "2012-09-21",
     "flag": "🇩🇪",
-    "modified": "10 Mar 2023 18:25:21",
+    "modified": "13 Mar 2023 18:20:55",
     "name": "Sindelfingen",
     "state": "Baden-Württemberg",
     "timezone": "Europe/Berlin",
@@ -5986,14 +5986,19 @@
   "691": {
     "alter": "Seoul",
     "city": "서울",
+    "dates": "2023-03-31",
     "flag": "🇰🇷",
-    "name": "Store in Seoul South",
+    "modified": "13 Mar 2023 23:05:55",
+    "name": [
+      "강남",
+      "Gangnam"
+    ],
     "state": "서울",
-    "status": "future",
-    "timezone": "Asia/Seoul"
+    "timezone": "Asia/Seoul",
+    "website": "gangnam"
   },
   "692": {
-    "alter": "Seoul 首尔",
+    "alter": "Seoul",
     "city": "서울",
     "dates": "2018-01-27",
     "flag": "🇰🇷",
