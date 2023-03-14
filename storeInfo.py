@@ -162,7 +162,7 @@ class Store:
 		except:
 			return None
 
-def StoreID(sid: int | str, fuzzy: bool = False) -> list[Store]:
+def StoreID(sid: int | str, fuzzy: Any = False) -> list[Store]:
 	try:
 		assert sid
 		if fuzzy:
@@ -177,7 +177,7 @@ def StoreID(sid: int | str, fuzzy: bool = False) -> list[Store]:
 		return []
 	return stores
 
-def StoreMatch(keyword: str, fuzzy: bool = False) -> list[Store]:
+def StoreMatch(keyword: str, fuzzy: Any = False) -> list[Store]:
 	if not keyword:
 		return []
 	if keyword == "all" and fuzzy:
@@ -229,10 +229,10 @@ def reloadJSON(filename: str = DEFAULTFILE) -> str:
 def sidify(sid: int | str, *, R: bool = False, fill: bool = True) -> str:
 	return f"{'R' if R and fill else ''}{str(sid).upper().removeprefix('R'):{'0>3' if fill else ''}}"
 
-def storeReturn(args: str | list[str], *, remove_closed: bool = False, remove_future: bool = False,
-	fuzzy: bool = False, split: bool = False, sort: bool = True) -> list[Store]:
+def storeReturn(args: str | list[str], *, remove_closed: Any = False, remove_future: Any = False,
+	fuzzy: Any = False, split: Any = False, sort: Any = True) -> list[Store]:
 	ans = []
-	match args, split:
+	match args, bool(split):
 		case str(), True:
 			splits = re.split(",|，", args) # type: ignore
 		case list(), False:
@@ -240,7 +240,7 @@ def storeReturn(args: str | list[str], *, remove_closed: bool = False, remove_fu
 		case _, _:
 			splits = [args]
 
-	for a in map(lambda s: str(s).strip(), splits):
+	for a in (str(s).strip() for s in splits):
 		for stores in (StoreID(a, fuzzy = fuzzy), StoreMatch(a, fuzzy = fuzzy)):
 			for s in stores:
 				try:
