@@ -162,31 +162,32 @@ class Store:
 		except:
 			return None
 
-def StoreID(sid: int | str, fuzzy: Any = False) -> list[Store]:
+def StoreID(sid: int | str, fuzzy: Any = False, regular: Any = False) -> list[Store]:
 	try:
 		assert sid
-		if fuzzy:
+		if regular:
+			return [i for i in STORES.values() if re.search(str(sid), i.rid)]
+		elif fuzzy:
 			sid = sidify(sid, fill = False)
 			assert sid.isdigit()
-			stores = [i for i in STORES.values() if sid in i.sid]
-		else:
-			sid = sidify(sid)
-			assert sid.isdigit()
-			stores = [STORES[sid]] if sid in STORES else []
+			return [i for i in STORES.values() if sid in i.sid]
+		sid = sidify(sid)
+		assert sid.isdigit()
+		return [STORES[sid]] if sid in STORES else []
 	except AssertionError:
 		return []
-	return stores
 
-def StoreMatch(keyword: str, fuzzy: Any = False) -> list[Store]:
+def StoreMatch(keyword: str, fuzzy: Any = False, regular: Any = False) -> list[Store]:
 	if not keyword:
 		return []
 	if keyword == "all" and fuzzy:
 		return list(STORES.values())
+	if regular:
+		pattern = re.compile(keyword, re.I)
+		return [i for i in STORES.values() if any(re.search(pattern, k) for k in i.keys)]
 	if fuzzy:
-		stores = [i for i in STORES.values() if any(keyword.lower() in k.lower() for k in i.keys)]
-	else:
-		stores = [i for i in STORES.values() if keyword.lower() in (k.lower() for k in i.keys)]
-	return stores
+		return [i for i in STORES.values() if any(keyword.lower() in k.lower() for k in i.keys)]
+	return [i for i in STORES.values() if keyword.lower() in (k.lower() for k in i.keys)]
 
 def getStore(sid: int | str) -> Optional[Store]:
 	return STORES.get(sidify(sid), None)
@@ -230,7 +231,7 @@ def sidify(sid: int | str, *, R: bool = False, fill: bool = True) -> str:
 	return f"{'R' if R and fill else ''}{str(sid).upper().removeprefix('R'):{'0>3' if fill else ''}}"
 
 def storeReturn(args: str | list[str], *, remove_closed: Any = False, remove_future: Any = False,
-	fuzzy: Any = False, split: Any = False, sort: Any = True) -> list[Store]:
+	fuzzy: Any = False, regular: Any = False, split: Any = False, sort: Any = True) -> list[Store]:
 	ans = []
 	match args, bool(split):
 		case str(), True:
@@ -241,7 +242,7 @@ def storeReturn(args: str | list[str], *, remove_closed: Any = False, remove_fut
 			splits = [args]
 
 	for a in (str(s).strip() for s in splits):
-		for stores in (StoreID(a, fuzzy = fuzzy), StoreMatch(a, fuzzy = fuzzy)):
+		for stores in (StoreID(a, fuzzy = fuzzy, regular = regular), StoreMatch(a, fuzzy = fuzzy, regular = regular)):
 			for s in stores:
 				try:
 					assert s not in ans
