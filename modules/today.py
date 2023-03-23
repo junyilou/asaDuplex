@@ -47,13 +47,13 @@ except FileNotFoundError:
 	_known_slugs = []
 
 @atexit.register
-def clean(loop: Optional[asyncio.AbstractEventLoop] = None):
+def clean(loop: Optional[asyncio.AbstractEventLoop] = None) -> None:
 	try:
 		l = [asyncio.get_running_loop()] if loop is None else [loop]
 	except:
-		l = [i for i in __session_pool]
+		l = list(__session_pool)
 
-	async def __clean_task(loop):
+	async def __clean_task(loop) -> None:
 		await __session_pool[loop].close()
 		del __session_pool[loop]
 
@@ -73,7 +73,7 @@ def _get_session() -> SessionType:
 		__session_pool[loop] = session
 	return session
 
-def _resolution(vids: list[str], direction: Optional[Literal["l"] | Literal["p"]] = None) -> list[str]:
+def _resolution(vids: list[str], direction: Optional[Literal["l", "p"]] = None) -> list[str]:
 	res = {}
 	for v in vids:
 		f = re.findall(r"([0-9]+)x([0-9]+)\.[a-zA-Z0-9]+", v)
@@ -120,7 +120,7 @@ def _validDates(ex: str, runtime: datetime) -> list[datetime]:
 class TodayObject:
 	hashattr: list[str] = []
 	sortkeys: list[str] = []
-	raw: dict = {}
+	raw: dict[str, Any] = {}
 
 	def _sort_tuple(self) -> tuple[Any, ...]:
 		return tuple(getattr(self, key) for key in self.sortkeys)
@@ -138,15 +138,13 @@ class TodayObject:
 		return type(other) is type(self) and self._sort_tuple() == other._sort_tuple()
 
 class TodayEncoder(json.JSONEncoder):
-	def __init__(self, **kwargs):
+	def __init__(self, **kwargs) -> None:
 		super().__init__(**(kwargs | {"ensure_ascii": False}))
 
-	def default(self, o):
-		match o:
-			case TodayObject() | Raw_Store():
-				return o.raw
-			case _:
-				return super().default(o)
+	def default(self, o) -> dict[str, Any]:
+		if isinstance(o, TodayObject) or isinstance(o, Raw_Store):
+			return o.raw
+		return super().default(o)
 
 class Store(TodayObject):
 	hashattr: list[str] = ["sid"]
@@ -187,7 +185,7 @@ class Store(TodayObject):
 		self.today: str = self.url.replace("/retail/", "/today/")
 		self.calendar: str = self.url.replace("/retail/", "/today/calendar/")
 		self.serial: dict[str, str] = {"sid": self.sid}
-		self.raw: dict = {k: v for k, v in vars(self).items() if k != "raw"}
+		self.raw: dict[str, Any] = {k: v for k, v in vars(self).items() if k != "raw"}
 
 	def __repr__(self) -> str:
 		return f'<Store "{self.name}" ({self.sid}), "{self.slug}", "{self.rootPath}">'
@@ -258,9 +256,8 @@ class Talent(TodayObject):
 	hashattr: list[str] = ["name"]
 	sortkeys: list[str] = ["name"]
 
-	def __init__(self,
-	    raw: dict) -> None:
-		self.raw: dict = raw
+	def __init__(self, raw: dict[str, Any]) -> None:
+		self.raw: dict[str, Any] = raw
 		self.name: str = raw["name"].strip()
 		self.title: Optional[str] = raw["title"].strip() if "title" in raw else None
 		self.description: str = raw["description"].strip()
@@ -293,9 +290,9 @@ class Course(TodayObject):
 				raise ValueError(f"获取课程 {rootPath}/{slug} 数据失败") from None
 
 		assert isinstance(remote, dict), f"课程 {rootPath}/{slug} 数据信息无效"
-		courseId: str = next(filter(lambda t: t[1]["urlTitle"] == slug, remote["courses"].items()))[0]
+		courseId: str = next(t[0] for t in remote["courses"].items() if t[1]["urlTitle"] == slug)
 		talents: list[dict] = remote.get("talents", [])
-		raw: dict = remote["courses"][courseId]
+		raw: dict[str, Any] = remote["courses"][courseId]
 		moreAbout, collection = [], raw["collectionName"]
 		if "moreAbout" in remote:
 			moreAbout.append(remote["moreAbout"])
@@ -311,7 +308,7 @@ class Course(TodayObject):
 
 	def __init__(self,
 	    courseId: str,
-		raw: dict,
+		raw: dict[str, Any],
 		rootPath: str,
 		collection: Optional[Union[str, "Collection"]] = None,
 		talents: list[dict] = []) -> None:
@@ -461,7 +458,7 @@ class Schedule(TodayObject):
 		course: Course = await getCourse(
 			remote = remote, rootPath = rootPath,
 			slug = remote["courses"][remote["schedules"][scheduleId]["courseId"]]["urlTitle"])
-		raw: dict = remote["schedules"][scheduleId]
+		raw: dict[str, Any] = remote["schedules"][scheduleId]
 
 		return cls(scheduleId = scheduleId, course = course, store = store, rootPath = rootPath, raw = raw)
 
@@ -469,7 +466,7 @@ class Schedule(TodayObject):
 	    course: Course,
 		scheduleId: str,
 		store: Store,
-		raw: dict,
+		raw: dict[str, Any],
 		rootPath: str) -> None:
 
 		_ = [setattr(self, key, getattr(course, key)) for key in vars(course)]
@@ -493,7 +490,7 @@ class Schedule(TodayObject):
 		self.rawEnd: datetime = datetime.fromtimestamp(raw["endTime"] / 1000)
 		self.status: bool = raw["status"] == "RSVP"
 		self.url: str = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}/{scheduleId}/?sn={self.store.sid}"
-		self.raw: dict = raw | {"serial": self.serial}
+		self.raw: dict[str, Any] = raw | {"serial": self.serial}
 
 	def datetimeStart(self, form: str = "%-m 月 %-d 日 %-H:%M") -> str:
 		if isinstance(self.timeStart, datetime):
@@ -555,7 +552,7 @@ class Collection(TodayObject):
 		return cls(rootPath = rootPath, slug = slug, raw = remote)
 
 	def __init__(self,
-	    raw: dict,
+	    raw: dict[str, Any],
 		rootPath: str,
 		slug: str) -> None:
 
@@ -590,7 +587,7 @@ class Collection(TodayObject):
 			self.collaborations = [Talent(raw = t) for t in raw["inCollaborationWith"]["partners"]]
 		else:
 			self.collaborations = []
-		self.raw: dict = raw | {"serial": self.serial}
+		self.raw: dict[str, Any] = raw | {"serial": self.serial}
 
 	def __repr__(self) -> str:
 		return f'<Collection "{self.name}", "{self.slug}", "{self.rootPath}">'
@@ -856,7 +853,7 @@ def teleinfo(
 		courseStore = schedules[0].raw_store.telename(sid = False)
 	else:
 		storeSets = set([i.raw_store for i in schedules])
-		storeCounts = {r: len(list(filter(lambda s: s.flag == r, storeSets))) for r in priorlist}
+		storeCounts = {r: len([s for s in storeSets if s.flag == r]) for r in priorlist}
 		textStore = [f"{k} ({v} {lang[userLang]['STORES'].format(PLURAL = 's' if v > 1 else '')})"
 			for k, v in storeCounts.items() if v]
 		courseStore = lang[userLang]["JOINT"].join(textStore)
@@ -895,7 +892,7 @@ def teleinfo(
 	if mode == "new" or schedules == []:
 		signing = signingPrefix = ""
 	else:
-		upCount = len(tuple(filter(lambda i: i.status is True, schedules)))
+		upCount = len([s for s in schedules if s.status])
 		seCount = len(schedules)
 		if seCount > 1:
 			if upCount:

@@ -36,11 +36,14 @@ def sortOD(od: dict, reverse: list[bool] = [False], key: Optional[Callable] = No
 				res[k] = v
 	return res
 
-def timeDelta(*, seconds: int = 0, dt1: datetime = datetime.min,
-	dt2: datetime = datetime.min, items: int = 5) -> str:
+def timeDelta(*, seconds: float = 0, dt1: datetime = datetime.min, dt2: datetime = datetime.min,
+	items: Optional[int] = None, empty: str = "") -> str:
 	ans, base = [], 1
-	s = seconds or (dt2 - dt1).total_seconds()
 	comp = [(60, "秒"), (60, "分钟"), (24, "小时"), (7, "天"), (0, "周")]
+	s = int(abs(seconds or (dt2 - dt1).total_seconds()))
+	if not s:
+		return empty
+	items = items or len(comp)
 	for carry, desc in comp:
 		if (c := s // base):
 			if (l := f"{c % carry if carry else c:.0f}") != "0":
@@ -57,12 +60,10 @@ def timezoneText(dtime: datetime) -> str:
 	return f"GMT{time_h:+.0f}" + (f":{60 * time_min:0>2.0f}" if time_min else "")
 
 async def request(session: Optional[SessionType] = None,
-	url: str = "", mode: str | list[str] = ["text"],
+	url: str = "", method: str = "GET", mode: str | list[str] = ["text"],
 	retryNum: int = 1, ensureAns: bool = True, **kwargs) -> Any:
-	assert url != "", "URL 不合法"
-	method = kwargs.get("method", "GET")
-	_ = kwargs.pop("method") if "method" in kwargs else None
-	logger = logging.getLogger("async_request")
+	assert url, "URL 不正确"
+	logger = logging.getLogger("util.request")
 
 	close_session = False
 	if session is None:
@@ -70,8 +71,8 @@ async def request(session: Optional[SessionType] = None,
 		session = aiohttp.ClientSession()
 		close_session = True
 
-	modes: list = mode if isinstance(mode, list) else [mode]
-	logger.debug(f"[{method}] '{url}', [模式] {mode}, [参数] {kwargs}, [重试] {retryNum}")
+	modes: list[str] = mode if isinstance(mode, list) else [mode]
+	logger.debug(", ".join(f"[{k}] {v}" for k, v in {method: repr(url), "模式": mode, "参数": kwargs, "重试": retryNum}.items()))
 	while retryNum:
 		try:
 			async with session.request(url = url, method = method, **kwargs) as resp:
@@ -92,25 +93,22 @@ async def request(session: Optional[SessionType] = None,
 								results[m] = json.loads(r)
 						case _:
 							results[m] = await resp.text()
-			logger.debug(f"[状态{resp.status}] '{url}'")
+			logger.debug(", ".join(f"[{k}] {v}" for k, v in {f"状态{resp.status}": repr(url)}.items()))
 			if close_session:
 				await session.close()
 			if len(modes) == 1:
-				return results[modes[0]]
+				return next(iter(results.values()))
 			return results
 		except Exception as exp:
-			if retryNum == 1:
-				logger.debug(f"[丢弃] '{url}', [异常] {exp}")
-				logger.debug(f"{exp!r}")
+			retryNum -= 1
+			if retryNum <= 0:
+				logger.debug(", ".join(f"[{k}] {v}" for k, v in {"丢弃": repr(url), "异常": repr(exp)}.items()))
 				if close_session:
 					await session.close()
 				if ensureAns:
 					return exp
 				raise exp
-			else:
-				retryNum -= 1
-				logger.debug(f"[异常] '{url}', [异常] {exp}, [重试剩余] {retryNum}")
-				logger.debug(f"{exp!r}")
+			logger.debug(", ".join(f"[{k}] {v}" for k, v in {"丢弃": repr(url), "异常": repr(exp), "重试剩余": retryNum}.items()))
 
 P = ParamSpec('P')
 R = TypeVar('R')
@@ -122,20 +120,19 @@ def session_func(func: Callable[Concatenate[SessionType, P],
 			return await func(session, *args, **kwargs)
 	return wrapper
 
-def sync(coroutine: Optional[Awaitable] = None, loop: Optional[asyncio.AbstractEventLoop] = None):
+def sync(coroutine: Optional[Awaitable] = None, loop: Optional[asyncio.AbstractEventLoop] = None) -> Any:
 	if loop is None:
 		loop = asyncio.new_event_loop()
 	if coroutine is not None:
 		return loop.run_until_complete(coroutine)
 	return loop
 
-def setLogger(level: int, name: str, force_print: bool = False):
+def setLogger(level: int, name: str, force_print: bool = False) -> None:
 	if isdir('logs') and not force_print:
-		logging.basicConfig(
+		return logging.basicConfig(
 			filename = f"logs/{name}.log",
 			format = '[%(asctime)s %(name)s %(levelname)s] %(message)s',
 			level = level, filemode = 'a', datefmt = '%F %T')
-	else:
-		logging.basicConfig(
-			format = '[%(process)d %(asctime)s %(name)s %(levelname)s] %(message)s',
-			level = level, datefmt = '%T')
+	return logging.basicConfig(
+		format = '[%(process)d %(asctime)s %(name)s %(levelname)s] %(message)s',
+		level = level, datefmt = '%T')
