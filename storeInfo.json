@@ -1,5 +1,5 @@
 {
-  "update": "2023-03-14 03:10:17 GMT",
+  "update": "2023-03-29 15:00:00 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -8,7 +8,7 @@
     "name": "Glendale Galleria",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "002": {
     "city": "Palo Alto",
@@ -21,7 +21,7 @@
     "name": "Palo Alto",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "003": {
     "city": "Bellevue",
@@ -34,7 +34,7 @@
     "name": "Bellevue Square",
     "state": "Washington",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "004": {
     "city": "Costa Mesa",
@@ -44,7 +44,7 @@
     "name": "South Coast Plaza",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "005": {
     "alter": "爱知 Aichi Nagoya Nagoya-shi",
@@ -71,7 +71,7 @@
     "name": "Lenox Square",
     "state": "Georgia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "007": {
     "city": "Bloomington",
@@ -84,7 +84,7 @@
     "name": "Mall of America",
     "state": "Minnesota",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "008": {
     "city": "Plano",
@@ -97,7 +97,7 @@
     "name": "Willow Bend",
     "state": "Texas",
     "status": "closed",
-    "website": "-"
+    "website": ""
   },
   "009": {
     "city": "Columbus",
@@ -110,7 +110,7 @@
     "name": "Easton Town Center",
     "state": "Ohio",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "010": {
     "city": "McLean",
@@ -120,7 +120,7 @@
     "name": "Tysons Corner",
     "state": "Virginia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "011": {
     "city": "Lynnfield",
@@ -136,7 +136,7 @@
     ],
     "state": "Massachusetts",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "012": {
     "city": "Miami",
@@ -146,7 +146,7 @@
     "name": "The Falls",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "013": {
     "city": "Woodcliff Lake",
@@ -172,7 +172,7 @@
     ],
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "015": {
     "city": "Newport Beach",
@@ -185,7 +185,7 @@
     "name": "Fashion Island",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "016": {
     "city": "Buffalo",
@@ -195,7 +195,7 @@
     "name": "Walden Galleria",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "017": {
     "city": "Albany",
@@ -205,7 +205,7 @@
     "name": "Crossgates",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "018": {
     "city": "Schaumburg",
@@ -218,7 +218,7 @@
     "name": "Woodfield",
     "state": "Illinois",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "019": {
     "city": "Tampa",
@@ -228,7 +228,7 @@
     "name": "International Plaza",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "020": {
     "city": "Germantown",
@@ -241,7 +241,7 @@
     "name": "Saddle Creek",
     "state": "Tennessee",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "021": {
     "city": "Cambridge",
@@ -254,7 +254,7 @@
     "name": "CambridgeSide",
     "state": "Massachusetts",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "022": {
     "city": "Roseville",
@@ -267,7 +267,7 @@
     "name": "Rosedale Center",
     "state": "Minnesota",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "023": {
     "city": "Northridge",
@@ -277,7 +277,7 @@
     "name": "Northridge",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "024": {
     "city": "Wellington",
@@ -287,7 +287,7 @@
     "name": "Wellington Green",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "025": {
     "city": "Farmington",
@@ -297,7 +297,7 @@
     "name": "Westfarms",
     "state": "Connecticut",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "026": {
     "city": "Chandler",
@@ -310,7 +310,7 @@
     "name": "Chandler Fashion Center",
     "state": "Arizona",
     "timezone": "US/Arizona",
-    "website": "-"
+    "website": ""
   },
   "027": {
     "city": "Salem",
@@ -323,7 +323,7 @@
     "name": "Rockingham Park",
     "state": "New Hampshire",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "028": {
     "city": "Cincinnati",
@@ -333,7 +333,7 @@
     "name": "Kenwood Towne Centre",
     "state": "Ohio",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "029": {
     "city": "Burlingame",
@@ -343,7 +343,7 @@
     "name": "Burlingame",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "030": {
     "city": "Littleton",
@@ -353,7 +353,7 @@
     "name": "Aspen Grove",
     "state": "Colorado",
     "timezone": "America/Denver",
-    "website": "-"
+    "website": ""
   },
   "031": {
     "city": "Scottsdale",
@@ -370,7 +370,7 @@
     ],
     "state": "Arizona",
     "timezone": "US/Arizona",
-    "website": "-"
+    "website": ""
   },
   "032": {
     "city": "New York",
@@ -380,7 +380,7 @@
     "name": "SoHo",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "033": {
     "city": "San Francisco",
@@ -393,7 +393,7 @@
     "name": "Stonestown",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "034": {
     "city": "Pasadena",
@@ -403,7 +403,7 @@
     "name": "Pasadena",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "035": {
     "city": "Chicago",
@@ -419,7 +419,7 @@
     ],
     "state": "Illinois",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "036": {
     "city": "Arlington",
@@ -429,7 +429,7 @@
     "name": "Clarendon",
     "state": "Virginia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "038": {
     "alter": "Rome Lazio",
@@ -443,7 +443,7 @@
     "name": "RomaEst",
     "state": "Roma",
     "status": "closed",
-    "website": "-"
+    "website": ""
   },
   "039": {
     "city": "Santa Clara",
@@ -456,7 +456,7 @@
     "name": "Valley Fair",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "040": {
     "city": "San Diego",
@@ -466,7 +466,7 @@
     "name": "Fashion Valley",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "041": {
     "city": "Novi",
@@ -479,7 +479,7 @@
     "name": "Twelve Oaks",
     "state": "Michigan",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "042": {
     "city": "Dallas",
@@ -489,7 +489,7 @@
     "name": "Knox Street",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "043": {
     "city": "Short Hills",
@@ -499,7 +499,7 @@
     "name": "Short Hills",
     "state": "New Jersey",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "044": {
     "city": "Santa Rosa",
@@ -512,7 +512,7 @@
     "name": "Santa Rosa Plaza",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "045": {
     "alter": "Munich Munchen Muenchen Bavaria Rosenstrabe",
@@ -542,7 +542,7 @@
     ],
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "047": {
     "city": "Denver",
@@ -555,7 +555,7 @@
     "name": "Cherry Creek",
     "state": "Colorado",
     "timezone": "America/Denver",
-    "website": "-"
+    "website": ""
   },
   "048": {
     "city": "福岡市 Fukuoka-shi 福冈 福冈天神",
@@ -586,7 +586,7 @@
     "name": "Southpoint",
     "state": "North Carolina",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "050": {
     "city": "Los Angeles",
@@ -599,7 +599,7 @@
     "name": "The Grove",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "051": {
     "city": "Santa Monica",
@@ -612,7 +612,7 @@
     "name": "Third Street Promenade",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "052": {
     "city": "Cupertino",
@@ -622,7 +622,7 @@
     "name": "Infinite Loop",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "053": {
     "city": "Orlando",
@@ -632,7 +632,7 @@
     "name": "Millenia",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "054": {
     "city": "Edina",
@@ -645,7 +645,7 @@
     "name": "Southdale",
     "state": "Minnesota",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "055": {
     "city": "Troy",
@@ -655,7 +655,7 @@
     "name": "Somerset",
     "state": "Michigan",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "056": {
     "city": "Oak Brook",
@@ -668,7 +668,7 @@
     "name": "Oakbrook",
     "state": "Illinois",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "057": {
     "city": "Emeryville",
@@ -682,7 +682,7 @@
     "name": "Bay Street",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "058": {
     "city": "Houston",
@@ -692,7 +692,7 @@
     "name": "Houston Galleria",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "059": {
     "city": "Wauwatosa",
@@ -705,7 +705,7 @@
     "name": "Mayfair",
     "state": "Wisconsin",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "060": {
     "city": "Garden City",
@@ -718,7 +718,7 @@
     "name": "Roosevelt Field",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "061": {
     "city": "White Plains",
@@ -731,7 +731,7 @@
     "name": "The Westchester",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "062": {
     "city": "St. Louis",
@@ -741,7 +741,7 @@
     "name": "West County",
     "state": "Missouri",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "063": {
     "city": "Towson",
@@ -754,7 +754,7 @@
     "name": "Towson Town Center",
     "state": "Maryland",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "064": {
     "city": "Las Vegas",
@@ -764,7 +764,7 @@
     "name": "Fashion Show",
     "state": "Nevada",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "065": {
     "city": "King of Prussia",
@@ -777,7 +777,7 @@
     "name": "King of Prussia",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "066": {
     "city": "Indianapolis",
@@ -793,7 +793,7 @@
     ],
     "state": "Indiana",
     "timezone": "America/Indianapolis",
-    "website": "-"
+    "website": ""
   },
   "067": {
     "city": "Edison",
@@ -806,7 +806,7 @@
     "name": "Menlo Park",
     "state": "New Jersey",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "068": {
     "city": "Huntington Station",
@@ -816,7 +816,7 @@
     "name": "Walt Whitman",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "069": {
     "city": "Mission Viejo",
@@ -826,7 +826,7 @@
     "name": "Mission Viejo",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "070": {
     "city": "Sacramento",
@@ -839,7 +839,7 @@
     "name": "Arden Fair",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "071": {
     "city": "Corte Madera",
@@ -852,7 +852,7 @@
     "name": "Corte Madera",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "072": {
     "city": "Seattle",
@@ -865,7 +865,7 @@
     "name": "University Village",
     "state": "Washington",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "073": {
     "city": "Honolulu",
@@ -875,7 +875,7 @@
     "name": "Ala Moana",
     "state": "Hawaii",
     "timezone": "Pacific/Honolulu",
-    "website": "-"
+    "website": ""
   },
   "074": {
     "city": "Boca Raton",
@@ -888,7 +888,7 @@
     "name": "Boca Raton",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "075": {
     "city": "San Francisco",
@@ -915,7 +915,7 @@
     "name": "Chestnut Hill",
     "state": "Massachusetts",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "077": {
     "city": "Portland",
@@ -928,7 +928,7 @@
     "name": "Pioneer Place",
     "state": "Oregon",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "078": {
     "city": "Richmond",
@@ -941,7 +941,7 @@
     "name": "Short Pump Town Center",
     "state": "Virginia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "079": {
     "alter": "Tokyo Chuo Chuo-ku 银座",
@@ -974,7 +974,7 @@
     ],
     "state": "Georgia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "081": {
     "city": "Woodmere",
@@ -990,7 +990,7 @@
     ],
     "state": "Ohio",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "082": {
     "city": "San Diego",
@@ -1003,7 +1003,7 @@
     "name": "UTC",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "083": {
     "city": "Charlotte",
@@ -1016,7 +1016,7 @@
     "name": "SouthPark",
     "state": "North Carolina",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "084": {
     "city": "Bethesda",
@@ -1026,7 +1026,7 @@
     "name": "Montgomery Mall",
     "state": "Maryland",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "085": {
     "city": "Austin",
@@ -1039,7 +1039,7 @@
     "name": "Barton Creek",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "086": {
     "city": "Tucson",
@@ -1049,7 +1049,7 @@
     "name": "La Encantada",
     "state": "Arizona",
     "timezone": "US/Arizona",
-    "website": "-"
+    "website": ""
   },
   "087": {
     "city": "Aventura",
@@ -1063,7 +1063,7 @@
     "name": "Aventura",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "088": {
     "city": "Marlton",
@@ -1073,7 +1073,7 @@
     "name": "Sagemore",
     "state": "New Jersey",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "089": {
     "city": "Skokie",
@@ -1086,7 +1086,7 @@
     "name": "Old Orchard",
     "state": "Illinois",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "090": {
     "city": "Tigard",
@@ -1099,7 +1099,7 @@
     "name": "Washington Square",
     "state": "Oregon",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "091": {
     "alter": "Osaka Osaka-shi 心斋桥",
@@ -1123,7 +1123,7 @@
     "name": "Regent Street",
     "state": "Central London",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "093": {
     "city": "Danbury",
@@ -1133,7 +1133,7 @@
     "name": "Danbury Fair Mall",
     "state": "Connecticut",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "094": {
     "city": "Rancho Cucamonga",
@@ -1146,7 +1146,7 @@
     "name": "Victoria Gardens",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "095": {
     "city": "New York",
@@ -1160,7 +1160,7 @@
     "name": "Fifth Avenue",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "096": {
     "city": "Pittsburgh",
@@ -1170,7 +1170,7 @@
     "name": "Shadyside",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "097": {
     "city": "Kansas City",
@@ -1183,7 +1183,7 @@
     "name": "Country Club Plaza",
     "state": "Missouri",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "099": {
     "city": "Palo Alto",
@@ -1199,7 +1199,7 @@
     ],
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "100": {
     "city": "Lynnwood",
@@ -1212,7 +1212,7 @@
     ],
     "state": "Washington",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "101": {
     "city": "Pleasanton",
@@ -1225,7 +1225,7 @@
     "name": "Stoneridge Mall",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "102": {
     "city": "Newark",
@@ -1238,7 +1238,7 @@
     "name": "Christiana Mall",
     "state": "Delaware",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "103": {
     "city": "Rockaway",
@@ -1251,7 +1251,7 @@
     "name": "Rockaway",
     "state": "New Jersey",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "104": {
     "city": "Bridgewater",
@@ -1264,7 +1264,7 @@
     "name": "Bridgewater",
     "state": "New Jersey",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "105": {
     "city": "San Jose",
@@ -1277,7 +1277,7 @@
     "name": "Oakridge",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "106": {
     "city": "Tukwila",
@@ -1290,7 +1290,7 @@
     "name": "Southcenter",
     "state": "Washington",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "107": {
     "city": "Syracuse",
@@ -1306,7 +1306,7 @@
     ],
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "108": {
     "city": "Los Angeles",
@@ -1319,7 +1319,7 @@
     "name": "Century City",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "109": {
     "city": "West Des Moines",
@@ -1329,7 +1329,7 @@
     "name": "Jordan Creek",
     "state": "Iowa",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "110": {
     "city": "Braintree",
@@ -1339,7 +1339,7 @@
     "name": "South Shore",
     "state": "Massachusetts",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "111": {
     "city": "Jacksonville",
@@ -1368,7 +1368,7 @@
     "name": "Bethesda Row",
     "state": "Maryland",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "113": {
     "city": "Greenhithe",
@@ -1378,7 +1378,7 @@
     "name": "Bluewater",
     "state": "Kent",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "114": {
     "city": "Saint Louis",
@@ -1391,7 +1391,7 @@
     "name": "Saint Louis Galleria",
     "state": "Missouri",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "115": {
     "city": "Miami Beach",
@@ -1404,7 +1404,7 @@
     "name": "Lincoln Road",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "116": {
     "city": "Raleigh",
@@ -1417,7 +1417,7 @@
     "name": "Crabtree Valley Mall",
     "state": "North Carolina",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "117": {
     "city": "Paramus",
@@ -1430,7 +1430,7 @@
     "name": "Garden State Plaza",
     "state": "New Jersey",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "118": {
     "city": "Birmingham",
@@ -1446,7 +1446,7 @@
     ],
     "state": "West Midlands",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "119": {
     "alter": "Tokyo Shibuya Shibuya-ku 涩谷",
@@ -1473,7 +1473,7 @@
     "name": "Yorkdale",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "121": {
     "city": "Toronto",
@@ -1486,7 +1486,7 @@
     "name": "Eaton Centre",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "122": {
     "city": "Manhattan Beach",
@@ -1495,11 +1495,11 @@
       "2014-09-13"
     ],
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:08",
+    "modified": "21 Mar 2023 16:05:22",
     "name": "Manhattan Village",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "123": {
     "city": "Nashville",
@@ -1509,7 +1509,7 @@
     "name": "Green Hills",
     "state": "Tennessee",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "124": {
     "city": "Los Angeles",
@@ -1522,7 +1522,7 @@
     "name": "Beverly Center",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "125": {
     "city": "Salt Lake City",
@@ -1538,7 +1538,7 @@
     ],
     "state": "Utah",
     "timezone": "America/Denver",
-    "website": "-"
+    "website": ""
   },
   "126": {
     "city": "The Woodlands",
@@ -1551,7 +1551,7 @@
     "name": "The Woodlands",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "127": {
     "city": "Palm Beach Gardens",
@@ -1561,7 +1561,7 @@
     "name": "The Gardens Mall",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "128": {
     "alter": "Tokyo Shinjuku Shinjuku-ku",
@@ -1585,7 +1585,7 @@
     "name": "Pentagon City",
     "state": "Virginia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "130": {
     "city": "Oklahoma City",
@@ -1595,7 +1595,7 @@
     "name": "Penn Square",
     "state": "Oklahoma",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "131": {
     "city": "San Antonio",
@@ -1605,7 +1605,7 @@
     "name": "La Cantera",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "132": {
     "city": "Grand Rapids",
@@ -1618,7 +1618,7 @@
     "name": "Woodland",
     "state": "Michigan",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "133": {
     "city": "Nashville",
@@ -1628,7 +1628,7 @@
     "name": "Downtown Nashville",
     "state": "Tennessee",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "134": {
     "city": "Tigard",
@@ -1641,7 +1641,7 @@
     "name": "Bridgeport Village",
     "state": "Oregon",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "135": {
     "city": "Glasgow",
@@ -1654,7 +1654,7 @@
     ],
     "state": "Glasgow",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "136": {
     "city": "Manchester",
@@ -1664,17 +1664,17 @@
     "name": "Trafford Centre",
     "state": "Greater Manchester",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "137": {
     "city": "Hingham",
     "dates": "2006-02-18",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "24 Mar 2023 15:43:41",
     "name": "Derby Street",
     "state": "Massachusetts",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "138": {
     "city": "Freehold",
@@ -1684,7 +1684,7 @@
     "name": "Freehold Raceway Mall",
     "state": "New Jersey",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "139": {
     "city": "Lake Grove",
@@ -1697,7 +1697,7 @@
     "name": "Smith Haven",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "140": {
     "city": "Victor",
@@ -1710,7 +1710,7 @@
     "name": "Eastview",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "141": {
     "city": "Northbrook",
@@ -1723,7 +1723,7 @@
     "name": "Northbrook",
     "state": "Illinois",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "142": {
     "city": "Annapolis",
@@ -1736,7 +1736,7 @@
     "name": "Annapolis",
     "state": "Maryland",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "143": {
     "city": "Orlando",
@@ -1749,7 +1749,7 @@
     "name": "Florida Mall",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "144": {
     "city": "Dallas",
@@ -1762,7 +1762,7 @@
     "name": "NorthPark Center",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "146": {
     "city": "Irvine",
@@ -1775,7 +1775,7 @@
     "name": "Irvine Spectrum Center",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "147": {
     "city": "Pittsburgh",
@@ -1788,7 +1788,7 @@
     "name": "South Hills Village",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "148": {
     "city": "Sherman Oaks",
@@ -1801,7 +1801,7 @@
     "name": "Sherman Oaks",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "149": {
     "city": "Boston",
@@ -1811,7 +1811,7 @@
     "name": "Boylston Street",
     "state": "Massachusetts",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "150": {
     "alter": "Miyagi Sendai-shi",
@@ -1838,7 +1838,7 @@
     "name": "Southlake Town Square",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "152": {
     "city": "Staten Island",
@@ -1848,7 +1848,7 @@
     "name": "Staten Island",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "153": {
     "city": "Sheffield",
@@ -1858,7 +1858,7 @@
     "name": "Meadowhall",
     "state": "South Yorkshire",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "154": {
     "city": "Thousand Oaks",
@@ -1868,7 +1868,7 @@
     "name": "The Oaks",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "155": {
     "city": "Burlington",
@@ -1878,7 +1878,7 @@
     "name": "Burlington",
     "state": "Massachusetts",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "156": {
     "city": "Brea",
@@ -1891,7 +1891,7 @@
     "name": "Brea Mall",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "159": {
     "alter": "Zurich",
@@ -1908,7 +1908,7 @@
     ],
     "state": "Zürich",
     "timezone": "Europe/Zurich",
-    "website": "-"
+    "website": ""
   },
   "161": {
     "city": "Las Vegas",
@@ -1918,7 +1918,7 @@
     "name": "The Forum Shops",
     "state": "Nevada",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "162": {
     "city": "Philadelphia",
@@ -1928,7 +1928,7 @@
     "name": "Walnut Street",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "163": {
     "city": "London",
@@ -1938,7 +1938,7 @@
     "name": "Brent Cross",
     "state": "Greater London",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "164": {
     "city": "Houston",
@@ -1951,7 +1951,7 @@
     "name": "Memorial City",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "166": {
     "city": "Ardmore",
@@ -1961,7 +1961,7 @@
     "name": "Suburban Square",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "167": {
     "city": "Providence",
@@ -1974,7 +1974,7 @@
     "name": "Providence Place",
     "state": "Rhode Island",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "168": {
     "city": "Columbia",
@@ -1987,7 +1987,7 @@
     "name": "Columbia",
     "state": "Maryland",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "169": {
     "city": "Naples",
@@ -1997,7 +1997,7 @@
     "name": "Waterside Shops",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "171": {
     "city": "Simi Valley",
@@ -2010,7 +2010,7 @@
     "name": "Simi Valley",
     "state": "California",
     "status": "closed",
-    "website": "-"
+    "website": ""
   },
   "172": {
     "city": "Boulder",
@@ -2020,7 +2020,7 @@
     "name": "Twenty Ninth Street",
     "state": "Colorado",
     "timezone": "America/Denver",
-    "website": "-"
+    "website": ""
   },
   "173": {
     "city": "Atlantic City",
@@ -2033,7 +2033,7 @@
     "name": "The Pier",
     "state": "New Jersey",
     "status": "closed",
-    "website": "-"
+    "website": ""
   },
   "174": {
     "city": "Southampton",
@@ -2049,7 +2049,7 @@
     ],
     "state": "Hampshire",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "176": {
     "city": "Reading",
@@ -2059,7 +2059,7 @@
     "name": "The Oracle",
     "state": "Berkshire",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "177": {
     "city": "Albuquerque",
@@ -2069,7 +2069,7 @@
     "name": "ABQ Uptown",
     "state": "New Mexico",
     "timezone": "America/Denver",
-    "website": "-"
+    "website": ""
   },
   "178": {
     "alter": "Puteaux - la Defense",
@@ -2080,7 +2080,7 @@
     "name": "Les Quatre Temps",
     "state": "Hauts-de-Seine",
     "timezone": "Europe/Paris",
-    "website": "-"
+    "website": ""
   },
   "180": {
     "city": "Chadstone",
@@ -2093,7 +2093,7 @@
     "name": "Chadstone",
     "state": "Victoria",
     "timezone": "Australia/Melbourne",
-    "website": "-"
+    "website": ""
   },
   "182": {
     "city": "Broomfield",
@@ -2103,7 +2103,7 @@
     "name": "FlatIron Crossing",
     "state": "Colorado",
     "timezone": "America/Denver",
-    "website": "-"
+    "website": ""
   },
   "183": {
     "city": "Minnetonka",
@@ -2116,7 +2116,7 @@
     "name": "Ridgedale",
     "state": "Minnesota",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "184": {
     "city": "Atlanta",
@@ -2129,7 +2129,7 @@
     "name": "Perimeter",
     "state": "Georgia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "185": {
     "city": "Estero",
@@ -2139,7 +2139,7 @@
     "name": "Coconut Point",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "186": {
     "city": "Reno",
@@ -2152,7 +2152,7 @@
     "name": "Summit Sierra",
     "state": "Nevada",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "189": {
     "city": "Canoga Park",
@@ -2162,7 +2162,7 @@
     "name": "Topanga",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "190": {
     "city": "Omaha",
@@ -2175,7 +2175,7 @@
     "name": "Village Pointe",
     "state": "Nebraska",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "191": {
     "city": "Holyoke",
@@ -2185,7 +2185,7 @@
     "name": "Holyoke",
     "state": "Massachusetts",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "192": {
     "city": "Westlake",
@@ -2195,7 +2195,7 @@
     "name": "Crocker Park",
     "state": "Ohio",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "193": {
     "alter": "Hokkaido Sapporo-shi",
@@ -2222,7 +2222,7 @@
     "name": "Royal Hawaiian",
     "state": "Hawaii",
     "timezone": "Pacific/Honolulu",
-    "website": "-"
+    "website": ""
   },
   "199": {
     "city": "San Luis Obispo",
@@ -2232,7 +2232,7 @@
     "name": "Higuera Street",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "202": {
     "city": "Norwalk",
@@ -2248,7 +2248,7 @@
     ],
     "state": "Connecticut",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "203": {
     "city": "Knoxville",
@@ -2261,7 +2261,7 @@
     "name": "West Town Mall",
     "state": "Tennessee",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "204": {
     "city": "Friendswood",
@@ -2271,7 +2271,7 @@
     "name": "Baybrook",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "205": {
     "city": "Sugar Land",
@@ -2281,7 +2281,7 @@
     "name": "First Colony Mall",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "206": {
     "city": "Cherry Hill",
@@ -2294,7 +2294,7 @@
     "name": "Cherry Hill",
     "state": "New Jersey",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "207": {
     "city": "Laval",
@@ -2304,7 +2304,7 @@
     "name": "Carrefour Laval",
     "state": "Quebec",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "208": {
     "city": "Toronto",
@@ -2314,7 +2314,7 @@
     "name": "Sherway Gardens",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "209": {
     "city": "Calgary",
@@ -2324,7 +2324,7 @@
     "name": "Chinook Centre",
     "state": "Alberta",
     "timezone": "Canada/Mountain",
-    "website": "-"
+    "website": ""
   },
   "210": {
     "city": "Honolulu",
@@ -2334,7 +2334,7 @@
     "name": "Kahala",
     "state": "Hawaii",
     "timezone": "Pacific/Honolulu",
-    "website": "-"
+    "website": ""
   },
   "211": {
     "city": "Norfolk",
@@ -2347,7 +2347,7 @@
     "name": "MacArthur Center",
     "state": "Virginia",
     "status": "closed",
-    "website": "-"
+    "website": ""
   },
   "213": {
     "city": "Chula Vista",
@@ -2357,7 +2357,7 @@
     "name": "Otay Ranch",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "214": {
     "city": "Fort Lauderdale",
@@ -2367,7 +2367,7 @@
     "name": "The Galleria",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "215": {
     "city": "Manchester",
@@ -2377,7 +2377,7 @@
     "name": "Manchester Arndale",
     "state": "Greater Manchester",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "216": {
     "city": "Austin",
@@ -2393,7 +2393,7 @@
     ],
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "217": {
     "city": "San Francisco",
@@ -2403,7 +2403,7 @@
     "name": "Chestnut Street",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "218": {
     "city": "Clinton Township",
@@ -2413,17 +2413,17 @@
     "name": "Partridge Creek",
     "state": "Michigan",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "219": {
     "city": "Las Vegas",
     "dates": "2007-11-14",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "14 Mar 2023 02:49:00",
     "name": "Town Square",
     "state": "Nevada",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "221": {
     "city": "Fairfax",
@@ -2433,7 +2433,7 @@
     "name": "Fair Oaks",
     "state": "Virginia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "224": {
     "alter": "Tokyo Shibuya Shibuya-ku",
@@ -2451,13 +2451,16 @@
   },
   "225": {
     "city": "Birmingham",
-    "dates": "2007-04-14",
+    "dates": [
+      "2007-04-14",
+      "2023-03-25"
+    ],
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:09",
+    "modified": "27 Mar 2023 21:34:32",
     "name": "The Summit",
     "state": "Alabama",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "226": {
     "city": "London",
@@ -2471,7 +2474,7 @@
     "name": "White City",
     "state": "Greater London",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "227": {
     "city": "Kingston upon Thames",
@@ -2481,7 +2484,7 @@
     "name": "Bentall Centre",
     "state": "Greater London",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "228": {
     "city": "Lone Tree",
@@ -2494,7 +2497,7 @@
     "name": "Park Meadows",
     "state": "Colorado",
     "timezone": "America/Denver",
-    "website": "-"
+    "website": ""
   },
   "229": {
     "city": "Madison",
@@ -2510,7 +2513,7 @@
     ],
     "state": "Wisconsin",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "230": {
     "city": "Ann Arbor",
@@ -2520,7 +2523,7 @@
     "name": "Briarwood",
     "state": "Michigan",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "231": {
     "city": "San Mateo",
@@ -2533,7 +2536,7 @@
     "name": "Hillsdale",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "232": {
     "city": "Natick",
@@ -2546,7 +2549,7 @@
     ],
     "state": "Massachusetts",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "233": {
     "city": "Tulsa",
@@ -2556,7 +2559,7 @@
     "name": "Woodland Hills",
     "state": "Oklahoma",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "234": {
     "city": "Willow Grove",
@@ -2566,7 +2569,7 @@
     "name": "Willow Grove Park",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "235": {
     "city": "Metairie",
@@ -2579,7 +2582,7 @@
     "name": "Lakeside Shopping Center",
     "state": "Louisiana",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "236": {
     "city": "Fresno",
@@ -2589,7 +2592,7 @@
     "name": "Fashion Fair",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "237": {
     "city": "Orland Park",
@@ -2602,7 +2605,7 @@
     "name": "Orland Square Mall",
     "state": "Illinois",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "238": {
     "city": "Sydney",
@@ -2612,7 +2615,7 @@
     "name": "Sydney",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
-    "website": "-"
+    "website": ""
   },
   "239": {
     "city": "Liverpool",
@@ -2628,7 +2631,7 @@
     ],
     "state": "Merseyside",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "240": {
     "city": "Los Gatos",
@@ -2638,7 +2641,7 @@
     "name": "Los Gatos",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "242": {
     "city": "Grays",
@@ -2648,7 +2651,7 @@
     "name": "Lakeside",
     "state": "Essex",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "244": {
     "city": "Brighton",
@@ -2658,7 +2661,7 @@
     "name": "Churchill Square",
     "state": "East Sussex",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "245": {
     "city": "London",
@@ -2668,7 +2671,7 @@
     "name": "Covent Garden",
     "state": "Central London",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "247": {
     "city": "Glendale",
@@ -2681,7 +2684,7 @@
     "name": "Arrowhead",
     "state": "Arizona",
     "timezone": "US/Arizona",
-    "website": "-"
+    "website": ""
   },
   "248": {
     "city": "Montreal",
@@ -2704,7 +2707,7 @@
     "name": "West 14th Street",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "251": {
     "city": "New York",
@@ -2714,7 +2717,7 @@
     "name": "Upper West Side",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "252": {
     "city": "Bristol",
@@ -2727,7 +2730,7 @@
     ],
     "state": "Bristol",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "253": {
     "city": "Chatswood",
@@ -2737,7 +2740,7 @@
     "name": "Chatswood Chase",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
-    "website": "-"
+    "website": ""
   },
   "254": {
     "city": "Bondi Junction",
@@ -2747,7 +2750,7 @@
     "name": "Bondi",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
-    "website": "-"
+    "website": ""
   },
   "255": {
     "city": "Solihull",
@@ -2757,7 +2760,7 @@
     "name": "Touchwood Centre",
     "state": "West Midlands",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "257": {
     "city": "Glendale",
@@ -2767,7 +2770,7 @@
     "name": "Bayshore",
     "state": "Wisconsin",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "258": {
     "city": "Deer Park",
@@ -2780,7 +2783,7 @@
     "name": "Deer Park",
     "state": "Illinois",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "259": {
     "city": "Buford",
@@ -2790,7 +2793,7 @@
     "name": "Mall of Georgia",
     "state": "Georgia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "261": {
     "city": "Yonkers",
@@ -2800,7 +2803,7 @@
     "name": "Ridge Hill",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "262": {
     "city": "Anchorage",
@@ -2810,7 +2813,7 @@
     "name": "Anchorage 5th Avenue Mall",
     "state": "Alaska",
     "timezone": "America/Anchorage",
-    "website": "-"
+    "website": ""
   },
   "263": {
     "city": "Baton Rouge",
@@ -2820,7 +2823,7 @@
     "name": "Mall of Louisiana",
     "state": "Louisiana",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "264": {
     "city": "Louisville",
@@ -2833,7 +2836,7 @@
     "name": "Oxmoor",
     "state": "Kentucky",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "266": {
     "city": "Huntsville",
@@ -2843,7 +2846,7 @@
     "name": "Bridge Street",
     "state": "Alabama",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "267": {
     "city": "Gilbert",
@@ -2853,7 +2856,7 @@
     "name": "SanTan Village",
     "state": "Arizona",
     "timezone": "US/Arizona",
-    "website": "-"
+    "website": ""
   },
   "269": {
     "city": "Milton Keynes",
@@ -2863,7 +2866,7 @@
     "name": "Milton Keynes",
     "state": "Buckinghamshire",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "270": {
     "city": "Cambridge",
@@ -2873,7 +2876,7 @@
     "name": "Grand Arcade",
     "state": "Cambridgeshire",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "271": {
     "city": "Reston",
@@ -2886,7 +2889,7 @@
     "name": "Reston",
     "state": "Virginia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "272": {
     "city": "Minneapolis",
@@ -2899,7 +2902,7 @@
     "name": "Uptown",
     "state": "Minnesota",
     "status": "closed",
-    "website": "-"
+    "website": ""
   },
   "273": {
     "city": "Edmonton",
@@ -2909,7 +2912,7 @@
     "name": "West Edmonton",
     "state": "Alberta",
     "timezone": "Canada/Mountain",
-    "website": "-"
+    "website": ""
   },
   "275": {
     "alter": "Geneve Geneva",
@@ -2920,7 +2923,7 @@
     "name": "Rue de Rive",
     "state": "Genève",
     "timezone": "Europe/Zurich",
-    "website": "-"
+    "website": ""
   },
   "276": {
     "city": "Paris",
@@ -2933,7 +2936,7 @@
     "name": "Carrousel du Louvre",
     "state": "Paris",
     "status": "closed",
-    "website": "-"
+    "website": ""
   },
   "277": {
     "city": "Paris",
@@ -2956,17 +2959,17 @@
     "name": "Le Gru",
     "state": "Torino",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "279": {
     "city": "Exeter",
     "dates": "2007-11-24",
     "flag": "🇬🇧",
-    "modified": "07 Jan 2022 08:59:08",
+    "modified": "22 Mar 2023 18:15:14",
     "name": "Princesshay",
     "state": "Devon",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "280": {
     "city": "Vancouver",
@@ -2979,7 +2982,7 @@
     "name": "Pacific Centre",
     "state": "British Columbia",
     "timezone": "Canada/Pacific",
-    "website": "-"
+    "website": ""
   },
   "281": {
     "city": "Whitehall",
@@ -2992,7 +2995,7 @@
     "name": "Lehigh Valley",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "282": {
     "city": "Greenwich",
@@ -3002,7 +3005,7 @@
     "name": "Greenwich Avenue",
     "state": "Connecticut",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "283": {
     "city": "Leawood",
@@ -3012,7 +3015,7 @@
     "name": "Leawood",
     "state": "Kansas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "284": {
     "city": "Chicago",
@@ -3022,7 +3025,7 @@
     "name": "Lincoln Park",
     "state": "Illinois",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "285": {
     "city": "Escondido",
@@ -3032,7 +3035,7 @@
     "name": "North County",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "286": {
     "city": "Little Rock",
@@ -3042,7 +3045,7 @@
     "name": "The Promenade at Chenal",
     "state": "Arkansas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "287": {
     "city": "Washington",
@@ -3052,7 +3055,7 @@
     "name": "Georgetown",
     "state": "District of Columbia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "288": {
     "city": "Lexington",
@@ -3068,7 +3071,7 @@
     ],
     "state": "Kentucky",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "289": {
     "city": "Brandon",
@@ -3078,7 +3081,7 @@
     "name": "Brandon",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "290": {
     "city": "San Antonio",
@@ -3088,7 +3091,7 @@
     "name": "North Star",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "291": {
     "city": "Altamonte Springs",
@@ -3098,7 +3101,7 @@
     "name": "Altamonte",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "292": {
     "city": "Scottsdale",
@@ -3108,7 +3111,7 @@
     "name": "Scottsdale Quarter",
     "state": "Arizona",
     "timezone": "US/Arizona",
-    "website": "-"
+    "website": ""
   },
   "293": {
     "city": "Greensboro",
@@ -3118,7 +3121,7 @@
     "name": "Friendly Center",
     "state": "North Carolina",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "294": {
     "city": "Carlsbad",
@@ -3128,7 +3131,7 @@
     "name": "Carlsbad",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "297": {
     "city": "Palm Desert",
@@ -3138,7 +3141,7 @@
     "name": "El Paseo Village",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "298": {
     "city": "Roseville",
@@ -3148,7 +3151,7 @@
     "name": "Roseville",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "299": {
     "city": "Toledo",
@@ -3158,7 +3161,7 @@
     "name": "Franklin Park Mall",
     "state": "Ohio",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "300": {
     "city": "Cerritos",
@@ -3168,7 +3171,7 @@
     "name": "Los Cerritos",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "301": {
     "city": "Calgary",
@@ -3181,7 +3184,7 @@
     "name": "Market Mall",
     "state": "Alberta",
     "timezone": "Canada/Mountain",
-    "website": "-"
+    "website": ""
   },
   "302": {
     "city": "Frisco",
@@ -3194,7 +3197,7 @@
     "name": "Stonebriar",
     "state": "Texas",
     "status": "closed",
-    "website": "-"
+    "website": ""
   },
   "303": {
     "city": "Boise",
@@ -3204,7 +3207,7 @@
     "name": "Boise Towne Square",
     "state": "Idaho",
     "timezone": "America/Denver",
-    "website": "-"
+    "website": ""
   },
   "304": {
     "city": "Lancaster",
@@ -3214,7 +3217,7 @@
     "name": "Park City",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "305": {
     "city": "Monterey",
@@ -3224,7 +3227,7 @@
     "name": "Del Monte",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "307": {
     "city": "South Portland",
@@ -3237,7 +3240,7 @@
     "name": "Maine Mall",
     "state": "Maine",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "308": {
     "city": "Leicester",
@@ -3247,7 +3250,7 @@
     "name": "Highcross",
     "state": "Leicestershire",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "309": {
     "alter": "Zurich Glattzentrum bei Wallisellen",
@@ -3258,7 +3261,7 @@
     "name": "Glattzentrum",
     "state": "Zürich",
     "timezone": "Europe/Zurich",
-    "website": "-"
+    "website": ""
   },
   "312": {
     "city": "Miami",
@@ -3271,7 +3274,7 @@
     "name": "Dadeland",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "313": {
     "city": "Belfast",
@@ -3281,7 +3284,7 @@
     "name": "Victoria Square",
     "state": "Antrim",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "315": {
     "alter": "Velizy Villacoublay Velizy-Villacoublay",
@@ -3305,7 +3308,7 @@
     "name": "University Park Village",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "317": {
     "city": "Santa Barbara",
@@ -3315,7 +3318,7 @@
     "name": "State Street",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "318": {
     "city": "Charleston",
@@ -3328,7 +3331,7 @@
     ],
     "state": "South Carolina",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "320": {
     "alter": "Beijing",
@@ -3355,7 +3358,7 @@
     "name": "Willowbrook Mall",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "322": {
     "city": "Modesto",
@@ -3365,7 +3368,7 @@
     "name": "Vintage Faire",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "324": {
     "city": "Ridgeland",
@@ -3375,7 +3378,7 @@
     "name": "Renaissance at Colony Park",
     "state": "Mississippi",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "325": {
     "city": "Wayne",
@@ -3385,7 +3388,7 @@
     "name": "Willowbrook",
     "state": "New Jersey",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "327": {
     "city": "Manhasset",
@@ -3395,7 +3398,7 @@
     "name": "Manhasset",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "328": {
     "city": "Edinburgh",
@@ -3408,7 +3411,7 @@
     ],
     "state": "Edinburgh",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "329": {
     "city": "London",
@@ -3418,7 +3421,7 @@
     "name": "Brompton Road",
     "state": "Central London",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "331": {
     "alter": "Duesseldorf Dusseldorf Nordrhein Westfalen North Rhine-Westphalia",
@@ -3442,7 +3445,7 @@
     "name": "Rideau",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "333": {
     "city": "Toronto",
@@ -3455,7 +3458,7 @@
     "name": "Fairview",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "334": {
     "city": "Cardiff",
@@ -3468,7 +3471,7 @@
     ],
     "state": "Cardiff",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "335": {
     "city": "Bath",
@@ -3478,7 +3481,7 @@
     "name": "SouthGate",
     "state": "Somerset",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "338": {
     "city": "Colorado Springs",
@@ -3488,7 +3491,7 @@
     "name": "The Promenade Shops at Briargate",
     "state": "Colorado",
     "timezone": "America/Denver",
-    "website": "-"
+    "website": ""
   },
   "339": {
     "city": "Tacoma",
@@ -3498,7 +3501,7 @@
     "name": "Tacoma Mall",
     "state": "Washington",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "340": {
     "city": "Glasgow",
@@ -3508,7 +3511,7 @@
     "name": "Braehead",
     "state": "Glasgow",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "341": {
     "city": "Newcastle upon Tyne",
@@ -3518,7 +3521,7 @@
     "name": "Eldon Square",
     "state": "Tyne and Wear",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "342": {
     "city": "Doncaster",
@@ -3528,7 +3531,7 @@
     "name": "Doncaster",
     "state": "Victoria",
     "timezone": "Australia/Melbourne",
-    "website": "-"
+    "website": ""
   },
   "343": {
     "city": "Cheltenham",
@@ -3538,7 +3541,7 @@
     "name": "Southland",
     "state": "Victoria",
     "timezone": "Australia/Melbourne",
-    "website": "-"
+    "website": ""
   },
   "344": {
     "city": "Castle Hill",
@@ -3548,7 +3551,7 @@
     "name": "Castle Towers",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
-    "website": "-"
+    "website": ""
   },
   "345": {
     "city": "Temecula",
@@ -3558,7 +3561,7 @@
     "name": "Promenade Temecula",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "346": {
     "city": "Dedham",
@@ -3568,7 +3571,7 @@
     "name": "Legacy Place",
     "state": "Massachusetts",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "348": {
     "city": "Naperville",
@@ -3578,7 +3581,7 @@
     "name": "Main Place",
     "state": "Illinois",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "350": {
     "city": "Mississauga",
@@ -3588,7 +3591,7 @@
     "name": "Square One",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "351": {
     "city": "Robina Town Centre",
@@ -3601,7 +3604,7 @@
     "name": "Robina",
     "state": "Queensland",
     "timezone": "Australia/Brisbane",
-    "website": "-"
+    "website": ""
   },
   "352": {
     "city": "Frankfurt Grobe Strabe",
@@ -3624,7 +3627,7 @@
     "name": "Summit Mall",
     "state": "Ohio",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "354": {
     "city": "Nashua",
@@ -3634,7 +3637,7 @@
     "name": "Pheasant Lane",
     "state": "New Hampshire",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "355": {
     "city": "Greenville",
@@ -3644,7 +3647,7 @@
     "name": "Haywood Mall",
     "state": "South Carolina",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "357": {
     "alter": "Bouches Rhone",
@@ -3655,7 +3658,7 @@
     "name": "Marseille",
     "state": "Bouches-du-Rhône",
     "timezone": "Europe/Paris",
-    "website": "-"
+    "website": ""
   },
   "358": {
     "alter": "Kurfurstendamm",
@@ -3693,7 +3696,7 @@
     "name": "University Park Mall",
     "state": "Indiana",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "362": {
     "city": "Vancouver",
@@ -3706,7 +3709,7 @@
     "name": "Oakridge Centre",
     "state": "British Columbia",
     "status": "closed",
-    "website": "-"
+    "website": ""
   },
   "363": {
     "city": "Aberdeen",
@@ -3729,7 +3732,7 @@
     "name": "Augusta",
     "state": "Georgia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "365": {
     "city": "Carugate",
@@ -3739,7 +3742,7 @@
     "name": "Carosello",
     "state": "Milano",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "366": {
     "city": "Hamburg",
@@ -3749,7 +3752,7 @@
     "name": "Alstertal",
     "state": "Hamburg",
     "timezone": "Europe/Berlin",
-    "website": "-"
+    "website": ""
   },
   "367": {
     "alter": "Herault",
@@ -3760,7 +3763,7 @@
     "name": "Odysseum",
     "state": "Hérault",
     "timezone": "Europe/Paris",
-    "website": "-"
+    "website": ""
   },
   "368": {
     "city": "Barcelona",
@@ -3783,7 +3786,7 @@
     "name": "Polo Park",
     "state": "Manitoba",
     "timezone": "Canada/Central",
-    "website": "-"
+    "website": ""
   },
   "372": {
     "city": "Leeds",
@@ -3793,18 +3796,18 @@
     "name": "Trinity Leeds",
     "state": "West Yorkshire",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "373": {
     "alter": "Rhone",
     "city": "Lyon",
     "dates": "2011-06-04",
     "flag": "🇫🇷",
-    "modified": "07 Jan 2022 08:59:06",
+    "modified": "24 Mar 2023 15:37:26",
     "name": "Part-Dieu",
     "state": "Rhône",
     "timezone": "Europe/Paris",
-    "website": "-"
+    "website": ""
   },
   "374": {
     "city": "Le Chesnay",
@@ -3814,7 +3817,7 @@
     "name": "Parly 2",
     "state": "Yvelines",
     "timezone": "Europe/Paris",
-    "website": "-"
+    "website": ""
   },
   "376": {
     "city": "Lille",
@@ -3824,7 +3827,7 @@
     "name": "Lille",
     "state": "Nord-Pas-de-Calais",
     "timezone": "Europe/Paris",
-    "website": "-"
+    "website": ""
   },
   "377": {
     "city": "Zaragoza",
@@ -3834,7 +3837,7 @@
     "name": "Puerto Venecia",
     "state": "Zaragoza",
     "timezone": "Europe/Madrid",
-    "website": "-"
+    "website": ""
   },
   "381": {
     "alter": "Rome",
@@ -3845,7 +3848,7 @@
     "name": "Porta di Roma",
     "state": "Roma",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "382": {
     "alter": "Rome",
@@ -3856,7 +3859,7 @@
     "name": "Via del Corso",
     "state": "Roma",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "384": {
     "city": "Chermside",
@@ -3866,7 +3869,7 @@
     "name": "Chermside",
     "state": "Queensland",
     "timezone": "Australia/Brisbane",
-    "website": "-"
+    "website": ""
   },
   "385": {
     "city": "Charlestown",
@@ -3876,7 +3879,7 @@
     "name": "Charlestown",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
-    "website": "-"
+    "website": ""
   },
   "386": {
     "city": "Perth",
@@ -3886,7 +3889,7 @@
     "name": "Perth City",
     "state": "Western Australia",
     "timezone": "Australia/Perth",
-    "website": "-"
+    "website": ""
   },
   "388": {
     "alter": "Beijing",
@@ -3941,7 +3944,7 @@
     ],
     "state": "Norfolk",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "392": {
     "alter": "Pointe Claire",
@@ -3962,7 +3965,7 @@
     "name": "Cribbs Causeway",
     "state": "Bristol",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "394": {
     "alter": "Bas Rhin",
@@ -3973,7 +3976,7 @@
     "name": "Strasbourg",
     "state": "Bas-Rhin",
     "timezone": "Europe/Paris",
-    "website": "-"
+    "website": ""
   },
   "395": {
     "alter": "Alpes Maritimes",
@@ -3984,7 +3987,7 @@
     "name": "CAP 3000",
     "state": "Alpes-Maritimes",
     "timezone": "Europe/Paris",
-    "website": "-"
+    "website": ""
   },
   "396": {
     "city": "Hamburg",
@@ -3994,7 +3997,7 @@
     "name": "Jungfernstieg",
     "state": "Hamburg",
     "timezone": "Europe/Berlin",
-    "website": "-"
+    "website": ""
   },
   "397": {
     "city": "Arroyomolinos",
@@ -4033,7 +4036,7 @@
     "name": "CentrO",
     "state": "Nordrhein-Westfalen",
     "timezone": "Europe/Berlin",
-    "website": "-"
+    "website": ""
   },
   "405": {
     "city": "Adelaide",
@@ -4043,7 +4046,7 @@
     "name": "Rundle Place",
     "state": "South Australia",
     "timezone": "Australia/Adelaide",
-    "website": "-"
+    "website": ""
   },
   "406": {
     "city": "Barcelona",
@@ -4053,7 +4056,7 @@
     "name": "La Maquinista",
     "state": "Barcelona",
     "timezone": "Europe/Madrid",
-    "website": "-"
+    "website": ""
   },
   "408": {
     "alter": "Noord Holland",
@@ -4064,7 +4067,7 @@
     "name": "Amsterdam",
     "state": "Noord-Holland",
     "timezone": "Europe/Amsterdam",
-    "website": "-"
+    "website": ""
   },
   "409": {
     "alter": "Hong Kong 铜锣湾 銅鑼灣",
@@ -4075,7 +4078,7 @@
     "name": "Causeway Bay",
     "state": "香港",
     "timezone": "Asia/Hong_Kong",
-    "website": "-"
+    "website": ""
   },
   "410": {
     "city": "London",
@@ -4085,7 +4088,7 @@
     "name": "Stratford City",
     "state": "Greater London",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "411": {
     "city": "Edmonton",
@@ -4095,7 +4098,7 @@
     "name": "Southgate Centre",
     "state": "Alberta",
     "timezone": "Canada/Mountain",
-    "website": "-"
+    "website": ""
   },
   "412": {
     "city": "Quebec City",
@@ -4115,7 +4118,7 @@
     "name": "Ross Park",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "414": {
     "city": "Berkeley",
@@ -4125,7 +4128,7 @@
     "name": "4th Street",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "415": {
     "city": "New York",
@@ -4135,7 +4138,7 @@
     "name": "Grand Central",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "417": {
     "city": "Columbus",
@@ -4145,7 +4148,7 @@
     "name": "Polaris Fashion Place",
     "state": "Ohio",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "418": {
     "city": "Orio al Serio",
@@ -4155,7 +4158,7 @@
     "name": "Oriocenter",
     "state": "Bergamo",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "419": {
     "city": "Valencia",
@@ -4169,7 +4172,7 @@
     ],
     "state": "Valencia",
     "timezone": "Europe/Madrid",
-    "website": "-"
+    "website": ""
   },
   "420": {
     "city": "Spokane",
@@ -4179,7 +4182,7 @@
     "name": "River Park Square",
     "state": "Washington",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "421": {
     "city": "Richmond",
@@ -4189,7 +4192,7 @@
     "name": "Richmond Centre",
     "state": "British Columbia",
     "timezone": "Canada/Pacific",
-    "website": "-"
+    "website": ""
   },
   "423": {
     "city": "Gateshead",
@@ -4199,7 +4202,7 @@
     "name": "Metrocentre",
     "state": "Tyne and Wear",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "424": {
     "city": "Bordeaux",
@@ -4236,7 +4239,7 @@
     "name": "Via Rizzoli",
     "state": "Bologna",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "428": {
     "alter": "Hong Kong Central 中環 中环",
@@ -4247,7 +4250,7 @@
     "name": "ifc mall",
     "state": "香港",
     "timezone": "Asia/Hong_Kong",
-    "website": "-"
+    "website": ""
   },
   "429": {
     "city": "Newmarket",
@@ -4257,7 +4260,7 @@
     "name": "Upper Canada Mall",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "430": {
     "city": "Dresden Saxony",
@@ -4267,7 +4270,7 @@
     "name": "Altmarkt-Galerie",
     "state": "Sachsen",
     "timezone": "Europe/Berlin",
-    "website": "-"
+    "website": ""
   },
   "431": {
     "city": "Augsburg Bavaria",
@@ -4277,7 +4280,7 @@
     "name": "City-Galerie",
     "state": "Bayern",
     "timezone": "Europe/Berlin",
-    "website": "-"
+    "website": ""
   },
   "434": {
     "city": "Sulzbach",
@@ -4287,7 +4290,7 @@
     "name": "MTZ",
     "state": "Hessen",
     "timezone": "Europe/Berlin",
-    "website": "-"
+    "website": ""
   },
   "435": {
     "city": "Majadahonda",
@@ -4297,7 +4300,7 @@
     "name": "Gran Plaza 2",
     "state": "Madrid",
     "timezone": "Europe/Madrid",
-    "website": "-"
+    "website": ""
   },
   "436": {
     "alter": "Leganes",
@@ -4308,7 +4311,7 @@
     "name": "Parquesur",
     "state": "Madrid",
     "timezone": "Europe/Madrid",
-    "website": "-"
+    "website": ""
   },
   "437": {
     "city": "Houston",
@@ -4318,7 +4321,7 @@
     "name": "Highland Village",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "438": {
     "city": "Lieusaint",
@@ -4342,7 +4345,7 @@
     "name": "Freie Strasse",
     "state": "Basel-Stadt",
     "timezone": "Europe/Zurich",
-    "website": "-"
+    "website": ""
   },
   "440": {
     "city": "Penrith",
@@ -4352,7 +4355,7 @@
     "name": "Penrith",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
-    "website": "-"
+    "website": ""
   },
   "441": {
     "city": "Rozzano",
@@ -4362,7 +4365,7 @@
     "name": "Fiordaliso",
     "state": "Milano",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "442": {
     "alter": "Rome Turin Piedmont",
@@ -4373,7 +4376,7 @@
     "name": "Via Roma",
     "state": "Torino",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "443": {
     "alter": "Strabe",
@@ -4397,7 +4400,7 @@
     "name": "New Haven",
     "state": "Connecticut",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "447": {
     "city": "Burlington",
@@ -4407,7 +4410,7 @@
     "name": "Mapleview Centre",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "448": {
     "alter": "Beijing",
@@ -4431,7 +4434,7 @@
     "name": "I Gigli",
     "state": "Firenze",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "450": {
     "city": "Madrid",
@@ -4441,17 +4444,17 @@
     "name": "Puerta del Sol",
     "state": "Madrid",
     "timezone": "Europe/Madrid",
-    "website": "-"
+    "website": ""
   },
   "451": {
     "city": "Glendale",
     "dates": "2011-07-30",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:08",
+    "modified": "21 Mar 2023 19:22:16",
     "name": "The Americana at Brand",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "453": {
     "city": "Marcianise",
@@ -4461,7 +4464,7 @@
     "name": "Campania",
     "state": "Caserta",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "454": {
     "city": "Misterbianco",
@@ -4471,7 +4474,7 @@
     "name": "Centro Sicilia",
     "state": "Catania",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "455": {
     "city": "Hannover Lower Saxony",
@@ -4481,7 +4484,7 @@
     "name": "Hannover",
     "state": "Niedersachsen",
     "timezone": "Europe/Berlin",
-    "website": "-"
+    "website": ""
   },
   "458": {
     "city": "Hornsby",
@@ -4491,7 +4494,7 @@
     "name": "Hornsby",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
-    "website": "-"
+    "website": ""
   },
   "460": {
     "city": "Burnaby",
@@ -4501,7 +4504,7 @@
     "name": "Metrotown",
     "state": "British Columbia",
     "timezone": "Canada/Pacific",
-    "website": "-"
+    "website": ""
   },
   "461": {
     "city": "Murray",
@@ -4511,7 +4514,7 @@
     "name": "Fashion Place",
     "state": "Utah",
     "timezone": "America/Denver",
-    "website": "-"
+    "website": ""
   },
   "462": {
     "city": "Valencia",
@@ -4521,7 +4524,7 @@
     "name": "Valencia Town Center",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "463": {
     "city": "Charlotte",
@@ -4535,7 +4538,7 @@
     "state": "North Carolina",
     "status": "closed",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "464": {
     "city": "Waterloo",
@@ -4545,7 +4548,7 @@
     "name": "Conestoga",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "466": {
     "city": "Brisbane City",
@@ -4555,7 +4558,7 @@
     "name": "Brisbane",
     "state": "Queensland",
     "timezone": "Australia/Brisbane",
-    "website": "-"
+    "website": ""
   },
   "468": {
     "alter": "Malaga",
@@ -4580,7 +4583,7 @@
     "name": "Confluence",
     "state": "Rhône",
     "timezone": "Europe/Paris",
-    "website": "-"
+    "website": ""
   },
   "470": {
     "alter": "Loire Atlantique",
@@ -4591,7 +4594,7 @@
     "name": "Atlantis",
     "state": "Loire-Atlantique",
     "timezone": "Europe/Paris",
-    "website": "-"
+    "website": ""
   },
   "471": {
     "alter": "Zhejiang Hangzhou 江浙沪",
@@ -4630,7 +4633,7 @@
     "name": "Aix-en-Provence",
     "state": "Bouches-du-Rhône",
     "timezone": "Europe/Paris",
-    "website": "-"
+    "website": ""
   },
   "478": {
     "alter": "Liaoning Dalian",
@@ -4682,7 +4685,7 @@
     "name": "Festival Place",
     "state": "Hampshire",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "483": {
     "city": "Canberra",
@@ -4692,7 +4695,7 @@
     "name": "Canberra",
     "state": "Australian Capital Territory",
     "timezone": "Australia/Sydney",
-    "website": "-"
+    "website": ""
   },
   "484": {
     "alter": "Guangdong Shenzhen",
@@ -4717,7 +4720,7 @@
     "name": "Festival Walk",
     "state": "香港",
     "timezone": "Asia/Hong_Kong",
-    "website": "-"
+    "website": ""
   },
   "486": {
     "alter": "Brussel Region Bruxelles Capitale Brabant",
@@ -4728,7 +4731,7 @@
     "name": "Brussels",
     "state": "Région de Bruxelles-Capitale",
     "timezone": "Europe/Brussels",
-    "website": "-"
+    "website": ""
   },
   "488": {
     "city": "Coquitlam",
@@ -4738,7 +4741,7 @@
     "name": "Coquitlam Centre",
     "state": "British Columbia",
     "timezone": "Canada/Pacific",
-    "website": "-"
+    "website": ""
   },
   "489": {
     "city": "London",
@@ -4748,7 +4751,7 @@
     "name": "Masonville",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "490": {
     "city": "Ottawa",
@@ -4758,7 +4761,7 @@
     "name": "Bayshore Shopping Centre",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "492": {
     "city": "El Paso",
@@ -4768,7 +4771,7 @@
     "name": "Cielo Vista Mall",
     "state": "Texas",
     "timezone": "America/Denver",
-    "website": "-"
+    "website": ""
   },
   "493": {
     "alter": "Jiangsu Nanjing 江浙沪",
@@ -4795,7 +4798,7 @@
     ],
     "state": "Kent",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "499": {
     "alter": "Hong Kong Tsim Sha Tsui 尖沙咀",
@@ -4806,7 +4809,7 @@
     "name": "Canton Road",
     "state": "香港",
     "timezone": "Asia/Hong_Kong",
-    "website": "-"
+    "website": ""
   },
   "502": {
     "alter": "Sichuan Chengdu",
@@ -4831,7 +4834,7 @@
     "name": "Emporia",
     "state": "Skåne",
     "timezone": "Europe/Stockholm",
-    "website": "-"
+    "website": ""
   },
   "504": {
     "city": "Maribyrnong",
@@ -4841,7 +4844,7 @@
     "name": "Highpoint",
     "state": "Victoria",
     "timezone": "Australia/Melbourne",
-    "website": "-"
+    "website": ""
   },
   "505": {
     "alter": "Taby",
@@ -4865,7 +4868,7 @@
     "name": "Nueva Condomina",
     "state": "Murcia",
     "timezone": "Europe/Madrid",
-    "website": "-"
+    "website": ""
   },
   "508": {
     "city": "Booragoon",
@@ -4878,7 +4881,7 @@
     ],
     "state": "Western Australia",
     "timezone": "Australia/Perth",
-    "website": "-"
+    "website": ""
   },
   "509": {
     "city": "Carindale",
@@ -4888,7 +4891,7 @@
     "name": "Carindale",
     "state": "Queensland",
     "timezone": "Australia/Brisbane",
-    "website": "-"
+    "website": ""
   },
   "512": {
     "city": "Brossard",
@@ -4898,7 +4901,7 @@
     "name": "DIX30",
     "state": "Quebec",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "513": {
     "city": "Franklin",
@@ -4908,7 +4911,7 @@
     "name": "CoolSprings Galleria",
     "state": "Tennessee",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "514": {
     "city": "Halifax",
@@ -4918,7 +4921,7 @@
     "name": "Halifax Shopping Centre",
     "state": "Nova Scotia",
     "timezone": "Canada/Atlantic",
-    "website": "-"
+    "website": ""
   },
   "515": {
     "city": "Markham",
@@ -4928,7 +4931,7 @@
     "name": "Markville Shopping Centre",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
-    "website": "-"
+    "website": ""
   },
   "516": {
     "city": "Washington",
@@ -4938,7 +4941,7 @@
     "name": "Carnegie Library",
     "state": "District of Columbia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "518": {
     "city": "Beavercreek",
@@ -4948,7 +4951,7 @@
     "name": "The Greene",
     "state": "Ohio",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "519": {
     "alter": "Baden Wurttemberg",
@@ -4959,7 +4962,7 @@
     "name": "Sindelfingen",
     "state": "Baden-Württemberg",
     "timezone": "Europe/Berlin",
-    "website": "-"
+    "website": ""
   },
   "520": {
     "alter": "Nordrhein Westfalen Cologne Koln North Rhine-Westphalia",
@@ -4970,7 +4973,7 @@
     "name": "Rhein Center",
     "state": "Nordrhein-Westfalen",
     "timezone": "Europe/Berlin",
-    "website": "-"
+    "website": ""
   },
   "521": {
     "alter": "Munich Munchen Muenchen Bavaria",
@@ -4981,7 +4984,7 @@
     "name": "OEZ",
     "state": "Bayern",
     "timezone": "Europe/Berlin",
-    "website": "-"
+    "website": ""
   },
   "522": {
     "alter": "Cote d’Or dOr",
@@ -5005,7 +5008,7 @@
     "name": "Broadway",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
-    "website": "-"
+    "website": ""
   },
   "527": {
     "city": "Watford",
@@ -5018,7 +5021,7 @@
     ],
     "state": "Hertfordshire",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "530": {
     "city": "Fountain Gate",
@@ -5028,7 +5031,7 @@
     "name": "Fountain Gate",
     "state": "Victoria",
     "timezone": "Australia/Melbourne",
-    "website": "-"
+    "website": ""
   },
   "531": {
     "alter": "Zhejiang Ningbo 江浙沪",
@@ -5081,7 +5084,7 @@
     "name": "Rosny 2",
     "state": "Seine-Saint-Denis",
     "timezone": "Europe/Paris",
-    "website": "-"
+    "website": ""
   },
   "538": {
     "city": "Arroyo de la Encomienda",
@@ -5105,7 +5108,7 @@
     "name": "Haarlem",
     "state": "Noord-Holland",
     "timezone": "Europe/Amsterdam",
-    "website": "-"
+    "website": ""
   },
   "540": {
     "alter": "Zuid Holland The Hague",
@@ -5116,7 +5119,7 @@
     "name": "Den Haag",
     "state": "Zuid-Holland",
     "timezone": "Europe/Amsterdam",
-    "website": "-"
+    "website": ""
   },
   "545": {
     "city": "Plymouth",
@@ -5129,7 +5132,7 @@
     ],
     "state": "Devon",
     "timezone": "Europe/London",
-    "website": "-"
+    "website": ""
   },
   "547": {
     "city": "Lonato",
@@ -5139,7 +5142,7 @@
     "name": "il Leone",
     "state": "Brescia",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "549": {
     "city": "Lawrence Township",
@@ -5149,7 +5152,7 @@
     "name": "Quaker Bridge",
     "state": "New Jersey",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "550": {
     "city": "Bakersfield",
@@ -5159,7 +5162,7 @@
     "name": "Valley Plaza",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "557": {
     "alter": "Shandong Qingdao",
@@ -5184,7 +5187,7 @@
     "name": "Schildergasse",
     "state": "Nordrhein-Westfalen",
     "timezone": "Europe/Berlin",
-    "website": "-"
+    "website": ""
   },
   "562": {
     "alter": "Rome",
@@ -5195,7 +5198,7 @@
     "name": "Euroma2",
     "state": "Roma",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "564": {
     "city": "Rimini",
@@ -5205,7 +5208,7 @@
     "name": "Le Befane",
     "state": "Rimini",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "566": {
     "city": "Paris",
@@ -5228,7 +5231,7 @@
     "name": "VillageMall",
     "state": "RJ",
     "timezone": "Brazil/East",
-    "website": "-"
+    "website": ""
   },
   "571": {
     "alter": "Guangxi Nanning 广西",
@@ -5378,7 +5381,7 @@
     "name": "Upper East Side",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "583": {
     "alter": "Istanbul",
@@ -5389,7 +5392,7 @@
     "name": "Zorlu Center",
     "state": "İstanbul",
     "timezone": "Europe/Istanbul",
-    "website": "-"
+    "website": ""
   },
   "588": {
     "alter": "Istanbul",
@@ -5400,7 +5403,7 @@
     "name": "Akasya",
     "state": "İstanbul",
     "timezone": "Europe/Istanbul",
-    "website": "-"
+    "website": ""
   },
   "591": {
     "city": "Atlanta",
@@ -5410,7 +5413,7 @@
     "name": "Cumberland Mall",
     "state": "Georgia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "593": {
     "alter": "Skane Scania",
@@ -5434,7 +5437,7 @@
     "name": "Williamsburg",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "595": {
     "city": "Abu Dhabi",
@@ -5447,7 +5450,7 @@
     "name": "Yas Mall",
     "state": "Abu Dhabi",
     "timezone": "Asia/Dubai",
-    "website": "-"
+    "website": ""
   },
   "596": {
     "city": "Dubai",
@@ -5457,7 +5460,7 @@
     "name": "Mall of the Emirates",
     "state": "Dubai",
     "timezone": "Asia/Dubai",
-    "website": "-"
+    "website": ""
   },
   "597": {
     "city": "Dubai",
@@ -5467,7 +5470,7 @@
     "name": "Dubai Mall",
     "state": "Dubai",
     "timezone": "Asia/Dubai",
-    "website": "-"
+    "website": ""
   },
   "598": {
     "city": "Woodbridge",
@@ -5477,7 +5480,7 @@
     "name": "Potomac Town Center",
     "state": "Virginia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "599": {
     "city": "Farmington",
@@ -5487,7 +5490,7 @@
     "name": "Station Park",
     "state": "Utah",
     "timezone": "America/Denver",
-    "website": "-"
+    "website": ""
   },
   "601": {
     "city": "Surrey",
@@ -5497,7 +5500,7 @@
     "name": "Guildford Town Centre",
     "state": "British Columbia",
     "timezone": "Canada/Pacific",
-    "website": "-"
+    "website": ""
   },
   "602": {
     "city": "Firenze Florence",
@@ -5507,7 +5510,7 @@
     "name": "Firenze",
     "state": "Firenze",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "606": {
     "city": "Miranda",
@@ -5517,7 +5520,7 @@
     "name": "Miranda",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
-    "website": "-"
+    "website": ""
   },
   "608": {
     "alter": "Sao Paulo",
@@ -5528,7 +5531,7 @@
     "name": "Morumbi",
     "state": "SP",
     "timezone": "Brazil/East",
-    "website": "-"
+    "website": ""
   },
   "609": {
     "alter": "Liaoning Dalian",
@@ -5553,7 +5556,7 @@
     "name": "New Town Plaza",
     "state": "香港",
     "timezone": "Asia/Hong_Kong",
-    "website": "-"
+    "website": ""
   },
   "612": {
     "city": "Elmhurst",
@@ -5563,7 +5566,7 @@
     "name": "Queens Center",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "613": {
     "city": "South Windsor",
@@ -5573,17 +5576,17 @@
     "name": "Evergreen Walk",
     "state": "Connecticut",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "614": {
     "city": "Virginia Beach",
     "dates": "2014-09-19",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "23 Mar 2023 18:34:25",
     "name": "Lynnhaven Mall",
     "state": "Virginia",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "615": {
     "city": "Sarasota",
@@ -5593,7 +5596,7 @@
     "name": "University Town Center",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "616": {
     "city": "Lansing",
@@ -5603,7 +5606,7 @@
     "name": "Eastwood Towne Center",
     "state": "Michigan",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "617": {
     "alter": "Hunan Changsha",
@@ -5627,7 +5630,7 @@
     "name": "Solomon Pond Mall",
     "state": "Massachusetts",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "623": {
     "city": "Miami",
@@ -5637,7 +5640,7 @@
     "name": "Brickell City Centre",
     "state": "Florida",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "624": {
     "city": "Madrid",
@@ -5655,7 +5658,7 @@
     "name": "Nave de Vero",
     "state": "Venezia",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "629": {
     "city": "Trumbull",
@@ -5665,7 +5668,7 @@
     "name": "Trumbull",
     "state": "Connecticut",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "631": {
     "city": "Manchester",
@@ -5675,7 +5678,7 @@
     "name": "The Mall of New Hampshire",
     "state": "New Hampshire",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "633": {
     "city": "Singapore",
@@ -5685,7 +5688,7 @@
     "name": "Marina Bay Sands",
     "state": "Singapore",
     "timezone": "Asia/Singapore",
-    "website": "-"
+    "website": ""
   },
   "637": {
     "alter": "Tianjin",
@@ -5810,7 +5813,7 @@
     "name": "Summerlin",
     "state": "Nevada",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "654": {
     "city": "New York",
@@ -5820,7 +5823,7 @@
     "name": "World Trade Center",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "658": {
     "city": "Paris",
@@ -5862,7 +5865,7 @@
     "name": "Piazza Liberty",
     "state": "Milano",
     "timezone": "Europe/Rome",
-    "website": "-"
+    "website": ""
   },
   "669": {
     "city": "Singapore",
@@ -5872,7 +5875,7 @@
     "name": "Orchard Road",
     "state": "Singapore",
     "timezone": "Asia/Singapore",
-    "website": "-"
+    "website": ""
   },
   "670": {
     "alter": "Yunnan Kunming",
@@ -5912,7 +5915,7 @@
     "name": "apm Hong Kong",
     "state": "香港",
     "timezone": "Asia/Hong_Kong",
-    "website": "-"
+    "website": ""
   },
   "675": {
     "alter": "Champs Elysees Île-de-France",
@@ -6080,7 +6083,7 @@
     "name": "Al Maryah Island",
     "state": "Abu Dhabi",
     "timezone": "Asia/Dubai",
-    "website": "-"
+    "website": ""
   },
   "708": {
     "alter": "Del Cuajimalpa de Morelos D.F., Mexico",
@@ -6146,7 +6149,7 @@
     "name": "Downtown Brooklyn",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "718": {
     "alter": "Tokyo Chiyoda Chiyoda-ku",
@@ -6170,7 +6173,7 @@
     "name": "Tower Theatre",
     "state": "California",
     "timezone": "America/Los_Angeles",
-    "website": "-"
+    "website": ""
   },
   "724": {
     "alter": "Istanbul",
@@ -6195,7 +6198,7 @@
     "name": "Iconsiam",
     "state": "กรุงเทพมหานคร",
     "timezone": "Asia/Bangkok",
-    "website": "-"
+    "website": ""
   },
   "733": {
     "alter": "Bangkok",
@@ -6206,7 +6209,7 @@
     "name": "Central World",
     "state": "กรุงเทพมหานคร",
     "timezone": "Asia/Bangkok",
-    "website": "-"
+    "website": ""
   },
   "736": {
     "city": "Singapore",
@@ -6216,7 +6219,7 @@
     "name": "Jewel Changi Airport",
     "state": "Singapore",
     "timezone": "Asia/Singapore",
-    "website": "-"
+    "website": ""
   },
   "738": {
     "alter": "Seoul",
@@ -6241,7 +6244,7 @@
     "name": "Antara",
     "state": "Ciudad de México",
     "timezone": "Mexico/General",
-    "website": "-"
+    "website": ""
   },
   "742": {
     "city": "Kuala Lumpur",
@@ -6254,10 +6257,11 @@
   "744": {
     "city": "Mumbai",
     "flag": "🇮🇳",
-    "name": "Store in Mumbai",
+    "name": "BKC",
     "state": "Maharashtra",
     "status": "future",
-    "timezone": "Asia/Kolkata"
+    "timezone": "Asia/Kolkata",
+    "website": ""
   },
   "746": {
     "city": "Dallas",
@@ -6267,7 +6271,7 @@
     "name": "Galleria Dallas",
     "state": "Texas",
     "timezone": "America/Chicago",
-    "website": "-"
+    "website": ""
   },
   "747": {
     "alter": "Seoul",
@@ -6326,7 +6330,7 @@
     "name": "The Mall at Bay Plaza",
     "state": "New York",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "755": {
     "city": "East Rutherford",
@@ -6336,7 +6340,7 @@
     "name": "American Dream",
     "state": "New Jersey",
     "timezone": "America/New_York",
-    "website": "-"
+    "website": ""
   },
   "756": {
     "city": "New Delhi",
@@ -6356,17 +6360,17 @@
     "timezone": "Asia/Seoul"
   },
   "761": {
-    "alter": "Guangdong Shenzhen 深圳东 深圳东部",
+    "alter": "Guangdong Shenzhen",
     "city": "深圳",
     "flag": "🇨🇳",
     "name": [
-      "Store in Shenzhen East",
       "深圳万象城",
       "MixC Shenzhen"
     ],
     "state": "广东",
     "status": "future",
-    "timezone": "Asia/Shanghai"
+    "timezone": "Asia/Shanghai",
+    "website": "mixcshenzhen"
   },
   "764": {
     "alter": "Seoul",
