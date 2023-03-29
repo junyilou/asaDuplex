@@ -4,11 +4,11 @@ from datetime import datetime
 from functools import total_ordering
 from modules.constants import allRegions, userAgent
 from modules.util import SessionType, request
-from typing import Any, Literal, Optional
+from typing import Any, Literal, Optional, overload
 
-STORES: dict[str, "Store"] = {}
 DEFAULTFILE = "storeInfo.json"
 STATUSTRANS = {"closed": "关闭", "future": "招聘", "internal": "内部"}
+STORES: dict[str, "Store"] = {}
 
 @total_ordering
 class Store:
@@ -17,14 +17,14 @@ class Store:
 			assert e in dct, f"key {e} not exist"
 
 		self.sid: str = f"{sid:0>3}"
-		self.rid: str = f"R{self.sid}"
+		self.rid: str = "R" + self.sid
 		self.iid: int = int(self.sid)
 		self.flag: str = dct["flag"]
 
 		self.name: str = dct["name"]
 		self.altname: list[str]
 		if isinstance(self.name, list):
-			self.altname = self.name
+			self.altname = self.name.copy()
 			self.name = self.altname.pop(0)
 		else:
 			self.altname = []
@@ -59,7 +59,7 @@ class Store:
 		self.city: str = dct["city"]
 		self.region: dict = allRegions[self.flag]
 		if "website" in dct:
-			self.slug: str = self.name.lower().replace(" ", "") if dct["website"] == "-" else dct["website"]
+			self.slug: str = dct["website"] or self.name.lower().replace(" ", "")
 			self.url: str = f"https://www.apple.com{self.region['storeURL']}/retail/{self.slug}"
 
 		keys = [
@@ -68,7 +68,7 @@ class Store:
 			getattr(self, "slug", ""),
 			self.region["name"], self.region["nameEng"], self.region["abbr"], *self.region["altername"],
 			*([dct["status"].capitalize(), STATUSTRANS[dct["status"]]] if "status" in dct else [])]
-		self.keys: list[str] = list(filter(None, keys))
+		self.keys: list[str] = [i for i in keys if i]
 		self.keys += [k.replace(" ", "") for k in self.keys if " " in k]
 
 		self.sortkey: tuple[str, str, str] = (self.flag, self.state, self.sid)
@@ -101,12 +101,12 @@ class Store:
 	def __str__(self) -> str:
 		return self.telename(sid = False)
 
-	def __gt__(self, other):
+	def __gt__(self, other) -> bool:
 		if not type(other) is type(self):
 			return NotImplemented
 		return self.sortkey > other.sortkey
 
-	def __eq__(self, other):
+	def __eq__(self, other) -> bool:
 		if not type(other) is type(self):
 			return NotImplemented
 		return self.sortkey == other.sortkey
@@ -114,9 +114,15 @@ class Store:
 	def __hash__(self) -> int:
 		return hash(self.sortkey)
 
+	@overload
 	async def detail(self, session: Optional[SessionType] = None,
-		mode: Literal["dict", "hours", "raw", "url"] = "dict") -> Any:
+		mode: Optional[Literal["dict", "hours", "raw"]] = None) -> dict[str, Any]: ...
+	@overload
+	async def detail(self, session: Optional[SessionType] = None, mode: Literal["url"] = "url") -> str: ...
+	async def detail(self, session: Optional[SessionType] = None,
+		mode: Optional[Literal["dict", "hours", "raw", "url"]] = None) -> Any:
 		try:
+			assert mode in ["dict", "hours", "raw", "url", None]
 			assert hasattr(self, "slug")
 			url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={self.slug}&locale={self.region['rspLocale']}&sc=false"
 			if mode == "url":
@@ -134,16 +140,14 @@ class Store:
 					return r
 				case "hours":
 					return hours
-				case "dict":
+				case _:
 					add = r["address"]
-					address = ", ".join(a.strip() for a in filter(None, [add["address1"], add["address2"]]))
-					province = ", ".join(a.strip() for a in filter(None, [add["city"], add["stateName"], add["postal"]]))
+					address = ", ".join(a.strip() for a in [add["address1"], add["address2"]] if a)
+					province = ", ".join(a.strip() for a in [add["city"], add["stateName"], add["postal"]] if a)
 					info = {"timezone": r["timezone"], "telephone": r["telephone"], "address": address, "province": province}
 					return r["geolocation"] | info | hours
-				case _:
-					return {}
 		except:
-			return {}
+			return "https://www.apple.com" if mode == "url" else {}
 
 	@property
 	def dieter(self) -> str:
@@ -222,7 +226,7 @@ def reloadJSON(filename: str = DEFAULTFILE) -> str:
 	global STORES
 	with open(filename) as r:
 		infoJSON = json.load(r)
-	update = infoJSON.pop("update")
+	update = infoJSON.pop("update", None)
 	STORES = {sid: Store(sid = sid, dct = dct) for sid, dct in infoJSON.items()}
 	infoJSON["update"] = update
 	return update
@@ -232,25 +236,12 @@ def sidify(sid: int | str, *, R: bool = False, fill: bool = True) -> str:
 
 def storeReturn(args: str | list[str], *, remove_closed: Any = False, remove_future: Any = False,
 	fuzzy: Any = False, regular: Any = False, split: Any = False, sort: Any = True) -> list[Store]:
-	ans = []
-	match args, bool(split):
-		case str(), True:
-			splits = re.split(",|，", args) # type: ignore
-		case list(), False:
-			splits = args
-		case _, _:
-			splits = [args]
-
-	for a in (str(s).strip() for s in splits):
-		for stores in (StoreID(a, fuzzy = fuzzy, regular = regular), StoreMatch(a, fuzzy = fuzzy, regular = regular)):
-			for s in stores:
-				try:
-					assert s not in ans
-					assert not remove_closed or not s.isClosed and not s.isIntern
-					assert not remove_future or not s.isFuture and not s.isIntern
-				except AssertionError:
-					continue
-				ans.append(s)
+	if not isinstance(args, list):
+		args = re.split(r"\s*[,，]\s*", str(args)) if split else [str(args).strip()]
+	gen = set(g for s in args for m in (StoreID(s, fuzzy = fuzzy, regular = regular),
+		StoreMatch(s, fuzzy = fuzzy, regular = regular)) for g in m)
+	ans = [s for s in gen if (not remove_closed or not s.isClosed and not s.isIntern) and
+		(not remove_future or not s.isFuture and not s.isIntern)]
 	if sort:
 		ans.sort()
 	return ans
