@@ -1,5 +1,5 @@
 {
-  "update": "2023-03-29 15:00:00 GMT",
+  "update": "2023-04-03 00:10:18 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -3715,7 +3715,7 @@
     "city": "Aberdeen",
     "dates": "2009-10-29",
     "flag": "🇬🇧",
-    "modified": "07 Jan 2022 08:59:08",
+    "modified": "31 Mar 2023 16:36:07",
     "name": [
       "Union Square (UK)",
       "Union Square"
@@ -3738,7 +3738,7 @@
     "city": "Carugate",
     "dates": "2009-09-05",
     "flag": "🇮🇹",
-    "modified": "07 Jan 2022 08:59:08",
+    "modified": "31 Mar 2023 18:46:47",
     "name": "Carosello",
     "state": "Milano",
     "timezone": "Europe/Rome",
@@ -5654,7 +5654,7 @@
     "city": "Mestre Venice",
     "dates": "2014-10-11",
     "flag": "🇮🇹",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "31 Mar 2023 18:44:21",
     "name": "Nave de Vero",
     "state": "Venezia",
     "timezone": "Europe/Rome",
@@ -5991,7 +5991,7 @@
     "city": "서울",
     "dates": "2023-03-31",
     "flag": "🇰🇷",
-    "modified": "13 Mar 2023 23:05:55",
+    "modified": "31 Mar 2023 19:23:32",
     "name": [
       "강남",
       "Gangnam"
@@ -6363,12 +6363,12 @@
     "alter": "Guangdong Shenzhen",
     "city": "深圳",
     "flag": "🇨🇳",
+    "modified": "03 Apr 2023 00:08:44",
     "name": [
       "深圳万象城",
       "MixC Shenzhen"
     ],
     "state": "广东",
-    "status": "future",
     "timezone": "Asia/Shanghai",
     "website": "mixcshenzhen"
   },

@@ -115,14 +115,12 @@ class Store:
 		return hash(self.sortkey)
 
 	@overload
-	async def detail(self, session: Optional[SessionType] = None,
-		mode: Optional[Literal["dict", "hours", "raw"]] = None) -> dict[str, Any]: ...
+	async def detail(self, mode: Optional[Literal["dict", "hours", "raw"]] = None, session: Optional[SessionType] = None) -> dict[str, Any]: ...
 	@overload
-	async def detail(self, session: Optional[SessionType] = None, mode: Literal["url"] = "url") -> str: ...
-	async def detail(self, session: Optional[SessionType] = None,
-		mode: Optional[Literal["dict", "hours", "raw", "url"]] = None) -> Any:
+	async def detail(self, mode: Literal["hero", "url"], session: Optional[SessionType] = None, ) -> str: ...
+	async def detail(self, mode: Optional[str] = None, session: Optional[SessionType] = None) -> Any:
 		try:
-			assert mode in ["dict", "hours", "raw", "url", None]
+			assert mode in ["dict", "hero", "hours", "raw", "url", None]
 			assert hasattr(self, "slug")
 			url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={self.slug}&locale={self.region['rspLocale']}&sc=false"
 			if mode == "url":
@@ -138,6 +136,8 @@ class Store:
 			match mode:
 				case "raw":
 					return r
+				case "hero":
+					return r["heroImage"]["large"]["x2"]
 				case "hours":
 					return hours
 				case _:
@@ -147,7 +147,7 @@ class Store:
 					info = {"timezone": r["timezone"], "telephone": r["telephone"], "address": address, "province": province}
 					return r["geolocation"] | info | hours
 		except:
-			return "https://www.apple.com" if mode == "url" else {}
+			return "https://www.apple.com" if mode in ["hero", "url"] else {}
 
 	@property
 	def dieter(self) -> str:
