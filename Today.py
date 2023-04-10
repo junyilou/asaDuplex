@@ -4,16 +4,18 @@ import logging
 from datetime import UTC, datetime
 from os.path import basename
 from sys import argv
+from typing import Optional
 
 from bot import chat_ids
 from botpost import async_post as raw_post
+from modules.constants import allRegions
 from modules.today import Collection, Sitemap, Store, teleinfo
 from modules.util import setLogger, sortOD
 from storeInfo import storeReturn
 
-TODAYARGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼", "🇯🇵", "🇰🇷", "🇸🇬", "🇹🇭"]
+TODAYARGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼", "🇮🇳", "🇯🇵", "🇰🇷", "🇸🇬", "🇹🇭"]
 
-def rec(lst, rst):
+def rec(lst, rst) -> list:
 	for i in lst:
 		match i:
 			case list():
@@ -25,18 +27,13 @@ def rec(lst, rst):
 					rst.append(i)
 	return rst
 
-async def async_post(text, image, keyboard):
+async def async_post(text: str, image: str, keyboard: list[list[list[str]]]) -> Optional[dict]:
 	push = {
-		"mode": "photo-text",
-		"text": text,
-		"image": image,
-		"parse": "MARK",
-		"chat_id": chat_ids[0],
-		"keyboard": keyboard
-	}
-	await raw_post(push)
+		"mode": "photo-text", "text": text, "image": image,
+		"parse": "MARK", "chat_id": chat_ids[0], "keyboard": keyboard}
+	return await raw_post(push)
 
-async def main(mode):
+async def main(mode: str) -> None:
 	global append
 	match mode:
 		case "today":
@@ -100,19 +97,12 @@ async def main(mode):
 			await async_post(text, image, keyboard)
 
 if __name__ == "__main__":
-	args = {
-		"today": TODAYARGS,
-		"sitemap": ".cn /hk /mo /tw /jp /kr /sg /th".split(" ")
-	}
-
-	append = False
-	savedID = {}
-
+	append, savedID = False, {}
+	args = {"today": TODAYARGS, "sitemap": [allRegions[i]["storeURL"] for i in TODAYARGS]}
 	with open("Retail/savedEvent.json") as m:
 		saved = json.loads(m.read())
 		for m in saved:
 			savedID[m] = [i for i in saved[m]]
-
 	if len(argv) == 1:
 		argv = ["", "today"]
 
