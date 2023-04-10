@@ -65,7 +65,10 @@ async def speHours(sid: int | str, session: Optional[SessionType] = None, runtim
 	runtime = datetime.now().date() if runtime is None else runtime
 	try:
 		j = await store.detail(session = session, mode = "hours")
-		assert isinstance(j, dict)
+		assert isinstance(j, dict) and "regular" in j
+	except AssertionError:
+		logging.getLogger(__name__).error(f"[DEBUG] 远程数据无效: {j!r}")
+		return []
 	except:
 		logging.getLogger(__name__).error(f"未能获得 {store.rid} 营业时间信息" if userLang else f"Failed getting store hours for {store.rid}")
 		return []
