@@ -8,7 +8,6 @@ from typing import Optional
 
 from bot import chat_ids
 from botpost import async_post as raw_post
-from modules.constants import allRegions
 from modules.today import Collection, Sitemap, Store, teleinfo
 from modules.util import setLogger, sortOD
 from storeInfo import storeReturn
@@ -37,16 +36,13 @@ async def main(mode: str) -> None:
 	global append
 	match mode:
 		case "today":
-			stores = storeReturn(args["today"], remove_closed = True, remove_future = True)
+			stores = storeReturn(TODAYARGS, remove_closed = True, remove_future = True)
 			tasks = [Store(store = store).getSchedules() for store in stores]
 		case "sitemap":
-			tasks = [Sitemap(rootPath = i).getObjects() for i in args["sitemap"]]
+			tasks = [Sitemap(flag = flag).getObjects() for flag in TODAYARGS]
 		case _:
 			return
-
-	courses = {}
-	results = await asyncio.gather(*tasks, return_exceptions = True)
-	results = rec(results, [])
+	courses, results= {}, rec(await asyncio.gather(*tasks, return_exceptions = True), [])
 
 	for j in results:
 		if hasattr(j, "scheduleId"):
@@ -98,7 +94,6 @@ async def main(mode: str) -> None:
 
 if __name__ == "__main__":
 	append, savedID = False, {}
-	args = {"today": TODAYARGS, "sitemap": [allRegions[i]["storeURL"] for i in TODAYARGS]}
 	with open("Retail/savedEvent.json") as m:
 		saved = json.loads(m.read())
 		for m in saved:
