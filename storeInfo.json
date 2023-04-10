@@ -1,5 +1,5 @@
 {
-  "update": "2023-04-03 00:10:18 GMT",
+  "update": "2023-04-06 16:00:08 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -4579,7 +4579,7 @@
     "city": "Lyon",
     "dates": "2012-04-04",
     "flag": "🇫🇷",
-    "modified": "06 Jan 2023 23:13:30",
+    "modified": "05 Apr 2023 00:11:53",
     "name": "Confluence",
     "state": "Rhône",
     "timezone": "Europe/Paris",
@@ -5991,7 +5991,7 @@
     "city": "서울",
     "dates": "2023-03-31",
     "flag": "🇰🇷",
-    "modified": "31 Mar 2023 19:23:32",
+    "modified": "05 Apr 2023 17:56:27",
     "name": [
       "강남",
       "Gangnam"
@@ -6257,9 +6257,9 @@
   "744": {
     "city": "Mumbai",
     "flag": "🇮🇳",
+    "modified": "06 Apr 2023 15:41:52",
     "name": "BKC",
     "state": "Maharashtra",
-    "status": "future",
     "timezone": "Asia/Kolkata",
     "website": ""
   },
@@ -6345,10 +6345,11 @@
   "756": {
     "city": "New Delhi",
     "flag": "🇮🇳",
-    "name": "Store in New Delhi",
+    "name": "Saket",
     "state": "Delhi",
     "status": "future",
-    "timezone": "Asia/Kolkata"
+    "timezone": "Asia/Kolkata",
+    "website": ""
   },
   "760": {
     "alter": "Seoul",

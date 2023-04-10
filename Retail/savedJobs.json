@@ -1,5 +1,5 @@
 {
-  "update": "2023-02-16 00:20:08 GMT",
+  "update": "2023-04-05 00:20:07 GMT",
   "🇦🇪": {
     "state1049": {
       "ABUA": "Al Maryah Island",
@@ -585,7 +585,7 @@
   },
   "🇰🇷": {
     "state1112": {
-      "R691": "Seoul South - KR",
+      "R691": "Gangnam",
       "R692": "Garosugil",
       "R738": "Myeongdong",
       "R747": "Seoul - Yeouido",
@@ -735,7 +735,7 @@
       "R148": "Sherman Oaks",
       "R154": "The Oaks",
       "R156": "Brea Mall",
-      "R171": "Simi Valley",
+      "R171": "~Simi Valley",
       "R189": "Topanga",
       "R199": "Higuera Street",
       "R213": "Otay Ranch",
@@ -942,7 +942,7 @@
       "R104": "Bridgewater",
       "R117": "Garden State Plaza",
       "R138": "Freehold Raceway Mall",
-      "R173": "The Pier",
+      "R173": "~The Pier",
       "R206": "Cherry Hill",
       "R325": "Willowbrook",
       "R549": "Quaker Bridge",
