@@ -1,5 +1,5 @@
 {
-  "update": "2023-04-06 16:00:08 GMT",
+  "update": "2023-04-26 06:30:19 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -3748,7 +3748,7 @@
     "city": "Hamburg",
     "dates": "2009-08-29",
     "flag": "🇩🇪",
-    "modified": "07 Jan 2022 08:59:08",
+    "modified": "20 Apr 2023 17:40:33",
     "name": "Alstertal",
     "state": "Hamburg",
     "timezone": "Europe/Berlin",
@@ -5080,7 +5080,7 @@
     "city": "Rosny-Sous-Bois",
     "dates": "2013-07-06",
     "flag": "🇫🇷",
-    "modified": "07 Jan 2022 08:59:09",
+    "modified": "25 Apr 2023 15:36:23",
     "name": "Rosny 2",
     "state": "Seine-Saint-Denis",
     "timezone": "Europe/Paris",
@@ -6256,8 +6256,9 @@
   },
   "744": {
     "city": "Mumbai",
+    "dates": "2023-04-18",
     "flag": "🇮🇳",
-    "modified": "06 Apr 2023 15:41:52",
+    "modified": "21 Apr 2023 20:10:00",
     "name": "BKC",
     "state": "Maharashtra",
     "timezone": "Asia/Kolkata",
@@ -6344,10 +6345,11 @@
   },
   "756": {
     "city": "New Delhi",
+    "dates": "2023-04-20",
     "flag": "🇮🇳",
+    "modified": "21 Apr 2023 20:18:50",
     "name": "Saket",
     "state": "Delhi",
-    "status": "future",
     "timezone": "Asia/Kolkata",
     "website": ""
   },
@@ -6362,9 +6364,10 @@
   },
   "761": {
     "alter": "Guangdong Shenzhen",
+    "dates": "2023-04-28",
     "city": "深圳",
     "flag": "🇨🇳",
-    "modified": "03 Apr 2023 00:08:44",
+    "modified": "20 Apr 2023 00:01:47",
     "name": [
       "深圳万象城",
       "MixC Shenzhen"
@@ -6394,6 +6397,14 @@
     "state": "浙江",
     "status": "future",
     "timezone": "Asia/Shanghai"
+  },
+  "770": {
+    "city": "서울",
+    "flag": "🇰🇷",
+    "name": "Store in Seoul East",
+    "state": "경기도",
+    "status": "future",
+    "timezone": "Asia/Seoul"
   },
   "824": {
     "city": "Cupertino",
