@@ -4,7 +4,7 @@ import logging
 from datetime import UTC, datetime
 from os.path import basename
 from sys import argv
-from typing import Optional, Union
+from typing import Optional
 
 from bot import chat_ids
 from botpost import async_post
@@ -16,56 +16,60 @@ API = {
 	"province": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/storeLocations",
 	"image": "https://www.apple.com/careers/images/retail/fy22/hero_hotspot/default@2x.png"}
 
-TASKS: list[Union["Region", "State"]] = []
+class JobObject:
+	hashattr: str
+	reprattrs: list[str]
+
+	def __eq__(self, other) -> bool:
+		if type(self) is not type(other):
+			return NotImplemented
+		return hash(self) == hash(other)
+
+	def __hash__(self) -> int:
+		return hash((self.__class__.__name__, getattr(self, self.hashattr)))
+
+	def __repr__(self) -> str:
+		return f'<{self.__class__.__name__}: {", ".join(i for i in (getattr(self, attr) for attr in self.reprattrs) if i)}>'
+
+class TaskObject(JobObject):
+	async def runner(self) -> None: ...
+
+TASKS: list[TaskObject] = []
 RESULTS: list["Store"] = []
 FUTURES: dict[str, str] = {}
 
-class Store:
-	def __init__(self, **kwargs):
+class Store(JobObject):
+	hashattr = "sid"
+	reprattrs = ["flag", "stateName", "sid", "name"]
+
+	def __init__(self, **kwargs) -> None:
 		for k in ["state", "city", "sid", "name"]:
 			setattr(self, k, kwargs.get(k, None))
 		self.sid: str = kwargs["sid"]
 		self.name: str = kwargs["name"]
 		self.city: Optional[str] = kwargs.get("city", None)
 		self.state: "State" = kwargs["state"]
-		self.flag = self.state.flag
-		self.stateName = self.state.name
-		self.stateCode = self.state.code
-
-	def __repr__(self):
-		args = filter(None, [self.flag, self.stateName, self.sid, self.name])
-		return f'<Store: {", ".join(args)}>'
-
-	def __hash__(self):
-		return hash(("Store", self.sid))
-
-	def __eq__(self, other):
-		return (type(self), hash(self)) == (type(other), hash(other))
+		self.flag: str = self.state.flag
+		self.stateName: str = self.state.name
+		self.stateCode: str = self.state.code
 
 	def teleInfo(self) -> str:
 		city = f"{self.city}, " if self.city is not None else f"{self.stateCode}: "
 		return f"*{self.flag} {city}{self.stateName}*\n{self.sid} - {self.name}"
 
-class State:
-	def __init__(self, **kwargs):
+class State(TaskObject):
+	hashattr = "code"
+	reprattrs = ["flag", "code", "name"]
+
+	def __init__(self, **kwargs) -> None:
 		self.region: "Region" = kwargs["region"]
 		self.fieldID: Optional[str] = kwargs.get("fieldID", None)
 		self.code: str = kwargs["code"]
 		self.name: str = kwargs["name"]
 		self.session: Optional[SessionType] = kwargs.get("session", None)
 		self.semaphore: Optional[SemaphoreType] = kwargs.get("semaphore", None)
-		self.flag = self.region.flag
-		self.regionCode = self.region.code
-
-	def __repr__(self):
-		args = filter(None, [self.flag, self.code, self.name])
-		return f'<State: {", ".join(args)}>'
-
-	def __hash__(self):
-		return hash(("State", self.code))
-
-	def __eq__(self, other):
-		return (type(self), hash(self)) == (type(other), hash(other))
+		self.flag: str = self.region.flag
+		self.regionCode: str = self.region.code
 
 	async def runner(self) -> None:
 		global TASKS, RESULTS
@@ -83,30 +87,22 @@ class State:
 				raise NameError("SERVER")
 			else:
 				logging.warning(", ".join(["下载失败", "等待重试", str(self)]))
-				TASKS.append(self)
-				return
+				return TASKS.append(self)
 		except:
 			logging.error(", ".join(["下载失败", "放弃下载", str(self)]))
-			TASKS.append(self)
-			return
+			return TASKS.append(self)
 		for c in a:
 			RESULTS.append(Store(state = self, city = c["city"], name = c["name"], sid = c["code"]))
 
-class Region:
-	def __init__(self, **kwargs):
+class Region(TaskObject):
+	hashattr = "flag"
+	reprattrs = ["flag", "code"]
+
+	def __init__(self, **kwargs) -> None:
 		self.flag: str = kwargs["flag"]
 		self.session: Optional[SessionType] = kwargs.get("session", None)
 		self.semaphore: Optional[SemaphoreType] = kwargs.get("semaphore", None)
 		self.code: str = allRegions[self.flag]["jobCode"]
-
-	def __repr__(self):
-		return f'<Region: {", ".join([self.flag, self.code])}>'
-
-	def __hash__(self):
-		return hash(("Region", self.flag))
-
-	def __eq__(self, other):
-		return (type(self), hash(self)) == (type(other), hash(other))
 
 	async def runner(self) -> None:
 		global TASKS
@@ -123,12 +119,10 @@ class Region:
 				raise NameError("SERVER")
 			else:
 				logging.warning(", ".join(["下载失败", "等待重试", str(self)]))
-				TASKS.append(self)
-				return
+				return TASKS.append(self)
 		except:
 			logging.error(", ".join(["下载失败", "放弃下载", str(self)]))
-			TASKS.append(self)
-			return
+			return TASKS.append(self)
 		for p in a["searchResults"]:
 			TASKS.append(State(
 				region = self, fieldID = p["id"], code = p["code"], name = p["stateProvince"],
@@ -171,34 +165,36 @@ async def entry(session: SessionType, targets: list[str], check_cancel: bool) ->
 						logging.error(", ".join(["放弃下载", str(t)]))
 						continue
 					tg.create_task(t.runner())
-			_ = [TASKS.remove(t) for t in tasks]
+			for t in tasks:
+				TASKS.remove(t)
 		except* NameError:
 			TASKS = []
 
 	append = False
-	pushes = [[], [], []]
+	pushes = {"已开始招聘": [], "已恢复招聘": [], "已停止招聘": []}
 
 	for store in RESULTS:
 		if store.flag not in SAVED:
 			SAVED[store.flag] = {}
+		dct = SAVED[store.flag]
 		if store not in STORES:
 			append = True
 			logging.info(f"记录到新地点 {store.flag} {store.stateName} {store.sid} {store.name}")
-			SAVED[store.flag][store.stateCode] = SAVED[store.flag].get(store.stateCode, {"name": store.stateName})
-			SAVED[store.flag][store.stateCode][store.sid] = store.name
+			dct[store.stateCode] = dct.get(store.stateCode, {"name": store.stateName})
+			dct[store.stateCode][store.sid] = store.name
 			linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
-			pushes[0].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
-		elif (oldName := SAVED[store.flag][store.stateCode]["name"]) != store.stateName:
+			pushes["已开始招聘"].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
+		elif (oldName := dct[store.stateCode]["name"]) != store.stateName:
 			append = True
 			logging.info(f"更改名称 {oldName} 为 {store.stateName}")
-			SAVED[store.flag][store.stateCode]["name"] = store.stateName
-		elif (oldName := SAVED[store.flag][store.stateCode][store.sid]) != store.name:
+			dct[store.stateCode]["name"] = store.stateName
+		elif (oldName := dct[store.stateCode][store.sid]) != store.name:
 			append = True
 			logging.info(f"更改名称 {oldName} 为 {store.name}")
-			SAVED[store.flag][store.stateCode][store.sid] = store.name
+			dct[store.stateCode][store.sid] = store.name
 			if oldName.startswith("~"):
 				linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
-				pushes[1].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
+				pushes["已恢复招聘"].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
 
 	if check_cancel:
 		for store in STORES:
@@ -208,18 +204,18 @@ async def entry(session: SessionType, targets: list[str], check_cancel: bool) ->
 			logging.info(f"记录到地点已停止招聘 {store.flag} {store.stateName} {store.sid} {store.name}")
 			SAVED[store.flag][store.stateCode][store.sid] = "~" + store.name
 			linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
-			pushes[2].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
+			pushes["已停止招聘"].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
 
-	for p, t in zip(pushes, ["已开始招聘", "已恢复招聘", "已停止招聘"]):
-		if (content := "\n".join(p)):
-			push = {
-				"mode": "photo-text",
-				"text": f"\\#新店新机遇\n{t}\n\n{content}",
-				"chat_id": chat_ids[0],
-				"parse": "MARK",
-				"image": API["image"]
-			}
-			await async_post(push, session = session)
+	for t, p in pushes.items():
+		if not p:
+			continue
+		push = {
+			"mode": "photo-text",
+			"text": "\n".join(["\\#新店新机遇", t, "", *p]),
+			"chat_id": chat_ids[0],
+			"parse": "MARK",
+			"image": API["image"]}
+		await async_post(push, session = session)
 
 	if append:
 		SAVED["update"] = datetime.now(UTC).strftime("%F %T GMT")
@@ -248,7 +244,6 @@ async def main(session: SessionType, targets: list[str], futures: dict[str, str]
 			logging.info(f"找到一个新职位信息: {reference['positionId']} {reference['postingTitle']}")
 			allRegions[flag] = allRegions.get(flag, {}) | {"jobCode": reference["positionId"]}
 			targets.append(flag)
-
 	await entry(session, targets, check_cancel)
 
 setLogger(logging.INFO, basename(__file__))
