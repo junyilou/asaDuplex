@@ -4,17 +4,17 @@ import logging
 from datetime import UTC, datetime
 from os.path import basename
 from sys import argv
-from typing import Optional
+from typing import Any, Optional
 
 from bot import chat_ids
 from botpost import async_post as raw_post
-from modules.today import Collection, Sitemap, Store, teleinfo
+from modules.today import Collection, Course, Schedule, Sitemap, Store, teleinfo
 from modules.util import setLogger, sortOD
 from storeInfo import storeReturn
 
-TODAYARGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼", "🇮🇳", "🇯🇵", "🇰🇷", "🇸🇬", "🇹🇭"]
+TODAYARGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼"]
 
-def rec(lst, rst) -> list:
+def rec(lst: list[Any], rst: list[Any]) -> list[Any]:
 	for i in lst:
 		match i:
 			case list():
@@ -32,8 +32,8 @@ async def async_post(text: str, image: str, keyboard: list[list[list[str]]]) -> 
 		"parse": "MARK", "chat_id": chat_ids[0], "keyboard": keyboard}
 	return await raw_post(push)
 
-async def main(mode: str) -> None:
-	global append
+async def main(mode: str) -> bool:
+	append = False
 	match mode:
 		case "today":
 			stores = storeReturn(TODAYARGS, remove_closed = True, remove_future = True)
@@ -41,23 +41,26 @@ async def main(mode: str) -> None:
 		case "sitemap":
 			tasks = [Sitemap(flag = flag).getObjects() for flag in TODAYARGS]
 		case _:
-			return
-	courses, results= {}, rec(await asyncio.gather(*tasks, return_exceptions = True), [])
+			return append
+
+	courses: dict[Course, list[Schedule]] = {}
+	results: list[Course | Schedule] = rec(await asyncio.gather(*tasks, return_exceptions = True), [])
 
 	for j in results:
-		if hasattr(j, "scheduleId"):
-			courses[j.course] = courses.get(j.course, [])
-			if j not in courses[j.course]:
-				courses[j.course].append(j)
-		else:
-			courses[j] = courses.get(j, [])
+		match j:
+			case Schedule(course = c):
+				courses[c] = courses.get(c, [])
+				if j not in courses[c]:
+					courses[c].append(j)
+			case Course() as c:
+				courses[c] = courses.get(c, [])
 
 	for course in courses:
-		doSend = False
-		toSave = {"slug": course.slug, "names": {course.flag: course.name}}
-		conditions = [len(courses[course]) > 0] + [course.courseId in saved[s] for s in ["today", "sitemap"]]
+		doSend, toSave = False, {"slug": course.slug, "names": {course.flag: course.name}}
+		conditions: tuple[bool, bool, bool] = (len(courses[course]) > 0, *(course.courseId in saved[s] for s in ("today", "sitemap")))
 
-		if isinstance((collection := course.collection), Collection):
+		if isinstance(course.collection, Collection):
+			collection = course.collection
 			if collection.slug in saved["collection"]:
 				if course.flag not in saved["collection"][collection.slug]:
 					saved["collection"][collection.slug][collection.flag] = collection.name
@@ -92,25 +95,23 @@ async def main(mode: str) -> None:
 			text, image, keyboard = teleinfo(course = course, schedules = schedules, prior = TODAYARGS)
 			await async_post(text, image, keyboard)
 
-if __name__ == "__main__":
-	append, savedID = False, {}
-	with open("Retail/savedEvent.json") as m:
-		saved = json.loads(m.read())
-		for m in saved:
-			savedID[m] = [i for i in saved[m]]
-	if len(argv) == 1:
-		argv = ["", "today"]
+	return append
 
-	setLogger(logging.INFO, basename(__file__))
-	logging.info("程序启动")
-	loop = asyncio.new_event_loop()
-	asyncio.set_event_loop(loop)
-	loop.run_until_complete(main(argv[1]))
+setLogger(logging.INFO, basename(__file__))
+logging.info("程序启动")
 
-	if append:
-		logging.info("正在更新 savedEvent 文件")
-		saved["update"] = datetime.now(UTC).strftime("%F %T GMT")
-		with open("Retail/savedEvent.json", "w") as w:
-			json.dump(sortOD(saved, reverse = [True, False]), w, ensure_ascii = False, indent = 2)
+argv[1:] = argv[1:] or ["today"]
+with open("Retail/savedEvent.json") as m:
+	saved = json.loads(m.read())
 
-	logging.info("程序结束")
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+append = loop.run_until_complete(main(argv[1]))
+
+if append:
+	logging.info("正在更新 savedEvent 文件")
+	saved["update"] = datetime.now(UTC).strftime("%F %T GMT")
+	with open("Retail/savedEvent.json", "w") as w:
+		json.dump(sortOD(saved, reverse = [True, False]), w, ensure_ascii = False, indent = 2)
+
+logging.info("程序结束")
