@@ -276,7 +276,7 @@ class Course(TodayObject):
 
 	@classmethod
 	async def get(cls,
-	    rootPath: str,
+		rootPath: str,
 		slug: str,
 		remote: Optional[dict] = None) -> Self:
 		if remote is None:
@@ -293,7 +293,7 @@ class Course(TodayObject):
 		courseId: str = next(t[0] for t in remote["courses"].items() if t[1]["urlTitle"] == slug)
 		talents: list[dict] = remote.get("talents", [])
 		raw: dict[str, Any] = remote["courses"][courseId]
-		moreAbout, collection = [], raw["collectionName"]
+		moreAbout, collection = [], raw.get("collectionName")
 		if "moreAbout" in remote:
 			moreAbout.append(remote["moreAbout"])
 		if "heroGallery" in remote:
@@ -301,13 +301,13 @@ class Course(TodayObject):
 				if m.get("heroType", None) == "TAG":
 					moreAbout.append(m)
 		for more in moreAbout:
-			if raw["collectionName"] in [more.get(k, k) for k in ["title", "name"]]:
+			if collection and any(collection == more.get(k, k) for k in ["title", "name"]):
 				collection = await getCollection(rootPath = rootPath, slug = more["collId"])
 
 		return cls(courseId = courseId, raw = raw, rootPath = rootPath, collection = collection, talents = talents)
 
 	def __init__(self,
-	    courseId: str,
+		courseId: str,
 		raw: dict[str, Any],
 		rootPath: str,
 		collection: Optional[Union[str, "Collection"]] = None,
@@ -328,7 +328,7 @@ class Course(TodayObject):
 			"short": raw["shortDescription"].strip()}
 
 		self.intro: dict[str, str | list[str]] = {}
-		if raw["modalVideo"]:
+		if "modalVideo" in raw:
 			self.intro = {
 				"poster": raw["modalVideo"]["poster"]["source"],
 				"video": _resolution(raw["modalVideo"]["sources"])}
@@ -463,7 +463,7 @@ class Schedule(TodayObject):
 		return cls(scheduleId = scheduleId, course = course, store = store, rootPath = rootPath, raw = raw)
 
 	def __init__(self,
-	    course: Course,
+		course: Course,
 		scheduleId: str,
 		store: Store,
 		raw: dict[str, Any],
@@ -535,7 +535,7 @@ class Collection(TodayObject):
 
 	@classmethod
 	async def get(cls,
-	    rootPath: str,
+		rootPath: str,
 		slug: str,
 		remote: Optional[dict] = None) -> Self:
 		if remote is None:
@@ -552,7 +552,7 @@ class Collection(TodayObject):
 		return cls(rootPath = rootPath, slug = slug, raw = remote)
 
 	def __init__(self,
-	    raw: dict[str, Any],
+		raw: dict[str, Any],
 		rootPath: str,
 		slug: str) -> None:
 
