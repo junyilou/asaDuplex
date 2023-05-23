@@ -1,11 +1,14 @@
 {
-  "update": "2023-04-26 06:30:19 GMT",
+  "update": "2023-05-22 23:20:10 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
     "flag": "🇺🇸",
     "modified": "07 Feb 2022 23:00:22",
-    "name": "Glendale Galleria",
+    "name": [
+      "Glendale Galleria",
+      "Glendale"
+    ],
     "state": "California",
     "timezone": "America/Los_Angeles",
     "website": ""
@@ -107,17 +110,26 @@
     ],
     "flag": "🇺🇸",
     "modified": "07 Jan 2022 08:59:09",
-    "name": "Easton Town Center",
+    "name": [
+      "Easton Town Center",
+      "Easton"
+    ],
     "state": "Ohio",
     "timezone": "America/New_York",
     "website": ""
   },
   "010": {
     "city": "McLean",
-    "dates": "2001-05-19",
+    "dates": [
+      "2001-05-19",
+      "2023-05-19"
+    ],
     "flag": "🇺🇸",
-    "modified": "28 Feb 2022 22:59:44",
-    "name": "Tysons Corner",
+    "modified": "22 May 2023 22:18:46",
+    "name": [
+      "Tysons Corner",
+      "Tysons"
+    ],
     "state": "Virginia",
     "timezone": "America/New_York",
     "website": ""
@@ -153,7 +165,10 @@
     "dates": "2001-11-03",
     "flag": "🇺🇸",
     "modified": "07 Jan 2022 08:59:07",
-    "name": "Tice's Corner",
+    "name": [
+      "Tice's Corner",
+      "Tice's"
+    ],
     "state": "New Jersey",
     "timezone": "America/New_York",
     "website": "ticescorner"
@@ -181,7 +196,7 @@
       "2011-08-20"
     ],
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:09",
+    "modified": "10 May 2023 18:16:41",
     "name": "Fashion Island",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -192,7 +207,10 @@
     "dates": "2001-11-23",
     "flag": "🇺🇸",
     "modified": "07 Jan 2022 08:59:09",
-    "name": "Walden Galleria",
+    "name": [
+      "Walden Galleria",
+      "Walden"
+    ],
     "state": "New York",
     "timezone": "America/New_York",
     "website": ""
@@ -225,7 +243,10 @@
     "dates": "2001-09-18",
     "flag": "🇺🇸",
     "modified": "07 Jan 2022 08:59:07",
-    "name": "International Plaza",
+    "name": [
+      "International Plaza",
+      "Plaza"
+    ],
     "state": "Florida",
     "timezone": "America/New_York",
     "website": ""
@@ -307,7 +328,10 @@
     ],
     "flag": "🇺🇸",
     "modified": "07 Jan 2022 08:59:07",
-    "name": "Chandler Fashion Center",
+    "name": [
+      "Chandler Fashion Center",
+      "Chandler"
+    ],
     "state": "Arizona",
     "timezone": "US/Arizona",
     "website": ""
@@ -495,7 +519,7 @@
     "city": "Short Hills",
     "dates": "2002-06-22",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "16 May 2023 20:49:00",
     "name": "Short Hills",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -751,7 +775,10 @@
     ],
     "flag": "🇺🇸",
     "modified": "07 Jan 2022 08:59:06",
-    "name": "Towson Town Center",
+    "name": [
+      "Towson Town Center",
+      "Towson"
+    ],
     "state": "Maryland",
     "timezone": "America/New_York",
     "website": ""
@@ -1680,7 +1707,7 @@
     "city": "Freehold",
     "dates": "2006-05-27",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "19 May 2023 04:40:26",
     "name": "Freehold Raceway Mall",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -1772,7 +1799,10 @@
     ],
     "flag": "🇺🇸",
     "modified": "07 Jan 2022 08:59:09",
-    "name": "Irvine Spectrum Center",
+    "name": [
+      "Irvine Spectrum Center",
+      "Irvine Spectrum"
+    ],
     "state": "California",
     "timezone": "America/Los_Angeles",
     "website": ""
@@ -2228,7 +2258,7 @@
     "city": "San Luis Obispo",
     "dates": "2007-06-09",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "16 May 2023 20:56:22",
     "name": "Higuera Street",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -2277,7 +2307,7 @@
     "city": "Sugar Land",
     "dates": "2006-11-11",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:09",
+    "modified": "04 May 2023 20:57:45",
     "name": "First Colony Mall",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -3203,7 +3233,7 @@
     "city": "Boise",
     "dates": "2010-09-11",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "16 May 2023 20:51:10",
     "name": "Boise Towne Square",
     "state": "Idaho",
     "timezone": "America/Denver",
@@ -3324,7 +3354,7 @@
     "city": "Charleston",
     "dates": "2008-07-26",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:08",
+    "modified": "16 May 2023 20:54:38",
     "name": [
       "Charleston",
       "King Street"
@@ -3557,7 +3587,7 @@
     "city": "Temecula",
     "dates": "2009-09-26",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:08",
+    "modified": "10 May 2023 18:16:04",
     "name": "Promenade Temecula",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -5294,7 +5324,7 @@
     "city": "武汉",
     "dates": "2022-05-21",
     "flag": "🇨🇳",
-    "modified": "20 May 2022 17:44:46",
+    "modified": "16 May 2023 19:49:32",
     "name": [
       "武汉",
       "Wuhan"
@@ -6258,7 +6288,7 @@
     "city": "Mumbai",
     "dates": "2023-04-18",
     "flag": "🇮🇳",
-    "modified": "21 Apr 2023 20:10:00",
+    "modified": "16 May 2023 20:45:10",
     "name": "BKC",
     "state": "Maharashtra",
     "timezone": "Asia/Kolkata",
@@ -6347,7 +6377,7 @@
     "city": "New Delhi",
     "dates": "2023-04-20",
     "flag": "🇮🇳",
-    "modified": "21 Apr 2023 20:18:50",
+    "modified": "27 Apr 2023 15:41:22",
     "name": "Saket",
     "state": "Delhi",
     "timezone": "Asia/Kolkata",
@@ -6364,10 +6394,10 @@
   },
   "761": {
     "alter": "Guangdong Shenzhen",
-    "dates": "2023-04-28",
     "city": "深圳",
+    "dates": "2023-04-28",
     "flag": "🇨🇳",
-    "modified": "20 Apr 2023 00:01:47",
+    "modified": "28 Apr 2023 02:02:18",
     "name": [
       "深圳万象城",
       "MixC Shenzhen"
