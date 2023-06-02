@@ -225,6 +225,7 @@ async def entry(session: SessionType, targets: list[str], check_cancel: bool) ->
 			json.dump(SAVED, w, ensure_ascii = False, indent = 2, sort_keys = True)
 
 async def future(session: SessionType, futures: dict[str, str]) -> dict[str, dict[str, dict[str, int]]]:
+	futures: dict[str, dict[str, dict[str, int]]] = {}
 	data = {
 		"filters": {
 			"postingpostLocation": [],
@@ -252,8 +253,8 @@ async def future(session: SessionType, futures: dict[str, str]) -> dict[str, dic
 			logging.info(f"找到新职位信息: {i['positionId']} {i['postingTitle']}")
 			roles[i["transformedPostingTitle"]] = int(i["positionId"])
 		if roles:
-			return {flag: {"jobCode": roles}}
-	return {}
+			futures[flag] = {"jobCode": roles}
+	return futures
 
 @session_func
 async def main(session: SessionType, targets: list[str], check_cancel: bool) -> None:
