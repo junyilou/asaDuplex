@@ -2,7 +2,7 @@ import json
 import re
 from datetime import datetime
 from functools import total_ordering
-from modules.constants import allRegions, userAgent
+from modules.constants import RegionDict, allRegions, userAgent
 from modules.util import SessionType, request
 from typing import Any, Literal, Optional, overload
 
@@ -57,7 +57,7 @@ class Store:
 
 		self.state: str = dct["state"]
 		self.city: str = dct["city"]
-		self.region: dict = allRegions[self.flag]
+		self.region: RegionDict = allRegions[self.flag]
 		if "website" in dct:
 			self.slug: str = dct["website"] or self.name.lower().replace(" ", "")
 			self.url: str = f"https://www.apple.com{self.region['storeURL']}/retail/{self.slug}"
