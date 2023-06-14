@@ -1,121 +1,109 @@
 import aiohttp
 import asyncio
-import atexit
 import itertools
 import json
 import re
 
+from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
 from modules.constants import allRegions, userAgent
 from modules.util import SessionType, disMarkdown, request, timezoneText
 from storeInfo import Store as Raw_Store, getStore as getRaw_Store, sidify, storeReturn
-from typing import Any, Callable, Literal, Optional, Self, Union
+from typing import Any, AsyncIterator, Callable, Literal, Optional, Self, Union
 from zoneinfo import ZoneInfo
 
-__session_pool = {}
-savedToday = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}
+__SAVED = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}
+ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
+API_ROOT = ["https:", "", "www.apple.com", "today-bff"]
+PARAM = {"ensureAns": False, "timeout": 25, "retryNum": 5}
+SEMAPHORE_LIMIT = 20
+VALIDDATES = r"(-([0-9]{4,8}))$"
+
 todayNation: dict[str, Any] = {allRegions[i]["rootPath"]: i for i in allRegions}
 
-_RETRYNUM = 5
-_SEMAPHORE_LIMIT = 20
-_TIMEOUT = 25
-
-_ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
-_ASSURED_JSON = "Retail/savedEvent.json"
-_VALIDDATES = r"(-([0-9]{6,8}))"
-
-API_ROOT = "https://www.apple.com/today-bff/"
-API = {
-	"landing": {
-		"store": API_ROOT + "landing/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}",
-		"nearby": API_ROOT + "landing/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&nearby=true"},
-	"session": {
-		"course": API_ROOT + "session/course?stageRootPath={ROOTPATH}&courseSlug={COURSESLUG}",
-		"schedule": API_ROOT + "session/schedule?stageRootPath={ROOTPATH}&courseSlug={COURSESLUG}&scheduleId={SCHEDULEID}",
-		"store": API_ROOT + "session/course/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&courseSlug={COURSESLUG}",
-		"nearby": API_ROOT + "session/course/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&courseSlug={COURSESLUG}"},
-	"collection": {
-		"geo": API_ROOT + "collection/geo?stageRootPath={ROOTPATH}&collectionSlug={COLLECTIONSLUG}",
-		"store": API_ROOT + "collection/store?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&collectionSlug={COLLECTIONSLUG}",
-		"nearby": API_ROOT + "collection/nearby?stageRootPath={ROOTPATH}&storeSlug={STORESLUG}&collectionSlug={COLLECTIONSLUG}"}}
-
-try:
-	with open(_ASSURED_JSON) as r:
-		assure = json.loads(r.read())
-	_known_slugs = [assure["today"][i]["slug"] for i in assure["assure"]]
-except FileNotFoundError:
-	_known_slugs = []
-
-@atexit.register
-def clean(loop: Optional[asyncio.AbstractEventLoop] = None) -> None:
+@asynccontextmanager
+async def get_session() -> AsyncIterator[SessionType]:
+	session = aiohttp.ClientSession(headers = userAgent)
 	try:
-		l = [asyncio.get_running_loop()] if loop is None else [loop]
-	except:
-		l = list(__session_pool)
+		yield session
+	finally:
+		await session.close()
 
-	async def __clean_task(loop) -> None:
-		await __session_pool[loop].close()
-		del __session_pool[loop]
+class APIClass:
+	args = {
+		"COLLECTIONSLUG": "collectionSlug",
+		"COURSESLUG": "courseSlug",
+		"ROOTPATH": "stageRootPath",
+		"SCHEDULEID": "scheduleId",
+		"STORESLUG": "storeSlug"}
 
-	for loop in l:
-		if loop.is_closed():
-			return
-		if not loop.is_running():
-			loop.run_until_complete(__clean_task(loop))
-		else:
-			loop.create_task(__clean_task(loop))
+	def __init__(self, parts: list[str]) -> None:
+		self._parts: list[str] = parts
 
-def _get_session() -> SessionType:
-	loop = asyncio.get_running_loop()
-	session = __session_pool.get(loop, None)
-	if session is None:
-		session = aiohttp.ClientSession(loop = loop, headers = userAgent)
-		__session_pool[loop] = session
-	return session
+	def __getitem__(self, key: str) -> Self:
+		return APIClass(parts = self._parts + [key])
 
-def _resolution(vids: list[str], direction: Optional[Literal["l", "p"]] = None) -> list[str]:
-	res = {}
-	for v in vids:
-		f = re.findall(r"([0-9]+)x([0-9]+)\.[a-zA-Z0-9]+", v)
-		if not f:
-			return vids
-		res[v] = [int(f[0][0]), int(f[0][1])]
-	vids.sort(key = lambda k: res[k][0] * res[k][1], reverse = True)
+	def __repr__(self) -> str:
+		return "/".join(self._parts)
 
-	if not direction:
-		return vids
-	match direction:
-		case "p":
-			fil = [i for i in vids if res[i][0] < res[i][1]]
-		case "l":
-			fil = [i for i in vids if res[i][0] > res[i][1]]
-		case _:
-			fil = []
-	return fil
+	def format(self, **kwargs) -> str:
+		return "/".join(self._parts) + "?" + "&".join(f"{self.args.get(k, k)}={v}" for k, v in kwargs.items())
 
-def _separate(text: str) -> str:
-	rep = {0xa0: 0x20, 0x200b: None, 0x200c: None, 0x2060: None}
-	return text.translate(rep)
+API = APIClass(API_ROOT)
 
-def _validDates(ex: str, runtime: datetime) -> list[datetime]:
-	v = []
-	match len(ex):
-		case 6:
-			possible = ["%y%m%d", "%d%m%y", "%m%d%y"]
-		case 8:
-			possible = ["%Y%m%d", "%d%m%Y", "%m%d%Y"]
-		case _:
-			return []
-	for pattern in possible:
+class utils:
+	@staticmethod
+	def known_slugs() -> list[str]:
 		try:
-			date = datetime.strptime(ex, pattern).date()
-		except ValueError:
-			pass
-		else:
-			delta = (date - runtime.date()).days
-			if date not in v and delta > -7 and delta < 70:
-				v.append(date)
-	return v
+			with open("Retail/savedEvent.json") as r:
+				assure = json.loads(r.read())
+			return [assure["today"][i]["slug"] for i in assure["assure"]]
+		except FileNotFoundError:
+			return []
+
+	@staticmethod
+	def resolution(vids: list[str], direction: Optional[Literal["l", "p"]] = None) -> list[str]:
+		res = {}
+		for v in vids:
+			f = re.findall(r"([0-9]+)x([0-9]+)\.[a-zA-Z0-9]+", v)
+			if not f:
+				return vids
+			res[v] = [int(f[0][0]), int(f[0][1])]
+		vids.sort(key = lambda k: res[k][0] * res[k][1], reverse = True)
+
+		if direction not in ["p", "l"]:
+			return vids
+		return [i for i in vids if direction == "p" and res[i][0] < res[i][1] \
+			or direction == "l" and res[i][0] > res[i][1]]
+
+	@staticmethod
+	def separate(text: str) -> str:
+		rep = {0xa0: 0x20, 0x200b: None, 0x200c: None, 0x2060: None}
+		return text.translate(rep)
+
+	@staticmethod
+	def valid_dates(ex: str, runtime: datetime) -> list[datetime]:
+		v = []
+		match len(ex):
+			case 4:
+				ex += str(runtime.year)
+				possible = ["%m%d%Y", "%d%m%Y"]
+			case 6:
+				possible = ["%y%m%d", "%d%m%y", "%m%d%y"]
+			case 8:
+				possible = ["%Y%m%d", "%d%m%Y", "%m%d%Y"]
+			case _:
+				return []
+		for pattern in possible:
+			try:
+				date = datetime.strptime(ex, pattern).date()
+			except ValueError:
+				pass
+			else:
+				delta = (date - runtime.date()).days
+				if date not in v and delta > -7 and delta < 70:
+					v.append(date)
+		return v
 
 class TodayObject:
 	hashattr: list[str] = []
@@ -171,9 +159,9 @@ class Store(TodayObject):
 				else f"https://www.apple.com.cn{raw['path']}"
 			self.coord: Optional[list[float]] = [raw["lat"], raw["long"]]
 		else:
-			raw_store = store or getRaw_Store(sid) # type: ignore
-			assert raw_store is not None, f"本地数据库中无法匹配关键字 {sid!r}"
-			self.raw_store: Raw_Store = raw_store
+			temp = store or getRaw_Store(sid) if sid else None
+			assert temp is not None, f"本地数据库中无法匹配关键字 {sid!r}"
+			self.raw_store: Raw_Store = temp
 			self.sid: str = self.raw_store.rid
 			self.name: str = self.raw_store.name
 			self.slug: str = self.raw_store.slug
@@ -191,13 +179,12 @@ class Store(TodayObject):
 		return f'<Store "{self.name}" ({self.sid}), "{self.slug}", "{self.rootPath}">'
 
 	async def getCourses(self, ensure: bool = True) -> list["Course"]:
-		r = await request(
-			session = _get_session(),
-			url = (API["landing"]["store"] if ensure else API["landing"]["nearby"]).format(
-				STORESLUG = self.slug, ROOTPATH = self.rootPath),
-			ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
+		async with get_session() as session:
+			nearby = {"nearby": "true"} if not ensure else {}
+			r = await request(session = session, url = (API["landing"]["store" if ensure else "nearby"]).format(
+				STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
 		try:
-			remote = json.loads(_separate(r))
+			remote = json.loads(utils.separate(r))
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
 
@@ -208,13 +195,12 @@ class Store(TodayObject):
 		return [t.result() for t in tasks]
 
 	async def getSchedules(self, ensure: bool = True) -> list["Schedule"]:
-		r = await request(
-			session = _get_session(),
-			url = (API["landing"]["store"] if ensure else API["landing"]["nearby"]).format(
-				STORESLUG = self.slug, ROOTPATH = self.rootPath),
-			ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
+		async with get_session() as session:
+			nearby = {"nearby": "true"} if not ensure else {}
+			r = await request(session = session, url = (API["landing"]["store" if ensure else "nearby"]).format(
+				STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
 		try:
-			remote = json.loads(_separate(r))
+			remote = json.loads(utils.separate(r))
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
 
@@ -232,7 +218,8 @@ class Store(TodayObject):
 		return [t.result() for t in tasks]
 
 	async def getCoord(self) -> list[float]:
-		d = await self.raw_store.detail(session = _get_session(), mode = "raw")
+		async with get_session() as session:
+			d = await self.raw_store.detail(session = session, mode = "raw")
 		assert isinstance(d, dict)
 		self.coord = [i[1] for i in sorted(d["geolocation"].items())]
 		return self.coord
@@ -243,13 +230,13 @@ def getStore(
 	rootPath: Optional[str] = None,
 	store: Optional[Raw_Store] = None) -> Store:
 
-	global savedToday
+	global __SAVED
 	sid = sidify(sid, R = True)
-	if sid in savedToday["Store"] and raw is not None:
+	if sid in __SAVED["Store"] and raw is not None:
 		get = Store(raw = raw, rootPath = rootPath)
 	else:
 		get = Store(sid = sid, store = store, raw = raw, rootPath = rootPath)
-	savedToday["Store"][sid] = get
+	__SAVED["Store"][sid] = get
 	return get
 
 class Talent(TodayObject):
@@ -280,12 +267,11 @@ class Course(TodayObject):
 		slug: str,
 		remote: Optional[dict] = None) -> Self:
 		if remote is None:
-			r = await request(
-				session = _get_session(),
-				url = API["session"]["course"].format(COURSESLUG = slug, ROOTPATH = rootPath),
-				ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
+			async with get_session() as session:
+				r = await request(session = session, url = API["session"]["course"].format(
+					COURSESLUG = slug, ROOTPATH = rootPath), **PARAM)
 			try:
-				remote = json.loads(_separate(r))
+				remote = json.loads(utils.separate(r))
 			except json.decoder.JSONDecodeError:
 				raise ValueError(f"获取课程 {rootPath}/{slug} 数据失败") from None
 
@@ -331,7 +317,7 @@ class Course(TodayObject):
 		if "modalVideo" in raw:
 			self.intro = {
 				"poster": raw["modalVideo"]["poster"]["source"],
-				"video": _resolution(raw["modalVideo"]["sources"])}
+				"video": utils.resolution(raw["modalVideo"]["sources"])}
 
 		media = raw["backgroundMedia"]
 		self.images: dict[str, str] = {
@@ -342,10 +328,10 @@ class Course(TodayObject):
 			self.videos = {
 				"portrait": {
 					"poster": media["ambientVideo"]["poster"][0]["portrait"]["source"],
-					"videos": _resolution(media["ambientVideo"]["sources"], "p")},
+					"videos": utils.resolution(media["ambientVideo"]["sources"], "p")},
 				"landscape": {
 					"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
-					"videos": _resolution(media["ambientVideo"]["sources"], "l")}}
+					"videos": utils.resolution(media["ambientVideo"]["sources"], "l")}}
 
 		self.virtual: bool = "VIRTUAL" in raw["type"]
 		self.special: bool = "SPECIAL" in raw["type"] or "HIGH" in raw["talentType"]
@@ -359,7 +345,7 @@ class Course(TodayObject):
 		return f'<Course {self.courseId} "{self.name}", "{self.slug}"{col}>'
 
 	def elements(self, accept: Optional[list[str]] = None) -> list[str]:
-		accept = accept or _ACCEPT
+		accept = accept or ACCEPT
 		result, pattern = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + pattern +
 			"))+[\'\"]?", json.dumps(self, cls = TodayEncoder)) if i[0] not in result]
@@ -369,15 +355,13 @@ class Course(TodayObject):
 		semaphore: Optional[asyncio.Semaphore] = None) -> list["Schedule"]:
 		if semaphore is not None:
 			await semaphore.acquire()
-		r = await request(
-			session = _get_session(),
-			url = (API["session"]["store"] if ensure else API["session"]["nearby"]).format(
-				STORESLUG = store.slug, COURSESLUG = self.slug, ROOTPATH = store.rootPath),
-			ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
+		async with get_session() as session:
+			r = await request(session = session, url = (API["session"]["course"]["store" if ensure else "nearby"]).format(
+				STORESLUG = store.slug, COURSESLUG = self.slug, ROOTPATH = store.rootPath), **PARAM)
 		if semaphore is not None:
 			semaphore.release()
 		try:
-			remote = json.loads(_separate(r))
+			remote = json.loads(utils.separate(r))
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取排课 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
 
@@ -395,7 +379,7 @@ class Course(TodayObject):
 	async def getRootSchedules(self, rootPath: Optional[str] = None) -> list["Schedule"]:
 		rootPath = rootPath or self.rootPath
 		stores = storeReturn(todayNation[rootPath], remove_closed = True, remove_future = True)
-		semaphore = asyncio.Semaphore(_SEMAPHORE_LIMIT)
+		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores)
 		results = await asyncio.gather(*tasks, return_exceptions = True)
 		return sorted(itertools.chain.from_iterable(results))
@@ -407,26 +391,26 @@ async def getCourse(
 	rootPath: Optional[str] = None,
 	slug: Optional[str] = None) -> Course:
 
-	global savedToday
+	global __SAVED
 	courseId = str(courseId)
 
 	if remote is not None:
 		assert rootPath is not None and slug is not None, "在提供字典模式下 rootPath 和 slug 必须提供"
 		obj = await Course.get(slug = slug, rootPath = rootPath, remote = remote)
-		savedToday["Course"][f"{obj.rootPath}/{obj.courseId}"] = obj
+		__SAVED["Course"][f"{obj.rootPath}/{obj.courseId}"] = obj
 		return obj
 
 	keyword = courseId
 	if not fuzzy:
 		assert rootPath is not None, "在非模糊模式下 rootPath 必须提供"
 		keyword = "/".join([rootPath, keyword])
-	for i, c in savedToday["Course"].items():
+	for i, c in __SAVED["Course"].items():
 		if (fuzzy and keyword in i) or (not fuzzy and keyword == i):
 			return c
 
 	assert slug is not None and rootPath is not None, "没有找到匹配时 slug 和 rootPath 必须全部提供"
 	obj = await Course.get(slug = slug, rootPath = rootPath)
-	savedToday["Course"][f"{obj.rootPath}/{obj.courseId}"] = obj
+	__SAVED["Course"][f"{obj.rootPath}/{obj.courseId}"] = obj
 	return obj
 
 class Schedule(TodayObject):
@@ -441,12 +425,11 @@ class Schedule(TodayObject):
 		remote: Optional[dict] = None) -> Self:
 		if remote is None:
 			scheduleId = f"{scheduleId}"
-			r = await request(
-				session = _get_session(),
-				url = API["session"]["schedule"].format(COURSESLUG = slug, SCHEDULEID = scheduleId, ROOTPATH = rootPath),
-				ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
+			async with get_session() as session:
+				r = await request(session = session, url = API["session"]["schedule"].format(
+					COURSESLUG = slug, SCHEDULEID = scheduleId, ROOTPATH = rootPath), **PARAM)
 			try:
-				remote = json.loads(_separate(r))
+				remote = json.loads(utils.separate(r))
 			except json.decoder.JSONDecodeError:
 				raise ValueError(f"获取排课 {rootPath}/{slug}/{scheduleId} 数据失败") from None
 
@@ -512,21 +495,21 @@ async def getSchedule(
 	rootPath: Optional[str] = None,
 	slug: Optional[str] = None) -> Schedule:
 
-	global savedToday
+	global __SAVED
 	scheduleId = str(scheduleId)
 
 	if remote is not None:
 		assert rootPath is not None and slug is not None, "在提供字典模式下 rootPath 和 slug 必须提供"
 		obj = await Schedule.get(rootPath = rootPath, scheduleId = scheduleId, slug = slug, remote = remote)
-		savedToday["Schedule"][obj.scheduleId] = obj
+		__SAVED["Schedule"][obj.scheduleId] = obj
 		return obj
 
-	if scheduleId in savedToday["Schedule"]:
-		return savedToday["Schedule"][scheduleId]
+	if scheduleId in __SAVED["Schedule"]:
+		return __SAVED["Schedule"][scheduleId]
 
 	assert slug is not None and rootPath is not None, "没有找到匹配时 slug 和 rootPath 必须全部提供"
 	obj = await Schedule.get(rootPath = rootPath, scheduleId = scheduleId, slug = slug)
-	savedToday["Schedule"][obj.scheduleId] = obj
+	__SAVED["Schedule"][obj.scheduleId] = obj
 	return obj
 
 class Collection(TodayObject):
@@ -539,12 +522,11 @@ class Collection(TodayObject):
 		slug: str,
 		remote: Optional[dict] = None) -> Self:
 		if remote is None:
-			r = await request(
-				session = _get_session(),
-				url = API["collection"]["geo"].format(COLLECTIONSLUG = slug, ROOTPATH = rootPath),
-				ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
+			async with get_session() as session:
+				r = await request(session = session, url = API["collection"]["geo"].format(
+					COLLECTIONSLUG = slug, ROOTPATH = rootPath), **PARAM)
 			try:
-				remote = json.loads(_separate(r))
+				remote = json.loads(utils.separate(r))
 			except json.decoder.JSONDecodeError:
 				raise ValueError(f"获取系列 {rootPath}/{slug} 数据失败") from None
 
@@ -577,10 +559,10 @@ class Collection(TodayObject):
 			self.videos = {
 				"portrait": {
 					"poster": media["ambientVideo"]["poster"][0]["portrait"]["source"],
-					"videos": _resolution(media["ambientVideo"]["sources"], "p")},
+					"videos": utils.resolution(media["ambientVideo"]["sources"], "p")},
 				"landscape": {
 					"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
-					"videos": _resolution(media["ambientVideo"]["sources"], "l")}}
+					"videos": utils.resolution(media["ambientVideo"]["sources"], "l")}}
 
 		self.collaborations: list[Talent]
 		if "inCollaborationWith" in raw:
@@ -593,7 +575,7 @@ class Collection(TodayObject):
 		return f'<Collection "{self.name}", "{self.slug}", "{self.rootPath}">'
 
 	def elements(self, accept: Optional[list[str]] = None) -> list[str]:
-		accept = accept or _ACCEPT
+		accept = accept or ACCEPT
 		result, pattern = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + pattern +
 			"))+[\'\"]?", json.dumps(self, cls = TodayEncoder)) if i[0] not in result]
@@ -603,15 +585,13 @@ class Collection(TodayObject):
 		semaphore: Optional[asyncio.Semaphore] = None) -> list[Schedule]:
 		if semaphore is not None:
 			await semaphore.acquire()
-		r = await request(
-			session = _get_session(),
-			url = (API["collection"]["store"] if ensure else API["collection"]["nearby"]).format(
-				STORESLUG = store.slug, COLLECTIONSLUG = self.slug, ROOTPATH = store.rootPath),
-			ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
+		async with get_session() as session:
+			r = await request(session = session, url = (API["collection"]["store" if ensure else "nearby"]).format(
+				STORESLUG = store.slug, COLLECTIONSLUG = self.slug, ROOTPATH = store.rootPath), **PARAM)
 		if semaphore is not None:
 			semaphore.release()
 		try:
-			remote = json.loads(_separate(r))
+			remote = json.loads(utils.separate(r))
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取排课 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
 
@@ -630,7 +610,7 @@ class Collection(TodayObject):
 	async def getRootSchedules(self, rootPath: Optional[str] = None) -> list[Schedule]:
 		rootPath = rootPath or self.rootPath
 		stores = storeReturn(todayNation[rootPath], remove_closed = True, remove_future = True)
-		semaphore = asyncio.Semaphore(_SEMAPHORE_LIMIT)
+		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores)
 		results = await asyncio.gather(*tasks, return_exceptions = True)
 		return sorted(itertools.chain.from_iterable(results))
@@ -643,14 +623,14 @@ async def getCollection(
 	rootPath: str,
 	slug: str) -> Collection:
 
-	global savedToday
+	global __SAVED
 	keyword = f"{rootPath}/{slug}"
-	for i, c in savedToday["Collection"].items():
+	for i, c in __SAVED["Collection"].items():
 		if keyword == i:
 			return c
 
 	obj = await Collection.get(rootPath = rootPath, slug = slug)
-	savedToday["Collection"][keyword] = obj
+	__SAVED["Collection"][keyword] = obj
 	return obj
 
 class Sitemap(TodayObject):
@@ -658,14 +638,14 @@ class Sitemap(TodayObject):
 	sortkeys: list[str] = ["urlPath"]
 
 	def match_by_assure(self, slug: str) -> bool:
-		for s in _known_slugs:
+		for s in utils.known_slugs():
 			if s == slug:
 				return False
 		return True
 
 	def match_by_valid(self, slug: str) -> bool:
-		matches = re.findall(_VALIDDATES, slug)
-		return bool(matches and _validDates(matches[0][1], self.runtime) != [])
+		matches = re.findall(VALIDDATES, slug)
+		return bool(matches and utils.valid_dates(matches[0][1], self.runtime) != [])
 
 	def __init__(self, rootPath: Optional[str] = None, flag: Optional[str] = None) -> None:
 		assert rootPath is not None or flag, "rootPath 和 flag 必须提供一个"
@@ -674,7 +654,7 @@ class Sitemap(TodayObject):
 				self.urlPath = allRegions[fl]["storeURL"]
 			case rp, _ if rp is not None:
 				self.urlPath = rp.replace("/cn", ".cn")
-		self.using = self.match_by_valid if _known_slugs == [] else self.match_by_assure
+		self.using = self.match_by_valid if not utils.known_slugs() else self.match_by_assure
 		self.runtime = datetime.now()
 		self.raw = {"urlPath": self.urlPath}
 
@@ -682,10 +662,8 @@ class Sitemap(TodayObject):
 		return f'<Sitemap "{self.urlPath}">'
 
 	async def getObjects(self) -> list[Course | Schedule]:
-		r = await request(
-			session = _get_session(),
-			url = f"https://www.apple.com{self.urlPath}/today/sitemap.xml",
-			ensureAns = False, timeout = _TIMEOUT, retryNum = _RETRYNUM)
+		async with get_session() as session:
+			r = await request(session = session, url = f"https://www.apple.com{self.urlPath}/today/sitemap.xml", **PARAM)
 		urls = re.findall(r"<loc>\s*(\S*)\s*</loc>", r)
 
 		slugs = {}
@@ -880,8 +858,8 @@ def teleinfo(
 		keyboard = [[[lang[userLang]["SIGN_UP"], priorSchedule.url]]]
 	else:
 		try:
-			date = re.findall(_VALIDDATES, course.slug)[0][1]
-			vals = _validDates(date, runtime)
+			date = re.findall(VALIDDATES, course.slug)[0][1]
+			vals = utils.valid_dates(date, runtime)
 			timing = f' {lang[userLang]["OR"]} '.join(i.strftime(lang[userLang]["FORMAT_DATE"]) for i in vals)
 		except IndexError:
 			timing = lang[userLang]["GENERAL_TIMING"]
