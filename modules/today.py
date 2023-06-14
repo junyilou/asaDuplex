@@ -681,49 +681,40 @@ class Sitemap(TodayObject):
 				parsing = slugs[slug][1 if len(slugs[slug]) > 1 else 0]
 			else:
 				parsing = slugs[slug][0]
-			objects.append(parseURL(parsing, coro = True))
+			objects.append(getURL(parsing))
 
 		return await asyncio.gather(*objects, return_exceptions = True)
 
-def parseURL(url: str, coro: bool = False) -> Any:
-	coursePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*))"
-	schedulePattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*)/([67][0-9]{18})(\/\?sn\=(R[0-9]{3}))?)"
-	collectionPattern = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/collection/([a-z0-9\-]*))(/\S*)?"
+def parseURL(url: str) -> dict[str, str]:
+	cp = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*))"
+	sp = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*)/([67][0-9]{18})(\/\?sn\=(R[0-9]{3}))?)"
+	lp = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/collection/([a-z0-9\-]*))(/\S*)?"
 
-	async def nothing():
-		return None
-
-	match [re.findall(p, url, re.I) for p in [schedulePattern, coursePattern, collectionPattern]]:
+	match [re.findall(p, url, re.I) for p in [sp, cp, lp]]:
 		case [[s, *_], _, _]:
-			matched = {
-				"parse": {
-					"type": "schedule", "rootPath": s[1].replace(".cn", "/cn"),
-					"slug": s[2], "scheduleId": s[3], "sid": s[5],
-					"url": f"https://www.apple.com{s[1]}/today/event/{s[2]}/{s[3]}/?sn={s[5]}"},
-				"coroutine": getSchedule}
+			return {
+				"type": "schedule", "rootPath": s[1].replace(".cn", "/cn"),
+				"slug": s[2], "scheduleId": s[3], "sid": s[5],
+				"url": f"https://www.apple.com{s[1]}/today/event/{s[2]}/{s[3]}/?sn={s[5]}"}
 		case [_, [c, *_], _]:
-			matched = {
-				"parse": {
-					"type": "course", "rootPath": c[1].replace(".cn", "/cn"),
-					"slug": c[2], "url": f"https://www.apple.com{c[1]}/today/event/{c[2]}",
-					"fuzzy": False},
-				"coroutine": getCourse}
-		case [_, _, [c, *_]]:
-			matched = {
-				"parse": {
-					"type": "collection", "rootPath": c[1].replace(".cn", "/cn"),
-					"slug": c[2], "url": f"https://www.apple.com{c[1]}/today/collection/{c[2]}"},
-				"coroutine": getCollection}
-		case _:
-			matched = {"parse": None}
+			return {
+				"type": "course", "rootPath": c[1].replace(".cn", "/cn"),
+				"slug": c[2], "url": f"https://www.apple.com{c[1]}/today/event/{c[2]}"}
+		case [_, _, [l, *_]]:
+			return {
+				"type": "collection", "rootPath": l[1].replace(".cn", "/cn"),
+				"slug": l[2], "url": f"https://www.apple.com{l[1]}/today/collection/{l[2]}"}
+	return {}
 
-	if not coro:
-		return matched["parse"]
-	if not matched["parse"]:
-		return nothing()
-	assert isinstance(matched["coroutine"], Callable)
-	return matched["coroutine"](**{k: v for k, v in matched["parse"].items()
-		if k not in ["type", "url", "sid"]})
+async def getURL(url: str) -> TodayObject:
+	match parseURL(url):
+		case {"type": "schedule", "rootPath": r, "slug": g, "scheduleId": s}:
+			return await getSchedule(scheduleId = s, rootPath = r, slug = g)
+		case {"type": "course", "rootPath": r, "slug": g}:
+			return await getCourse(fuzzy = False, rootPath = r, slug = g)
+		case {"type": "collection", "rootPath": r, "slug": g}:
+			return await getCollection(rootPath = r, slug = g)
+	raise ValueError(f"无法解析并生成自: {url}")
 
 lang = {
 	True: {
