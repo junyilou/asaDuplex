@@ -10,9 +10,9 @@ from bot import chat_ids
 from botpost import async_post
 from modules.constants import userAgent
 from modules.util import SemaphoreType, SessionType, disMarkdown, request, session_func, setLogger
-from storeInfo import DEFAULTFILE, Store, getStore, sidify
+from storeInfo import DEFAULTFILE, Store, StoreDict, getStore, sidify
 
-DUMMYDICT = {"name": "Store", "flag": "🇺🇸", "state": "California", "city": "Cupertino"}
+DUMMYDICT: StoreDict = {"name": "Store", "flag": "🇺🇸", "state": "California", "city": "Cupertino"}
 INVALIDDATE = datetime(2001, 5, 19)
 INVALIDREMOTE = [date(2021, 7, 13), date(2021, 8, 28), date(2021, 8, 29), date(2022, 1, 7)]
 

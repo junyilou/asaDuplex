@@ -127,7 +127,8 @@ class TodayObject:
 
 class TodayEncoder(json.JSONEncoder):
 	def __init__(self, **kwargs) -> None:
-		super().__init__(**(kwargs | {"ensure_ascii": False}))
+		k = {**kwargs, "ensure_ascii": False}
+		super().__init__(**k)
 
 	def default(self, o) -> dict[str, Any]:
 		if isinstance(o, TodayObject) or isinstance(o, Raw_Store):
@@ -159,7 +160,7 @@ class Store(TodayObject):
 				else f"https://www.apple.com.cn{raw['path']}"
 			self.coord: Optional[list[float]] = [raw["lat"], raw["long"]]
 		else:
-			temp = store or getRaw_Store(sid) if sid else None
+			temp = store or (getRaw_Store(sid) if sid else None)
 			assert temp is not None, f"本地数据库中无法匹配关键字 {sid!r}"
 			self.raw_store: Raw_Store = temp
 			self.sid: str = self.raw_store.rid

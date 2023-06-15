@@ -4,60 +4,62 @@ from datetime import datetime
 from functools import total_ordering
 from modules.constants import RegionDict, allRegions, userAgent
 from modules.util import SessionType, request
-from typing import Any, Literal, Optional, overload
+from typing import Any, Literal, Optional, Required, TypedDict, cast, overload
 
 DEFAULTFILE = "storeInfo.json"
-STATUSTRANS = {"closed": "关闭", "future": "招聘", "internal": "内部"}
-STORES: dict[str, "Store"] = {}
+
+class StoreDict(TypedDict, total = False):
+	alter: str
+	city: Required[str]
+	dates: str | list[str]
+	flag: Required[str]
+	modified: str
+	name: Required[str | list[str]]
+	state: Required[str]
+	status: str
+	timezone: str
+	website: str
 
 @total_ordering
 class Store:
-	def __init__(self, sid: int | str, dct: dict) -> None:
-		for e in ["name", "flag", "state", "city"]:
-			assert e in dct, f"key {e} not exist"
-
+	def __init__(self, sid: int | str, dct: StoreDict) -> None:
 		self.sid: str = f"{sid:0>3}"
 		self.rid: str = "R" + self.sid
 		self.iid: int = int(self.sid)
 		self.flag: str = dct["flag"]
 
-		self.name: str = dct["name"]
-		self.altname: list[str]
-		if isinstance(self.name, list):
-			self.altname = self.name.copy()
-			self.name = self.altname.pop(0)
+		name = dct["name"]
+		if isinstance(name, list):
+			self.altname: list[str] = name.copy()
+			self.name: str = self.altname.pop(0)
 		else:
-			self.altname = []
+			self.altname: list[str] = []
+			self.name: str = name
 
-		if "timezone" in dct:
-			self.timezone: str = dct["timezone"]
-
-		self.nso: str
-		self.dates: list[str]
 		if "dates" in dct:
 			raw_dates = dct["dates"]
 			if isinstance(raw_dates, list):
-				self.dates, self.nso = raw_dates, raw_dates[0]
+				self.dates: list[str] = raw_dates
+				self.nso: str = raw_dates[0]
 			else:
-				self.dates, self.nso = [raw_dates], raw_dates
+				self.dates: list[str] = [raw_dates]
+				self.nso: str = raw_dates
 
+		if "timezone" in dct:
+			self.timezone: str = dct["timezone"]
 		if "modified" in dct:
 			self.modified: str = dct["modified"]
 
-		self.isClosed: bool
-		self.isFuture: bool
-		self.isIntern: bool
-		if "status" in dct:
-			self.isClosed = dct["status"] == "closed"
-			self.isFuture = dct["status"] == "future"
-			self.isIntern = dct["status"] == "internal"
-		else:
-			self.isClosed = self.isFuture = self.isIntern = False
+		status = dct.get("status")
+		trans_table = {"closed": "关闭", "future": "招聘", "internal": "内部"}
+		self.isClosed: bool = status == "closed"
+		self.isFuture: bool = status == "future"
+		self.isIntern: bool = status == "internal"
 		self.isNormal: bool = not any([self.isClosed, self.isFuture, self.isIntern])
 
 		self.state: str = dct["state"]
 		self.city: str = dct["city"]
-		self.region: RegionDict = allRegions[self.flag]
+		self.region: RegionDict = cast(RegionDict, allRegions[self.flag])
 		if "website" in dct:
 			self.slug: str = dct["website"] or self.name.lower().replace(" ", "")
 			self.url: str = f"https://www.apple.com{self.region['storeURL']}/retail/{self.slug}"
@@ -67,12 +69,12 @@ class Store:
 			*dct.get("alter", "").split(" "),
 			getattr(self, "slug", ""),
 			self.region["name"], self.region["nameEng"], self.region["abbr"], *self.region["altername"],
-			*([dct["status"].capitalize(), STATUSTRANS[dct["status"]]] if "status" in dct else [])]
+			*([dct["status"].capitalize(), trans_table[dct["status"]]] if "status" in dct else [])]
 		self.keys: list[str] = [i for i in keys if i]
 		self.keys += [k.replace(" ", "") for k in self.keys if " " in k]
 
 		self.sortkey: tuple[str, str, str] = (self.flag, self.state, self.sid)
-		self.raw: dict = dct
+		self.raw: dict[str, Any] = cast(dict[str, Any], dct)
 
 	def telename(self, bold: bool = False, flag: bool = False, sid: bool = True) -> str:
 		c = ((flag, f"{self.flag} "), (bold, "*"), (True, f"Apple {self.name}"), (bold, "*"), (sid, f" ({self.rid})"))
@@ -101,10 +103,10 @@ class Store:
 	def __str__(self) -> str:
 		return self.telename(sid = False)
 
-	def __gt__(self, other) -> bool:
+	def __lt__(self, other) -> bool:
 		if not type(other) is type(self):
 			return NotImplemented
-		return self.sortkey > other.sortkey
+		return self.sortkey < other.sortkey
 
 	def __eq__(self, other) -> bool:
 		if not type(other) is type(self):
@@ -118,7 +120,7 @@ class Store:
 	async def detail(self, mode: Optional[Literal["dict", "hours", "raw"]] = None, session: Optional[SessionType] = None) -> dict[str, Any]: ...
 	@overload
 	async def detail(self, mode: Literal["hero", "url"], session: Optional[SessionType] = None, ) -> str: ...
-	async def detail(self, mode: Optional[str] = None, session: Optional[SessionType] = None) -> Any:
+	async def detail(self, mode: Optional[str] = None, session: Optional[SessionType] = None) -> dict[str, Any] | str:
 		try:
 			assert mode in ["dict", "hero", "hours", "raw", "url", None]
 			assert hasattr(self, "slug")
@@ -166,6 +168,8 @@ class Store:
 		except:
 			return None
 
+STORES: dict[str, Store] = {}
+
 def StoreID(sid: int | str, fuzzy: Any = False, regular: Any = False) -> list[Store]:
 	try:
 		assert sid
@@ -185,7 +189,7 @@ def StoreMatch(keyword: str, fuzzy: Any = False, regular: Any = False) -> list[S
 	if not keyword:
 		return []
 	if keyword == "all" and fuzzy:
-		return list(STORES.values())
+		return [i for i in STORES.values()]
 	if regular:
 		pattern = re.compile(keyword, re.I)
 		return [i for i in STORES.values() if any(re.search(pattern, k) for k in i.keys)]
