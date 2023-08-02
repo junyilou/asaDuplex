@@ -74,7 +74,7 @@ class State(TaskObject):
 
 	async def runner(self) -> None:
 		global TASKS, RESULTS
-		assert isinstance(self.semaphore, SemaphoreType)
+		assert self.semaphore
 		async with self.semaphore:
 			# logging.info(", ".join(["开始下载 province", str(self)]))
 			r = await request(session = self.session, ssl = False, headers = userAgent,
@@ -109,7 +109,7 @@ class Region(TaskObject):
 
 	async def runner(self) -> None:
 		global TASKS
-		assert isinstance(self.semaphore, SemaphoreType)
+		assert self.semaphore
 		async with self.semaphore:
 			logging.info(", ".join(["开始下载", str(self)]))
 			r = await request(session = self.session, ssl = False, headers = userAgent,

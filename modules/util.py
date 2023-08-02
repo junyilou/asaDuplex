@@ -5,10 +5,10 @@ import logging
 from datetime import datetime, timedelta
 from functools import wraps
 from os.path import isdir
-from typing import Any, Awaitable, Callable, Concatenate, Coroutine, Optional, ParamSpec, TypeVar
+from typing import Any, Awaitable, Callable, Concatenate, Coroutine, Optional, ParamSpec, TypeAlias, TypeVar
 
-SemaphoreType = asyncio.Semaphore
-SessionType = aiohttp.ClientSession
+SemaphoreType: TypeAlias = asyncio.Semaphore
+SessionType: TypeAlias = aiohttp.ClientSession
 
 def bitsize(integer: int | float, width: int = 8, precision: int = 2, ks: float = 1e3) -> str:
 	unit, order = 0, ["B", "KB", "MB", "GB", "TB"]
