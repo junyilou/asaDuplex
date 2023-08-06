@@ -1,5 +1,5 @@
 {
-  "update": "2023-06-02 17:48:11 GMT",
+  "update": "2023-08-03 00:20:06 GMT",
   "🇦🇪": {
     "state1049": {
       "ABUA": "Al Maryah Island",
@@ -142,7 +142,7 @@
   },
   "🇨🇳": {
     "state1058": {
-      "R476": "Paradise Walk",
+      "R476": "Paradise Walk Chongqing",
       "R480": "Jiefangbei",
       "R573": "MixC Chongqing",
       "name": "Chongqing"
@@ -184,7 +184,7 @@
       "R574": "Center 66 Wuxi",
       "R643": "Wonder City",
       "R688": "Suzhou",
-      "R703": "Nanjing Jinmao Place",
+      "R703": "Xuanwu Lake",
       "name": "Jiangsu"
     },
     "state167": {
@@ -209,7 +209,7 @@
       "name": "Hunan"
     },
     "state172": {
-      "R575": "Wuhan International Plaza",
+      "R575": "Wuhan",
       "name": "Hubei"
     },
     "state173": {
@@ -455,7 +455,7 @@
       "R329": "Brompton Road",
       "R410": "Stratford City",
       "R496": "Bromley",
-      "R762": "London-UK",
+      "R762": "Battersea",
       "name": "Greater London"
     },
     "state439": {
@@ -563,9 +563,12 @@
       "R119": "Shibuya",
       "R128": "Shinjuku",
       "R224": "Omotesando",
-      "R710": "Kawasaki",
       "R718": "Marunouchi",
       "name": "Tokyo-to"
+    },
+    "state672": {
+      "R710": "Kawasaki",
+      "name": "Kanagawa-ken"
     },
     "state681": {
       "R005": "Nagoya Sakae",
@@ -589,7 +592,7 @@
       "R691": "Gangnam",
       "R692": "Garosugil",
       "R738": "Myeongdong",
-      "R747": "Seoul - Yeouido",
+      "R747": "Yeouido",
       "R751": "Jamsil",
       "R760": "~Seoul South - KR",
       "R764": "Seoul West - KR",
@@ -600,7 +603,7 @@
   "🇲🇴": {
     "state745": {
       "R672": "Galaxy Macau",
-      "R697": "Cotai Central",
+      "R697": "Cotai Strip",
       "name": "Macao Region"
     }
   },
@@ -661,7 +664,7 @@
   },
   "🇹🇼": {
     "state943": {
-      "R694": "Taipei Xinyi A13",
+      "R694": "Xinyi A13",
       "R713": "Taipei 101",
       "name": "Taiwan"
     }
