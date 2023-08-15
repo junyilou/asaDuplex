@@ -9,12 +9,11 @@ from datetime import datetime, timedelta
 from modules.constants import allRegions, userAgent
 from modules.util import SessionType, disMarkdown, request, timezoneText
 from storeInfo import Store as Raw_Store, getStore as getRaw_Store, sidify, storeReturn
-from typing import Any, AsyncIterator, Callable, Literal, Optional, Self, Union
+from typing import Any, AsyncIterator, Literal, Optional, Self
 from zoneinfo import ZoneInfo
 
 __SAVED = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}
 ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
-API_ROOT = ["https:", "", "www.apple.com", "today-bff"]
 PARAM = {"ensureAns": False, "timeout": 25, "retryNum": 5}
 SEMAPHORE_LIMIT = 20
 VALIDDATES = r"(-([0-9]{4,8}))$"
@@ -49,7 +48,7 @@ class APIClass:
 	def format(self, **kwargs) -> str:
 		return "/".join(self._parts) + "?" + "&".join(f"{self.args.get(k, k)}={v}" for k, v in kwargs.items())
 
-API = APIClass(API_ROOT)
+API = APIClass("https://www.apple.com/today-bff".split("/"))
 
 class utils:
 	@staticmethod
@@ -297,7 +296,7 @@ class Course(TodayObject):
 		courseId: str,
 		raw: dict[str, Any],
 		rootPath: str,
-		collection: Optional[Union[str, "Collection"]] = None,
+		collection: Optional["str | Collection"] = None,
 		talents: list[dict] = []) -> None:
 
 		self.rootPath: str = rootPath
