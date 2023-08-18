@@ -96,7 +96,7 @@ async def main(session: SessionType):
 		case []:
 			return print("请指定一种运行模式: normal, special 或 single")
 		case ["normal" | "single" as mode, *targets]:
-			setLogger(logging.INFO, os.path.basename(__file__))
+			setLogger(logging.INFO, __file__, base_name = True)
 			if mode == "normal":
 				targets = [i for i in storejson if i != "update"]
 			logging.info(f"开始查询 {len(targets)} 家零售店")
@@ -109,7 +109,7 @@ async def main(session: SessionType):
 			locallist = specialist.copy()
 			if not len(specialist):
 				return
-			setLogger(logging.INFO, os.path.basename(__file__))
+			setLogger(logging.INFO, __file__, base_name = True)
 			logging.info("开始特别观察模式: " + ", ".join(specialist))
 			tasks = [down(session, semaphore, i, storejson, specialist) for i in locallist]
 			runFlag = any(await asyncio.gather(*tasks))

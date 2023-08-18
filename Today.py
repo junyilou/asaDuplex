@@ -2,7 +2,6 @@ import asyncio
 import json
 import logging
 from datetime import UTC, datetime
-from os.path import basename
 from sys import argv
 from typing import Any, Optional
 
@@ -97,7 +96,7 @@ async def main(mode: str) -> bool:
 
 	return append
 
-setLogger(logging.INFO, basename(__file__))
+setLogger(logging.INFO, __file__, base_name = True)
 logging.info("程序启动")
 
 argv[1:] = argv[1:] or ["today"]

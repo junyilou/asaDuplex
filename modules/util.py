@@ -4,7 +4,7 @@ import json
 import logging
 from datetime import datetime, timedelta
 from functools import wraps
-from os.path import isdir
+from os.path import basename, isdir
 from typing import Any, Awaitable, Callable, Concatenate, Coroutine, Optional, ParamSpec, TypeAlias, TypeVar
 
 SemaphoreType: TypeAlias = asyncio.Semaphore
@@ -127,7 +127,9 @@ def sync(coroutine: Optional[Awaitable] = None, loop: Optional[asyncio.AbstractE
 		return loop.run_until_complete(coroutine)
 	return loop
 
-def setLogger(level: int, name: str, force_print: bool = False) -> None:
+def setLogger(level: int, name: str, *, base_name: bool = False, force_print: bool = False) -> None:
+	if base_name:
+		name = basename(name)
 	if isdir('logs') and not force_print:
 		return logging.basicConfig(
 			filename = f"logs/{name}.log",

@@ -84,8 +84,8 @@ async def entry(session: SessionType, semaphore: SemaphoreType,
 
 @session_func
 async def main(session: SessionType) -> None:
-	args = dict(split = True, remove_closed = True, remove_future = True)
-	pref = dict(ensure_ascii = False, indent = 2)
+	args = {"split": True, "remove_closed": True, "remove_future": True}
+	pref = {"ensure_ascii": False, "indent": 2}
 
 	includes = storeReturn(INCLUDE, **args)
 	excludes = storeReturn(EXCLUDE, **args)
@@ -153,7 +153,7 @@ async def main(session: SessionType) -> None:
 		"parse": "MARK"}
 	await async_post(push)
 
-setLogger(logging.INFO, os.path.basename(__file__))
+setLogger(logging.INFO, __file__, base_name = True)
 logging.info(LANG["START"])
 asyncio.run(main())
 logging.info(LANG["END"])
