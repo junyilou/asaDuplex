@@ -80,7 +80,12 @@ async def down(session: SessionType, semaphore: SemaphoreType, sid: str,
 			"image": img,
 			"text": disMarkdown(f'*来自 Rtl 的通知*\n\n{info}'),
 			"parse": "MARK"}
-		await async_post(push)
+		try:
+			assert await async_post(push)
+		except AssertionError:
+			del push["image"]
+			push["mode"] = "text"
+			await async_post(push)
 		return True
 	elif specialist != []:
 		logging.info(f"{store.rid} 图片没有更新")
