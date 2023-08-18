@@ -2,7 +2,6 @@ import asyncio
 import json
 import logging
 from datetime import UTC, datetime
-from os.path import basename
 from random import choice
 from sys import argv
 from typing import Optional
@@ -33,6 +32,8 @@ class JobObject:
 		return f'<{self.__class__.__name__}: {", ".join(i for i in (getattr(self, attr) for attr in self.reprattrs) if i)}>'
 
 class TaskObject(JobObject):
+	_repeat = False
+
 	async def runner(self) -> None: ...
 
 TASKS: list[TaskObject] = []
@@ -76,22 +77,25 @@ class State(TaskObject):
 		global TASKS, RESULTS
 		assert self.semaphore
 		async with self.semaphore:
-			# logging.info(", ".join(["开始下载 province", str(self)]))
+			debug_logger.info(", ".join(["开始下载 province", str(self)]))
 			r = await request(session = self.session, ssl = False, headers = userAgent,
 				timeout = 3, retryNum = 3, url = API["province"].format(JOBID = self.regionCode),
 				params = dict(searchField = "stateProvince", fieldValue = self.fieldID))
 		try:
 			a = json.loads(r)
+			if self._repeat:
+				logging.info(", ".join(["下载重试", "已正确下载", str(self)]))
 		except json.decoder.JSONDecodeError:
 			if "Maintenance" in r:
 				logging.error("Apple 招贤纳才维护中")
 				raise NameError("SERVER")
 			else:
+				self._repeat = True
 				logging.warning(", ".join(["下载失败", "等待重试", str(self)]))
 				return TASKS.append(self)
 		except:
-			logging.error(", ".join(["下载失败", "放弃下载", str(self)]))
-			return TASKS.append(self)
+			return logging.error(", ".join(["下载失败", "放弃下载", str(self)]))
+		debug_logger.info(", ".join([str(self), f"找到 {len(a)} 个门店"]))
 		for c in a:
 			RESULTS.append(Store(state = self, city = c["city"], name = c["name"], sid = c["code"]))
 
@@ -116,16 +120,18 @@ class Region(TaskObject):
 				timeout = 3, retryNum = 3, url = API["state"].format(JOBID = self.code))
 		try:
 			a = json.loads(r)
+			if self._repeat:
+				logging.info(", ".join(["下载重试", "已正确下载", str(self)]))
 		except json.decoder.JSONDecodeError:
 			if "Maintenance" in r:
 				logging.error("Apple 招贤纳才维护中")
 				raise NameError("SERVER")
 			else:
+				self._repeat = True
 				logging.warning(", ".join(["下载失败", "等待重试", str(self)]))
 				return TASKS.append(self)
 		except:
-			logging.error(", ".join(["下载失败", "放弃下载", str(self)]))
-			return TASKS.append(self)
+			return logging.error(", ".join(["下载失败", "放弃下载", str(self)]))
 		for p in a["searchResults"]:
 			TASKS.append(State(
 				region = self, fieldID = p["id"], code = p["code"], name = p["stateProvince"],
@@ -265,14 +271,16 @@ async def main(session: SessionType, targets: list[str], check_cancel: bool) -> 
 		targets.extend(list(futures))
 	await entry(session, targets, check_cancel)
 
-setLogger(logging.INFO, basename(__file__))
+setLogger(logging.INFO, __file__, base_name = True)
 logging.info("程序启动")
 
-check_cancel = False
-if "cancel" in argv:
-	argv.remove("cancel")
-	check_cancel = True
-targets = argv[1:] if len(argv) > 1 else list(allRegions)
+judge_remove = lambda k: not (k not in argv or (argv.remove(k) or False))
+debug_logger = logging.getLogger("debug")
+debug_logger.setLevel(logging.INFO)
+debug_logger.propagate = judge_remove("debug")
+check_cancel = judge_remove("cancel")
+
+targets = argv[1:] or list(allRegions)
 asyncio.run(main(targets = targets, check_cancel = check_cancel))
 
 logging.info("程序结束")
