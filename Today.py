@@ -3,7 +3,7 @@ import json
 import logging
 from datetime import UTC, datetime
 from sys import argv
-from typing import Any, Optional
+from typing import Optional
 
 from bot import chat_ids
 from botpost import async_post as raw_post
@@ -13,18 +13,6 @@ from storeInfo import storeReturn
 
 TODAYARGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼"]
 
-def rec(lst: list[Any], rst: list[Any]) -> list[Any]:
-	for i in lst:
-		match i:
-			case list():
-				rec(i, rst)
-			case Exception():
-				logging.error(f"{i!r}")
-			case _:
-				if i not in rst:
-					rst.append(i)
-	return rst
-
 async def async_post(text: str, image: str, keyboard: list[list[list[str]]]) -> Optional[dict]:
 	push = {
 		"mode": "photo-text", "text": text, "image": image,
@@ -33,6 +21,9 @@ async def async_post(text: str, image: str, keyboard: list[list[list[str]]]) -> 
 
 async def main(mode: str) -> bool:
 	append = False
+	courses: dict[Course, list[Schedule]] = {}
+	results: list[Course | Schedule] = []
+
 	match mode:
 		case "today":
 			stores = storeReturn(TODAYARGS, remove_closed = True, remove_future = True)
@@ -42,8 +33,8 @@ async def main(mode: str) -> bool:
 		case _:
 			return append
 
-	courses: dict[Course, list[Schedule]] = {}
-	results: list[Course | Schedule] = rec(await asyncio.gather(*tasks, return_exceptions = True), [])
+	runners = await asyncio.gather(*tasks, return_exceptions = True)
+	results = list(set(i for j in (k for k in runners if isinstance(k, list)) for i in j))
 
 	for j in results:
 		match j:

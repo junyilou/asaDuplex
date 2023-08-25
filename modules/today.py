@@ -247,7 +247,7 @@ class Talent(TodayObject):
 		self.raw: dict[str, Any] = raw
 		self.name: str = raw["name"].strip()
 		self.title: Optional[str] = raw["title"].strip() if "title" in raw else None
-		self.description: str = raw["description"].strip()
+		self.description: Optional[str] = raw["description"].strip() if "description" in raw else None
 		self.image: Optional[str] = raw.get("backgroundImage", None) or raw.get("logo", None)
 		self.links: dict[str, str] = (
 			({"Website": raw["websiteUrl"]} if "websiteUrl" in raw else {}) |
@@ -382,7 +382,7 @@ class Course(TodayObject):
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores)
 		results = await asyncio.gather(*tasks, return_exceptions = True)
-		return sorted(itertools.chain.from_iterable(results))
+		return sorted(set(itertools.chain.from_iterable(results)))
 
 async def getCourse(
 	courseId: Optional[int | str] = None,
@@ -613,7 +613,7 @@ class Collection(TodayObject):
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores)
 		results = await asyncio.gather(*tasks, return_exceptions = True)
-		return sorted(itertools.chain.from_iterable(results))
+		return sorted(set(itertools.chain.from_iterable(results)))
 
 	async def getCourses(self, rootPath: Optional[str] = None) -> list[Course]:
 		schedules = await self.getRootSchedules(rootPath = rootPath)
@@ -661,7 +661,7 @@ class Sitemap(TodayObject):
 	def __repr__(self) -> str:
 		return f'<Sitemap "{self.urlPath}">'
 
-	async def getObjects(self) -> list[Course | Schedule]:
+	async def getURLs(self) -> list[str]:
 		async with get_session() as session:
 			r = await request(session = session, url = f"https://www.apple.com{self.urlPath}/today/sitemap.xml", **PARAM)
 		urls = re.findall(r"<loc>\s*(\S*)\s*</loc>", r)
@@ -681,9 +681,11 @@ class Sitemap(TodayObject):
 				parsing = slugs[slug][1 if len(slugs[slug]) > 1 else 0]
 			else:
 				parsing = slugs[slug][0]
-			objects.append(getURL(parsing))
+			objects.append(parsing)
+		return objects
 
-		return await asyncio.gather(*objects, return_exceptions = True)
+	async def getObjects(self) -> list[Course | Schedule]:
+		return await asyncio.gather(*(getURL(u) for u in await self.getURLs()), return_exceptions = True)
 
 def parseURL(url: str) -> dict[str, str]:
 	cp = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*))"
