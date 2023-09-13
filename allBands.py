@@ -3,7 +3,7 @@ import json
 from bs4 import BeautifulSoup
 from modules.constants import userAgent
 from modules.util import SemaphoreType, SessionType, request, session_func
-from typing import Any, Optional
+from typing import Any
 
 class Band:
 
@@ -29,13 +29,13 @@ class Band:
 	dictProperty = ["name", "partNumber", "material", "colorGroup", "specialEdition", "price", "image"] + \
 		detailProperty + [(i + "Localized") for i in detailProperty]
 
-	def __init__(self, **kwargs):
+	def __init__(self, **kwargs) -> None:
 		_ = [setattr(self, k, kwargs[k]) for k in kwargs]
 
-	def __repr__(self):
+	def __repr__(self) -> str:
 		basic = [self.partNumber, self.name]
 		detail = [getattr(self, d) for d in self.detailProperty] if self.isChecked else []
-		return ", ".join(basic + detail)
+		return "<Band: " + ", ".join(basic + detail) + ">"
 
 	@property
 	def isChecked(self) -> bool:
@@ -46,7 +46,7 @@ class Band:
 		return self.rootPath + "/shop/product/" + self.partNumber
 
 	@property
-	def dict(self):
+	def dict(self) -> dict[str, Any]:
 		return {i: getattr(self, i, None) for i in self.dictProperty}
 
 def commonWords(nameList: list[str]) -> str:
@@ -70,9 +70,6 @@ async def getGrids(rootPath: str, session: SessionType, semaphore: SemaphoreType
 		r = await request(session, rootPath + "/shop/watch/bands", headers = userAgent)
 	h = BeautifulSoup(r, features = "lxml")
 
-	def get_value(element: dict[str, Any]) -> Optional[str]:
-		return None if element is None else element["value"]
-
 	for l in h.find_all("script"):
 		if l.string is None or "window.sectionData.push" not in l.string:
 			continue
@@ -80,14 +77,15 @@ async def getGrids(rootPath: str, session: SessionType, semaphore: SemaphoreType
 		bands: dict[str, Band] = {}
 		r = "]".join(l.string.split("products: ")[1].split("]")[:-1]) + "]"
 		for w in json.loads(r):
+			d = w["dimensionValues"]
 			band = Band(
 				name = w["name"].replace("\u00A0", " "),
 				partNumber = w["partNumber"],
-				collection = get_value(w["dimensionValues"]["dimensionCollection"]),
-				material = get_value(w["dimensionValues"]["dimensionMaterial"]),
-				colorGroup = get_value(w["dimensionValues"]["dimensionBandColor"]),
-				specialEdition = get_value(w["dimensionValues"]["dimensionSpecialEdition"]),
-				newFilter = get_value(w["dimensionValues"]["dimensionnewfilter"]),
+				collection = d.get("dimensionCollection"),
+				material = d.get("dimensionMaterial"),
+				colorGroup = d.get("dimensionBandColor"),
+				specialEdition = d.get("dimensionSpecialEdition"),
+				newFilter = d.get("dimensionnewfilter"),
 				price = w["currentAmount"],
 				image = w["image"]["imageName"],
 				rootPath = rootPath)
@@ -133,9 +131,9 @@ async def getBands(bands: dict[str, Band], session: SessionType, semaphore: Sema
 			varient.bandSize = v[w]["dimensionbandsize"]
 			varient.bandCaseSize = v[w]["dimensionCaseSize"]
 			varient.bandColor = v[w]["dimensionColor"]
-			varient.bandSizeLocalized = radioValue["dimensionbandsize"].get(v[w]["dimensionbandsize"], None)
-			varient.bandCaseSizeLocalized = radioValue["dimensionCaseSize"].get(v[w]["dimensionCaseSize"], None)
-			varient.bandColorLocalized = radioValue["dimensionColor"].get(v[w]["dimensionColor"], None)
+			varient.bandSizeLocalized = radioValue["dimensionbandsize"].get(v[w]["dimensionbandsize"])
+			varient.bandCaseSizeLocalized = radioValue["dimensionCaseSize"].get(v[w]["dimensionCaseSize"])
+			varient.bandColorLocalized = radioValue["dimensionColor"].get(v[w]["dimensionColor"])
 			variations.append(varient.dict)
 		variationName = commonWords([v["name"] for v in variations])
 		while variationName in collections:
@@ -145,9 +143,9 @@ async def getBands(bands: dict[str, Band], session: SessionType, semaphore: Sema
 	return collections
 
 @session_func
-async def main(session: SessionType):
+async def main(session: SessionType) -> None:
 	semaphore = asyncio.Semaphore(10)
-	rootPath = "https://www.apple.com"
+	rootPath = "https://www.apple.com/de"
 	grids = await getGrids(rootPath, session, semaphore)
 	tasks = [getBands(grid, session, semaphore) for grid in grids]
 	collections = await asyncio.gather(*tasks)
