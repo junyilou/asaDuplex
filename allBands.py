@@ -145,7 +145,7 @@ async def getBands(bands: dict[str, Band], session: SessionType, semaphore: Sema
 @session_func
 async def main(session: SessionType) -> None:
 	semaphore = asyncio.Semaphore(10)
-	rootPath = "https://www.apple.com/de"
+	rootPath = "https://www.apple.com"
 	grids = await getGrids(rootPath, session, semaphore)
 	tasks = [getBands(grid, session, semaphore) for grid in grids]
 	collections = await asyncio.gather(*tasks)
