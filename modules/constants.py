@@ -3,8 +3,6 @@ from typing import Any, NotRequired, Optional, TypedDict
 userAgent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \
 AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15"}
 
-partRuleBase = r"[FGHMNPS][0-9A-Z]{3}[0-9]"
-partRuleFull = r"([FGHMNPS][0-9A-Z]{3}[0-9][A-Z]{1,2}/[A-Z])"
 partRuleCheck = r"([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?)"
 
 DIFFHTML = """<!DOCTYPE html>
@@ -17,9 +15,6 @@ DIFFHTML = """<!DOCTYPE html>
 {DIFFCONTENT}
 </code></pre></body>
 </html>"""
-
-editStart = "### *** EDIT START *** ###\n"
-editEnd	 = "\n### *** EDIT	END	*** ###"
 
 class RegionDict(TypedDict):
 	abbr: str
@@ -35,7 +30,7 @@ class RegionDict(TypedDict):
 	shopURL: Optional[str]
 	storeURL: str
 
-allRegions: dict[str, RegionDict | dict[str, Any]] = {
+allRegions: dict[str, RegionDict] = {
 	"BE": {
 		"abbr": "BENL",
 		"altername": [
