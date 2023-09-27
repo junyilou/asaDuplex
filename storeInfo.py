@@ -1,10 +1,9 @@
 import json
 import re
 from datetime import datetime
-from functools import total_ordering
 from modules.constants import RegionDict, allRegions, userAgent
 from modules.util import SessionType, request
-from typing import Any, Literal, Optional, Required, TypedDict, cast, overload
+from typing import Any, Literal, Optional, Required, TypedDict, overload
 
 DEFAULTFILE = "storeInfo.json"
 
@@ -20,7 +19,6 @@ class StoreDict(TypedDict, total = False):
 	timezone: str
 	website: str
 
-@total_ordering
 class Store:
 	def __init__(self, sid: int | str, dct: StoreDict) -> None:
 		self.sid: str = f"{sid:0>3}"
@@ -59,7 +57,7 @@ class Store:
 
 		self.state: str = dct["state"]
 		self.city: str = dct["city"]
-		self.region: RegionDict = cast(RegionDict, allRegions[self.flag])
+		self.region: RegionDict = allRegions[self.flag]
 		if "website" in dct:
 			self.slug: str = dct["website"] or self.name.lower().replace(" ", "")
 			self.url: str = f"https://www.apple.com{self.region['storeURL']}/retail/{self.slug}"
@@ -74,7 +72,7 @@ class Store:
 		self.keys += [k.replace(" ", "") for k in self.keys if " " in k]
 
 		self.sortkey: tuple[str, str, str] = (self.flag, self.state, self.sid)
-		self.raw: dict[str, Any] = cast(dict[str, Any], dct)
+		self.raw: dict[str, Any] = dict(dct)
 
 	def telename(self, bold: bool = False, flag: bool = False, sid: bool = True) -> str:
 		c = ((flag, f"{self.flag} "), (bold, "*"), (True, f"Apple {self.name}"), (bold, "*"), (sid, f" ({self.rid})"))
