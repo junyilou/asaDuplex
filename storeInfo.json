@@ -1,5 +1,5 @@
 {
-  "update": "2023-09-12 00:10:13 GMT",
+  "update": "2023-09-23 00:10:19 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -2172,7 +2172,7 @@
     "city": "Estero",
     "dates": "2007-02-24",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:07",
+    "modified": "22 Sep 2023 03:44:35",
     "name": "Coconut Point",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -5629,7 +5629,7 @@
     "city": "Sarasota",
     "dates": "2014-10-16",
     "flag": "🇺🇸",
-    "modified": "07 Jan 2022 08:59:06",
+    "modified": "22 Sep 2023 03:41:40",
     "name": "University Town Center",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -6437,13 +6437,13 @@
     "city": "温州",
     "flag": "🇨🇳",
     "name": [
-      "Store in Wenzhou",
       "温州万象城",
       "MixC Wenzhou"
     ],
     "state": "浙江",
     "status": "future",
-    "timezone": "Asia/Shanghai"
+    "timezone": "Asia/Shanghai",
+    "website": "mixcwenzhou"
   },
   "770": {
     "city": "서울",
