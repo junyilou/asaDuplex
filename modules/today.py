@@ -230,7 +230,6 @@ def getStore(
 	rootPath: Optional[str] = None,
 	store: Optional[Raw_Store] = None) -> Store:
 
-	global __SAVED
 	sid = sidify(sid, R = True)
 	if sid in __SAVED["Store"] and raw is not None:
 		get = Store(raw = raw, rootPath = rootPath)
@@ -391,7 +390,6 @@ async def getCourse(
 	rootPath: Optional[str] = None,
 	slug: Optional[str] = None) -> Course:
 
-	global __SAVED
 	courseId = str(courseId)
 
 	if remote is not None:
@@ -495,7 +493,6 @@ async def getSchedule(
 	rootPath: Optional[str] = None,
 	slug: Optional[str] = None) -> Schedule:
 
-	global __SAVED
 	scheduleId = str(scheduleId)
 
 	if remote is not None:
@@ -623,7 +620,6 @@ async def getCollection(
 	rootPath: str,
 	slug: str) -> Collection:
 
-	global __SAVED
 	keyword = f"{rootPath}/{slug}"
 	for i, c in __SAVED["Collection"].items():
 		if keyword == i:

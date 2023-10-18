@@ -19,6 +19,8 @@ class StoreDict(TypedDict, total = False):
 	timezone: str
 	website: str
 
+STORES: dict[str, "Store"] = {}
+
 class Store:
 	def __init__(self, sid: int | str, dct: StoreDict) -> None:
 		self.sid: str = f"{sid:0>3}"
@@ -225,11 +227,11 @@ def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 	return results
 
 def reloadJSON(filename: str = DEFAULTFILE) -> str:
-	global STORES
 	with open(filename) as r:
 		infoJSON = json.load(r)
 	update = infoJSON.pop("update", None)
-	STORES = {sid: Store(sid = sid, dct = dct) for sid, dct in infoJSON.items()}
+	for sid, dct in infoJSON.items():
+		STORES[sid] = Store(sid = sid, dct = dct)
 	infoJSON["update"] = update
 	return update
 

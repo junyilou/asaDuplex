@@ -74,7 +74,6 @@ class State(TaskObject):
 		self.regionCode: str = self.region.code
 
 	async def runner(self) -> None:
-		global TASKS, RESULTS
 		assert self.semaphore
 		async with self.semaphore:
 			debug_logger.info(", ".join(["开始下载 province", str(self)]))
@@ -112,7 +111,6 @@ class Region(TaskObject):
 		self.code: str = str(choice(list(codes.values())))
 
 	async def runner(self) -> None:
-		global TASKS
 		assert self.semaphore
 		async with self.semaphore:
 			logging.info(", ".join(["开始下载", str(self)]))
@@ -157,9 +155,8 @@ async def entry(session: SessionType, targets: list[str], check_cancel: bool) ->
 					state = State(region = Region(flag = flag), name = stateName, code = stateCode),
 					sid = store, name = SAVED[flag][stateCode][store]))
 
-	global TASKS
 	RECORD = {}
-	semaphore = asyncio.Semaphore(30)
+	semaphore = asyncio.Semaphore(10)
 
 	TASKS = [Region(flag = i, session = session, semaphore = semaphore) for i in targets if allRegions[i]["jobCode"]]
 

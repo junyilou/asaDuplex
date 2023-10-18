@@ -37,7 +37,8 @@ async def apu(session: Optional[SessionType], store: Store, target: str, userLan
 			break
 		except:
 			retry -= 1
-			logging.debug(("等待 {SEC} 秒" if userLang else "Wait for {SEC} sec").format(SEC = (sec := choice(SLEEPER))))
+			sec = choice(SLEEPER)
+			logging.debug(("等待 {SEC} 秒" if userLang else "Wait for {SEC} sec").format(SEC = sec))
 			await asyncio.sleep(sec)
 
 	for rstore in stores:
@@ -51,7 +52,6 @@ async def apu(session: Optional[SessionType], store: Store, target: str, userLan
 			yield (astore, sDay, sTxt)
 
 async def comment(session: Optional[SessionType], store: Store, userLang: bool = True) -> dict:
-	global COMMENTS
 	async for i in apu(session, store, f'MM0A3{store.region["partSample"]}/A', userLang):
 		astore, sDay, sTxt = i
 		COMMENTS[astore] = COMMENTS.get(astore, {})
