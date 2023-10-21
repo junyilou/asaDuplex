@@ -1,6 +1,7 @@
 import asyncio
 import json
 import logging
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from random import choice
 from sys import argv
@@ -8,13 +9,19 @@ from typing import Optional
 
 from bot import chat_ids
 from botpost import async_post
-from modules.constants import allRegions, userAgent
+from modules.constants import Regions, userAgent
 from modules.util import SemaphoreType, SessionType, disMarkdown, request, session_func, setLogger
 
 API = {
 	"state": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/stateProvinceList",
 	"province": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/storeLocations",
 	"image": "https://www.apple.com/careers/images/retail/fy22/hero_hotspot/default@2x.png"}
+
+FUTURES: dict[str, str] = {}
+
+@dataclass
+class JobRegion:
+	job_code: dict[str, int]
 
 class JobObject:
 	hashattr: str
@@ -38,7 +45,7 @@ class TaskObject(JobObject):
 
 TASKS: list[TaskObject] = []
 RESULTS: list["Store"] = []
-FUTURES: dict[str, str] = {}
+JOB_REGIONS: dict[str, JobRegion] = {}
 
 class Store(JobObject):
 	hashattr = "sid"
@@ -104,11 +111,9 @@ class Region(TaskObject):
 
 	def __init__(self, **kwargs) -> None:
 		self.flag: str = kwargs["flag"]
-		codes = allRegions[self.flag]["jobCode"]
-		assert isinstance(codes, dict)
 		self.session: Optional[SessionType] = kwargs.get("session", None)
 		self.semaphore: Optional[SemaphoreType] = kwargs.get("semaphore", None)
-		self.code: str = str(choice(list(codes.values())))
+		self.code: str = str(choice(list(JOB_REGIONS[self.flag].job_code.values())))
 
 	async def runner(self) -> None:
 		assert self.semaphore
@@ -158,7 +163,7 @@ async def entry(session: SessionType, targets: list[str], check_cancel: bool) ->
 	RECORD = {}
 	semaphore = asyncio.Semaphore(10)
 
-	TASKS = [Region(flag = i, session = session, semaphore = semaphore) for i in targets if allRegions[i]["jobCode"]]
+	TASKS = [Region(flag = i, session = session, semaphore = semaphore) for i in targets]
 
 	while len(TASKS):
 		tasks = TASKS.copy()
@@ -227,8 +232,8 @@ async def entry(session: SessionType, targets: list[str], check_cancel: bool) ->
 		with open("Retail/savedJobs.json", "w") as w:
 			json.dump(SAVED, w, ensure_ascii = False, indent = 2, sort_keys = True)
 
-async def future(session: SessionType, futures: dict[str, str]) -> dict[str, dict[str, dict[str, int]]]:
-	results: dict[str, dict[str, dict[str, int]]] = {}
+async def future(session: SessionType, futures: dict[str, str]) -> dict[str, dict[str, int]]:
+	results: dict[str, dict[str, int]] = {}
 	data = {
 		"filters": {
 			"postingpostLocation": [],
@@ -237,8 +242,8 @@ async def future(session: SessionType, futures: dict[str, str]) -> dict[str, dic
 				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSCS"},
 				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSLD"}]},
 		"page": 1, "locale": "en-us", "sort": "newest"}
-	for flag, pipe in futures.items():
-		data["filters"]["postingpostLocation"] = [pipe]
+	for flag, post_loc in futures.items():
+		data["filters"]["postingpostLocation"] = [post_loc]
 		try:
 			r = await request(session = session, url = "https://jobs.apple.com/api/role/search",
 				method = "POST", json = data, mode = "json", ssl = False)
@@ -255,17 +260,18 @@ async def future(session: SessionType, futures: dict[str, str]) -> dict[str, dic
 				continue
 			logging.info(f"找到新职位信息: {i['positionId']} {i['postingTitle']}")
 			roles[i["transformedPostingTitle"]] = int(i["positionId"])
-		if roles:
-			results[flag] = {"jobCode": roles}
+		results[flag] = roles
 	return results
 
 @session_func
-async def main(session: SessionType, targets: list[str], check_cancel: bool) -> None:
-	global allRegions
+async def main(session: SessionType, check_cancel: bool) -> None:
+	for k, j in Regions.items():
+		if j.job_code:
+			JOB_REGIONS[k] = JobRegion(job_code = j.job_code)
 	futures = await future(session, FUTURES)
-	if futures:
-		allRegions |= futures
-		targets.extend(list(futures))
+	for k, j in futures.items():
+		JOB_REGIONS[k] = JobRegion(job_code = j)
+	targets = argv[1:] or list(JOB_REGIONS)
 	await entry(session, targets, check_cancel)
 
 setLogger(logging.INFO, __file__, base_name = True)
@@ -276,8 +282,5 @@ debug_logger = logging.getLogger("debug")
 debug_logger.setLevel(logging.INFO)
 debug_logger.propagate = judge_remove("debug")
 check_cancel = judge_remove("cancel")
-
-targets = argv[1:] or list(allRegions)
-asyncio.run(main(targets = targets, check_cancel = check_cancel))
-
+asyncio.run(main(check_cancel))
 logging.info("程序结束")

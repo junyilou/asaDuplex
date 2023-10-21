@@ -23,7 +23,7 @@ def textConvert(dct: dict, userLang: bool = True) -> str:
 
 async def apu(session: Optional[SessionType], store: Store, target: str, userLang: bool) -> AsyncGenerator[tuple[str, date, str], None]:
 	retry = 3
-	baseURL = f"https://www.apple.com{store.region['shopURL']}"
+	baseURL = f"https://www.apple.com{store.region.url_store}"
 	url = f"{baseURL}/shop/fulfillment-messages"
 	referer = userAgent | {"Referer": f"{baseURL}/shop/product/{target}"}
 	params = {"searchNearby": "true", "store": store.rid, "parts.0": target}
@@ -52,7 +52,7 @@ async def apu(session: Optional[SessionType], store: Store, target: str, userLan
 			yield (astore, sDay, sTxt)
 
 async def comment(session: Optional[SessionType], store: Store, userLang: bool = True) -> dict:
-	async for i in apu(session, store, f'MM0A3{store.region["partSample"]}/A', userLang):
+	async for i in apu(session, store, f'MM0A3{store.region.part_sample}/A', userLang):
 		astore, sDay, sTxt = i
 		COMMENTS[astore] = COMMENTS.get(astore, {})
 		COMMENTS[astore][sDay] = sTxt

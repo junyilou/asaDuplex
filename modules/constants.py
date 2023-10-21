@@ -1,7 +1,8 @@
-from typing import Any, NotRequired, Optional, TypedDict
+from dataclasses import dataclass
+from typing import Optional
 
 userAgent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \
-AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.1 Safari/605.1.15"}
+AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"}
 
 partRuleCheck = r"([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?)"
 
@@ -16,388 +17,397 @@ DIFFHTML = """<!DOCTYPE html>
 </code></pre></body>
 </html>"""
 
-class RegionDict(TypedDict):
+@dataclass
+class Region:
 	abbr: str
-	altername: list[str]
-	eppURL: NotRequired[dict[str, Optional[str]]]
-	jobCode: Optional[dict[str, int]]
-	mobileApp: Optional[str]
+	job_code: Optional[dict[str, int]]
+	locale: str
 	name: str
-	nameEng: str
-	partSample: Optional[str]
-	rootPath: str
-	rspLocale: str
-	shopURL: Optional[str]
-	storeURL: str
+	name_alter: list[str]
+	name_eng: str
+	part_sample: Optional[str]
+	url_app: Optional[str]
+	url_taa: str
+	url_retail: str
+	url_store: Optional[str]
 
-allRegions: dict[str, RegionDict] = {
-	"BE": {
-		"abbr": "BENL",
-		"altername": [
-			"比利時"
+Regions = {
+	"BE": Region(
+		abbr = "BENL",
+		job_code = None,
+		locale = "nl_BE",
+		name = "比利时 (荷兰语)",
+		name_alter = [
+			"België"
 		],
-		"jobCode": None,
-		"mobileApp": "e/be-nl",
-		"name": "比利时 (荷兰语)",
-		"nameEng": "Belgium (Dutch)",
-		"partSample": "ZM",
-		"rootPath": "/benl",
-		"rspLocale": "nl_BE",
-		"shopURL": "/be-nl",
-		"storeURL": "/benl"
-	},
-	"CA": {
-		"abbr": "CAFR",
-		"altername": [],
-		"jobCode": None,
-		"mobileApp": "a/xf",
-		"name": "加拿大 (法语)",
-		"nameEng": "Canada (French)",
-		"partSample": "AM",
-		"rootPath": "/ca/fr",
-		"rspLocale": "fr_CA",
-		"shopURL": "/xf",
-		"storeURL": "/ca/fr"
-	},
-	"CH": {
-		"abbr": "CHDE",
-		"altername": [
-			"Swiss"
+		name_eng = "Belgium (Dutch)",
+		part_sample = "ZM",
+		url_app = "e/be-nl",
+		url_retail = "/benl",
+		url_store = "/be-nl",
+		url_taa = "/benl"
+	),
+	"CA": Region(
+		abbr = "CAFR",
+		job_code = None,
+		locale = "fr_CA",
+		name = "加拿大 (法语)",
+		name_alter = [],
+		name_eng = "Canada (French)",
+		part_sample = "AM",
+		url_app = "a/xf",
+		url_retail = "/ca/fr",
+		url_store = "/xf",
+		url_taa = "/ca/fr"
+	),
+	"CH": Region(
+		abbr = "CHDE",
+		job_code = None,
+		locale = "de_CH",
+		name = "瑞士 (德语)",
+		name_alter = [
+			"Schweiz"
 		],
-		"jobCode": None,
-		"mobileApp": "e/ch-de",
-		"name": "瑞士 (德语)",
-		"nameEng": "Switzerland (German)",
-		"partSample": "ZM",
-		"rootPath": "/chde",
-		"rspLocale": "de_CH",
-		"shopURL": "/ch-de",
-		"storeURL": "/chde"
-	},
-	"HK": {
-		"abbr": "HKEN",
-		"altername": [],
-		"jobCode": None,
-		"mobileApp": "p/hk",
-		"name": "香港 (英语)",
-		"nameEng": "Hong Kong (English)",
-		"partSample": "FE",
-		"rootPath": "/hk/en",
-		"rspLocale": "en_HK",
-		"shopURL": "/hk",
-		"storeURL": "/hk/en"
-	},
-	"🇦🇪": {
-		"abbr": "AE",
-		"altername": [
-			"UAE",
-			"阿聯酋",
-			"阿拉伯联合酋长国",
-			"阿拉伯聯合酋長國"
-			"阿拉伯联合大公国"
-		],
-		"jobCode": {
+		name_eng = "Switzerland (German)",
+		part_sample = "ZM",
+		url_app = "e/ch-de",
+		url_retail = "/chde",
+		url_store = "/ch-de",
+		url_taa = "/chde"
+	),
+	"HK": Region(
+		abbr = "HKEN",
+		job_code = None,
+		locale = "en_HK",
+		name = "香港 (英语)",
+		name_alter = [],
+		name_eng = "Hong Kong (English)",
+		part_sample = "FE",
+		url_app = "p/hk",
+		url_retail = "/hk/en",
+		url_store = "/hk",
+		url_taa = "/hk/en"
+	),
+	"🇦🇪": Region(
+		abbr = "AE",
+		job_code = {
 			"expert": 114438218,
 			"genius": 114438219,
 			"specialist": 114438225
 		},
-		"mobileApp": "e/ae",
-		"name": "阿联酋",
-		"nameEng": "United Arab Emirates",
-		"partSample": "ZE",
-		"rootPath": "/ae",
-		"rspLocale": "en_AE",
-		"shopURL": "/ae",
-		"storeURL": "/ae"
-	},
-	"🇦🇹": {
-		"abbr": "AT",
-		"altername": [],
-		"jobCode": {
+		locale = "en_AE",
+		name = "阿联酋",
+		name_alter = [
+			"UAE",
+			"阿聯酋",
+			"阿拉伯联合酋长国",
+			"阿拉伯聯合酋長國"
+		],
+		name_eng = "United Arab Emirates",
+		part_sample = "ZE",
+		url_app = "e/ae",
+		url_retail = "/ae",
+		url_store = "/ae",
+		url_taa = "/ae"
+	),
+	"🇦🇹": Region(
+		abbr = "AT",
+		job_code = {
 			"expert": 114438333,
 			"genius": 114438334,
 			"specialist": 114438340
 		},
-		"mobileApp": "e/at",
-		"name": "奥地利",
-		"nameEng": "Austria",
-		"partSample": "ZM",
-		"rootPath": "/at",
-		"rspLocale": "de_AT",
-		"shopURL": "/at",
-		"storeURL": "/at"
-	},
-	"🇦🇺": {
-		"abbr": "AU",
-		"altername": [
-			"澳洲"
-		],
-		"jobCode": {
+		locale = "de_AT",
+		name = "奥地利",
+		name_alter = [],
+		name_eng = "Austria",
+		part_sample = "ZM",
+		url_app = "e/at",
+		url_retail = "/at",
+		url_store = "/at",
+		url_taa = "/at"
+	),
+	"🇦🇺": Region(
+		abbr = "AU",
+		job_code = {
 			"expert": 114437983,
 			"genius": 114437984,
 			"specialist": 114437991
 		},
-		"mobileApp": "p/au",
-		"name": "澳大利亚",
-		"nameEng": "Australia",
-		"partSample": "FE",
-		"rootPath": "/au",
-		"rspLocale": "en_AU",
-		"shopURL": "/au",
-		"storeURL": "/au"
-	},
-	"🇧🇪": {
-		"abbr": "BE",
-		"altername": [
-			"比利時"
+		locale = "en_AU",
+		name = "澳大利亚",
+		name_alter = [
+			"澳洲"
 		],
-		"jobCode": {
+		name_eng = "Australia",
+		part_sample = "FE",
+		url_app = "p/au",
+		url_retail = "/au",
+		url_store = "/au",
+		url_taa = "/au"
+	),
+	"🇧🇪": Region(
+		abbr = "BE",
+		job_code = {
 			"expert": 114438244,
 			"genius": 114438245,
 			"specialist": 114438251
 		},
-		"mobileApp": "e/be-fr",
-		"name": "比利时",
-		"nameEng": "Belgium",
-		"partSample": "ZM",
-		"rootPath": "/befr",
-		"rspLocale": "fr_BE",
-		"shopURL": "/be-fr",
-		"storeURL": "/befr"
-	},
-	"🇧🇷": {
-		"abbr": "BR",
-		"altername": [],
-		"jobCode": {
+		locale = "fr_BE",
+		name = "比利时",
+		name_alter = [
+			"比利時",
+			"Belgique"
+		],
+		name_eng = "Belgium",
+		part_sample = "ZM",
+		url_app = "e/be-fr",
+		url_retail = "/befr",
+		url_store = "/be-fr",
+		url_taa = "/befr"
+	),
+	"🇧🇷": Region(
+		abbr = "BR",
+		job_code = {
 			"expert": 114438177,
 			"genius": 114438178,
 			"specialist": 114438176
 		},
-		"mobileApp": "a/br",
-		"name": "巴西",
-		"nameEng": "Brazil",
-		"partSample": "AM",
-		"rootPath": "/br",
-		"rspLocale": "pt_BR",
-		"shopURL": "/br",
-		"storeURL": "/br"
-	},
-	"🇨🇦": {
-		"abbr": "CA",
-		"altername": [],
-		"jobCode": {
+		locale = "pt_BR",
+		name = "巴西",
+		name_alter = [],
+		name_eng = "Brazil",
+		part_sample = "AM",
+		url_app = "a/br",
+		url_retail = "/br",
+		url_store = "/br",
+		url_taa = "/br"
+	),
+	"🇨🇦": Region(
+		abbr = "CA",
+		job_code = {
 			"expert": 114437996,
 			"genius": 114437997,
 			"specialist": 114438004
 		},
-		"mobileApp": "a/ca",
-		"name": "加拿大",
-		"nameEng": "Canada",
-		"partSample": "AM",
-		"rootPath": "/ca",
-		"rspLocale": "en_CA",
-		"shopURL": "/ca",
-		"storeURL": "/ca"
-	},
-	"🇨🇭": {
-		"abbr": "CH",
-		"altername": [
-			"Swiss"
-		],
-		"jobCode": {
+		locale = "en_CA",
+		name = "加拿大",
+		name_alter = [],
+		name_eng = "Canada",
+		part_sample = "AM",
+		url_app = "a/ca",
+		url_retail = "/ca",
+		url_store = "/ca",
+		url_taa = "/ca"
+	),
+	"🇨🇭": Region(
+		abbr = "CH",
+		job_code = {
 			"expert": 114438009,
 			"genius": 114438010,
 			"specialist": 114438017
 		},
-		"mobileApp": "e/ch-fr",
-		"name": "瑞士",
-		"nameEng": "Switzerland",
-		"partSample": "ZM",
-		"rootPath": "/chfr",
-		"rspLocale": "fr_CH",
-		"shopURL": "/ch-fr",
-		"storeURL": "/chfr"
-	},
-	"🇨🇳": {
-		"abbr": "CN",
-		"altername": [
+		locale = "fr_CH",
+		name = "瑞士",
+		name_alter = [
+			"Swiss",
+			"Suisse"
+		],
+		name_eng = "Switzerland",
+		part_sample = "ZM",
+		url_app = "e/ch-fr",
+		url_retail = "/chfr",
+		url_store = "/ch-fr",
+		url_taa = "/chfr"
+	),
+	"🇨🇳": Region(
+		abbr = "CN",
+		job_code = {
+			"expert": 114438022,
+			"genius": 114438023,
+			"specialist": 114438030
+		},
+		locale = "zh_CN",
+		name = "中国",
+		name_alter = [
 			"中國",
 			"中华人民共和国",
 			"中華人民共和國",
 			"China mainland",
 			"PRC"
 		],
-		"jobCode": {
-			"expert": 114438022,
-			"genius": 114438023,
-			"specialist": 114438030
-		},
-		"mobileApp": "p/cn",
-		"name": "中国",
-		"nameEng": "China",
-		"partSample": "FE",
-		"rootPath": "/cn",
-		"rspLocale": "zh_CN",
-		"shopURL": ".cn",
-		"storeURL": ".cn"
-	},
-	"🇩🇪": {
-		"abbr": "DE",
-		"altername": [
-			"德國",
-			"Deutschland"
-		],
-		"jobCode": {
+		name_eng = "China",
+		part_sample = "FE",
+		url_app = "p/cn",
+		url_retail = ".cn",
+		url_store = ".cn",
+		url_taa = "/cn"
+	),
+	"🇩🇪": Region(
+		abbr = "DE",
+		job_code = {
 			"expert": 114438035,
 			"genius": 114438036,
 			"specialist": 114438043
 		},
-		"mobileApp": "e/de",
-		"name": "德国",
-		"nameEng": "Germany",
-		"partSample": "ZM",
-		"rootPath": "/de",
-		"rspLocale": "de_DE",
-		"shopURL": "/de",
-		"storeURL": "/de"
-	},
-	"🇪🇸": {
-		"abbr": "ES",
-		"altername": [
-			"España"
+		locale = "de_DE",
+		name = "德国",
+		name_alter = [
+			"德國",
+			"Deutschland"
 		],
-		"jobCode": {
+		name_eng = "Germany",
+		part_sample = "ZM",
+		url_app = "e/de",
+		url_retail = "/de",
+		url_store = "/de",
+		url_taa = "/de"
+	),
+	"🇪🇸": Region(
+		abbr = "ES",
+		job_code = {
 			"expert": 114438048,
 			"genius": 114438049,
 			"specialist": 114438056
 		},
-		"mobileApp": "e/es",
-		"name": "西班牙",
-		"nameEng": "Spain",
-		"partSample": "ZM",
-		"rootPath": "/es",
-		"rspLocale": "es_ES",
-		"shopURL": "/es",
-		"storeURL": "/es"
-	},
-	"🇫🇷": {
-		"abbr": "FR",
-		"altername": [
-			"法國",
-			"法兰西共和国",
-			"法蘭西共和國"
+		locale = "es_ES",
+		name = "西班牙",
+		name_alter = [
+			"España"
 		],
-		"jobCode": {
+		name_eng = "Spain",
+		part_sample = "ZM",
+		url_app = "e/es",
+		url_retail = "/es",
+		url_store = "/es",
+		url_taa = "/es"
+	),
+	"🇫🇷": Region(
+		abbr = "FR",
+		job_code = {
 			"expert": 114438061,
 			"genius": 114438062,
 			"specialist": 114438069
 		},
-		"mobileApp": "e/fr",
-		"name": "法国",
-		"nameEng": "France",
-		"partSample": "ZM",
-		"rootPath": "/fr",
-		"rspLocale": "fr_FR",
-		"shopURL": "/fr",
-		"storeURL": "/fr"
-	},
-	"🇬🇧": {
-		"abbr": "GB",
-		"altername": [
-			"UK",
-			"Great Britain",
-			"大英帝国",
-			"大英帝國"
+		locale = "fr_FR",
+		name = "法国",
+		name_alter = [
+			"法國",
+			"法兰西共和国",
+			"法蘭西共和國"
 		],
-		"jobCode": {
+		name_eng = "France",
+		part_sample = "ZM",
+		url_app = "e/fr",
+		url_retail = "/fr",
+		url_store = "/fr",
+		url_taa = "/fr"
+	),
+	"🇬🇧": Region(
+		abbr = "GB",
+		job_code = {
 			"expert": 114438137,
 			"genius": 114438138,
 			"specialist": 114438145
 		},
-		"mobileApp": "e/uk",
-		"name": "英国",
-		"nameEng": "United Kingdom",
-		"partSample": "ZM",
-		"rootPath": "/uk",
-		"rspLocale": "en_GB",
-		"shopURL": "/uk",
-		"storeURL": "/uk"
-	},
-	"🇭🇰": {
-		"abbr": "HK",
-		"altername": [
-			"香港特别行政区",
-			"香港特別行政區"
+		locale = "en_GB",
+		name = "英国",
+		name_alter = [
+			"UK",
+			"U.K.",
+			"Great Britain",
+			"大英帝国",
+			"大英帝國"
 		],
-		"jobCode": {
+		name_eng = "United Kingdom",
+		part_sample = "ZM",
+		url_app = "e/uk",
+		url_retail = "/uk",
+		url_store = "/uk",
+		url_taa = "/uk"
+	),
+	"🇭🇰": Region(
+		abbr = "HK",
+		job_code = {
 			"expert": 114438074,
 			"genius": 114438075,
 			"specialist": 114438082
 		},
-		"mobileApp": "p/hk-zh",
-		"name": "香港",
-		"nameEng": "Hong Kong",
-		"partSample": "FE",
-		"rootPath": "/hk",
-		"rspLocale": "zh_HK",
-		"shopURL": "/hk-zh",
-		"storeURL": "/hk"
-	},
-	"🇮🇳": {
-		"abbr": "IN",
-		"altername": [],
-		"jobCode": {
+		locale = "zh_HK",
+		name = "香港",
+		name_alter = [
+			"香港特别行政区",
+			"香港特別行政區"
+		],
+		name_eng = "Hong Kong",
+		part_sample = "FE",
+		url_app = "p/hk-zh",
+		url_retail = "/hk",
+		url_store = "/hk-zh",
+		url_taa = "/hk"
+	),
+	"🇮🇳": Region(
+		abbr = "IN",
+		job_code = {
 			"expert": 200314010,
 			"genius": 200314015,
 			"technical": 200314122
 		},
-		"mobileApp": None,
-		"name": "印度",
-		"nameEng": "India",
-		"partSample": "ZM",
-		"rootPath": "/in",
-		"rspLocale": "en_IN",
-		"shopURL": "/in",
-		"storeURL": "/in"
-	},
-	"🇮🇹": {
-		"abbr": "IT",
-		"altername": [
-			"Italia",
-			"义大利"
-		],
-		"jobCode": {
+		locale = "en_IN",
+		name = "印度",
+		name_alter = [],
+		name_eng = "India",
+		part_sample = "ZM",
+		url_app = None,
+		url_retail = "/in",
+		url_store = "/in",
+		url_taa = "/in"
+	),
+	"🇮🇹": Region(
+		abbr = "IT",
+		job_code = {
 			"expert": 114438087,
 			"genius": 114438088,
 			"specialist": 114438095
 		},
-		"mobileApp": "e/it",
-		"name": "意大利",
-		"nameEng": "Italy",
-		"partSample": "ZM",
-		"rootPath": "/it",
-		"rspLocale": "it_IT",
-		"shopURL": "/it",
-		"storeURL": "/it"
-	},
-	"🇯🇵": {
-		"abbr": "JP",
-		"altername": [],
-		"jobCode": {
+		locale = "it_IT",
+		name = "意大利",
+		name_alter = [
+			"Italia",
+			"义大利"
+		],
+		name_eng = "Italy",
+		part_sample = "ZM",
+		url_app = "e/it",
+		url_retail = "/it",
+		url_store = "/it",
+		url_taa = "/it"
+	),
+	"🇯🇵": Region(
+		abbr = "JP",
+		job_code = {
 			"specialist": 114438107
 		},
-		"mobileApp": "j/jp",
-		"name": "日本",
-		"nameEng": "Japan",
-		"partSample": "FE",
-		"rootPath": "/jp",
-		"rspLocale": "ja_JP",
-		"shopURL": "/jp",
-		"storeURL": "/jp"
-	},
-	"🇰🇷": {
-		"abbr": "KR",
-		"altername": [
+		locale = "ja_JP",
+		name = "日本",
+		name_alter = [],
+		name_eng = "Japan",
+		part_sample = "FE",
+		url_app = "j/jp",
+		url_retail = "/jp",
+		url_store = "/jp",
+		url_taa = "/jp"
+	),
+	"🇰🇷": Region(
+		abbr = "KR",
+		job_code = {
+			"expert": 114438319,
+			"genius": 114438320,
+			"specialist": 114438326
+		},
+		locale = "ko_KR",
+		name = "韩国",
+		name_alter = [
 			"Korea",
 			"ROK",
 			"南韩",
@@ -405,207 +415,200 @@ allRegions: dict[str, RegionDict] = {
 			"大韩民国",
 			"大韓民國"
 		],
-		"jobCode": {
-			"expert": 114438319,
-			"genius": 114438320,
-			"specialist": 114438326
+		name_eng = "South Korea",
+		part_sample = "FE",
+		url_app = "p/kr",
+		url_retail = "/kr",
+		url_store = "/kr",
+		url_taa = "/kr"
+	),
+	"🇲🇴": Region(
+		abbr = "MO",
+		job_code = {
+			"expert": 114438275,
+			"genius": 114438276,
+			"specialist": 114438282
 		},
-		"mobileApp": "p/kr",
-		"name": "韩国",
-		"nameEng": "South Korea",
-		"partSample": "FE",
-		"rootPath": "/kr",
-		"rspLocale": "ko_KR",
-		"shopURL": "/kr",
-		"storeURL": "/kr"
-	},
-	"🇲🇴": {
-		"abbr": "MO",
-		"altername": [
+		locale = "zh_MO",
+		name = "澳门",
+		name_alter = [
 			"澳門",
 			"澳门特别行政区",
 			"澳門特別行政區",
 			"Macao"
 		],
-		"jobCode": {
-			"expert": 114438275,
-			"genius": 114438276,
-			"specialist": 114438282
-		},
-		"mobileApp": None,
-		"name": "澳门",
-		"nameEng": "Macau",
-		"partSample": None,
-		"rootPath": "/mo",
-		"rspLocale": "zh_MO",
-		"shopURL": None,
-		"storeURL": "/mo"
-	},
-	"🇲🇽": {
-		"abbr": "MX",
-		"altername": [],
-		"jobCode": {
+		name_eng = "Macau",
+		part_sample = None,
+		url_app = None,
+		url_retail = "/mo",
+		url_store = None,
+		url_taa = "/mo"
+	),
+	"🇲🇽": Region(
+		abbr = "MX",
+		job_code = {
 			"expert": 114438290,
 			"genius": 114438291,
 			"specialist": 114438297
 		},
-		"mobileApp": "a/mx",
-		"name": "墨西哥",
-		"nameEng": "Mexico",
-		"partSample": "AM",
-		"rootPath": "/mx",
-		"rspLocale": "es_MX",
-		"shopURL": "/mx",
-		"storeURL": "/mx"
-	},
-	"🇲🇾": {
-		"abbr": "MY",
-		"altername": [
-			"馬來西亞",
-			"大马"
-		],
-		"jobCode": {
+		locale = "es_MX",
+		name = "墨西哥",
+		name_alter = [],
+		name_eng = "Mexico",
+		part_sample = "AM",
+		url_app = "a/mx",
+		url_retail = "/mx",
+		url_store = "/mx",
+		url_taa = "/mx"
+	),
+	"🇲🇾": Region(
+		abbr = "MY",
+		job_code = {
 			"expert": 200450004,
 			"genius": 200450000,
 			"specialist": 200450003
 		},
-		"mobileApp": "p/my",
-		"name": "马来西亚",
-		"nameEng": "Malaysia",
-		"partSample": "FE",
-		"rootPath": "/my",
-		"rspLocale": "en_MY",
-		"shopURL": "/my",
-		"storeURL": "/my"
-	},
-	"🇳🇱": {
-		"abbr": "NL",
-		"altername": [
-			"荷蘭",
-			"Holland"
+		locale = "en_MY",
+		name = "马来西亚",
+		name_alter = [
+			"馬來西亞",
+			"大马"
 		],
-		"jobCode": {
+		name_eng = "Malaysia",
+		part_sample = "FE",
+		url_app = "p/my",
+		url_retail = "/my",
+		url_store = "/my",
+		url_taa = "/my"
+	),
+	"🇳🇱": Region(
+		abbr = "NL",
+		job_code = {
 			"expert": 114438111,
 			"genius": 114438112,
 			"specialist": 114438119
 		},
-		"mobileApp": "e/nl",
-		"name": "荷兰",
-		"nameEng": "Netherlands",
-		"partSample": "ZM",
-		"rootPath": "/nl",
-		"rspLocale": "nl_NL",
-		"shopURL": "/nl",
-		"storeURL": "/nl"
-	},
-	"🇸🇪": {
-		"abbr": "SE",
-		"altername": [],
-		"jobCode": {
+		locale = "nl_NL",
+		name = "荷兰",
+		name_alter = [
+			"荷蘭",
+			"Holland"
+		],
+		name_eng = "Netherlands",
+		part_sample = "ZM",
+		url_app = "e/nl",
+		url_retail = "/nl",
+		url_store = "/nl",
+		url_taa = "/nl"
+	),
+	"🇸🇪": Region(
+		abbr = "SE",
+		job_code = {
 			"expert": 114438124,
 			"genius": 114438125,
 			"specialist": 114438132
 		},
-		"mobileApp": "e/se",
-		"name": "瑞典",
-		"nameEng": "Sweden",
-		"partSample": "ZM",
-		"rootPath": "/se",
-		"rspLocale": "sv_SE",
-		"shopURL": "/se",
-		"storeURL": "/se"
-	},
-	"🇸🇬": {
-		"abbr": "SG",
-		"altername": [
-			"星加坡"
-		],
-		"jobCode": {
+		locale = "sv_SE",
+		name = "瑞典",
+		name_alter = [],
+		name_eng = "Sweden",
+		part_sample = "ZM",
+		url_app = "e/se",
+		url_retail = "/se",
+		url_store = "/se",
+		url_taa = "/se"
+	),
+	"🇸🇬": Region(
+		abbr = "SG",
+		job_code = {
 			"specialist": 114438238
 		},
-		"mobileApp": "p/sg",
-		"name": "新加坡",
-		"nameEng": "Singapore",
-		"partSample": "FE",
-		"rootPath": "/sg",
-		"rspLocale": "en_SG",
-		"shopURL": "/sg",
-		"storeURL": "/sg"
-	},
-	"🇹🇭": {
-		"abbr": "TH",
-		"altername": [
-			"泰國"
+		locale = "en_SG",
+		name = "新加坡",
+		name_alter = [
+			"星加坡"
 		],
-		"jobCode": {
+		name_eng = "Singapore",
+		part_sample = "FE",
+		url_app = "p/sg",
+		url_retail = "/sg",
+		url_store = "/sg",
+		url_taa = "/sg"
+	),
+	"🇹🇭": Region(
+		abbr = "TH",
+		job_code = {
 			"specialist": 114438346
 		},
-		"mobileApp": "p/th-en",
-		"name": "泰国",
-		"nameEng": "Thailand",
-		"partSample": "FE",
-		"rootPath": "/th",
-		"rspLocale": "th_TH",
-		"shopURL": "/th",
-		"storeURL": "/th"
-	},
-	"🇹🇷": {
-		"abbr": "TR",
-		"altername": [],
-		"jobCode": {
+		locale = "th_TH",
+		name = "泰国",
+		name_alter = [
+			"泰國"
+		],
+		name_eng = "Thailand",
+		part_sample = "FE",
+		url_app = "p/th-en",
+		url_retail = "/th",
+		url_store = "/th",
+		url_taa = "/th"
+	),
+	"🇹🇷": Region(
+		abbr = "TR",
+		job_code = {
 			"expert": 114438165,
 			"genius": 114438166,
 			"specialist": 114438164
 		},
-		"mobileApp": "e/tr",
-		"name": "土耳其",
-		"nameEng": "Turkey",
-		"partSample": "ZM",
-		"rootPath": "/tr",
-		"rspLocale": "tr_TR",
-		"shopURL": "/tr",
-		"storeURL": "/tr"
-	},
-	"🇹🇼": {
-		"abbr": "TW",
-		"altername": [
-			"ROC",
-			"中华民国",
-			"中華民國"
-		],
-		"jobCode": {
+		locale = "tr_TR",
+		name = "土耳其",
+		name_alter = [],
+		name_eng = "Turkey",
+		part_sample = "ZM",
+		url_app = "e/tr",
+		url_retail = "/tr",
+		url_store = "/tr",
+		url_taa = "/tr"
+	),
+	"🇹🇼": Region(
+		abbr = "TW",
+		job_code = {
 			"expert": 114438305,
 			"genius": 114438306,
 			"specialist": 114438311
 		},
-		"mobileApp": "p/tw",
-		"name": "台湾",
-		"nameEng": "Taiwan",
-		"partSample": "FE",
-		"rootPath": "/tw",
-		"rspLocale": "zh_TW",
-		"shopURL": "/tw",
-		"storeURL": "/tw"
-	},
-	"🇺🇸": {
-		"abbr": "US",
-		"altername": [
-			"美國",
-			"America",
-			"U.S."
+		locale = "zh_TW",
+		name = "台湾",
+		name_alter = [
+			"ROC",
+			"中华民国",
+			"中華民國"
 		],
-		"jobCode": {
+		name_eng = "Taiwan",
+		part_sample = "FE",
+		url_app = "p/tw",
+		url_retail = "/tw",
+		url_store = "/tw",
+		url_taa = "/tw"
+	),
+	"🇺🇸": Region(
+		abbr = "US",
+		job_code = {
 			"expert": 114438150,
 			"genius": 114438151,
 			"specialist": 114438158
 		},
-		"mobileApp": "a/us",
-		"name": "美国",
-		"nameEng": "United States",
-		"partSample": "AM",
-		"rootPath": "",
-		"rspLocale": "en_US",
-		"shopURL": "",
-		"storeURL": ""
-	}
+		locale = "en_US",
+		name = "美国",
+		name_alter = [
+			"美國",
+			"America",
+			"U.S."
+		],
+		name_eng = "United States",
+		part_sample = "AM",
+		url_app = "a/us",
+		url_retail = "",
+		url_store = "",
+		url_taa = ""
+	)
 }

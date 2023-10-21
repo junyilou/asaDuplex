@@ -1,7 +1,7 @@
 import json
 import re
 from datetime import datetime
-from modules.constants import RegionDict, allRegions, userAgent
+from modules.constants import Region, Regions, userAgent
 from modules.util import SessionType, request
 from typing import Any, Literal, Optional, Required, TypedDict, overload
 
@@ -59,16 +59,16 @@ class Store:
 
 		self.state: str = dct["state"]
 		self.city: str = dct["city"]
-		self.region: RegionDict = allRegions[self.flag]
+		self.region: Region = Regions[self.flag]
 		if "website" in dct:
 			self.slug: str = dct["website"] or self.name.lower().replace(" ", "")
-			self.url: str = f"https://www.apple.com{self.region['storeURL']}/retail/{self.slug}"
+			self.url: str = f"https://www.apple.com{self.region.url_retail}/retail/{self.slug}"
 
 		keys = [
 			self.name, self.state, self.city, self.flag, *self.altname,
 			*dct.get("alter", "").split(" "),
 			getattr(self, "slug", ""),
-			self.region["name"], self.region["nameEng"], self.region["abbr"], *self.region["altername"],
+			self.region.name, self.region.name_eng, self.region.abbr, *self.region.name_alter,
 			*([dct["status"].capitalize(), trans_table[dct["status"]]] if "status" in dct else [])]
 		self.keys: list[str] = [i for i in keys if i]
 		self.keys += [k.replace(" ", "") for k in self.keys if " " in k]
@@ -124,7 +124,7 @@ class Store:
 		try:
 			assert mode in ["dict", "hero", "hours", "raw", "url", None]
 			assert hasattr(self, "slug")
-			url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={self.slug}&locale={self.region['rspLocale']}&sc=false"
+			url = f"https://www.apple.com/rsp-web/store-detail?storeSlug={self.slug}&locale={self.region.locale}&sc=false"
 			if mode == "url":
 				return url
 
@@ -216,7 +216,7 @@ def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 			if ast and ast.issubset(stores):
 				stores = stores.symmetric_difference(ast)
 				if level == "flag":
-					attrs = {None: store.flag, True: store.region["name"], False: store.region["nameEng"]}
+					attrs = {None: store.flag, True: store.region.name, False: store.region.name_eng}
 					attr = " ".join(attrs[i] for i in userLang)
 				else:
 					attr = getattr(store, level)

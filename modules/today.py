@@ -6,7 +6,7 @@ import re
 
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
-from modules.constants import allRegions, userAgent
+from modules.constants import Regions, userAgent
 from modules.util import SessionType, disMarkdown, request, timezoneText
 from storeInfo import Store as Raw_Store, getStore as getRaw_Store, sidify, storeReturn
 from typing import Any, AsyncIterator, Literal, Optional, Self
@@ -18,7 +18,7 @@ PARAM = {"ensureAns": False, "timeout": 25, "retryNum": 5}
 SEMAPHORE_LIMIT = 20
 VALIDDATES = r"(-([0-9]{4,8}))$"
 
-todayNation: dict[str, Any] = {allRegions[i]["rootPath"]: i for i in allRegions}
+todayNation: dict[str, Any] = {v.url_taa: k for k, v in Regions.items()}
 
 @asynccontextmanager
 async def get_session() -> AsyncIterator[SessionType]:
@@ -153,7 +153,7 @@ class Store(TodayObject):
 			self.raw_store: Raw_Store = raw_store
 			self.timezone: str = raw["timezone"]["name"]
 			self.slug: str = raw["slug"]
-			self.rootPath: str = rootPath or self.raw_store.region["rootPath"]
+			self.rootPath: str = rootPath or self.raw_store.region.url_taa
 			self.flag: str = todayNation[self.rootPath]
 			self.url: str = f"https://www.apple.com{raw['path']}" if self.rootPath != "/cn" \
 				else f"https://www.apple.com.cn{raw['path']}"
@@ -165,7 +165,7 @@ class Store(TodayObject):
 			self.sid: str = self.raw_store.rid
 			self.name: str = self.raw_store.name
 			self.slug: str = self.raw_store.slug
-			self.rootPath: str = rootPath or self.raw_store.region["rootPath"]
+			self.rootPath: str = rootPath or self.raw_store.region.url_taa
 			self.timezone: str = self.raw_store.timezone
 			self.flag: str = todayNation[self.rootPath]
 			self.url: str = self.raw_store.url
@@ -647,7 +647,7 @@ class Sitemap(TodayObject):
 		assert rootPath is not None or flag, "rootPath 和 flag 必须提供一个"
 		match rootPath, flag:
 			case _, fl if fl is not None:
-				self.urlPath = allRegions[fl]["storeURL"]
+				self.urlPath = Regions[fl].url_retail
 			case rp, _ if rp is not None:
 				self.urlPath = rp.replace("/cn", ".cn")
 		self.using = self.match_by_valid if not utils.known_slugs() else self.match_by_assure
@@ -788,7 +788,7 @@ def teleinfo(
 
 	runtime = datetime.now()
 	offset = (runtime.astimezone().utcoffset() or timedelta()).total_seconds() / 3600
-	priorlist = prior + list(allRegions)
+	priorlist = prior + list(Regions)
 
 	if collection is not None:
 		text = disMarkdown(lang[userLang]["MAIN1"].format(
