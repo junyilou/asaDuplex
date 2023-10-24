@@ -383,6 +383,9 @@ class Course(TodayObject):
 		results = await asyncio.gather(*tasks, return_exceptions = True)
 		return sorted(set(itertools.chain.from_iterable(results)))
 
+	async def getSingleSchedule(self) -> "Schedule":
+		return await getSchedule(scheduleId = self.courseId, rootPath = self.rootPath, slug = self.slug)
+
 async def getCourse(
 	courseId: Optional[int | str] = None,
 	fuzzy: bool = True,
