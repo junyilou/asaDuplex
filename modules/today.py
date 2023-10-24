@@ -405,9 +405,16 @@ async def getCourse(
 	if not fuzzy:
 		assert rootPath is not None, "在非模糊模式下 rootPath 必须提供"
 		keyword = "/".join([rootPath, keyword])
-	for i, c in __SAVED["Course"].items():
-		if (fuzzy and keyword in i) or (not fuzzy and keyword == i):
-			return c
+
+	try:
+		return __SAVED["Course"][keyword]
+	except KeyError:
+		try:
+			assert fuzzy
+			matched = (i for i in __SAVED["Course"].keys() if keyword in i)
+			return __SAVED["Course"][next(matched)]
+		except:
+			pass
 
 	assert slug is not None and rootPath is not None, "没有找到匹配时 slug 和 rootPath 必须全部提供"
 	obj = await Course.get(slug = slug, rootPath = rootPath)
@@ -504,8 +511,10 @@ async def getSchedule(
 		__SAVED["Schedule"][obj.scheduleId] = obj
 		return obj
 
-	if scheduleId in __SAVED["Schedule"]:
+	try:
 		return __SAVED["Schedule"][scheduleId]
+	except KeyError:
+		pass
 
 	assert slug is not None and rootPath is not None, "没有找到匹配时 slug 和 rootPath 必须全部提供"
 	obj = await Schedule.get(rootPath = rootPath, scheduleId = scheduleId, slug = slug)
@@ -623,13 +632,13 @@ async def getCollection(
 	rootPath: str,
 	slug: str) -> Collection:
 
-	keyword = f"{rootPath}/{slug}"
-	for i, c in __SAVED["Collection"].items():
-		if keyword == i:
-			return c
+	try:
+		return __SAVED["Collection"][f"{rootPath}/{slug}"]
+	except KeyError:
+		pass
 
 	obj = await Collection.get(rootPath = rootPath, slug = slug)
-	__SAVED["Collection"][keyword] = obj
+	__SAVED["Collection"][f"{obj.rootPath}/{obj.slug}"] = obj
 	return obj
 
 class Sitemap(TodayObject):
