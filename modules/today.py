@@ -1,6 +1,5 @@
 import aiohttp
 import asyncio
-import itertools
 import json
 import re
 
@@ -381,7 +380,7 @@ class Course(TodayObject):
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores)
 		results = await asyncio.gather(*tasks, return_exceptions = True)
-		return sorted(set(itertools.chain.from_iterable(results)))
+		return sorted(set(i for j in results for i in j))
 
 	async def getSingleSchedule(self) -> "Schedule":
 		return await getSchedule(scheduleId = self.courseId, rootPath = self.rootPath, slug = self.slug)
@@ -622,7 +621,7 @@ class Collection(TodayObject):
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores)
 		results = await asyncio.gather(*tasks, return_exceptions = True)
-		return sorted(set(itertools.chain.from_iterable(results)))
+		return sorted(set(i for j in results for i in j))
 
 	async def getCourses(self, rootPath: Optional[str] = None) -> list[Course]:
 		schedules = await self.getRootSchedules(rootPath = rootPath)
