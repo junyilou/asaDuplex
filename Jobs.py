@@ -163,7 +163,8 @@ async def entry(session: SessionType, targets: list[str], check_cancel: bool) ->
 	RECORD = {}
 	semaphore = asyncio.Semaphore(10)
 
-	TASKS = [Region(flag = i, session = session, semaphore = semaphore) for i in targets]
+	for i in targets:
+		TASKS.append(Region(flag = i, session = session, semaphore = semaphore))
 
 	while len(TASKS):
 		tasks = TASKS.copy()
@@ -178,7 +179,7 @@ async def entry(session: SessionType, targets: list[str], check_cancel: bool) ->
 			for t in tasks:
 				TASKS.remove(t)
 		except* NameError:
-			TASKS = []
+			TASKS.clear()
 
 	append = False
 	pushes = {"已开始招聘": [], "已恢复招聘": [], "已停止招聘": []}
