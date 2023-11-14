@@ -188,7 +188,7 @@ def StoreID(sid: int | str, fuzzy: Any = False, regular: Any = False) -> list[St
 def StoreMatch(keyword: str, fuzzy: Any = False, regular: Any = False) -> list[Store]:
 	if not keyword:
 		return []
-	if keyword == "all" and fuzzy:
+	if keyword == "_" and fuzzy:
 		return [i for i in STORES.values()]
 	if regular:
 		pattern = re.compile(keyword, re.I)
@@ -238,8 +238,9 @@ def reloadJSON(filename: str = DEFAULTFILE) -> str:
 def sidify(sid: int | str, *, R: bool = False, fill: bool = True) -> str:
 	return f"{'R' if R and fill else ''}{str(sid).upper().removeprefix('R'):{'0>3' if fill else ''}}"
 
-def storeReturn(args: str | list[str], *, remove_closed: Any = False, remove_future: Any = False,
+def storeReturn(args: Optional[str | list[str]] = None, *, remove_closed: Any = False, remove_future: Any = False,
 	fuzzy: Any = False, regular: Any = False, split: Any = False, sort: Any = True) -> list[Store]:
+	args = args or "_"
 	if not isinstance(args, list):
 		args = re.split(r"\s*[,，]\s*", str(args)) if split else [str(args).strip()]
 	gen = set(g for s in args for m in (StoreID(s, fuzzy = fuzzy, regular = regular),

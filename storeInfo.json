@@ -1,5 +1,5 @@
 {
-  "update": "2023-10-20 00:10:17 GMT",
+  "update": "2023-11-12 00:10:15 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -1362,7 +1362,7 @@
     "city": "Braintree",
     "dates": "2005-08-06",
     "flag": "🇺🇸",
-    "modified": "07 Mar 2022 22:47:36",
+    "modified": "11 Nov 2023 01:37:39",
     "name": "South Shore",
     "state": "Massachusetts",
     "timezone": "America/New_York",
@@ -3328,7 +3328,7 @@
     "city": "Vélizy-Villacoublay",
     "dates": "2010-09-25",
     "flag": "🇫🇷",
-    "modified": "18 Aug 2023 07:44:05",
+    "modified": "08 Nov 2023 13:49:17",
     "name": [
       "Vélizy 2",
       "Velizy 2"
@@ -6435,13 +6435,14 @@
   "766": {
     "alter": "Zhejiang Wenzhou 温州",
     "city": "温州",
+    "dates": "2023-11-04",
     "flag": "🇨🇳",
+    "modified": "08 Nov 2023 00:32:37",
     "name": [
       "温州万象城",
       "MixC Wenzhou"
     ],
     "state": "浙江",
-    "status": "future",
     "timezone": "Asia/Shanghai",
     "website": "mixcwenzhou"
   },
