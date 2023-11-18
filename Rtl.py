@@ -91,7 +91,7 @@ async def down(session: SessionType, semaphore: SemaphoreType, sid: str,
 	return False
 
 @session_func
-async def main(session: SessionType):
+async def main(session: SessionType) -> None:
 	semaphore = asyncio.Semaphore(50)
 	with open(DEFAULTFILE) as r:
 		storejson = json.load(r)
