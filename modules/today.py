@@ -2,13 +2,13 @@ import aiohttp
 import asyncio
 import json
 import re
-
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
 from modules.constants import Regions, userAgent
 from modules.util import SessionType, disMarkdown, request, timezoneText
 from storeInfo import Store as Raw_Store, getStore as getRaw_Store, sidify, storeReturn
-from typing import Any, AsyncIterator, Literal, Optional, Self
+from typing import Any, Literal, Optional, Self
 from zoneinfo import ZoneInfo
 
 __SAVED = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}

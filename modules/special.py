@@ -1,10 +1,11 @@
 import asyncio
 import logging
+from collections.abc import AsyncIterator
 from datetime import date, datetime, timedelta
 from modules.constants import userAgent
 from modules.util import SessionType, request
 from random import choice
-from typing import AsyncGenerator, Optional
+from typing import Optional
 from storeInfo import Store, getStore
 
 COMMENTS: dict[str, dict[date, str]] = {}
@@ -21,7 +22,7 @@ def textConvert(dct: dict, userLang: bool = True) -> str:
 			return f'{opt} - {clt}'
 	return "未知时间" if userLang else "Unknown Hours"
 
-async def apu(session: Optional[SessionType], store: Store, target: str, userLang: bool) -> AsyncGenerator[tuple[str, date, str], None]:
+async def apu(session: Optional[SessionType], store: Store, target: str, userLang: bool) -> AsyncIterator[tuple[str, date, str]]:
 	retry = 3
 	baseURL = f"https://www.apple.com{store.region.url_store}"
 	url = f"{baseURL}/shop/fulfillment-messages"
