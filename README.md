@@ -1,4 +1,4 @@
-# asaDuplex ![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
+# asaDuplex ![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
 
 ![bot](Retail/bot.jpg)
 
