@@ -19,31 +19,18 @@
 
 ### 代码依赖
 
-本库中的部分代码使用了 Python 3.8 至 Python 3.11 的部分特性，使用旧版本的 Python 可能导致缺失部分函数从而导致无法运行。网络 I/O 请求依赖 [aiohttp](https://github.com/aio-libs/aiohttp)，可通过 pip 安装，库中需要网络请求的函数全部为协程函数，需要使用 `await` 关键字等待，但也提供了简单的异步转同步方法 `sync()`，可在复杂度不高的代码中使用。
+代码使用了 Python 3.9 至 Python 3.12 的部分语法和特性，**必须使用 Python 3.12 版本才可完整运行**
 
-```python
-from modules.special import speHours
-from modules.util import sync
+所有网络请求均使用异步网络 I/O: [aiohttp](https://github.com/aio-libs/aiohttp) 发送，部分代码依赖 [beautifulsoup4](https://pypi.org/project/beautifulsoup4) 和 [lxml](https://github.com/lxml/lxml)，可通过 pip 安装
 
->>> await speHours(session=None, sid=688) # 异步
-{'2022-10-15': {'regular': '10:00 - 23:00', 'special': '10:00 - 22:00', 'reason': '[COVID Related]'}}
-
->>> sync(speHours(session=None, sid=688)) # 同步，不建议
-{'2022-10-15': {'regular': '10:00 - 23:00', 'special': '10:00 - 22:00', 'reason': '[COVID Related]'}}
-```
-
-
-
-### 结果推送
-
-许多代码设计为可以和本地记录的信息进行比较，在有新结果时推送通知。在这些代码的顶部，可能有：
+许多代码设计为在有结果时可推送通知。在这些代码的顶部，可能有：
 
 ```python
 from bot import tokens
 from botpost import async_post
 ```
 
-这是我个人对结果推送的实现方式，`bot` 和 `botpost` 并未在此库中给出。代码运行到输出阶段会产生一个包含文本、图片、链接等内容的字典，您可以通过编写适合您自己的推送结果的方式以获取代码结果，例如将内容推送至 Telegram Channel、微信公众号、其他第三方 iOS 推送 app 等。
+这是我个人对结果推送的实现方式，`bot` 和 `botpost` 并未在此库中给出。代码运行到输出阶段会产生一个包含文本、图片、链接等内容的字典，您可以通过编写适合您自己的推送结果的方式以获取代码结果，例如将内容推送至 Telegram、微信、其他第三方 iOS 推送 app 等。
 
 
 

@@ -2,7 +2,7 @@ import aiohttp
 import asyncio
 import json
 import logging
-from collections.abc import Awaitable, Callable, Coroutine
+from collections.abc import Callable, Coroutine
 from datetime import datetime, timedelta
 from functools import wraps
 from os.path import basename, isdir
@@ -118,13 +118,6 @@ def session_func[Y, S, R, **P](func: Callable[Concatenate[SessionType, P],
 		async with aiohttp.ClientSession() as session:
 			return await func(session, *args, **kwargs)
 	return wrapper
-
-def sync(coroutine: Optional[Awaitable] = None, loop: Optional[asyncio.AbstractEventLoop] = None) -> Any:
-	if loop is None:
-		loop = asyncio.new_event_loop()
-	if coroutine is not None:
-		return loop.run_until_complete(coroutine)
-	return loop
 
 def setLogger(level: int, name: str, *, base_name: bool = False, force_print: bool = False) -> None:
 	if base_name:
