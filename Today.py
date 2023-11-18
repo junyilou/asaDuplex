@@ -47,7 +47,10 @@ async def main(mode: str) -> bool:
 
 	for course in courses:
 		doSend, toSave = False, {"slug": course.slug, "names": {course.flag: course.name}}
-		conditions: tuple[bool, bool, bool] = (len(courses[course]) > 0, *(course.courseId in saved[s] for s in ("today", "sitemap")))
+		conditions: tuple[bool, bool, bool] = (
+			len(courses[course]) > 0,
+			course.courseId in saved["today"],
+			course.courseId in saved["sitemap"])
 
 		if isinstance(course.collection, Collection):
 			collection = course.collection
