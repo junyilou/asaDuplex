@@ -1,5 +1,5 @@
 {
-  "update": "2023-11-12 00:10:15 GMT",
+  "update": "2023-11-16 12:49:40 GMT",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -6449,10 +6449,23 @@
   "770": {
     "city": "서울",
     "flag": "🇰🇷",
-    "name": "Store in Seoul East",
+    "name": [
+      "하남",
+      "Hanam"
+    ],
     "state": "경기도",
     "status": "future",
-    "timezone": "Asia/Seoul"
+    "timezone": "Asia/Seoul",
+    "website": "hanam"
+  },
+  "796": {
+    "city": "Charlotte",
+    "flag": "🇺🇸",
+    "name": "Birkdale Village",
+    "state": "North Carolina",
+    "status": "future",
+    "timezone": "America/New_York",
+    "website": ""
   },
   "824": {
     "city": "Cupertino",
