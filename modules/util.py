@@ -2,20 +2,21 @@ import aiohttp
 import asyncio
 import json
 import logging
+from collections.abc import Awaitable, Callable, Coroutine
 from datetime import datetime, timedelta
 from functools import wraps
 from os.path import basename, isdir
-from typing import Any, Awaitable, Callable, Concatenate, Coroutine, Optional, ParamSpec, TypeAlias, TypeVar
+from typing import Any, Concatenate, Optional
 
-SemaphoreType: TypeAlias = asyncio.Semaphore
-SessionType: TypeAlias = aiohttp.ClientSession
+type SemaphoreType = asyncio.Semaphore
+type SessionType = aiohttp.ClientSession
 
 def bitsize(integer: int | float, width: int = 8, precision: int = 2, ks: float = 1e3) -> str:
 	unit, order = 0, ["B", "KB", "MB", "GB", "TB"]
 	while integer > ks and unit < len(order) - 1:
 		integer /= ks
 		unit += 1
-	return f"{integer:{width}.{precision}f} {order[unit]:>2}"
+	return f"{integer:{width}.{precision}f} {order[unit]:<2}"
 
 def disMarkdown(text: str, wrap: str = "", extra: str = "") -> str:
 	temp = str(text)
@@ -110,10 +111,8 @@ async def request(session: Optional[SessionType] = None,
 				raise exp
 			logger.debug(", ".join(f"[{k}] {v}" for k, v in {"丢弃": repr(url), "异常": repr(exp), "重试剩余": retryNum}.items()))
 
-P = ParamSpec('P')
-R = TypeVar('R')
-def session_func(func: Callable[Concatenate[SessionType, P],
-	Awaitable[R]]) -> Callable[P, Coroutine[None, None, R]]:
+def session_func[Y, S, R, **P](func: Callable[Concatenate[SessionType, P],
+	Coroutine[Y, S, R]]) -> Callable[P, Coroutine[Y, S, R]]:
 	@wraps(func)
 	async def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
 		async with aiohttp.ClientSession() as session:
