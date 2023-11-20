@@ -127,7 +127,7 @@ class Store:
 	async def header(self, session: Optional[SessionType] = None) -> Optional[str]:
 		try:
 			r = await request(session = session, url = self.dieter, headers = userAgent, ssl = False,
-				method = "HEAD", allow_redirects = False, raise_for_status = True, mode = "HEAD", timeout = 5)
+				method = "HEAD", allow_redirects = False, raise_for_status = True, mode = "head", timeout = 5)
 			return r['Last-Modified'][5:-4]
 		except:
 			return None
