@@ -9,8 +9,9 @@ from typing import Optional
 
 from bot import chat_ids
 from botpost import async_post
-from modules.constants import Regions, userAgent
-from modules.util import SemaphoreType, SessionType, disMarkdown, request, session_func, setLogger
+from modules.constants import Regions
+from modules.util import SemaphoreType, SessionType
+from modules.util import broswer_agent, disMarkdown, request, session_func, setLogger
 
 API = {
 	"state": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/stateProvinceList",
@@ -84,9 +85,9 @@ class State(TaskObject):
 		assert self.semaphore
 		async with self.semaphore:
 			debug_logger.info(", ".join(["开始下载 province", str(self)]))
-			r = await request(session = self.session, ssl = False, headers = userAgent,
-				timeout = 3, retryNum = 3, url = API["province"].format(JOBID = self.regionCode),
-				params = dict(searchField = "stateProvince", fieldValue = self.fieldID))
+			r = await request(API["province"].format(JOBID = self.regionCode), self.session,
+				ssl = False, headers = broswer_agent, timeout = 3, retry = 3,
+				params = {"searchField": "stateProvince", "fieldValue": self.fieldID})
 		try:
 			a = json.loads(r)
 			if self._repeat:
@@ -119,8 +120,8 @@ class Region(TaskObject):
 		assert self.semaphore
 		async with self.semaphore:
 			logging.info(", ".join(["开始下载", str(self)]))
-			r = await request(session = self.session, ssl = False, headers = userAgent,
-				timeout = 3, retryNum = 3, url = API["state"].format(JOBID = self.code))
+			r = await request(API["state"].format(JOBID = self.code), self.session,
+				headers = broswer_agent, timeout = 3, retry = 3, ssl = False)
 		try:
 			a = json.loads(r)
 			if self._repeat:
@@ -246,8 +247,8 @@ async def future(session: SessionType, futures: dict[str, str]) -> dict[str, dic
 	for flag, post_loc in futures.items():
 		data["filters"]["postingpostLocation"] = [post_loc]
 		try:
-			r = await request(session = session, url = "https://jobs.apple.com/api/role/search",
-				method = "POST", json = data, mode = "json", ssl = False)
+			r = await request("https://jobs.apple.com/api/role/search", session, "POST",
+				json = data, mode = "json", ssl = False)
 			assert "searchResults" in r
 		except:
 			logging.warning(f"尝试搜索地区 {flag} 失败")

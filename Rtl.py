@@ -7,8 +7,8 @@ from datetime import datetime, date, UTC
 
 from bot import chat_ids
 from botpost import async_post
-from modules.constants import userAgent
-from modules.util import SemaphoreType, SessionType, disMarkdown, request, session_func, setLogger
+from modules.util import SemaphoreType, SessionType
+from modules.util import broswer_agent, disMarkdown, request, session_func, setLogger
 from storeInfo import DEFAULTFILE, Store, StoreDict, getStore, sidify
 
 DUMMYDICT: StoreDict = {"name": "Store", "flag": "🇺🇸", "state": "California", "city": "Cupertino"}
@@ -53,8 +53,8 @@ async def down(session: SessionType, semaphore: SemaphoreType, sid: str,
 		savename = f"Retail/{store.rid}_{remote.replace(' ', '').replace(':', '')}.png"
 
 		try:
-			r = await request(session = session, url = store.dieter, headers = userAgent,
-				ssl = False, mode = "raw", ensureAns = False)
+			r = await request(store.dieter, session,
+				headers = broswer_agent, ssl = False, mode = "raw")
 			with open(savename, "wb") as w:
 				w.write(r)
 			img = "BASE64" + b64encode(r).decode()

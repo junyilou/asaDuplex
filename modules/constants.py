@@ -1,11 +1,6 @@
 from dataclasses import dataclass
 from typing import Optional
 
-userAgent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \
-AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"}
-
-partRuleCheck = r"([FGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?)"
-
 DIFFHTML = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">

@@ -2,8 +2,8 @@ import asyncio
 import logging
 from collections.abc import AsyncIterator
 from datetime import date, datetime, timedelta
-from modules.constants import userAgent
-from modules.util import SessionType, request
+from modules.util import SessionType
+from modules.util import broswer_agent, request
 from random import choice
 from typing import Optional
 from storeInfo import Store, getStore
@@ -26,14 +26,14 @@ async def apu(session: Optional[SessionType], store: Store, target: str, userLan
 	retry = 3
 	baseURL = f"https://www.apple.com{store.region.url_store}"
 	url = f"{baseURL}/shop/fulfillment-messages"
-	referer = userAgent | {"Referer": f"{baseURL}/shop/product/{target}"}
+	referer = broswer_agent | {"Referer": f"{baseURL}/shop/product/{target}"}
 	params = {"searchNearby": "true", "store": store.rid, "parts.0": target}
 
 	stores: list[dict] = []
 	while retry:
 		try:
-			r = await request(session = session, url = url, headers = referer, timeout = 5,
-				params = params, ensureAns = False, raise_for_status = True, mode = "json")
+			r = await request(url, session, headers = referer, timeout = 5,
+				params = params, raise_for_status = True, mode = "json")
 			stores = r["body"]["content"]["pickupMessage"]["stores"]
 			break
 		except:

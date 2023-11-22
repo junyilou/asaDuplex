@@ -5,15 +5,16 @@ import re
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
-from modules.constants import Regions, userAgent
-from modules.util import SessionType, disMarkdown, request, timezoneText
+from modules.constants import Regions
+from modules.util import SessionType
+from modules.util import broswer_agent, disMarkdown, request, timezoneText
 from storeInfo import Store as Raw_Store, getStore as getRaw_Store, sidify, storeReturn
 from typing import Any, Literal, Optional, Self
 from zoneinfo import ZoneInfo
 
 __SAVED = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}
 ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
-PARAM = {"ensureAns": False, "timeout": 25, "retryNum": 5}
+PARAM = {"method": "GET", "timeout": 25, "retry": 5}
 SEMAPHORE_LIMIT = 20
 VALIDDATES = r"(-([0-9]{4,8}))$"
 
@@ -21,7 +22,7 @@ todayNation: dict[str, Any] = {v.url_taa: k for k, v in Regions.items()}
 
 @asynccontextmanager
 async def get_session() -> AsyncIterator[SessionType]:
-	session = aiohttp.ClientSession(headers = userAgent)
+	session = aiohttp.ClientSession(headers = broswer_agent)
 	try:
 		yield session
 	finally:
@@ -178,12 +179,12 @@ class Store(TodayObject):
 		return f'<Store "{self.name}" ({self.sid}), "{self.slug}", "{self.rootPath}">'
 
 	async def getCourses(self, ensure: bool = True) -> list["Course"]:
-		async with get_session() as session:
-			nearby = {"nearby": "true"} if not ensure else {}
-			r = await request(session = session, url = (API["landing"]["store" if ensure else "nearby"]).format(
-				STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
 		try:
-			remote = json.loads(utils.separate(r))
+			async with get_session() as session:
+				nearby = {"nearby": "true"} if not ensure else {}
+				r = await request(session = session, url = (API["landing"]["store" if ensure else "nearby"]).format(
+					STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
+				remote = json.loads(utils.separate(r))
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
 
@@ -194,12 +195,12 @@ class Store(TodayObject):
 		return [t.result() for t in tasks]
 
 	async def getSchedules(self, ensure: bool = True) -> list["Schedule"]:
-		async with get_session() as session:
-			nearby = {"nearby": "true"} if not ensure else {}
-			r = await request(session = session, url = (API["landing"]["store" if ensure else "nearby"]).format(
-				STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
 		try:
-			remote = json.loads(utils.separate(r))
+			async with get_session() as session:
+				nearby = {"nearby": "true"} if not ensure else {}
+				r = await request(session = session, url = (API["landing"]["store" if ensure else "nearby"]).format(
+					STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
+				remote = json.loads(utils.separate(r))
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
 
@@ -265,10 +266,10 @@ class Course(TodayObject):
 		slug: str,
 		remote: Optional[dict] = None) -> Self:
 		if remote is None:
-			async with get_session() as session:
-				r = await request(session = session, url = API["session"]["course"].format(
-					COURSESLUG = slug, ROOTPATH = rootPath), **PARAM)
 			try:
+				async with get_session() as session:
+					r = await request(session = session, url = API["session"]["course"].format(
+						COURSESLUG = slug, ROOTPATH = rootPath), **PARAM)
 				remote = json.loads(utils.separate(r))
 			except json.decoder.JSONDecodeError:
 				raise ValueError(f"获取课程 {rootPath}/{slug} 数据失败") from None
@@ -351,17 +352,18 @@ class Course(TodayObject):
 
 	async def getSchedules(self, store: Store, ensure: bool = True,
 		semaphore: Optional[asyncio.Semaphore] = None) -> list["Schedule"]:
-		if semaphore is not None:
-			await semaphore.acquire()
-		async with get_session() as session:
-			r = await request(session = session, url = (API["session"]["course"]["store" if ensure else "nearby"]).format(
-				STORESLUG = store.slug, COURSESLUG = self.slug, ROOTPATH = store.rootPath), **PARAM)
-		if semaphore is not None:
-			semaphore.release()
 		try:
+			if semaphore is not None:
+				await semaphore.acquire()
+			async with get_session() as session:
+				r = await request(session = session, url = (API["session"]["course"]["store" if ensure else "nearby"]).format(
+					STORESLUG = store.slug, COURSESLUG = self.slug, ROOTPATH = store.rootPath), **PARAM)
 			remote = json.loads(utils.separate(r))
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取排课 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
+		finally:
+			if semaphore is not None:
+				semaphore.release()
 
 		tasks = []
 		async with asyncio.TaskGroup() as tg:
@@ -431,11 +433,11 @@ class Schedule(TodayObject):
 		slug: str,
 		remote: Optional[dict] = None) -> Self:
 		if remote is None:
-			scheduleId = f"{scheduleId}"
-			async with get_session() as session:
-				r = await request(session = session, url = API["session"]["schedule"].format(
-					COURSESLUG = slug, SCHEDULEID = scheduleId, ROOTPATH = rootPath), **PARAM)
+			scheduleId = str(scheduleId)
 			try:
+				async with get_session() as session:
+					r = await request(session = session, url = API["session"]["schedule"].format(
+						COURSESLUG = slug, SCHEDULEID = scheduleId, ROOTPATH = rootPath), **PARAM)
 				remote = json.loads(utils.separate(r))
 			except json.decoder.JSONDecodeError:
 				raise ValueError(f"获取排课 {rootPath}/{slug}/{scheduleId} 数据失败") from None
@@ -530,10 +532,10 @@ class Collection(TodayObject):
 		slug: str,
 		remote: Optional[dict] = None) -> Self:
 		if remote is None:
-			async with get_session() as session:
-				r = await request(session = session, url = API["collection"]["geo"].format(
-					COLLECTIONSLUG = slug, ROOTPATH = rootPath), **PARAM)
 			try:
+				async with get_session() as session:
+					r = await request(session = session, url = API["collection"]["geo"].format(
+						COLLECTIONSLUG = slug, ROOTPATH = rootPath), **PARAM)
 				remote = json.loads(utils.separate(r))
 			except json.decoder.JSONDecodeError:
 				raise ValueError(f"获取系列 {rootPath}/{slug} 数据失败") from None
@@ -591,17 +593,18 @@ class Collection(TodayObject):
 
 	async def getSchedules(self, store: Store, ensure: bool = True,
 		semaphore: Optional[asyncio.Semaphore] = None) -> list[Schedule]:
-		if semaphore is not None:
-			await semaphore.acquire()
-		async with get_session() as session:
-			r = await request(session = session, url = (API["collection"]["store" if ensure else "nearby"]).format(
-				STORESLUG = store.slug, COLLECTIONSLUG = self.slug, ROOTPATH = store.rootPath), **PARAM)
-		if semaphore is not None:
-			semaphore.release()
 		try:
+			if semaphore is not None:
+				await semaphore.acquire()
+			async with get_session() as session:
+				r = await request(session = session, url = (API["collection"]["store" if ensure else "nearby"]).format(
+					STORESLUG = store.slug, COLLECTIONSLUG = self.slug, ROOTPATH = store.rootPath), **PARAM)
 			remote = json.loads(utils.separate(r))
 		except json.decoder.JSONDecodeError:
 			raise ValueError(f"获取排课 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
+		finally:
+			if semaphore is not None:
+				semaphore.release()
 
 		tasks = []
 		async with asyncio.TaskGroup() as tg:
@@ -669,9 +672,12 @@ class Sitemap(TodayObject):
 		return f'<Sitemap "{self.urlPath}">'
 
 	async def getURLs(self) -> list[str]:
-		async with get_session() as session:
-			r = await request(session = session, url = f"https://www.apple.com{self.urlPath}/today/sitemap.xml", **PARAM)
-		urls = re.findall(r"<loc>\s*(\S*)\s*</loc>", r)
+		try:
+			async with get_session() as session:
+				r = await request(session = session, url = f"https://www.apple.com{self.urlPath}/today/sitemap.xml", **PARAM)
+			urls = re.findall(r"<loc>\s*(\S*)\s*</loc>", r)
+		except:
+			raise ValueError(f"获取 {self.urlPath} Sitemap 数据失败") from None
 
 		slugs = {}
 		for url in urls:

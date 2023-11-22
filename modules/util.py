@@ -2,7 +2,8 @@ import aiohttp
 import asyncio
 import json
 import logging
-from collections.abc import Callable, Coroutine
+from collections.abc import AsyncIterator, Callable, Coroutine
+from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
 from functools import wraps
 from os.path import basename, isdir
@@ -10,6 +11,9 @@ from typing import Any, Concatenate, Optional
 
 type SemaphoreType = asyncio.Semaphore
 type SessionType = aiohttp.ClientSession
+
+broswer_agent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \
+AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15"}
 
 def bitsize(integer: int | float, width: int = 8, precision: int = 2, ks: float = 1e3) -> str:
 	unit, order = 0, ["B", "KB", "MB", "GB", "TB"]
@@ -60,58 +64,69 @@ def timezoneText(dtime: datetime) -> str:
 	time_h = delta - time_min
 	return f"GMT{time_h:+.0f}" + (f":{60 * time_min:0>2.0f}" if time_min else "")
 
-async def request(session: Optional[SessionType] = None,
-	url: str = "", method: str = "GET", mode: str | list[str] = ["text"],
-	retryNum: int = 1, ensureAns: bool = True, **kwargs) -> Any:
-	assert url, "URL 不正确"
+async def base_request(
+	url: str,
+	method: str,
+	session: SessionType,
+	modes: set[str],
+	**kwargs) -> dict[str, Any]:
+	results = {}
+	async with session.request(url = url, method = method, **kwargs) as resp:
+		for m in modes:
+			d = ("head" if method == "HEAD" else "text") if m == "default" else m
+			if d == "text":
+				results[m] = await resp.text()
+			elif d == "head":
+				results[m] = resp.headers
+			elif d == "status":
+				results[m] = resp.status
+			elif d == "json":
+				results[m] = json.loads(await resp.text())
+			elif d == "raw":
+				results[m] = await resp.read()
+		logging.getLogger("util.request").debug(f"网络请求: [状态={resp.status}] [方法={method}] [URL={url}]")
+	if len(modes) == 1:
+		return results[next(iter(modes))]
+	return results
+
+@asynccontextmanager
+async def get_session(
+	session: Optional[SessionType] = None) -> AsyncIterator[SessionType]:
+	y = session or aiohttp.ClientSession()
+	i = y is not session
+	if i:
+		logging.getLogger("util.request").debug("已创建新的 aiohttp 线程")
+	try:
+		yield y
+	finally:
+		if i:
+			await y.close()
+
+async def request(
+	url: str,
+	session: Optional[SessionType] = None,
+	method: str = "GET", *,
+	mode: Optional[str | list[str]] = None,
+	retry: int = 1,
+	return_exception: bool = False,
+	**kwargs) -> Any:
 	logger = logging.getLogger("util.request")
+	modes = {str(i) for i in (mode if isinstance(mode, list) else [mode or "default"])}
+	while retry:
+		retry -= 1
+		async with get_session(session) as ses:
+			try:
+				return await base_request(url, method.upper(), ses, modes, **kwargs)
+			except Exception as exp:
+				if not retry:
+					logger.debug(f"异常丢弃: [方法={method}] [模式={mode}] [URL={url}]")
+					if return_exception:
+						return exp
+					raise
+		logger.debug(f"等待重试: [方法={method}] [模式={mode}] [URL={url}] [重试剩余={retry}]")
 
-	close_session = False
-	if session is None:
-		logger.debug("已创建新的 aiohttp 线程")
-		session = aiohttp.ClientSession()
-		close_session = True
-
-	modes: list[str] = mode if isinstance(mode, list) else [mode]
-	logger.debug(", ".join(f"[{k}] {v}" for k, v in {method: repr(url), "模式": mode, "参数": kwargs, "重试": retryNum}.items()))
-	while retryNum:
-		try:
-			async with session.request(url = url, method = method, **kwargs) as resp:
-				results = {}
-				for m in set(modes):
-					match m:
-						case "raw":
-							results[m] = await resp.read()
-						case "head":
-							results[m] = resp.headers
-						case "status":
-							results[m] = resp.status
-						case "json":
-							try:
-								results[m] = await resp.json()
-							except:
-								r = await resp.text()
-								results[m] = json.loads(r)
-						case _:
-							results[m] = await resp.text()
-			logger.debug(", ".join(f"[{k}] {v}" for k, v in {f"状态{resp.status}": repr(url)}.items()))
-			if close_session:
-				await session.close()
-			if len(modes) == 1:
-				return next(iter(results.values()))
-			return results
-		except Exception as exp:
-			retryNum -= 1
-			if retryNum <= 0:
-				logger.debug(", ".join(f"[{k}] {v}" for k, v in {"丢弃": repr(url), "异常": repr(exp)}.items()))
-				if close_session:
-					await session.close()
-				if ensureAns:
-					return exp
-				raise exp
-			logger.debug(", ".join(f"[{k}] {v}" for k, v in {"丢弃": repr(url), "异常": repr(exp), "重试剩余": retryNum}.items()))
-
-def session_func[Y, S, R, **P](func: Callable[Concatenate[SessionType, P],
+def session_func[Y, S, R, **P](
+	func: Callable[Concatenate[SessionType, P],
 	Coroutine[Y, S, R]]) -> Callable[P, Coroutine[Y, S, R]]:
 	@wraps(func)
 	async def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:

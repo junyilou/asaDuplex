@@ -1,8 +1,9 @@
 import json
 import re
 from datetime import datetime
-from modules.constants import Regions, userAgent
-from modules.util import SessionType, request
+from modules.constants import Regions
+from modules.util import SessionType
+from modules.util import broswer_agent, request
 from typing import Any, Callable, Literal, Optional, Required, TypedDict
 
 DEFAULTFILE = "storeInfo.json"
@@ -108,8 +109,8 @@ class Store:
 		session: Optional[SessionType] = None) -> dict[str, Any]:
 		try:
 			assert hasattr(self, "detail_url")
-			r = await request(session = session, url = self.detail_url, headers = userAgent,
-				ensureAns = False, retryNum = 3, timeout = 5, mode = "json")
+			r = await request(self.detail_url, session, headers = broswer_agent,
+				retry = 3, timeout = 5, mode = "json")
 			if mode == "raw":
 				return r
 			else:
@@ -126,7 +127,7 @@ class Store:
 
 	async def header(self, session: Optional[SessionType] = None) -> Optional[str]:
 		try:
-			r = await request(session = session, url = self.dieter, headers = userAgent, ssl = False,
+			r = await request(session = session, url = self.dieter, headers = broswer_agent, ssl = False,
 				method = "HEAD", allow_redirects = False, raise_for_status = True, mode = "head", timeout = 5)
 			return r['Last-Modified'][5:-4]
 		except:
