@@ -58,6 +58,8 @@ from botpost import async_post
 
 2022 年 11 月：完成核心 storeInfo 的面向对象化，所有零售店均为一个对象，包含基本信息属性和简单的操作方法。 [[commit]](https://github.com/junyilou/asaduplex/commit/49ee12f2785bd4a12637321abc72808d859e585b)
 
+2023 年 11 月：重写了核心网络请求函数，并适配了 Python 3.12 的部分特性。[[commit1]](https://github.com/junyilou/asaDuplex/commit/3d256965e798e501563120b3133b40883745945d) [[commit2]](https://github.com/junyilou/asaDuplex/commit/26c479a1c2b61bea518893b0f20d82ba18158e3e)
+
 
 
 ##### 免责声明 | Disclaimer
