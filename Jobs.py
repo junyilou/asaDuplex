@@ -86,7 +86,7 @@ class State(TaskObject):
 		async with self.semaphore:
 			debug_logger.info(", ".join(["开始下载 province", str(self)]))
 			r = await request(API["province"].format(JOBID = self.regionCode), self.session,
-				ssl = False, headers = broswer_agent, timeout = 3, retry = 3,
+				ssl = False, headers = broswer_agent, timeout = 3, retry = 3, return_exception = True,
 				params = {"searchField": "stateProvince", "fieldValue": self.fieldID})
 		try:
 			a = json.loads(r)
@@ -121,7 +121,7 @@ class Region(TaskObject):
 		async with self.semaphore:
 			logging.info(", ".join(["开始下载", str(self)]))
 			r = await request(API["state"].format(JOBID = self.code), self.session,
-				headers = broswer_agent, timeout = 3, retry = 3, ssl = False)
+				headers = broswer_agent, timeout = 3, retry = 3, ssl = False, return_exception = True)
 		try:
 			a = json.loads(r)
 			if self._repeat:
