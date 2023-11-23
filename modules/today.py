@@ -382,7 +382,7 @@ class Course(TodayObject):
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores)
 		results = await asyncio.gather(*tasks, return_exceptions = True)
-		return sorted(set(i for j in results for i in j))
+		return sorted({i for j in results for i in j})
 
 	async def getSingleSchedule(self) -> "Schedule":
 		return await getSchedule(scheduleId = self.courseId, rootPath = self.rootPath, slug = self.slug)
@@ -624,11 +624,11 @@ class Collection(TodayObject):
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores)
 		results = await asyncio.gather(*tasks, return_exceptions = True)
-		return sorted(set(i for j in results for i in j))
+		return sorted({i for j in results for i in j})
 
 	async def getCourses(self, rootPath: Optional[str] = None) -> list[Course]:
 		schedules = await self.getRootSchedules(rootPath = rootPath)
-		return sorted(set((schedule.course for schedule in schedules)))
+		return sorted({schedule.course for schedule in schedules})
 
 async def getCollection(
 	rootPath: str,
@@ -836,8 +836,7 @@ def teleinfo(
 	elif len(schedules) == 1:
 		courseStore = schedules[0].raw_store.telename(sid = False)
 	else:
-		storeSets = set([i.raw_store for i in schedules])
-		storeCounts = {r: len([s for s in storeSets if s.flag == r]) for r in priorlist}
+		storeCounts = {r: len([s for s in {i.raw_store for i in schedules} if s.flag == r]) for r in priorlist}
 		textStore = [f"{k} ({v} {lang[userLang]['STORES'].format(PLURAL = 's' if v > 1 else '')})"
 			for k, v in storeCounts.items() if v]
 		courseStore = lang[userLang]["JOINT"].join(textStore)

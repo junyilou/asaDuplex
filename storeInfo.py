@@ -192,7 +192,7 @@ def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 
 	for store in stores:
 		for level in levels:
-			ast = set(s for s in STORES.values() if getattr(s, level) == getattr(store, level) and s.isNormal)
+			ast = {s for s in STORES.values() if getattr(s, level) == getattr(store, level) and s.isNormal}
 			if ast and ast.issubset(stores):
 				stores = stores.symmetric_difference(ast)
 				if level == "flag":
@@ -223,8 +223,8 @@ def storeReturn(args: Optional[str | list[str]] = None, *, remove_closed: Any = 
 		args, fuzzy = "_", True
 	if not isinstance(args, list):
 		args = re.split(r"\s*[,，]\s*", str(args)) if split else [str(args).strip()]
-	gen = set(g for s in args for m in (StoreID(s, fuzzy = fuzzy, regular = regular),
-		StoreMatch(s, fuzzy = fuzzy, regular = regular)) for g in m)
+	gen = {g for s in args for m in (StoreID(s, fuzzy = fuzzy, regular = regular),
+		StoreMatch(s, fuzzy = fuzzy, regular = regular)) for g in m}
 	ans = [s for s in gen if (not remove_closed or not s.isClosed and not s.isIntern) and
 		(not remove_future or not s.isFuture and not s.isIntern)]
 	if filter:

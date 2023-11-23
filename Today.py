@@ -34,7 +34,7 @@ async def main(mode: str) -> bool:
 			return append
 
 	runners = await asyncio.gather(*tasks, return_exceptions = True)
-	results = list(set(i for j in (k for k in runners if isinstance(k, list)) for i in j))
+	results = list({i for j in (k for k in runners if isinstance(k, list)) for i in j})
 
 	for j in results:
 		match j:
