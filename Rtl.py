@@ -102,7 +102,7 @@ async def main(session: SessionType) -> None:
 		if mode[0] == "special":
 			logging.info(f"更新特别观察列表: {l}")
 			with open("specialists.json", "w") as w:
-				json.dump(l, w, ensure_ascii = False, indent = 2)
+				json.dump(l, w)
 		logging.info(f"更新门店数据文件: {dt}")
 		with open("storeInfo.json", "w") as w:
 			json.dump(p, w, ensure_ascii = False, indent = 2)
