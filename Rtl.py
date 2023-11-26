@@ -95,6 +95,9 @@ async def main(session: SessionType) -> None:
 		case _:
 			stores, l = [], []
 
+	if not stores:
+		return
+	setLogger(logging.INFO, __file__, base_name = True)
 	logging.info(f"准备查询 {len(stores)} 家零售店")
 	tasks = [entry(store, p, l, session, semaphore) for store in stores]
 	if any(await asyncio.gather(*tasks)):
@@ -106,7 +109,6 @@ async def main(session: SessionType) -> None:
 		logging.info(f"更新门店数据文件: {dt}")
 		with open("storeInfo.json", "w") as w:
 			json.dump(p, w, ensure_ascii = False, indent = 2)
+	logging.info("程序结束")
 
-setLogger(logging.INFO, __file__, base_name = True)
 asyncio.run(main())
-logging.info("程序结束")
