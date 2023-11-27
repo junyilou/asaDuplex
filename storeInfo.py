@@ -1,10 +1,11 @@
 import json
 import re
-from datetime import datetime
+from datetime import UTC, datetime
 from modules.constants import Regions
 from modules.util import SessionType
 from modules.util import broswer_agent, request
 from typing import Any, Callable, Literal, Optional, Required, TypedDict
+from zoneinfo import ZoneInfo
 
 DEFAULTFILE = "storeInfo.json"
 
@@ -27,8 +28,10 @@ class Store:
 		self.sid = f"{sid:0>3}"
 		self.rid = "R" + self.sid
 		self.iid = int(self.sid)
+		assert "flag" in dct, 'Key "flag" missed'
 		self.flag = dct["flag"]
 
+		assert "name" in dct, 'Key "name" missed'
 		name = dct["name"]
 		if isinstance(name, list):
 			self.altname: list[str] = name.copy()
@@ -37,20 +40,6 @@ class Store:
 			self.altname: list[str] = []
 			self.name: str = name
 
-		if "dates" in dct:
-			raw_dates = dct["dates"]
-			if isinstance(raw_dates, list):
-				self.dates: list[str] = raw_dates
-				self.nso: str = raw_dates[0]
-			else:
-				self.dates: list[str] = [raw_dates]
-				self.nso: str = raw_dates
-
-		if "timezone" in dct:
-			self.timezone = dct["timezone"]
-		if "modified" in dct:
-			self.modified = dct["modified"]
-
 		status = dct.get("status")
 		trans_table = {"closed": "关闭", "future": "招聘", "internal": "内部"}
 		self.isClosed = status == "closed"
@@ -58,7 +47,27 @@ class Store:
 		self.isIntern = status == "internal"
 		self.isNormal = not (self.isClosed or self.isFuture or self.isIntern)
 
+		if "timezone" in dct:
+			self.timezone = dct["timezone"]
+		if "dates" in dct:
+			assert "timezone" in dct, 'Key "timezone" missed'
+			raw_dates = dct["dates"]
+			timezone = ZoneInfo(self.timezone)
+			if isinstance(raw_dates, list):
+				self.dates: list[str] = raw_dates
+				self.nso: str = raw_dates[0]
+			else:
+				self.dates: list[str] = [raw_dates]
+				self.nso: str = raw_dates
+			self.index = (datetime.strptime(self.nso, "%Y-%m-%d").replace(tzinfo = timezone), self.isIntern, self.sid)
+		else:
+			self.index = (datetime.max.replace(tzinfo = UTC), self.isIntern, self.sid)
+		if "modified" in dct:
+			self.modified = dct["modified"]
+
+		assert "state" in dct, 'Key "state" missed'
 		self.state = dct["state"]
+		assert "city" in dct, 'Key "city" missed'
 		self.city = dct["city"]
 		self.region = Regions[self.flag]
 		if "website" in dct:

@@ -1,5 +1,5 @@
 {
-  "update": "2023-11-26 10:36:37",
+  "update": "2023-11-27 09:43:35",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -100,6 +100,7 @@
     "name": "Willow Bend",
     "state": "Texas",
     "status": "closed",
+    "timezone": "America/Chicago",
     "website": ""
   },
   "009": {
@@ -467,6 +468,7 @@
     "name": "RomaEst",
     "state": "Roma",
     "status": "closed",
+    "timezone": "Europe/Rome",
     "website": ""
   },
   "039": {
@@ -1365,7 +1367,7 @@
       "2023-11-18"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-11-11 01:37:39",
+    "modified": "2023-11-22 11:31:08",
     "name": "South Shore",
     "state": "Massachusetts",
     "timezone": "America/New_York",
@@ -1871,6 +1873,7 @@
     ],
     "state": "宮城県",
     "status": "closed",
+    "timezone": "Asia/Tokyo",
     "website": "sendaiichibancho"
   },
   "151": {
@@ -2053,6 +2056,7 @@
     "name": "Simi Valley",
     "state": "California",
     "status": "closed",
+    "timezone": "America/Los_Angeles",
     "website": ""
   },
   "172": {
@@ -2076,6 +2080,7 @@
     "name": "The Pier",
     "state": "New Jersey",
     "status": "closed",
+    "timezone": "America/New_York",
     "website": ""
   },
   "174": {
@@ -2255,6 +2260,7 @@
     ],
     "state": "北海道",
     "status": "closed",
+    "timezone": "Asia/Tokyo",
     "website": "sapporo"
   },
   "198": {
@@ -2390,6 +2396,7 @@
     "name": "MacArthur Center",
     "state": "Virginia",
     "status": "closed",
+    "timezone": "America/Chicago",
     "website": ""
   },
   "213": {
@@ -2945,6 +2952,7 @@
     "name": "Uptown",
     "state": "Minnesota",
     "status": "closed",
+    "timezone": "America/Chicago",
     "website": ""
   },
   "273": {
@@ -2979,6 +2987,7 @@
     "name": "Carrousel du Louvre",
     "state": "Paris",
     "status": "closed",
+    "timezone": "Europe/Paris",
     "website": ""
   },
   "277": {
@@ -3240,6 +3249,7 @@
     "name": "Stonebriar",
     "state": "Texas",
     "status": "closed",
+    "timezone": "America/Chicago",
     "website": ""
   },
   "303": {
@@ -3752,6 +3762,7 @@
     "name": "Oakridge Centre",
     "state": "British Columbia",
     "status": "closed",
+    "timezone": "Canada/Pacific",
     "website": ""
   },
   "363": {
@@ -5882,6 +5893,7 @@
     ],
     "state": "Paris",
     "status": "closed",
+    "timezone": "Europe/Paris",
     "website": "galerieslafayette"
   },
   "659": {
@@ -5898,6 +5910,7 @@
     ],
     "state": "Central London",
     "status": "closed",
+    "timezone": "Europe/London",
     "website": "selfridges"
   },
   "667": {
@@ -6295,7 +6308,7 @@
     "name": "Store in Kuala Lumpur",
     "state": "Kuala Lumpur",
     "status": "future",
-    "timezone": "Asia/Singapore"
+    "timezone": "Asia/Kuala_Lumpur"
   },
   "744": {
     "city": "Mumbai",
@@ -6453,14 +6466,15 @@
     "website": "mixcwenzhou"
   },
   "770": {
-    "city": "서울",
+    "city": "하남",
+    "dates": "2023-12-09",
     "flag": "🇰🇷",
+    "modified": "2023-11-27 01:35:21",
     "name": [
       "하남",
       "Hanam"
     ],
-    "state": "경기도",
-    "status": "future",
+    "state": "경기",
     "timezone": "Asia/Seoul",
     "website": "hanam"
   },
@@ -6496,6 +6510,7 @@
       "WWDC Store"
     ],
     "state": "California",
+    "timezone": "America/Los_Angeles",
     "status": "internal"
   },
   "851": {
