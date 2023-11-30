@@ -1,5 +1,5 @@
 {
-  "update": "2023-11-27 09:43:35",
+  "update": "2023-11-30 23:34:14",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -2396,7 +2396,7 @@
     "name": "MacArthur Center",
     "state": "Virginia",
     "status": "closed",
-    "timezone": "America/Chicago",
+    "timezone": "America/New_York",
     "website": ""
   },
   "213": {
@@ -6479,11 +6479,11 @@
     "website": "hanam"
   },
   "796": {
-    "city": "Charlotte",
+    "city": "Huntersville",
+    "dates": "2023-12-14",
     "flag": "🇺🇸",
     "name": "Birkdale Village",
     "state": "North Carolina",
-    "status": "future",
     "timezone": "America/New_York",
     "website": ""
   },

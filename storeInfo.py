@@ -1,13 +1,14 @@
 import json
 import re
+from collections.abc import Callable
 from datetime import UTC, datetime
 from modules.constants import Regions
-from modules.util import SessionType
-from modules.util import broswer_agent, request
-from typing import Any, Callable, Literal, Optional, Required, TypedDict
+from modules.util import SessionType, broswer_agent, request
+from typing import Any, Literal, Optional, Required, TypedDict
 from zoneinfo import ZoneInfo
 
 DEFAULTFILE = "storeInfo.json"
+type FilterType = Callable[[Store], Any]
 
 class StoreDict(TypedDict, total = False):
 	alter: str
@@ -26,6 +27,7 @@ STORES: dict[str, "Store"] = {}
 class Store:
 	def __init__(self, sid: int | str, dct: StoreDict) -> None:
 		self.sid = f"{sid:0>3}"
+		assert len(self.sid) == 3, "Invalid Store ID"
 		self.rid = "R" + self.sid
 		self.iid = int(self.sid)
 		assert "flag" in dct, 'Key "flag" missed'
@@ -191,11 +193,8 @@ def getStore(sid: int | str) -> Optional[Store]:
 
 def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 	final: str = "name", userLang: Optional[bool | list[Optional[bool]]] = [None]) -> list[str]:
-	if not rstores:
-		return []
-	stores = set(rstores)
+	stores, results = set(rstores), []
 	levels = ["flag", "state", "city"]
-	results = []
 	boldmark = "*" if bold else ""
 	userLang = [userLang] if not isinstance(userLang, list) else userLang
 
@@ -226,20 +225,27 @@ def reloadJSON(filename: str = DEFAULTFILE) -> str:
 def sidify(sid: int | str, *, R: bool = False, fill: bool = True) -> str:
 	return f"{'R' if R and fill else ''}{str(sid).upper().removeprefix('R'):{'0>3' if fill else ''}}"
 
-def storeReturn(args: Optional[str | list[str]] = None, *, remove_closed: Any = False, remove_future: Any = False,
-	fuzzy: Any = False, regular: Any = False, split: Any = False, sort: Any = True, filter: Optional[Callable] = None) -> list[Store]:
+def storeReturn(args: Optional[str | list[str]] = None, *,
+	remove_closed: Any = False,
+	remove_future: Any = False,
+	remove_internal: Any = True,
+	fuzzy: Any = False,
+	regular: Any = False,
+	split: Any = False,
+	sort_by: Literal["", "id", "index"] = "",
+	filter: Optional[FilterType] = None) -> list[Store]:
 	if not args or args == "_":
 		args, fuzzy = "_", True
 	if not isinstance(args, list):
 		args = re.split(r"\s*[,，]\s*", str(args)) if split else [str(args).strip()]
 	gen = {g for s in args for m in (StoreID(s, fuzzy = fuzzy, regular = regular),
 		StoreMatch(s, fuzzy = fuzzy, regular = regular)) for g in m}
-	ans = [s for s in gen if (not remove_closed or not s.isClosed and not s.isIntern) and
-		(not remove_future or not s.isFuture and not s.isIntern)]
-	if filter:
-		ans = [i for i in ans if filter(i)]
-	if sort:
-		ans.sort()
-	return ans
+	filters: list[Optional[FilterType]] = [filter,
+		lambda i: not remove_closed or not i.isClosed,
+		lambda i: not remove_future or not i.isFuture,
+		lambda i: not remove_internal or not i.isIntern]
+	answer = sorted((i for i in gen if all(f(i) for f in filters if f)),
+		key = None if not sort_by else (lambda i: i.iid if sort_by == "id" else i.index))
+	return answer
 
 reloadJSON()
