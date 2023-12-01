@@ -41,7 +41,6 @@ class JobObject:
 
 class TaskObject(JobObject):
 	_repeat = False
-
 	async def runner(self) -> None: ...
 
 TASKS: list[TaskObject] = []
@@ -57,15 +56,14 @@ class Store(JobObject):
 			setattr(self, k, kwargs.get(k, None))
 		self.sid: str = kwargs["sid"]
 		self.name: str = kwargs["name"]
-		self.city: Optional[str] = kwargs.get("city", None)
+		self.city: Optional[str] = kwargs.get("city")
 		self.state: "State" = kwargs["state"]
 		self.flag: str = self.state.flag
 		self.stateName: str = self.state.name
 		self.stateCode: str = self.state.code
 
 	def teleInfo(self) -> str:
-		city = f"{self.city}, " if self.city is not None else f"{self.stateCode}: "
-		return f"*{self.flag} {city}{self.stateName}*\n{self.sid} - {self.name}"
+		return f"*{self.flag} {f"{self.city}, " if self.city else ""}{self.stateName}*\n{self.sid} - {self.name}"
 
 class State(TaskObject):
 	hashattr = "code"
@@ -73,11 +71,11 @@ class State(TaskObject):
 
 	def __init__(self, **kwargs) -> None:
 		self.region: "Region" = kwargs["region"]
-		self.fieldID: Optional[str] = kwargs.get("fieldID", None)
+		self.fieldID: Optional[str] = kwargs.get("fieldID")
 		self.code: str = kwargs["code"]
 		self.name: str = kwargs["name"]
-		self.session: Optional[SessionType] = kwargs.get("session", None)
-		self.semaphore: Optional[SemaphoreType] = kwargs.get("semaphore", None)
+		self.session: Optional[SessionType] = kwargs.get("session")
+		self.semaphore: Optional[SemaphoreType] = kwargs.get("semaphore")
 		self.flag: str = self.region.flag
 		self.regionCode: str = self.region.code
 
@@ -112,8 +110,8 @@ class Region(TaskObject):
 
 	def __init__(self, **kwargs) -> None:
 		self.flag: str = kwargs["flag"]
-		self.session: Optional[SessionType] = kwargs.get("session", None)
-		self.semaphore: Optional[SemaphoreType] = kwargs.get("semaphore", None)
+		self.session: Optional[SessionType] = kwargs.get("session")
+		self.semaphore: Optional[SemaphoreType] = kwargs.get("semaphore")
 		self.code: str = str(choice(list(JOB_REGIONS[self.flag].job_code.values())))
 
 	async def runner(self) -> None:
