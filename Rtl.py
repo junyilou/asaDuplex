@@ -81,6 +81,7 @@ async def main(session: SessionType) -> None:
 	semaphore = asyncio.Semaphore(50)
 	with open("storeInfo.json") as r:
 		j = json.load(r)
+		j.pop("update")
 		p = cast(dict[str, StoreDict], j)
 
 	mode = argv[1:] or ["normal"]
@@ -101,11 +102,15 @@ async def main(session: SessionType) -> None:
 	logging.info(f"准备查询 {len(stores)} 家零售店")
 	tasks = [entry(store, p, l, session, semaphore) for store in stores]
 	if any(await asyncio.gather(*tasks)):
-		j["update"] = dt = f"{datetime.now():%F %T}"
 		if mode[0] == "special":
 			logging.info(f"更新特别观察列表: {l}")
 			with open("specialists.json", "w") as w:
 				json.dump(l, w)
+		j["update"] = dt = f"{datetime.now():%F %T}"
+		for i in list(j):
+			if i == "update":
+				break
+			j[i] = j.pop(i)
 		logging.info(f"更新门店数据文件: {dt}")
 		with open("storeInfo.json", "w") as w:
 			json.dump(p, w, ensure_ascii = False, indent = 2)
