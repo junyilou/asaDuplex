@@ -2,6 +2,7 @@ import json
 import re
 from collections.abc import Callable
 from datetime import UTC, datetime
+from enum import Enum
 from modules.constants import Regions
 from modules.util import SessionType, broswer_agent, request
 from typing import Any, Literal, Optional, Required, TypedDict
@@ -21,6 +22,11 @@ class StoreDict(TypedDict, total = False):
 	status: str
 	timezone: str
 	website: str
+
+class SortKey(Enum):
+	default = ""
+	id = "id"
+	index = "index"
 
 STORES: dict[str, "Store"] = {}
 
@@ -46,8 +52,8 @@ class Store:
 		trans_table = {"closed": "关闭", "future": "招聘", "internal": "内部"}
 		self.isClosed = status == "closed"
 		self.isFuture = status == "future"
-		self.isIntern = status == "internal"
-		self.isNormal = not (self.isClosed or self.isFuture or self.isIntern)
+		self.isInternal = status == "internal"
+		self.isOpen = not (self.isClosed or self.isFuture or self.isInternal)
 
 		if "timezone" in dct:
 			self.timezone = dct["timezone"]
@@ -61,9 +67,9 @@ class Store:
 			else:
 				self.dates: list[str] = [raw_dates]
 				self.nso: str = raw_dates
-			self.index = (datetime.strptime(self.nso, "%Y-%m-%d").replace(tzinfo = timezone), self.isIntern, self.sid)
+			self.index = (datetime.strptime(self.nso, "%Y-%m-%d").replace(tzinfo = timezone), self.isInternal, self.sid)
 		else:
-			self.index = (datetime.max.replace(tzinfo = UTC), self.isIntern, self.sid)
+			self.index = (datetime.max.replace(tzinfo = UTC), self.isInternal, self.sid)
 		if "modified" in dct:
 			self.modified = dct["modified"]
 
@@ -96,8 +102,8 @@ class Store:
 
 	def __repr__(self) -> str:
 		name = [f"Store {self.telename(flag = True)}"]
-		status = [f"({s[2:].capitalize()})" for s in ["isClosed", "isFuture", "isIntern"] if getattr(self, s)]
-		return f"<{' '.join(name + status)}>"
+		status = [f"({s.removeprefix("is").capitalize()})" for s in ["isClosed", "isFuture", "isInternal"] if getattr(self, s)]
+		return f"<{" ".join(name + status)}>"
 
 	def __str__(self) -> str:
 		return self.telename(sid = False)
@@ -189,7 +195,7 @@ def StoreMatch(keyword: str, fuzzy: Any = False, regular: Any = False) -> list[S
 	return [i for i in STORES.values() if keyword.lower() in (k.lower() for k in i.keys)]
 
 def getStore(sid: int | str) -> Optional[Store]:
-	return STORES.get(sidify(sid), None)
+	return STORES.get(sidify(sid))
 
 def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 	final: str = "name", userLang: Optional[bool | list[Optional[bool]]] = [None]) -> list[str]:
@@ -200,7 +206,7 @@ def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 
 	for store in stores:
 		for level in levels:
-			ast = {s for s in STORES.values() if getattr(s, level) == getattr(store, level) and s.isNormal}
+			ast = {s for s in STORES.values() if getattr(s, level) == getattr(store, level) and s.isOpen}
 			if ast and ast.issubset(stores):
 				stores = stores.symmetric_difference(ast)
 				if level == "flag":
@@ -217,22 +223,23 @@ def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 def reloadJSON(filename: str = DEFAULTFILE) -> str:
 	with open(filename) as r:
 		infoJSON = json.load(r)
-	update = infoJSON.pop("update", None)
+	update = infoJSON.pop("update")
 	for sid, dct in infoJSON.items():
 		STORES[sid] = Store(sid = sid, dct = dct)
 	return update
 
 def sidify(sid: int | str, *, R: bool = False, fill: bool = True) -> str:
-	return f"{'R' if R and fill else ''}{str(sid).upper().removeprefix('R'):{'0>3' if fill else ''}}"
+	return f"{"R" if R and fill else ""}{str(sid).upper().removeprefix("R"):{"0>3" if fill else ""}}"
 
 def storeReturn(args: Optional[str | list[str]] = None, *,
+	opening: Any = False,
 	remove_closed: Any = False,
 	remove_future: Any = False,
 	remove_internal: Any = True,
 	fuzzy: Any = False,
 	regular: Any = False,
 	split: Any = False,
-	sort_by: Literal["", "id", "index"] = "",
+	sort_by: SortKey = SortKey.default,
 	filter: Optional[FilterType] = None) -> list[Store]:
 	if not args or args == "_":
 		args, fuzzy = "_", True
@@ -241,11 +248,17 @@ def storeReturn(args: Optional[str | list[str]] = None, *,
 	gen = {g for s in args for m in (StoreID(s, fuzzy = fuzzy, regular = regular),
 		StoreMatch(s, fuzzy = fuzzy, regular = regular)) for g in m}
 	filters: list[Optional[FilterType]] = [filter,
+		lambda i: not opening or i.isOpen,
 		lambda i: not remove_closed or not i.isClosed,
 		lambda i: not remove_future or not i.isFuture,
-		lambda i: not remove_internal or not i.isIntern]
-	answer = sorted((i for i in gen if all(f(i) for f in filters if f)),
-		key = None if not sort_by else (lambda i: i.iid if sort_by == "id" else i.index))
-	return answer
+		lambda i: not remove_internal or not i.isInternal]
+	answer = (i for i in gen if all(f(i) for f in filters if f))
+	match sort_by:
+		case SortKey.default:
+			return sorted(answer)
+		case SortKey.id:
+			return sorted(answer, key = lambda i: i.iid)
+		case SortKey.index:
+			return sorted(answer, key = lambda i: i.index)
 
 reloadJSON()
