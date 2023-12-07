@@ -84,7 +84,7 @@ async def entry(session: SessionType, semaphore: SemaphoreType,
 
 @session_func
 async def main(session: SessionType) -> None:
-	args = {"split": True, "remove_closed": True, "remove_future": True}
+	args: dict[str, Any] = {"split": True, "opening": True}
 	pref = {"ensure_ascii": False, "indent": 2}
 
 	includes = storeReturn(INCLUDE, **args)

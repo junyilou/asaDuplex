@@ -26,7 +26,7 @@ async def main(mode: str) -> bool:
 
 	match mode:
 		case "today":
-			stores = storeReturn(TODAYARGS, remove_closed = True, remove_future = True)
+			stores = storeReturn(TODAYARGS, opening = True)
 			tasks = [Store(store = store).getSchedules() for store in stores]
 		case "sitemap":
 			tasks = [Sitemap(flag = flag).getObjects() for flag in TODAYARGS]

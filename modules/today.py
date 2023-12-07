@@ -247,7 +247,7 @@ class Talent(TodayObject):
 		self.name: str = raw["name"].strip()
 		self.title: Optional[str] = raw["title"].strip() if "title" in raw else None
 		self.description: Optional[str] = raw["description"].strip() if "description" in raw else None
-		self.image: Optional[str] = raw.get("backgroundImage", None) or raw.get("logo", None)
+		self.image: Optional[str] = raw.get("backgroundImage") or raw.get("logo")
 		self.links: dict[str, str] = (
 			({"Website": raw["websiteUrl"]} if "websiteUrl" in raw else {}) |
 			({"URL": raw["url"]} if "url" in raw else {}) |
@@ -283,7 +283,7 @@ class Course(TodayObject):
 			moreAbout.append(remote["moreAbout"])
 		if "heroGallery" in remote:
 			for m in remote["heroGallery"]:
-				if m.get("heroType", None) == "TAG":
+				if m.get("heroType") == "TAG":
 					moreAbout.append(m)
 		for more in moreAbout:
 			if collection and any(collection == more.get(k, k) for k in ["title", "name"]):
@@ -378,7 +378,7 @@ class Course(TodayObject):
 
 	async def getRootSchedules(self, rootPath: Optional[str] = None) -> list["Schedule"]:
 		rootPath = rootPath or self.rootPath
-		stores = storeReturn(todayNation[rootPath], remove_closed = True, remove_future = True)
+		stores = storeReturn(todayNation[rootPath], opening = True)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores)
 		results = await asyncio.gather(*tasks, return_exceptions = True)
@@ -445,7 +445,7 @@ class Schedule(TodayObject):
 		assert isinstance(remote, dict), f"排课 {rootPath}/{slug}/{scheduleId} 数据信息无效"
 		store: Store = getStore(
 			sid = remote["schedules"][scheduleId]["storeNum"],
-			raw = remote["stores"].get(remote["schedules"][scheduleId]["storeNum"], None),
+			raw = remote["stores"].get(remote["schedules"][scheduleId]["storeNum"]),
 			rootPath = rootPath)
 		course: Course = await getCourse(
 			remote = remote, rootPath = rootPath,
@@ -620,7 +620,7 @@ class Collection(TodayObject):
 
 	async def getRootSchedules(self, rootPath: Optional[str] = None) -> list[Schedule]:
 		rootPath = rootPath or self.rootPath
-		stores = storeReturn(todayNation[rootPath], remove_closed = True, remove_future = True)
+		stores = storeReturn(todayNation[rootPath], opening = True)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), semaphore = semaphore) for i in stores)
 		results = await asyncio.gather(*tasks, return_exceptions = True)

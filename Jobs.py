@@ -53,7 +53,7 @@ class Store(JobObject):
 
 	def __init__(self, **kwargs) -> None:
 		for k in ["state", "city", "sid", "name"]:
-			setattr(self, k, kwargs.get(k, None))
+			setattr(self, k, kwargs.get(k))
 		self.sid: str = kwargs["sid"]
 		self.name: str = kwargs["name"]
 		self.city: Optional[str] = kwargs.get("city")
