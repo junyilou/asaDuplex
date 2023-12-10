@@ -5,7 +5,7 @@ import re
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
-from modules.constants import Regions
+from modules.regions import Regions
 from modules.util import SessionType
 from modules.util import broswer_agent, disMarkdown, request, timezoneText
 from storeInfo import Store as Raw_Store, getStore as getRaw_Store, sidify, storeReturn

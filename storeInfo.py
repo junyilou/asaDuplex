@@ -3,7 +3,7 @@ import re
 from collections.abc import Callable
 from datetime import UTC, datetime
 from enum import Enum
-from modules.constants import Regions
+from modules.regions import Regions
 from modules.util import SessionType, broswer_agent, request
 from typing import Any, Literal, Optional, Required, TypedDict
 from zoneinfo import ZoneInfo
