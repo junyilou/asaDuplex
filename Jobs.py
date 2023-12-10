@@ -1,7 +1,6 @@
 import asyncio
 import json
 import logging
-from dataclasses import dataclass
 from datetime import UTC, datetime
 from random import choice
 from sys import argv
@@ -9,20 +8,17 @@ from typing import Optional
 
 from bot import chat_ids
 from botpost import async_post
-from modules.constants import Regions
+from modules.regions import Region as RawRegion, RegionList
 from modules.util import SemaphoreType, SessionType
 from modules.util import broswer_agent, disMarkdown, request, session_func, setLogger
 
 API = {
 	"state": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/stateProvinceList",
 	"province": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/storeLocations",
+	"search": "https://jobs.apple.com/api/role/search",
 	"image": "https://www.apple.com/careers/images/retail/fy22/hero_hotspot/default@2x.png"}
 
 FUTURES: dict[str, str] = {}
-
-@dataclass
-class JobRegion:
-	job_code: dict[str, int]
 
 class JobObject:
 	hashattr: str
@@ -45,7 +41,7 @@ class TaskObject(JobObject):
 
 TASKS: list[TaskObject] = []
 RESULTS: list["Store"] = []
-JOB_REGIONS: dict[str, JobRegion] = {}
+REGIONS: dict[str, dict[str, int]] = {}
 
 class Store(JobObject):
 	hashattr = "sid"
@@ -112,7 +108,7 @@ class Region(TaskObject):
 		self.flag: str = kwargs["flag"]
 		self.session: Optional[SessionType] = kwargs.get("session")
 		self.semaphore: Optional[SemaphoreType] = kwargs.get("semaphore")
-		self.code: str = str(choice(list(JOB_REGIONS[self.flag].job_code.values())))
+		self.code: str = str(choice(list(REGIONS[self.flag].values())))
 
 	async def runner(self) -> None:
 		assert self.semaphore
@@ -139,9 +135,47 @@ class Region(TaskObject):
 				region = self, fieldID = p["id"], code = p["code"], name = p["stateProvince"],
 				session = self.session, semaphore = self.semaphore))
 
-async def entry(session: SessionType, targets: list[str], check_cancel: bool) -> None:
+async def search(session: SessionType, region: RawRegion) -> dict[str, int]:
+	data = {
+		"filters": {
+			"postingpostLocation": [f"postLocation-{region.post_location}"],
+			"teams":[
+				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSS"},
+				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSCS"},
+				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSLD"}]},
+		"page": 1, "locale": "en-us", "sort": "newest", "query": ""}
+	try:
+		r = await request(API["search"], session, "POST", json = data, mode = "json", ssl = False)
+		assert r.get("searchResults")
+	except:
+		logging.warning(f"尝试搜索地区 {region.flag} 失败")
+		return {}
+
+	roles = {}
+	for i in r["searchResults"]:
+		if not i["managedPipelineRole"]:
+			continue
+		logging.info(f"找到新职位信息: {i['positionId']} {i['postingTitle']}")
+		roles[i["transformedPostingTitle"]] = int(i["positionId"])
+	return roles
+
+@session_func
+async def main(
+	session: SessionType,
+	targets: list[str],
+	check_cancel: bool,
+	check_future: bool) -> None:
 	with open("Retail/savedJobs.json") as r:
 		SAVED = eval(r.read())
+
+	for region in RegionList:
+		if region.flag.isascii():
+			continue
+		if region.job_code:
+			REGIONS[region.flag] = region.job_code
+		elif check_future:
+			REGIONS[region.flag] = await search(session, region)
+	targets = [i for i in targets if REGIONS.get(i)]
 
 	STORES: list[Store] = []
 	for flag in SAVED:
@@ -232,55 +266,12 @@ async def entry(session: SessionType, targets: list[str], check_cancel: bool) ->
 		with open("Retail/savedJobs.json", "w") as w:
 			json.dump(SAVED, w, ensure_ascii = False, indent = 2, sort_keys = True)
 
-async def future(session: SessionType, futures: dict[str, str]) -> dict[str, dict[str, int]]:
-	results: dict[str, dict[str, int]] = {}
-	data = {
-		"filters": {
-			"postingpostLocation": [],
-			"teams":[
-				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSS"},
-				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSCS"},
-				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSLD"}]},
-		"page": 1, "locale": "en-us", "sort": "newest"}
-	for flag, post_loc in futures.items():
-		data["filters"]["postingpostLocation"] = [post_loc]
-		try:
-			r = await request("https://jobs.apple.com/api/role/search", session, "POST",
-				json = data, mode = "json", ssl = False)
-			assert "searchResults" in r
-		except:
-			logging.warning(f"尝试搜索地区 {flag} 失败")
-			continue
-		if not r["searchResults"]:
-			continue
-
-		roles = {}
-		for i in r["searchResults"]:
-			if not i["managedPipelineRole"]:
-				continue
-			logging.info(f"找到新职位信息: {i['positionId']} {i['postingTitle']}")
-			roles[i["transformedPostingTitle"]] = int(i["positionId"])
-		results[flag] = roles
-	return results
-
-@session_func
-async def main(session: SessionType, check_cancel: bool) -> None:
-	for k, j in Regions.items():
-		if j.job_code:
-			JOB_REGIONS[k] = JobRegion(job_code = j.job_code)
-	futures = await future(session, FUTURES)
-	for k, j in futures.items():
-		JOB_REGIONS[k] = JobRegion(job_code = j)
-	targets = argv[1:] or list(JOB_REGIONS)
-	await entry(session, targets, check_cancel)
-
-setLogger(logging.INFO, __file__, base_name = True)
-logging.info("程序启动")
-
-judge_remove = lambda k: not (k not in argv or (argv.remove(k) or False))
-debug_logger = logging.getLogger("debug")
-debug_logger.setLevel(logging.INFO)
-debug_logger.propagate = judge_remove("debug")
-check_cancel = judge_remove("cancel")
-asyncio.run(main(check_cancel))
-logging.info("程序结束")
+if __name__ == "__main__":
+	setLogger(logging.INFO, __file__, base_name = True)
+	logging.info("程序启动")
+	judge_remove = lambda k: not (k not in argv or (argv.remove(k) or False))
+	debug_logger = logging.getLogger("debug")
+	debug_logger.setLevel(logging.INFO)
+	debug_logger.propagate = judge_remove("debug")
+	asyncio.run(main(argv[1:], judge_remove("cancel"), judge_remove("future")))
+	logging.info("程序结束")
