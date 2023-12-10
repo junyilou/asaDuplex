@@ -175,7 +175,7 @@ async def main(
 			REGIONS[region.flag] = region.job_code
 		elif check_future:
 			REGIONS[region.flag] = await search(session, region)
-	targets = [i for i in targets if REGIONS.get(i)]
+	targets = [i for i in targets or REGIONS if REGIONS.get(i)]
 
 	STORES: list[Store] = []
 	for flag in SAVED:
