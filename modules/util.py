@@ -12,7 +12,7 @@ from typing import Any, Concatenate, Optional
 type SemaphoreType = asyncio.Semaphore
 type SessionType = aiohttp.ClientSession
 
-broswer_agent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \
+browser_agent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \
 AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15"}
 
 def bitsize(integer: int | float, width: int = 8, precision: int = 2, ks: float = 1e3) -> str:
@@ -84,6 +84,8 @@ async def base_request(
 				results[m] = json.loads(await resp.text())
 			elif d == "raw":
 				results[m] = await resp.read()
+			elif d == "blank":
+				results[m] = None
 		logging.getLogger("util.request").debug(f"网络请求: [状态={resp.status}] [方法={method}] [URL={url}]")
 	if len(modes) == 1:
 		return results[next(iter(modes))]
@@ -91,8 +93,9 @@ async def base_request(
 
 @asynccontextmanager
 async def get_session(
-	session: Optional[SessionType] = None) -> AsyncIterator[SessionType]:
-	y = session or aiohttp.ClientSession()
+	session: Optional[SessionType] = None,
+	**kwargs) -> AsyncIterator[SessionType]:
+	y = session or aiohttp.ClientSession(**kwargs)
 	i = y is not session
 	if i:
 		logging.getLogger("util.request").debug("已创建新的 aiohttp 线程")
@@ -101,6 +104,7 @@ async def get_session(
 	finally:
 		if i:
 			await y.close()
+			logging.getLogger("util.request").debug("已关闭临时 aiohttp 线程")
 
 async def request(
 	url: str,

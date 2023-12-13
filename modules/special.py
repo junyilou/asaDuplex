@@ -3,7 +3,7 @@ import logging
 from collections.abc import AsyncIterator
 from datetime import date, datetime, timedelta
 from modules.util import SessionType
-from modules.util import broswer_agent, request
+from modules.util import browser_agent, request
 from random import choice
 from typing import Optional
 from storeInfo import Store, getStore
@@ -26,7 +26,7 @@ async def apu(session: Optional[SessionType], store: Store, target: str, userLan
 	retry = 3
 	baseURL = f"https://www.apple.com{store.region.url_store}"
 	url = f"{baseURL}/shop/fulfillment-messages"
-	referer = broswer_agent | {"Referer": f"{baseURL}/shop/product/{target}"}
+	referer = browser_agent | {"Referer": f"{baseURL}/shop/product/{target}"}
 	params = {"searchNearby": "true", "store": store.rid, "parts.0": target}
 
 	stores: list[dict] = []

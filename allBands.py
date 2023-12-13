@@ -2,7 +2,7 @@ import asyncio
 import json
 from bs4 import BeautifulSoup
 from modules.util import SemaphoreType, SessionType
-from modules.util import request, broswer_agent, session_func
+from modules.util import request, browser_agent, session_func
 from typing import Any
 
 class Band:
@@ -67,7 +67,7 @@ def commonWords(nameList: list[str]) -> str:
 async def getGrids(rootPath: str, session: SessionType, semaphore: SemaphoreType) -> list[dict[str, Band]]:
 	grids: list[dict[str, Band]] = []
 	async with semaphore:
-		r = await request(rootPath + "/shop/watch/bands", session, headers = broswer_agent)
+		r = await request(rootPath + "/shop/watch/bands", session, headers = browser_agent)
 	h = BeautifulSoup(r, features = "lxml")
 
 	for l in h.find_all("script"):
@@ -102,7 +102,7 @@ async def getBands(bands: dict[str, Band], session: SessionType, semaphore: Sema
 		if band.isChecked:
 			continue
 		async with semaphore:
-			r = await request(band.url, session, headers = broswer_agent)
+			r = await request(band.url, session, headers = browser_agent)
 		s = r.split('window.pageLevelData.PDPContent')[1].split("window.pageLevelData.Overview")[0]
 		l = json.loads(";".join(s.split(";")[:-1]).lstrip("= "))
 

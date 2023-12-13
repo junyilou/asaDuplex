@@ -10,7 +10,7 @@ from bot import chat_ids
 from botpost import async_post
 from modules.regions import Region as RawRegion, RegionList
 from modules.util import SemaphoreType, SessionType
-from modules.util import broswer_agent, disMarkdown, request, session_func, setLogger
+from modules.util import browser_agent, disMarkdown, request, session_func, setLogger
 
 API = {
 	"state": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/stateProvinceList",
@@ -80,7 +80,7 @@ class State(TaskObject):
 		async with self.semaphore:
 			debug_logger.info(", ".join(["开始下载 province", str(self)]))
 			r = await request(API["province"].format(JOBID = self.regionCode), self.session,
-				ssl = False, headers = broswer_agent, timeout = 3, retry = 3, return_exception = True,
+				ssl = False, headers = browser_agent, timeout = 3, retry = 3, return_exception = True,
 				params = {"searchField": "stateProvince", "fieldValue": self.fieldID})
 		try:
 			a = json.loads(r)
@@ -115,7 +115,7 @@ class Region(TaskObject):
 		async with self.semaphore:
 			logging.info(", ".join(["开始下载", str(self)]))
 			r = await request(API["state"].format(JOBID = self.code), self.session,
-				headers = broswer_agent, timeout = 3, retry = 3, ssl = False, return_exception = True)
+				headers = browser_agent, timeout = 3, retry = 3, ssl = False, return_exception = True)
 		try:
 			a = json.loads(r)
 			if self._repeat:

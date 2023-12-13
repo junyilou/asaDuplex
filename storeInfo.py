@@ -4,7 +4,7 @@ from collections.abc import Callable
 from datetime import UTC, datetime
 from enum import Enum
 from modules.regions import Regions
-from modules.util import SessionType, broswer_agent, request
+from modules.util import SessionType, browser_agent, request
 from typing import Any, Literal, Optional, Required, TypedDict
 from zoneinfo import ZoneInfo
 
@@ -126,7 +126,7 @@ class Store:
 		session: Optional[SessionType] = None) -> dict[str, Any]:
 		try:
 			assert hasattr(self, "detail_url")
-			r = await request(self.detail_url, session, headers = broswer_agent,
+			r = await request(self.detail_url, session, headers = browser_agent,
 				retry = 3, timeout = 5, mode = "json")
 			if mode == "raw":
 				return r
@@ -144,7 +144,7 @@ class Store:
 
 	async def header(self, session: Optional[SessionType] = None) -> Optional[str]:
 		try:
-			r = await request(session = session, url = self.dieter, headers = broswer_agent, ssl = False,
+			r = await request(session = session, url = self.dieter, headers = browser_agent, ssl = False,
 				method = "HEAD", allow_redirects = False, raise_for_status = True, mode = "head", timeout = 5)
 			return r['Last-Modified'][5:-4]
 		except:
