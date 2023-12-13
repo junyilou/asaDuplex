@@ -8,7 +8,7 @@ from typing import Optional
 from bot import chat_ids
 from botpost import async_post as raw_post
 from modules.today import Collection, Course, Schedule, Sitemap, Store, teleinfo
-from modules.util import setLogger, sortOD
+from modules.util import get_session, setLogger, sortOD
 from storeInfo import storeReturn
 
 TODAYARGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼"]
@@ -19,19 +19,21 @@ async def async_post(text: str, image: str, keyboard: list[list[list[str]]]) -> 
 		"parse": "MARK", "chat_id": chat_ids[0], "keyboard": keyboard}
 	return await raw_post(push)
 
-async def main(mode: str) -> bool:
+async def main(mode: str) -> None:
 	append = False
 	courses: dict[Course, list[Schedule]] = {}
 	results: list[Course | Schedule] = []
 
-	match mode:
-		case "today":
-			stores = storeReturn(TODAYARGS, opening = True)
-			tasks = [Store(store = store).getSchedules() for store in stores]
-		case "sitemap":
-			tasks = [Sitemap(flag = flag).getObjects() for flag in TODAYARGS]
-		case _:
-			return append
+	async with get_session() as session:
+		session = None
+		match mode:
+			case "today":
+				stores = storeReturn(TODAYARGS, opening = True)
+				tasks = [Store(store = store).getSchedules(session = session) for store in stores]
+			case "sitemap":
+				tasks = [Sitemap(flag = flag).getObjects(session = session) for flag in TODAYARGS]
+			case _:
+				return
 
 	runners = await asyncio.gather(*tasks, return_exceptions = True)
 	results = list({i for j in (k for k in runners if isinstance(k, list)) for i in j})
@@ -88,23 +90,16 @@ async def main(mode: str) -> bool:
 			text, image, keyboard = teleinfo(course = course, schedules = schedules, prior = TODAYARGS)
 			await async_post(text, image, keyboard)
 
-	return append
+	if append:
+		logging.info("正在更新 savedEvent 文件")
+		saved["update"] = datetime.now(UTC).strftime("%F %T GMT")
+		with open("Retail/savedEvent.json", "w") as w:
+			json.dump(sortOD(saved, reverse = [True, False]), w, ensure_ascii = False, indent = 2)
 
 setLogger(logging.INFO, __file__, base_name = True)
 logging.info("程序启动")
-
 argv[1:] = argv[1:] or ["today"]
 with open("Retail/savedEvent.json") as m:
 	saved = json.loads(m.read())
-
-loop = asyncio.new_event_loop()
-asyncio.set_event_loop(loop)
-append = loop.run_until_complete(main(argv[1]))
-
-if append:
-	logging.info("正在更新 savedEvent 文件")
-	saved["update"] = datetime.now(UTC).strftime("%F %T GMT")
-	with open("Retail/savedEvent.json", "w") as w:
-		json.dump(sortOD(saved, reverse = [True, False]), w, ensure_ascii = False, indent = 2)
-
+asyncio.run(main(argv[1]))
 logging.info("程序结束")
