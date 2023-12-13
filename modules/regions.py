@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Optional
 
-@dataclass(repr = False, order = True, frozen = True)
+@dataclass(order = True, frozen = True)
 class Region:
 	flag: str
 	abbr: str
