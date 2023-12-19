@@ -239,7 +239,7 @@ def storeReturn(args: Optional[str | list[str]] = None, *,
 	fuzzy: Any = False,
 	regular: Any = False,
 	split: Any = False,
-	sort_by: SortKey = SortKey.default,
+	sort: SortKey = SortKey.default,
 	filter: Optional[FilterType] = None) -> list[Store]:
 	if not args or args == "_":
 		args, fuzzy = "_", True
@@ -253,7 +253,7 @@ def storeReturn(args: Optional[str | list[str]] = None, *,
 		lambda i: not remove_future or not i.isFuture,
 		lambda i: not remove_internal or not i.isInternal]
 	answer = (i for i in gen if all(f(i) for f in filters if f))
-	match sort_by:
+	match sort:
 		case SortKey.default:
 			return sorted(answer)
 		case SortKey.id:
