@@ -59,10 +59,10 @@ async def comment(session: Optional[SessionType], store: Store, userLang: bool =
 		COMMENTS[astore][sDay] = sTxt
 	return COMMENTS
 
-async def speHours(sid: int | str, session: Optional[SessionType] = None, runtime: Optional[date] = None, limit: int = 14,
-	askComment: bool = True, userLang: bool = True) -> list | dict[str, dict[str, str]]:
-	store, j = getStore(sid), {}
-	assert store is not None, f"没有零售店数据: {sid}" if userLang else f"No such store: {sid}"
+async def speHours(store: Store, session: Optional[SessionType] = None,
+	runtime: Optional[date] = None, limit: int = 14, askComment: bool = True,
+	userLang: bool = True) -> list | dict[str, dict[str, str]]:
+	j = {}
 	runtime = datetime.now().date() if runtime is None else runtime
 	try:
 		j = await store.detail(session = session, mode = "hours")

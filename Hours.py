@@ -47,8 +47,7 @@ LANG = LOGSTRING[USERLANG]
 async def entry(session: SessionType, semaphore: SemaphoreType,
 	store: Store, saved: dict[str, dict[str, str]]) -> dict[str, Any]:
 	async with semaphore:
-		special = await speHours(session = session, sid = store.sid,
-			runtime = TODAY, userLang = USERLANG == "ZH")
+		special = await speHours(store, session, TODAY, userLang = USERLANG == "ZH")
 	if special == []:
 		return {"hours": saved, "diff": []}
 	assert isinstance(special, dict)
