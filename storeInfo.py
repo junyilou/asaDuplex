@@ -247,11 +247,11 @@ def storeReturn(args: Optional[str | list[str]] = None, *,
 		args = re.split(r"\s*[,，]\s*", str(args)) if split else [str(args).strip()]
 	gen = {g for s in args for m in (StoreID(s, fuzzy = fuzzy, regular = regular),
 		StoreMatch(s, fuzzy = fuzzy, regular = regular)) for g in m}
-	filters: list[Optional[FilterType]] = [filter,
+	filters: list[Optional[FilterType]] = [
 		lambda i: not opening or i.isOpen,
 		lambda i: not remove_closed or not i.isClosed,
 		lambda i: not remove_future or not i.isFuture,
-		lambda i: not remove_internal or not i.isInternal]
+		lambda i: not remove_internal or not i.isInternal, filter]
 	answer = (i for i in gen if all(f(i) for f in filters if f))
 	match sort:
 		case SortKey.default:
