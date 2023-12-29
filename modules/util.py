@@ -106,6 +106,16 @@ async def get_session(
 			await y.close()
 			logging.getLogger("util.request").debug("已关闭临时 aiohttp 线程")
 
+@asynccontextmanager
+async def with_semaphore(semaphore: Optional[SemaphoreType] = None) -> AsyncIterator[None]:
+	try:
+		if semaphore:
+			await semaphore.acquire()
+		yield
+	finally:
+		if semaphore:
+			semaphore.release()
+
 async def request(
 	url: str,
 	session: Optional[SessionType] = None,

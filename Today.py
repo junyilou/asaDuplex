@@ -7,7 +7,7 @@ from typing import Optional
 
 from bot import chat_ids
 from botpost import async_post as raw_post
-from modules.today import Collection, Course, Schedule, Sitemap, Store, teleinfo
+from modules.today import Collection, Course, Schedule, Sitemap, Store, TodayObject, teleinfo
 from modules.util import get_session, setLogger, sortOD
 from storeInfo import storeReturn
 
@@ -22,7 +22,7 @@ async def async_post(text: str, image: str, keyboard: list[list[list[str]]]) -> 
 async def main(mode: str) -> None:
 	append = False
 	courses: dict[Course, list[Schedule]] = {}
-	results: list[Course | Schedule] = []
+	results: list[TodayObject] = []
 
 	async with get_session() as session:
 		session = None

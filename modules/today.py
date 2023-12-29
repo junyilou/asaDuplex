@@ -1,14 +1,12 @@
 import asyncio
 import json
 import re
-from collections.abc import AsyncIterator
-from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
 from modules.regions import Regions
 from modules.util import SemaphoreType, SessionType
-from modules.util import browser_agent, disMarkdown, get_session, request, timezoneText
+from modules.util import browser_agent, disMarkdown, get_session, request, timezoneText, with_semaphore
 from storeInfo import Store as Raw_Store, getStore as getRaw_Store, sidify, storeReturn
-from typing import Any, Literal, Optional, Self
+from typing import Any, Literal, Optional, Self, Sequence
 from zoneinfo import ZoneInfo
 
 __SAVED = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}
@@ -26,11 +24,11 @@ class APIClass:
 		"SCHEDULEID": "scheduleId",
 		"STORESLUG": "storeSlug"}
 
-	def __init__(self, parts: list[str]) -> None:
-		self._parts: list[str] = parts
+	def __init__(self, parts: Sequence[str]) -> None:
+		self._parts: list[str] = list(parts)
 
 	def __getitem__(self, key: str) -> Self:
-		return APIClass(parts = self._parts + [key])
+		return type(self)(parts = self._parts + [key])
 
 	def __repr__(self) -> str:
 		return "/".join(self._parts)
@@ -123,16 +121,6 @@ class TodayEncoder(json.JSONEncoder):
 		if isinstance(o, TodayObject) or isinstance(o, Raw_Store):
 			return o.raw
 		return super().default(o)
-
-@asynccontextmanager
-async def with_semaphore(semaphore: Optional[SemaphoreType] = None) -> AsyncIterator[None]:
-	try:
-		if semaphore:
-			await semaphore.acquire()
-		yield
-	finally:
-		if semaphore:
-			semaphore.release()
 
 class Store(TodayObject):
 	hashattr: list[str] = ["sid"]
@@ -381,7 +369,7 @@ class Course(TodayObject):
 			tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath),
 				session = session, semaphore = semaphore) for i in stores)
 			results = await asyncio.gather(*tasks, return_exceptions = True)
-		return sorted({i for j in results for i in j})
+		return sorted({i for j in (r for r in results if not isinstance(r, BaseException)) for i in j})
 
 	async def getSingleSchedule(self, session: Optional[SessionType] = None) -> "Schedule":
 		return await getSchedule(scheduleId = self.courseId, rootPath = self.rootPath, slug = self.slug, session = session)
@@ -626,7 +614,7 @@ class Collection(TodayObject):
 		async with get_session(session) as session:
 			tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), session = session, semaphore = semaphore) for i in stores)
 			results = await asyncio.gather(*tasks, return_exceptions = True)
-		return sorted({i for j in results for i in j})
+		return sorted({i for j in (r for r in results if not isinstance(r, BaseException)) for i in j})
 
 	async def getCourses(self, rootPath: Optional[str] = None, session: Optional[SessionType] = None) -> list[Course]:
 		schedules = await self.getRootSchedules(rootPath = rootPath, session = session)
@@ -699,11 +687,12 @@ class Sitemap(TodayObject):
 			objects.append(parsing)
 		return objects
 
-	async def getObjects(self, session: Optional[SessionType] = None) -> list[Course | Schedule]:
+	async def getObjects(self, session: Optional[SessionType] = None) -> list[TodayObject]:
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		async with get_session(session) as session:
-			return await asyncio.gather(*(getURL(u, session = session, semaphore = semaphore)
+			results = await asyncio.gather(*(getURL(u, session = session, semaphore = semaphore)
 				for u in await self.getURLs()), return_exceptions = True)
+		return [i for i in results if not isinstance(i, BaseException)]
 
 def parseURL(url: str) -> dict[str, str]:
 	cp = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*))"
