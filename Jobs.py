@@ -13,6 +13,7 @@ from modules.util import SemaphoreType, SessionType
 from modules.util import browser_agent, disMarkdown, request, session_func, setLogger
 
 API = {
+	"csrf": "https://jobs.apple.com/api/csrfToken",
 	"state": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/stateProvinceList",
 	"province": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/storeLocations",
 	"search": "https://jobs.apple.com/api/role/search",
@@ -145,7 +146,12 @@ async def search(session: SessionType, region: RawRegion) -> dict[str, int]:
 				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSLD"}]},
 		"page": 1, "locale": "en-us", "sort": "newest", "query": ""}
 	try:
-		r = await request(API["search"], session, "POST", json = data, mode = "json", ssl = False)
+		key = "x-apple-csrf-token"
+		h = await request(API["csrf"], session, "HEAD",
+			headers = browser_agent | {"Referer": API["search"]}, ssl = False)
+		c = {key: h[key]} if h.get(key) else {}
+		r = await request(API["search"], session, "POST", mode = "json",
+			headers = browser_agent | c, json = data, ssl = False)
 		assert r.get("searchResults")
 	except:
 		logging.warning(f"尝试搜索地区 {region.flag} 失败")
@@ -157,6 +163,7 @@ async def search(session: SessionType, region: RawRegion) -> dict[str, int]:
 			continue
 		logging.info(f"找到新职位信息: {i['positionId']} {i['postingTitle']}")
 		roles[i["transformedPostingTitle"]] = int(i["positionId"])
+	roles = dict((k, v) for k, v in sorted(roles.items(), key = lambda t: t[1]))
 	return roles
 
 @session_func
