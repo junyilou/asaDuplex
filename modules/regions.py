@@ -2,7 +2,7 @@ import json
 from dataclasses import dataclass
 from typing import Optional
 
-@dataclass(order = True, frozen = True, slots = True)
+@dataclass(order = True, slots = True)
 class Region:
 	flag: str
 	abbr: str
