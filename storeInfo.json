@@ -1,5 +1,5 @@
 {
-  "update": "2023-11-30 23:34:14",
+  "update": "2024-01-09 08:10:35",
   "001": {
     "city": "Glendale",
     "dates": "2001-05-19",
@@ -1367,7 +1367,7 @@
       "2023-11-18"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-11-22 11:31:08",
+    "modified": "2024-01-08 19:42:25",
     "name": "South Shore",
     "state": "Massachusetts",
     "timezone": "America/New_York",
@@ -3357,7 +3357,7 @@
     "city": "Fort Worth",
     "dates": "2008-08-23",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2023-12-05 21:54:16",
     "name": "University Park Village",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -6445,11 +6445,16 @@
   "764": {
     "alter": "Seoul",
     "city": "서울",
+    "dates": "2024-01-20",
     "flag": "🇰🇷",
-    "name": "Store in Seoul West",
+    "modified": "2024-01-08 01:32:18",
+    "name": [
+      "홍대",
+      "Hongdae"
+    ],
     "state": "서울",
-    "status": "future",
-    "timezone": "Asia/Seoul"
+    "timezone": "Asia/Seoul",
+    "website": "hongdae"
   },
   "766": {
     "alter": "Zhejiang Wenzhou 温州",
@@ -6466,10 +6471,11 @@
     "website": "mixcwenzhou"
   },
   "770": {
-    "city": "하남",
+    "alter": "Gyeonggi",
+    "city": "경기",
     "dates": "2023-12-09",
     "flag": "🇰🇷",
-    "modified": "2023-11-27 01:35:21",
+    "modified": "2023-12-09 09:52:25",
     "name": [
       "하남",
       "Hanam"
@@ -6482,6 +6488,7 @@
     "city": "Huntersville",
     "dates": "2023-12-14",
     "flag": "🇺🇸",
+    "modified": "2024-01-08 19:24:12",
     "name": "Birkdale Village",
     "state": "North Carolina",
     "timezone": "America/New_York",
@@ -6511,6 +6518,13 @@
     ],
     "state": "California",
     "timezone": "America/Los_Angeles",
+    "status": "internal"
+  },
+  "850": {
+    "city": "Bengaluru",
+    "flag": "🇮🇳",
+    "name": "TestIndia Store",
+    "state": "Karnataka",
     "status": "internal"
   },
   "851": {

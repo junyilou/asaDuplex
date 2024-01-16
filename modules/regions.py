@@ -504,7 +504,6 @@ RegionList = [
 		job_code = {
 			"kr-manager": 114438322,
 			"kr-senior-manager": 114438327,
-			"kr-specialist": 114438326,
 			"kr-store-leader": 114438324
 		},
 		locale = "ko_KR",
