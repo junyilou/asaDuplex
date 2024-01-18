@@ -231,7 +231,7 @@ def reloadJSON(filename: str = DEFAULTFILE) -> str:
 def sidify(sid: int | str, *, R: bool = False, fill: bool = True) -> str:
 	return f"{"R" if R and fill else ""}{str(sid).upper().removeprefix("R"):{"0>3" if fill else ""}}"
 
-def storeReturn(args: Optional[str | list[str]] = None, *,
+def storeReturn(args: Any = None, *,
 	opening: Any = False,
 	remove_closed: Any = False,
 	remove_future: Any = False,
@@ -244,7 +244,8 @@ def storeReturn(args: Optional[str | list[str]] = None, *,
 	if not args or args == "_":
 		args, fuzzy = "_", True
 	if not isinstance(args, list):
-		args = re.split(r"\s*[,，]\s*", str(args)) if split else [str(args).strip()]
+		args = re.split(r"\s*[,，]\s*", str(args)) if split else [args]
+	args = [str(a) for a in args]
 	gen = {g for s in args for m in (StoreID(s, fuzzy = fuzzy, regular = regular),
 		StoreMatch(s, fuzzy = fuzzy, regular = regular)) for g in m}
 	filters: list[Optional[FilterType]] = [
