@@ -21,7 +21,7 @@ async def async_post(text: str, image: str, keyboard: list[list[list[str]]]) -> 
 
 async def main(mode: str) -> None:
 	append = False
-	courses: dict[Course, list[Schedule]] = {}
+	courses: dict[Course, set[Schedule]] = {}
 	results: list[TodayObject] = []
 
 	async with get_session() as session:
@@ -36,16 +36,16 @@ async def main(mode: str) -> None:
 				return
 
 	runners = await asyncio.gather(*tasks, return_exceptions = True)
-	results = list({i for j in (k for k in runners if isinstance(k, list)) for i in j})
+	r = {i for j in [k for k in runners if isinstance(k, list)] for i in j}
+	g = [[i for i in r if not b ^ isinstance(i, Schedule)] for b in [True, False]]
+	results = sorted(g[0], key = lambda v: (getattr(v, "rootPath"), v._sort_tuple())) + sorted(g[1])
 
 	for j in results:
 		match j:
 			case Schedule(course = c):
-				courses[c] = courses.get(c, [])
-				if j not in courses[c]:
-					courses[c].append(j)
+				courses.setdefault(c, set()).add(j)
 			case Course() as c:
-				courses[c] = courses.get(c, [])
+				courses.setdefault(c, set())
 
 	for course in courses:
 		doSend, toSave = False, {"slug": course.slug, "names": {course.flag: course.name}}
