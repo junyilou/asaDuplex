@@ -153,14 +153,14 @@ class Store:
 	def nsoString(self, userLang: bool = True) -> str:
 		if not hasattr(self, "dates"):
 			return ""
-		lang = {True: {"OPENED": "首次开幕于 {DATE}", "MOVED": "搬迁换址于 {DATE}", "CLOSED": "结束营业于 {DATE}", "FORMAT": "%Y 年 %-m 月 %-d 日"},
-			False: {"OPENED": "Opened on {DATE}", "MOVED": "Moved on {DATE}", "CLOSED": "Closed on {DATE}", "FORMAT": "%b %-d, %Y"}}
+		lang = {True: {"OPENED": "首次开幕于 {}", "REOPEN": "重新开幕于 {}", "CLOSED": "结束营业于 {}", "FORMAT": "%Y 年 %-m 月 %-d 日"},
+			False: {"OPENED": "Opened on {}", "REOPEN": "Reopened on {}", "CLOSED": "Closed on {}", "FORMAT": "%b %-d, %Y"}}
 		localize = lambda dt, userLang: datetime.strptime(dt, "%Y-%m-%d").strftime(lang[userLang]["FORMAT"])
-		info = [lang[userLang]["OPENED"].format(DATE = localize(self.dates[0], userLang))]
+		info = [lang[userLang]["OPENED"].format(localize(self.dates[0], userLang))]
 		for d in self.dates[1 : -1 if self.isClosed else None]:
-			info.append(lang[userLang]["MOVED"].format(DATE = localize(d, userLang)))
+			info.append(lang[userLang]["REOPEN"].format(localize(d, userLang)))
 		if self.isClosed:
-			info.append(lang[userLang]["CLOSED"].format(DATE = localize(self.dates[-1], userLang)))
+			info.append(lang[userLang]["CLOSED"].format(localize(self.dates[-1], userLang)))
 		return "\n".join(info)
 
 	def telename(self, bold: bool = False, flag: bool = False, sid: bool = True) -> str:
