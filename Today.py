@@ -38,7 +38,7 @@ async def main(mode: str) -> None:
 	runners = await asyncio.gather(*tasks, return_exceptions = True)
 	r = {i for j in [k for k in runners if isinstance(k, list)] for i in j}
 	g = [[i for i in r if not b ^ isinstance(i, Schedule)] for b in [True, False]]
-	results = sorted(g[0], key = lambda v: (getattr(v, "rootPath"), v._sort_tuple())) + sorted(g[1])
+	results = sorted(g[0], key = lambda v: (getattr(v, "rootPath"), v)) + sorted(g[1])
 
 	for j in results:
 		match j:
