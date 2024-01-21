@@ -280,5 +280,6 @@ if __name__ == "__main__":
 	debug_logger = logging.getLogger("debug")
 	debug_logger.setLevel(logging.INFO)
 	debug_logger.propagate = judge_remove("debug")
-	asyncio.run(main(argv[1:], judge_remove("cancel"), judge_remove("future")))
+	c, f = judge_remove("cancel"), judge_remove("future")
+	asyncio.run(main(argv[1:], c, f))
 	logging.info("程序结束")
