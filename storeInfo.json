@@ -1,5 +1,5 @@
 {
-  "update": "2024-01-18 17:09:14",
+  "update": "2024-01-21 08:10:20",
   "001": {
     "city": "Glendale",
     "dates": [
@@ -3936,7 +3936,10 @@
   "359": {
     "alter": "Shanghai 江浙沪",
     "city": "上海",
-    "dates": "2011-09-23",
+    "dates": [
+      "2011-09-23",
+      "2023-12-22"
+    ],
     "flag": "🇨🇳",
     "modified": "2022-01-07 08:59:06",
     "name": [
@@ -5947,6 +5950,15 @@
     "timezone": "Europe/Rome",
     "website": ""
   },
+  "626": {
+    "city": "Solna",
+    "flag": "🇸🇪",
+    "name": "Mall of Scandinavia",
+    "state": "Stockholm",
+    "status": "future",
+    "timezone": "Europe/Stockholm",
+    "website": ""
+  },
   "629": {
     "city": "Trumbull",
     "dates": "2014-10-11",
@@ -6680,7 +6692,7 @@
     "city": "서울",
     "dates": "2024-01-20",
     "flag": "🇰🇷",
-    "modified": "2024-01-08 01:32:18",
+    "modified": "2024-01-21 00:02:25",
     "name": [
       "홍대",
       "Hongdae"

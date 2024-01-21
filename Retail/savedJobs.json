@@ -1,5 +1,5 @@
 {
-  "update": "2024-01-13 02:10:14 GMT",
+  "update": "2024-01-21 14:39:30 GMT",
   "🇦🇪": {
     "state1049": {
       "ABUA": "Al Maryah Island",
@@ -86,7 +86,7 @@
     },
     "state111": {
       "R280": "Pacific Centre",
-      "R362": "Oakridge Centre",
+      "R362": "~Oakridge Centre",
       "R421": "Richmond Centre",
       "R460": "Metrotown",
       "R488": "Coquitlam Centre",
@@ -541,7 +541,7 @@
       "name": "Tuscany"
     },
     "state1109": {
-      "R038": "RomaEst",
+      "R038": "~RomaEst",
       "R381": "Porta di Roma",
       "R382": "Via del Corso",
       "R562": "Euroma2",
@@ -631,6 +631,7 @@
   "🇸🇪": {
     "state1099": {
       "R505": "Taby Centrum",
+      "R626": "Mall of Scandinavia",
       "name": "Stockholm"
     },
     "state1100": {
