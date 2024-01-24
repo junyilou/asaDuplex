@@ -198,7 +198,8 @@ def getStore(sid: int | str) -> Optional[Store]:
 	return STORES.get(sidify(sid))
 
 def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
-	final: str = "name", userLang: Optional[bool | list[Optional[bool]]] = [None]) -> list[str]:
+	final: Callable[[Store], str] = lambda s: s.name,
+	userLang: Optional[bool | list[Optional[bool]]] = [None]) -> list[str]:
 	stores, results = set(rstores), []
 	levels = ["flag", "state", "city"]
 	boldmark = "*" if bold else ""
@@ -217,7 +218,7 @@ def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 				num = f" ({len(ast)})" if number else ""
 				results.append((f"{boldmark}{attr}{boldmark}{num}", level))
 	results = [s[0] for s in sorted(results, key = lambda k: (levels.index(k[1]), k[0]))]
-	results += [getattr(s, final) for s in stores]
+	results.extend(final(s) for s in sorted(stores))
 	return results
 
 def reloadJSON(filename: str = DEFAULTFILE) -> str:
