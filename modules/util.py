@@ -29,7 +29,10 @@ def disMarkdown(text: str, wrap: str = "", extra: str = "") -> str:
 		temp = temp.replace(s, "\\" + s)
 	return wrap + temp + wrap[::-1]
 
-def sortOD(od: dict, reverse: list[bool] = [False], key: Optional[Callable] = None, level: int = 0) -> dict:
+def sortOD[K, V](od: dict[K, V],
+	reverse: list[bool] = [False],
+	key: Optional[Callable[..., Any]] = None,
+	level: int = 0) -> dict[K, V]:
 	res = {}
 	for k, v in sorted(od.items(), reverse = reverse[min(level, len(reverse) - 1)], key = key):
 		match v:
@@ -69,7 +72,7 @@ async def base_request(
 	method: str,
 	session: SessionType,
 	modes: set[str],
-	**kwargs) -> dict[str, Any]:
+	**kwargs) -> Any:
 	results = {}
 	async with session.request(url = url, method = method, **kwargs) as resp:
 		for m in modes:
