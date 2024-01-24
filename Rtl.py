@@ -1,14 +1,13 @@
 import asyncio
 import json
 import logging
-from bot import chat_ids
-from botpost import async_post, photo_encode
 from datetime import datetime
+from sys import argv
+from typing import Optional, cast
+
 from modules.util import SemaphoreType, SessionType
 from modules.util import disMarkdown, request, session_func, setLogger
 from storeInfo import Store, StoreDict, sidify
-from sys import argv
-from typing import Optional, cast
 
 INVALIDS = [datetime(2021, 7, 13), datetime(2021, 8, 28),
 	datetime(2021, 8, 29), datetime(2022, 1, 7)]
@@ -36,6 +35,8 @@ async def task(store: Store, session: SessionType, semaphore: SemaphoreType) -> 
 		return remote, invalid
 
 async def post(store: Store, dt: datetime, session: SessionType, semaphore: SemaphoreType) -> None:
+	from bot import chat_ids
+	from botpost import async_post, photo_encode
 	async with semaphore:
 		r = await request(store.dieter, session, mode = "raw", retry = 3)
 	with open(f"Retail/{store.rid}-{dt:%F-%H%M%S}.png", "wb") as w:

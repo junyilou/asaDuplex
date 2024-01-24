@@ -19,11 +19,11 @@
 
 ### 代码依赖
 
-代码使用了 Python 3.9 至 Python 3.12 的部分语法和特性，**必须使用 Python 3.12 版本才可完整运行**
+代码使用了最高至 Python 3.12 的语法和特性，**必须使用 Python 3.12 版本才可完整运行**
 
 所有网络请求均使用异步网络 I/O: [aiohttp](https://github.com/aio-libs/aiohttp) 发送，部分代码依赖 [beautifulsoup4](https://pypi.org/project/beautifulsoup4) 和 [lxml](https://github.com/lxml/lxml)，可通过 pip 安装
 
-许多代码设计为在有结果时可推送通知。在这些代码的顶部，可能有：
+许多代码设计为在有结果时可推送通知。在这些代码中，一般有负责输出结果的函数，并包含类似的代码：
 
 ```python
 from bot import tokens

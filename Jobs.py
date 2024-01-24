@@ -6,8 +6,6 @@ from random import choice
 from sys import argv
 from typing import Optional
 
-from bot import chat_ids
-from botpost import async_post
 from modules.regions import Region as RawRegion, RegionList
 from modules.util import SemaphoreType, SessionType
 from modules.util import browser_agent, disMarkdown, request, session_func, setLogger
@@ -166,6 +164,16 @@ async def search(session: SessionType, region: RawRegion) -> dict[str, int]:
 	roles = dict((k, v) for k, v in sorted(roles.items(), key = lambda t: t[1]))
 	return roles
 
+async def post(pushes: dict[str, list[str]], session: SessionType):
+	from bot import chat_ids
+	from botpost import async_post
+	for t, p in pushes.items():
+		if not p:
+			continue
+		push = {"mode": "photo-text", "text": "\n".join(["\\#新店新机遇", t, "", *p]),
+			"chat_id": chat_ids[0], "parse": "MARK", "image": API["image"]}
+		await async_post(push, session = session)
+
 @session_func
 async def main(
 	session: SessionType,
@@ -257,16 +265,7 @@ async def main(
 			linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
 			pushes["已停止招聘"].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
 
-	for t, p in pushes.items():
-		if not p:
-			continue
-		push = {
-			"mode": "photo-text",
-			"text": "\n".join(["\\#新店新机遇", t, "", *p]),
-			"chat_id": chat_ids[0],
-			"parse": "MARK",
-			"image": API["image"]}
-		await async_post(push, session = session)
+	await post(pushes, session)
 
 	if append:
 		SAVED["update"] = datetime.now(UTC).strftime("%F %T GMT")

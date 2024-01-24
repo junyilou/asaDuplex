@@ -5,19 +5,19 @@ from datetime import UTC, datetime
 from sys import argv
 from typing import Optional
 
-from bot import chat_ids
-from botpost import async_post as raw_post
 from modules.today import Collection, Course, Schedule, Sitemap, Store, TodayObject, teleinfo
 from modules.util import get_session, setLogger, sortOD
 from storeInfo import storeReturn
 
 TODAYARGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼"]
 
-async def async_post(text: str, image: str, keyboard: list[list[list[str]]]) -> Optional[dict]:
+async def post(text: str, image: str, keyboard: list[list[list[str]]]) -> Optional[dict]:
+	from bot import chat_ids
+	from botpost import async_post
 	push = {
 		"mode": "photo-text", "text": text, "image": image,
 		"parse": "MARK", "chat_id": chat_ids[0], "keyboard": keyboard}
-	return await raw_post(push)
+	return await async_post(push)
 
 async def main(mode: str) -> None:
 	append = False
@@ -64,7 +64,7 @@ async def main(mode: str) -> None:
 				saved["collection"][collection.slug] = {collection.flag: collection.name}
 				logging.info(str(collection))
 				text, image, keyboard = teleinfo(collection = collection)
-				await async_post(text, image, keyboard)
+				await post(text, image, keyboard)
 
 		match conditions:
 			case True, True, _:
@@ -88,7 +88,7 @@ async def main(mode: str) -> None:
 			logging.info(str(course))
 			schedules = [i for j in (courses[c] for c in courses if c.courseId == course.courseId) for i in j]
 			text, image, keyboard = teleinfo(course = course, schedules = schedules, prior = TODAYARGS)
-			await async_post(text, image, keyboard)
+			await post(text, image, keyboard)
 
 	if append:
 		logging.info("正在更新 savedEvent 文件")
