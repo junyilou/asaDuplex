@@ -8,7 +8,7 @@ from typing import Optional
 
 from modules.regions import Region as RawRegion, RegionList
 from modules.util import SemaphoreType, SessionType
-from modules.util import browser_agent, disMarkdown, request, session_func, setLogger
+from modules.util import browser_agent, disMarkdown, get_session, request, session_func, setLogger
 
 API = {
 	"csrf": "https://jobs.apple.com/api/csrfToken",
@@ -134,7 +134,7 @@ class Region(TaskObject):
 				region = self, fieldID = p["id"], code = p["code"], name = p["stateProvince"],
 				session = self.session, semaphore = self.semaphore))
 
-async def search(session: SessionType, region: RawRegion) -> dict[str, int]:
+async def search(region: RawRegion, session: SessionType) -> dict[str, int]:
 	data = {
 		"filters": {
 			"postingpostLocation": [f"postLocation-{region.post_location}"],
@@ -145,11 +145,11 @@ async def search(session: SessionType, region: RawRegion) -> dict[str, int]:
 		"page": 1, "locale": "en-us", "sort": "newest", "query": ""}
 	try:
 		key = "x-apple-csrf-token"
-		h = await request(API["csrf"], session, "HEAD",
-			headers = browser_agent | {"Referer": API["search"]}, ssl = False)
-		c = {key: h[key]} if h.get(key) else {}
-		r = await request(API["search"], session, "POST", mode = "json",
-			headers = browser_agent | c, json = data, ssl = False)
+		async with get_session(session) as ses:
+			h = await request(API["csrf"], ses, "HEAD",
+				headers = browser_agent | {"Referer": API["search"]}, ssl = False)
+			r = await request(API["search"], ses, "POST", mode = "json", json = data,
+				headers = browser_agent | ({key: h[key]} if h.get(key) else {}), ssl = False)
 		assert r.get("searchResults")
 	except:
 		logging.warning(f"尝试搜索地区 {region.flag} 失败")
@@ -164,7 +164,7 @@ async def search(session: SessionType, region: RawRegion) -> dict[str, int]:
 	roles = dict((k, v) for k, v in sorted(roles.items(), key = lambda t: t[1]))
 	return roles
 
-async def post(pushes: dict[str, list[str]], session: SessionType):
+async def post(pushes: dict[str, list[str]], session: SessionType) -> None:
 	from bot import chat_ids
 	from botpost import async_post
 	for t, p in pushes.items():
@@ -189,7 +189,7 @@ async def main(
 		if region.job_code:
 			REGIONS[region.flag] = region.job_code
 		elif check_future:
-			REGIONS[region.flag] = await search(session, region)
+			REGIONS[region.flag] = await search(region, session)
 	targets = [i for i in targets or REGIONS if REGIONS.get(i)]
 
 	STORES: list[Store] = []
