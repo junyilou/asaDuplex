@@ -1,5 +1,5 @@
 {
-  "update": "2024-01-21 08:10:20",
+  "update": "2024-01-22 21:33:45",
   "001": {
     "city": "Glendale",
     "dates": [
@@ -6660,8 +6660,7 @@
     "flag": "🇰🇷",
     "name": "Store in Seoul South",
     "state": "서울",
-    "status": "future",
-    "timezone": "Asia/Seoul"
+    "status": "internal"
   },
   "761": {
     "alter": "Guangdong Shenzhen",
