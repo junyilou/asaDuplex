@@ -181,7 +181,7 @@ async def main(
 	check_cancel: bool,
 	check_future: bool) -> None:
 	with open("Retail/savedJobs.json") as r:
-		SAVED = eval(r.read())
+		SAVED = json.load(r)
 
 	for region in RegionList:
 		if region.flag.isascii():
