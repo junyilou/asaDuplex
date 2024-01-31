@@ -40,10 +40,20 @@ API = APIClass("https://www.apple.com/today-bff".split("/"))
 
 class utils:
 	@staticmethod
+	def get_fas_stores(rootPath: str, fast: bool) -> list[Raw_Store]:
+		try:
+			assert fast
+			with open("Retail/findasession-stores.json") as r:
+				fas = json.load(r)
+			return [s for s in (getRaw_Store(i) for i in fas[todayNation[rootPath]]) if s]
+		except:
+			return storeReturn(todayNation[rootPath], opening = True)
+
+	@staticmethod
 	def known_slugs() -> list[str]:
 		try:
 			with open("Retail/savedEvent.json") as r:
-				assure = json.loads(r.read())
+				assure = json.load(r)
 			return [assure["today"][i]["slug"] for i in assure["assure"]]
 		except FileNotFoundError:
 			return []
@@ -182,7 +192,9 @@ class Store(TodayObject):
 				tasks.append(tg.create_task(getCourse(remote = remote, rootPath = self.rootPath, slug = c["urlTitle"])))
 		return [t.result() for t in tasks]
 
-	async def getSchedules(self, ensure: bool = True, session: Optional[SessionType] = None) -> list["Schedule"]:
+	async def getSchedules(self, ensure: bool = True,
+		date: Optional[datetime] = None,
+		session: Optional[SessionType] = None) -> list["Schedule"]:
 		try:
 			nearby = {"nearby": "true"} if not ensure else {}
 			r = await request(session = session, headers = browser_agent,
@@ -203,7 +215,10 @@ class Store(TodayObject):
 					tasks.append(tg.create_task(getSchedule(
 						scheduleId = i, remote = remote, rootPath = self.rootPath,
 						slug = course["urlTitle"])))
-		return [t.result() for t in tasks]
+		results: list[Schedule] = [t.result() for t in tasks]
+		if date:
+			results = [i for i in results if i.rawStart.date() == date.date()]
+		return results
 
 	async def getCoord(self, session: Optional[SessionType] = None) -> list[float]:
 		d = await self.raw_store.detail(mode = "raw", session = session)
@@ -233,12 +248,12 @@ class Talent(TodayObject):
 		self.raw: dict[str, Any] = raw
 		self.name: str = raw["name"].strip()
 		self.title: Optional[str] = raw["title"].strip() if "title" in raw else None
-		self.description: Optional[str] = raw["description"].strip() if "description" in raw else None
+		self.description: Optional[str] = re.sub(r"\s*\n\s*", " ", raw["description"].strip()) if "description" in raw else None
 		self.image: Optional[str] = raw.get("backgroundImage") or raw.get("logo")
 		self.links: dict[str, str] = (
-			({"Website": raw["websiteUrl"]} if "websiteUrl" in raw else {}) |
-			({"URL": raw["url"]} if "url" in raw else {}) |
-			({social["name"].capitalize(): social["url"] for social in raw.get("socialLinks", {})}))
+			({"website": raw["websiteUrl"]} if "websiteUrl" in raw else {}) |
+			({"url": raw["url"]} if "url" in raw else {}) |
+			({social["name"]: social["url"] for social in raw.get("socialLinks", {})}))
 
 	def __repr__(self) -> str:
 		return f'<Talent "{self.name}"' + (f', "{self.title}"' if self.title else "") + ">"
@@ -299,6 +314,8 @@ class Course(TodayObject):
 			"long": raw["longDescription"].strip(),
 			"medium": raw["mediumDescription"].strip(),
 			"short": raw["shortDescription"].strip()}
+		for k, v in self.description.items():
+			self.description[k] = re.sub(r"\s*\n\s*", " ", v)
 
 		self.intro: dict[str, str | list[str]] = {}
 		if "modalVideo" in raw:
@@ -339,6 +356,7 @@ class Course(TodayObject):
 		return result
 
 	async def getSchedules(self, store: Store, ensure: bool = True,
+		date: Optional[datetime] = None,
 		session: Optional[SessionType] = None,
 		semaphore: Optional[SemaphoreType] = None) -> list["Schedule"]:
 		try:
@@ -359,15 +377,20 @@ class Course(TodayObject):
 					if not ensure or storeNum == store.sid or "VIRTUAL" in remote["courses"][self.courseId]["type"]:
 						tasks.append(tg.create_task(getSchedule(
 							scheduleId = i, remote = remote, rootPath = store.rootPath, slug = self.slug)))
-		return [t.result() for t in tasks]
+		results: list[Schedule] = [t.result() for t in tasks]
+		if date:
+			results = [i for i in results if i.rawStart.date() == date.date()]
+		return results
 
-	async def getRootSchedules(self, rootPath: Optional[str] = None, session: Optional[SessionType] = None) -> list["Schedule"]:
+	async def getRootSchedules(self, rootPath: Optional[str] = None,
+		date: Optional[datetime] = None, fast: bool = False,
+		session: Optional[SessionType] = None) -> list["Schedule"]:
 		rootPath = rootPath or self.rootPath
-		stores = storeReturn(todayNation[rootPath], opening = True)
+		stores = utils.get_fas_stores(rootPath, fast)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		async with get_session(session) as session:
 			tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath),
-				session = session, semaphore = semaphore) for i in stores)
+				ensure = not fast, date = date, session = session, semaphore = semaphore) for i in stores)
 			results = await asyncio.gather(*tasks, return_exceptions = True)
 		return sorted({i for j in (r for r in results if not isinstance(r, BaseException)) for i in j})
 
@@ -551,6 +574,8 @@ class Collection(TodayObject):
 			"long": raw["longDescription"].strip(),
 			"medium": raw["mediumDescription"].strip(),
 			"short": raw["shortDescription"].strip()}
+		for k, v in self.description.items():
+			self.description[k] = re.sub(r"\s*\n\s*", " ", v)
 
 		media = raw["heroGallery"][0]["backgroundMedia"]
 		self.images: dict[str, str] = {
@@ -566,11 +591,11 @@ class Collection(TodayObject):
 					"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
 					"videos": utils.resolution(media["ambientVideo"]["sources"], "l")}}
 
-		self.collaborations: list[Talent]
+		self.talents: list[Talent]
 		if "inCollaborationWith" in raw:
-			self.collaborations = [Talent(raw = t) for t in raw["inCollaborationWith"]["partners"]]
+			self.talents = [Talent(raw = t) for t in raw["inCollaborationWith"]["partners"]]
 		else:
-			self.collaborations = []
+			self.talents = []
 		self.raw: dict[str, Any] = raw | {"serial": self.serial}
 
 	def __repr__(self) -> str:
@@ -584,6 +609,7 @@ class Collection(TodayObject):
 		return result
 
 	async def getSchedules(self, store: Store, ensure: bool = True,
+		date: Optional[datetime] = None,
 		session: Optional[SessionType] = None,
 		semaphore: Optional[SemaphoreType] = None) -> list[Schedule]:
 		try:
@@ -605,19 +631,26 @@ class Collection(TodayObject):
 					if not ensure or storeNum == store.sid or "VIRTUAL" in course["type"]:
 						tasks.append(tg.create_task(getSchedule(
 							scheduleId = i, remote = remote, rootPath = store.rootPath, slug = course["urlTitle"])))
-		return [t.result() for t in tasks]
+		results: list[Schedule] = [t.result() for t in tasks]
+		if date:
+			results = [i for i in results if i.rawStart.date() == date.date()]
+		return results
 
-	async def getRootSchedules(self, rootPath: Optional[str] = None, session: Optional[SessionType] = None) -> list[Schedule]:
+	async def getRootSchedules(self, rootPath: Optional[str] = None,
+		date: Optional[datetime] = None, fast: bool = False,
+		session: Optional[SessionType] = None) -> list[Schedule]:
 		rootPath = rootPath or self.rootPath
-		stores = storeReturn(todayNation[rootPath], opening = True)
+		stores = utils.get_fas_stores(rootPath, fast)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		async with get_session(session) as session:
-			tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath), session = session, semaphore = semaphore) for i in stores)
+			tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath),
+				ensure = not fast, date = date, session = session, semaphore = semaphore) for i in stores)
 			results = await asyncio.gather(*tasks, return_exceptions = True)
 		return sorted({i for j in (r for r in results if not isinstance(r, BaseException)) for i in j})
 
-	async def getCourses(self, rootPath: Optional[str] = None, session: Optional[SessionType] = None) -> list[Course]:
-		schedules = await self.getRootSchedules(rootPath = rootPath, session = session)
+	async def getCourses(self, rootPath: Optional[str] = None, fast: bool = False,
+		session: Optional[SessionType] = None) -> list[Course]:
+		schedules = await self.getRootSchedules(rootPath = rootPath, fast = fast, session = session)
 		return sorted({schedule.course for schedule in schedules})
 
 async def getCollection(
@@ -667,7 +700,7 @@ class Sitemap(TodayObject):
 				session = session, headers = browser_agent, **PARAM)
 			urls = re.findall(r"<loc>\s*(\S*)\s*</loc>", r)
 		except:
-			raise ValueError(f"获取 {self.urlPath} Sitemap 数据失败") from None
+			raise ValueError(f"获取 {self.urlPath!r} Sitemap 数据失败") from None
 
 		slugs = {}
 		for url in urls:
@@ -687,7 +720,7 @@ class Sitemap(TodayObject):
 			objects.append(parsing)
 		return objects
 
-	async def getObjects(self, session: Optional[SessionType] = None) -> list[TodayObject]:
+	async def getObjects(self, session: Optional[SessionType] = None) -> list[Collection | Course | Schedule]:
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		async with get_session(session) as session:
 			results = await asyncio.gather(*(getURL(u, session = session, semaphore = semaphore)
@@ -717,7 +750,7 @@ def parseURL(url: str) -> dict[str, str]:
 
 async def getURL(url: str,
 	session: Optional[SessionType] = None,
-	semaphore: Optional[SemaphoreType] = None) -> TodayObject:
+	semaphore: Optional[SemaphoreType] = None) -> Collection | Course | Schedule:
 	async with with_semaphore(semaphore):
 		match parseURL(url):
 			case {"type": "schedule", "rootPath": r, "slug": g, "scheduleId": s}:
@@ -811,9 +844,9 @@ def teleinfo(
 			NAME = collection.name,
 			INTROTITLE = lang[userLang]["INTRO_COLLECTION"],
 			INTRO = collection.description['long']))
-		if collection.collaborations != []:
+		if collection.talents != []:
 			collab = []
-			for c in collection.collaborations:
+			for c in collection.talents:
 				name = disMarkdown(c.name)
 				collab.append(f"[{name}]({c.links['URL']})" if "URL" in c.links else name)
 			text += f"\n\n{lang[userLang]['COLLAB_WITH']}\n{lang[userLang]['JOINT'].join(collab)}"
