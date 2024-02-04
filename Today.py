@@ -32,8 +32,7 @@ async def main(mode: str) -> None:
 				tasks = [Sitemap(flag = flag).getObjects(session = session) for flag in TODAYARGS]
 			case _:
 				return
-
-	runners = await asyncio.gather(*tasks, return_exceptions = True)
+		runners = await asyncio.gather(*tasks, return_exceptions = True)
 	r = {i for j in [k for k in runners if isinstance(k, list)] for i in j}
 	g = [[i for i in r if not b ^ isinstance(i, Schedule)] for b in [True, False]]
 	results = sorted(g[0], key = lambda v: v.rootPath) + sorted(g[1])
