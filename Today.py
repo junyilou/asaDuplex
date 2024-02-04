@@ -5,27 +5,25 @@ from datetime import UTC, datetime
 from sys import argv
 from typing import Optional
 
-from modules.today import Collection, Course, Schedule, Sitemap, Store, TodayObject, teleinfo
+from modules.today import Collection, Course, Schedule, Sitemap, Store, teleinfo
 from modules.util import get_session, setLogger, sortOD
 from storeInfo import storeReturn
 
-TODAYARGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼"]
+TODAYARGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼", "🇯🇵"]
 
 async def post(text: str, image: str, keyboard: list[list[list[str]]]) -> Optional[dict]:
 	from bot import chat_ids
 	from botpost import async_post
-	push = {
-		"mode": "photo-text", "text": text, "image": image,
+	push = {"mode": "photo-text", "text": text, "image": image,
 		"parse": "MARK", "chat_id": chat_ids[0], "keyboard": keyboard}
 	return await async_post(push)
 
 async def main(mode: str) -> None:
 	append = False
 	courses: dict[Course, set[Schedule]] = {}
-	results: list[TodayObject] = []
+	results: list[Collection | Course | Schedule] = []
 
 	async with get_session() as session:
-		session = None
 		match mode:
 			case "today":
 				stores = storeReturn(TODAYARGS, opening = True)
@@ -38,7 +36,7 @@ async def main(mode: str) -> None:
 	runners = await asyncio.gather(*tasks, return_exceptions = True)
 	r = {i for j in [k for k in runners if isinstance(k, list)] for i in j}
 	g = [[i for i in r if not b ^ isinstance(i, Schedule)] for b in [True, False]]
-	results = sorted(g[0], key = lambda v: (getattr(v, "rootPath"), v)) + sorted(g[1])
+	results = sorted(g[0], key = lambda v: v.rootPath) + sorted(g[1])
 
 	for j in results:
 		match j:
