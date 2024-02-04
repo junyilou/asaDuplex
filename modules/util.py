@@ -7,7 +7,7 @@ from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
 from functools import wraps
 from os.path import basename, isdir
-from typing import Any, Concatenate, Optional
+from typing import Any, Concatenate, Mapping, Optional
 
 type SemaphoreType = asyncio.Semaphore
 type SessionType = aiohttp.ClientSession
@@ -29,7 +29,7 @@ def disMarkdown(text: str, wrap: str = "", extra: str = "") -> str:
 		temp = temp.replace(s, "\\" + s)
 	return wrap + temp + wrap[::-1]
 
-def sortOD[K, V](od: dict[K, V],
+def sortOD[K, V](od: Mapping[K, V],
 	reverse: list[bool] = [False],
 	key: Optional[Callable[..., Any]] = None,
 	level: int = 0) -> dict[K, V]:
