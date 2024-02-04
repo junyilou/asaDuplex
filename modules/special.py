@@ -8,7 +8,7 @@ from random import choice
 from storeInfo import Store
 from typing import Any, Optional
 
-COMMENTS: dict[str, dict[datetime, str]] = {}
+COMMENTS: dict[str, dict[str, str]] = {}
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 def convert(dct: dict[str, Any], userLang: bool = True) -> str:
@@ -23,7 +23,7 @@ def convert(dct: dict[str, Any], userLang: bool = True) -> str:
 			return "未知时间" if userLang else "Unknown Hours"
 
 async def apu(store: Store, userLang: bool, target: str,
-	session: Optional[SessionType] = None) -> AsyncIterator[tuple[str, datetime, str]]:
+	session: Optional[SessionType] = None) -> AsyncIterator[tuple[str, str, str]]:
 	retry = 3
 	base = f"https://www.apple.com{store.region.url_store}"
 	url = f"{base}/shop/fulfillment-messages"
@@ -49,38 +49,43 @@ async def apu(store: Store, userLang: bool, target: str,
 			if raw < datetime.now() - timedelta(weeks = 1):
 				raw = raw.replace(year = raw.year + 1)
 			text = (f"[{holiday['description']}]" if holiday["description"] else "") + (f" {holiday['comments']}" if holiday["comments"] else "")
-			yield (rstore["storeNumber"], raw, text)
+			yield (rstore["storeNumber"], f"{raw:%F}", text)
 
 async def comment(store: Store, userLang: bool = True,
-	session: Optional[SessionType] = None) -> dict[str, dict[datetime, str]]:
+	session: Optional[SessionType] = None) -> dict[str, dict[str, str]]:
 	async for i in apu(store, userLang, f'MM0A3{store.region.part_sample}/A', session):
 		astore, date, text = i
 		COMMENTS.setdefault(astore, {})[date] = text
 	return COMMENTS
 
-async def special(store: Store, threshold: Optional[datetime] = None, ask_comment: bool = True,
-	userLang: bool = True, session: Optional[SessionType] = None) -> Optional[dict[str, dict[str, str]]]:
+async def special(store: Store, *,
+	threshold: Optional[datetime] = None,
+	ask_comment: bool = True,
+	userLang: bool = True,
+	detail: dict[str, list[dict[str, Any]]] = {},
+	session: Optional[SessionType] = None) -> Optional[dict[str, dict[str, str]]]:
 	threshold = threshold or datetime.now()
-	try:
-		j = await store.detail(session = session, mode = "hours")
-		assert isinstance(j, dict)
-		for key in ("regular", "special"):
-			assert key in j
-	except:
-		text = f"未能获得 {store.rid} 营业时间信息" if userLang else f"Failed getting store hours for {store.rid}"
-		logging.getLogger("modules.special").error(text)
-		return
+	if not detail:
+		try:
+			detail = await store.detail(session = session, mode = "hours")
+			assert isinstance(detail, dict)
+			for key in ("regular", "special"):
+				assert key in detail
+		except:
+			text = f"未能获得 {store.rid} 营业时间信息" if userLang else f"Failed getting store hours for {store.rid}"
+			logging.getLogger("modules.special").error(text)
+			return
 
 	comments, results = {}, {}
-	regular = {dayOfWeek.index(regular["name"]): convert(regular, userLang = userLang) for regular in j["regular"]}
-	if j["special"] and ask_comment:
+	regular = {dayOfWeek.index(regular["name"]): convert(regular, userLang = userLang) for regular in detail["regular"]}
+	if detail["special"] and ask_comment:
 		comments = await comment(store, userLang, session)
-	for item in sorted(j["special"], key = lambda k: k["date"]):
+	for item in sorted(detail["special"], key = lambda k: k["date"]):
 		d = datetime.strptime(item["date"], "%Y-%m-%d")
-		if d.date() < threshold.date():
+		if item["date"] < f"{threshold:%F}":
 			continue
 		reg = regular[d.weekday()]
 		spe = convert(item, userLang = userLang)
-		com = comments.get(store.rid, {}).get(d)
+		com = comments.get(store.rid, {}).get(item["date"])
 		results[f"{d:%F}"] = {"regular": reg, "special": spe} | ({"comment": com} if com else {})
 	return results

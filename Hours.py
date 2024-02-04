@@ -48,7 +48,7 @@ async def entry(store: Store, saved: Optional[dict[str, dict[str, str]]],
 	session: SessionType, semaphore: SemaphoreType) -> tuple[dict[str, dict[str, str]], list[str]]:
 	saved = saved or {}
 	async with semaphore:
-		ans = await special(store, RUNTIME, userLang = USERLANG == "ZH", session = session)
+		ans = await special(store, threshold = RUNTIME, userLang = USERLANG == "ZH", session = session)
 	if ans is None:
 		return saved, []
 
