@@ -6,12 +6,12 @@ from modules.util import SessionType
 from modules.util import browser_agent, request
 from random import choice
 from storeInfo import Store
-from typing import Any, Optional
+from typing import Any, Mapping, Optional
 
 COMMENTS: dict[str, dict[str, str]] = {}
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
-def convert(dct: dict[str, Any], userLang: bool = True) -> str:
+def convert(dct: Mapping[str, Any], userLang: bool = True) -> str:
 	match dct:
 		case {"closed": True}:
 			return "不营业" if userLang else "Closed"
@@ -45,7 +45,7 @@ async def apu(store: Store, userLang: bool, target: str,
 
 	for rstore in stores:
 		for holiday in rstore["retailStore"]["storeHolidays"]:
-			raw = datetime.strptime(holiday["date"], "%b %d").replace(year = datetime.now().year)
+			raw = datetime.strptime(f"{holiday["date"]} 00", "%b %d %y").replace(year = datetime.now().year)
 			if raw < datetime.now() - timedelta(weeks = 1):
 				raw = raw.replace(year = raw.year + 1)
 			text = (f"[{holiday['description']}]" if holiday["description"] else "") + (f" {holiday['comments']}" if holiday["comments"] else "")
