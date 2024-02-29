@@ -1,5 +1,5 @@
 {
-  "update": "2024-01-22 21:33:45",
+  "update": "2024-02-29 13:38:07",
   "001": {
     "city": "Glendale",
     "dates": [
@@ -2263,7 +2263,7 @@
     "city": "Reading",
     "dates": "2011-06-25",
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-06 11:27:13",
     "name": "The Oracle",
     "state": "Berkshire",
     "timezone": "Europe/London",
@@ -5064,12 +5064,14 @@
     "flag": "🇨🇳",
     "modified": "2022-01-07 08:59:08",
     "name": [
+      "新街口",
       "南京艾尚天地",
+      "Xinjiekou",
       "Nanjing IST"
     ],
     "state": "江苏",
     "timezone": "Asia/Shanghai",
-    "website": "nanjingist"
+    "website": "xinjiekou"
   },
   "496": {
     "city": "Bromley",
@@ -5391,7 +5393,7 @@
     "city": "Haarlem",
     "dates": "2013-12-07",
     "flag": "🇳🇱",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-01-30 16:14:02",
     "name": "Haarlem",
     "state": "Noord-Holland",
     "timezone": "Europe/Amsterdam",
@@ -6237,13 +6239,13 @@
     "city": "上海",
     "flag": "🇨🇳",
     "name": [
-      "Store in Shanghai",
-      "静安寺",
-      "Jingan Temple"
+      "静安",
+      "Jing'an"
     ],
     "state": "上海",
     "status": "future",
-    "timezone": "Asia/Shanghai"
+    "timezone": "Asia/Shanghai",
+    "website": "jingan"
   },
   "683": {
     "alter": "Shanghai 江浙沪",

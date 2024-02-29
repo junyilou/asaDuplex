@@ -33,9 +33,13 @@ async def main(mode: str) -> None:
 			case _:
 				return
 		runners = await asyncio.gather(*tasks, return_exceptions = True)
-	r = {i for j in [k for k in runners if isinstance(k, list)] for i in j}
-	g = [[i for i in r if not b ^ isinstance(i, Schedule)] for b in [True, False]]
-	results = sorted(g[0], key = lambda v: v.rootPath) + sorted(g[1])
+	runners, exp = [[i for i in runners if b ^ isinstance(i, BaseException)] for b in [True, False]]
+	for e in exp:
+		assert isinstance(e, BaseException)
+		logging.error(repr(e))
+	r = {i for j in runners if isinstance(j, list) for i in j}
+	course_collection, schedule = [[i for i in r if b ^ isinstance(i, Schedule)] for b in [True, False]]
+	results = sorted(course_collection, key = lambda v: v.rootPath) + sorted(schedule)
 
 	for j in results:
 		match j:
