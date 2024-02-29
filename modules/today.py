@@ -4,7 +4,7 @@ import re
 from datetime import datetime, timedelta
 from modules.regions import Regions
 from modules.util import SemaphoreType, SessionType
-from modules.util import browser_agent, disMarkdown, get_session, request, timezoneText, with_semaphore
+from modules.util import browser_agent, disMarkdown, get_session, request, tz_text, with_semaphore
 from storeInfo import Store as Raw_Store, getStore as getRaw_Store, sidify, storeReturn
 from typing import Any, Literal, Optional, Self, Sequence
 from zoneinfo import ZoneInfo
@@ -498,14 +498,10 @@ class Schedule(TodayObject):
 		self.raw: dict[str, Any] = raw | {"serial": self.serial}
 
 	def datetimeStart(self, form: str = "%-m 月 %-d 日 %-H:%M") -> str:
-		if isinstance(self.timeStart, datetime):
-			return self.timeStart.astimezone(self.tzinfo).strftime(form)
-		return self.rawStart.strftime(form)
+		return f"{self.timeStart or self.rawStart:{form}}"
 
 	def datetimeEnd(self, form: str = "%-H:%M") -> str:
-		if isinstance(self.timeEnd, datetime):
-			return self.timeEnd.astimezone(self.tzinfo).strftime(form)
-		return self.rawEnd.strftime(form)
+		return f"{self.timeEnd or self.rawEnd:{form}}"
 
 	def __repr__(self) -> str:
 		loc = self.store.sid if not self.course.virtual else "Online"
@@ -864,7 +860,7 @@ def teleinfo(
 	elif schedules == []:
 		courseStore = lang[userLang]["GENERAL_STORE"]
 	elif len(schedules) == 1:
-		courseStore = schedules[0].raw_store.telename(sid = False)
+		courseStore = str(schedules[0].raw_store)
 	else:
 		storeCounts = {r: len([s for s in {i.raw_store for i in schedules} if s.flag == r]) for r in priorlist}
 		textStore = [f"{k} ({v} {lang[userLang]['STORES'].format(PLURAL = 's' if v > 1 else '')})"
@@ -885,7 +881,7 @@ def teleinfo(
 		tzText = ""
 		if isinstance(priorSchedule.timeStart, datetime):
 			if (priorSchedule.timeStart.utcoffset() or timedelta()).total_seconds() / 3600 != offset:
-				tzText = " " + timezoneText(priorSchedule.timeStart)
+				tzText = " " + tz_text(priorSchedule.timeStart)
 
 		timing = lang[userLang]["START_FROM" if len(schedules) == 1 else "START_FROM_ALL"].format(
 			START = priorSchedule.datetimeStart(form = lang[userLang]["FORMAT_START"]),
