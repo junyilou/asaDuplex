@@ -5,11 +5,12 @@ from datetime import UTC, datetime
 from enum import Enum
 from modules.regions import Regions
 from modules.util import SessionType, browser_agent, request
+from pathlib import PurePath
 from typing import Any, Literal, Optional, Required, TypedDict
 from zoneinfo import ZoneInfo
 
-DEFAULTFILE = "storeInfo.json"
-type FilterType = Callable[[Store], Any]
+DEFAULTFILE = PurePath(__file__).with_suffix(".json")
+type StoreMapping = Callable[[Store], Any]
 
 class StoreDict(TypedDict, total = False):
 	alter: str
@@ -34,7 +35,7 @@ class Store:
 	def __init__(self, sid: int | str, dct: StoreDict) -> None:
 		self.sid = f"{sid:0>3}"
 		assert len(self.sid) == 3, "Invalid Store ID"
-		self.rid = "R" + self.sid
+		self.rid = f"R{self.sid}"
 		self.iid = int(self.sid)
 		assert "flag" in dct, 'Key "flag" missed'
 		self.flag = dct["flag"]
@@ -45,14 +46,14 @@ class Store:
 			self.altname: list[str] = name.copy()
 			self.name: str = self.altname.pop(0)
 		else:
-			self.altname: list[str] = []
-			self.name: str = name
+			self.altname = []
+			self.name = name
 
-		status = dct.get("status")
 		trans_table = {"closed": "关闭", "future": "招聘", "internal": "内部"}
-		self.isClosed = status == "closed"
-		self.isFuture = status == "future"
-		self.isInternal = status == "internal"
+		self.status: str = (dct.get("status") or "").capitalize()
+		self.isClosed = self.status == "Closed"
+		self.isFuture = self.status == "Future"
+		self.isInternal = self.status == "Internal"
 		self.isOpen = not (self.isClosed or self.isFuture or self.isInternal)
 
 		if "timezone" in dct:
@@ -90,9 +91,9 @@ class Store:
 			self.region.name, self.region.name_eng, self.region.abbr, *self.region.name_alter,
 			*([dct["status"].capitalize(), trans_table[dct["status"]]] if "status" in dct else [])]
 		self.keys = [i for i in keys if i]
-		self.keys += [k.replace(" ", "") for k in self.keys if " " in k]
+		self.keys.extend(k.replace(" ", "") for k in self.keys if " " in k)
 
-		self.sortkey = (self.flag, self.state, self.sid)
+		self.sortkey = (self.flag, self.state, self.city, self.sid)
 		self.raw: dict[str, Any] = dict(dct)
 
 	@property
@@ -101,12 +102,23 @@ class Store:
 		return f"https://rtlimages.apple.com/cmc/dieter/store/16_9/{self.rid}.png?{args}"
 
 	def __repr__(self) -> str:
-		name = [f"Store {self.telename(flag = True)}"]
-		status = [f"({s.removeprefix("is").capitalize()})" for s in ["isClosed", "isFuture", "isInternal"] if getattr(self, s)]
-		return f"<{" ".join(name + status)}>"
+		return f"<Store {self:full}{f" ({self.status})" if self.status else ""}>"
 
 	def __str__(self) -> str:
-		return self.telename(sid = False)
+		return format(self)
+
+	def __format__(self, __format_spec: str) -> str:
+		presets = {"": "Apple %name",
+			"plain": "Apple %name (%rid)",
+			"full": "%flag Apple %name (%rid)",
+			"telegram": "%flag *Apple %name* (%rid)"}
+		temp = "$"
+		if temp in __format_spec:
+			raise ValueError(f"format spec can not contain {temp!r}")
+		spec = presets.get(__format_spec, __format_spec).replace("%%", temp)
+		for k in ("sid", "rid", "name", "flag"):
+			spec = re.sub(fr"(?<!%)%{k}", getattr(self, k), spec)
+		return spec.replace(temp, "%")
 
 	def __lt__(self, other) -> bool:
 		if not type(other) is type(self):
@@ -123,15 +135,19 @@ class Store:
 
 	async def detail(self,
 		mode: Optional[Literal["dict", "hours", "raw"]] = None,
-		session: Optional[SessionType] = None) -> dict[str, Any]:
+		session: Optional[SessionType] = None,
+		raise_exception: bool = False) -> dict[str, Any]:
 		try:
-			assert hasattr(self, "detail_url")
-			r = await request(self.detail_url, session, headers = browser_agent,
+			r = await request(self.detail_url, session,
+				headers = browser_agent,
 				retry = 3, timeout = 5, mode = "json")
 			if mode == "raw":
 				return r
 			else:
-				hours = {"isnso": r["hours"]["isNSO"], "regular": r["hours"]["hoursData"], "special": r["hours"]["specialHoursData"]}
+				hours = {
+					"isnso": r["hours"]["isNSO"],
+					"regular": r["hours"]["hoursData"],
+					"special": r["hours"]["specialHoursData"]}
 				if mode == "hours":
 					return hours
 				add = r["address"]
@@ -140,6 +156,8 @@ class Store:
 				info = {"timezone": r["timezone"], "telephone": r["telephone"], "address": address, "province": province}
 				return r["geolocation"] | info | hours
 		except:
+			if raise_exception:
+				raise
 			return {}
 
 	async def header(self, session: Optional[SessionType] = None) -> Optional[str]:
@@ -162,10 +180,6 @@ class Store:
 		if self.isClosed:
 			info.append(lang[userLang]["CLOSED"].format(localize(self.dates[-1], userLang)))
 		return "\n".join(info)
-
-	def telename(self, bold: bool = False, flag: bool = False, sid: bool = True) -> str:
-		c = ((flag, f"{self.flag} "), (bold, "*"), (True, f"Apple {self.name}"), (bold, "*"), (sid, f" ({self.rid})"))
-		return "".join(j for i, j in c if i)
 
 def StoreID(sid: int | str, fuzzy: Any = False, regular: Any = False) -> list[Store]:
 	try:
@@ -198,7 +212,7 @@ def getStore(sid: int | str) -> Optional[Store]:
 	return STORES.get(sidify(sid))
 
 def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
-	final: Callable[[Store], str] = lambda s: s.name,
+	final: Callable[[Store], str] = str,
 	userLang: Optional[bool | list[Optional[bool]]] = [None]) -> list[str]:
 	stores, results = set(rstores), []
 	levels = ["flag", "state", "city"]
@@ -221,7 +235,7 @@ def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 	results.extend(final(s) for s in sorted(stores))
 	return results
 
-def reloadJSON(filename: str = DEFAULTFILE) -> str:
+def reloadJSON(filename: str | PurePath = DEFAULTFILE) -> str:
 	with open(filename) as r:
 		infoJSON = json.load(r)
 	update = infoJSON.pop("update")
@@ -241,15 +255,16 @@ def storeReturn(args: Any = None, *,
 	regular: Any = False,
 	split: Any = False,
 	sort: SortKey = SortKey.default,
-	filter: Optional[FilterType] = None) -> list[Store]:
-	if not args or args == "_":
+	filter: Optional[StoreMapping] = None,
+	allow_empty: bool = True) -> list[Store]:
+	if not args and allow_empty or args in ["_", "all"]:
 		args, fuzzy = "_", True
 	if not isinstance(args, list):
 		args = re.split(r"\s*[,，]\s*", str(args)) if split else [args]
 	args = [str(a) for a in args]
 	gen = {g for s in args for m in (StoreID(s, fuzzy = fuzzy, regular = regular),
 		StoreMatch(s, fuzzy = fuzzy, regular = regular)) for g in m}
-	filters: list[Optional[FilterType]] = [
+	filters: list[Optional[StoreMapping]] = [
 		lambda i: not opening or i.isOpen,
 		lambda i: not remove_closed or not i.isClosed,
 		lambda i: not remove_future or not i.isFuture,
@@ -257,10 +272,11 @@ def storeReturn(args: Any = None, *,
 	answer = (i for i in gen if all(f(i) for f in filters if f))
 	match sort:
 		case SortKey.default:
-			return sorted(answer)
+			key: StoreMapping = lambda i: i
 		case SortKey.id:
-			return sorted(answer, key = lambda i: i.iid)
+			key = lambda i: i.iid
 		case SortKey.index:
-			return sorted(answer, key = lambda i: i.index)
+			key = lambda i: i.index
+	return sorted(answer, key = key)
 
 reloadJSON()
