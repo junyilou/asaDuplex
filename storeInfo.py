@@ -182,6 +182,8 @@ class Store:
 		return "\n".join(info)
 
 def StoreID(sid: int | str, fuzzy: Any = False, regular: Any = False) -> list[Store]:
+	if sid == "ALL":
+		return list(STORES.values())
 	try:
 		assert sid
 		if regular:
@@ -199,8 +201,8 @@ def StoreID(sid: int | str, fuzzy: Any = False, regular: Any = False) -> list[St
 def StoreMatch(keyword: str, fuzzy: Any = False, regular: Any = False) -> list[Store]:
 	if not keyword:
 		return []
-	if keyword == "_" and fuzzy:
-		return [i for i in STORES.values()]
+	if keyword == "ALL":
+		return list(STORES.values())
 	if regular:
 		pattern = re.compile(keyword, re.I)
 		return [i for i in STORES.values() if any(re.search(pattern, k) for k in i.keys)]
@@ -257,8 +259,8 @@ def storeReturn(args: Any = None, *,
 	sort: SortKey = SortKey.default,
 	filter: Optional[StoreMapping] = None,
 	allow_empty: bool = True) -> list[Store]:
-	if not args and allow_empty or args in ["_", "all"]:
-		args, fuzzy = "_", True
+	if not args and allow_empty:
+		args = "ALL"
 	if not isinstance(args, list):
 		args = re.split(r"\s*[,，]\s*", str(args)) if split else [args]
 	args = [str(a) for a in args]

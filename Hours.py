@@ -75,15 +75,14 @@ async def entry(store: Store, saved: Optional[dict[str, dict[str, str]]],
 			diff.append(LANG["CANCEL"].format(DATE = date, HOURS = detail["special"]))
 
 	if diff:
-		logging.info(f"[{store.telename(sid = False)}] " + ", ".join(
-			i.lstrip() for i in "\n".join(diff).split("\n")))
+		logging.info(f"[{store}] " + ", ".join(i.lstrip() for i in "\n".join(diff).split("\n")))
 
 	return specials, diff
 
 async def report(targets: list[Store]) -> None:
 	from bot import chat_ids
 	from botpost import async_post
-	replaced = nameReplace(targets, number = False, final = lambda s: s.telename(sid = False))
+	replaced = nameReplace(targets, number = False, final = str)
 	text = f"{"、".join(replaced[:10])} 等 {len(targets)} 家零售店" if len(replaced) > 10 else "、".join(replaced)
 	push = {"image": targets[0].dieter.split("?")[0],
 		"mode": "photo-text", "chat_id": chat_ids[0], "parse": "MARK",
@@ -119,7 +118,7 @@ async def main(session: SessionType) -> None:
 		if len(specials):
 			results[store] = specials
 		if diff:
-			diffs.append(f"{'':4}{store.telename(sid = False)}")
+			diffs.append(f"{'':4}{store}")
 			diffs.extend(diff)
 			targets.append(store)
 		for date in specials:

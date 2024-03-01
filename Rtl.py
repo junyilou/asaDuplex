@@ -41,7 +41,7 @@ async def post(store: Store, dt: datetime, session: SessionType, semaphore: Sema
 		r = await request(store.dieter, session, mode = "raw", retry = 3)
 	with open(f"Retail/{store.rid}-{dt:%F-%H%M%S}.png", "wb") as w:
 		w.write(r)
-	texts = ["*零售店图片更新通知*", "", store.telename(True, True, True), f"*远程标签* {dt:%F %T}"]
+	texts = ["*零售店图片更新通知*", "", f"{store:telegram}", f"*远程标签* {dt:%F %T}"]
 	if hasattr(store, "modified"):
 		texts.insert(-1, f"*本地标签* {store.modified}")
 	photo = photo_encode(r)
