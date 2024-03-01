@@ -2,12 +2,16 @@ import asyncio
 import json
 import re
 from datetime import datetime, timedelta
-from modules.regions import Regions
-from modules.util import SemaphoreType, SessionType
-from modules.util import browser_agent, disMarkdown, get_session, request, tz_text, with_semaphore
-from storeInfo import Store as Raw_Store, getStore as getRaw_Store, sidify, storeReturn
 from typing import Any, Literal, Optional, Self, Sequence
 from zoneinfo import ZoneInfo
+
+from modules.regions import Regions
+from modules.util import (SemaphoreType, SessionType, browser_agent,
+                          disMarkdown, get_session, request, tz_text,
+                          with_semaphore)
+from storeInfo import Store as Raw_Store
+from storeInfo import getStore as getRaw_Store
+from storeInfo import sidify, storeReturn
 
 __SAVED = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}
 ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]

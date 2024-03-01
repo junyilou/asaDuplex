@@ -2,11 +2,11 @@ import asyncio
 import logging
 from collections.abc import AsyncIterator
 from datetime import datetime, timedelta
-from modules.util import SessionType
-from modules.util import browser_agent, request
 from random import choice
-from storeInfo import Store
 from typing import Any, Mapping, Optional
+
+from modules.util import SessionType, browser_agent, request
+from storeInfo import Store
 
 COMMENTS: dict[str, dict[str, str]] = {}
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]

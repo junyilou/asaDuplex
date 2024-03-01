@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from pathlib import PurePath
 from typing import Optional
 
+
 @dataclass(order = True, slots = True)
 class Region:
 	flag: str

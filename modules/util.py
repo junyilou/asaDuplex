@@ -1,4 +1,3 @@
-import aiohttp
 import asyncio
 import json
 import logging
@@ -6,6 +5,8 @@ from collections.abc import AsyncIterator, Callable, Coroutine
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
 from typing import Any, Concatenate, Mapping, Optional
+
+import aiohttp
 
 type SemaphoreType = asyncio.Semaphore
 type SessionType = aiohttp.ClientSession
