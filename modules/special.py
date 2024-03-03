@@ -1,9 +1,9 @@
 import asyncio
 import logging
-from collections.abc import AsyncIterator
+from collections.abc import AsyncIterator, Iterator, Mapping
 from datetime import datetime, timedelta
 from random import choice
-from typing import Any, Mapping, Optional
+from typing import Any, Literal, Optional
 
 from modules.util import SessionType, browser_agent, request
 from storeInfo import Store
@@ -21,6 +21,19 @@ def convert(dct: Mapping[str, Any], userLang: bool = True) -> str:
 			return f'{opt} - {clt}'
 		case _:
 			return "未知时间" if userLang else "Unknown Hours"
+
+def ignored(
+	data: list[dict[str, Any]],
+	rules: dict[str, str],
+	userLang: bool = True) -> Iterator[tuple[str, str]]:
+	for item in sorted(data, key = lambda k: k["date"]):
+		converted = convert(item, userLang)
+		try:
+			for key in ("date", "name"):
+				assert converted != rules.get(item[key])
+		except:
+			continue
+		yield item["date"], converted
 
 async def apu(store: Store, userLang: bool, target: str,
 	session: Optional[SessionType] = None) -> AsyncIterator[tuple[str, str, str]]:
@@ -63,6 +76,7 @@ async def special(store: Store, *,
 	ask_comment: bool = True,
 	userLang: bool = True,
 	detail: dict[str, list[dict[str, Any]]] = {},
+	rules: dict[str, str] = {},
 	session: Optional[SessionType] = None) -> Optional[dict[str, dict[str, str]]]:
 	threshold = threshold or datetime.now()
 	if not detail:
@@ -76,16 +90,46 @@ async def special(store: Store, *,
 			logging.getLogger("modules.special").error(text)
 			return
 
-	comments, results = {}, {}
+	comments, results, asked = {}, {}, []
 	regular = {dayOfWeek.index(regular["name"]): convert(regular, userLang = userLang) for regular in detail["regular"]}
 	if detail["special"] and ask_comment:
 		comments = await comment(store, userLang, session)
-	for item in sorted(detail["special"], key = lambda k: k["date"]):
-		d = datetime.strptime(item["date"], "%Y-%m-%d")
-		if item["date"] < f"{threshold:%F}":
+	for date, converted in ignored(detail["special"], rules = rules, userLang = userLang):
+		d = datetime.strptime(date, "%Y-%m-%d")
+		if date < f"{threshold:%F}":
 			continue
 		reg = regular[d.weekday()]
-		spe = convert(item, userLang = userLang)
-		com = comments.get(store.rid, {}).get(item["date"])
-		results[f"{d:%F}"] = {"regular": reg, "special": spe} | ({"comment": com} if com else {})
+		try:
+			assert ask_comment
+			assert store.rid not in comments
+			assert store.rid not in asked
+			comments = await comment(store, userLang, session)
+			com = comments.get(store.rid, {}).get(date)
+		except:
+			com = None
+		finally:
+			asked.append(store.rid)
+		results[f"{d:%F}"] = {"regular": reg, "special": converted} | ({"comment": com} if com else {})
 	return results
+
+type ResultType = tuple[str, Literal["new", "change", "comment", "outdated", "cancel"], *tuple[str, ...]]
+
+def compare(
+	original: dict[str, dict[str, str]],
+	current: dict[str, dict[str, str]],
+	threshold: str = "") -> list[ResultType]:
+	diff: list[ResultType] = []
+	for date, detail in current.items():
+		spe = detail["special"]
+		if date not in original:
+			diff.append((date, "new", spe))
+		elif (svd := original[date]["special"]) != spe:
+			diff.append((date, "change", svd, spe))
+		elif not original[date].get("comment") and detail.get("comment"):
+			diff.append((date, "comment", detail["comment"]))
+	for date, detail in original.items():
+		if date < threshold:
+			diff.append((date, "outdated"))
+		elif date not in current:
+			diff.append((date, "cancel", detail["special"]))
+	return sorted(diff)
