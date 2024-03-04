@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from collections.abc import AsyncIterator, Iterator, Mapping
+from collections.abc import AsyncIterator, Iterable, Iterator, Mapping
 from datetime import datetime, timedelta
 from random import choice
 from typing import Any, Literal, Optional
@@ -61,14 +61,16 @@ async def apu(store: Store, userLang: bool, target: str,
 			raw = datetime.strptime(f"{holiday["date"]} 00", "%b %d %y").replace(year = datetime.now().year)
 			if raw < datetime.now() - timedelta(weeks = 1):
 				raw = raw.replace(year = raw.year + 1)
-			text = (f"[{holiday['description']}]" if holiday["description"] else "") + (f" {holiday['comments']}" if holiday["comments"] else "")
+			text = " ".join([f"[{holiday["description"]}]" if holiday["description"] else "", holiday["comments"] or ""])
 			yield (rstore["storeNumber"], f"{raw:%F}", text)
 
 async def comment(store: Store, userLang: bool = True,
+	accepted_dates: Iterable[str] = [],
 	session: Optional[SessionType] = None) -> dict[str, dict[str, str]]:
-	async for i in apu(store, userLang, f'MM0A3{store.region.part_sample}/A', session):
-		astore, date, text = i
-		COMMENTS.setdefault(astore, {})[date] = text
+	async for s, d, t in apu(store, userLang, f'MM0A3{store.region.part_sample}/A', session):
+		if accepted_dates and d not in accepted_dates:
+			continue
+		COMMENTS.setdefault(s, {})[d] = t
 	return COMMENTS
 
 async def special(store: Store, *,
@@ -92,8 +94,6 @@ async def special(store: Store, *,
 
 	comments, results, asked = {}, {}, []
 	regular = {dayOfWeek.index(regular["name"]): convert(regular, userLang = userLang) for regular in detail["regular"]}
-	if detail["special"] and ask_comment:
-		comments = await comment(store, userLang, session)
 	for date, converted in ignored(detail["special"], rules = rules, userLang = userLang):
 		d = datetime.strptime(date, "%Y-%m-%d")
 		if date < f"{threshold:%F}":
@@ -103,12 +103,12 @@ async def special(store: Store, *,
 			assert ask_comment
 			assert store.rid not in comments
 			assert store.rid not in asked
-			comments = await comment(store, userLang, session)
-			com = comments.get(store.rid, {}).get(date)
+			comments = await comment(store, userLang, session = session)
 		except:
-			com = None
+			pass
 		finally:
 			asked.append(store.rid)
+		com = comments.get(store.rid, {}).get(date)
 		results[f"{d:%F}"] = {"regular": reg, "special": converted} | ({"comment": com} if com else {})
 	return results
 
@@ -121,6 +121,8 @@ def compare(
 	diff: list[ResultType] = []
 	for date, detail in current.items():
 		spe = detail["special"]
+		if date < threshold:
+			continue
 		if date not in original:
 			diff.append((date, "new", spe))
 		elif (svd := original[date]["special"]) != spe:
