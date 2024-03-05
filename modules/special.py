@@ -67,7 +67,7 @@ async def apu(store: Store, userLang: bool, target: str,
 async def comment(store: Store, userLang: bool = True,
 	accepted_dates: Iterable[str] = [],
 	session: Optional[SessionType] = None) -> dict[str, dict[str, str]]:
-	async for s, d, t in apu(store, userLang, f'MM0A3{store.region.part_sample}/A', session):
+	async for s, d, t in apu(store, userLang, f'MUQ93{store.region.part_sample}/A', session):
 		if accepted_dates and d not in accepted_dates:
 			continue
 		COMMENTS.setdefault(s, {})[d] = t
