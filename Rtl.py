@@ -21,8 +21,11 @@ async def task(store: Store, session: SessionType, semaphore: SemaphoreType) -> 
 		async with semaphore:
 			r = await request(store.dieter, session, method = "GET", ssl = False,
 				mode = ["status", "head", "raw"], retry = 3, allow_redirects = False)
-		assert r["status"] == 200, r["status"]
+		if r["status"] != 200:
+			raise ValueError(r["status"])
 		assert "Last-Modified" in r["head"], r["head"]
+	except ValueError:
+		return None
 	except Exception as exp:
 		logging.error(f"[{store.rid}] 请求失败: {exp!r}")
 		return None

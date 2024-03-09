@@ -1,5 +1,5 @@
 {
-  "update": "2024-02-29 13:38:07",
+  "update": "2024-03-10 02:12:06",
   "001": {
     "city": "Glendale",
     "dates": [
@@ -7,7 +7,7 @@
       "2007-11-17"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-02-07 23:00:22",
+    "modified": "2024-02-08 18:41:30",
     "name": [
       "Glendale Galleria",
       "Glendale"
@@ -24,7 +24,7 @@
       "2018-06-30"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:30",
     "name": "Palo Alto",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -37,7 +37,7 @@
       "2012-09-01"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:30",
     "name": "Bellevue Square",
     "state": "Washington",
     "timezone": "America/Los_Angeles",
@@ -50,7 +50,7 @@
       "2007-11-03"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-03-02 22:17:47",
+    "modified": "2024-02-08 18:41:30",
     "name": "South Coast Plaza",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -61,7 +61,7 @@
     "city": "名古屋市",
     "dates": "2005-01-22",
     "flag": "🇯🇵",
-    "modified": "2022-09-07 19:36:08",
+    "modified": "2024-02-08 18:41:30",
     "name": [
       "名古屋栄",
       "Nagoya Sakae"
@@ -78,7 +78,7 @@
       "2020-11-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:30",
     "name": "Lenox Square",
     "state": "Georgia",
     "timezone": "America/New_York",
@@ -91,7 +91,7 @@
       "2019-09-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:30",
     "name": "Mall of America",
     "state": "Minnesota",
     "timezone": "America/Chicago",
@@ -105,7 +105,7 @@
       "2019-04-12"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:30",
     "name": "Willow Bend",
     "state": "Texas",
     "status": "closed",
@@ -119,7 +119,7 @@
       "2012-11-10"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:30",
     "name": [
       "Easton Town Center",
       "Easton"
@@ -135,7 +135,7 @@
       "2023-05-19"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-05-22 22:18:46",
+    "modified": "2024-02-08 18:41:30",
     "name": [
       "Tysons Corner",
       "Tysons"
@@ -151,7 +151,7 @@
       "2017-01-28"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:31",
     "name": [
       "MarketStreet",
       "Northshore"
@@ -167,7 +167,7 @@
       "2007-11-10"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:31",
     "name": "The Falls",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -180,7 +180,7 @@
       "2023-07-22"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-07-25 23:15:28",
+    "modified": "2024-02-08 18:41:31",
     "name": [
       "Tice's Corner",
       "Tice's"
@@ -196,7 +196,7 @@
       "2018-07-28"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:31",
     "name": [
       "Broadway Plaza",
       "Walnut Creek"
@@ -212,7 +212,7 @@
       "2011-08-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-05-10 18:16:41",
+    "modified": "2024-02-08 18:41:31",
     "name": "Fashion Island",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -225,7 +225,7 @@
       "2016-03-19"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:31",
     "name": [
       "Walden Galleria",
       "Walden"
@@ -241,7 +241,7 @@
       "2016-02-27"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:31",
     "name": "Crossgates",
     "state": "New York",
     "timezone": "America/New_York",
@@ -254,7 +254,7 @@
       "2017-09-30"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:31",
     "name": "Woodfield",
     "state": "Illinois",
     "timezone": "America/Chicago",
@@ -267,7 +267,7 @@
       "2014-05-24"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-09-11 09:01:54",
+    "modified": "2024-02-08 18:41:31",
     "name": [
       "International Plaza",
       "Plaza"
@@ -283,7 +283,7 @@
       "2016-03-26"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:31",
     "name": "Saddle Creek",
     "state": "Tennessee",
     "timezone": "America/Chicago",
@@ -296,7 +296,7 @@
       "2017-07-08"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:31",
     "name": "CambridgeSide",
     "state": "Massachusetts",
     "timezone": "America/New_York",
@@ -309,7 +309,7 @@
       "2013-12-14"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:31",
     "name": "Rosedale Center",
     "state": "Minnesota",
     "timezone": "America/Chicago",
@@ -322,7 +322,7 @@
       "2014-07-26"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:32",
     "name": "Northridge",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -332,7 +332,7 @@
     "city": "Wellington",
     "dates": "2002-08-17",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:32",
     "name": "Wellington Green",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -345,7 +345,7 @@
       "2014-08-06"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:32",
     "name": "Westfarms",
     "state": "Connecticut",
     "timezone": "America/New_York",
@@ -358,7 +358,7 @@
       "2016-09-24"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:32",
     "name": [
       "Chandler Fashion Center",
       "Chandler"
@@ -374,7 +374,7 @@
       "2013-11-16"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-07-28 17:11:22",
+    "modified": "2024-02-08 18:41:32",
     "name": "Rockingham Park",
     "state": "New Hampshire",
     "timezone": "America/New_York",
@@ -387,7 +387,7 @@
       "2012-10-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-06-24 21:19:03",
+    "modified": "2024-02-08 18:41:32",
     "name": "Kenwood Towne Centre",
     "state": "Ohio",
     "timezone": "America/New_York",
@@ -400,7 +400,7 @@
       "2017-11-18"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:32",
     "name": "Burlingame",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -413,7 +413,7 @@
       "2016-04-30"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:32",
     "name": "Aspen Grove",
     "state": "Colorado",
     "timezone": "America/Denver",
@@ -427,7 +427,7 @@
       "2018-09-29"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:32",
     "name": [
       "Scottsdale Fashion Square",
       "Biltmore"
@@ -443,7 +443,7 @@
       "2012-07-14"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:32",
     "name": "SoHo",
     "state": "New York",
     "timezone": "America/New_York",
@@ -456,7 +456,7 @@
       "2013-12-14"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:32",
     "name": "Stonestown",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -469,7 +469,7 @@
       "2012-02-04"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-10-19 18:45:27",
+    "modified": "2024-02-08 18:41:32",
     "name": "Pasadena",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -482,7 +482,7 @@
       "2017-10-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:32",
     "name": [
       "Michigan Avenue",
       "North Michigan Avenue"
@@ -498,7 +498,7 @@
       "2016-09-24"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:32",
     "name": "Clarendon",
     "state": "Virginia",
     "timezone": "America/New_York",
@@ -512,7 +512,7 @@
       "2020-10-17"
     ],
     "flag": "🇮🇹",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:32",
     "name": "RomaEst",
     "state": "Roma",
     "status": "closed",
@@ -527,7 +527,7 @@
       "2020-10-23"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:32",
     "name": "Valley Fair",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -540,7 +540,7 @@
       "2007-06-16"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-10-12 22:46:18",
+    "modified": "2024-02-08 18:41:32",
     "name": "Fashion Valley",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -553,7 +553,7 @@
       "2014-05-17"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-10-06 21:16:10",
+    "modified": "2024-02-08 18:41:32",
     "name": "Twelve Oaks",
     "state": "Michigan",
     "timezone": "America/New_York",
@@ -566,7 +566,7 @@
       "2011-11-25"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:32",
     "name": "Knox Street",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -579,7 +579,7 @@
       "2007-11-17"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-05-16 20:49:00",
+    "modified": "2024-02-08 18:41:32",
     "name": "Short Hills",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -592,7 +592,7 @@
       "2012-09-21"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-09-06 14:21:26",
+    "modified": "2024-02-08 18:41:32",
     "name": "Santa Rosa Plaza",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -603,7 +603,7 @@
     "city": "München",
     "dates": "2008-12-06",
     "flag": "🇩🇪",
-    "modified": "2023-07-21 22:15:51",
+    "modified": "2024-02-08 18:41:32",
     "name": [
       "Rosenstraße",
       "Rosenstrasse"
@@ -619,7 +619,7 @@
       "2013-10-10"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:32",
     "name": [
       "Nanuet",
       "Palisades"
@@ -635,7 +635,7 @@
       "2021-02-22"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:32",
     "name": "Cherry Creek",
     "state": "Colorado",
     "timezone": "America/Denver",
@@ -648,7 +648,7 @@
       "2019-09-28"
     ],
     "flag": "🇯🇵",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:32",
     "name": [
       "福岡",
       "Fukuoka",
@@ -666,7 +666,7 @@
       "2021-02-15"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:32",
     "name": "Southpoint",
     "state": "North Carolina",
     "timezone": "America/New_York",
@@ -679,7 +679,7 @@
       "2021-11-19"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:32",
     "name": "The Grove",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -693,7 +693,7 @@
       "2018-11-17"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:32",
     "name": "Third Street Promenade",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -706,7 +706,7 @@
       "2024-01-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:33",
     "name": "Infinite Loop",
     "state": "California",
     "status": "closed",
@@ -721,7 +721,7 @@
       "2012-11-10"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-06-08 18:03:24",
+    "modified": "2024-02-08 18:41:33",
     "name": "Millenia",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -734,7 +734,7 @@
       "2013-04-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:33",
     "name": "Southdale",
     "state": "Minnesota",
     "timezone": "America/Chicago",
@@ -748,7 +748,7 @@
       "2011-11-19"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-07-08 18:08:11",
+    "modified": "2024-02-08 18:41:33",
     "name": "Somerset",
     "state": "Michigan",
     "timezone": "America/New_York",
@@ -761,7 +761,7 @@
       "2014-01-11"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:33",
     "name": "Oakbrook",
     "state": "Illinois",
     "timezone": "America/Chicago",
@@ -775,7 +775,7 @@
       "2016-09-10"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:33",
     "name": "Bay Street",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -789,7 +789,7 @@
       "2014-10-11"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:33",
     "name": "Houston Galleria",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -802,7 +802,7 @@
       "2016-09-10"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:33",
     "name": "Mayfair",
     "state": "Wisconsin",
     "timezone": "America/Chicago",
@@ -815,7 +815,7 @@
       "2009-12-10"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-06-24 22:21:02",
+    "modified": "2024-02-08 18:41:33",
     "name": "Roosevelt Field",
     "state": "New York",
     "timezone": "America/New_York",
@@ -829,7 +829,7 @@
       "2018-11-10"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:33",
     "name": "The Westchester",
     "state": "New York",
     "timezone": "America/New_York",
@@ -842,7 +842,7 @@
       "2016-06-25"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:33",
     "name": "West County",
     "state": "Missouri",
     "timezone": "America/Chicago",
@@ -855,7 +855,7 @@
       "2012-09-29"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-07-26 17:43:54",
+    "modified": "2024-02-08 18:41:33",
     "name": [
       "Towson Town Center",
       "Towson"
@@ -871,7 +871,7 @@
       "2013-11-16"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:33",
     "name": "Fashion Show",
     "state": "Nevada",
     "timezone": "America/Los_Angeles",
@@ -884,7 +884,7 @@
       "2012-12-08"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-02-18 22:18:38",
+    "modified": "2024-02-08 18:41:33",
     "name": "King of Prussia",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
@@ -897,7 +897,7 @@
       "2016-09-16"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:33",
     "name": [
       "The Fashion Mall at Keystone",
       "Keystone"
@@ -913,7 +913,7 @@
       "2016-11-05"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:33",
     "name": "Menlo Park",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -926,7 +926,7 @@
       "2012-12-01"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-04-27 17:48:17",
+    "modified": "2024-02-08 18:41:33",
     "name": "Walt Whitman",
     "state": "New York",
     "timezone": "America/New_York",
@@ -939,7 +939,7 @@
       "2009-11-27"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-06-24 22:15:39",
+    "modified": "2024-02-08 18:41:33",
     "name": "Mission Viejo",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -952,7 +952,7 @@
       "2013-11-27"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:33",
     "name": "Arden Fair",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -965,7 +965,7 @@
       "2016-01-30"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:33",
     "name": "Corte Madera",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -979,7 +979,7 @@
       "2018-06-30"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:33",
     "name": "University Village",
     "state": "Washington",
     "timezone": "America/Los_Angeles",
@@ -992,7 +992,7 @@
       "2011-11-19"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:33",
     "name": "Ala Moana",
     "state": "Hawaii",
     "timezone": "Pacific/Honolulu",
@@ -1005,7 +1005,7 @@
       "2012-11-10"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:33",
     "name": "Boca Raton",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -1018,7 +1018,7 @@
       "2016-05-21"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:33",
     "name": [
       "Union Square (US)",
       "Union Square",
@@ -1035,7 +1035,7 @@
       "2016-03-26"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:33",
     "name": "Chestnut Hill",
     "state": "Massachusetts",
     "timezone": "America/New_York",
@@ -1049,7 +1049,7 @@
       "2019-05-31"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:33",
     "name": "Pioneer Place",
     "state": "Oregon",
     "timezone": "America/Los_Angeles",
@@ -1062,7 +1062,7 @@
       "2014-05-10"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-07-19 22:43:31",
+    "modified": "2024-02-08 18:41:33",
     "name": "Short Pump Town Center",
     "state": "Virginia",
     "timezone": "America/New_York",
@@ -1076,7 +1076,7 @@
       "2022-08-30"
     ],
     "flag": "🇯🇵",
-    "modified": "2022-08-31 13:40:51",
+    "modified": "2024-02-08 18:41:33",
     "name": [
       "銀座",
       "Ginza"
@@ -1092,7 +1092,7 @@
       "2017-04-13"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-05-09 23:13:40",
+    "modified": "2024-02-08 18:41:33",
     "name": [
       "Avalon",
       "North Point"
@@ -1108,7 +1108,7 @@
       "2013-06-29"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:33",
     "name": [
       "Eton",
       "Legacy Village"
@@ -1124,7 +1124,7 @@
       "2017-11-16"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:33",
     "name": "UTC",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -1138,7 +1138,7 @@
       "2018-09-02"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:33",
     "name": "SouthPark",
     "state": "North Carolina",
     "timezone": "America/New_York",
@@ -1151,7 +1151,7 @@
       "2016-11-19"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:33",
     "name": "Montgomery Mall",
     "state": "Maryland",
     "timezone": "America/New_York",
@@ -1164,7 +1164,7 @@
       "2013-03-23"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:33",
     "name": "Barton Creek",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -1174,7 +1174,7 @@
     "city": "Tucson",
     "dates": "2004-01-24",
     "flag": "🇺🇸",
-    "modified": "2022-06-03 16:52:46",
+    "modified": "2024-02-08 18:41:33",
     "name": "La Encantada",
     "state": "Arizona",
     "timezone": "US/Arizona",
@@ -1188,7 +1188,7 @@
       "2019-08-10"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:33",
     "name": "Aventura",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -1198,7 +1198,7 @@
     "city": "Marlton",
     "dates": "2003-11-01",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:33",
     "name": "Sagemore",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -1211,7 +1211,7 @@
       "2019-09-28"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:34",
     "name": "Old Orchard",
     "state": "Illinois",
     "timezone": "America/Chicago",
@@ -1224,7 +1224,7 @@
       "2014-12-06"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-05-27 19:05:06",
+    "modified": "2024-02-08 18:41:34",
     "name": "Washington Square",
     "state": "Oregon",
     "timezone": "America/Los_Angeles",
@@ -1235,7 +1235,7 @@
     "city": "大阪市",
     "dates": "2004-08-28",
     "flag": "🇯🇵",
-    "modified": "2022-09-13 20:58:56",
+    "modified": "2024-02-08 18:41:34",
     "name": [
       "心斎橋",
       "Shinsaibashi"
@@ -1251,7 +1251,7 @@
       "2016-10-15"
     ],
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:34",
     "name": "Regent Street",
     "state": "Central London",
     "timezone": "Europe/London",
@@ -1264,7 +1264,7 @@
       "2017-07-08"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:34",
     "name": "Danbury Fair Mall",
     "state": "Connecticut",
     "timezone": "America/New_York",
@@ -1277,7 +1277,7 @@
       "2011-10-22"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": "Victoria Gardens",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -1291,7 +1291,7 @@
       "2019-09-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:34",
     "name": "Fifth Avenue",
     "state": "New York",
     "timezone": "America/New_York",
@@ -1301,7 +1301,7 @@
     "city": "Pittsburgh",
     "dates": "2004-09-04",
     "flag": "🇺🇸",
-    "modified": "2022-03-25 00:19:27",
+    "modified": "2024-02-08 18:41:34",
     "name": "Shadyside",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
@@ -1314,7 +1314,7 @@
       "2016-08-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:34",
     "name": "Country Club Plaza",
     "state": "Missouri",
     "timezone": "America/Chicago",
@@ -1327,7 +1327,7 @@
       "2013-09-07"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": [
       "Stanford Shopping Center",
       "Stanford"
@@ -1343,7 +1343,7 @@
       "2018-11-17"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": [
       "Alderwood",
       "Alderwood Mall"
@@ -1359,7 +1359,7 @@
       "2016-09-24"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": "Stoneridge Mall",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -1373,7 +1373,7 @@
       "2012-11-23"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": "Christiana Mall",
     "state": "Delaware",
     "timezone": "America/New_York",
@@ -1386,7 +1386,7 @@
       "2012-12-15"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:34",
     "name": "Rockaway",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -1400,7 +1400,7 @@
       "2019-09-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:34",
     "name": "Bridgewater",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -1413,7 +1413,7 @@
       "2015-02-14"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": "Oakridge",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -1426,7 +1426,7 @@
       "2008-11-15"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-03-22 19:07:32",
+    "modified": "2024-02-08 18:41:34",
     "name": "Southcenter",
     "state": "Washington",
     "timezone": "America/Los_Angeles",
@@ -1439,7 +1439,7 @@
       "2012-08-25"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-05-16 21:15:00",
+    "modified": "2024-02-08 18:41:34",
     "name": [
       "Syracuse",
       "Carousel"
@@ -1455,7 +1455,7 @@
       "2017-11-03"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": "Century City",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -1468,7 +1468,7 @@
       "2016-10-01"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": "Jordan Creek",
     "state": "Iowa",
     "timezone": "America/Chicago",
@@ -1481,7 +1481,7 @@
       "2023-11-18"
     ],
     "flag": "🇺🇸",
-    "modified": "2024-01-08 19:42:25",
+    "modified": "2024-02-08 18:41:34",
     "name": "South Shore",
     "state": "Massachusetts",
     "timezone": "America/New_York",
@@ -1494,7 +1494,7 @@
       "2017-03-11"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": [
       "St. Johns Town Center",
       "St Johns Town Center"
@@ -1510,7 +1510,7 @@
       "2009-04-04"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": "Bethesda Row",
     "state": "Maryland",
     "timezone": "America/New_York",
@@ -1523,7 +1523,7 @@
       "2018-03-24"
     ],
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": "Bluewater",
     "state": "Kent",
     "timezone": "Europe/London",
@@ -1536,7 +1536,7 @@
       "2010-10-16"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-03-03 21:41:42",
+    "modified": "2024-02-08 18:41:34",
     "name": "Saint Louis Galleria",
     "state": "Missouri",
     "timezone": "America/Chicago",
@@ -1549,7 +1549,7 @@
       "2015-04-25"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:34",
     "name": "Lincoln Road",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -1562,7 +1562,7 @@
       "2017-12-09"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": "Crabtree Valley Mall",
     "state": "North Carolina",
     "timezone": "America/New_York",
@@ -1575,7 +1575,7 @@
       "2012-12-08"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:34",
     "name": "Garden State Plaza",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -1588,7 +1588,7 @@
       "2016-09-24"
     ],
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": [
       "Birmingham",
       "Bullring"
@@ -1605,7 +1605,7 @@
       "2018-10-26"
     ],
     "flag": "🇯🇵",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": [
       "渋谷",
       "Shibuya"
@@ -1621,7 +1621,7 @@
       "2012-12-01"
     ],
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:34",
     "name": "Yorkdale",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -1635,7 +1635,7 @@
       "2019-12-14"
     ],
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": "Eaton Centre",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -1648,7 +1648,7 @@
       "2014-09-13"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-03-21 16:05:22",
+    "modified": "2024-02-08 18:41:34",
     "name": "Manhattan Village",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -1661,7 +1661,7 @@
       "2018-09-29"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:34",
     "name": "Green Hills",
     "state": "Tennessee",
     "timezone": "America/Chicago",
@@ -1674,7 +1674,7 @@
       "2018-06-09"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:34",
     "name": "Beverly Center",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -1687,7 +1687,7 @@
       "2012-11-17"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": [
       "City Creek Center",
       "The Gateway"
@@ -1703,7 +1703,7 @@
       "2019-09-14"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:34",
     "name": "The Woodlands",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -1716,7 +1716,7 @@
       "2017-12-16"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:34",
     "name": "The Gardens Mall",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -1727,7 +1727,7 @@
     "city": "新宿区",
     "dates": "2018-04-07",
     "flag": "🇯🇵",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:35",
     "name": [
       "新宿",
       "Shinjuku"
@@ -1743,7 +1743,7 @@
       "2017-03-04"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:35",
     "name": "Pentagon City",
     "state": "Virginia",
     "timezone": "America/New_York",
@@ -1756,7 +1756,7 @@
       "2016-11-19"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:35",
     "name": "Penn Square",
     "state": "Oklahoma",
     "timezone": "America/Chicago",
@@ -1766,7 +1766,7 @@
     "city": "San Antonio",
     "dates": "2005-09-16",
     "flag": "🇺🇸",
-    "modified": "2022-03-07 21:41:59",
+    "modified": "2024-02-08 18:41:35",
     "name": "La Cantera",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -1779,7 +1779,7 @@
       "2017-04-08"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:35",
     "name": "Woodland",
     "state": "Michigan",
     "timezone": "America/New_York",
@@ -1789,7 +1789,7 @@
     "city": "Nashville",
     "dates": "2021-03-29",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-20 08:52:20",
     "name": "Downtown Nashville",
     "state": "Tennessee",
     "timezone": "America/Chicago",
@@ -1802,7 +1802,7 @@
       "2022-11-12"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-11-14 19:36:48",
+    "modified": "2024-02-08 18:41:35",
     "name": "Bridgeport Village",
     "state": "Oregon",
     "timezone": "America/Los_Angeles",
@@ -1815,7 +1815,7 @@
       "2016-08-27"
     ],
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:35",
     "name": [
       "Glasgow",
       "Buchanan Street"
@@ -1831,7 +1831,7 @@
       "2010-11-26"
     ],
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:35",
     "name": "Trafford Centre",
     "state": "Greater Manchester",
     "timezone": "Europe/London",
@@ -1844,7 +1844,7 @@
       "2016-06-25"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-03-24 15:43:41",
+    "modified": "2024-02-08 18:41:35",
     "name": "Derby Street",
     "state": "Massachusetts",
     "timezone": "America/New_York",
@@ -1857,7 +1857,7 @@
       "2023-05-27"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-06-01 19:28:18",
+    "modified": "2024-02-08 18:41:35",
     "name": "Freehold Raceway Mall",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -1870,7 +1870,7 @@
       "2017-09-22"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:35",
     "name": "Smith Haven",
     "state": "New York",
     "timezone": "America/New_York",
@@ -1883,7 +1883,7 @@
       "2018-09-21"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:35",
     "name": "Eastview",
     "state": "New York",
     "timezone": "America/New_York",
@@ -1896,7 +1896,7 @@
       "2017-09-09"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:35",
     "name": "Northbrook",
     "state": "Illinois",
     "timezone": "America/Chicago",
@@ -1909,7 +1909,7 @@
       "2016-08-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:35",
     "name": "Annapolis",
     "state": "Maryland",
     "timezone": "America/New_York",
@@ -1922,7 +1922,7 @@
       "2013-07-27"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:35",
     "name": "Florida Mall",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -1935,7 +1935,7 @@
       "2013-06-22"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:35",
     "name": "NorthPark Center",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -1955,7 +1955,7 @@
       "2018-08-18"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:35",
     "name": [
       "Irvine Spectrum Center",
       "Irvine Spectrum"
@@ -1971,7 +1971,7 @@
       "2017-09-02"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:35",
     "name": "South Hills Village",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
@@ -1984,7 +1984,7 @@
       "2016-08-06"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:35",
     "name": "Sherman Oaks",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -1994,7 +1994,7 @@
     "city": "Boston",
     "dates": "2008-05-15",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:35",
     "name": "Boylston Street",
     "state": "Massachusetts",
     "timezone": "America/New_York",
@@ -2008,7 +2008,7 @@
       "2019-01-25"
     ],
     "flag": "🇯🇵",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:35",
     "name": [
       "仙台一番町",
       "Sendai Ichibancho"
@@ -2025,7 +2025,7 @@
       "2018-11-03"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:35",
     "name": "Southlake Town Square",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -2035,7 +2035,7 @@
     "city": "Staten Island",
     "dates": "2005-10-15",
     "flag": "🇺🇸",
-    "modified": "2022-03-22 19:09:08",
+    "modified": "2024-02-08 18:41:35",
     "name": "Staten Island",
     "state": "New York",
     "timezone": "America/New_York",
@@ -2048,7 +2048,7 @@
       "2017-09-22"
     ],
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:35",
     "name": "Meadowhall",
     "state": "South Yorkshire",
     "timezone": "Europe/London",
@@ -2061,7 +2061,7 @@
       "2016-08-27"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:35",
     "name": "The Oaks",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -2074,7 +2074,7 @@
       "2017-11-18"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:35",
     "name": "Burlington",
     "state": "Massachusetts",
     "timezone": "America/New_York",
@@ -2087,7 +2087,7 @@
       "2016-09-24"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:35",
     "name": "Brea Mall",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -2101,7 +2101,7 @@
       "2019-08-31"
     ],
     "flag": "🇨🇭",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:35",
     "name": [
       "Rennweg",
       "Bahnhofstrasse"
@@ -2114,7 +2114,7 @@
     "city": "Las Vegas",
     "dates": "2008-08-30",
     "flag": "🇺🇸",
-    "modified": "2022-05-16 21:54:09",
+    "modified": "2024-02-08 18:41:35",
     "name": "The Forum Shops",
     "state": "Nevada",
     "timezone": "America/Los_Angeles",
@@ -2124,7 +2124,7 @@
     "city": "Philadelphia",
     "dates": "2010-07-30",
     "flag": "🇺🇸",
-    "modified": "2023-06-13 21:25:35",
+    "modified": "2024-02-08 18:41:35",
     "name": "Walnut Street",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
@@ -2137,7 +2137,7 @@
       "2015-12-05"
     ],
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:35",
     "name": "Brent Cross",
     "state": "Greater London",
     "timezone": "Europe/London",
@@ -2150,7 +2150,7 @@
       "2016-09-02"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:35",
     "name": "Memorial City",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -2160,7 +2160,7 @@
     "city": "Ardmore",
     "dates": "2006-05-13",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:35",
     "name": "Suburban Square",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
@@ -2173,7 +2173,7 @@
       "2017-05-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:35",
     "name": "Providence Place",
     "state": "Rhode Island",
     "timezone": "America/New_York",
@@ -2186,7 +2186,7 @@
       "2019-09-28"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:35",
     "name": "Columbia",
     "state": "Maryland",
     "timezone": "America/New_York",
@@ -2199,7 +2199,7 @@
       "2019-08-24"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:36",
     "name": "Waterside Shops",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -2212,7 +2212,7 @@
       "2017-09-15"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:36",
     "name": "Simi Valley",
     "state": "California",
     "status": "closed",
@@ -2223,7 +2223,7 @@
     "city": "Boulder",
     "dates": "2006-10-13",
     "flag": "🇺🇸",
-    "modified": "2022-03-22 19:10:28",
+    "modified": "2024-02-08 18:41:36",
     "name": "Twenty Ninth Street",
     "state": "Colorado",
     "timezone": "America/Denver",
@@ -2236,7 +2236,7 @@
       "2018-06-30"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:36",
     "name": "The Pier",
     "state": "New Jersey",
     "status": "closed",
@@ -2250,7 +2250,7 @@
       "2017-08-12"
     ],
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:36",
     "name": [
       "Southampton",
       "WestQuay"
@@ -2263,7 +2263,7 @@
     "city": "Reading",
     "dates": "2011-06-25",
     "flag": "🇬🇧",
-    "modified": "2024-02-06 11:27:13",
+    "modified": "2024-02-08 18:41:36",
     "name": "The Oracle",
     "state": "Berkshire",
     "timezone": "Europe/London",
@@ -2273,7 +2273,7 @@
     "city": "Albuquerque",
     "dates": "2006-11-01",
     "flag": "🇺🇸",
-    "modified": "2023-08-30 23:28:48",
+    "modified": "2024-02-08 18:41:36",
     "name": "ABQ Uptown",
     "state": "New Mexico",
     "timezone": "America/Denver",
@@ -2284,7 +2284,7 @@
     "city": "Puteaux - la Défense",
     "dates": "2012-05-25",
     "flag": "🇫🇷",
-    "modified": "2022-05-18 16:46:58",
+    "modified": "2024-02-08 18:41:36",
     "name": "Les Quatre Temps",
     "state": "Hauts-de-Seine",
     "timezone": "Europe/Paris",
@@ -2297,7 +2297,7 @@
       "2017-11-24"
     ],
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:36",
     "name": "Chadstone",
     "state": "Victoria",
     "timezone": "Australia/Melbourne",
@@ -2307,7 +2307,7 @@
     "city": "Broomfield",
     "dates": "2006-05-06",
     "flag": "🇺🇸",
-    "modified": "2023-07-05 05:38:43",
+    "modified": "2024-02-08 18:41:36",
     "name": "FlatIron Crossing",
     "state": "Colorado",
     "timezone": "America/Denver",
@@ -2320,7 +2320,7 @@
       "2016-09-16"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:36",
     "name": "Ridgedale",
     "state": "Minnesota",
     "timezone": "America/Chicago",
@@ -2333,7 +2333,7 @@
       "2016-10-22"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:36",
     "name": "Perimeter",
     "state": "Georgia",
     "timezone": "America/New_York",
@@ -2343,7 +2343,7 @@
     "city": "Estero",
     "dates": "2007-02-24",
     "flag": "🇺🇸",
-    "modified": "2023-09-22 03:44:35",
+    "modified": "2024-02-08 18:41:36",
     "name": "Coconut Point",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -2356,7 +2356,7 @@
       "2017-09-16"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:36",
     "name": "Summit Sierra",
     "state": "Nevada",
     "timezone": "America/Los_Angeles",
@@ -2369,7 +2369,7 @@
       "2017-09-16"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-07-11 00:14:26",
+    "modified": "2024-02-08 18:41:36",
     "name": "Topanga",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -2382,7 +2382,7 @@
       "2017-09-02"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:36",
     "name": "Village Pointe",
     "state": "Nebraska",
     "timezone": "America/Chicago",
@@ -2392,7 +2392,7 @@
     "city": "Holyoke",
     "dates": "2007-07-21",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:36",
     "name": "Holyoke",
     "state": "Massachusetts",
     "timezone": "America/New_York",
@@ -2402,7 +2402,7 @@
     "city": "Westlake",
     "dates": "2008-09-13",
     "flag": "🇺🇸",
-    "modified": "2022-05-20 17:23:43",
+    "modified": "2024-02-08 18:41:36",
     "name": "Crocker Park",
     "state": "Ohio",
     "timezone": "America/New_York",
@@ -2416,7 +2416,7 @@
       "2016-02-26"
     ],
     "flag": "🇯🇵",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:36",
     "name": [
       "札幌",
       "Sapporo"
@@ -2433,7 +2433,7 @@
       "2024-01-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:36",
     "name": "Royal Hawaiian",
     "state": "Hawaii",
     "status": "closed",
@@ -2444,7 +2444,7 @@
     "city": "San Luis Obispo",
     "dates": "2007-06-09",
     "flag": "🇺🇸",
-    "modified": "2023-05-16 20:56:22",
+    "modified": "2024-02-08 18:41:36",
     "name": "Higuera Street",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -2457,7 +2457,7 @@
       "2020-02-15"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:36",
     "name": [
       "SoNo Collection",
       "Stamford"
@@ -2473,7 +2473,7 @@
       "2016-09-10"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:36",
     "name": "West Town Mall",
     "state": "Tennessee",
     "timezone": "America/New_York",
@@ -2483,7 +2483,7 @@
     "city": "Friendswood",
     "dates": "2007-05-12",
     "flag": "🇺🇸",
-    "modified": "2022-03-08 18:21:03",
+    "modified": "2024-02-08 18:41:36",
     "name": "Baybrook",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -2493,7 +2493,7 @@
     "city": "Sugar Land",
     "dates": "2006-11-11",
     "flag": "🇺🇸",
-    "modified": "2023-05-04 20:57:45",
+    "modified": "2024-02-08 18:41:36",
     "name": "First Colony Mall",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -2506,7 +2506,7 @@
       "2020-09-10"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:36",
     "name": "Cherry Hill",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -2519,7 +2519,7 @@
       "2013-02-16"
     ],
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:36",
     "name": "Carrefour Laval",
     "state": "Quebec",
     "timezone": "Canada/Eastern",
@@ -2532,7 +2532,7 @@
       "2012-10-27"
     ],
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:36",
     "name": "Sherway Gardens",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -2542,7 +2542,7 @@
     "city": "Calgary",
     "dates": "2010-09-29",
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:36",
     "name": "Chinook Centre",
     "state": "Alberta",
     "timezone": "Canada/Mountain",
@@ -2552,7 +2552,7 @@
     "city": "Honolulu",
     "dates": "2007-02-10",
     "flag": "🇺🇸",
-    "modified": "2023-03-02 05:43:49",
+    "modified": "2024-02-08 18:41:36",
     "name": "Kahala",
     "state": "Hawaii",
     "timezone": "Pacific/Honolulu",
@@ -2565,7 +2565,7 @@
       "2021-05-14"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:36",
     "name": "MacArthur Center",
     "state": "Virginia",
     "status": "closed",
@@ -2576,7 +2576,7 @@
     "city": "Chula Vista",
     "dates": "2006-10-27",
     "flag": "🇺🇸",
-    "modified": "2022-10-10 17:08:33",
+    "modified": "2024-02-08 18:41:36",
     "name": "Otay Ranch",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -2586,7 +2586,7 @@
     "city": "Fort Lauderdale",
     "dates": "2007-04-21",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:36",
     "name": "The Galleria",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -2599,7 +2599,7 @@
       "2012-09-08"
     ],
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:36",
     "name": "Manchester Arndale",
     "state": "Greater Manchester",
     "timezone": "Europe/London",
@@ -2612,7 +2612,7 @@
       "2017-11-11"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-07-10 21:27:08",
+    "modified": "2024-02-08 18:41:36",
     "name": [
       "Domain NORTHSIDE",
       "The Domain"
@@ -2625,7 +2625,7 @@
     "city": "San Francisco",
     "dates": "2007-11-23",
     "flag": "🇺🇸",
-    "modified": "2023-06-21 17:48:26",
+    "modified": "2024-02-08 18:41:36",
     "name": "Chestnut Street",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -2635,7 +2635,7 @@
     "city": "Clinton Township",
     "dates": "2007-10-18",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:36",
     "name": "Partridge Creek",
     "state": "Michigan",
     "timezone": "America/New_York",
@@ -2645,7 +2645,7 @@
     "city": "Las Vegas",
     "dates": "2007-11-14",
     "flag": "🇺🇸",
-    "modified": "2023-03-14 02:49:00",
+    "modified": "2024-02-08 18:41:36",
     "name": "Town Square",
     "state": "Nevada",
     "timezone": "America/Los_Angeles",
@@ -2655,7 +2655,7 @@
     "city": "Fairfax",
     "dates": "2008-04-26",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:36",
     "name": "Fair Oaks",
     "state": "Virginia",
     "timezone": "America/New_York",
@@ -2669,7 +2669,7 @@
       "2019-09-20"
     ],
     "flag": "🇯🇵",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:36",
     "name": [
       "表参道",
       "Omotesando"
@@ -2685,7 +2685,7 @@
       "2023-03-25"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-03-27 21:34:32",
+    "modified": "2024-02-08 18:41:37",
     "name": "The Summit",
     "state": "Alabama",
     "timezone": "America/Chicago",
@@ -2699,7 +2699,7 @@
       "2022-12-08"
     ],
     "flag": "🇬🇧",
-    "modified": "2022-12-12 17:16:42",
+    "modified": "2024-02-08 18:41:37",
     "name": "White City",
     "state": "Greater London",
     "timezone": "Europe/London",
@@ -2712,7 +2712,7 @@
       "2012-06-02"
     ],
     "flag": "🇬🇧",
-    "modified": "2023-07-05 05:40:27",
+    "modified": "2024-02-08 18:41:37",
     "name": "Bentall Centre",
     "state": "Greater London",
     "timezone": "Europe/London",
@@ -2725,7 +2725,7 @@
       "2016-09-16"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:37",
     "name": "Park Meadows",
     "state": "Colorado",
     "timezone": "America/Denver",
@@ -2738,7 +2738,7 @@
       "2017-08-12"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:37",
     "name": [
       "Hilldale",
       "West Towne"
@@ -2751,7 +2751,7 @@
     "city": "Ann Arbor",
     "dates": "2007-07-21",
     "flag": "🇺🇸",
-    "modified": "2023-06-12 15:48:59",
+    "modified": "2024-02-08 18:41:37",
     "name": "Briarwood",
     "state": "Michigan",
     "timezone": "America/New_York",
@@ -2764,7 +2764,7 @@
       "2019-12-07"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:37",
     "name": "Hillsdale",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -2777,7 +2777,7 @@
       "2019-02-16"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:37",
     "name": [
       "Natick",
       "Natick Collection"
@@ -2790,7 +2790,7 @@
     "city": "Tulsa",
     "dates": "2007-06-29",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:37",
     "name": "Woodland Hills",
     "state": "Oklahoma",
     "timezone": "America/Chicago",
@@ -2800,7 +2800,7 @@
     "city": "Willow Grove",
     "dates": "2012-11-17",
     "flag": "🇺🇸",
-    "modified": "2022-06-24 22:04:46",
+    "modified": "2024-02-08 18:41:37",
     "name": "Willow Grove Park",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
@@ -2813,7 +2813,7 @@
       "2022-10-22"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-10-26 17:40:45",
+    "modified": "2024-02-08 18:41:37",
     "name": "Lakeside Shopping Center",
     "state": "Louisiana",
     "timezone": "America/Chicago",
@@ -2823,7 +2823,7 @@
     "city": "Fresno",
     "dates": "2007-06-09",
     "flag": "🇺🇸",
-    "modified": "2022-03-02 01:36:23",
+    "modified": "2024-02-08 18:41:37",
     "name": "Fashion Fair",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -2836,7 +2836,7 @@
       "2018-08-18"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:37",
     "name": "Orland Square Mall",
     "state": "Illinois",
     "timezone": "America/Chicago",
@@ -2849,7 +2849,7 @@
       "2020-05-28"
     ],
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:37",
     "name": "Sydney",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
@@ -2862,7 +2862,7 @@
       "2016-10-29"
     ],
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:37",
     "name": [
       "Liverpool",
       "Liverpool ONE"
@@ -2875,7 +2875,7 @@
     "city": "Los Gatos",
     "dates": "2007-09-06",
     "flag": "🇺🇸",
-    "modified": "2022-09-06 14:19:57",
+    "modified": "2024-02-08 18:41:37",
     "name": "Los Gatos",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -2885,7 +2885,7 @@
     "city": "Grays",
     "dates": "2007-10-20",
     "flag": "🇬🇧",
-    "modified": "2023-03-07 22:45:17",
+    "modified": "2024-02-08 18:41:37",
     "name": "Lakeside",
     "state": "Essex",
     "timezone": "Europe/London",
@@ -2895,7 +2895,7 @@
     "city": "Brighton",
     "dates": "2009-07-25",
     "flag": "🇬🇧",
-    "modified": "2023-08-25 12:44:42",
+    "modified": "2024-02-08 18:41:37",
     "name": "Churchill Square",
     "state": "East Sussex",
     "timezone": "Europe/London",
@@ -2908,7 +2908,7 @@
       "2018-10-26"
     ],
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:37",
     "name": "Covent Garden",
     "state": "Central London",
     "timezone": "Europe/London",
@@ -2921,7 +2921,7 @@
       "2016-09-24"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:37",
     "name": "Arrowhead",
     "state": "Arizona",
     "timezone": "US/Arizona",
@@ -2931,7 +2931,7 @@
     "city": "Montreal",
     "dates": "2008-07-25",
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:37",
     "name": [
       "Sainte-Catherine (CA)",
       "Sainte-Catherine"
@@ -2944,7 +2944,7 @@
     "city": "New York",
     "dates": "2007-12-07",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:37",
     "name": "West 14th Street",
     "state": "New York",
     "timezone": "America/New_York",
@@ -2954,7 +2954,7 @@
     "city": "New York",
     "dates": "2009-11-14",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:37",
     "name": "Upper West Side",
     "state": "New York",
     "timezone": "America/New_York",
@@ -2964,7 +2964,7 @@
     "city": "Bristol",
     "dates": "2008-09-25",
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:37",
     "name": [
       "Bristol",
       "Cabot Circus"
@@ -2980,7 +2980,7 @@
       "2013-02-23"
     ],
     "flag": "🇦🇺",
-    "modified": "2023-08-10 03:24:33",
+    "modified": "2024-02-08 18:41:37",
     "name": "Chatswood Chase",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
@@ -2993,7 +2993,7 @@
       "2019-06-29"
     ],
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:37",
     "name": "Bondi",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
@@ -3003,7 +3003,7 @@
     "city": "Solihull",
     "dates": "2007-09-22",
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:37",
     "name": "Touchwood Centre",
     "state": "West Midlands",
     "timezone": "Europe/London",
@@ -3013,7 +3013,7 @@
     "city": "Glendale",
     "dates": "2007-06-29",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:37",
     "name": "Bayshore",
     "state": "Wisconsin",
     "timezone": "America/Chicago",
@@ -3026,7 +3026,7 @@
       "2018-09-29"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:37",
     "name": "Deer Park",
     "state": "Illinois",
     "timezone": "America/Chicago",
@@ -3036,7 +3036,7 @@
     "city": "Buford",
     "dates": "2007-09-22",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:37",
     "name": "Mall of Georgia",
     "state": "Georgia",
     "timezone": "America/New_York",
@@ -3046,7 +3046,7 @@
     "city": "Yonkers",
     "dates": "2012-06-30",
     "flag": "🇺🇸",
-    "modified": "2022-05-13 18:45:52",
+    "modified": "2024-02-08 18:41:37",
     "name": "Ridge Hill",
     "state": "New York",
     "timezone": "America/New_York",
@@ -3056,7 +3056,7 @@
     "city": "Anchorage",
     "dates": "2011-08-13",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:37",
     "name": "Anchorage 5th Avenue Mall",
     "state": "Alaska",
     "timezone": "America/Anchorage",
@@ -3066,7 +3066,7 @@
     "city": "Baton Rouge",
     "dates": "2008-03-06",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:37",
     "name": "Mall of Louisiana",
     "state": "Louisiana",
     "timezone": "America/Chicago",
@@ -3079,7 +3079,7 @@
       "2019-09-14"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:37",
     "name": "Oxmoor",
     "state": "Kentucky",
     "timezone": "America/New_York",
@@ -3089,7 +3089,7 @@
     "city": "Huntsville",
     "dates": "2008-05-31",
     "flag": "🇺🇸",
-    "modified": "2022-03-22 19:12:28",
+    "modified": "2024-02-08 18:41:37",
     "name": "Bridge Street",
     "state": "Alabama",
     "timezone": "America/Chicago",
@@ -3099,7 +3099,7 @@
     "city": "Gilbert",
     "dates": "2007-10-26",
     "flag": "🇺🇸",
-    "modified": "2023-10-10 17:19:15",
+    "modified": "2024-02-08 18:41:37",
     "name": "SanTan Village",
     "state": "Arizona",
     "timezone": "US/Arizona",
@@ -3109,7 +3109,7 @@
     "city": "Milton Keynes",
     "dates": "2008-03-01",
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:37",
     "name": "Milton Keynes",
     "state": "Buckinghamshire",
     "timezone": "Europe/London",
@@ -3119,7 +3119,7 @@
     "city": "Cambridge",
     "dates": "2008-03-27",
     "flag": "🇬🇧",
-    "modified": "2023-03-02 15:04:42",
+    "modified": "2024-02-08 18:41:37",
     "name": "Grand Arcade",
     "state": "Cambridgeshire",
     "timezone": "Europe/London",
@@ -3132,7 +3132,7 @@
       "2020-07-16"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:38",
     "name": "Reston",
     "state": "Virginia",
     "timezone": "America/New_York",
@@ -3145,7 +3145,7 @@
       "2020-03-13"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:38",
     "name": "Uptown",
     "state": "Minnesota",
     "status": "closed",
@@ -3156,7 +3156,7 @@
     "city": "Edmonton",
     "dates": "2008-07-05",
     "flag": "🇨🇦",
-    "modified": "2023-06-06 20:43:54",
+    "modified": "2024-02-08 18:41:38",
     "name": "West Edmonton",
     "state": "Alberta",
     "timezone": "Canada/Mountain",
@@ -3167,7 +3167,7 @@
     "city": "Genève",
     "dates": "2008-09-25",
     "flag": "🇨🇭",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:38",
     "name": "Rue de Rive",
     "state": "Genève",
     "timezone": "Europe/Zurich",
@@ -3180,7 +3180,7 @@
       "2018-10-27"
     ],
     "flag": "🇫🇷",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:38",
     "name": "Carrousel du Louvre",
     "state": "Paris",
     "status": "closed",
@@ -3191,7 +3191,7 @@
     "city": "Paris",
     "dates": "2010-07-03",
     "flag": "🇫🇷",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:38",
     "name": [
       "Opéra",
       "Opera"
@@ -3204,7 +3204,7 @@
     "city": "Grugliasco Turin",
     "dates": "2010-09-18",
     "flag": "🇮🇹",
-    "modified": "2022-06-14 21:32:18",
+    "modified": "2024-02-08 18:41:38",
     "name": "Le Gru",
     "state": "Torino",
     "timezone": "Europe/Rome",
@@ -3214,7 +3214,7 @@
     "city": "Exeter",
     "dates": "2007-11-24",
     "flag": "🇬🇧",
-    "modified": "2023-03-22 18:15:14",
+    "modified": "2024-02-08 18:41:38",
     "name": "Princesshay",
     "state": "Devon",
     "timezone": "Europe/London",
@@ -3227,7 +3227,7 @@
       "2022-11-18"
     ],
     "flag": "🇨🇦",
-    "modified": "2023-01-12 19:13:12",
+    "modified": "2024-02-08 18:41:38",
     "name": "Pacific Centre",
     "state": "British Columbia",
     "timezone": "Canada/Pacific",
@@ -3240,7 +3240,7 @@
       "2018-09-29"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:38",
     "name": "Lehigh Valley",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
@@ -3250,7 +3250,7 @@
     "city": "Greenwich",
     "dates": "2009-11-21",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:38",
     "name": "Greenwich Avenue",
     "state": "Connecticut",
     "timezone": "America/New_York",
@@ -3260,7 +3260,7 @@
     "city": "Leawood",
     "dates": "2008-07-11",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:38",
     "name": "Leawood",
     "state": "Kansas",
     "timezone": "America/Chicago",
@@ -3270,7 +3270,7 @@
     "city": "Chicago",
     "dates": "2010-10-23",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:38",
     "name": "Lincoln Park",
     "state": "Illinois",
     "timezone": "America/Chicago",
@@ -3280,7 +3280,7 @@
     "city": "Escondido",
     "dates": "2008-09-20",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:38",
     "name": "North County",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -3290,7 +3290,7 @@
     "city": "Little Rock",
     "dates": "2011-08-27",
     "flag": "🇺🇸",
-    "modified": "2022-05-10 17:27:29",
+    "modified": "2024-02-08 18:41:38",
     "name": "The Promenade at Chenal",
     "state": "Arkansas",
     "timezone": "America/Chicago",
@@ -3300,7 +3300,7 @@
     "city": "Washington",
     "dates": "2010-06-18",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:38",
     "name": "Georgetown",
     "state": "District of Columbia",
     "timezone": "America/New_York",
@@ -3313,7 +3313,7 @@
       "2021-03-01"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:38",
     "name": [
       "Fritz Farm",
       "Fayette Mall"
@@ -3326,7 +3326,7 @@
     "city": "Brandon",
     "dates": "2008-05-24",
     "flag": "🇺🇸",
-    "modified": "2023-09-11 09:01:11",
+    "modified": "2024-02-22 06:58:58",
     "name": "Brandon",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -3336,7 +3336,7 @@
     "city": "San Antonio",
     "dates": "2008-06-28",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:38",
     "name": "North Star",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -3349,7 +3349,7 @@
       "2019-09-06"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:38",
     "name": "Altamonte",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -3359,7 +3359,7 @@
     "city": "Scottsdale",
     "dates": "2009-06-12",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:38",
     "name": "Scottsdale Quarter",
     "state": "Arizona",
     "timezone": "US/Arizona",
@@ -3369,7 +3369,7 @@
     "city": "Greensboro",
     "dates": "2009-02-21",
     "flag": "🇺🇸",
-    "modified": "2022-06-29 16:36:05",
+    "modified": "2024-02-08 18:41:38",
     "name": "Friendly Center",
     "state": "North Carolina",
     "timezone": "America/New_York",
@@ -3379,7 +3379,7 @@
     "city": "Carlsbad",
     "dates": "2008-08-16",
     "flag": "🇺🇸",
-    "modified": "2022-02-07 18:41:12",
+    "modified": "2024-02-08 18:41:38",
     "name": "Carlsbad",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -3389,7 +3389,7 @@
     "city": "Palm Desert",
     "dates": "2010-09-04",
     "flag": "🇺🇸",
-    "modified": "2022-05-02 21:21:47",
+    "modified": "2024-02-08 18:41:38",
     "name": "El Paseo Village",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -3399,7 +3399,7 @@
     "city": "Roseville",
     "dates": "2009-06-06",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:38",
     "name": "Roseville",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -3409,7 +3409,7 @@
     "city": "Toledo",
     "dates": "2014-12-06",
     "flag": "🇺🇸",
-    "modified": "2022-06-27 18:09:29",
+    "modified": "2024-02-08 18:41:38",
     "name": "Franklin Park Mall",
     "state": "Ohio",
     "timezone": "America/New_York",
@@ -3419,7 +3419,7 @@
     "city": "Cerritos",
     "dates": "2010-06-24",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:38",
     "name": "Los Cerritos",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -3432,7 +3432,7 @@
       "2012-08-18"
     ],
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:38",
     "name": "Market Mall",
     "state": "Alberta",
     "timezone": "Canada/Mountain",
@@ -3445,7 +3445,7 @@
       "2019-04-12"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:38",
     "name": "Stonebriar",
     "state": "Texas",
     "status": "closed",
@@ -3456,7 +3456,7 @@
     "city": "Boise",
     "dates": "2010-09-11",
     "flag": "🇺🇸",
-    "modified": "2023-05-16 20:51:10",
+    "modified": "2024-02-08 18:41:38",
     "name": "Boise Towne Square",
     "state": "Idaho",
     "timezone": "America/Denver",
@@ -3466,7 +3466,7 @@
     "city": "Lancaster",
     "dates": "2008-09-20",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:38",
     "name": "Park City",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
@@ -3476,7 +3476,7 @@
     "city": "Monterey",
     "dates": "2008-08-09",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:38",
     "name": "Del Monte",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -3489,7 +3489,7 @@
       "2019-10-12"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:38",
     "name": "Maine Mall",
     "state": "Maine",
     "timezone": "America/New_York",
@@ -3499,7 +3499,7 @@
     "city": "Leicester",
     "dates": "2008-09-04",
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:38",
     "name": "Highcross",
     "state": "Leicestershire",
     "timezone": "Europe/London",
@@ -3513,7 +3513,7 @@
       "2014-11-22"
     ],
     "flag": "🇨🇭",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:38",
     "name": "Glattzentrum",
     "state": "Zürich",
     "timezone": "Europe/Zurich",
@@ -3526,7 +3526,7 @@
       "2021-08-19"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:38",
     "name": "Dadeland",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -3536,7 +3536,7 @@
     "city": "Belfast",
     "dates": "2008-09-20",
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:38",
     "name": "Victoria Square",
     "state": "Antrim",
     "timezone": "Europe/London",
@@ -3547,7 +3547,7 @@
     "city": "Vélizy-Villacoublay",
     "dates": "2010-09-25",
     "flag": "🇫🇷",
-    "modified": "2023-11-08 13:49:17",
+    "modified": "2024-02-08 18:41:38",
     "name": [
       "Vélizy 2",
       "Velizy 2"
@@ -3560,7 +3560,7 @@
     "city": "Fort Worth",
     "dates": "2008-08-23",
     "flag": "🇺🇸",
-    "modified": "2023-12-05 21:54:16",
+    "modified": "2024-02-08 18:41:39",
     "name": "University Park Village",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -3570,7 +3570,7 @@
     "city": "Santa Barbara",
     "dates": "2009-05-16",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:39",
     "name": "State Street",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -3580,7 +3580,7 @@
     "city": "Charleston",
     "dates": "2008-07-26",
     "flag": "🇺🇸",
-    "modified": "2023-05-16 20:54:38",
+    "modified": "2024-02-08 18:41:39",
     "name": [
       "Charleston",
       "King Street"
@@ -3597,7 +3597,7 @@
       "2020-07-17"
     ],
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:39",
     "name": [
       "三里屯",
       "Sanlitun"
@@ -3610,7 +3610,7 @@
     "city": "Houston",
     "dates": "2008-06-07",
     "flag": "🇺🇸",
-    "modified": "2023-08-21 21:19:13",
+    "modified": "2024-02-08 18:41:39",
     "name": "Willowbrook Mall",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -3620,7 +3620,7 @@
     "city": "Modesto",
     "dates": "2008-11-14",
     "flag": "🇺🇸",
-    "modified": "2023-10-10 17:20:59",
+    "modified": "2024-02-08 18:41:39",
     "name": "Vintage Faire",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -3630,7 +3630,7 @@
     "city": "Ridgeland",
     "dates": "2008-08-30",
     "flag": "🇺🇸",
-    "modified": "2022-04-12 23:44:15",
+    "modified": "2024-02-08 18:41:39",
     "name": "Renaissance at Colony Park",
     "state": "Mississippi",
     "timezone": "America/Chicago",
@@ -3640,7 +3640,7 @@
     "city": "Wayne",
     "dates": "2008-09-13",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:39",
     "name": "Willowbrook",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -3650,7 +3650,7 @@
     "city": "Manhasset",
     "dates": "2009-10-17",
     "flag": "🇺🇸",
-    "modified": "2023-10-03 20:04:36",
+    "modified": "2024-02-08 18:41:39",
     "name": "Manhasset",
     "state": "New York",
     "timezone": "America/New_York",
@@ -3660,7 +3660,7 @@
     "city": "Edinburgh",
     "dates": "2014-10-18",
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:39",
     "name": [
       "Edinburgh",
       "Princes Street"
@@ -3673,7 +3673,7 @@
     "city": "London",
     "dates": "2022-07-28",
     "flag": "🇬🇧",
-    "modified": "2022-08-24 17:27:58",
+    "modified": "2024-02-08 18:41:39",
     "name": "Brompton Road",
     "state": "Central London",
     "timezone": "Europe/London",
@@ -3684,7 +3684,7 @@
     "city": "Düsseldorf",
     "dates": "2013-12-14",
     "flag": "🇩🇪",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:39",
     "name": [
       "Düsseldorf",
       "Duesseldorf"
@@ -3697,7 +3697,7 @@
     "city": "Ottawa",
     "dates": "2009-07-18",
     "flag": "🇨🇦",
-    "modified": "2023-06-20 15:31:37",
+    "modified": "2024-02-08 18:41:39",
     "name": "Rideau",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -3710,7 +3710,7 @@
       "2020-02-29"
     ],
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:39",
     "name": "Fairview",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -3720,7 +3720,7 @@
     "city": "Cardiff",
     "dates": "2009-10-22",
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-20 08:44:36",
     "name": [
       "Cardiff",
       "St David's 2"
@@ -3733,7 +3733,7 @@
     "city": "Bath",
     "dates": "2010-03-27",
     "flag": "🇬🇧",
-    "modified": "2022-03-08 18:24:21",
+    "modified": "2024-02-08 18:41:39",
     "name": "SouthGate",
     "state": "Somerset",
     "timezone": "Europe/London",
@@ -3743,7 +3743,7 @@
     "city": "Colorado Springs",
     "dates": "2008-09-20",
     "flag": "🇺🇸",
-    "modified": "2022-03-11 21:28:44",
+    "modified": "2024-02-08 18:41:39",
     "name": "The Promenade Shops at Briargate",
     "state": "Colorado",
     "timezone": "America/Denver",
@@ -3753,7 +3753,7 @@
     "city": "Tacoma",
     "dates": "2010-05-29",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:39",
     "name": "Tacoma Mall",
     "state": "Washington",
     "timezone": "America/Los_Angeles",
@@ -3763,7 +3763,7 @@
     "city": "Glasgow",
     "dates": "2011-09-17",
     "flag": "🇬🇧",
-    "modified": "2022-03-11 21:30:47",
+    "modified": "2024-02-08 18:41:39",
     "name": "Braehead",
     "state": "Glasgow",
     "timezone": "Europe/London",
@@ -3773,7 +3773,7 @@
     "city": "Newcastle upon Tyne",
     "dates": "2010-02-16",
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:39",
     "name": "Eldon Square",
     "state": "Tyne and Wear",
     "timezone": "Europe/London",
@@ -3783,7 +3783,7 @@
     "city": "Doncaster",
     "dates": "2009-05-23",
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:39",
     "name": "Doncaster",
     "state": "Victoria",
     "timezone": "Australia/Melbourne",
@@ -3793,7 +3793,7 @@
     "city": "Cheltenham",
     "dates": "2011-08-13",
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:39",
     "name": "Southland",
     "state": "Victoria",
     "timezone": "Australia/Melbourne",
@@ -3803,7 +3803,7 @@
     "city": "Castle Hill",
     "dates": "2010-08-19",
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:39",
     "name": "Castle Towers",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
@@ -3813,7 +3813,7 @@
     "city": "Temecula",
     "dates": "2009-09-26",
     "flag": "🇺🇸",
-    "modified": "2023-05-10 18:16:04",
+    "modified": "2024-02-08 18:41:39",
     "name": "Promenade Temecula",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -3826,7 +3826,7 @@
       "2016-09-02"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:39",
     "name": "Legacy Place",
     "state": "Massachusetts",
     "timezone": "America/New_York",
@@ -3836,7 +3836,7 @@
     "city": "Naperville",
     "dates": "2009-08-15",
     "flag": "🇺🇸",
-    "modified": "2023-02-21 22:03:15",
+    "modified": "2024-02-08 18:41:39",
     "name": "Main Place",
     "state": "Illinois",
     "timezone": "America/Chicago",
@@ -3846,7 +3846,7 @@
     "city": "Mississauga",
     "dates": "2009-08-15",
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:39",
     "name": "Square One",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -3859,7 +3859,7 @@
       "2018-09-29"
     ],
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:39",
     "name": "Robina",
     "state": "Queensland",
     "timezone": "Australia/Brisbane",
@@ -3869,7 +3869,7 @@
     "city": "Frankfurt Grobe Strabe",
     "dates": "2010-01-23",
     "flag": "🇩🇪",
-    "modified": "2023-09-30 05:37:53",
+    "modified": "2024-02-08 18:41:39",
     "name": [
       "Große Bockenheimer Straße",
       "Grosse Bockenheimer Strasse"
@@ -3882,7 +3882,7 @@
     "city": "Akron",
     "dates": "2010-11-13",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:39",
     "name": "Summit Mall",
     "state": "Ohio",
     "timezone": "America/New_York",
@@ -3892,7 +3892,7 @@
     "city": "Nashua",
     "dates": "2009-11-21",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:39",
     "name": "Pheasant Lane",
     "state": "New Hampshire",
     "timezone": "America/New_York",
@@ -3902,7 +3902,7 @@
     "city": "Greenville",
     "dates": "2010-07-10",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:39",
     "name": "Haywood Mall",
     "state": "South Carolina",
     "timezone": "America/New_York",
@@ -3913,7 +3913,7 @@
     "city": "Marseille",
     "dates": "2016-05-14",
     "flag": "🇫🇷",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:39",
     "name": "Marseille",
     "state": "Bouches-du-Rhône",
     "timezone": "Europe/Paris",
@@ -3924,7 +3924,7 @@
     "city": "Berlin",
     "dates": "2013-05-03",
     "flag": "🇩🇪",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:39",
     "name": [
       "Kurfürstendamm",
       "Kurfuerstendamm"
@@ -3941,7 +3941,7 @@
       "2023-12-22"
     ],
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:39",
     "name": [
       "南京东路",
       "Nanjing East"
@@ -3954,7 +3954,7 @@
     "city": "Mishawaka",
     "dates": "2010-11-13",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:39",
     "name": "University Park Mall",
     "state": "Indiana",
     "timezone": "America/New_York",
@@ -3967,7 +3967,7 @@
       "2020-09-26"
     ],
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:39",
     "name": "Oakridge Centre",
     "state": "British Columbia",
     "status": "closed",
@@ -3978,7 +3978,7 @@
     "city": "Aberdeen",
     "dates": "2009-10-29",
     "flag": "🇬🇧",
-    "modified": "2023-03-31 16:36:07",
+    "modified": "2024-02-08 18:41:39",
     "name": [
       "Union Square (UK)",
       "Union Square"
@@ -3991,7 +3991,7 @@
     "city": "Augusta",
     "dates": "2009-09-19",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:39",
     "name": "Augusta",
     "state": "Georgia",
     "timezone": "America/New_York",
@@ -4001,7 +4001,7 @@
     "city": "Carugate",
     "dates": "2009-09-05",
     "flag": "🇮🇹",
-    "modified": "2023-03-31 18:46:47",
+    "modified": "2024-02-08 18:41:39",
     "name": "Carosello",
     "state": "Milano",
     "timezone": "Europe/Rome",
@@ -4011,7 +4011,7 @@
     "city": "Hamburg",
     "dates": "2009-08-29",
     "flag": "🇩🇪",
-    "modified": "2023-04-20 17:40:33",
+    "modified": "2024-02-08 18:41:40",
     "name": "Alstertal",
     "state": "Hamburg",
     "timezone": "Europe/Berlin",
@@ -4022,7 +4022,7 @@
     "city": "Montpellier",
     "dates": "2009-11-14",
     "flag": "🇫🇷",
-    "modified": "2022-04-26 23:08:21",
+    "modified": "2024-02-08 18:41:40",
     "name": "Odysseum",
     "state": "Hérault",
     "timezone": "Europe/Paris",
@@ -4035,7 +4035,7 @@
       "2019-06-20"
     ],
     "flag": "🇪🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:40",
     "name": [
       "Passeig de Gràcia",
       "Passeig de Gracia"
@@ -4048,7 +4048,7 @@
     "city": "Winnipeg",
     "dates": "2009-09-19",
     "flag": "🇨🇦",
-    "modified": "2022-05-27 19:08:48",
+    "modified": "2024-02-08 18:41:40",
     "name": "Polo Park",
     "state": "Manitoba",
     "timezone": "Canada/Central",
@@ -4058,7 +4058,7 @@
     "city": "Leeds",
     "dates": "2013-03-21",
     "flag": "🇬🇧",
-    "modified": "2022-09-16 15:56:47",
+    "modified": "2024-02-08 18:41:40",
     "name": "Trinity Leeds",
     "state": "West Yorkshire",
     "timezone": "Europe/London",
@@ -4069,7 +4069,7 @@
     "city": "Lyon",
     "dates": "2011-06-04",
     "flag": "🇫🇷",
-    "modified": "2023-03-24 15:37:26",
+    "modified": "2024-02-08 18:41:40",
     "name": "Part-Dieu",
     "state": "Rhône",
     "timezone": "Europe/Paris",
@@ -4079,7 +4079,7 @@
     "city": "Le Chesnay",
     "dates": "2011-09-24",
     "flag": "🇫🇷",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:40",
     "name": "Parly 2",
     "state": "Yvelines",
     "timezone": "Europe/Paris",
@@ -4089,7 +4089,7 @@
     "city": "Lille",
     "dates": "2014-11-15",
     "flag": "🇫🇷",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:40",
     "name": "Lille",
     "state": "Nord-Pas-de-Calais",
     "timezone": "Europe/Paris",
@@ -4099,7 +4099,7 @@
     "city": "Zaragoza",
     "dates": "2012-10-04",
     "flag": "🇪🇸",
-    "modified": "2023-05-24 18:55:11",
+    "modified": "2024-02-08 18:41:40",
     "name": "Puerto Venecia",
     "state": "Zaragoza",
     "timezone": "Europe/Madrid",
@@ -4110,7 +4110,7 @@
     "city": "Bufalotta",
     "dates": "2012-04-21",
     "flag": "🇮🇹",
-    "modified": "2022-04-26 16:59:38",
+    "modified": "2024-02-08 18:41:40",
     "name": "Porta di Roma",
     "state": "Roma",
     "timezone": "Europe/Rome",
@@ -4121,7 +4121,7 @@
     "city": "Roma",
     "dates": "2021-05-27",
     "flag": "🇮🇹",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:40",
     "name": "Via del Corso",
     "state": "Roma",
     "timezone": "Europe/Rome",
@@ -4131,7 +4131,7 @@
     "city": "Chermside",
     "dates": "2009-11-14",
     "flag": "🇦🇺",
-    "modified": "2023-07-19 16:31:03",
+    "modified": "2024-02-08 18:41:40",
     "name": "Chermside",
     "state": "Queensland",
     "timezone": "Australia/Brisbane",
@@ -4141,7 +4141,7 @@
     "city": "Charlestown",
     "dates": "2010-10-21",
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:40",
     "name": "Charlestown",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
@@ -4151,7 +4151,7 @@
     "city": "Perth",
     "dates": "2010-06-26",
     "flag": "🇦🇺",
-    "modified": "2023-07-19 16:18:40",
+    "modified": "2024-02-08 18:41:40",
     "name": "Perth City",
     "state": "Western Australia",
     "timezone": "Australia/Perth",
@@ -4162,7 +4162,7 @@
     "city": "北京",
     "dates": "2010-09-25",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:40",
     "name": [
       "西单大悦城",
       "Xidan Joy City"
@@ -4176,7 +4176,7 @@
     "city": "上海",
     "dates": "2010-07-10",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:40",
     "name": [
       "浦东",
       "Pudong"
@@ -4190,7 +4190,7 @@
     "city": "上海",
     "dates": "2010-09-25",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:40",
     "name": [
       "香港广场",
       "Hong Kong Plaza"
@@ -4203,7 +4203,7 @@
     "city": "Norwich",
     "dates": "2009-09-26",
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-09 22:29:16",
     "name": [
       "Norwich",
       "Chapelfield"
@@ -4217,7 +4217,7 @@
     "city": "Pointe-Claire",
     "dates": "2009-09-26",
     "flag": "🇨🇦",
-    "modified": "2022-03-15 17:23:56",
+    "modified": "2024-02-08 18:41:40",
     "name": "Fairview Pointe-Claire",
     "state": "Quebec",
     "timezone": "Canada/Eastern",
@@ -4227,7 +4227,7 @@
     "city": "Bristol",
     "dates": "2009-12-12",
     "flag": "🇬🇧",
-    "modified": "2023-08-17 11:13:46",
+    "modified": "2024-02-08 18:41:40",
     "name": "Cribbs Causeway",
     "state": "Bristol",
     "timezone": "Europe/London",
@@ -4238,7 +4238,7 @@
     "city": "Strasbourg",
     "dates": "2012-09-15",
     "flag": "🇫🇷",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:40",
     "name": "Strasbourg",
     "state": "Bas-Rhin",
     "timezone": "Europe/Paris",
@@ -4249,7 +4249,7 @@
     "city": "Nice",
     "dates": "2010-08-28",
     "flag": "🇫🇷",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:40",
     "name": "CAP 3000",
     "state": "Alpes-Maritimes",
     "timezone": "Europe/Paris",
@@ -4259,7 +4259,7 @@
     "city": "Hamburg",
     "dates": "2011-09-17",
     "flag": "🇩🇪",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:40",
     "name": "Jungfernstieg",
     "state": "Hamburg",
     "timezone": "Europe/Berlin",
@@ -4269,7 +4269,7 @@
     "city": "Arroyomolinos",
     "dates": "2010-09-11",
     "flag": "🇪🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:40",
     "name": [
       "Xanadú",
       "Xanadu"
@@ -4286,7 +4286,7 @@
       "2019-09-28"
     ],
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:40",
     "name": [
       "上海环贸 iapm",
       "上海环贸iapm",
@@ -4301,7 +4301,7 @@
     "city": "Oberhausen",
     "dates": "2010-09-25",
     "flag": "🇩🇪",
-    "modified": "2023-08-09 10:00:43",
+    "modified": "2024-02-08 18:41:40",
     "name": "CentrO",
     "state": "Nordrhein-Westfalen",
     "timezone": "Europe/Berlin",
@@ -4311,7 +4311,7 @@
     "city": "Adelaide",
     "dates": "2013-05-25",
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:40",
     "name": "Rundle Place",
     "state": "South Australia",
     "timezone": "Australia/Adelaide",
@@ -4321,7 +4321,7 @@
     "city": "Barcelona",
     "dates": "2010-09-04",
     "flag": "🇪🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:40",
     "name": "La Maquinista",
     "state": "Barcelona",
     "timezone": "Europe/Madrid",
@@ -4335,7 +4335,7 @@
       "2019-10-24"
     ],
     "flag": "🇳🇱",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:40",
     "name": "Amsterdam",
     "state": "Noord-Holland",
     "timezone": "Europe/Amsterdam",
@@ -4349,7 +4349,7 @@
       "2018-09-21"
     ],
     "flag": "🇭🇰",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:40",
     "name": "Causeway Bay",
     "state": "香港",
     "timezone": "Asia/Hong_Kong",
@@ -4359,7 +4359,7 @@
     "city": "London",
     "dates": "2011-09-13",
     "flag": "🇬🇧",
-    "modified": "2023-02-17 17:57:22",
+    "modified": "2024-02-08 18:41:40",
     "name": "Stratford City",
     "state": "Greater London",
     "timezone": "Europe/London",
@@ -4369,7 +4369,7 @@
     "city": "Edmonton",
     "dates": "2010-05-28",
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:40",
     "name": "Southgate Centre",
     "state": "Alberta",
     "timezone": "Canada/Mountain",
@@ -4379,7 +4379,7 @@
     "city": "Quebec City",
     "dates": "2010-11-13",
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:40",
     "name": "Place Ste-Foy",
     "state": "Quebec",
     "timezone": "Canada/Eastern",
@@ -4389,7 +4389,7 @@
     "city": "Pittsburgh",
     "dates": "2010-08-28",
     "flag": "🇺🇸",
-    "modified": "2022-03-28 16:20:13",
+    "modified": "2024-02-08 18:41:40",
     "name": "Ross Park",
     "state": "Pennsylvania",
     "timezone": "America/New_York",
@@ -4399,7 +4399,7 @@
     "city": "Berkeley",
     "dates": "2011-08-20",
     "flag": "🇺🇸",
-    "modified": "2022-06-30 19:43:22",
+    "modified": "2024-02-08 18:41:40",
     "name": "4th Street",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -4409,7 +4409,7 @@
     "city": "New York",
     "dates": "2011-12-09",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:40",
     "name": "Grand Central",
     "state": "New York",
     "timezone": "America/New_York",
@@ -4419,7 +4419,7 @@
     "city": "Columbus",
     "dates": "2010-07-24",
     "flag": "🇺🇸",
-    "modified": "2023-08-11 22:03:10",
+    "modified": "2024-02-08 18:41:40",
     "name": "Polaris Fashion Place",
     "state": "Ohio",
     "timezone": "America/New_York",
@@ -4429,7 +4429,7 @@
     "city": "Orio al Serio",
     "dates": "2010-09-25",
     "flag": "🇮🇹",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:40",
     "name": "Oriocenter",
     "state": "Bergamo",
     "timezone": "Europe/Rome",
@@ -4439,7 +4439,7 @@
     "city": "Valencia",
     "dates": "2011-12-03",
     "flag": "🇪🇸",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:40",
     "name": [
       "Valencia",
       "Calle Colón",
@@ -4453,7 +4453,7 @@
     "city": "Spokane",
     "dates": "2010-09-25",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:41",
     "name": "River Park Square",
     "state": "Washington",
     "timezone": "America/Los_Angeles",
@@ -4463,7 +4463,7 @@
     "city": "Richmond",
     "dates": "2010-09-11",
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:41",
     "name": "Richmond Centre",
     "state": "British Columbia",
     "timezone": "Canada/Pacific",
@@ -4473,7 +4473,7 @@
     "city": "Gateshead",
     "dates": "2010-09-25",
     "flag": "🇬🇧",
-    "modified": "2022-03-28 20:13:59",
+    "modified": "2024-02-08 18:41:41",
     "name": "Metrocentre",
     "state": "Tyne and Wear",
     "timezone": "Europe/London",
@@ -4483,7 +4483,7 @@
     "city": "Bordeaux",
     "dates": "2011-05-14",
     "flag": "🇫🇷",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:41",
     "name": [
       "Sainte-Catherine (FR)",
       "Sainte-Catherine"
@@ -4497,7 +4497,7 @@
     "city": "Marne-la-Vallée",
     "dates": "2012-10-13",
     "flag": "🇫🇷",
-    "modified": "2022-05-17 18:40:35",
+    "modified": "2024-02-08 18:41:41",
     "name": [
       "Val d’Europe",
       "Val d'Europe"
@@ -4510,7 +4510,7 @@
     "city": "Bologna",
     "dates": "2011-09-17",
     "flag": "🇮🇹",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:41",
     "name": "Via Rizzoli",
     "state": "Bologna",
     "timezone": "Europe/Rome",
@@ -4521,7 +4521,7 @@
     "city": "香港",
     "dates": "2011-09-24",
     "flag": "🇭🇰",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:41",
     "name": "ifc mall",
     "state": "香港",
     "timezone": "Asia/Hong_Kong",
@@ -4531,7 +4531,7 @@
     "city": "Newmarket",
     "dates": "2010-09-11",
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:41",
     "name": "Upper Canada Mall",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -4541,7 +4541,7 @@
     "city": "Dresden Saxony",
     "dates": "2011-03-31",
     "flag": "🇩🇪",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:41",
     "name": "Altmarkt-Galerie",
     "state": "Sachsen",
     "timezone": "Europe/Berlin",
@@ -4551,7 +4551,7 @@
     "city": "Augsburg Bavaria",
     "dates": "2011-09-03",
     "flag": "🇩🇪",
-    "modified": "2023-09-11 09:02:32",
+    "modified": "2024-02-08 18:41:41",
     "name": "City-Galerie",
     "state": "Bayern",
     "timezone": "Europe/Berlin",
@@ -4561,7 +4561,7 @@
     "city": "Sulzbach",
     "dates": "2011-11-17",
     "flag": "🇩🇪",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:41",
     "name": "MTZ",
     "state": "Hessen",
     "timezone": "Europe/Berlin",
@@ -4571,7 +4571,7 @@
     "city": "Majadahonda",
     "dates": "2012-04-27",
     "flag": "🇪🇸",
-    "modified": "2022-03-28 20:21:32",
+    "modified": "2024-02-08 18:41:41",
     "name": "Gran Plaza 2",
     "state": "Madrid",
     "timezone": "Europe/Madrid",
@@ -4582,7 +4582,7 @@
     "city": "Leganés",
     "dates": "2011-08-20",
     "flag": "🇪🇸",
-    "modified": "2022-03-28 20:27:51",
+    "modified": "2024-02-08 18:41:41",
     "name": "Parquesur",
     "state": "Madrid",
     "timezone": "Europe/Madrid",
@@ -4595,7 +4595,7 @@
       "2019-09-20"
     ],
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:41",
     "name": "Highland Village",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -4605,7 +4605,7 @@
     "city": "Lieusaint",
     "dates": "2011-08-27",
     "flag": "🇫🇷",
-    "modified": "2023-03-02 05:40:56",
+    "modified": "2024-02-08 18:41:41",
     "name": [
       "Carré Sénart",
       "Carre Senart"
@@ -4619,7 +4619,7 @@
     "city": "Basel",
     "dates": "2014-07-12",
     "flag": "🇨🇭",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:41",
     "name": "Freie Strasse",
     "state": "Basel-Stadt",
     "timezone": "Europe/Zurich",
@@ -4629,7 +4629,7 @@
     "city": "Penrith",
     "dates": "2011-07-23",
     "flag": "🇦🇺",
-    "modified": "2022-05-03 16:05:09",
+    "modified": "2024-02-08 18:41:41",
     "name": "Penrith",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
@@ -4639,7 +4639,7 @@
     "city": "Rozzano",
     "dates": "2011-07-02",
     "flag": "🇮🇹",
-    "modified": "2022-06-29 16:37:14",
+    "modified": "2024-02-08 18:41:41",
     "name": "Fiordaliso",
     "state": "Milano",
     "timezone": "Europe/Rome",
@@ -4650,7 +4650,7 @@
     "city": "Torino",
     "dates": "2012-10-13",
     "flag": "🇮🇹",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:41",
     "name": "Via Roma",
     "state": "Torino",
     "timezone": "Europe/Rome",
@@ -4661,7 +4661,7 @@
     "city": "Berlin",
     "dates": "2021-12-02",
     "flag": "🇩🇪",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:41",
     "name": [
       "Rosenthaler Straße",
       "Rosenthaler Strasse"
@@ -4674,7 +4674,7 @@
     "city": "New Haven",
     "dates": "2011-09-24",
     "flag": "🇺🇸",
-    "modified": "2023-10-03 20:05:38",
+    "modified": "2024-02-08 18:41:41",
     "name": "New Haven",
     "state": "Connecticut",
     "timezone": "America/New_York",
@@ -4684,7 +4684,7 @@
     "city": "Burlington",
     "dates": "2011-09-03",
     "flag": "🇨🇦",
-    "modified": "2022-06-30 19:40:08",
+    "modified": "2024-02-08 18:41:41",
     "name": "Mapleview Centre",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -4698,7 +4698,7 @@
       "2018-09-17"
     ],
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:41",
     "name": [
       "王府井",
       "Wangfujing"
@@ -4711,7 +4711,7 @@
     "city": "Campi Bisenzio Florence",
     "dates": "2011-08-13",
     "flag": "🇮🇹",
-    "modified": "2023-08-30 10:29:17",
+    "modified": "2024-02-08 18:41:41",
     "name": "I Gigli",
     "state": "Firenze",
     "timezone": "Europe/Rome",
@@ -4724,7 +4724,7 @@
       "2019-11-07"
     ],
     "flag": "🇪🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:41",
     "name": "Puerta del Sol",
     "state": "Madrid",
     "timezone": "Europe/Madrid",
@@ -4734,7 +4734,7 @@
     "city": "Glendale",
     "dates": "2011-07-30",
     "flag": "🇺🇸",
-    "modified": "2023-03-21 19:22:16",
+    "modified": "2024-02-08 18:41:41",
     "name": "The Americana at Brand",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -4744,7 +4744,7 @@
     "city": "Marcianise",
     "dates": "2011-09-03",
     "flag": "🇮🇹",
-    "modified": "2022-04-26 16:58:53",
+    "modified": "2024-02-08 18:41:41",
     "name": "Campania",
     "state": "Caserta",
     "timezone": "Europe/Rome",
@@ -4754,7 +4754,7 @@
     "city": "Misterbianco",
     "dates": "2011-09-24",
     "flag": "🇮🇹",
-    "modified": "2022-04-26 20:36:01",
+    "modified": "2024-02-08 18:41:41",
     "name": "Centro Sicilia",
     "state": "Catania",
     "timezone": "Europe/Rome",
@@ -4764,7 +4764,7 @@
     "city": "Hannover Lower Saxony",
     "dates": "2014-09-27",
     "flag": "🇩🇪",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:41",
     "name": "Hannover",
     "state": "Niedersachsen",
     "timezone": "Europe/Berlin",
@@ -4774,7 +4774,7 @@
     "city": "Hornsby",
     "dates": "2011-09-24",
     "flag": "🇦🇺",
-    "modified": "2023-08-10 03:24:01",
+    "modified": "2024-02-08 18:41:41",
     "name": "Hornsby",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
@@ -4784,7 +4784,7 @@
     "city": "Burnaby",
     "dates": "2011-09-24",
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:41",
     "name": "Metrotown",
     "state": "British Columbia",
     "timezone": "Canada/Pacific",
@@ -4794,7 +4794,7 @@
     "city": "Murray",
     "dates": "2011-08-13",
     "flag": "🇺🇸",
-    "modified": "2022-06-24 20:33:13",
+    "modified": "2024-02-08 18:41:41",
     "name": "Fashion Place",
     "state": "Utah",
     "timezone": "America/Denver",
@@ -4804,7 +4804,7 @@
     "city": "Valencia",
     "dates": "2011-07-16",
     "flag": "🇺🇸",
-    "modified": "2023-10-19 22:00:48",
+    "modified": "2024-02-08 18:41:41",
     "name": "Valencia Town Center",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -4817,7 +4817,7 @@
       "2023-03-01"
     ],
     "flag": "🇺🇸",
-    "modified": "2023-03-07 22:46:52",
+    "modified": "2024-02-08 18:41:41",
     "name": "Northlake Mall",
     "state": "North Carolina",
     "status": "closed",
@@ -4828,7 +4828,7 @@
     "city": "Waterloo",
     "dates": "2011-08-13",
     "flag": "🇨🇦",
-    "modified": "2023-03-02 05:45:34",
+    "modified": "2024-02-08 18:41:42",
     "name": "Conestoga",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -4838,7 +4838,7 @@
     "city": "Brisbane City",
     "dates": "2014-01-17",
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:42",
     "name": "Brisbane",
     "state": "Queensland",
     "timezone": "Australia/Brisbane",
@@ -4849,7 +4849,7 @@
     "city": "Marbella",
     "dates": "2011-11-25",
     "flag": "🇪🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:42",
     "name": [
       "La Cañada",
       "La Canada"
@@ -4863,7 +4863,7 @@
     "city": "Lyon",
     "dates": "2012-04-04",
     "flag": "🇫🇷",
-    "modified": "2023-04-05 00:11:53",
+    "modified": "2024-02-08 18:41:42",
     "name": "Confluence",
     "state": "Rhône",
     "timezone": "Europe/Paris",
@@ -4874,7 +4874,7 @@
     "city": "Saint Herblain",
     "dates": "2012-11-15",
     "flag": "🇫🇷",
-    "modified": "2022-03-23 20:18:58",
+    "modified": "2024-02-08 18:41:42",
     "name": "Atlantis",
     "state": "Loire-Atlantique",
     "timezone": "Europe/Paris",
@@ -4885,7 +4885,7 @@
     "city": "杭州",
     "dates": "2015-01-24",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:42",
     "name": [
       "西湖",
       "West Lake"
@@ -4899,7 +4899,7 @@
     "city": "重庆",
     "dates": "2014-07-26",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:42",
     "name": [
       "重庆北城天街",
       "Paradise Walk Chongqing"
@@ -4913,7 +4913,7 @@
     "city": "Aix-en-Provence",
     "dates": "2014-06-14",
     "flag": "🇫🇷",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:42",
     "name": "Aix-en-Provence",
     "state": "Bouches-du-Rhône",
     "timezone": "Europe/Paris",
@@ -4924,7 +4924,7 @@
     "city": "大连",
     "dates": "2015-10-24",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:42",
     "name": [
       "百年城",
       "Parkland"
@@ -4938,7 +4938,7 @@
     "city": "北京",
     "dates": "2014-01-10",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:42",
     "name": [
       "华贸购物中心",
       "China Central Mall"
@@ -4952,7 +4952,7 @@
     "city": "重庆",
     "dates": "2015-01-31",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:42",
     "name": [
       "解放碑",
       "Jiefangbei"
@@ -4965,7 +4965,7 @@
     "city": "Basingstoke",
     "dates": "2011-08-20",
     "flag": "🇬🇧",
-    "modified": "2022-03-08 18:30:35",
+    "modified": "2024-02-08 18:41:42",
     "name": "Festival Place",
     "state": "Hampshire",
     "timezone": "Europe/London",
@@ -4975,7 +4975,7 @@
     "city": "Canberra",
     "dates": "2012-09-08",
     "flag": "🇦🇺",
-    "modified": "2022-04-29 20:40:11",
+    "modified": "2024-02-08 18:41:42",
     "name": "Canberra",
     "state": "Australian Capital Territory",
     "timezone": "Australia/Sydney",
@@ -4986,7 +4986,7 @@
     "city": "深圳",
     "dates": "2012-11-03",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:42",
     "name": [
       "深圳益田假日广场",
       "Holiday Plaza Shenzhen"
@@ -5000,7 +5000,7 @@
     "city": "香港",
     "dates": "2012-09-29",
     "flag": "🇭🇰",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:42",
     "name": "Festival Walk",
     "state": "香港",
     "timezone": "Asia/Hong_Kong",
@@ -5011,7 +5011,7 @@
     "city": "Bruxelles",
     "dates": "2015-09-19",
     "flag": "🇧🇪",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:42",
     "name": "Brussels",
     "state": "Région de Bruxelles-Capitale",
     "timezone": "Europe/Brussels",
@@ -5021,7 +5021,7 @@
     "city": "Coquitlam",
     "dates": "2012-08-18",
     "flag": "🇨🇦",
-    "modified": "2023-06-06 20:41:52",
+    "modified": "2024-02-08 18:41:42",
     "name": "Coquitlam Centre",
     "state": "British Columbia",
     "timezone": "Canada/Pacific",
@@ -5031,7 +5031,7 @@
     "city": "London",
     "dates": "2012-06-23",
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:42",
     "name": "Masonville",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -5041,7 +5041,7 @@
     "city": "Ottawa",
     "dates": "2012-09-08",
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:42",
     "name": "Bayshore Shopping Centre",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -5051,7 +5051,7 @@
     "city": "El Paso",
     "dates": "2011-09-17",
     "flag": "🇺🇸",
-    "modified": "2023-08-30 23:38:34",
+    "modified": "2024-02-08 18:41:42",
     "name": "Cielo Vista Mall",
     "state": "Texas",
     "timezone": "America/Denver",
@@ -5062,7 +5062,7 @@
     "city": "南京",
     "dates": "2016-01-16",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:42",
     "name": [
       "新街口",
       "南京艾尚天地",
@@ -5077,7 +5077,7 @@
     "city": "Bromley",
     "dates": "2012-09-29",
     "flag": "🇬🇧",
-    "modified": "2023-03-02 05:48:47",
+    "modified": "2024-02-08 18:41:42",
     "name": [
       "Bromley",
       "The Glades"
@@ -5094,7 +5094,7 @@
       "2020-01-18"
     ],
     "flag": "🇭🇰",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:42",
     "name": "Canton Road",
     "state": "香港",
     "timezone": "Asia/Hong_Kong",
@@ -5105,7 +5105,7 @@
     "city": "成都",
     "dates": "2012-12-15",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:42",
     "name": [
       "成都万象城",
       "MixC Chengdu"
@@ -5119,7 +5119,7 @@
     "city": "Malmö",
     "dates": "2012-12-15",
     "flag": "🇸🇪",
-    "modified": "2022-04-01 18:09:55",
+    "modified": "2024-02-08 18:41:42",
     "name": "Emporia",
     "state": "Skåne",
     "timezone": "Europe/Stockholm",
@@ -5129,7 +5129,7 @@
     "city": "Maribyrnong",
     "dates": "2013-04-27",
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:42",
     "name": "Highpoint",
     "state": "Victoria",
     "timezone": "Australia/Melbourne",
@@ -5140,7 +5140,7 @@
     "city": "Täby",
     "dates": "2012-09-15",
     "flag": "🇸🇪",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:42",
     "name": [
       "Täby Centrum",
       "Taby Centrum"
@@ -5153,7 +5153,7 @@
     "city": "Murcia Churra",
     "dates": "2012-05-12",
     "flag": "🇪🇸",
-    "modified": "2022-05-13 20:50:52",
+    "modified": "2024-02-08 18:41:42",
     "name": "Nueva Condomina",
     "state": "Murcia",
     "timezone": "Europe/Madrid",
@@ -5163,7 +5163,7 @@
     "city": "Booragoon",
     "dates": "2012-09-08",
     "flag": "🇦🇺",
-    "modified": "2022-06-14 21:33:44",
+    "modified": "2024-02-08 18:41:42",
     "name": [
       "Booragoon",
       "Garden City Perth"
@@ -5176,7 +5176,7 @@
     "city": "Carindale",
     "dates": "2012-08-25",
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:42",
     "name": "Carindale",
     "state": "Queensland",
     "timezone": "Australia/Brisbane",
@@ -5186,7 +5186,7 @@
     "city": "Brossard",
     "dates": "2013-04-27",
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:42",
     "name": "DIX30",
     "state": "Quebec",
     "timezone": "Canada/Eastern",
@@ -5196,7 +5196,7 @@
     "city": "Franklin",
     "dates": "2012-06-30",
     "flag": "🇺🇸",
-    "modified": "2022-09-07 15:39:20",
+    "modified": "2024-02-08 18:41:42",
     "name": "CoolSprings Galleria",
     "state": "Tennessee",
     "timezone": "America/Chicago",
@@ -5206,7 +5206,7 @@
     "city": "Halifax",
     "dates": "2012-08-18",
     "flag": "🇨🇦",
-    "modified": "2022-06-30 19:42:09",
+    "modified": "2024-02-08 18:41:42",
     "name": "Halifax Shopping Centre",
     "state": "Nova Scotia",
     "timezone": "Canada/Atlantic",
@@ -5216,7 +5216,7 @@
     "city": "Markham",
     "dates": "2013-07-27",
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:42",
     "name": "Markville Shopping Centre",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -5226,7 +5226,7 @@
     "city": "Washington",
     "dates": "2019-05-11",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:42",
     "name": "Carnegie Library",
     "state": "District of Columbia",
     "timezone": "America/New_York",
@@ -5236,7 +5236,7 @@
     "city": "Beavercreek",
     "dates": "2014-07-19",
     "flag": "🇺🇸",
-    "modified": "2023-06-06 20:21:33",
+    "modified": "2024-02-08 18:41:43",
     "name": "The Greene",
     "state": "Ohio",
     "timezone": "America/New_York",
@@ -5247,7 +5247,7 @@
     "city": "Sindelfingen",
     "dates": "2012-09-21",
     "flag": "🇩🇪",
-    "modified": "2023-03-13 18:20:55",
+    "modified": "2024-02-08 18:41:43",
     "name": "Sindelfingen",
     "state": "Baden-Württemberg",
     "timezone": "Europe/Berlin",
@@ -5258,7 +5258,7 @@
     "city": "Köln",
     "dates": "2012-09-01",
     "flag": "🇩🇪",
-    "modified": "2022-02-28 23:04:41",
+    "modified": "2024-02-08 18:41:43",
     "name": "Rhein Center",
     "state": "Nordrhein-Westfalen",
     "timezone": "Europe/Berlin",
@@ -5269,7 +5269,7 @@
     "city": "München",
     "dates": "2013-09-28",
     "flag": "🇩🇪",
-    "modified": "2023-07-12 17:42:13",
+    "modified": "2024-02-08 18:41:43",
     "name": "OEZ",
     "state": "Bayern",
     "timezone": "Europe/Berlin",
@@ -5280,7 +5280,7 @@
     "city": "Dijon",
     "dates": "2012-09-21",
     "flag": "🇫🇷",
-    "modified": "2023-03-02 05:47:13",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "La Toison d’Or",
       "La Toison d'Or"
@@ -5293,7 +5293,7 @@
     "city": "Broadway",
     "dates": "2012-06-30",
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:43",
     "name": "Broadway",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
@@ -5303,7 +5303,7 @@
     "city": "Watford",
     "dates": "2012-09-15",
     "flag": "🇬🇧",
-    "modified": "2022-06-29 16:37:55",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "Watford",
       "The Harlequin"
@@ -5316,7 +5316,7 @@
     "city": "Fountain Gate",
     "dates": "2012-12-15",
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:43",
     "name": "Fountain Gate",
     "state": "Victoria",
     "timezone": "Australia/Melbourne",
@@ -5327,7 +5327,7 @@
     "city": "宁波",
     "dates": "2017-09-16",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "天一广场",
       "Tianyi Square"
@@ -5341,7 +5341,7 @@
     "city": "杭州",
     "dates": "2015-04-24",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "杭州万象城",
       "MixC Hangzhou"
@@ -5355,7 +5355,7 @@
     "city": "沈阳",
     "dates": "2015-02-28",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "中街大悦城",
       "Zhongjie Joy City"
@@ -5369,7 +5369,7 @@
     "city": "Rosny-Sous-Bois",
     "dates": "2013-07-06",
     "flag": "🇫🇷",
-    "modified": "2023-04-25 15:36:23",
+    "modified": "2024-02-08 18:41:43",
     "name": "Rosny 2",
     "state": "Seine-Saint-Denis",
     "timezone": "Europe/Paris",
@@ -5379,7 +5379,7 @@
     "city": "Arroyo de la Encomienda",
     "dates": "2012-09-20",
     "flag": "🇪🇸",
-    "modified": "2022-05-13 20:38:55",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "Río Shopping",
       "Rio Shopping"
@@ -5393,7 +5393,7 @@
     "city": "Haarlem",
     "dates": "2013-12-07",
     "flag": "🇳🇱",
-    "modified": "2024-01-30 16:14:02",
+    "modified": "2024-02-08 18:41:43",
     "name": "Haarlem",
     "state": "Noord-Holland",
     "timezone": "Europe/Amsterdam",
@@ -5404,7 +5404,7 @@
     "city": "Den Haag",
     "dates": "2014-08-09",
     "flag": "🇳🇱",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:43",
     "name": "Den Haag",
     "state": "Zuid-Holland",
     "timezone": "Europe/Amsterdam",
@@ -5414,7 +5414,7 @@
     "city": "Plymouth",
     "dates": "2013-04-20",
     "flag": "🇬🇧",
-    "modified": "2022-03-10 18:18:51",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "Plymouth",
       "Drake Circus"
@@ -5427,7 +5427,7 @@
     "city": "Lonato",
     "dates": "2012-09-22",
     "flag": "🇮🇹",
-    "modified": "2022-07-13 17:51:59",
+    "modified": "2024-02-08 18:41:43",
     "name": "il Leone",
     "state": "Brescia",
     "timezone": "Europe/Rome",
@@ -5437,7 +5437,7 @@
     "city": "Lawrence Township",
     "dates": "2013-06-29",
     "flag": "🇺🇸",
-    "modified": "2023-02-21 22:04:34",
+    "modified": "2024-02-08 18:41:43",
     "name": "Quaker Bridge",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -5447,7 +5447,7 @@
     "city": "Bakersfield",
     "dates": "2012-09-21",
     "flag": "🇺🇸",
-    "modified": "2023-06-20 15:29:58",
+    "modified": "2024-02-08 18:41:43",
     "name": "Valley Plaza",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -5458,7 +5458,7 @@
     "city": "青岛",
     "dates": "2016-01-30",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "青岛万象城",
       "MixC Qingdao"
@@ -5472,7 +5472,7 @@
     "city": "Köln",
     "dates": "2017-03-25",
     "flag": "🇩🇪",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:43",
     "name": "Schildergasse",
     "state": "Nordrhein-Westfalen",
     "timezone": "Europe/Berlin",
@@ -5483,7 +5483,7 @@
     "city": "Roma",
     "dates": "2013-08-31",
     "flag": "🇮🇹",
-    "modified": "2023-08-30 10:29:53",
+    "modified": "2024-02-08 18:41:43",
     "name": "Euroma2",
     "state": "Roma",
     "timezone": "Europe/Rome",
@@ -5493,7 +5493,7 @@
     "city": "Rimini",
     "dates": "2013-08-03",
     "flag": "🇮🇹",
-    "modified": "2022-07-18 16:07:00",
+    "modified": "2024-02-08 18:41:43",
     "name": "Le Befane",
     "state": "Rimini",
     "timezone": "Europe/Rome",
@@ -5503,7 +5503,7 @@
     "city": "Paris",
     "dates": "2016-12-03",
     "flag": "🇫🇷",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "Marché Saint-Germain",
       "Marche Saint-Germain"
@@ -5516,7 +5516,7 @@
     "city": "Rio de Janeiro Barra da Tijuca",
     "dates": "2014-02-15",
     "flag": "🇧🇷",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:43",
     "name": "VillageMall",
     "state": "RJ",
     "timezone": "Brazil/East",
@@ -5527,7 +5527,7 @@
     "city": "南宁",
     "dates": "2015-12-12",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "南宁万象城",
       "MixC Nanning"
@@ -5541,7 +5541,7 @@
     "city": "郑州",
     "dates": "2015-01-10",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-03-08 08:35:08",
     "name": [
       "郑州万象城",
       "MixC Zhengzhou"
@@ -5555,7 +5555,7 @@
     "city": "重庆",
     "dates": "2015-03-07",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "重庆万象城",
       "MixC Chongqing"
@@ -5569,7 +5569,7 @@
     "city": "无锡",
     "dates": "2014-08-02",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "无锡恒隆广场",
       "Center 66 Wuxi"
@@ -5583,7 +5583,7 @@
     "city": "武汉",
     "dates": "2022-05-21",
     "flag": "🇨🇳",
-    "modified": "2023-05-16 19:49:32",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "武汉",
       "Wuhan"
@@ -5597,7 +5597,7 @@
     "city": "沈阳",
     "dates": "2016-01-09",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "沈阳万象城",
       "MixC Shenyang"
@@ -5614,7 +5614,7 @@
       "2019-09-20"
     ],
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "天环广场",
       "Parc Central"
@@ -5628,7 +5628,7 @@
     "city": "天津",
     "dates": "2016-03-26",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "天津恒隆广场",
       "Riverside 66 Tianjin"
@@ -5642,7 +5642,7 @@
     "city": "成都",
     "dates": "2015-11-21",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "成都太古里",
       "Taikoo Li Chengdu"
@@ -5656,7 +5656,7 @@
     "city": "上海",
     "dates": "2016-06-18",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:43",
     "name": [
       "五角场",
       "Wujiaochang"
@@ -5669,7 +5669,7 @@
     "city": "New York",
     "dates": "2015-06-13",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:43",
     "name": "Upper East Side",
     "state": "New York",
     "timezone": "America/New_York",
@@ -5680,7 +5680,7 @@
     "city": "Beşiktaş İstanbul",
     "dates": "2014-04-05",
     "flag": "🇹🇷",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:43",
     "name": "Zorlu Center",
     "state": "İstanbul",
     "timezone": "Europe/Istanbul",
@@ -5691,7 +5691,7 @@
     "city": "Üsküdar İstanbul",
     "dates": "2014-10-25",
     "flag": "🇹🇷",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:43",
     "name": "Akasya",
     "state": "İstanbul",
     "timezone": "Europe/Istanbul",
@@ -5701,7 +5701,7 @@
     "city": "Atlanta",
     "dates": "2014-09-06",
     "flag": "🇺🇸",
-    "modified": "2023-06-22 16:37:31",
+    "modified": "2024-02-08 18:41:43",
     "name": "Cumberland Mall",
     "state": "Georgia",
     "timezone": "America/New_York",
@@ -5712,7 +5712,7 @@
     "city": "Helsingborg",
     "dates": "2013-11-09",
     "flag": "🇸🇪",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "Väla Centrum",
       "Vala Centrum"
@@ -5725,7 +5725,7 @@
     "city": "Brooklyn",
     "dates": "2016-07-30",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:44",
     "name": "Williamsburg",
     "state": "New York",
     "timezone": "America/New_York",
@@ -5738,7 +5738,7 @@
       "2022-02-03"
     ],
     "flag": "🇦🇪",
-    "modified": "2022-02-04 22:14:03",
+    "modified": "2024-02-08 18:41:44",
     "name": "Yas Mall",
     "state": "Abu Dhabi",
     "timezone": "Asia/Dubai",
@@ -5748,7 +5748,7 @@
     "city": "Dubai",
     "dates": "2015-10-29",
     "flag": "🇦🇪",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:44",
     "name": "Mall of the Emirates",
     "state": "Dubai",
     "timezone": "Asia/Dubai",
@@ -5758,7 +5758,7 @@
     "city": "Dubai",
     "dates": "2017-04-27",
     "flag": "🇦🇪",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:44",
     "name": "Dubai Mall",
     "state": "Dubai",
     "timezone": "Asia/Dubai",
@@ -5768,7 +5768,7 @@
     "city": "Woodbridge",
     "dates": "2013-09-28",
     "flag": "🇺🇸",
-    "modified": "2023-08-17 10:20:05",
+    "modified": "2024-02-08 18:41:44",
     "name": "Potomac Town Center",
     "state": "Virginia",
     "timezone": "America/New_York",
@@ -5778,7 +5778,7 @@
     "city": "Farmington",
     "dates": "2013-09-20",
     "flag": "🇺🇸",
-    "modified": "2023-06-13 21:26:28",
+    "modified": "2024-02-08 18:41:44",
     "name": "Station Park",
     "state": "Utah",
     "timezone": "America/Denver",
@@ -5788,7 +5788,7 @@
     "city": "Surrey",
     "dates": "2013-09-28",
     "flag": "🇨🇦",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:44",
     "name": "Guildford Town Centre",
     "state": "British Columbia",
     "timezone": "Canada/Pacific",
@@ -5798,7 +5798,7 @@
     "city": "Firenze Florence",
     "dates": "2015-09-26",
     "flag": "🇮🇹",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:44",
     "name": "Firenze",
     "state": "Firenze",
     "timezone": "Europe/Rome",
@@ -5808,7 +5808,7 @@
     "city": "Miranda",
     "dates": "2015-07-25",
     "flag": "🇦🇺",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:44",
     "name": "Miranda",
     "state": "New South Wales",
     "timezone": "Australia/Sydney",
@@ -5819,7 +5819,7 @@
     "city": "São Paulo",
     "dates": "2015-04-18",
     "flag": "🇧🇷",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:44",
     "name": "Morumbi",
     "state": "SP",
     "timezone": "Brazil/East",
@@ -5830,7 +5830,7 @@
     "city": "大连",
     "dates": "2016-03-19",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "大连恒隆广场",
       "Olympia 66 Dalian"
@@ -5844,7 +5844,7 @@
     "city": "香港",
     "dates": "2016-06-30",
     "flag": "🇭🇰",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:44",
     "name": "New Town Plaza",
     "state": "香港",
     "timezone": "Asia/Hong_Kong",
@@ -5854,7 +5854,7 @@
     "city": "Elmhurst",
     "dates": "2015-07-11",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:44",
     "name": "Queens Center",
     "state": "New York",
     "timezone": "America/New_York",
@@ -5864,7 +5864,7 @@
     "city": "South Windsor",
     "dates": "2014-08-23",
     "flag": "🇺🇸",
-    "modified": "2022-06-22 21:37:02",
+    "modified": "2024-02-08 18:41:44",
     "name": "Evergreen Walk",
     "state": "Connecticut",
     "timezone": "America/New_York",
@@ -5874,7 +5874,7 @@
     "city": "Virginia Beach",
     "dates": "2014-09-19",
     "flag": "🇺🇸",
-    "modified": "2023-03-23 18:34:25",
+    "modified": "2024-02-08 18:41:44",
     "name": "Lynnhaven Mall",
     "state": "Virginia",
     "timezone": "America/New_York",
@@ -5884,7 +5884,7 @@
     "city": "Sarasota",
     "dates": "2014-10-16",
     "flag": "🇺🇸",
-    "modified": "2023-09-22 03:41:40",
+    "modified": "2024-02-08 18:41:44",
     "name": "University Town Center",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -5894,7 +5894,7 @@
     "city": "Lansing",
     "dates": "2014-08-09",
     "flag": "🇺🇸",
-    "modified": "2023-06-12 15:53:15",
+    "modified": "2024-02-08 18:41:44",
     "name": "Eastwood Towne Center",
     "state": "Michigan",
     "timezone": "America/New_York",
@@ -5905,7 +5905,7 @@
     "city": "长沙",
     "dates": "2021-09-04",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "长沙",
       "Changsha"
@@ -5918,7 +5918,7 @@
     "city": "Marlborough",
     "dates": "2014-10-11",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:44",
     "name": "Solomon Pond Mall",
     "state": "Massachusetts",
     "timezone": "America/New_York",
@@ -5928,7 +5928,7 @@
     "city": "Miami",
     "dates": "2017-03-25",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:44",
     "name": "Brickell City Centre",
     "state": "Florida",
     "timezone": "America/New_York",
@@ -5946,7 +5946,7 @@
     "city": "Mestre Venice",
     "dates": "2014-10-11",
     "flag": "🇮🇹",
-    "modified": "2023-03-31 18:44:21",
+    "modified": "2024-02-08 18:41:44",
     "name": "Nave de Vero",
     "state": "Venezia",
     "timezone": "Europe/Rome",
@@ -5965,7 +5965,7 @@
     "city": "Trumbull",
     "dates": "2014-10-11",
     "flag": "🇺🇸",
-    "modified": "2023-08-25 07:37:36",
+    "modified": "2024-02-08 18:41:44",
     "name": "Trumbull",
     "state": "Connecticut",
     "timezone": "America/New_York",
@@ -5975,7 +5975,7 @@
     "city": "Manchester",
     "dates": "2014-10-18",
     "flag": "🇺🇸",
-    "modified": "2022-07-28 16:35:04",
+    "modified": "2024-02-08 18:41:44",
     "name": "The Mall of New Hampshire",
     "state": "New Hampshire",
     "timezone": "America/New_York",
@@ -5985,7 +5985,7 @@
     "city": "Singapore",
     "dates": "2020-09-10",
     "flag": "🇸🇬",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:44",
     "name": "Marina Bay Sands",
     "state": "Singapore",
     "timezone": "Asia/Singapore",
@@ -5996,7 +5996,7 @@
     "city": "天津",
     "dates": "2015-02-07",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "天津大悦城",
       "Tianjin Joy City"
@@ -6010,7 +6010,7 @@
     "city": "天津",
     "dates": "2016-06-11",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "天津万象城",
       "银河国际购物中心",
@@ -6026,7 +6026,7 @@
     "city": "广州",
     "dates": "2016-12-01",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "珠江新城",
       "Zhujiang New Town"
@@ -6040,7 +6040,7 @@
     "city": "南京",
     "dates": "2015-09-19",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "虹悦城",
       "Wonder City"
@@ -6054,7 +6054,7 @@
     "city": "厦门",
     "dates": "2016-01-14",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "厦门新生活广场",
       "Xiamen Lifestyle Center"
@@ -6068,7 +6068,7 @@
     "city": "北京",
     "dates": "2015-11-28",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "朝阳大悦城",
       "Chaoyang Joy City"
@@ -6082,7 +6082,7 @@
     "city": "福州",
     "dates": "2016-04-02",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "泰禾广场",
       "Tahoe Plaza",
@@ -6097,7 +6097,7 @@
     "city": "济南",
     "dates": "2016-05-21",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "济南恒隆广场",
       "Parc 66 Jinan"
@@ -6110,7 +6110,7 @@
     "city": "Las Vegas",
     "dates": "2014-11-22",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:44",
     "name": "Summerlin",
     "state": "Nevada",
     "timezone": "America/Los_Angeles",
@@ -6120,7 +6120,7 @@
     "city": "New York",
     "dates": "2016-08-16",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:44",
     "name": "World Trade Center",
     "state": "New York",
     "timezone": "America/New_York",
@@ -6133,7 +6133,7 @@
       "2017-01-21"
     ],
     "flag": "🇫🇷",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "Watch at Galeries Lafayette",
       "Apple Watch at Galeries Lafayette"
@@ -6150,7 +6150,7 @@
       "2017-01-03"
     ],
     "flag": "🇬🇧",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "Watch at Selfridges",
       "Apple Watch at Selfridges"
@@ -6164,7 +6164,7 @@
     "city": "Milano Lombardy",
     "dates": "2018-07-26",
     "flag": "🇮🇹",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:44",
     "name": "Piazza Liberty",
     "state": "Milano",
     "timezone": "Europe/Rome",
@@ -6174,7 +6174,7 @@
     "city": "Singapore",
     "dates": "2017-05-27",
     "flag": "🇸🇬",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:44",
     "name": "Orchard Road",
     "state": "Singapore",
     "timezone": "Asia/Singapore",
@@ -6185,7 +6185,7 @@
     "city": "昆明",
     "dates": "2017-01-21",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "昆明",
       "Kunming"
@@ -6199,7 +6199,7 @@
     "city": "澳門",
     "dates": "2016-06-25",
     "flag": "🇲🇴",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:44",
     "name": [
       "澳門銀河",
       "澳门银河",
@@ -6214,7 +6214,7 @@
     "city": "香港",
     "dates": "2016-09-22",
     "flag": "🇭🇰",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:44",
     "name": "apm Hong Kong",
     "state": "香港",
     "timezone": "Asia/Hong_Kong",
@@ -6225,7 +6225,7 @@
     "city": "Paris",
     "dates": "2018-11-18",
     "flag": "🇫🇷",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "Champs-Élysées",
       "Champs-Elysees"
@@ -6238,12 +6238,12 @@
     "alter": "Shanghai 江浙沪",
     "city": "上海",
     "flag": "🇨🇳",
+    "modified": "2024-03-07 23:34:41",
     "name": [
       "静安",
       "Jing'an"
     ],
     "state": "上海",
-    "status": "future",
     "timezone": "Asia/Shanghai",
     "website": "jingan"
   },
@@ -6252,7 +6252,7 @@
     "city": "上海",
     "dates": "2016-05-28",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "环球港",
       "Global Harbor"
@@ -6266,7 +6266,7 @@
     "city": "Wien",
     "dates": "2018-02-24",
     "flag": "🇦🇹",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "Kärntner Straße",
       "Kaerntner Strasse"
@@ -6280,7 +6280,7 @@
     "city": "苏州",
     "dates": "2018-09-21",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "苏州",
       "Suzhou"
@@ -6294,7 +6294,7 @@
     "city": "서울",
     "dates": "2023-03-31",
     "flag": "🇰🇷",
-    "modified": "2023-04-05 17:56:27",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "강남",
       "Gangnam"
@@ -6308,7 +6308,7 @@
     "city": "서울",
     "dates": "2018-01-27",
     "flag": "🇰🇷",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "가로수길",
       "Garosugil"
@@ -6322,7 +6322,7 @@
     "city": "台北市",
     "dates": "2019-06-15",
     "flag": "🇹🇼",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "信義 A13",
       "信义 A13",
@@ -6337,7 +6337,7 @@
     "city": "澳門",
     "dates": "2018-06-29",
     "flag": "🇲🇴",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "路氹金光大道",
       "金沙广场",
@@ -6353,7 +6353,7 @@
     "city": "南京",
     "dates": "2017-03-25",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "玄武湖",
       "南京金茂汇",
@@ -6369,7 +6369,7 @@
     "city": "上海",
     "dates": "2016-12-10",
     "flag": "🇨🇳",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "七宝",
       "Qibao"
@@ -6382,7 +6382,7 @@
     "city": "Abu Dhabi",
     "dates": "2022-02-25",
     "flag": "🇦🇪",
-    "modified": "2022-03-01 21:26:03",
+    "modified": "2024-02-08 18:41:45",
     "name": "Al Maryah Island",
     "state": "Abu Dhabi",
     "timezone": "Asia/Dubai",
@@ -6393,7 +6393,7 @@
     "city": "Del. Cuajimalpa",
     "dates": "2016-09-24",
     "flag": "🇲🇽",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "Vía Santa Fe",
       "Via Santa Fe"
@@ -6407,7 +6407,7 @@
     "city": "川崎市",
     "dates": "2019-12-14",
     "flag": "🇯🇵",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "川崎",
       "Kawasaki"
@@ -6421,7 +6421,7 @@
     "city": "京都市",
     "dates": "2018-08-25",
     "flag": "🇯🇵",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "京都",
       "Kyoto"
@@ -6435,7 +6435,7 @@
     "city": "台北市",
     "dates": "2017-07-01",
     "flag": "🇹🇼",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "台北 101",
       "Taipei 101"
@@ -6448,7 +6448,7 @@
     "city": "Brooklyn",
     "dates": "2017-12-02",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:45",
     "name": "Downtown Brooklyn",
     "state": "New York",
     "timezone": "America/New_York",
@@ -6459,7 +6459,7 @@
     "city": "千代田区",
     "dates": "2019-09-07",
     "flag": "🇯🇵",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "丸の内",
       "Marunouchi"
@@ -6472,7 +6472,7 @@
     "city": "Los Angeles",
     "dates": "2021-06-24",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:45",
     "name": "Tower Theatre",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -6483,7 +6483,7 @@
     "city": "Kadıköy İstanbul",
     "dates": "2021-10-22",
     "flag": "🇹🇷",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "Bağdat Caddesi",
       "Bagdat Caddesi"
@@ -6497,7 +6497,7 @@
     "city": "กรุงเทพมหานคร",
     "dates": "2018-11-10",
     "flag": "🇹🇭",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:45",
     "name": "Iconsiam",
     "state": "กรุงเทพมหานคร",
     "timezone": "Asia/Bangkok",
@@ -6508,7 +6508,7 @@
     "city": "กรุงเทพมหานคร",
     "dates": "2020-07-31",
     "flag": "🇹🇭",
-    "modified": "2022-01-07 08:59:06",
+    "modified": "2024-02-08 18:41:45",
     "name": "Central World",
     "state": "กรุงเทพมหานคร",
     "timezone": "Asia/Bangkok",
@@ -6518,7 +6518,7 @@
     "city": "Singapore",
     "dates": "2019-07-13",
     "flag": "🇸🇬",
-    "modified": "2022-01-07 08:59:09",
+    "modified": "2024-02-08 18:41:45",
     "name": "Jewel Changi Airport",
     "state": "Singapore",
     "timezone": "Asia/Singapore",
@@ -6529,7 +6529,7 @@
     "city": "서울",
     "dates": "2022-04-09",
     "flag": "🇰🇷",
-    "modified": "2022-10-14 21:43:34",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "명동",
       "Myeongdong"
@@ -6543,7 +6543,7 @@
     "city": "Ciudad de México",
     "dates": "2019-09-27",
     "flag": "🇲🇽",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:45",
     "name": "Antara",
     "state": "Ciudad de México",
     "timezone": "Mexico/General",
@@ -6561,7 +6561,7 @@
     "city": "Mumbai",
     "dates": "2023-04-18",
     "flag": "🇮🇳",
-    "modified": "2023-05-16 20:45:10",
+    "modified": "2024-02-08 18:41:45",
     "name": "BKC",
     "state": "Maharashtra",
     "timezone": "Asia/Kolkata",
@@ -6571,7 +6571,7 @@
     "city": "Dallas",
     "dates": "2019-04-13",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:45",
     "name": "Galleria Dallas",
     "state": "Texas",
     "timezone": "America/Chicago",
@@ -6582,7 +6582,7 @@
     "city": "서울",
     "dates": "2021-02-26",
     "flag": "🇰🇷",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "여의도",
       "Yeouido"
@@ -6617,7 +6617,7 @@
     "city": "서울",
     "dates": "2022-09-24",
     "flag": "🇰🇷",
-    "modified": "2022-09-26 18:50:39",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "잠실",
       "Jamsil"
@@ -6630,7 +6630,7 @@
     "city": "Bronx",
     "dates": "2021-09-24",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:45",
     "name": "The Mall at Bay Plaza",
     "state": "New York",
     "timezone": "America/New_York",
@@ -6640,7 +6640,7 @@
     "city": "East Rutherford",
     "dates": "2022-12-03",
     "flag": "🇺🇸",
-    "modified": "2022-12-05 20:27:05",
+    "modified": "2024-02-08 18:41:45",
     "name": "American Dream",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -6650,7 +6650,7 @@
     "city": "New Delhi",
     "dates": "2023-04-20",
     "flag": "🇮🇳",
-    "modified": "2023-04-27 15:41:22",
+    "modified": "2024-02-08 18:41:45",
     "name": "Saket",
     "state": "Delhi",
     "timezone": "Asia/Kolkata",
@@ -6669,7 +6669,7 @@
     "city": "深圳",
     "dates": "2023-04-28",
     "flag": "🇨🇳",
-    "modified": "2023-04-28 02:02:18",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "深圳万象城",
       "MixC Shenzhen"
@@ -6682,7 +6682,7 @@
     "city": "London",
     "dates": "2023-06-15",
     "flag": "🇬🇧",
-    "modified": "2023-06-21 16:18:52",
+    "modified": "2024-02-08 18:41:45",
     "name": "Battersea",
     "state": "Greater London",
     "timezone": "Europe/London",
@@ -6693,7 +6693,7 @@
     "city": "서울",
     "dates": "2024-01-20",
     "flag": "🇰🇷",
-    "modified": "2024-01-21 00:02:25",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "홍대",
       "Hongdae"
@@ -6707,7 +6707,7 @@
     "city": "温州",
     "dates": "2023-11-04",
     "flag": "🇨🇳",
-    "modified": "2023-11-08 00:32:37",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "温州万象城",
       "MixC Wenzhou"
@@ -6721,7 +6721,7 @@
     "city": "경기",
     "dates": "2023-12-09",
     "flag": "🇰🇷",
-    "modified": "2023-12-09 09:52:25",
+    "modified": "2024-02-08 18:41:45",
     "name": [
       "하남",
       "Hanam"
@@ -6734,7 +6734,7 @@
     "city": "Huntersville",
     "dates": "2023-12-14",
     "flag": "🇺🇸",
-    "modified": "2024-01-08 19:24:12",
+    "modified": "2024-02-08 18:41:46",
     "name": "Birkdale Village",
     "state": "North Carolina",
     "timezone": "America/New_York",
@@ -6744,7 +6744,7 @@
     "city": "Cupertino",
     "dates": "2017-11-17",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:07",
+    "modified": "2024-02-08 18:41:46",
     "name": [
       "Park Visitor Center",
       "Apple Park Visitor Center"
@@ -6757,14 +6757,14 @@
     "city": "Cupertino",
     "dates": "2019-06-04",
     "flag": "🇺🇸",
-    "modified": "2022-01-07 08:59:08",
+    "modified": "2024-02-08 18:41:46",
     "name": [
       "Corporate Events",
       "WWDC Store"
     ],
     "state": "California",
-    "timezone": "America/Los_Angeles",
-    "status": "internal"
+    "status": "internal",
+    "timezone": "America/Los_Angeles"
   },
   "850": {
     "city": "Bengaluru",
@@ -6846,7 +6846,7 @@
   "900": {
     "city": "Cupertino",
     "flag": "🇺🇸",
-    "modified": "2023-08-22 06:18:06",
+    "modified": "2024-02-08 18:41:46",
     "name": "Mock Store",
     "state": "California",
     "status": "internal"
