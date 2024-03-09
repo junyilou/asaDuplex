@@ -160,14 +160,6 @@ class Store:
 				raise
 			return {}
 
-	async def header(self, session: Optional[SessionType] = None) -> Optional[str]:
-		try:
-			r = await request(session = session, url = self.dieter, headers = browser_agent, ssl = False,
-				method = "HEAD", allow_redirects = False, raise_for_status = True, mode = "head", timeout = 5)
-			return r['Last-Modified'][5:-4]
-		except:
-			return None
-
 	def nsoString(self, userLang: bool = True) -> str:
 		if not hasattr(self, "dates"):
 			return ""
