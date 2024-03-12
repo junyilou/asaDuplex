@@ -25,7 +25,7 @@ async def task(store: Store,
 			return dt, r["raw"]
 	except aiohttp.ClientResponseError as cre:
 		if cre.status == 404:
-			pass
+			return
 		logging.error(f"[{store.rid}] 请求失败: {cre!r}")
 	except Exception as exp:
 		logging.error(f"[{store.rid}] 请求失败: {exp!r}")

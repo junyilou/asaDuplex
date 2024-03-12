@@ -2,7 +2,6 @@ import asyncio
 import logging
 from collections.abc import AsyncIterator, Iterable, Iterator, Mapping
 from datetime import datetime, timedelta
-from random import choice
 from typing import Any, Literal, Optional
 
 from modules.util import SessionType, browser_agent, request
@@ -37,7 +36,7 @@ def ignored(
 
 async def apu(store: Store, userLang: bool, target: str,
 	session: Optional[SessionType] = None) -> AsyncIterator[tuple[str, str, str]]:
-	retry = 3
+	retry = max_retry = 3
 	base = f"https://www.apple.com{store.region.url_store}"
 	url = f"{base}/shop/fulfillment-messages"
 	referer = browser_agent | {"Referer": f"{base}/shop/product/{target}"}
@@ -52,7 +51,7 @@ async def apu(store: Store, userLang: bool, target: str,
 			break
 		except:
 			retry -= 1
-			sec = choice(list(range(2, 16, 2)))
+			sec = 2 ** (max_retry - retry)
 			logging.debug(("等待 {} 秒" if userLang else "Waiting {} sec").format(sec))
 			await asyncio.sleep(sec)
 
@@ -61,7 +60,7 @@ async def apu(store: Store, userLang: bool, target: str,
 			raw = datetime.strptime(f"{holiday["date"]} 00", "%b %d %y").replace(year = datetime.now().year)
 			if raw < datetime.now() - timedelta(weeks = 1):
 				raw = raw.replace(year = raw.year + 1)
-			text = " ".join([f"[{holiday["description"]}]" if holiday["description"] else "", holiday["comments"] or ""])
+			text = " ".join(i for i in (f"[{holiday["description"]}]" if holiday["description"] else "", holiday["comments"] or "") if i)
 			yield (rstore["storeNumber"], f"{raw:%F}", text)
 
 async def comment(store: Store, userLang: bool = True,
