@@ -120,7 +120,6 @@ async def main(session: SessionType) -> None:
 		results[store] = specials
 		if diff:
 			diffs[store] = diff
-			targets.append(store)
 		for date in specials:
 			calendar.setdefault(date, {})[store] = specials[date]["special"]
 
@@ -141,6 +140,7 @@ async def main(session: SessionType) -> None:
 		if not any(diff):
 			continue
 		diff_str.append(f"{'':4}{store}\n{"\n".join(diff)}")
+		targets.append(store)
 	if not diff_str:
 		return logging.info(LANG["NODIFF"])
 	logging.info(LANG["PREPS"].format(LEN = len(targets)))
