@@ -7,7 +7,8 @@ from typing import Any
 
 from modules.constants import DIFFHTML
 from modules.special import compare, special
-from modules.util import SemaphoreType, SessionType, session_func, setLogger, sortOD
+from modules.util import (SemaphoreType, SessionType, session_func, setLogger,
+                          sortOD)
 from storeInfo import Store, getStore, nameReplace, storeReturn
 
 INCLUDE = "🇨🇳, 🇯🇵"
@@ -79,7 +80,7 @@ async def report(targets: list[Store]) -> None:
 	text = f"{"、".join(replaced[:10])} 等 {len(targets)} 家零售店" if len(replaced) > 10 else "、".join(replaced)
 	push = {"image": targets[0].dieter.split("?")[0],
 		"mode": "photo-text", "chat_id": chat_ids[0], "parse": "MARK",
-		"text": f'*来自 Hours 的通知*\n{text} 有特别营业时间更新 [↗](http://aliy.un/html/storeHours.html)'}
+		"text": f'*来自 Hours 的通知*\n{text} 有特别营业时间更新 [↗](http://aliy.un/hours)'}
 	await async_post(push)
 
 @session_func
@@ -143,13 +144,17 @@ async def main(session: SessionType) -> None:
 		targets.append(store)
 	if not diff_str:
 		return logging.info(LANG["NODIFF"])
+
 	logging.info(LANG["PREPS"].format(LEN = len(targets)))
+	hfile = Path("www/hours/index.html")
+	if hfile.exists():
+		hfile.rename(hfile.with_stem(f"history-{datetime.fromtimestamp(hfile.stat().st_ctime):%Y%m%d-%H%M%S}"))
 	content = LANG["DIFFCONTENT"].format(
 		RUNTIME = f"{RUNTIME:%F %T}", DIFF = "\n".join(diff_str), JSON = file_text,
 		CALENDAR = json.dumps(cal, ensure_ascii = False, indent = 2, sort_keys = True))
-	with open("html/storeHours.html", "w") as w:
-		w.write(DIFFHTML.format(DIFFTITLE = "Special Hours", DIFFCONTENT = content))
+	hfile.write_text(DIFFHTML.format(DIFFTITLE = "Special Hours", DIFFCONTENT = content))
 	logging.info(LANG["DIFFGEN"])
+
 	await report(targets)
 
 setLogger(logging.INFO, __file__, base_name = True)
