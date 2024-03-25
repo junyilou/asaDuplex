@@ -11,9 +11,8 @@ from modules.util import (SemaphoreType, SessionType, browser_agent,
                           with_semaphore)
 from storeInfo import Store as Raw_Store
 from storeInfo import getStore as getRaw_Store
-from storeInfo import sidify, storeReturn
+from storeInfo import storeReturn
 
-__SAVED = {"Store": {}, "Course": {}, "Schedule": {}, "Collection": {}}
 ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
 PARAM = {"method": "GET", "timeout": 25, "retry": 5}
 SEMAPHORE_LIMIT = 20
@@ -141,7 +140,7 @@ class Store(TodayObject):
 	sortkeys: list[str] = ["raw_store"]
 
 	def __init__(self,
-		raw: Optional[dict] = None,
+		raw: Optional[dict[str, Any]] = None,
 		rootPath: Optional[str] = None,
 		sid: Optional[int | str] = None,
 		store: Optional[Raw_Store] = None) -> None:
@@ -193,7 +192,8 @@ class Store(TodayObject):
 		tasks = []
 		async with asyncio.TaskGroup() as tg:
 			for c in remote["courses"].values():
-				tasks.append(tg.create_task(getCourse(remote = remote, rootPath = self.rootPath, slug = c["urlTitle"])))
+				tasks.append(tg.create_task(Course.get(rootPath = self.rootPath,
+					slug = c["urlTitle"], remote = remote, session = session)))
 		return [t.result() for t in tasks]
 
 	async def getSchedules(self, ensure: bool = True,
@@ -216,9 +216,8 @@ class Store(TodayObject):
 				if not ensure or storeNum == self.sid or "VIRTUAL" in course["type"]:
 					if s["courseId"] not in remote["courses"]:
 						continue
-					tasks.append(tg.create_task(getSchedule(
-						scheduleId = i, remote = remote, rootPath = self.rootPath,
-						slug = course["urlTitle"])))
+					tasks.append(tg.create_task(Schedule.get(rootPath = self.rootPath,
+						scheduleId = i, slug = course["urlTitle"], remote = remote, session = session)))
 		results: list[Schedule] = [t.result() for t in tasks]
 		if date:
 			results = [i for i in results if i.rawStart.date() == date.date()]
@@ -229,20 +228,6 @@ class Store(TodayObject):
 		assert isinstance(d, dict)
 		self.coord = [i[1] for i in sorted(d["geolocation"].items())]
 		return self.coord
-
-def getStore(
-	sid: int | str,
-	raw: Optional[dict] = None,
-	rootPath: Optional[str] = None,
-	store: Optional[Raw_Store] = None) -> Store:
-
-	sid = sidify(sid, R = True)
-	if sid in __SAVED["Store"] and raw is not None:
-		get = Store(raw = raw, rootPath = rootPath)
-	else:
-		get = Store(sid = sid, store = store, raw = raw, rootPath = rootPath)
-	__SAVED["Store"][sid] = get
-	return get
 
 class Talent(TodayObject):
 	hashattr: list[str] = ["name"]
@@ -270,7 +255,7 @@ class Course(TodayObject):
 	async def get(cls,
 		rootPath: str,
 		slug: str,
-		remote: Optional[dict] = None,
+		remote: Optional[dict[str, Any]] = None,
 		session: Optional[SessionType] = None) -> Self:
 		if remote is None:
 			try:
@@ -283,7 +268,7 @@ class Course(TodayObject):
 
 		assert isinstance(remote, dict), f"课程 {rootPath}/{slug} 数据信息无效"
 		courseId: str = next(t[0] for t in remote["courses"].items() if t[1]["urlTitle"] == slug)
-		talents: list[dict] = remote.get("talents", [])
+		talents: list[dict[str, Any]] = remote.get("talents", [])
 		raw: dict[str, Any] = remote["courses"][courseId]
 		moreAbout, collection = [], raw.get("collectionName")
 		if "moreAbout" in remote:
@@ -294,7 +279,7 @@ class Course(TodayObject):
 					moreAbout.append(m)
 		for more in moreAbout:
 			if collection and any(collection == more.get(k, k) for k in ["title", "name"]):
-				collection = await getCollection(rootPath = rootPath, slug = more["collId"], session = session)
+				collection = await Collection.get(rootPath = rootPath, slug = more["collId"], session = session)
 
 		return cls(courseId = courseId, raw = raw, rootPath = rootPath, collection = collection, talents = talents)
 
@@ -303,7 +288,7 @@ class Course(TodayObject):
 		raw: dict[str, Any],
 		rootPath: str,
 		collection: Optional["str | Collection"] = None,
-		talents: list[dict] = []) -> None:
+		talents: list[dict[str, Any]] = []) -> None:
 
 		self.rootPath: str = rootPath
 		self.flag: str = todayNation[self.rootPath]
@@ -379,8 +364,8 @@ class Course(TodayObject):
 				storeNum = schedules[i]["storeNum"]
 				if schedules[i]["courseId"] == self.courseId:
 					if not ensure or storeNum == store.sid or "VIRTUAL" in remote["courses"][self.courseId]["type"]:
-						tasks.append(tg.create_task(getSchedule(
-							scheduleId = i, remote = remote, rootPath = store.rootPath, slug = self.slug)))
+						tasks.append(tg.create_task(Schedule.get(rootPath = store.rootPath,
+							scheduleId = i, slug = self.slug, remote = remote, session = session)))
 		results: list[Schedule] = [t.result() for t in tasks]
 		if date:
 			results = [i for i in results if i.rawStart.date() == date.date()]
@@ -393,49 +378,13 @@ class Course(TodayObject):
 		stores = utils.get_fas_stores(rootPath, fast)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		async with get_session(session) as session:
-			tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath),
+			tasks = (self.getSchedules(Store(store = i, rootPath = rootPath),
 				ensure = not fast, date = date, session = session, semaphore = semaphore) for i in stores)
 			results = await asyncio.gather(*tasks, return_exceptions = True)
 		return sorted({i for j in (r for r in results if not isinstance(r, BaseException)) for i in j})
 
 	async def getSingleSchedule(self, session: Optional[SessionType] = None) -> "Schedule":
-		return await getSchedule(scheduleId = self.courseId, rootPath = self.rootPath, slug = self.slug, session = session)
-
-async def getCourse(
-	courseId: Optional[int | str] = None,
-	fuzzy: bool = True,
-	remote: Optional[dict] = None,
-	rootPath: Optional[str] = None,
-	slug: Optional[str] = None,
-	session: Optional[SessionType] = None) -> Course:
-
-	courseId = str(courseId)
-
-	if remote is not None:
-		assert rootPath is not None and slug is not None, "在提供字典模式下 rootPath 和 slug 必须提供"
-		obj = await Course.get(slug = slug, rootPath = rootPath, remote = remote, session = session)
-		__SAVED["Course"][f"{obj.rootPath}/{obj.courseId}"] = obj
-		return obj
-
-	keyword = courseId
-	if not fuzzy:
-		assert rootPath is not None, "在非模糊模式下 rootPath 必须提供"
-		keyword = "/".join([rootPath, keyword])
-
-	try:
-		return __SAVED["Course"][keyword]
-	except KeyError:
-		try:
-			assert fuzzy
-			matched = (i for i in __SAVED["Course"].keys() if keyword in i)
-			return __SAVED["Course"][next(matched)]
-		except:
-			pass
-
-	assert slug is not None and rootPath is not None, "没有找到匹配时 slug 和 rootPath 必须全部提供"
-	obj = await Course.get(slug = slug, rootPath = rootPath, session = session)
-	__SAVED["Course"][f"{obj.rootPath}/{obj.courseId}"] = obj
-	return obj
+		return await Schedule.get(scheduleId = self.courseId, rootPath = self.rootPath, slug = self.slug, session = session)
 
 class Schedule(TodayObject):
 	hashattr: list[str] = ["rootPath", "scheduleId", "slug"]
@@ -446,7 +395,7 @@ class Schedule(TodayObject):
 		rootPath: str,
 		scheduleId: str,
 		slug: str,
-		remote: Optional[dict] = None,
+		remote: Optional[dict[str, Any]] = None,
 		session: Optional[SessionType] = None) -> Self:
 		if remote is None:
 			scheduleId = str(scheduleId)
@@ -459,14 +408,14 @@ class Schedule(TodayObject):
 				raise ValueError(f"获取排课 {rootPath}/{slug}/{scheduleId} 数据失败") from None
 
 		assert isinstance(remote, dict), f"排课 {rootPath}/{slug}/{scheduleId} 数据信息无效"
-		store = getStore(
+		store = Store(
 			sid = remote["schedules"][scheduleId]["storeNum"],
 			raw = remote["stores"].get(remote["schedules"][scheduleId]["storeNum"]),
 			rootPath = rootPath)
 		cid = remote["schedules"][scheduleId]["courseId"]
-		course = await getCourse(
-			remote = remote, rootPath = rootPath,
-			slug = remote["courses"][cid]["urlTitle"], session = session)
+		course = await Course.get(rootPath = rootPath,
+			slug = remote["courses"][cid]["urlTitle"],
+			remote = remote, session = session)
 		raw: dict[str, Any] = remote["schedules"][scheduleId]
 
 		return cls(scheduleId = scheduleId, course = course, store = store, rootPath = rootPath, raw = raw)
@@ -511,31 +460,6 @@ class Schedule(TodayObject):
 		loc = self.store.sid if not self.course.virtual else "Online"
 		return f'<Schedule {self.scheduleId} of {self.course.courseId}, {self.datetimeStart("%-m/%-d %-H:%M")}-{self.datetimeEnd()} @ {loc}>'
 
-async def getSchedule(
-	scheduleId: int | str,
-	remote: Optional[dict] = None,
-	rootPath: Optional[str] = None,
-	slug: Optional[str] = None,
-	session: Optional[SessionType] = None) -> Schedule:
-
-	scheduleId = str(scheduleId)
-
-	if remote is not None:
-		assert rootPath is not None and slug is not None, "在提供字典模式下 rootPath 和 slug 必须提供"
-		obj = await Schedule.get(rootPath = rootPath, scheduleId = scheduleId, slug = slug, remote = remote, session = session)
-		__SAVED["Schedule"][obj.scheduleId] = obj
-		return obj
-
-	try:
-		return __SAVED["Schedule"][scheduleId]
-	except KeyError:
-		pass
-
-	assert slug is not None and rootPath is not None, "没有找到匹配时 slug 和 rootPath 必须全部提供"
-	obj = await Schedule.get(rootPath = rootPath, scheduleId = scheduleId, slug = slug, session = session)
-	__SAVED["Schedule"][obj.scheduleId] = obj
-	return obj
-
 class Collection(TodayObject):
 	hashattr: list[str] = ["rootPath", "slug"]
 	sortkeys: list[str] = ["rootPath", "slug"]
@@ -544,7 +468,7 @@ class Collection(TodayObject):
 	async def get(cls,
 		rootPath: str,
 		slug: str,
-		remote: Optional[dict] = None,
+		remote: Optional[dict[str, Any]] = None,
 		session: Optional[SessionType] = None) -> Self:
 		if remote is None:
 			try:
@@ -629,8 +553,8 @@ class Collection(TodayObject):
 				course = remote["courses"][courseId]
 				if self.slug in (m["collId"] for m in remote["heroGallery"] if m["heroType"] == "TAG"):
 					if not ensure or storeNum == store.sid or "VIRTUAL" in course["type"]:
-						tasks.append(tg.create_task(getSchedule(
-							scheduleId = i, remote = remote, rootPath = store.rootPath, slug = course["urlTitle"])))
+						tasks.append(tg.create_task(Schedule.get(rootPath = store.rootPath,
+							scheduleId = i, slug = course["urlTitle"], remote = remote, session = session)))
 		results: list[Schedule] = [t.result() for t in tasks]
 		if date:
 			results = [i for i in results if i.rawStart.date() == date.date()]
@@ -643,7 +567,7 @@ class Collection(TodayObject):
 		stores = utils.get_fas_stores(rootPath, fast)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		async with get_session(session) as session:
-			tasks = (self.getSchedules(getStore(sid = i.sid, store = i, rootPath = rootPath),
+			tasks = (self.getSchedules(Store(store = i, rootPath = rootPath),
 				ensure = not fast, date = date, session = session, semaphore = semaphore) for i in stores)
 			results = await asyncio.gather(*tasks, return_exceptions = True)
 		return sorted({i for j in (r for r in results if not isinstance(r, BaseException)) for i in j})
@@ -652,19 +576,6 @@ class Collection(TodayObject):
 		session: Optional[SessionType] = None) -> list[Course]:
 		schedules = await self.getRootSchedules(rootPath = rootPath, fast = fast, session = session)
 		return sorted({schedule.course for schedule in schedules})
-
-async def getCollection(
-	rootPath: str, slug: str,
-	session: Optional[SessionType] = None) -> Collection:
-
-	try:
-		return __SAVED["Collection"][f"{rootPath}/{slug}"]
-	except KeyError:
-		pass
-
-	obj = await Collection.get(rootPath = rootPath, slug = slug, session = session)
-	__SAVED["Collection"][f"{obj.rootPath}/{obj.slug}"] = obj
-	return obj
 
 class Sitemap(TodayObject):
 	hashattr: list[str] = ["urlPath"]
@@ -754,11 +665,11 @@ async def getURL(url: str,
 	async with with_semaphore(semaphore):
 		match parseURL(url):
 			case {"type": "schedule", "rootPath": r, "slug": g, "scheduleId": s}:
-				return await getSchedule(scheduleId = s, rootPath = r, slug = g, session = session)
+				return await Schedule.get(rootPath = r, scheduleId = s, slug = g, session = session)
 			case {"type": "course", "rootPath": r, "slug": g}:
-				return await getCourse(fuzzy = False, rootPath = r, slug = g, session = session)
+				return await Course.get(rootPath = r, slug = g, session = session)
 			case {"type": "collection", "rootPath": r, "slug": g}:
-				return await getCollection(rootPath = r, slug = g, session = session)
+				return await Collection.get(rootPath = r, slug = g, session = session)
 	raise ValueError(f"无法解析并生成自: {url}")
 
 lang = {
