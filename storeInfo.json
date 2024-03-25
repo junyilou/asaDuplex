@@ -1,5 +1,5 @@
 {
-  "update": "2024-03-10 13:14:08",
+  "update": "2024-03-25 11:43:15",
   "001": {
     "city": "Glendale",
     "dates": [
@@ -1233,7 +1233,10 @@
   "091": {
     "alter": "Osaka Osaka-shi 心斋桥",
     "city": "大阪市",
-    "dates": "2004-08-28",
+    "dates": [
+      "2004-08-28",
+      "2024-03-09"
+    ],
     "flag": "🇯🇵",
     "md5": "8c3667e14299aa15c243c9d25fa93837",
     "name": [
@@ -3783,7 +3786,7 @@
     "city": "Doncaster",
     "dates": "2009-05-23",
     "flag": "🇦🇺",
-    "md5": "fbab3996fdd5eb96d9ce4304e87d4a25",
+    "md5": "069e783b737985d28a948af378156a6b",
     "name": "Doncaster",
     "state": "Victoria",
     "timezone": "Australia/Melbourne",
@@ -3793,7 +3796,7 @@
     "city": "Cheltenham",
     "dates": "2011-08-13",
     "flag": "🇦🇺",
-    "md5": "b982a395452c7145e053cc75f44500e8",
+    "md5": "0d3ca880060c02879a5b084a7859a509",
     "name": "Southland",
     "state": "Victoria",
     "timezone": "Australia/Melbourne",
@@ -3844,9 +3847,12 @@
   },
   "350": {
     "city": "Mississauga",
-    "dates": "2009-08-15",
+    "dates": [
+      "2009-08-15",
+      "2024-03-23"
+    ],
     "flag": "🇨🇦",
-    "md5": "41ed5c69f43475c2b3c29200d77f8a59",
+    "md5": "5f73a75c51b78b6925d8a4fa3d6ac1b5",
     "name": "Square One",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -6237,8 +6243,9 @@
   "678": {
     "alter": "Shanghai 江浙沪",
     "city": "上海",
+    "dates": "2024-03-21",
     "flag": "🇨🇳",
-    "md5": "178dc89defceec7dbff44654c25677d8",
+    "md5": "1511f60d2ccf4a76d3bf49a7dcc14033",
     "name": [
       "静安",
       "Jing'an"
