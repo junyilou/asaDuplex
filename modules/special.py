@@ -1,13 +1,12 @@
-import asyncio
-import logging
-from collections.abc import AsyncIterator, Iterable, Iterator, Mapping
+from asyncio import sleep
+from collections.abc import Iterable, Iterator, Mapping
 from datetime import datetime, timedelta
+from random import randint
 from typing import Any, Literal, Optional
 
 from modules.util import SessionType, browser_agent, request
 from storeInfo import Store
 
-COMMENTS: dict[str, dict[str, str]] = {}
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 def convert(dct: Mapping[str, Any], userLang: bool = True) -> str:
@@ -17,7 +16,7 @@ def convert(dct: Mapping[str, Any], userLang: bool = True) -> str:
 		case {"openTime": "00:00", "closeTime": "23:59"}:
 			return "24 小时营业" if userLang else "Always Open"
 		case {"openTime": opt, "closeTime": clt}:
-			return f'{opt} - {clt}'
+			return f"{opt} - {clt}"
 		case _:
 			return "未知时间" if userLang else "Unknown Hours"
 
@@ -34,43 +33,55 @@ def ignored(
 			continue
 		yield item["date"], converted
 
-async def apu(store: Store, userLang: bool, target: str,
-	session: Optional[SessionType] = None) -> AsyncIterator[tuple[str, str, str]]:
-	retry = max_retry = 3
+async def base_comment(store: Store,
+	accepted_dates: Iterable[str],
+	results_dict: dict[str, dict[str, str]],
+	timeout: int, session: Optional[SessionType]) -> dict[str, dict[str, str]]:
 	base = f"https://www.apple.com{store.region.url_store}"
 	url = f"{base}/shop/fulfillment-messages"
+	target = f"MUQ93{store.region.part_sample}/A"
 	referer = browser_agent | {"Referer": f"{base}/shop/product/{target}"}
 	params = {"searchNearby": "true", "store": store.rid, "parts.0": target}
 
 	stores: list[dict] = []
-	while retry:
-		try:
-			r = await request(url, session, headers = referer, timeout = 5,
-				params = params, raise_for_status = True, mode = "json")
-			stores = r["body"]["content"]["pickupMessage"]["stores"]
-			break
-		except:
-			retry -= 1
-			sec = 2 ** (max_retry - retry)
-			logging.debug(("等待 {} 秒" if userLang else "Waiting {} sec").format(sec))
-			await asyncio.sleep(sec)
-
+	r = await request(url, session, headers = referer, timeout = timeout,
+		params = params, raise_for_status = True, mode = "json")
+	stores = r["body"]["content"]["pickupMessage"]["stores"]
 	for rstore in stores:
 		for holiday in rstore["retailStore"]["storeHolidays"]:
-			raw = datetime.strptime(f"{holiday["date"]} 00", "%b %d %y").replace(year = datetime.now().year)
-			if raw < datetime.now() - timedelta(weeks = 1):
+			rid = rstore["storeNumber"]
+			raw = datetime.strptime(f"{holiday["date"]} 2000", "%b %d %Y")
+			try:
+				raw = raw.replace(year = datetime.now().year)
+				assert raw > datetime.now() - timedelta(weeks = 1)
+			except:
 				raw = raw.replace(year = raw.year + 1)
-			text = " ".join(i for i in (f"[{holiday["description"]}]" if holiday["description"] else "", holiday["comments"] or "") if i)
-			yield (rstore["storeNumber"], f"{raw:%F}", text)
+			date_str = raw.strftime("%F")
+			if accepted_dates and date_str not in accepted_dates:
+				continue
+			text = " ".join(i for i in (f"[{holiday["description"] or ""}]", holiday["comments"]) if i)
+			results_dict.setdefault(rid, {})[date_str] = text
+	return results_dict
 
-async def comment(store: Store, userLang: bool = True,
+async def comment(store: Store,
 	accepted_dates: Iterable[str] = [],
-	session: Optional[SessionType] = None) -> dict[str, dict[str, str]]:
-	async for s, d, t in apu(store, userLang, f'MUQ93{store.region.part_sample}/A', session):
-		if accepted_dates and d not in accepted_dates:
-			continue
-		COMMENTS.setdefault(s, {})[d] = t
-	return COMMENTS
+	results_dict: dict[str, dict[str, str]] = {},
+	session: Optional[SessionType] = None,
+	max_retry: int = 3, timeout: int = 5,
+	min_interval: int = 2, max_interval: int = 16,
+	shout: bool = False) -> dict[str, dict[str, str]]:
+	while max_retry:
+		try:
+			return await base_comment(store, accepted_dates, results_dict, timeout, session)
+		except Exception as exp:
+			max_retry -= 1
+			if not max_retry:
+				if not shout:
+					return results_dict
+				raise exp
+			delay = randint(min_interval, max_interval)
+			await sleep(delay)
+	return results_dict
 
 async def special(store: Store, *,
 	threshold: Optional[datetime] = None,
@@ -87,8 +98,6 @@ async def special(store: Store, *,
 			for key in ("regular", "special"):
 				assert key in detail
 		except:
-			text = f"未能获得 {store.rid} 营业时间信息" if userLang else f"Failed getting store hours for {store.rid}"
-			logging.getLogger("modules.special").error(text)
 			return
 
 	comments, results, asked = {}, {}, []
@@ -102,7 +111,7 @@ async def special(store: Store, *,
 			assert ask_comment
 			assert store.rid not in comments
 			assert store.rid not in asked
-			comments = await comment(store, userLang, session = session)
+			comments = await comment(store, results_dict = comments, session = session)
 		except:
 			pass
 		finally:
