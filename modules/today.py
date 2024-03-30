@@ -186,7 +186,8 @@ class Store(TodayObject):
 				url = (API["landing"]["store" if ensure else "nearby"]).format(
 				STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
 			remote = json.loads(utils.separate(r))
-		except json.decoder.JSONDecodeError:
+			assert "courses" in remote
+		except:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
 
 		tasks = []
@@ -205,7 +206,8 @@ class Store(TodayObject):
 				url = (API["landing"]["store" if ensure else "nearby"]).format(
 				STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
 			remote = json.loads(utils.separate(r))
-		except json.decoder.JSONDecodeError:
+			assert "schedules" in remote
+		except:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
 
 		tasks = []
@@ -263,7 +265,8 @@ class Course(TodayObject):
 					url = API["session"]["course"].format(
 					COURSESLUG = slug, ROOTPATH = rootPath), **PARAM)
 				remote = json.loads(utils.separate(r))
-			except json.decoder.JSONDecodeError:
+				assert isinstance(remote, dict) and "courses" in remote
+			except:
 				raise ValueError(f"获取课程 {rootPath}/{slug} 数据失败") from None
 
 		assert isinstance(remote, dict), f"课程 {rootPath}/{slug} 数据信息无效"
@@ -354,7 +357,8 @@ class Course(TodayObject):
 					url = (API["session"]["course"]["store" if ensure else "nearby"]).format(
 					STORESLUG = store.slug, COURSESLUG = self.slug, ROOTPATH = store.rootPath), **PARAM)
 			remote = json.loads(utils.separate(r))
-		except json.decoder.JSONDecodeError:
+			assert "schedules" in remote
+		except:
 			raise ValueError(f"获取排课 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
 
 		tasks = []
@@ -404,7 +408,8 @@ class Schedule(TodayObject):
 					url = API["session"]["schedule"].format(
 					COURSESLUG = slug, SCHEDULEID = scheduleId, ROOTPATH = rootPath), **PARAM)
 				remote = json.loads(utils.separate(r))
-			except json.decoder.JSONDecodeError:
+				assert isinstance(remote, dict) and "schedules" in remote
+			except:
 				raise ValueError(f"获取排课 {rootPath}/{slug}/{scheduleId} 数据失败") from None
 
 		assert isinstance(remote, dict), f"排课 {rootPath}/{slug}/{scheduleId} 数据信息无效"
@@ -476,7 +481,7 @@ class Collection(TodayObject):
 					url = API["collection"]["geo"].format(
 					COLLECTIONSLUG = slug, ROOTPATH = rootPath), **PARAM)
 				remote = json.loads(utils.separate(r))
-			except json.decoder.JSONDecodeError:
+			except:
 				raise ValueError(f"获取系列 {rootPath}/{slug} 数据失败") from None
 
 		assert isinstance(remote, dict), f"系列 {rootPath}/{slug} 数据信息无效"
@@ -542,7 +547,8 @@ class Collection(TodayObject):
 					url = (API["collection"]["store" if ensure else "nearby"]).format(
 					STORESLUG = store.slug, COLLECTIONSLUG = self.slug, ROOTPATH = store.rootPath), **PARAM)
 			remote = json.loads(utils.separate(r))
-		except json.decoder.JSONDecodeError:
+			assert "schedules" in remote
+		except:
 			raise ValueError(f"获取排课 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
 
 		tasks = []
