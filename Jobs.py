@@ -1,6 +1,7 @@
 import asyncio
 import json
 import logging
+from argparse import ArgumentParser
 from datetime import UTC, datetime
 from random import choice
 from sys import argv
@@ -97,7 +98,9 @@ class State(TaskObject):
 			return logging.error(", ".join(["下载失败", "放弃下载", str(self)]))
 		debug_logger.info(", ".join([str(self), f"找到 {len(a)} 个门店"]))
 		for c in a:
-			RESULTS.append(Store(state = self, city = c["city"], name = c["name"], sid = c["code"]))
+			s = Store(state = self, city = c["city"], name = c["name"], sid = c["code"])
+			RESULTS.append(s)
+			debug_logger.debug(repr(s))
 
 class Region(TaskObject):
 	hashattr = "flag"
@@ -175,11 +178,13 @@ async def post(pushes: dict[str, list[str]], session: SessionType) -> None:
 		await async_post(push, session = session)
 
 @session_func
-async def main(
+async def entry(
 	session: SessionType,
 	targets: list[str],
 	check_cancel: bool,
 	check_future: bool) -> None:
+	setLogger(logging.INFO, __file__, base_name = True)
+	logging.info("程序启动")
 	with open("Retail/savedJobs.json") as r:
 		SAVED = json.load(r)
 
@@ -271,14 +276,16 @@ async def main(
 		SAVED["update"] = datetime.now(UTC).strftime("%F %T GMT")
 		with open("Retail/savedJobs.json", "w") as w:
 			json.dump(SAVED, w, ensure_ascii = False, indent = 2, sort_keys = True)
+	logging.info("程序结束")
 
 if __name__ == "__main__":
-	setLogger(logging.INFO, __file__, base_name = True)
-	logging.info("程序启动")
-	judge_remove = lambda k: not (k not in argv or (argv.remove(k) or False))
+	parser = ArgumentParser()
+	parser.add_argument("flags", metavar = "FLAG", type = str, nargs = "*", help = "指定国家或地区旗帜")
+	parser.add_argument("-c", "--cancel", action = "store_true", help = "同时查询取消情况")
+	parser.add_argument("-f", "--future", action = "store_true", help = "使用远程职位列表")
+	parser.add_argument("-v", "--verbose", action = "count", default = 0, help = "记录调试信息")
+	parsed = parser.parse_args()
 	debug_logger = logging.getLogger("debug")
-	debug_logger.setLevel(logging.INFO)
-	debug_logger.propagate = judge_remove("debug")
-	c, f = judge_remove("cancel"), judge_remove("future")
-	asyncio.run(main(argv[1:], c, f))
-	logging.info("程序结束")
+	debug_logger.propagate = parsed.verbose > 0
+	debug_logger.setLevel(logging.DEBUG if parsed.verbose > 1 else logging.INFO)
+	asyncio.run(entry(parsed.flags, parsed.cancel, parsed.future))
