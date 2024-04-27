@@ -1,5 +1,5 @@
 {
-  "update": "2024-03-25 11:43:15",
+  "update": "2024-04-27 08:10:44",
   "001": {
     "city": "Glendale",
     "dates": [
@@ -1233,10 +1233,7 @@
   "091": {
     "alter": "Osaka Osaka-shi 心斋桥",
     "city": "大阪市",
-    "dates": [
-      "2004-08-28",
-      "2024-03-09"
-    ],
+    "dates": "2004-08-28",
     "flag": "🇯🇵",
     "md5": "8c3667e14299aa15c243c9d25fa93837",
     "name": [
@@ -1389,7 +1386,7 @@
       "2012-12-15"
     ],
     "flag": "🇺🇸",
-    "md5": "b33de9f0e8c2c0b5eedde328aa359047",
+    "md5": "f3cc6c21164ab74b315ebe16934fdb38",
     "name": "Rockaway",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -1578,7 +1575,7 @@
       "2012-12-08"
     ],
     "flag": "🇺🇸",
-    "md5": "feb9e5aee507e1d2516bcf49758b9670",
+    "md5": "8c095471bd6e01b09143cd5a2ae90bf9",
     "name": "Garden State Plaza",
     "state": "New Jersey",
     "timezone": "America/New_York",
@@ -1690,7 +1687,7 @@
       "2012-11-17"
     ],
     "flag": "🇺🇸",
-    "md5": "3adfb6b9553abffd2f62954d57f6bcfb",
+    "md5": "8612e1599e3de9a361681ec9262f2009",
     "name": [
       "City Creek Center",
       "The Gateway"
@@ -3852,7 +3849,7 @@
       "2024-03-23"
     ],
     "flag": "🇨🇦",
-    "md5": "5f73a75c51b78b6925d8a4fa3d6ac1b5",
+    "md5": "70f5f5d5df4556921f6be5b43895a6bb",
     "name": "Square One",
     "state": "Ontario",
     "timezone": "Canada/Eastern",
@@ -3947,7 +3944,7 @@
       "2023-12-22"
     ],
     "flag": "🇨🇳",
-    "md5": "bdbf7291988f140cd5db329264b147d8",
+    "md5": "caf4ab18ed3b08dd40a893d3af6b7fb8",
     "name": [
       "南京东路",
       "Nanjing East"
@@ -4085,7 +4082,7 @@
     "city": "Le Chesnay",
     "dates": "2011-09-24",
     "flag": "🇫🇷",
-    "md5": "6af664d560203ddddfcfb70dcef528c1",
+    "md5": "c0a45add90c7febf6028215e5a91359d",
     "name": "Parly 2",
     "state": "Yvelines",
     "timezone": "Europe/Paris",
@@ -5575,7 +5572,7 @@
     "city": "无锡",
     "dates": "2014-08-02",
     "flag": "🇨🇳",
-    "md5": "821b6f9b59e036eeae54c4c2f6e3bce7",
+    "md5": "54f2766740c8a13bd1e2048cb0db03b1",
     "name": [
       "无锡恒隆广场",
       "Center 66 Wuxi"
@@ -6559,10 +6556,11 @@
   "742": {
     "city": "Kuala Lumpur",
     "flag": "🇲🇾",
-    "name": "Store in Kuala Lumpur",
+    "name": "The Exchange TRX",
     "state": "Kuala Lumpur",
     "status": "future",
-    "timezone": "Asia/Kuala_Lumpur"
+    "timezone": "Asia/Kuala_Lumpur",
+    "website": ""
   },
   "744": {
     "city": "Mumbai",
@@ -6709,8 +6707,21 @@
     "timezone": "Asia/Seoul",
     "website": "hongdae"
   },
+  "765": {
+    "alter": "Anhui Hefei",
+    "city": "合肥",
+    "flag": "🇨🇳",
+    "name": [
+      "Store in Hefei",
+      "合肥万象城",
+      "MixC Hefei"
+    ],
+    "state": "安徽",
+    "status": "future",
+    "timezone": "Asia/Shanghai"
+  },
   "766": {
-    "alter": "Zhejiang Wenzhou 温州",
+    "alter": "Zhejiang Wenzhou",
     "city": "温州",
     "dates": "2023-11-04",
     "flag": "🇨🇳",
@@ -6736,6 +6747,17 @@
     "state": "경기",
     "timezone": "Asia/Seoul",
     "website": "hanam"
+  },
+  "777": {
+    "city": "Torrance",
+    "flag": "🇺🇸",
+    "name": [
+      "Store in Torrance",
+      "Del Amo"
+    ],
+    "state": "California",
+    "status": "future",
+    "timezone": "America/Los_Angeles"
   },
   "796": {
     "city": "Huntersville",
@@ -6772,6 +6794,13 @@
     "state": "California",
     "status": "internal",
     "timezone": "America/Los_Angeles"
+  },
+  "849": {
+    "city": "Mesa",
+    "flag": "🇺🇸",
+    "name": "Mesa Lab",
+    "state": "Arizona",
+    "status": "internal"
   },
   "850": {
     "city": "Bengaluru",
@@ -6856,6 +6885,132 @@
     "md5": "ae37f33e934d853d02443c5690f1dc6e",
     "name": "Mock Store",
     "state": "California",
+    "status": "internal"
+  },
+  "907": {
+    "city": "Sunnyvale",
+    "flag": "🇺🇸",
+    "name": "RT Lab",
+    "state": "California",
+    "status": "internal"
+  },
+  "910": {
+    "city": "test",
+    "flag": "🇺🇸",
+    "name": "test",
+    "state": "",
+    "status": "internal"
+  },
+  "911": {
+    "city": "Cupertino",
+    "flag": "🇺🇸",
+    "name": "Mock Store - Vintage C",
+    "state": "California",
+    "status": "internal"
+  },
+  "912": {
+    "city": "Arroyomolinos",
+    "flag": "🇪🇸",
+    "name": "Test Retail Store Spain",
+    "state": "Madrid",
+    "status": "internal"
+  },
+  "913": {
+    "city": "Torino",
+    "flag": "🇮🇹",
+    "name": "Test Retail Store Italy",
+    "state": "Turin",
+    "status": "internal"
+  },
+  "914": {
+    "city": "Yvelines",
+    "flag": "🇫🇷",
+    "name": "Test Retail Store France",
+    "state": "Yvelines",
+    "status": "internal"
+  },
+  "915": {
+    "city": "Sulzbach",
+    "flag": "🇩🇪",
+    "name": "Test Retail Store Germany",
+    "state": "Nordrhein-Westfalen",
+    "status": "internal"
+  },
+  "916": {
+    "city": "Zurich",
+    "flag": "🇨🇭",
+    "name": "Test Store Retail Switzerland",
+    "state": "",
+    "status": "internal"
+  },
+  "917": {
+    "city": "test",
+    "flag": "🇳🇱",
+    "name": "Test Retail Store Netherlands",
+    "state": "",
+    "status": "internal"
+  },
+  "918": {
+    "city": "Vancouver",
+    "flag": "🇨🇦",
+    "name": "Test Retail Store Canada _Eng",
+    "state": "British Columbia",
+    "status": "internal"
+  },
+  "920": {
+    "city": "city",
+    "flag": "🇯🇵",
+    "name": "Test Retail Store Japan",
+    "state": "",
+    "status": "internal"
+  },
+  "921": {
+    "city": "Melbourne",
+    "flag": "🇦🇺",
+    "name": "Test Retail Store Australia1",
+    "state": "Victoria",
+    "status": "internal"
+  },
+  "922": {
+    "city": "Sunnyvale",
+    "flag": "🇨🇳",
+    "name": "China Retail Store",
+    "state": "",
+    "status": "internal"
+  },
+  "923": {
+    "city": "Hong Kong",
+    "flag": "🇭🇰",
+    "name": "Test Retail Store Hong Kong",
+    "state": "Kowloon",
+    "status": "internal"
+  },
+  "925": {
+    "city": "ZZ Top",
+    "flag": "🇹🇷",
+    "name": "Test Retail Store Turkey",
+    "state": "ZZ",
+    "status": "internal"
+  },
+  "926": {
+    "city": "ZZ",
+    "flag": "🇧🇷",
+    "name": "Test Retail Store Brazil",
+    "state": "ZZ",
+    "status": "internal"
+  },
+  "927": {
+    "city": "ZZZ",
+    "flag": "🇦🇪",
+    "name": "Test JAM",
+    "state": "",
+    "status": "internal"
+  },
+  "928": {
+    "city": "Liberty",
+    "flag": "🇧🇪",
+    "name": "Liberty",
+    "state": "Liberty",
     "status": "internal"
   }
 }

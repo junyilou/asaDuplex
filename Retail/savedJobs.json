@@ -1,5 +1,5 @@
 {
-  "update": "2024-01-22 02:10:18 GMT",
+  "update": "2024-04-18 02:26:48 GMT",
   "🇦🇪": {
     "state1049": {
       "ABUA": "Al Maryah Island",
@@ -186,6 +186,10 @@
       "R688": "Suzhou",
       "R703": "Xuanwu Lake",
       "name": "Jiangsu"
+    },
+    "state166": {
+      "R765": "Hefei-CN",
+      "name": "Anhui"
     },
     "state167": {
       "R557": "MixC Qingdao",
@@ -596,8 +600,11 @@
       "R751": "Jamsil",
       "R760": "~Seoul South - KR",
       "R764": "Hongdae",
-      "R770": "Hanam",
       "name": "Seoul-si"
+    },
+    "state719": {
+      "R770": "Hanam",
+      "name": "Gyeonggi-do"
     }
   },
   "🇲🇴": {
@@ -660,7 +667,7 @@
       "R583": "Zorlu Center",
       "R588": "Akasya",
       "R724": "Bagdat Caddesi",
-      "name": "Turkey Region"
+      "name": "Turkiye Region"
     }
   },
   "🇹🇼": {
@@ -763,6 +770,7 @@
       "R462": "Valencia Town Center",
       "R550": "Valley Plaza",
       "R720": "Tower Theatre",
+      "R777": "Torrance-CA",
       "R824": "Apple Park Visitor Center",
       "name": "California"
     },
