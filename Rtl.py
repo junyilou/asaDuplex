@@ -93,7 +93,7 @@ async def main(session: SessionType) -> None:
 		case ["normal" | "single" as mode, *ids]:
 			sids, l = set(), []
 			for i in ids:
-				sids.update(j.sid for j in storeReturn(i))
+				sids.update(j.sid for j in storeReturn(i, remove_internal = True))
 			stores = [Store(s, d) for s, d in p.items() if mode == "normal" or s in sids]
 		case ["special"]:
 			with open("specialists.json") as r:
