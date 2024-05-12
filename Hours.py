@@ -113,7 +113,7 @@ async def main(session: SessionType) -> None:
 	for k, v in saved.items():
 		if not k.isdigit():
 			continue
-		if (s := getStore(k)):
+		if s := getStore(k):
 			results[s] = v
 
 	for store, item in tasks.items():

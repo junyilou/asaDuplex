@@ -55,7 +55,7 @@ def timeDelta(*,
 		return empty
 	items = items or len(comp)
 	for carry, desc in comp:
-		if (c := s // base):
+		if c := s // base:
 			if (l := f"{c % carry if carry else c:.0f}") != "0":
 				ans.append(f"{l} {desc}")
 		base *= carry
