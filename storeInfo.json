@@ -1,5 +1,5 @@
 {
-  "update": "2024-04-27 08:10:44",
+  "update": "2024-05-09 08:10:45",
   "001": {
     "city": "Glendale",
     "dates": [
@@ -309,7 +309,7 @@
       "2013-12-14"
     ],
     "flag": "🇺🇸",
-    "md5": "02ab1e37613692fd8b97a1150de896a3",
+    "md5": "cf34579fb0a6b321e12a3d6caa15f41c",
     "name": "Rosedale Center",
     "state": "Minnesota",
     "timezone": "America/Chicago",
@@ -456,7 +456,7 @@
       "2013-12-14"
     ],
     "flag": "🇺🇸",
-    "md5": "0080cc14e17fe2c09aded872cc3e3fb1",
+    "md5": "0febd575a9c16e75c621f5ccf5086834",
     "name": "Stonestown",
     "state": "California",
     "timezone": "America/Los_Angeles",
@@ -642,7 +642,8 @@
     "website": ""
   },
   "048": {
-    "city": "福岡市 Fukuoka-shi 福冈 福冈天神",
+    "alter": "Fukuoka-shi 福冈 福冈天神",
+    "city": "福岡市",
     "dates": [
       "2005-12-03",
       "2019-09-28"
@@ -2635,7 +2636,7 @@
     "city": "Clinton Township",
     "dates": "2007-10-18",
     "flag": "🇺🇸",
-    "md5": "e2ca0c25f67fe82030c464fc6657026f",
+    "md5": "789be1f55194450d4d40e71d7010f07e",
     "name": "Partridge Creek",
     "state": "Michigan",
     "timezone": "America/New_York",
@@ -2790,7 +2791,7 @@
     "city": "Tulsa",
     "dates": "2007-06-29",
     "flag": "🇺🇸",
-    "md5": "17bba9645800df7f92a760b112cf618b",
+    "md5": "563989f01d8ea58c64ffec914ab72777",
     "name": "Woodland Hills",
     "state": "Oklahoma",
     "timezone": "America/Chicago",
@@ -3270,7 +3271,7 @@
     "city": "Chicago",
     "dates": "2010-10-23",
     "flag": "🇺🇸",
-    "md5": "00885ed26d05879d326f90ea5064db13",
+    "md5": "67e3edfd92c20125e609b3baf2147434",
     "name": "Lincoln Park",
     "state": "Illinois",
     "timezone": "America/Chicago",
@@ -3885,7 +3886,7 @@
     "city": "Akron",
     "dates": "2010-11-13",
     "flag": "🇺🇸",
-    "md5": "40699cd6c38f748bbfb5675b247549e5",
+    "md5": "202c9614cd4b9e49fa1a521e38a431bf",
     "name": "Summit Mall",
     "state": "Ohio",
     "timezone": "America/New_York",
@@ -3957,7 +3958,7 @@
     "city": "Mishawaka",
     "dates": "2010-11-13",
     "flag": "🇺🇸",
-    "md5": "7ca14b79f241ca0c553bd25b38217e27",
+    "md5": "e9028f003639f7f197bf22378d04b796",
     "name": "University Park Mall",
     "state": "Indiana",
     "timezone": "America/New_York",
@@ -4080,9 +4081,12 @@
   },
   "374": {
     "city": "Le Chesnay",
-    "dates": "2011-09-24",
+    "dates": [
+      "2011-09-24",
+      "2024-04-27"
+    ],
     "flag": "🇫🇷",
-    "md5": "c0a45add90c7febf6028215e5a91359d",
+    "md5": "997958fb236e87b2894d254e60121b7c",
     "name": "Parly 2",
     "state": "Yvelines",
     "timezone": "Europe/Paris",
@@ -4927,7 +4931,7 @@
     "city": "大连",
     "dates": "2015-10-24",
     "flag": "🇨🇳",
-    "md5": "681ce08c34cd25170c7399adac8cf3e8",
+    "md5": "fe192010ca0eb8793039adfdb11785fa",
     "name": [
       "百年城",
       "Parkland"
@@ -5044,7 +5048,7 @@
     "city": "Ottawa",
     "dates": "2012-09-08",
     "flag": "🇨🇦",
-    "md5": "8013156e41d3d545ee589e495e88a28b",
+    "md5": "fe710c27e283478e23ab9989e9c383d5",
     "name": "Bayshore Shopping Centre",
     "state": "Ontario",
     "timezone": "Canada/Eastern",

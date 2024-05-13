@@ -1,7 +1,7 @@
 import asyncio
 import json
 import logging
-from datetime import UTC, datetime
+from datetime import datetime
 from sys import argv
 from typing import Optional
 
@@ -93,7 +93,7 @@ async def main(mode: str) -> None:
 
 	if append:
 		logging.info("正在更新 savedEvent 文件")
-		saved["update"] = datetime.now(UTC).strftime("%F %T GMT")
+		saved["update"] = f"{datetime.now():%F %T"
 		with open("Retail/savedEvent.json", "w") as w:
 			json.dump(sortOD(saved, reverse = [True, False]), w, ensure_ascii = False, indent = 2)
 
