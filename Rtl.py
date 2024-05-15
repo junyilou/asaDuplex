@@ -32,7 +32,6 @@ async def task(store: Store,
 	def judge(head: Mapping[str, str]) -> Optional[datetime]:
 		dt = datetime.strptime(head["Last-Modified"], "%a, %d %b %Y %H:%M:%S GMT")
 		local = getattr(store, "modify", None)
-		print(local, dt)
 		if local and local > dt.strftime("%F %T"):
 			if special:
 				logging.info(f"[{store.rid}] 记录到无效时间")
