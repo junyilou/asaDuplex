@@ -18,6 +18,7 @@ class StoreDict(TypedDict, total = False):
 	dates: str | list[str]
 	flag: Required[str]
 	md5: str
+	modify: str
 	name: Required[str | list[str]]
 	state: Required[str]
 	status: str
@@ -73,6 +74,8 @@ class Store:
 			self.index = (datetime.max.replace(tzinfo = UTC), self.isInternal, self.sid)
 		if "md5" in dct:
 			self.md5 = dct["md5"]
+		if "modify" in dct:
+			self.modify = dct["modify"]
 
 		assert "state" in dct, 'Key "state" missed'
 		self.state = dct["state"]

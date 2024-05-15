@@ -88,8 +88,6 @@ async def base_request(
 				results[m] = json.loads(await resp.text())
 			elif d == "raw":
 				results[m] = await resp.read()
-			elif d == "blank":
-				results[m] = None
 		request_logger.debug(f"网络请求: [状态={resp.status}] [方法={method}] [URL={url}]")
 	if len(modes) == 1:
 		return results[modes.pop()]
