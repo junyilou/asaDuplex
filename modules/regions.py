@@ -8,7 +8,6 @@ from typing import Optional
 class Region:
 	flag: str
 	abbr: str
-	job_code: dict[str, int]
 	locale: str
 	name: str
 	name_alter: list[str]
