@@ -49,11 +49,9 @@ async def main(mode: str) -> None:
 				courses.setdefault(c, set())
 
 	for course in courses:
-		doSend, toSave = False, {"slug": course.slug, "names": {course.flag: course.name}}
-		conditions: tuple[bool, bool, bool] = (
-			len(courses[course]) > 0,
-			course.courseId in saved["today"],
-			course.courseId in saved["sitemap"])
+		doSend = False
+		conditions: tuple[bool, bool, bool] = (len(courses[course]) > 0, course.courseId in saved["today"],
+			course.flag in saved["sitemap"].get(course.courseId, {}).get("names", {}))
 
 		if isinstance(course.collection, Collection):
 			collection = course.collection
@@ -74,16 +72,14 @@ async def main(mode: str) -> None:
 					saved["today"][course.courseId]["names"][course.flag] = course.name
 			case True, False, _:
 				append = doSend = True
-				saved["today"][course.courseId] = toSave
+				saved["today"][course.courseId] = {"slug": course.slug, "names": {course.flag: course.name}}
 			case False, False, False:
 				append = doSend = True
-				saved["sitemap"][course.courseId] = toSave
-		match conditions:
-			case True, _, True:
-				del saved["sitemap"][course.courseId]["names"][course.flag]
-				append = doSend = True
-				if not saved["sitemap"][course.courseId]["names"]:
-					del saved["sitemap"][course.courseId]
+				d = saved["sitemap"].setdefault(course.courseId, {"slug": course.slug, "names": {}})
+				d["names"][course.flag] = course.name
+		if conditions[0] and course.courseId in saved["sitemap"]:
+			append = doSend = True
+			del saved["sitemap"][course.courseId]
 
 		if doSend:
 			logging.info(str(course))
