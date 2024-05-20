@@ -74,9 +74,11 @@ async def main(mode: str) -> None:
 				append = doSend = True
 				saved["today"][course.courseId] = {"slug": course.slug, "names": {course.flag: course.name}}
 			case False, False, False:
-				append = doSend = True
-				d = saved["sitemap"].setdefault(course.courseId, {"slug": course.slug, "names": {}})
-				d["names"][course.flag] = course.name
+				append = True
+				if course.courseId not in saved["sitemap"]:
+					doSend = True
+					saved["sitemap"][course.courseId] = {"slug": course.slug, "names": {}}
+				saved["sitemap"][course.courseId]["names"][course.flag] = course.name
 		if conditions[0] and course.courseId in saved["sitemap"]:
 			append = doSend = True
 			del saved["sitemap"][course.courseId]
