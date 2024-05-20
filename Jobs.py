@@ -9,8 +9,6 @@ from itertools import groupby as _groupby
 from random import choice
 from typing import Any, Optional, Protocol, Self, Sequence, TypedDict, cast
 
-from tqdm.asyncio import tqdm_asyncio
-
 from bot import chat_ids
 from botpost import async_post
 from modules.regions import Region, Regions
