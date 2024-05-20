@@ -1,291 +1,326 @@
 import asyncio
 import json
 import logging
-from argparse import ArgumentParser
-from datetime import UTC, datetime
+from argparse import ArgumentParser, Namespace
+from collections.abc import Callable, Iterable
+from dataclasses import dataclass, field
+from datetime import datetime
+from itertools import groupby as _groupby
 from random import choice
-from sys import argv
-from typing import Optional
+from typing import Any, Optional, Protocol, Self, Sequence, TypedDict, cast
 
-from modules.regions import Region as RawRegion, RegionList
-from modules.util import SemaphoreType, SessionType
-from modules.util import browser_agent, disMarkdown, get_session, request, session_func, setLogger
+from tqdm.asyncio import tqdm_asyncio
 
-API = {
-	"csrf": "https://jobs.apple.com/api/csrfToken",
-	"state": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/stateProvinceList",
-	"province": "https://jobs.apple.com/api/v1/jobDetails/PIPE-{JOBID}/storeLocations",
-	"search": "https://jobs.apple.com/api/role/search",
-	"image": "https://www.apple.com/careers/images/retail/fy22/hero_hotspot/default@2x.png"}
+from bot import chat_ids
+from botpost import async_post
+from modules.regions import Region, Regions
+from modules.util import (AsyncGather, AsyncRetry, RetryExceeded, RetrySignal,
+                          SemaphoreType, SessionType, browser_agent,
+                          disMarkdown, get_session, session_func,
+                          with_semaphore)
 
-FUTURES: dict[str, str] = {}
 
-class JobObject:
-	hashattr: str
-	reprattrs: list[str]
+class SRC(Protocol):
+	def __lt__(self, other, /) -> bool: ...
 
-	def __eq__(self, other) -> bool:
-		if type(self) is not type(other):
-			return NotImplemented
-		return hash(self) == hash(other)
+def groupby[T1: SRC, T2: SRC](iterable: Iterable[T1], key: Callable[[T1], T2]) -> Iterable[tuple[T2, Iterable[T1]]]:
+	return _groupby(sorted(iterable, key = key), key = key)
 
-	def __hash__(self) -> int:
-		return hash((self.__class__.__name__, getattr(self, self.hashattr)))
+class ServerMaintenance(Exception):
+	pass
 
-	def __repr__(self) -> str:
-		return f'<{self.__class__.__name__}: {", ".join(i for i in (getattr(self, attr) for attr in self.reprattrs) if i)}>'
+@dataclass
+class APIClass:
+	parts: Sequence[str]
+	csrf: Optional[str] = None
 
-class TaskObject(JobObject):
-	_repeat = False
-	async def runner(self) -> None: ...
+	CSRF_KEY = "X-Apple-CSRF-Token"
 
-TASKS: list[TaskObject] = []
-RESULTS: list["Store"] = []
-REGIONS: dict[str, dict[str, int]] = {}
+	def __truediv__(self, other: str) -> Self:
+		return type(self)(parts = (*self.parts, other), csrf = self.csrf)
 
-class Store(JobObject):
-	hashattr = "sid"
-	reprattrs = ["flag", "stateName", "sid", "name"]
+	def __str__(self) -> str:
+		return "/".join(self.parts)
 
-	def __init__(self, **kwargs) -> None:
-		for k in ["state", "city", "sid", "name"]:
-			setattr(self, k, kwargs.get(k))
-		self.sid: str = kwargs["sid"]
-		self.name: str = kwargs["name"]
-		self.city: Optional[str] = kwargs.get("city")
-		self.state: "State" = kwargs["state"]
-		self.flag: str = self.state.flag
-		self.stateName: str = self.state.name
-		self.stateCode: str = self.state.code
+	@AsyncRetry(3, sleep = 1)
+	async def request(self,
+		session: Optional[SessionType] = None,
+		method: str = "GET", mode: str = "json", log_name: str = "",
+		extra_headers: dict[str, str] = {}, **kwargs) -> Any:
+		default_headers = browser_agent | ({self.CSRF_KEY: self.csrf} if self.csrf else {})
+		kwargs |= {"headers": default_headers | extra_headers, "allow_redirects": False, "ssl": False}
+		async with get_session(session) as ses:
+			try:
+				async with ses.request(method, "/".join(self.parts), **kwargs) as response:
+					if response.status > 300 and response.status < 400:
+						raise ServerMaintenance()
+					elif response.status >= 400:
+						response.raise_for_status()
+					elif mode == "head":
+						return response.headers
+					elif mode == "text":
+						return await response.text()
+					elif mode == "json":
+						return await response.json()
+			except ServerMaintenance:
+				raise
+			except Exception as exp:
+				logger.log(17, f"[等待重试] {log_name or "请求任务"}: {exp.__class__.__name__}({exp})")
+				raise RetrySignal(exp)
 
-	def teleInfo(self) -> str:
-		return f"*{self.flag} {f"{self.city}, " if self.city else ""}{self.stateName}*\n{self.sid} - {self.name}"
-
-class State(TaskObject):
-	hashattr = "code"
-	reprattrs = ["flag", "code", "name"]
-
-	def __init__(self, **kwargs) -> None:
-		self.region: "Region" = kwargs["region"]
-		self.fieldID: Optional[str] = kwargs.get("fieldID")
-		self.code: str = kwargs["code"]
-		self.name: str = kwargs["name"]
-		self.session: Optional[SessionType] = kwargs.get("session")
-		self.semaphore: Optional[SemaphoreType] = kwargs.get("semaphore")
-		self.flag: str = self.region.flag
-		self.regionCode: str = self.region.code
-
-	async def runner(self) -> None:
-		assert self.semaphore
-		async with self.semaphore:
-			debug_logger.info(", ".join(["开始下载 province", str(self)]))
-			r = await request(API["province"].format(JOBID = self.regionCode), self.session,
-				ssl = False, headers = browser_agent, timeout = 3, retry = 3, return_exception = True,
-				params = {"searchField": "stateProvince", "fieldValue": self.fieldID})
+	async def get_csrf(self, session: Optional[SessionType] = None,
+		semaphore: Optional[SemaphoreType] = None) -> Optional[str]:
 		try:
-			a = json.loads(r)
-			if self._repeat:
-				logging.info(", ".join(["下载重试", "已正确下载", str(self)]))
-		except json.decoder.JSONDecodeError:
-			if "Maintenance" in r:
-				logging.error("Apple 招贤纳才维护中")
-				raise NameError("SERVER")
-			else:
-				self._repeat = True
-				logging.warning(", ".join(["下载失败", "等待重试", str(self)]))
-				return TASKS.append(self)
-		except:
-			return logging.error(", ".join(["下载失败", "放弃下载", str(self)]))
-		debug_logger.info(", ".join([str(self), f"找到 {len(a)} 个门店"]))
-		for c in a:
-			s = Store(state = self, city = c["city"], name = c["name"], sid = c["code"])
-			RESULTS.append(s)
-			debug_logger.debug(repr(s))
+			async with with_semaphore(semaphore):
+				h = await (self / "csrfToken").request(session, mode = "head", log_name = "CSRF")
+		except ServerMaintenance:
+			raise
+		except RetryExceeded as exp:
+			logger.error(f"[请求失败] CSRF: {exp.message}")
+			return self.csrf
+		except Exception as exp:
+			raise RetrySignal(exp)
 
-class Region(TaskObject):
-	hashattr = "flag"
-	reprattrs = ["flag", "code"]
+		self.csrf = h.get("X-Apple-CSRF-Token")
+		return self.csrf
 
-	def __init__(self, **kwargs) -> None:
-		self.flag: str = kwargs["flag"]
-		self.session: Optional[SessionType] = kwargs.get("session")
-		self.semaphore: Optional[SemaphoreType] = kwargs.get("semaphore")
-		self.code: str = str(choice(list(REGIONS[self.flag].values())))
+API = APIClass("https://jobs.apple.com/api".split("/"))
+logger = logging.getLogger()
 
-	async def runner(self) -> None:
-		assert self.semaphore
-		async with self.semaphore:
-			logging.info(", ".join(["开始下载", str(self)]))
-			r = await request(API["state"].format(JOBID = self.code), self.session,
-				headers = browser_agent, timeout = 3, retry = 3, ssl = False, return_exception = True)
-		try:
-			a = json.loads(r)
-			if self._repeat:
-				logging.info(", ".join(["下载重试", "已正确下载", str(self)]))
-		except json.decoder.JSONDecodeError:
-			if "Maintenance" in r:
-				logging.error("Apple 招贤纳才维护中")
-				raise NameError("SERVER")
-			else:
-				self._repeat = True
-				logging.warning(", ".join(["下载失败", "等待重试", str(self)]))
-				return TASKS.append(self)
-		except:
-			return logging.error(", ".join(["下载失败", "放弃下载", str(self)]))
-		for p in a["searchResults"]:
-			TASKS.append(State(
-				region = self, fieldID = p["id"], code = p["code"], name = p["stateProvince"],
-				session = self.session, semaphore = self.semaphore))
+class StateDict(TypedDict):
+	name: str
+	stores: dict[str, str]
 
-async def search(region: RawRegion, session: SessionType) -> dict[str, int]:
-	data = {
-		"filters": {
-			"postingpostLocation": [f"postLocation-{region.post_location}"],
-			"teams":[
-				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSS"},
+class RegionDict(TypedDict):
+	locations: dict[str, StateDict]
+	positions: dict[str, dict[str, str]]
+
+@dataclass
+class Locale:
+	region: Region
+	positions: dict[str, dict[str, str]]
+
+	def get_position(self) -> "Position":
+		return Position(*choice(list(self.positions["managed"].items())), self.region)
+
+	async def get_positions(self,
+		managed: Optional[bool] = None,
+		later_than: str = "",
+		session: Optional[SessionType] = None,
+		semaphore: Optional[SemaphoreType] = None) -> list["RichPosition"]:
+		data = {"filters": {
+			"postingpostLocation": [f"postLocation-{self.region.post_location}"],
+			"teams":[{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSS"},
 				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSCS"},
 				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSLD"}]},
-		"page": 1, "locale": "en-us", "sort": "newest", "query": ""}
-	try:
-		key = "x-apple-csrf-token"
-		async with get_session(session) as ses:
-			h = await request(API["csrf"], ses, "HEAD",
-				headers = browser_agent | {"Referer": API["search"]}, ssl = False)
-			r = await request(API["search"], ses, "POST", mode = "json", json = data,
-				headers = browser_agent | ({key: h[key]} if h.get(key) else {}), ssl = False)
-		assert r.get("searchResults")
-	except:
-		logging.warning(f"尝试搜索地区 {region.flag} 失败")
-		return {}
+			"page": 1, "locale": self.region.locale.replace("_", "-"), "sort": "newest", "query": ""}
+		if not API.csrf:
+			await API.get_csrf(session, semaphore)
+		log_name = f"获取职位 {self}"
+		try:
+			async with with_semaphore(semaphore):
+				r = await (API / "role" / "search").request(session,
+					method = "POST", log_name = log_name, json = data)
+		except ServerMaintenance:
+			raise
+		except RetryExceeded as exp:
+			logger.error(f"[请求失败] {log_name}: {exp.message}")
+			return []
+		except Exception as exp:
+			raise RetrySignal(exp)
 
-	roles = {}
-	for i in r["searchResults"]:
-		if not i["managedPipelineRole"]:
-			continue
-		logging.info(f"找到新职位信息: {i['positionId']} {i['postingTitle']}")
-		roles[i["transformedPostingTitle"]] = int(i["positionId"])
-	roles = dict((k, v) for k, v in sorted(roles.items(), key = lambda t: t[1]))
-	return roles
+		g = (RichPosition(id = i["positionId"],
+			slug = i["transformedPostingTitle"],
+			region = self.region,
+			update = datetime.fromisoformat(i["postDateInGMT"]).strftime("%F"),
+			title = i["postingTitle"],
+			location = next((l["name"] for l in i["locations"]), ""),
+			managed = i["managedPipelineRole"]) for i in r["searchResults"])
+		l = (i for i in g if i.update >= later_than)
+		return [i for i in l if managed is None or i.managed == managed]
 
-async def post(pushes: dict[str, list[str]], session: SessionType) -> None:
-	from bot import chat_ids
-	from botpost import async_post
-	for t, p in pushes.items():
-		if not p:
-			continue
-		push = {"mode": "photo-text", "text": "\n".join(["\\#新店新机遇", t, "", *p]),
-			"chat_id": chat_ids[0], "parse": "MARK", "image": API["image"]}
-		await async_post(push, session = session)
+	async def get_stores(self, session: Optional[SessionType] = None,
+		semaphore: Optional[SemaphoreType] = None) -> list["Store"]:
+		states = await self.get_position().get_states(session, semaphore)
+		stores = await AsyncGather(state.get_stores(session, semaphore) for state in states)
+		return [i for j in stores for i in j]
+
+@dataclass(order = True)
+class Position:
+	id: str
+	slug: str = field(repr = False)
+	region: Region
+
+	async def get_states(self, session: Optional[SessionType] = None,
+		semaphore: Optional[SemaphoreType] = None) -> list["State"]:
+		api = API / "v1" / "jobDetails" / f"PIPE-{self.id}" / "stateProvinceList"
+		log_name = f"获取职位行政区 {self}"
+		try:
+			async with with_semaphore(semaphore):
+				logger.log(20, f"[开始] {log_name}")
+				r = await api.request(session, log_name = log_name)
+				logger.log(17, f"[完成] {log_name}")
+		except ServerMaintenance:
+			raise
+		except RetryExceeded as exp:
+			logger.error(f"[请求失败] {log_name}: {exp.message}")
+			return []
+		except Exception as exp:
+			raise RetrySignal(exp)
+		return [State(code = p["code"], name = p["stateProvince"],
+			field_val = p["id"], position = self) for p in r["searchResults"]]
+
+	@property
+	def url(self) -> str:
+		locale = self.region.locale.replace("_", "-")
+		return f"https://jobs.apple.com/{locale}/details/{self.id}/{self.slug}"
+
+@dataclass
+class RichPosition(Position):
+	update: str
+	title: str
+	location: str
+	managed: bool
+
+@dataclass
+class State:
+	code: str
+	name: str
+	position: Position = field(repr = False)
+	field_val: str = field(repr = False, default = "")
+
+	def __post_init__(self) -> None:
+		self.args: tuple[str, str] = self.code, self.name
+
+	async def get_stores(self, session: Optional[SessionType] = None,
+		semaphore: Optional[SemaphoreType] = None) -> list["Store"]:
+		assert self.position
+		api = API / "v1" / "jobDetails" / f"PIPE-{self.position.id}" / "storeLocations"
+		log_name = f"获取招聘地点 {self}"
+		try:
+			async with with_semaphore(semaphore):
+				logger.log(19, f"[开始] {log_name}")
+				r = await api.request(session, log_name = log_name, params = {
+					"searchField": "stateProvince", "fieldValue": self.field_val})
+				logger.log(17, f"[完成] {log_name}")
+		except ServerMaintenance:
+			raise
+		except RetryExceeded as exp:
+			logger.error(f"[请求失败] {log_name}: {exp.message}")
+			return []
+		except Exception as exp:
+			raise RetrySignal(exp)
+		stores  = [Store(code = c["code"], name = c["name"], state = self, city = c["city"]) for c in r]
+		for store in stores:
+			logger.log(18, f"[门店] {store}")
+		return stores
+
+@dataclass(order = True)
+class Store:
+	code: str
+	name: str
+	state: State = field(repr = False)
+	city: str = ""
+
+	@property
+	def telename(self) -> str:
+		flag = self.state.position.region.flag
+		city = f"{self.city}, " if self.city else ""
+		return f"*{flag} {city}{self.state.name}*\n{self.code} - {self.name}"
+
+def load_file() -> dict[str, RegionDict]:
+	with open("Retail/savedJobs.json") as r:
+		j = json.load(r)
+		j.pop("update")
+		p = cast(dict[str, RegionDict], j)
+	return p
+
+def set_logger(args: Namespace) -> None:
+	from os.path import basename
+	global logger
+	level, datefmt = logging.INFO - args.verbose, "%F %T"
+	format = "[%(asctime)s %(levelname)s] %(message)s"
+	file_args: dict[str, Any] = {"filename": f"logs/{basename(__file__)}.log", "filemode": "a"} if not args.debug else {}
+	logging.basicConfig(format = format, level = level, datefmt = datefmt, **file_args)
+	_ = [logging.addLevelName(i, "INFO") for i in range(17, 20)]
+	logger = logging.getLogger("Jobs")
+
+async def entry(flags: list[str], session: SessionType) -> None:
+	p = load_file()
+	saved = {code: Store(code, name, State(state_code, state["name"], Position("", "", Regions[flag])))
+		for flag, region in p.items() for state_code, state in region["locations"].items()
+		for code, name in state["stores"].items()}
+	flags = flags or list(Regions)
+
+	cancel = False
+	results: list[Store] = []
+	semaphore = asyncio.Semaphore(10)
+	locales = (Locale(Regions[flag], p[flag]["positions"]) for flag in flags if flag in Regions and not flag.isascii())
+	tasks = [asyncio.create_task(locale.get_stores(session, semaphore)) for locale in locales]
+	for coro in asyncio.as_completed(tasks):
+		try:
+			results.extend(await coro)
+		except ServerMaintenance:
+			logger.error("服务器维护中")
+			cancel = True
+			break
+	if cancel:
+		_ = [t.cancel() for t in tasks]
+
+	updated = None
+	arrival: list[Store] = []
+	for i in results:
+		if i.code in saved:
+			if (n := i.name) != (o := saved[i.code].name):
+				updated = True
+				logging.info(f"[更新名称] {i.code}: {o} -> {n}")
+				saved[i.code] = i
+		else:
+			updated = True
+			logging.info(f"[找到新店] {i.code}: {i.name}")
+			arrival.append(i)
+			saved[i.code] = i
+
+	if not updated:
+		logging.info("没有找到更新")
+		return
+
+	logger.info(f"[推送通知] {len(arrival)} 家新零售店")
+	title = ["\\#新店新机遇", ""]
+	body = [f"{disMarkdown(s.telename)} [↗]({s.state.position.url})" for s in arrival]
+	image = "https://www.apple.com/careers/images/retail/fy22/hero_hotspot/default@2x.png"
+	await async_post({"mode": "photo-text", "text": "\n".join(title + body),
+		"chat_id": chat_ids[0], "parse": "MARK", "image": image})
+
+	logging.info(f"[更新文件] {len(saved)} 家零售店")
+	write: dict[str, Any] = {flag: {"locations": {state_code:
+		{"name": state_name, "stores": {store.code: store.name for store in stores}}
+		for (state_code, state_name), stores in groupby(state_stores, lambda i: i.state.args)}}
+		for flag, state_stores in groupby(saved.values(), lambda i: i.state.position.region.flag)}
+	for flag, region in p.items():
+		write[flag]["positions"] = region["positions"]
+	write["update"] = f"{datetime.now():%F %T}"
+	with open("Retail/savedJobs.json", "w") as w:
+		json.dump(write, w, indent = 2, ensure_ascii = False, sort_keys = True)
 
 @session_func
-async def entry(
-	session: SessionType,
-	targets: list[str],
-	check_cancel: bool,
-	check_future: bool) -> None:
-	setLogger(logging.INFO, __file__, base_name = True)
-	logging.info("程序启动")
-	with open("Retail/savedJobs.json") as r:
-		SAVED = json.load(r)
+async def main(session: SessionType, args: Namespace) -> None:
+	set_logger(args)
 
-	for region in RegionList:
-		if region.flag.isascii():
-			continue
-		if region.job_code:
-			REGIONS[region.flag] = region.job_code
-		elif check_future:
-			REGIONS[region.flag] = await search(region, session)
-	targets = [i for i in targets or REGIONS if REGIONS.get(i)]
-
-	STORES: list[Store] = []
-	for flag in SAVED:
-		if flag == "update":
-			continue
-		for stateCode in SAVED[flag]:
-			if flag not in targets:
-				continue
-			stateName: str = ""
-			for store in SAVED[flag][stateCode]:
-				stateName = SAVED[flag][stateCode]["name"]
-				if store == "name":
-					continue
-				STORES.append(Store(
-					state = State(region = Region(flag = flag), name = stateName, code = stateCode),
-					sid = store, name = SAVED[flag][stateCode][store]))
-
-	RECORD = {}
-	semaphore = asyncio.Semaphore(10)
-
-	for i in targets:
-		TASKS.append(Region(flag = i, session = session, semaphore = semaphore))
-
-	while len(TASKS):
-		tasks = TASKS.copy()
-		try:
-			async with asyncio.TaskGroup() as tg:
-				for t in tasks:
-					RECORD[id(t)] = RECORD.get(id(t), 0) + 1
-					if RECORD[id(t)] > 3:
-						logging.error(", ".join(["放弃下载", str(t)]))
-						continue
-					tg.create_task(t.runner())
-			for t in tasks:
-				TASKS.remove(t)
-		except* NameError:
-			TASKS.clear()
-
-	append = False
-	pushes = {"已开始招聘": [], "已恢复招聘": [], "已停止招聘": []}
-
-	for store in RESULTS:
-		if store.flag not in SAVED:
-			SAVED[store.flag] = {}
-		dct = SAVED[store.flag]
-		if store not in STORES:
-			append = True
-			logging.info(f"记录到新地点 {store.flag} {store.stateName} {store.sid} {store.name}")
-			dct[store.stateCode] = dct.get(store.stateCode, {"name": store.stateName})
-			dct[store.stateCode][store.sid] = store.name
-			linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
-			pushes["已开始招聘"].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
-		elif (oldName := dct[store.stateCode]["name"]) != store.stateName:
-			append = True
-			logging.info(f"更改名称 {oldName} 为 {store.stateName}")
-			dct[store.stateCode]["name"] = store.stateName
-		elif (oldName := dct[store.stateCode][store.sid]) != store.name:
-			append = True
-			logging.info(f"更改名称 {oldName} 为 {store.name}")
-			dct[store.stateCode][store.sid] = store.name
-			if oldName.startswith("~"):
-				linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
-				pushes["已恢复招聘"].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
-
-	if check_cancel:
-		for store in STORES:
-			if store in RESULTS or store.name.startswith("~"):
-				continue
-			append = True
-			logging.info(f"记录到地点已停止招聘 {store.flag} {store.stateName} {store.sid} {store.name}")
-			SAVED[store.flag][store.stateCode][store.sid] = "~" + store.name
-			linkURL = f"https://jobs.apple.com/zh-cn/details/{store.state.regionCode}"
-			pushes["已停止招聘"].append(disMarkdown(store.teleInfo()) + f" [↗]({linkURL})")
-
-	await post(pushes, session)
-
-	if append:
-		SAVED["update"] = datetime.now(UTC).strftime("%F %T GMT")
-		with open("Retail/savedJobs.json", "w") as w:
-			json.dump(SAVED, w, ensure_ascii = False, indent = 2, sort_keys = True)
-	logging.info("程序结束")
+	# TODO: 搜索职位模式
+	if args.position:
+		...
+	elif args.temporary:
+		...
+	else:
+		await entry(args.flags, session)
 
 if __name__ == "__main__":
 	parser = ArgumentParser()
 	parser.add_argument("flags", metavar = "FLAG", type = str, nargs = "*", help = "指定国家或地区旗帜")
-	parser.add_argument("-c", "--cancel", action = "store_true", help = "同时查询取消情况")
-	parser.add_argument("-f", "--future", action = "store_true", help = "使用远程职位列表")
+	parser.add_argument("-d", "--debug", action = "store_true", help = "打印调试信息")
+	parser.add_argument("-p", "--position", action = "store_true", help = "寻找普通职位模式")
+	parser.add_argument("-t", "--temporary", action = "store_true", help = "寻找临时职位模式")
 	parser.add_argument("-v", "--verbose", action = "count", default = 0, help = "记录调试信息")
-	parsed = parser.parse_args()
-	debug_logger = logging.getLogger("debug")
-	debug_logger.propagate = parsed.verbose > 0
-	debug_logger.setLevel(logging.DEBUG if parsed.verbose > 1 else logging.INFO)
-	asyncio.run(entry(parsed.flags, parsed.cancel, parsed.future))
+	args = parser.parse_args()
+	asyncio.run(main(args))
