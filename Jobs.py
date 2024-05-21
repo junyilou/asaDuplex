@@ -5,6 +5,7 @@ from argparse import ArgumentParser, Namespace
 from collections.abc import Callable, Iterable
 from dataclasses import dataclass, field
 from datetime import datetime
+from http.cookies import SimpleCookie
 from itertools import groupby as _groupby
 from random import choice
 from typing import Any, Optional, Protocol, Self, Sequence, TypedDict, cast
@@ -30,12 +31,11 @@ class ServerMaintenance(Exception):
 @dataclass
 class APIClass:
 	parts: Sequence[str]
-	csrf: Optional[str] = None
-
-	CSRF_KEY = "X-Apple-CSRF-Token"
+	csrf: dict[str, str] = field(default_factory = dict)
+	cookies: Optional[SimpleCookie] = None
 
 	def __truediv__(self, other: str) -> Self:
-		return type(self)(parts = (*self.parts, other), csrf = self.csrf)
+		return type(self)((*self.parts, other), self.csrf, self.cookies)
 
 	def __str__(self) -> str:
 		return "/".join(self.parts)
@@ -45,8 +45,9 @@ class APIClass:
 		session: Optional[SessionType] = None,
 		method: str = "GET", mode: str = "json", log_name: str = "",
 		extra_headers: dict[str, str] = {}, **kwargs) -> Any:
-		default_headers = browser_agent | ({self.CSRF_KEY: self.csrf} if self.csrf else {})
-		kwargs |= {"headers": default_headers | extra_headers, "allow_redirects": False, "ssl": False}
+		default_headers = browser_agent | self.csrf
+		kwargs |= {"headers": default_headers | extra_headers,
+			"allow_redirects": False, "ssl": False, "cookies": self.cookies}
 		async with get_session(session) as ses:
 			try:
 				async with ses.request(method, "/".join(self.parts), **kwargs) as response:
@@ -54,8 +55,8 @@ class APIClass:
 						raise ServerMaintenance()
 					elif response.status >= 400:
 						response.raise_for_status()
-					elif mode == "head":
-						return response.headers
+					elif mode == "cookies":
+						return response.headers, response.cookies
 					elif mode == "text":
 						return await response.text()
 					elif mode == "json":
@@ -67,20 +68,21 @@ class APIClass:
 				raise RetrySignal(exp)
 
 	async def get_csrf(self, session: Optional[SessionType] = None,
-		semaphore: Optional[SemaphoreType] = None) -> Optional[str]:
+		semaphore: Optional[SemaphoreType] = None) -> None:
 		try:
 			async with with_semaphore(semaphore):
-				h = await (self / "csrfToken").request(session, mode = "head", log_name = "CSRF")
+				logger.log(17, "[开始] CSRF")
+				headers, cookies = await (self / "csrfToken").request(session, mode = "cookies", log_name = "CSRF")
 		except ServerMaintenance:
 			raise
 		except RetryExceeded as exp:
 			logger.error(f"[请求失败] CSRF: {exp.message}")
-			return self.csrf
+			return
 		except Exception as exp:
 			raise RetrySignal(exp)
 
-		self.csrf = h.get("X-Apple-CSRF-Token")
-		return self.csrf
+		self.csrf = {"X-Apple-CSRF-Token": headers["X-Apple-CSRF-Token"]}
+		self.cookies = cookies
 
 API = APIClass("https://jobs.apple.com/api".split("/"))
 logger = logging.getLogger()
@@ -96,45 +98,57 @@ class RegionDict(TypedDict):
 @dataclass
 class Locale:
 	region: Region
-	positions: dict[str, dict[str, str]]
+	positions: dict[str, dict[str, str]] = field(repr = False, default_factory = dict)
 
 	def get_position(self) -> "Position":
 		return Position(*choice(list(self.positions["managed"].items())), self.region)
 
-	async def get_positions(self,
-		managed: Optional[bool] = None,
-		later_than: str = "",
+	async def get_positions_base(self, page: int = 1,
 		session: Optional[SessionType] = None,
-		semaphore: Optional[SemaphoreType] = None) -> list["RichPosition"]:
+		semaphore: Optional[SemaphoreType] = None) -> tuple[list["RichPosition"], int]:
 		data = {"filters": {
 			"postingpostLocation": [f"postLocation-{self.region.post_location}"],
 			"teams":[{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSS"},
 				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSCS"},
 				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSLD"}]},
-			"page": 1, "locale": self.region.locale.replace("_", "-"), "sort": "newest", "query": ""}
-		if not API.csrf:
-			await API.get_csrf(session, semaphore)
-		log_name = f"获取职位 {self}"
+			"page": page, "locale": self.region.locale.replace("_", "-").lower(), "sort": "newest", "query": ""}
+		await API.get_csrf(session, semaphore)
+		log_name = f"获取职位 {self} (第 {page} 页)"
 		try:
+			logger.log(20, f"[开始] {log_name}")
 			async with with_semaphore(semaphore):
 				r = await (API / "role" / "search").request(session,
 					method = "POST", log_name = log_name, json = data)
+			logger.log(17, f"[完成] {log_name}")
 		except ServerMaintenance:
 			raise
 		except RetryExceeded as exp:
 			logger.error(f"[请求失败] {log_name}: {exp.message}")
-			return []
+			return [], 0
 		except Exception as exp:
 			raise RetrySignal(exp)
 
-		g = (RichPosition(id = i["positionId"],
+		g = [RichPosition(id = i["positionId"],
 			slug = i["transformedPostingTitle"],
 			region = self.region,
 			update = datetime.fromisoformat(i["postDateInGMT"]).strftime("%F"),
 			title = i["postingTitle"],
 			location = next((l["name"] for l in i["locations"]), ""),
-			managed = i["managedPipelineRole"]) for i in r["searchResults"])
-		l = (i for i in g if i.update >= later_than)
+			managed = i["managedPipelineRole"]) for i in r["searchResults"]]
+		return g, r["totalRecords"]
+
+	async def get_positions(self,
+		max_page: int = 3,
+		managed: Optional[bool] = None,
+		later_than: str = "",
+		session: Optional[SessionType] = None,
+		semaphore: Optional[SemaphoreType] = None) -> list["RichPosition"]:
+		results, total, page = [], 1, 1
+		while len(results) < total and page <= max_page:
+			positions, total = await self.get_positions_base(page, session, semaphore)
+			results.extend(positions)
+			page += 1
+		l = (i for i in results if managed is not False or i.update >= later_than)
 		return [i for i in l if managed is None or i.managed == managed]
 
 	async def get_stores(self, session: Optional[SessionType] = None,
@@ -170,7 +184,7 @@ class Position:
 
 	@property
 	def url(self) -> str:
-		locale = self.region.locale.replace("_", "-")
+		locale = self.region.locale.replace("_", "-").lower()
 		return f"https://jobs.apple.com/{locale}/details/{self.id}/{self.slug}"
 
 @dataclass
@@ -179,6 +193,10 @@ class RichPosition(Position):
 	title: str
 	location: str
 	managed: bool
+
+	@property
+	def telename(self) -> str:
+		return f"*{self.location}*\n{self.id} - {self.title}"
 
 @dataclass
 class State:
@@ -302,24 +320,75 @@ async def entry(flags: list[str], session: SessionType) -> None:
 	with open("Retail/savedJobs.json", "w") as w:
 		json.dump(write, w, indent = 2, ensure_ascii = False, sort_keys = True)
 
+async def position(flags: list[str], managed: bool, session: SessionType) -> None:
+	p = load_file()
+	flags = flags or list(Regions)
+	updated: tuple[int, int] = (0, 0)
+	added: list[RichPosition] = []
+	stopped: int = 0
+
+	for flag in flags:
+		if flag not in Regions or flag.isascii():
+			continue
+		added.clear()
+		stopped = 0
+		key = "managed" if managed else "standalone"
+		local = p[flag]["positions"][key]
+		later_than = f"{datetime.now().year}-01-01"
+		locale = Locale(Regions[flag])
+		try:
+			r = await locale.get_positions(managed = managed,
+				later_than = later_than, session = session)
+		except ServerMaintenance:
+			logger.error("服务器维护中")
+			break
+		remote = {p.id: p for p in r}
+		for pos in (v for i, v in remote.items() if i not in local):
+			added.append(pos)
+			logger.info(f"[新增招聘] {pos.id}: {pos.slug}")
+		if managed:
+			for pid, slug in ((i, v) for i, v in local.items() if i not in remote):
+				stopped += 1
+				logger.info(f"[停止招聘] {pid}: {slug}")
+		p[flag]["positions"][key] = {k: v.slug for k, v in remote.items()}
+
+		if added and not managed:
+			logger.info(f"[推送通知] {len(added)} 个新职位")
+			title = ["\\#新店新机遇", "新增独立职位", ""]
+			body = [f"{flag} {disMarkdown(s.telename)} [↗]({s.url})" for s in added]
+			image = "https://www.apple.com/careers/images/retail/fy22/hero-welcome_poster/desktop@2x.png"
+			await async_post({"mode": "photo-text", "text": "\n".join(title + body),
+				"chat_id": chat_ids[0], "parse": "MARK", "image": image})
+
+		updated = (updated[0] + len(added), updated[1] + stopped)
+
+	if any(updated):
+		logging.info(f"[更新文件] 新增职位: {updated[0]} 个, 停止职位: {updated[1]} 个")
+		write: dict[str, Any] = p
+		write["update"] = f"{datetime.now():%F %T}"
+		with open("Retail/savedJobs.json", "w") as w:
+			json.dump(write, w, indent = 2, ensure_ascii = False, sort_keys = True)
+	else:
+		logging.info("没有找到更新")
+
 @session_func
 async def main(session: SessionType, args: Namespace) -> None:
 	set_logger(args)
-
-	# TODO: 搜索职位模式
+	logger.info("程序启动")
 	if args.position:
-		...
-	elif args.temporary:
-		...
+		await position(args.flags, True, session)
+	elif args.standalone:
+		await position(args.flags, False, session)
 	else:
 		await entry(args.flags, session)
+	logger.info("程序结束")
 
 if __name__ == "__main__":
 	parser = ArgumentParser()
 	parser.add_argument("flags", metavar = "FLAG", type = str, nargs = "*", help = "指定国家或地区旗帜")
 	parser.add_argument("-d", "--debug", action = "store_true", help = "打印调试信息")
 	parser.add_argument("-p", "--position", action = "store_true", help = "寻找普通职位模式")
-	parser.add_argument("-t", "--temporary", action = "store_true", help = "寻找临时职位模式")
+	parser.add_argument("-s", "--standalone", action = "store_true", help = "寻找独立职位模式")
 	parser.add_argument("-v", "--verbose", action = "count", default = 0, help = "记录调试信息")
 	args = parser.parse_args()
 	asyncio.run(main(args))

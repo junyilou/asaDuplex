@@ -74,11 +74,8 @@ class RetryExceeded(RetrySignal):
 		return f"{self.exp.__class__.__name__}({self.exp})"
 
 def AsyncRetry[R, **P](limit: int, sleep: float = 0) -> Callable[
-	[Callable[P, CoroutineType[R]]],
-	Callable[P, CoroutineType[R]]]:
-	def retry_wrapper(
-		func: Callable[P, CoroutineType[R]]
-		) -> Callable[P, CoroutineType[R]]:
+	[Callable[P, CoroutineType[R]]], Callable[P, CoroutineType[R]]]:
+	def retry_wrapper(func: Callable[P, CoroutineType[R]]) -> Callable[P, CoroutineType[R]]:
 		from functools import wraps
 		@wraps(func)
 		async def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
@@ -103,6 +100,8 @@ async def _base_request(session: SessionType, url: str, method: str, modes: set[
 				results[m] = await resp.text()
 			elif d == "head":
 				results[m] = resp.headers
+			elif d == "cookies":
+				results[m] = resp.cookies
 			elif d == "status":
 				results[m] = resp.status
 			elif d == "json":
