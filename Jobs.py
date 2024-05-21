@@ -152,7 +152,7 @@ class Position:
 	async def get_states(self, session: Optional[SessionType] = None,
 		semaphore: Optional[SemaphoreType] = None) -> list["State"]:
 		api = API / "v1" / "jobDetails" / f"PIPE-{self.id}" / "stateProvinceList"
-		log_name = f"获取职位行政区 {self}"
+		log_name = f"获取 {self}"
 		try:
 			async with with_semaphore(semaphore):
 				logger.log(20, f"[开始] {log_name}")
@@ -283,12 +283,13 @@ async def entry(flags: list[str], session: SessionType) -> None:
 		logging.info("没有找到更新")
 		return
 
-	logger.info(f"[推送通知] {len(arrival)} 家新零售店")
-	title = ["\\#新店新机遇", ""]
-	body = [f"{disMarkdown(s.telename)} [↗]({s.state.position.url})" for s in arrival]
-	image = "https://www.apple.com/careers/images/retail/fy22/hero_hotspot/default@2x.png"
-	await async_post({"mode": "photo-text", "text": "\n".join(title + body),
-		"chat_id": chat_ids[0], "parse": "MARK", "image": image})
+	if arrival:
+		logger.info(f"[推送通知] {len(arrival)} 家新零售店")
+		title = ["\\#新店新机遇", ""]
+		body = [f"{disMarkdown(s.telename)} [↗]({s.state.position.url})" for s in arrival]
+		image = "https://www.apple.com/careers/images/retail/fy22/hero_hotspot/default@2x.png"
+		await async_post({"mode": "photo-text", "text": "\n".join(title + body),
+			"chat_id": chat_ids[0], "parse": "MARK", "image": image})
 
 	logging.info(f"[更新文件] {len(saved)} 家零售店")
 	write: dict[str, Any] = {flag: {"locations": {state_code:
