@@ -1,5 +1,5 @@
 {
-  "update": "2024-05-20 14:25:36",
+  "update": "2024-06-05 10:10:10",
   "🇦🇪": {
     "locations": {
       "state1049": {
@@ -417,7 +417,6 @@
     },
     "positions": {
       "managed": {
-        "114438020": "cn-business-expert",
         "114438021": "cn-creative",
         "114438022": "cn-expert",
         "114438023": "cn-genius",
@@ -429,7 +428,10 @@
         "114438255": "cn-senior-manager",
         "200125389": "cn-business-pro"
       },
-      "standalone": {}
+      "standalone": {
+        "200539697": "cn-manager",
+        "200540359": "cn-senior-manager"
+      }
     }
   },
   "🇩🇪": {
@@ -878,7 +880,9 @@
         "114438208": "hk-technical-specialist",
         "200125406": "hk-business-pro"
       },
-      "standalone": {}
+      "standalone": {
+        "200537813": "senior-manager"
+      }
     }
   },
   "🇮🇳": {
@@ -1032,7 +1036,9 @@
       "managed": {
         "114438107": "jp-specialist-full-time-or-part-time-permanent-or-temporary"
       },
-      "standalone": {}
+      "standalone": {
+        "200537677": "jp-store-leader"
+      }
     }
   },
   "🇰🇷": {
@@ -1059,6 +1065,7 @@
       "managed": {
         "114438322": "kr-manager",
         "114438324": "kr-store-leader",
+        "114438326": "kr-specialist-full-time-or-part-time-seasonal-role-also-available",
         "114438327": "kr-senior-manager"
       },
       "standalone": {}
@@ -1085,7 +1092,10 @@
         "114438282": "mo-specialist-full-time-or-part-time-permanent-or-temporary",
         "200125420": "mo-business-pro"
       },
-      "standalone": {}
+      "standalone": {
+        "200536922": "macao-manager",
+        "200543839": "manager-macao"
+      }
     }
   },
   "🇲🇽": {
@@ -1117,7 +1127,7 @@
       "state1105": {
         "name": "Kuala Lumpur",
         "stores": {
-          "R742": "Kuala Lumpur-MY"
+          "R742": "The Exchange TRX"
         }
       }
     },
@@ -1779,7 +1789,6 @@
     },
     "positions": {
       "managed": {
-        "114438148": "us-business-expert",
         "114438149": "us-creative",
         "114438150": "us-expert",
         "114438151": "us-genius",
