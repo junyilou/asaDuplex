@@ -56,8 +56,8 @@ class utils:
 	def known_slugs() -> list[str]:
 		try:
 			with open("Retail/savedEvent.json") as r:
-				assure = json.load(r)
-			return [assure["today"][i]["slug"] for i in assure["assure"]]
+				assure = json.load(r)["assure"]
+			return list(assure.values())
 		except FileNotFoundError:
 			return []
 
