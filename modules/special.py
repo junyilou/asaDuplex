@@ -4,7 +4,8 @@ from datetime import datetime, timedelta
 from random import randint
 from typing import Any, Literal, Optional
 
-from modules.util import SessionType, browser_agent, request
+from modules.util import (AsyncRetry, RetryExceeded, RetrySignal, SessionType,
+                          browser_agent, request)
 from storeInfo import Store
 
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
@@ -68,20 +69,21 @@ async def comment(store: Store,
 	results_dict: dict[str, dict[str, str]] = {},
 	session: Optional[SessionType] = None,
 	max_retry: int = 3, timeout: int = 5,
-	min_interval: int = 2, max_interval: int = 16,
+	min_interval: int = 2, max_interval: int = 8,
 	shout: bool = False) -> dict[str, dict[str, str]]:
-	while max_retry:
+	@AsyncRetry(max_retry)
+	async def decorate() -> dict[str, dict[str, str]]:
 		try:
 			return await base_comment(store, accepted_dates, results_dict, timeout, session)
 		except Exception as exp:
-			max_retry -= 1
-			if not max_retry:
-				if not shout:
-					return results_dict
-				raise exp
-			delay = randint(min_interval, max_interval)
-			await sleep(delay)
-	return results_dict
+			await sleep(randint(min_interval, max_interval))
+			raise RetrySignal(exp)
+	try:
+		return await decorate()
+	except RetryExceeded as re:
+		if not shout:
+			return results_dict
+		raise re.exp from None
 
 async def special(store: Store, *,
 	threshold: Optional[datetime] = None,

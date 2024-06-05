@@ -7,7 +7,6 @@ from datetime import datetime, timedelta
 from typing import Any, Concatenate, Literal, Mapping, Optional, overload
 
 import aiohttp
-from typing_extensions import TypeIs  # Python 3.13
 
 type SemaphoreType = asyncio.Semaphore
 type SessionType = aiohttp.ClientSession
@@ -19,6 +18,7 @@ request_logger = logging.getLogger("util.request")
 
 async def _Container[T](*coros: CoroutineType[T] | Iterable[CoroutineType[T]],
 	limit: Optional[int] = None, return_exceptions: bool = False) -> list[asyncio.Task[T]]:
+	from typing_extensions import TypeIs  # Python 3.13
 	def iscoroutine(obj: Any) -> TypeIs[CoroutineType[Any]]:
 		return asyncio.iscoroutine(obj)
 	async def task(coro: CoroutineType[T],
@@ -59,9 +59,11 @@ async def AsyncGather[T](*coros: CoroutineType[T] | Iterable[CoroutineType[T]],
 		except asyncio.CancelledError as ce:
 			if return_exceptions:
 				results.append(ce.args[0])
-		except Exception:
+			else:
+				raise ce.args[0] from None
+		except Exception as exp:
 			if not return_exceptions:
-				raise
+				raise exp from None
 	return results
 
 class RetrySignal(Exception):
@@ -140,27 +142,25 @@ async def get_session(
 			await y.close()
 			request_logger.debug("已关闭临时 aiohttp 线程")
 
-async def request(
-	url: str,
-	session: Optional[SessionType] = None,
-	method: str = "GET", *,
-	mode: Optional[str | list[str]] = None,
-	retry: int = 1,
-	return_exception: bool = False,
-	**kwargs) -> Any:
+async def request(url: str, session: Optional[SessionType] = None, method: str = "GET", *,
+	mode: Optional[str | list[str]] = None, retry: int = 1, sleep: int = 0,
+	return_exception: bool = False, **kwargs) -> Any:
 	modes = {str(i) for i in (mode if isinstance(mode, list) else [mode or "default"])}
-	while retry:
-		retry -= 1
+	@AsyncRetry(retry, sleep)
+	async def decorate(ses: SessionType) -> Any:
+		try:
+			return await _base_request(ses, url, method.upper(), modes, **kwargs)
+		except Exception as exp:
+			request_logger.debug(f"等待重试: [方法={method}] [模式={mode}] [URL={url}]")
+			raise RetrySignal(exp)
+	try:
 		async with get_session(session) as ses:
-			try:
-				return await _base_request(ses, url, method.upper(), modes, **kwargs)
-			except Exception as exp:
-				if not retry:
-					request_logger.debug(f"异常丢弃: [方法={method}] [模式={mode}] [URL={url}]")
-					if return_exception:
-						return exp
-					raise
-		request_logger.debug(f"等待重试: [方法={method}] [模式={mode}] [URL={url}] [重试剩余={retry}]")
+			return await decorate(ses)
+	except RetryExceeded as re:
+		request_logger.debug(f"异常丢弃: [方法={method}] [模式={mode}] [URL={url}]")
+		if return_exception:
+			return re.exp
+		raise re.exp from None
 
 def session_func[R, **P](func: Callable[Concatenate[SessionType, P],
 	CoroutineType[R]]) -> Callable[P, CoroutineType[R]]:

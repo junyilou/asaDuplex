@@ -6,9 +6,9 @@ from typing import Any, Literal, Optional, Self, Sequence
 from zoneinfo import ZoneInfo
 
 from modules.regions import Regions
-from modules.util import (SemaphoreType, SessionType, browser_agent,
-                          disMarkdown, get_session, request, tz_text,
-                          with_semaphore)
+from modules.util import (AsyncGather, CoroutineType, SemaphoreType,
+                          SessionType, browser_agent, disMarkdown, get_session,
+                          request, tz_text, with_semaphore)
 from storeInfo import Store as Raw_Store
 from storeInfo import getStore as getRaw_Store
 from storeInfo import storeReturn
@@ -156,8 +156,7 @@ class Store(TodayObject):
 			self.slug: str = raw["slug"]
 			self.rootPath: str = rootPath or self.raw_store.region.url_taa
 			self.flag: str = todayNation[self.rootPath]
-			self.url: str = f"https://www.apple.com{raw['path']}" if self.rootPath != "/cn" \
-				else f"https://www.apple.com.cn{raw['path']}"
+			self.url: str = f"https://www.apple.com{".cn" if self.rootPath == "/cn" else ""}{raw["path"]}"
 			self.coord: Optional[list[float]] = [raw["lat"], raw["long"]]
 		else:
 			temp = store or (getRaw_Store(sid) if sid else None)
@@ -189,13 +188,9 @@ class Store(TodayObject):
 			assert "courses" in remote
 		except:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
-
-		tasks = []
-		async with asyncio.TaskGroup() as tg:
-			for c in remote["courses"].values():
-				tasks.append(tg.create_task(Course.get(rootPath = self.rootPath,
-					slug = c["urlTitle"], remote = remote, session = session)))
-		return [t.result() for t in tasks]
+		return await AsyncGather(Course.get(rootPath = self.rootPath,
+			slug = c["urlTitle"], remote = remote, session = session)
+			for c in remote["courses"].values())
 
 	async def getSchedules(self, ensure: bool = True,
 		date: Optional[datetime] = None,
@@ -210,17 +205,16 @@ class Store(TodayObject):
 		except:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
 
-		tasks = []
-		async with asyncio.TaskGroup() as tg:
-			for i, s in remote["schedules"].items():
-				storeNum = s["storeNum"]
-				course = remote["courses"][s["courseId"]]
-				if not ensure or storeNum == self.sid or "VIRTUAL" in course["type"]:
-					if s["courseId"] not in remote["courses"]:
-						continue
-					tasks.append(tg.create_task(Schedule.get(rootPath = self.rootPath,
-						scheduleId = i, slug = course["urlTitle"], remote = remote, session = session)))
-		results: list[Schedule] = [t.result() for t in tasks]
+		tasks: list[CoroutineType[Schedule]] = []
+		for i, s in remote["schedules"].items():
+			storeNum = s["storeNum"]
+			course = remote["courses"][s["courseId"]]
+			if not ensure or storeNum == self.sid or "VIRTUAL" in course["type"]:
+				if s["courseId"] not in remote["courses"]:
+					continue
+				tasks.append(Schedule.get(rootPath = self.rootPath, scheduleId = i,
+					slug = course["urlTitle"], remote = remote, session = session))
+		results = await AsyncGather(tasks)
 		if date:
 			results = [i for i in results if i.rawStart.date() == date.date()]
 		return results
@@ -361,16 +355,15 @@ class Course(TodayObject):
 		except:
 			raise ValueError(f"获取排课 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
 
-		tasks = []
-		async with asyncio.TaskGroup() as tg:
-			schedules = remote["schedules"]
-			for i in remote["schedules"]:
-				storeNum = schedules[i]["storeNum"]
-				if schedules[i]["courseId"] == self.courseId:
-					if not ensure or storeNum == store.sid or "VIRTUAL" in remote["courses"][self.courseId]["type"]:
-						tasks.append(tg.create_task(Schedule.get(rootPath = store.rootPath,
-							scheduleId = i, slug = self.slug, remote = remote, session = session)))
-		results: list[Schedule] = [t.result() for t in tasks]
+		tasks: list[CoroutineType[Schedule]] = []
+		schedules = remote["schedules"]
+		for i in remote["schedules"]:
+			storeNum = schedules[i]["storeNum"]
+			if schedules[i]["courseId"] == self.courseId:
+				if not ensure or storeNum == store.sid or "VIRTUAL" in remote["courses"][self.courseId]["type"]:
+					tasks.append(Schedule.get(rootPath = store.rootPath,
+						scheduleId = i, slug = self.slug, remote = remote, session = session))
+		results = await AsyncGather(tasks)
 		if date:
 			results = [i for i in results if i.rawStart.date() == date.date()]
 		return results
@@ -551,17 +544,15 @@ class Collection(TodayObject):
 		except:
 			raise ValueError(f"获取排课 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
 
-		tasks = []
-		async with asyncio.TaskGroup() as tg:
-			for i, s in remote["schedules"].items():
-				courseId = s["courseId"]
-				storeNum = s["storeNum"]
-				course = remote["courses"][courseId]
-				if self.slug in (m["collId"] for m in remote["heroGallery"] if m["heroType"] == "TAG"):
-					if not ensure or storeNum == store.sid or "VIRTUAL" in course["type"]:
-						tasks.append(tg.create_task(Schedule.get(rootPath = store.rootPath,
-							scheduleId = i, slug = course["urlTitle"], remote = remote, session = session)))
-		results: list[Schedule] = [t.result() for t in tasks]
+		tasks: list[CoroutineType[Schedule]] = []
+		for i, s in remote["schedules"].items():
+			courseId, storeNum = s["courseId"], s["storeNum"]
+			course = remote["courses"][courseId]
+			if self.slug in (m["collId"] for m in remote["heroGallery"] if m["heroType"] == "TAG"):
+				if not ensure or storeNum == store.sid or "VIRTUAL" in course["type"]:
+					tasks.append(Schedule.get(rootPath = store.rootPath, scheduleId = i,
+						slug = course["urlTitle"], remote = remote, session = session))
+		results = await AsyncGather(tasks)
 		if date:
 			results = [i for i in results if i.rawStart.date() == date.date()]
 		return results

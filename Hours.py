@@ -7,7 +7,7 @@ from typing import Any
 
 from modules.constants import DIFFHTML
 from modules.special import compare, special
-from modules.util import (SemaphoreType, SessionType, session_func, setLogger,
+from modules.util import (AsyncGather, SessionType, session_func, setLogger,
                           sortOD)
 from storeInfo import Store, getStore, nameReplace, storeReturn
 
@@ -47,9 +47,9 @@ LOGSTRING = {
 LANG = LOGSTRING[USERLANG]
 
 async def entry(store: Store, saved: dict[str, dict[str, str]], rules: dict[str, str],
-	session: SessionType, semaphore: SemaphoreType) -> tuple[dict[str, dict[str, str]], list[str]]:
-	async with semaphore:
-		ans = await special(store, threshold = RUNTIME, userLang = USERLANG == "ZH", rules = rules, session = session)
+	session: SessionType) -> tuple[dict[str, dict[str, str]], list[str]]:
+	ans = await special(store, threshold = RUNTIME,
+		userLang = USERLANG == "ZH", rules = rules, session = session)
 	if ans is None:
 		return saved, []
 
@@ -87,7 +87,7 @@ async def report(targets: list[Store]) -> None:
 async def main(session: SessionType) -> None:
 	file, rule = Path(WORKFILE), Path(RULEFILE)
 	includes, excludes = [storeReturn(s, opening = True, split = True, allow_empty = False) for s in (INCLUDE, EXCLUDE)]
-	stores = (i for i in includes if i not in excludes)
+	stores = [i for i in includes if i not in excludes]
 
 	if file.is_file():
 		saved = json.loads(file.read_text())
@@ -99,12 +99,10 @@ async def main(session: SessionType) -> None:
 		file.write_text("{}")
 	rules = json.loads(rule.read_text()) if rule.is_file() else {}
 
-	semaphore = asyncio.Semaphore(20)
-	async with asyncio.TaskGroup() as tg:
-		tasks = {store: tg.create_task(entry(store,
-			saved = saved.get(store.sid, {}),
-			rules = rules.get(store.sid, {}),
-			session = session, semaphore = semaphore)) for store in stores}
+	remote = await AsyncGather((entry(store,
+		saved = saved.get(store.sid, {}),
+		rules = rules.get(store.sid, {}),
+		session = session) for store in stores), limit = 20)
 
 	diffs: dict[Store, list[str]] = {}
 	targets: list[Store] = []
@@ -116,8 +114,7 @@ async def main(session: SessionType) -> None:
 		if s := getStore(k):
 			results[s] = v
 
-	for store, item in tasks.items():
-		specials, diff = item.result()
+	for store, (specials, diff) in zip(stores, remote):
 		results[store] = specials
 		if diff:
 			diffs[store] = diff
