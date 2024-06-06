@@ -57,7 +57,7 @@ from botpost import async_post
 
 2022 年 10 月：改进代码使用 Python 3.8 [[commit]](https://github.com/junyilou/asaduplex/commit/2e7511ed22c38b7272f5b3e041ed6d66f8dcf21c), Python 3.9 [[commit]](https://github.com/junyilou/asaduplex/commit/dcfa943e543c157ca14a7e14cf98c98732ffc400), Python 3.10 [[commit]](https://github.com/junyilou/asaduplex/commit/78543f98a8c22b3aa6b93d6bc14d76b5f217e027), Python 3.11 [[commit]](https://github.com/junyilou/asaduplex/commit/9a3cf1cb049f0587b9dbb5a85500b26b6d77704e) 的部分特性。
 
-2022 年 11 月：面向对象化 storeInfo 核芯。 [[commit]](https://github.com/junyilou/asaduplex/commit/49ee12f2785bd4a12637321abc72808d859e585b)
+2022 年 11 月：面向对象化 storeInfo 核心。[[commit]](https://github.com/junyilou/asaduplex/commit/49ee12f2785bd4a12637321abc72808d859e585b)
 
 2023 年 11 月：重写了核心网络请求函数，并适配了 Python 3.12 的部分特性。[[commit1]](https://github.com/junyilou/asaDuplex/commit/3d256965e798e501563120b3133b40883745945d) [[commit2]](https://github.com/junyilou/asaDuplex/commit/26c479a1c2b61bea518893b0f20d82ba18158e3e)
 
