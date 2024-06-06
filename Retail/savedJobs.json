@@ -1,5 +1,5 @@
 {
-  "update": "2024-06-05 10:10:10",
+  "update": "2024-06-06 12:55:41",
   "🇦🇪": {
     "locations": {
       "state1049": {
@@ -429,8 +429,8 @@
         "200125389": "cn-business-pro"
       },
       "standalone": {
-        "200539697": "cn-manager",
-        "200540359": "cn-senior-manager"
+        "200553071": "cn-manager",
+        "200554356": "cn-manager"
       }
     }
   },
@@ -1036,7 +1036,9 @@
       "managed": {
         "114438107": "jp-specialist-full-time-or-part-time-permanent-or-temporary"
       },
-      "standalone": {}
+      "standalone": {
+        "200537677": "jp-store-leader"
+      }
     }
   },
   "🇰🇷": {
