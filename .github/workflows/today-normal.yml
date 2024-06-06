@@ -1,8 +1,8 @@
-name: Jobs at Apple [Standalone]
+name: Today at Apple [Normal]
 
 on:
   schedule:
-    - cron: '30 22 * * 1'
+    - cron: '0 1 * * *'
 
 jobs:
   build:
@@ -22,6 +22,8 @@ jobs:
         env:
           BOTPOST_API: ${{ secrets.BOTPOST_API }}
           BOTPOST_CHAT_ID: ${{ secrets.BOTPOST_CHAT_ID }}
-        run: python3 Jobs.py -s -d 🇨🇳 🇯🇵
+        run: python3 Today.py -d
       - name: commit files
         uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'auto: Today at Apple'

@@ -1,8 +1,8 @@
-name: Jobs at Apple [Japan]
+name: Jobs at Apple [Global]
 
 on:
   schedule:
-    - cron: '30 */8 * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   build:
@@ -22,6 +22,8 @@ jobs:
         env:
           BOTPOST_API: ${{ secrets.BOTPOST_API }}
           BOTPOST_CHAT_ID: ${{ secrets.BOTPOST_CHAT_ID }}
-        run: python3 Jobs.py 🇯🇵 -d
+        run: python3 Jobs.py -d
       - name: commit files
         uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'auto: Jobs at Apple [Global]'
