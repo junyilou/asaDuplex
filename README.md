@@ -11,8 +11,6 @@
 * 以极快的速度查询 Today at Apple 课程、排课信息，包括轻松获取课程介绍、配图和视频地址，跨店、跨国查询排课，搜索还未排课的未来特别活动等
 * 通过模块化设计的各种函数，实现信息的定时追踪，例如定期查询指定零售店的特别营业时间、定期查询零售店官方照片的变更、获取新 Today at Apple 课程详细信息、获取正在招聘的未开业零售店等
 
-详细的操作方法详见本库提供的 [Wiki](https://github.com/junyilou/asaduplex/wiki)。
-
 果铺知道通过库中的代码实现了 Telegram 果铺知道 Bot，你可以在[这里](https://t.me/guopuzdbot)体验。
 
 
@@ -23,14 +21,16 @@
 
 所有网络请求均使用异步网络 I/O: [aiohttp](https://github.com/aio-libs/aiohttp) 发送，部分代码依赖 [beautifulsoup4](https://pypi.org/project/beautifulsoup4) 和 [lxml](https://github.com/lxml/lxml)，可通过 pip 安装
 
-许多代码设计为在有结果时可推送通知。在这些代码中，一般有负责输出结果的函数，并包含类似的代码：
+#### Webhooks
+
+许多代码设计为将结果输出推送通知，这些代码通常导入了以下模块：
 
 ```python
-from bot import tokens
+from bot import chat_ids
 from botpost import async_post
 ```
 
-这是我个人对结果推送的实现方式，`bot` 和 `botpost` 并未在此库中给出。代码运行到输出阶段会产生一个包含文本、图片、链接等内容的字典，您可以通过编写适合您自己的推送结果的方式以获取代码结果，例如将内容推送至 Telegram、微信、其他第三方 iOS 推送 app 等。
+库中给出了一个示例 [bot.py](bot.py) 和 [botpost.py](botpost.py)，将读取环境变量 `BOTPOST_CHAT_ID` 中的用户 ID 和 `BOTPOST_API` 中的 Webhooks API 地址进行推送，你可以修改为其他你自己的结果推送方式。
 
 
 
