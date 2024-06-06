@@ -3,6 +3,7 @@ name: Jobs at Apple [Japan]
 on:
   schedule:
     - cron: '30 */8 * * *'
+  workflow_dispatch:
 
 jobs:
   build:

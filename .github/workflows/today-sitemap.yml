@@ -3,6 +3,7 @@ name: Today at Apple [Sitemap]
 on:
   schedule:
     - cron: '0 7 * * *'
+  workflow_dispatch:
 
 jobs:
   build:

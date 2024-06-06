@@ -3,6 +3,7 @@ name: Jobs at Apple [Standalone]
 on:
   schedule:
     - cron: '30 22 * * 1'
+  workflow_dispatch:
 
 jobs:
   build:
