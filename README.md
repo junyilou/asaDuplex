@@ -1,4 +1,7 @@
-# asaDuplex ![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
+# asaDuplex
+![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
+[![Jobs at Apple](https://github.com/junyilou/asaDuplex/actions/workflows/jobs-global.yaml/badge.svg)](https://github.com/junyilou/asaDuplex/actions/workflows/jobs-global.yaml)
+[![Today at Apple](https://github.com/junyilou/asaDuplex/actions/workflows/today-normal.yaml/badge.svg)](https://github.com/junyilou/asaDuplex/actions/workflows/today-normal.yaml)
 
 ![bot](Retail/bot.jpg)
 
@@ -60,6 +63,7 @@ from botpost import async_post
 
 2023 年 11 月：重写了核心网络请求函数，并适配了 Python 3.12 的部分特性。[[commit1]](https://github.com/junyilou/asaDuplex/commit/3d256965e798e501563120b3133b40883745945d) [[commit2]](https://github.com/junyilou/asaDuplex/commit/26c479a1c2b61bea518893b0f20d82ba18158e3e)
 
+2024 年 6 月：使用 GitHub Actions 自动化  Jobs at Apple 和 Today at Apple。[[commit1]](https://github.com/junyilou/asaDuplex/commit/18f9bb670f4de4809f927fb105b6f2b462f7391a) [[commit2]](https://github.com/junyilou/asaDuplex/commit/515eb0540610ccc509b9a422e863013befd5af80)
 
 
 ##### 免责声明 | Disclaimer
