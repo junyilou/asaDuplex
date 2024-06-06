@@ -739,11 +739,11 @@ def teleinfo(
 	collection: Optional[Collection] = None,
 	mode: str = "new",
 	userLang: bool = True,
-	prior: list[str] = []) -> tuple[str, str, list[list[list[str]]]]:
+	prior: Sequence[str] = []) -> tuple[str, str, list[list[list[str]]]]:
 
 	runtime = datetime.now()
 	offset = (runtime.astimezone().utcoffset() or timedelta()).total_seconds() / 3600
-	priorlist = prior + list(Regions)
+	priorlist = (*prior, *Regions)
 
 	if collection is not None:
 		text = disMarkdown(lang[userLang]["MAIN1"].format(

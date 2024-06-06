@@ -11,7 +11,7 @@ from modules.today import (Collection, Course, Schedule, Sitemap, Store,
 from modules.util import AsyncGather, get_session, setLogger, sortOD
 from storeInfo import storeReturn
 
-DEFAULT_FLAGS = "🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼", "🇯🇵"
+DEFAULT_FLAGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼", "🇯🇵"]
 
 async def post(text: str, image: str, keyboard: list[list[list[str]]]) -> Optional[dict]:
 	from bot import chat_ids
