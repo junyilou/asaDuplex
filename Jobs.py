@@ -78,8 +78,6 @@ class APIClass:
 		except RetryExceeded as exp:
 			logger.error(f"[请求失败] CSRF: {exp.message}")
 			return
-		except Exception as exp:
-			raise RetrySignal(exp)
 
 		self.csrf = {"X-Apple-CSRF-Token": headers["X-Apple-CSRF-Token"]}
 		self.cookies = cookies
@@ -125,15 +123,13 @@ class Locale:
 		except RetryExceeded as exp:
 			logger.error(f"[请求失败] {log_name}: {exp.message}")
 			return [], 0
-		except Exception as exp:
-			raise RetrySignal(exp)
 
 		g = [RichPosition(id = i["positionId"],
 			slug = i["transformedPostingTitle"],
 			region = self.region,
 			update = datetime.fromisoformat(i["postDateInGMT"]).strftime("%F"),
-			title = i["postingTitle"],
-			location = next((l["name"] for l in i["locations"]), ""),
+			title = i["postingTitle"].strip(),
+			location = next((l["name"] for l in i["locations"]), "").strip(),
 			managed = i["managedPipelineRole"]) for i in r["searchResults"]]
 		return g, r["totalRecords"]
 
@@ -177,8 +173,6 @@ class Position:
 		except RetryExceeded as exp:
 			logger.error(f"[请求失败] {log_name}: {exp.message}")
 			return []
-		except Exception as exp:
-			raise RetrySignal(exp)
 		return [State(code = p["code"], name = p["stateProvince"],
 			field_val = p["id"], position = self) for p in r["searchResults"]]
 
@@ -224,9 +218,7 @@ class State:
 		except RetryExceeded as exp:
 			logger.error(f"[请求失败] {log_name}: {exp.message}")
 			return []
-		except Exception as exp:
-			raise RetrySignal(exp)
-		stores  = [Store(code = c["code"], name = c["name"], state = self, city = c["city"]) for c in r]
+		stores = [Store(code = c["code"], name = c["name"], state = self, city = c["city"]) for c in r]
 		for store in stores:
 			logger.log(18, f"[门店] {store}")
 		return stores
@@ -301,13 +293,14 @@ async def entry(flags: list[str], session: SessionType) -> None:
 		logging.info("没有找到更新")
 		return
 
-	if arrival:
+	if arrival and not args.local:
 		logger.info(f"[推送通知] {len(arrival)} 家新零售店")
-		title = ["\\#新店新机遇", ""]
+		title = ["\\#新店新机遇", "已开始招聘", ""]
 		body = [f"{disMarkdown(s.telename)} [↗]({s.state.position.url})" for s in arrival]
 		image = "https://www.apple.com/careers/images/retail/fy22/hero_hotspot/default@2x.png"
-		await async_post({"mode": "photo-text", "text": "\n".join(title + body),
-			"chat_id": chat_ids[0], "parse": "MARK", "image": image})
+		push = {"mode": "photo-text", "text": "\n".join(title + body),
+			"chat_id": chat_ids[0], "parse": "MARK", "image": image}
+		await async_post(push)
 
 	logging.info(f"[更新文件] {len(saved)} 家零售店")
 	write: dict[str, Any] = {flag: {"locations": {state_code:
@@ -345,20 +338,21 @@ async def position(flags: list[str], managed: bool, session: SessionType) -> Non
 		remote = {p.id: p for p in r}
 		for pos in (v for i, v in remote.items() if i not in local):
 			added.append(pos)
-			logger.info(f"[新增招聘] {pos.id}: {pos.slug}")
+			logger.info(f"[新增招聘] {pos.id}: {pos.title}, {pos.location}, {pos.update}")
 		if managed:
 			for pid, slug in ((i, v) for i, v in local.items() if i not in remote):
 				stopped += 1
 				logger.info(f"[停止招聘] {pid}: {slug}")
 		p[flag]["positions"][key] = {k: v.slug for k, v in remote.items()}
 
-		if added and not managed:
+		if added and not managed and not args.local:
 			logger.info(f"[推送通知] {len(added)} 个新职位")
 			title = ["\\#新店新机遇", "新增独立职位", ""]
 			body = [f"{flag} {disMarkdown(s.telename)} [↗]({s.url})" for s in added]
 			image = "https://www.apple.com/careers/images/retail/fy22/hero-welcome_poster/desktop@2x.png"
-			await async_post({"mode": "photo-text", "text": "\n".join(title + body),
-				"chat_id": chat_ids[0], "parse": "MARK", "image": image})
+			push = {"mode": "photo-text", "text": "\n".join(title + body),
+				"chat_id": chat_ids[0], "parse": "MARK", "image": image}
+			await async_post(push)
 
 		updated = (updated[0] + len(added), updated[1] + stopped)
 
@@ -387,6 +381,7 @@ if __name__ == "__main__":
 	parser = ArgumentParser()
 	parser.add_argument("flags", metavar = "FLAG", type = str, nargs = "*", help = "指定国家或地区旗帜")
 	parser.add_argument("-d", "--debug", action = "store_true", help = "打印调试信息")
+	parser.add_argument("-l", "--local", action = "store_true", help = "仅限本地运行")
 	parser.add_argument("-p", "--position", action = "store_true", help = "寻找普通职位模式")
 	parser.add_argument("-s", "--standalone", action = "store_true", help = "寻找独立职位模式")
 	parser.add_argument("-v", "--verbose", action = "count", default = 0, help = "记录调试信息")
