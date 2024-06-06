@@ -1,4 +1,2 @@
 aiohttp
-beautifulsoup4
-lxml
 typing_extensions>=4.10.0

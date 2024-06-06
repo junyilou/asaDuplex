@@ -1,0 +1,24 @@
+name: Jobs at Apple [Standalone]
+
+on:
+  schedule:
+    - cron: '30 22 * * 1'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v4
+      - name: setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: install python packages
+        run: pip install -r requirements.txt
+      - name: execute py script
+        run: python3 Jobs.py -s -d 🇨🇳 🇯🇵
+      - name: commit files
+        uses: stefanzweifel/git-auto-commit-action@v5
