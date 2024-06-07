@@ -55,8 +55,8 @@ class utils:
 	@staticmethod
 	def known_slugs() -> list[str]:
 		try:
-			with open("Retail/savedEvent.json") as r:
-				assure = json.load(r)["assure"]
+			with open("Retail/assured-events.json") as r:
+				assure = json.load(r)
 			return list(assure.values())
 		except FileNotFoundError:
 			return []
@@ -377,7 +377,7 @@ class Course(TodayObject):
 		async with get_session(session) as session:
 			tasks = (self.getSchedules(Store(store = i, rootPath = rootPath),
 				ensure = not fast, date = date, session = session, semaphore = semaphore) for i in stores)
-			results = await asyncio.gather(*tasks, return_exceptions = True)
+			results = await AsyncGather(tasks, return_exceptions = True)
 		return sorted({i for j in (r for r in results if not isinstance(r, BaseException)) for i in j})
 
 	async def getSingleSchedule(self, session: Optional[SessionType] = None) -> "Schedule":
@@ -566,7 +566,7 @@ class Collection(TodayObject):
 		async with get_session(session) as session:
 			tasks = (self.getSchedules(Store(store = i, rootPath = rootPath),
 				ensure = not fast, date = date, session = session, semaphore = semaphore) for i in stores)
-			results = await asyncio.gather(*tasks, return_exceptions = True)
+			results = await AsyncGather(tasks, return_exceptions = True)
 		return sorted({i for j in (r for r in results if not isinstance(r, BaseException)) for i in j})
 
 	async def getCourses(self, rootPath: Optional[str] = None, fast: bool = False,
@@ -631,7 +631,7 @@ class Sitemap(TodayObject):
 	async def getObjects(self, session: Optional[SessionType] = None) -> list[Collection | Course | Schedule]:
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		async with get_session(session) as session:
-			results = await asyncio.gather(*(getURL(u, session = session, semaphore = semaphore)
+			results = await AsyncGather((getURL(u, session = session, semaphore = semaphore)
 				for u in await self.getURLs()), return_exceptions = True)
 		return [i for i in results if not isinstance(i, BaseException)]
 
