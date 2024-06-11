@@ -1,5 +1,5 @@
 {
-  "update": "2024-06-08 01:56:57",
+  "update": "2024-06-11 07:07:51",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -409,7 +409,14 @@
       "slug": "spotlight-kanata-kimoto-062024"
     }
   },
-  "sitemap": {},
+  "sitemap": {
+    "7204311431263978752": {
+      "names": {
+        "🇨🇳": "艺术漫游：跟着 Handowin 描绘 Apple 浦东的活力新面貌"
+      },
+      "slug": "art-tour-handowin-062024"
+    }
+  },
   "collection": {
     "kids-code-with-apple": {
       "🇯🇵": "Code with Apple - 子ども向け"
