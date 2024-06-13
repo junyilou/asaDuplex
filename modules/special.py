@@ -47,7 +47,10 @@ async def base_comment(store: Store,
 	stores: list[dict] = []
 	r = await request(url, session, headers = referer, timeout = timeout,
 		params = params, raise_for_status = True, mode = "json")
-	stores = r["body"]["content"]["pickupMessage"]["stores"]
+	try:
+		stores = r["body"]["content"]["pickupMessage"]["stores"]
+	except KeyError:
+		return results_dict
 	for rstore in stores:
 		for holiday in rstore["retailStore"]["storeHolidays"]:
 			rid = rstore["storeNumber"]
