@@ -1,17 +1,18 @@
 import asyncio
 import json
 import logging
+from argparse import ArgumentParser, Namespace
 from collections.abc import Mapping
 from datetime import datetime
 from hashlib import md5
-from sys import argv
-from typing import Optional, cast
+from pathlib import Path
+from typing import Optional
 
 import aiohttp
 
 from modules.util import (SemaphoreType, SessionType, disMarkdown, get_session,
                           session_func, setLogger, with_semaphore)
-from storeInfo import Store, StoreDict, storeReturn
+from storeInfo import DEFAULTFILE, STORES, Store, sidify
 
 
 async def post(store: Store, dt: datetime, raw: bytes) -> None:
@@ -62,13 +63,13 @@ async def task(store: Store,
 				return
 
 	digest = md5(raw).hexdigest()
-	store.raw["modify"] = dt.strftime("%F %T")
+	store.modify = dt.strftime("%F %T")
 	if digest == getattr(store, "md5", None):
 		logging.info(f"[{store.rid}] 图片实际上没有更新")
 		return store
 	if special:
 		special_list.remove(store.sid)
-	store.raw["md5"] = digest
+	store.md5 = digest
 	try:
 		with open(f"Retail/{store.rid}-{dt:%F-%H%M%S}.png", "wb") as w:
 			w.write(raw)
@@ -79,56 +80,43 @@ async def task(store: Store,
 	return store
 
 @session_func
-async def main(session: SessionType) -> None:
+async def main(session: SessionType, args: Namespace) -> None:
 	semaphore = asyncio.Semaphore(20)
-	with open("storeInfo.json") as r:
-		j = json.load(r)
-		j.pop("update")
-		p = cast(dict[str, StoreDict], j)
-
-	judge_remove = lambda k: not (k not in argv or (argv.remove(k) or False))
-	print_progress = judge_remove("print")
-	mode = argv[1:] or ["normal"]
-	match mode:
-		case ["normal" | "single" as mode, *ids]:
-			sids, l = set(), []
-			for i in ids:
-				sids.update(j.sid for j in storeReturn(i, remove_internal = True))
-			stores = [Store(s, d) for s, d in p.items() if mode == "normal" or s in sids]
-		case ["special", *_]:
-			with open("specialists.json") as r:
-				l = cast(list[str], json.load(r))
-			stores = [Store(s, d) for s, d in p.items() if s in l]
-		case _:
-			stores, l = [], []
-
+	special_file = Path("specialists.json")
+	special_list: list[str] = json.loads(special_file.read_text())
+	sids = {sidify(s) for s in args.sids}
+	if args.special:
+		sids.update(special_list)
+	elif not sids:
+		sids.update(STORES)
+	stores = [store for sid, store in STORES.items() if sid in sids]
 	if not stores:
 		return
+
 	setLogger(logging.INFO, __file__, base_name = True)
 	logging.info(f"准备查询 {len(stores)} 家零售店")
-	tasks = [task(store, l, session, semaphore) for store in stores]
-	if print_progress:
+	tasks = [task(store, special_list, session, semaphore) for store in sorted(stores)]
+	if args.debug:
 		from tqdm.asyncio import tqdm_asyncio
 		results = await tqdm_asyncio.gather(*tasks)
 	else:
 		results = await asyncio.gather(*tasks)
+	if not any(results):
+		return logging.info("没有找到更新")
 
-	write = False
-	for r in results:
-		if not isinstance(r, Store):
-			continue
-		write = True
-		j[r.sid] = r.raw
-	if write:
-		if mode[0] == "special":
-			logging.info(f"更新特别观察列表: {l}")
-			with open("specialists.json", "w") as w:
-				json.dump(l, w)
-		j["update"] = dt = f"{datetime.now():%F %T}"
-		logging.info(f"更新门店数据文件: {dt}")
-		with open("storeInfo.json", "w") as w:
-			json.dump(j, w, ensure_ascii = False, indent = 2, sort_keys = True)
+	remote = STORES | {r.sid: r for r in results if isinstance(r, Store)}
+	updated = {"_": datetime.now().strftime("%F %T"), "stores": {v.rid: v.dumps() for k, v in remote.items()}}
+	if args.special:
+		logging.info(f"更新特别观察列表: {special_list}")
+		special_file.write_text(json.dumps(special_list))
+	logging.info(f"更新门店数据文件: {updated["_"]}")
+	Path(DEFAULTFILE).write_text(json.dumps(updated, ensure_ascii = False, indent = 2, sort_keys = True))
 	logging.info("程序结束")
 
 if __name__ == "__main__":
-	asyncio.run(main())
+	parser = ArgumentParser()
+	parser.add_argument("sids", metavar = "SID", type = str, nargs = "*", help = "手动给出店号")
+	parser.add_argument("-d", "--debug", action = "store_false", help = "不打印调试信息")
+	parser.add_argument("-s", "--special", action = "store_true", help = "从特别列表读取店号")
+	args = parser.parse_args()
+	asyncio.run(main(args))
