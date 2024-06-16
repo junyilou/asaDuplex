@@ -164,9 +164,11 @@ class Store(TodayObject):
 			self.raw_store: Raw_Store = temp
 			self.sid: str = self.raw_store.rid
 			self.name: str = self.raw_store.name
+			assert self.raw_store.slug and self.raw_store.url, "本地数据库信息不正确"
 			self.slug: str = self.raw_store.slug
 			self.rootPath: str = rootPath or self.raw_store.region.url_taa
-			self.timezone: str = self.raw_store.timezone
+			assert self.raw_store.timezone, "本地数据库时区不正确"
+			self.timezone: str = self.raw_store.timezone.key
 			self.flag: str = todayNation[self.rootPath]
 			self.url: str = self.raw_store.url
 			self.coord: Optional[list[float]] = None
