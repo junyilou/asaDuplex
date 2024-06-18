@@ -38,11 +38,12 @@ async def base_comment(store: Store,
 	accepted_dates: Iterable[str],
 	results_dict: dict[str, dict[str, str]],
 	timeout: int, session: Optional[SessionType]) -> dict[str, dict[str, str]]:
+	if not store.region.url_store or not store.region.part_sample:
+		return {}
 	base = f"https://www.apple.com{store.region.url_store}"
 	url = f"{base}/shop/fulfillment-messages"
-	target = f"MUQ93{store.region.part_sample}/A"
-	referer = browser_agent | {"Referer": f"{base}/shop/product/{target}"}
-	params = {"searchNearby": "true", "store": store.rid, "parts.0": target}
+	referer = browser_agent | {"Referer": f"{base}/shop/product/{store.region.part_sample}"}
+	params = {"searchNearby": "true", "store": store.rid, "parts.0": store.region.part_sample}
 
 	stores: list[dict] = []
 	r = await request(url, session, headers = referer, timeout = timeout,

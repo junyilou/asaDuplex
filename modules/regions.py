@@ -10,7 +10,7 @@ class Region:
 	abbr: str
 	locale: str
 	name: str
-	name_alter: list[str]
+	name_alt: list[str]
 	name_eng: str
 	part_sample: Optional[str]
 	post_location: str

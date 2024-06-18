@@ -87,7 +87,7 @@ class Store:
 		keys: list[str] = [
 			self.name, self.name_eng, self.state, self.city, self.flag,
 			*self.name_alt, *self.keyword, (self.nso or "")[:10], self.slug or "",
-			self.region.name, self.region.name_eng, self.region.abbr, *self.region.name_alter,
+			self.region.name, self.region.name_eng, self.region.abbr, *self.region.name_alt,
 			*((dct["status"].capitalize(), statuses[dct["status"]]) if "status" in dct else ())]
 		self.keys = [i for i in keys if i]
 

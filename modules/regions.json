@@ -4,11 +4,11 @@
     "abbr": "BENL",
     "locale": "nl_BE",
     "name": "比利时 (荷兰语)",
-    "name_alter": [
+    "name_alt": [
       "België"
     ],
     "name_eng": "Belgium (Dutch)",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "BELC",
     "url_app": "e/be-nl",
     "url_taa": "/benl",
@@ -20,9 +20,9 @@
     "abbr": "CAFR",
     "locale": "fr_CA",
     "name": "加拿大 (法语)",
-    "name_alter": [],
+    "name_alt": [],
     "name_eng": "Canada (French)",
-    "part_sample": "AM",
+    "part_sample": "MUQ93AM/A",
     "post_location": "CANC",
     "url_app": "a/xf",
     "url_taa": "/ca/fr",
@@ -34,11 +34,11 @@
     "abbr": "CHDE",
     "locale": "de_CH",
     "name": "瑞士 (德语)",
-    "name_alter": [
+    "name_alt": [
       "Schweiz"
     ],
     "name_eng": "Switzerland (German)",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "CHEC",
     "url_app": "e/ch-de",
     "url_taa": "/chde",
@@ -50,9 +50,9 @@
     "abbr": "HKEN",
     "locale": "en_HK",
     "name": "香港 (英语)",
-    "name_alter": [],
+    "name_alt": [],
     "name_eng": "Hong Kong (English)",
-    "part_sample": "FE",
+    "part_sample": "MUQ93FE/A",
     "post_location": "HKGC",
     "url_app": "p/hk",
     "url_taa": "/hk/en",
@@ -64,14 +64,14 @@
     "abbr": "AE",
     "locale": "en_AE",
     "name": "阿联酋",
-    "name_alter": [
+    "name_alt": [
       "UAE",
       "阿聯酋",
       "阿拉伯联合酋长国",
       "阿拉伯聯合酋長國"
     ],
     "name_eng": "United Arab Emirates",
-    "part_sample": "ZE",
+    "part_sample": "MUQ93ZE/A",
     "post_location": "ARE",
     "url_app": "e/ae",
     "url_taa": "/ae",
@@ -83,9 +83,9 @@
     "abbr": "AT",
     "locale": "de_AT",
     "name": "奥地利",
-    "name_alter": [],
+    "name_alt": [],
     "name_eng": "Austria",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "AUT",
     "url_app": "e/at",
     "url_taa": "/at",
@@ -97,11 +97,11 @@
     "abbr": "AU",
     "locale": "en_AU",
     "name": "澳大利亚",
-    "name_alter": [
+    "name_alt": [
       "澳洲"
     ],
     "name_eng": "Australia",
-    "part_sample": "FE",
+    "part_sample": "MUQ93FE/A",
     "post_location": "AUSC",
     "url_app": "p/au",
     "url_taa": "/au",
@@ -113,12 +113,12 @@
     "abbr": "BE",
     "locale": "fr_BE",
     "name": "比利时",
-    "name_alter": [
+    "name_alt": [
       "比利時",
       "Belgique"
     ],
     "name_eng": "Belgium",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "BELC",
     "url_app": "e/be-fr",
     "url_taa": "/befr",
@@ -130,9 +130,9 @@
     "abbr": "BR",
     "locale": "pt_BR",
     "name": "巴西",
-    "name_alter": [],
+    "name_alt": [],
     "name_eng": "Brazil",
-    "part_sample": "AM",
+    "part_sample": "MUQ93AM/A",
     "post_location": "BRAC",
     "url_app": "a/br",
     "url_taa": "/br",
@@ -144,9 +144,9 @@
     "abbr": "CA",
     "locale": "en_CA",
     "name": "加拿大",
-    "name_alter": [],
+    "name_alt": [],
     "name_eng": "Canada",
-    "part_sample": "AM",
+    "part_sample": "MUQ93AM/A",
     "post_location": "CANC",
     "url_app": "a/ca",
     "url_taa": "/ca",
@@ -158,12 +158,12 @@
     "abbr": "CH",
     "locale": "fr_CH",
     "name": "瑞士",
-    "name_alter": [
+    "name_alt": [
       "Swiss",
       "Suisse"
     ],
     "name_eng": "Switzerland",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "CHEC",
     "url_app": "e/ch-fr",
     "url_taa": "/chfr",
@@ -175,7 +175,7 @@
     "abbr": "CN",
     "locale": "zh_CN",
     "name": "中国",
-    "name_alter": [
+    "name_alt": [
       "中國",
       "中华人民共和国",
       "中華人民共和國",
@@ -183,7 +183,7 @@
       "PRC"
     ],
     "name_eng": "China",
-    "part_sample": "FE",
+    "part_sample": "MUQ93FE/A",
     "post_location": "CHNC",
     "url_app": "p/cn",
     "url_taa": "/cn",
@@ -195,12 +195,12 @@
     "abbr": "DE",
     "locale": "de_DE",
     "name": "德国",
-    "name_alter": [
+    "name_alt": [
       "德國",
       "Deutschland"
     ],
     "name_eng": "Germany",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "DEU",
     "url_app": "e/de",
     "url_taa": "/de",
@@ -212,11 +212,11 @@
     "abbr": "ES",
     "locale": "es_ES",
     "name": "西班牙",
-    "name_alter": [
+    "name_alt": [
       "España"
     ],
     "name_eng": "Spain",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "ESPC",
     "url_app": "e/es",
     "url_taa": "/es",
@@ -228,13 +228,13 @@
     "abbr": "FR",
     "locale": "fr_FR",
     "name": "法国",
-    "name_alter": [
+    "name_alt": [
       "法國",
       "法兰西共和国",
       "法蘭西共和國"
     ],
     "name_eng": "France",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "FRAC",
     "url_app": "e/fr",
     "url_taa": "/fr",
@@ -246,7 +246,7 @@
     "abbr": "GB",
     "locale": "en_GB",
     "name": "英国",
-    "name_alter": [
+    "name_alt": [
       "UK",
       "U.K.",
       "Great Britain",
@@ -254,7 +254,7 @@
       "大英帝國"
     ],
     "name_eng": "United Kingdom",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "GBR",
     "url_app": "e/uk",
     "url_taa": "/uk",
@@ -266,12 +266,12 @@
     "abbr": "HK",
     "locale": "zh_HK",
     "name": "香港",
-    "name_alter": [
+    "name_alt": [
       "香港特别行政区",
       "香港特別行政區"
     ],
     "name_eng": "Hong Kong",
-    "part_sample": "FE",
+    "part_sample": "MUQ93FE/A",
     "post_location": "HKGC",
     "url_app": "p/hk-zh",
     "url_taa": "/hk",
@@ -283,9 +283,9 @@
     "abbr": "IN",
     "locale": "en_IN",
     "name": "印度",
-    "name_alter": [],
+    "name_alt": [],
     "name_eng": "India",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "INDC",
     "url_app": null,
     "url_taa": "/in",
@@ -297,12 +297,12 @@
     "abbr": "IT",
     "locale": "it_IT",
     "name": "意大利",
-    "name_alter": [
+    "name_alt": [
       "Italia",
       "义大利"
     ],
     "name_eng": "Italy",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "ITAC",
     "url_app": "e/it",
     "url_taa": "/it",
@@ -314,9 +314,9 @@
     "abbr": "JP",
     "locale": "ja_JP",
     "name": "日本",
-    "name_alter": [],
+    "name_alt": [],
     "name_eng": "Japan",
-    "part_sample": "FE",
+    "part_sample": "MUQ93FE/A",
     "post_location": "JPNC",
     "url_app": "j/jp",
     "url_taa": "/jp",
@@ -328,7 +328,7 @@
     "abbr": "KR",
     "locale": "ko_KR",
     "name": "韩国",
-    "name_alter": [
+    "name_alt": [
       "Korea",
       "ROK",
       "南韩",
@@ -337,7 +337,7 @@
       "大韓民國"
     ],
     "name_eng": "South Korea",
-    "part_sample": "FE",
+    "part_sample": "MUQ93FE/A",
     "post_location": "KOR",
     "url_app": "p/kr",
     "url_taa": "/kr",
@@ -349,7 +349,7 @@
     "abbr": "MO",
     "locale": "zh_MO",
     "name": "澳门",
-    "name_alter": [
+    "name_alt": [
       "澳門",
       "澳门特别行政区",
       "澳門特別行政區",
@@ -368,9 +368,9 @@
     "abbr": "MX",
     "locale": "es_MX",
     "name": "墨西哥",
-    "name_alter": [],
+    "name_alt": [],
     "name_eng": "Mexico",
-    "part_sample": "AM",
+    "part_sample": "MUQ93AM/A",
     "post_location": "MEXC",
     "url_app": "a/mx",
     "url_taa": "/mx",
@@ -382,12 +382,12 @@
     "abbr": "MY",
     "locale": "en_MY",
     "name": "马来西亚",
-    "name_alter": [
+    "name_alt": [
       "馬來西亞",
       "大马"
     ],
     "name_eng": "Malaysia",
-    "part_sample": "ZA",
+    "part_sample": "MUQ93ZA/A",
     "post_location": "MYS",
     "url_app": "p/my",
     "url_taa": "/my",
@@ -399,12 +399,12 @@
     "abbr": "NL",
     "locale": "nl_NL",
     "name": "荷兰",
-    "name_alter": [
+    "name_alt": [
       "荷蘭",
       "Holland"
     ],
     "name_eng": "Netherlands",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "NLD",
     "url_app": "e/nl",
     "url_taa": "/nl",
@@ -416,9 +416,9 @@
     "abbr": "SE",
     "locale": "sv_SE",
     "name": "瑞典",
-    "name_alter": [],
+    "name_alt": [],
     "name_eng": "Sweden",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "SWEC",
     "url_app": "e/se",
     "url_taa": "/se",
@@ -430,11 +430,11 @@
     "abbr": "SG",
     "locale": "en_SG",
     "name": "新加坡",
-    "name_alter": [
+    "name_alt": [
       "星加坡"
     ],
     "name_eng": "Singapore",
-    "part_sample": "ZA",
+    "part_sample": "MUQ93ZA/A",
     "post_location": "SGP",
     "url_app": "p/sg",
     "url_taa": "/sg",
@@ -446,11 +446,11 @@
     "abbr": "TH",
     "locale": "th_TH",
     "name": "泰国",
-    "name_alter": [
+    "name_alt": [
       "泰國"
     ],
     "name_eng": "Thailand",
-    "part_sample": "ZA",
+    "part_sample": "MUQ93ZA/A",
     "post_location": "THA",
     "url_app": "p/th-en",
     "url_taa": "/th",
@@ -462,9 +462,9 @@
     "abbr": "TR",
     "locale": "tr_TR",
     "name": "土耳其",
-    "name_alter": [],
+    "name_alt": [],
     "name_eng": "Turkey",
-    "part_sample": "ZM",
+    "part_sample": "MUQ93ZM/A",
     "post_location": "TURC",
     "url_app": "e/tr",
     "url_taa": "/tr",
@@ -476,13 +476,13 @@
     "abbr": "TW",
     "locale": "zh_TW",
     "name": "台湾",
-    "name_alter": [
+    "name_alt": [
       "ROC",
       "中华民国",
       "中華民國"
     ],
     "name_eng": "Taiwan",
-    "part_sample": "FE",
+    "part_sample": "MUQ93FE/A",
     "post_location": "TWN",
     "url_app": "p/tw",
     "url_taa": "/tw",
@@ -494,13 +494,13 @@
     "abbr": "US",
     "locale": "en_US",
     "name": "美国",
-    "name_alter": [
+    "name_alt": [
       "美國",
       "America",
       "U.S."
     ],
     "name_eng": "United States",
-    "part_sample": "AM",
+    "part_sample": "MUQ93AM/A",
     "post_location": "USA",
     "url_app": "a/us",
     "url_taa": "",
