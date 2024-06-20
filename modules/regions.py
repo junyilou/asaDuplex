@@ -6,6 +6,7 @@ from typing import Optional
 
 @dataclass(order = True, slots = True)
 class Region:
+	apu: bool
 	flag: str
 	abbr: str
 	locale: str

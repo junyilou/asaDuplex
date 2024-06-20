@@ -39,7 +39,13 @@ async def base_comment(store: Store,
 	force_return: bool,
 	results_dict: dict[str, dict[str, str]],
 	timeout: int, session: Optional[SessionType]) -> dict[str, dict[str, str]]:
-	if store.region.url_store is None or not store.region.part_sample:
+	try:
+		assert store.region.url_store is not None
+		assert store.region.part_sample
+		assert store.region.apu
+	except:
+		if force_return:
+			return {store.rid: {}}
 		return {}
 	base = f"https://www.apple.com{store.region.url_store}"
 	url = f"{base}/shop/fulfillment-messages"
