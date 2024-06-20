@@ -39,11 +39,11 @@ class SortKey(Enum):
 STORES: dict[str, "Store"] = {}
 
 class Store:
+	REQUIRED_KEYS = "city", "flag", "name", "state"
+
 	def __init__(self, rid: str, dct: StoreDict) -> None:
-		assert "city" in dct, 'Key "city" is required'
-		assert "flag" in dct, 'Key "flag" is required'
-		assert "name" in dct, 'Key "name" is required'
-		assert "state" in dct, 'Key "state" is required'
+		for k in self.REQUIRED_KEYS:
+			assert k in dct, f"Key {k!r} is required"
 
 		self.rid = rid
 		self.sid = self.rid.removeprefix("R")
@@ -130,7 +130,7 @@ class Store:
 
 	def dumps(self) -> dict[str, Any]:
 		kept_attrs = "city", "events", "flag", "keyword", "name", "name_alt", "nso", "slug", "state"
-		d = {k: v for k in kept_attrs if (v := getattr(self, k))}
+		d = {k: v for k in kept_attrs if (v := getattr(self, k)) or k in self.REQUIRED_KEYS}
 		if self.md5 and self.modify:
 			d["dieter"] = {"md5": self.md5, "modify": self.modify}
 		if self.name_eng != self.name:
