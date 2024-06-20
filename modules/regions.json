@@ -1,8 +1,8 @@
 [
   {
+    "abbr": "BENL",
     "apu": false,
     "flag": "BE",
-    "abbr": "BENL",
     "locale": "nl_BE",
     "name": "比利时 (荷兰语)",
     "name_alt": [
@@ -12,14 +12,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "BELC",
     "url_app": "e/be-nl",
-    "url_taa": "/benl",
     "url_retail": "/benl",
-    "url_store": "/be-nl"
+    "url_store": "/be-nl",
+    "url_taa": "/benl"
   },
   {
+    "abbr": "CAFR",
     "apu": true,
     "flag": "CA",
-    "abbr": "CAFR",
     "locale": "fr_CA",
     "name": "加拿大 (法语)",
     "name_alt": [],
@@ -27,14 +27,14 @@
     "part_sample": "MUQ93AM/A",
     "post_location": "CANC",
     "url_app": "a/xf",
-    "url_taa": "/ca/fr",
     "url_retail": "/ca/fr",
-    "url_store": "/xf"
+    "url_store": "/xf",
+    "url_taa": "/ca/fr"
   },
   {
+    "abbr": "CHDE",
     "apu": false,
     "flag": "CH",
-    "abbr": "CHDE",
     "locale": "de_CH",
     "name": "瑞士 (德语)",
     "name_alt": [
@@ -44,14 +44,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "CHEC",
     "url_app": "e/ch-de",
-    "url_taa": "/chde",
     "url_retail": "/chde",
-    "url_store": "/ch-de"
+    "url_store": "/ch-de",
+    "url_taa": "/chde"
   },
   {
+    "abbr": "HKEN",
     "apu": true,
     "flag": "HK",
-    "abbr": "HKEN",
     "locale": "en_HK",
     "name": "香港 (英语)",
     "name_alt": [],
@@ -59,14 +59,14 @@
     "part_sample": "MUQ93FE/A",
     "post_location": "HKGC",
     "url_app": "p/hk",
-    "url_taa": "/hk/en",
     "url_retail": "/hk/en",
-    "url_store": "/hk"
+    "url_store": "/hk",
+    "url_taa": "/hk/en"
   },
   {
+    "abbr": "AE",
     "apu": false,
     "flag": "🇦🇪",
-    "abbr": "AE",
     "locale": "en_AE",
     "name": "阿联酋",
     "name_alt": [
@@ -79,14 +79,14 @@
     "part_sample": "MUQ93ZE/A",
     "post_location": "ARE",
     "url_app": "e/ae",
-    "url_taa": "/ae",
     "url_retail": "/ae",
-    "url_store": "/ae"
+    "url_store": "/ae",
+    "url_taa": "/ae"
   },
   {
+    "abbr": "AT",
     "apu": true,
     "flag": "🇦🇹",
-    "abbr": "AT",
     "locale": "de_AT",
     "name": "奥地利",
     "name_alt": [],
@@ -94,14 +94,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "AUT",
     "url_app": "e/at",
-    "url_taa": "/at",
     "url_retail": "/at",
-    "url_store": "/at"
+    "url_store": "/at",
+    "url_taa": "/at"
   },
   {
+    "abbr": "AU",
     "apu": true,
     "flag": "🇦🇺",
-    "abbr": "AU",
     "locale": "en_AU",
     "name": "澳大利亚",
     "name_alt": [
@@ -111,14 +111,14 @@
     "part_sample": "MUQ93FE/A",
     "post_location": "AUSC",
     "url_app": "p/au",
-    "url_taa": "/au",
     "url_retail": "/au",
-    "url_store": "/au"
+    "url_store": "/au",
+    "url_taa": "/au"
   },
   {
+    "abbr": "BE",
     "apu": false,
     "flag": "🇧🇪",
-    "abbr": "BE",
     "locale": "fr_BE",
     "name": "比利时",
     "name_alt": [
@@ -129,14 +129,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "BELC",
     "url_app": "e/be-fr",
-    "url_taa": "/befr",
     "url_retail": "/befr",
-    "url_store": "/be-fr"
+    "url_store": "/be-fr",
+    "url_taa": "/befr"
   },
   {
+    "abbr": "BR",
     "apu": false,
     "flag": "🇧🇷",
-    "abbr": "BR",
     "locale": "pt_BR",
     "name": "巴西",
     "name_alt": [],
@@ -144,14 +144,14 @@
     "part_sample": "MUQ93AM/A",
     "post_location": "BRAC",
     "url_app": "a/br",
-    "url_taa": "/br",
     "url_retail": "/br",
-    "url_store": "/br"
+    "url_store": "/br",
+    "url_taa": "/br"
   },
   {
+    "abbr": "CA",
     "apu": true,
     "flag": "🇨🇦",
-    "abbr": "CA",
     "locale": "en_CA",
     "name": "加拿大",
     "name_alt": [],
@@ -159,14 +159,14 @@
     "part_sample": "MUQ93AM/A",
     "post_location": "CANC",
     "url_app": "a/ca",
-    "url_taa": "/ca",
     "url_retail": "/ca",
-    "url_store": "/ca"
+    "url_store": "/ca",
+    "url_taa": "/ca"
   },
   {
+    "abbr": "CH",
     "apu": false,
     "flag": "🇨🇭",
-    "abbr": "CH",
     "locale": "fr_CH",
     "name": "瑞士",
     "name_alt": [
@@ -177,14 +177,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "CHEC",
     "url_app": "e/ch-fr",
-    "url_taa": "/chfr",
     "url_retail": "/chfr",
-    "url_store": "/ch-fr"
+    "url_store": "/ch-fr",
+    "url_taa": "/chfr"
   },
   {
+    "abbr": "CN",
     "apu": true,
     "flag": "🇨🇳",
-    "abbr": "CN",
     "locale": "zh_CN",
     "name": "中国",
     "name_alt": [
@@ -198,14 +198,14 @@
     "part_sample": "MUQ93FE/A",
     "post_location": "CHNC",
     "url_app": "p/cn",
-    "url_taa": "/cn",
     "url_retail": ".cn",
-    "url_store": ".cn"
+    "url_store": ".cn",
+    "url_taa": "/cn"
   },
   {
+    "abbr": "DE",
     "apu": true,
     "flag": "🇩🇪",
-    "abbr": "DE",
     "locale": "de_DE",
     "name": "德国",
     "name_alt": [
@@ -216,14 +216,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "DEU",
     "url_app": "e/de",
-    "url_taa": "/de",
     "url_retail": "/de",
-    "url_store": "/de"
+    "url_store": "/de",
+    "url_taa": "/de"
   },
   {
+    "abbr": "ES",
     "apu": true,
     "flag": "🇪🇸",
-    "abbr": "ES",
     "locale": "es_ES",
     "name": "西班牙",
     "name_alt": [
@@ -233,14 +233,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "ESPC",
     "url_app": "e/es",
-    "url_taa": "/es",
     "url_retail": "/es",
-    "url_store": "/es"
+    "url_store": "/es",
+    "url_taa": "/es"
   },
   {
+    "abbr": "FR",
     "apu": true,
     "flag": "🇫🇷",
-    "abbr": "FR",
     "locale": "fr_FR",
     "name": "法国",
     "name_alt": [
@@ -252,14 +252,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "FRAC",
     "url_app": "e/fr",
-    "url_taa": "/fr",
     "url_retail": "/fr",
-    "url_store": "/fr"
+    "url_store": "/fr",
+    "url_taa": "/fr"
   },
   {
+    "abbr": "GB",
     "apu": true,
     "flag": "🇬🇧",
-    "abbr": "GB",
     "locale": "en_GB",
     "name": "英国",
     "name_alt": [
@@ -273,14 +273,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "GBR",
     "url_app": "e/uk",
-    "url_taa": "/uk",
     "url_retail": "/uk",
-    "url_store": "/uk"
+    "url_store": "/uk",
+    "url_taa": "/uk"
   },
   {
+    "abbr": "HK",
     "apu": true,
     "flag": "🇭🇰",
-    "abbr": "HK",
     "locale": "zh_HK",
     "name": "香港",
     "name_alt": [
@@ -291,14 +291,14 @@
     "part_sample": "MUQ93FE/A",
     "post_location": "HKGC",
     "url_app": "p/hk-zh",
-    "url_taa": "/hk",
     "url_retail": "/hk",
-    "url_store": "/hk-zh"
+    "url_store": "/hk-zh",
+    "url_taa": "/hk"
   },
   {
+    "abbr": "IN",
     "apu": true,
     "flag": "🇮🇳",
-    "abbr": "IN",
     "locale": "en_IN",
     "name": "印度",
     "name_alt": [],
@@ -306,14 +306,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "INDC",
     "url_app": null,
-    "url_taa": "/in",
     "url_retail": "/in",
-    "url_store": "/in"
+    "url_store": "/in",
+    "url_taa": "/in"
   },
   {
+    "abbr": "IT",
     "apu": true,
     "flag": "🇮🇹",
-    "abbr": "IT",
     "locale": "it_IT",
     "name": "意大利",
     "name_alt": [
@@ -324,14 +324,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "ITAC",
     "url_app": "e/it",
-    "url_taa": "/it",
     "url_retail": "/it",
-    "url_store": "/it"
+    "url_store": "/it",
+    "url_taa": "/it"
   },
   {
+    "abbr": "JP",
     "apu": true,
     "flag": "🇯🇵",
-    "abbr": "JP",
     "locale": "ja_JP",
     "name": "日本",
     "name_alt": [],
@@ -339,14 +339,14 @@
     "part_sample": "MUQ93FE/A",
     "post_location": "JPNC",
     "url_app": "j/jp",
-    "url_taa": "/jp",
     "url_retail": "/jp",
-    "url_store": "/jp"
+    "url_store": "/jp",
+    "url_taa": "/jp"
   },
   {
+    "abbr": "KR",
     "apu": true,
     "flag": "🇰🇷",
-    "abbr": "KR",
     "locale": "ko_KR",
     "name": "韩国",
     "name_alt": [
@@ -361,14 +361,14 @@
     "part_sample": "MUQ93FE/A",
     "post_location": "KOR",
     "url_app": "p/kr",
-    "url_taa": "/kr",
     "url_retail": "/kr",
-    "url_store": "/kr"
+    "url_store": "/kr",
+    "url_taa": "/kr"
   },
   {
+    "abbr": "MO",
     "apu": false,
     "flag": "🇲🇴",
-    "abbr": "MO",
     "locale": "zh_MO",
     "name": "澳门",
     "name_alt": [
@@ -381,14 +381,14 @@
     "part_sample": null,
     "post_location": "MAC",
     "url_app": null,
-    "url_taa": "/mo",
     "url_retail": "/mo",
-    "url_store": null
+    "url_store": null,
+    "url_taa": "/mo"
   },
   {
+    "abbr": "MX",
     "apu": false,
     "flag": "🇲🇽",
-    "abbr": "MX",
     "locale": "es_MX",
     "name": "墨西哥",
     "name_alt": [],
@@ -396,14 +396,14 @@
     "part_sample": "MUQ93AM/A",
     "post_location": "MEXC",
     "url_app": "a/mx",
-    "url_taa": "/mx",
     "url_retail": "/mx",
-    "url_store": "/mx"
+    "url_store": "/mx",
+    "url_taa": "/mx"
   },
   {
+    "abbr": "MY",
     "apu": true,
     "flag": "🇲🇾",
-    "abbr": "MY",
     "locale": "en_MY",
     "name": "马来西亚",
     "name_alt": [
@@ -414,14 +414,14 @@
     "part_sample": "MUQ93ZA/A",
     "post_location": "MYS",
     "url_app": "p/my",
-    "url_taa": "/my",
     "url_retail": "/my",
-    "url_store": "/my"
+    "url_store": "/my",
+    "url_taa": "/my"
   },
   {
+    "abbr": "NL",
     "apu": true,
     "flag": "🇳🇱",
-    "abbr": "NL",
     "locale": "nl_NL",
     "name": "荷兰",
     "name_alt": [
@@ -432,14 +432,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "NLD",
     "url_app": "e/nl",
-    "url_taa": "/nl",
     "url_retail": "/nl",
-    "url_store": "/nl"
+    "url_store": "/nl",
+    "url_taa": "/nl"
   },
   {
+    "abbr": "SE",
     "apu": true,
     "flag": "🇸🇪",
-    "abbr": "SE",
     "locale": "sv_SE",
     "name": "瑞典",
     "name_alt": [],
@@ -447,14 +447,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "SWEC",
     "url_app": "e/se",
-    "url_taa": "/se",
     "url_retail": "/se",
-    "url_store": "/se"
+    "url_store": "/se",
+    "url_taa": "/se"
   },
   {
+    "abbr": "SG",
     "apu": true,
     "flag": "🇸🇬",
-    "abbr": "SG",
     "locale": "en_SG",
     "name": "新加坡",
     "name_alt": [
@@ -464,14 +464,14 @@
     "part_sample": "MUQ93ZA/A",
     "post_location": "SGP",
     "url_app": "p/sg",
-    "url_taa": "/sg",
     "url_retail": "/sg",
-    "url_store": "/sg"
+    "url_store": "/sg",
+    "url_taa": "/sg"
   },
   {
+    "abbr": "TH",
     "apu": true,
     "flag": "🇹🇭",
-    "abbr": "TH",
     "locale": "th_TH",
     "name": "泰国",
     "name_alt": [
@@ -481,14 +481,14 @@
     "part_sample": "MUQ93ZA/A",
     "post_location": "THA",
     "url_app": "p/th-en",
-    "url_taa": "/th",
     "url_retail": "/th",
-    "url_store": "/th"
+    "url_store": "/th",
+    "url_taa": "/th"
   },
   {
+    "abbr": "TR",
     "apu": false,
     "flag": "🇹🇷",
-    "abbr": "TR",
     "locale": "tr_TR",
     "name": "土耳其",
     "name_alt": [],
@@ -496,14 +496,14 @@
     "part_sample": "MUQ93ZM/A",
     "post_location": "TURC",
     "url_app": "e/tr",
-    "url_taa": "/tr",
     "url_retail": "/tr",
-    "url_store": "/tr"
+    "url_store": "/tr",
+    "url_taa": "/tr"
   },
   {
+    "abbr": "TW",
     "apu": true,
     "flag": "🇹🇼",
-    "abbr": "TW",
     "locale": "zh_TW",
     "name": "台湾",
     "name_alt": [
@@ -515,14 +515,14 @@
     "part_sample": "MUQ93FE/A",
     "post_location": "TWN",
     "url_app": "p/tw",
-    "url_taa": "/tw",
     "url_retail": "/tw",
-    "url_store": "/tw"
+    "url_store": "/tw",
+    "url_taa": "/tw"
   },
   {
+    "abbr": "US",
     "apu": true,
     "flag": "🇺🇸",
-    "abbr": "US",
     "locale": "en_US",
     "name": "美国",
     "name_alt": [
@@ -534,8 +534,8 @@
     "part_sample": "MUQ93AM/A",
     "post_location": "USA",
     "url_app": "a/us",
-    "url_taa": "",
     "url_retail": "",
-    "url_store": ""
+    "url_store": "",
+    "url_taa": ""
   }
 ]
