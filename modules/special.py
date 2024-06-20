@@ -36,9 +36,10 @@ def ignored(
 
 async def base_comment(store: Store,
 	accepted_dates: Iterable[str],
+	force_return: bool,
 	results_dict: dict[str, dict[str, str]],
 	timeout: int, session: Optional[SessionType]) -> dict[str, dict[str, str]]:
-	if not store.region.url_store or not store.region.part_sample:
+	if store.region.url_store is None or not store.region.part_sample:
 		return {}
 	base = f"https://www.apple.com{store.region.url_store}"
 	url = f"{base}/shop/fulfillment-messages"
@@ -53,8 +54,10 @@ async def base_comment(store: Store,
 	except KeyError:
 		return results_dict
 	for rstore in stores:
+		rid = rstore["storeNumber"]
+		if force_return:
+			results_dict.setdefault(rid, {})
 		for holiday in rstore["retailStore"]["storeHolidays"]:
-			rid = rstore["storeNumber"]
 			raw = datetime.strptime(f"{holiday["date"]} 2000", "%b %d %Y")
 			try:
 				raw = raw.replace(year = datetime.now().year)
@@ -70,6 +73,7 @@ async def base_comment(store: Store,
 
 async def comment(store: Store,
 	accepted_dates: Iterable[str] = [],
+	force_return: bool = False,
 	results_dict: dict[str, dict[str, str]] = {},
 	session: Optional[SessionType] = None,
 	max_retry: int = 3, timeout: int = 5,
@@ -78,7 +82,7 @@ async def comment(store: Store,
 	@AsyncRetry(max_retry)
 	async def decorate() -> dict[str, dict[str, str]]:
 		try:
-			return await base_comment(store, accepted_dates, results_dict, timeout, session)
+			return await base_comment(store, accepted_dates, force_return, results_dict, timeout, session)
 		except Exception as exp:
 			await sleep(randint(min_interval, max_interval))
 			raise RetrySignal(exp)
