@@ -26,6 +26,7 @@ async def post(store: Store, dt: datetime, raw: bytes) -> None:
 
 async def task(store: Store,
 	special_list: list[str],
+	local_mode: bool,
 	session: Optional[SessionType] = None,
 	semaphore: Optional[SemaphoreType] = None) -> Optional[Store]:
 	special = store.sid in special_list
@@ -70,13 +71,14 @@ async def task(store: Store,
 	if special:
 		special_list.remove(store.sid)
 	store.md5 = digest
-	try:
-		with open(f"Retail/{store.rid}-{dt:%F-%H%M%S}.png", "wb") as w:
-			w.write(raw)
-		logging.info(f"[{store.rid}] 准备发送消息")
-		await post(store, dt, raw)
-	except Exception as exp:
-		logging.warning(f"[{store.rid}] 发送消息失败: {exp!r}")
+	with open(f"Retail/{store.rid}-{dt:%F-%H%M%S}.png", "wb") as w:
+		w.write(raw)
+	if not local_mode:
+		try:
+			logging.info(f"[{store.rid}] 准备发送消息")
+			await post(store, dt, raw)
+		except Exception as exp:
+			logging.warning(f"[{store.rid}] 发送消息失败: {exp!r}")
 	return store
 
 @session_func
@@ -95,7 +97,7 @@ async def main(session: SessionType, args: Namespace) -> None:
 
 	setLogger(logging.INFO, __file__, base_name = True)
 	logging.info(f"准备查询 {len(stores)} 家零售店")
-	tasks = [task(store, special_list, session, semaphore) for store in sorted(stores)]
+	tasks = [task(store, special_list, args.local, session, semaphore) for store in sorted(stores)]
 	if args.debug:
 		from tqdm.asyncio import tqdm_asyncio
 		results = await tqdm_asyncio.gather(*tasks)
@@ -117,6 +119,7 @@ if __name__ == "__main__":
 	parser = ArgumentParser()
 	parser.add_argument("sids", metavar = "SID", type = str, nargs = "*", help = "手动给出店号")
 	parser.add_argument("-d", "--debug", action = "store_false", help = "不打印调试信息")
+	parser.add_argument("-l", "--local", action = "store_true", help = "仅限本地运行")
 	parser.add_argument("-s", "--special", action = "store_true", help = "从特别列表读取店号")
 	args = parser.parse_args()
 	asyncio.run(main(args))
