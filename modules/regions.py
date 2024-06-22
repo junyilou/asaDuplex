@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass
-from pathlib import PurePath
+from pathlib import Path
 from typing import Optional
 
 
@@ -23,7 +23,6 @@ class Region:
 	def __repr__(self) -> str:
 		return f"<{self.__class__.__name__} {self.abbr}: {self.name}>"
 
-with open(PurePath(__file__).with_suffix(".json")) as r:
-	RegionList = [Region(**d) for d in json.load(r)]
-
+f = json.load(Path(__file__).with_suffix(".json").open())
+RegionList = [Region(**d) for d in f]
 Regions = {r.flag: r for r in RegionList}
