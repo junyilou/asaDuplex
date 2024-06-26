@@ -80,7 +80,7 @@ async def main(session: SessionType, args: Namespace) -> None:
 	rules = json.loads(rule.read_text()) if rule.is_file() else {}
 
 	remote = await AsyncGather((entry(store,
-		saved = saved.get(store.rid, {}),
+		saved = saved.get(store.rid, {}).get("dates", {}),
 		rules = rules.get(store.rid, {}),
 		session = session) for store in stores), limit = 20)
 
