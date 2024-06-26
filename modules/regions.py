@@ -23,6 +23,6 @@ class Region:
 	def __repr__(self) -> str:
 		return f"<{self.__class__.__name__} {self.abbr}: {self.name}>"
 
-f = json.load(Path(__file__).with_suffix(".json").open())
+f = json.loads(Path(__file__).with_suffix(".json").read_text())
 RegionList = [Region(**d) for d in f]
 Regions = {r.flag: r for r in RegionList}
