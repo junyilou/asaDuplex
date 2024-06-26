@@ -73,7 +73,7 @@ async def base_comment(store: Store,
 			date_str = raw.strftime("%F")
 			if accepted_dates and date_str not in accepted_dates:
 				continue
-			text = " ".join(i for i in (f"[{holiday["description"] or ""}]", holiday["comments"]) if i)
+			text = f"{f"[{d}] " if (d := holiday["description"]) else ""}{holiday["comments"]}"
 			results_dict.setdefault(rid, {})[date_str] = text
 	return results_dict
 
