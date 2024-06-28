@@ -69,7 +69,6 @@ async def report(targets: list[Store]) -> None:
 
 @session_func
 async def main(session: SessionType, args: Namespace) -> None:
-	setLogger(logging.INFO, __file__, base_name = True)
 	store_return = partial(storeReturn, opening = True, allow_empty = False)
 	includes, excludes = [store_return(s) for s in (args.include, args.exclude)]
 	stores = [i for i in includes if i not in excludes]
@@ -140,6 +139,7 @@ if __name__ == "__main__":
 	parser.add_argument("--rule", default = "Retail/storeHoursRules.json", help = "规则文件目录")
 	parser.add_argument("-l", "--local", action = "store_true", help = "仅限本地运行")
 	args = parser.parse_args()
+	setLogger(logging.INFO, __file__, base_name = True)
 	logging.info(LANG["START"])
 	asyncio.run(main(args))
 	logging.info(LANG["END"])
