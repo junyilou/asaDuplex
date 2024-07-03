@@ -208,10 +208,10 @@ def getStore(sid: int | str) -> Optional[Store]:
 	return STORES.get(sidify(sid))
 
 def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
+	levels: list[str] = ["flag", "state", "city"],
 	final: Callable[[Store], str] = str,
-	userLang: Optional[bool | list[Optional[bool]]] = [None]) -> list[str]:
+	userLang: Optional[bool] | list[Optional[bool]] = [None]) -> list[str]:
 	stores, results = set(rstores), []
-	levels = ["flag", "state", "city"]
 	boldmark = "*" if bold else ""
 	userLang = [userLang] if not isinstance(userLang, list) else userLang
 
