@@ -1,5 +1,5 @@
 {
-  "_": "2024-06-20 10:54:47",
+  "_": "2024-07-10 15:20:43",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -745,9 +745,7 @@
         "Munich"
       ],
       "name": "Rosenstraße",
-      "name_alt": [
-        "Rosenstrasse"
-      ],
+      "name_eng": "Rosenstrasse",
       "nso": "2008-12-06 10:00",
       "slug": "rosenstrasse",
       "state": "Bayern",
@@ -2906,7 +2904,10 @@
         "2017-09-16": "move"
       },
       "flag": "🇺🇸",
-      "name": "Summit Sierra",
+      "name": "Shayden Summit",
+      "name_alt": [
+        "Summit Sierra"
+      ],
       "nso": "2006-03-15 10:00",
       "slug": "summitsierra",
       "state": "Nevada",
@@ -3679,8 +3680,8 @@
     "R253": {
       "city": "Chatswood",
       "dieter": {
-        "md5": "8d5f7fc2889664a8bd726dc4d9f9e6a9",
-        "modify": "2024-02-08 18:41:37"
+        "md5": "b93951c052dcded0c8142a9e941e2d34",
+        "modify": "2024-07-07 07:41:58"
       },
       "events": {
         "2013-02-23": "rebuild"
@@ -3847,8 +3848,11 @@
     "R269": {
       "city": "Milton Keynes",
       "dieter": {
-        "md5": "a9da231376cd8f105c3c7d37ae4247bb",
-        "modify": "2024-02-08 18:41:37"
+        "md5": "3a22a4e934d494f49a72a3ce10762376",
+        "modify": "2024-07-01 12:42:35"
+      },
+      "events": {
+        "2024-06-29": "move"
       },
       "flag": "🇬🇧",
       "name": "Milton Keynes",
@@ -4819,9 +4823,7 @@
       },
       "flag": "🇩🇪",
       "name": "Große Bockenheimer Straße",
-      "name_alt": [
-        "Grosse Bockenheimer Strasse"
-      ],
+      "name_eng": "Grosse Bockenheimer Strasse",
       "nso": "2010-01-23 11:00",
       "slug": "grossebockenheimerstrasse",
       "state": "Hessen",
@@ -5836,9 +5838,7 @@
       },
       "flag": "🇩🇪",
       "name": "Rosenthaler Straße",
-      "name_alt": [
-        "Rosenthaler Strasse"
-      ],
+      "name_eng": "Rosenthaler Strasse",
       "nso": "2021-12-02 10:00",
       "slug": "rosenthalerstrasse",
       "state": "Berlin",
@@ -6783,8 +6783,8 @@
     "R539": {
       "city": "Haarlem",
       "dieter": {
-        "md5": "aadeb38187fea3276bbdfa85723bae20",
-        "modify": "2024-02-08 18:41:43"
+        "md5": "c0a45add90c7febf6028215e5a91359d",
+        "modify": "2024-06-26 15:30:27"
       },
       "flag": "🇳🇱",
       "name": "Haarlem",
@@ -8292,8 +8292,8 @@
     "R742": {
       "city": "Kuala Lumpur",
       "dieter": {
-        "md5": "0d39f6a42808e7aab003937732074ac3",
-        "modify": "2024-05-29 00:05:41"
+        "md5": "7d01961c60f9b3873e682146ab889721",
+        "modify": "2024-06-22 04:34:53"
       },
       "flag": "🇲🇾",
       "name": "The Exchange TRX",

@@ -83,12 +83,12 @@ class Store:
 		self.detail_url = detail_url.format(self.slug, self.region.locale) if self.slug else None
 		self.sortkey = (self.flag, self.state, self.city, self.sid)
 
-		statuses = {"closed": "关闭", "future": "招聘", "internal": "内部"}
-		keys: list[str] = [
-			self.name, self.name_eng, self.state, self.city, self.flag,
-			*self.name_alt, *self.keyword, (self.nso or "")[:10], self.slug or "",
-			self.region.name, self.region.name_eng, self.region.abbr, *self.region.name_alt,
-			*((dct["status"].capitalize(), statuses[dct["status"]]) if "status" in dct else ())]
+		statuses = {"Closed": "关闭", "Future": "招聘", "Internal": "内部", "": ""}
+		keys = [self.name, self.name_eng, self.state, self.city, self.flag,
+			*self.name_alt, *self.keyword, (self.nso or "")[:10],
+			self.slug or "", self.status, statuses[self.status],
+			self.region.name, self.region.name_eng, self.region.abbr, *self.region.name_alt]
+		keys.extend(i.replace(" ", "") for i in keys if " " in i)
 		self.keys = [i for i in keys if i]
 
 	@property
