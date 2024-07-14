@@ -35,6 +35,7 @@ class SortKey(Enum):
 	default = ""
 	id = "id"
 	index = "index"
+	latest = "latest"
 
 STORES: dict[str, "Store"] = {}
 
@@ -273,6 +274,11 @@ def storeReturn(args: Any = None, *,
 			key = lambda i: i.sid
 		case SortKey.index:
 			key = lambda i: i.index
+		case SortKey.latest:
+			def get_latest(i: Store) -> str:
+				evnt = [d for d, e in i.events.items() if e != "closure"]
+				return max(i.nso or "_", max(evnt) if evnt else "0")
+			key = lambda i: (get_latest(i), i)
 	return sorted(answer, key = key)
 
 reloadJSON()
