@@ -1,5 +1,5 @@
 {
-  "update": "2024-07-20 00:17:31",
+  "update": "2024-07-20 01:58:45",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -14,6 +14,7 @@
       "names": {
         "🇨🇳": "工作坊：用 Swift Playgrounds 学编程",
         "🇭🇰": "工作坊：用 Swift Playgrounds 學習編碼",
+        "🇯🇵": "ワークショップ：Swift Playgroundsでコーディングを学ぼう",
         "🇲🇴": "工作坊：用 Swift Playgrounds 學習編碼",
         "🇹🇼": "工作坊：以 Swift Playgrounds 學習編碼"
       },
@@ -273,7 +274,8 @@
       "names": {
         "🇨🇳": "轻松入门：在 Mac 和 iPad 上制作个性化文档",
         "🇭🇰": "輕鬆上手：在 Mac 和 iPad 上製作個人化的文件",
-        "🇯🇵": "はじめよう：MacやiPadでオリジナリティあふれるドキュメントを作成しよう"
+        "🇯🇵": "はじめよう：MacやiPadでオリジナリティあふれるドキュメントを作成しよう",
+        "🇲🇴": "輕鬆上手：在 Mac 和 iPad 上製作個人化的文件"
       },
       "slug": "get-started-create-personalized-documents-mac-ipad"
     },
