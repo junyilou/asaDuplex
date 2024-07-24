@@ -15,7 +15,7 @@ type StoreMapping = Callable[[Store], Any]
 class StoreDict(TypedDict, total = False):
 	city: Required[str]
 	dieter: dict[str, str]
-	events: dict[str, str]
+	events: list[dict[str, str]]
 	flag: Required[str]
 	keyword: list[str]
 	name: Required[str]
@@ -56,7 +56,8 @@ class Store:
 			self.modify = dct["dieter"]["modify"]
 		else:
 			self.md5 = self.modify = None
-		self.events = dct.get("events", {})
+		events = dct.get("events", [])
+		self.events = [(dt, typ) for event in events for dt, typ in event.items()]
 		self.flag = dct["flag"]
 		self.keyword = dct.get("keyword", [])
 		self.name = dct["name"]
@@ -86,8 +87,7 @@ class Store:
 
 		statuses = {"Closed": "关闭", "Future": "招聘", "Internal": "内部", "": ""}
 		keys = [self.name, self.name_eng, self.state, self.city, self.flag,
-			*self.name_alt, *self.keyword, (self.nso or "")[:10],
-			self.slug or "", self.status, statuses[self.status],
+			*self.name_alt, *self.keyword, self.slug or "", self.status, statuses[self.status],
 			self.region.name, self.region.name_eng, self.region.abbr, *self.region.name_alt]
 		keys.extend(i.replace(" ", "") for i in keys if " " in i)
 		self.keys = [i for i in keys if i]
@@ -130,10 +130,17 @@ class Store:
 		return hash(self.sortkey)
 
 	def dumps(self) -> dict[str, Any]:
-		kept_attrs = "city", "events", "flag", "keyword", "name", "name_alt", "nso", "slug", "state"
+		kept_attrs = "city", "flag", "keyword", "name", "name_alt", "nso", "slug", "state"
 		d = {k: v for k in kept_attrs if (v := getattr(self, k)) or k in self.REQUIRED_KEYS}
 		if self.md5 and self.modify:
 			d["dieter"] = {"md5": self.md5, "modify": self.modify}
+		if self.events:
+			d["events"], last_key = [{}], None
+			for date, type in self.events:
+				if date == last_key:
+					d["events"].append({})
+				d["events"][-1][date] = type
+				last_key = date
 		if self.name_eng != self.name:
 			d["name_eng"] = self.name_eng
 		if self.status:
@@ -169,10 +176,10 @@ class Store:
 			return {}
 
 	def events_string(self, userLang: bool = True) -> str:
-		events = self.events | ({self.nso: "nso"} if self.nso else {})
-		lang = {True: {"nso": "盛大开幕", "rebuild": "焕新开幕", "move": "搬迁地点", "closure": "永久关闭", "_": "%Y 年 %-m 月 %-d 日"},
-		  False: {"nso": "Opened", "rebuild": "Rebuild", "move": "Moved", "closure": "Closed", "_": "%b %-d, %Y"}}
-		return "\n".join(f"{lang[userLang][v]} {datetime.strptime(k[:10], "%Y-%m-%d"):{lang[userLang]["_"]}}" for k, v in sorted(events.items()))
+		events = ([(self.nso, "nso")] if self.nso else []) + self.events
+		lang = {True: {"nso": "盛大开幕", "rebuild": "焕新开幕", "move": "搬迁地点", "closure": "永久关闭", "rename": "门店更名", "_": "%Y 年 %-m 月 %-d 日"},
+		  False: {"nso": "Opened", "rebuild": "Rebuild", "move": "Moved", "closure": "Closed", "rename": "Renamed", "_": "%b %-d, %Y"}}
+		return "\n".join(f"{lang[userLang][v]} {datetime.strptime(k[:10], "%Y-%m-%d"):{lang[userLang]["_"]}}" for k, v in sorted(events))
 
 def StoreID(sid: int | str, fuzzy: Any = False, regular: Any = False) -> list[Store]:
 	if sid == "ALL":
@@ -276,7 +283,8 @@ def storeReturn(args: Any = None, *,
 			key = lambda i: i.index
 		case SortKey.latest:
 			def get_latest(i: Store) -> str:
-				evnt = [d for d, e in i.events.items() if e != "closure"]
+				accepted = ("nso", "rebuild", "move")
+				evnt = [d for d, e in i.events if e in accepted]
 				return max(i.nso or "_", max(evnt) if evnt else "0")
 			key = lambda i: (get_latest(i), i)
 	return sorted(answer, key = key)
