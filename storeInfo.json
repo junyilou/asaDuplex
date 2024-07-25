@@ -1,5 +1,5 @@
 {
-  "_": "2024-07-24 12:30:31",
+  "_": "2024-07-24 13:01:35",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -5689,6 +5689,11 @@
         "md5": "93067657840ecaab77eda3a017387c58",
         "modify": "2024-07-24 02:31:28"
       },
+      "events": [
+        {
+          "2024-06-16": "rebuild"
+        }
+      ],
       "flag": "🇨🇳",
       "keyword": [
         "Shanghai",
@@ -5699,12 +5704,7 @@
       "nso": "2010-07-10 10:00",
       "slug": "pudong",
       "state": "上海",
-      "timezone": "Asia/Shanghai",
-      "events": [
-        {
-          "2024-06-16": "rebuild"
-        }
-      ]
+      "timezone": "Asia/Shanghai"
     },
     "R390": {
       "city": "上海",
@@ -6133,8 +6133,8 @@
     "R428": {
       "city": "香港",
       "dieter": {
-        "md5": "93da9cec67d312041e59a014293d87c3",
-        "modify": "2024-02-08 18:41:41"
+        "md5": "bb26bce4e76efc16439a1e1f52f62a81",
+        "modify": "2024-07-24 02:34:51"
       },
       "flag": "🇭🇰",
       "keyword": [
@@ -6756,8 +6756,8 @@
     "R485": {
       "city": "香港",
       "dieter": {
-        "md5": "a63331a288ef0f7576cd26ab2fab3a0b",
-        "modify": "2024-02-08 18:41:42"
+        "md5": "535c3a7d59f894b4f36ca43ae020ec2f",
+        "modify": "2024-07-24 02:33:26"
       },
       "flag": "🇭🇰",
       "keyword": [
@@ -8897,6 +8897,14 @@
       "state": "서울",
       "timezone": "Asia/Seoul"
     },
+    "R752": {
+      "city": "Miami",
+      "flag": "🇺🇸",
+      "name": "Store in Miami",
+      "state": "Florida",
+      "status": "future",
+      "timezone": "America/New_York"
+    },
     "R753": {
       "city": "Bronx",
       "dieter": {
@@ -9008,6 +9016,7 @@
         "合肥万象城",
         "MixC Hefei"
       ],
+      "slug": "mixchefei",
       "state": "安徽",
       "status": "future",
       "timezone": "Asia/Shanghai"
