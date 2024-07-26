@@ -46,7 +46,7 @@ class APIClass:
 		method: str = "GET", mode: str = "json", log_name: str = "",
 		extra_headers: dict[str, str] = {}, **kwargs) -> Any:
 		default_headers = browser_agent | self.csrf
-		kwargs |= {"headers": default_headers | extra_headers,
+		kwargs |= {"headers": default_headers | extra_headers, "timeout": 30,
 			"allow_redirects": False, "ssl": False, "cookies": self.cookies}
 		async with get_session(session) as ses:
 			try:
