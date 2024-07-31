@@ -9,6 +9,7 @@ from http.cookies import SimpleCookie
 from itertools import groupby as _groupby
 from random import choice
 from typing import Any, Optional, Protocol, Self, Sequence, TypedDict, cast
+from urllib.parse import unquote
 
 from bot import chat_ids
 from botpost import async_post
@@ -125,7 +126,7 @@ class Locale:
 			return [], 0
 
 		g = [RichPosition(id = i["positionId"],
-			slug = i["transformedPostingTitle"],
+			slug = unquote(i["transformedPostingTitle"]),
 			region = self.region,
 			update = datetime.fromisoformat(i["postDateInGMT"]).strftime("%F"),
 			title = i["postingTitle"].strip(),
