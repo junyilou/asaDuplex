@@ -1,5 +1,5 @@
 {
-  "update": "2024-07-30 02:02:17",
+  "update": "2024-08-01 07:08:03",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -474,7 +474,14 @@
       "slug": "spotlight-hk-philharmonic-orchestra-081024"
     }
   },
-  "sitemap": {},
+  "sitemap": {
+    "7221902554589200896": {
+      "names": {
+        "🇨🇳": "焦点：游戏《鸣潮》"
+      },
+      "slug": "spotlight-wuthering-wave-091324"
+    }
+  },
   "collection": {
     "college-ready": {
       "🇨🇳": "高校生活，装备到位",
