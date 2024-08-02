@@ -1,5 +1,5 @@
 {
-  "_": "2024-07-24 13:01:35",
+  "_": "2024-08-02 21:32:57",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -9060,10 +9060,8 @@
     "R777": {
       "city": "Torrance",
       "flag": "🇺🇸",
-      "name": "Store in Torrance",
-      "name_alt": [
-        "Del Amo"
-      ],
+      "name": "Del Amo",
+      "slug": "delamo",
       "state": "California",
       "status": "future",
       "timezone": "America/Los_Angeles"
@@ -9203,7 +9201,7 @@
         "modify": "2024-02-08 18:41:46"
       },
       "flag": "🇺🇸",
-      "name": "Mock Store",
+      "name": "Mock Store - Vintage D",
       "state": "California",
       "status": "internal"
     },
@@ -9238,7 +9236,7 @@
     "R913": {
       "city": "Torino",
       "flag": "🇮🇹",
-      "name": "Test Retail Store Italy",
+      "name": "Test Retail Store Italy1",
       "state": "Turin",
       "status": "internal"
     },
