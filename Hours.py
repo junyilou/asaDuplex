@@ -74,7 +74,7 @@ async def main(session: SessionType, args: Namespace) -> None:
 	stores = [i for i in includes if i not in excludes]
 	shuffle(stores)
 
-	file, rule = Path(args.file), Path(args.rule)
+	file, rule = args.file, args.rule
 	saved = json.loads(file.read_text())["stores"] if file.is_file() else {}
 	rules = json.loads(rule.read_text()) if rule.is_file() else {}
 
@@ -98,15 +98,6 @@ async def main(session: SessionType, args: Namespace) -> None:
 		for date in specials:
 			calendar.setdefault(date, {})[store] = specials[date]["special"]
 
-	out: dict[str, Any] = {"_": f"{RUNTIME:%F %T}"}
-	out["stores"] = {i: j for i, j in {k.rid: {"name": k.name,
-		"dates": {d: t for d, t in v.items() if d >= f"{RUNTIME:%F}"}}
-		for k, v in results.items()}.items() if j.get("dates")}
-	file.rename(file.with_stem(f"{file.stem}-{RUNTIME:%y%m%d%H%M}"))
-	file_text = json.dumps(out, ensure_ascii = False, indent = 2)
-	file.write_text(file_text)
-	logging.info(LANG["WRITE"])
-
 	diff_str = []
 	for store, diff in sorted(diffs.items()):
 		if not any(diff):
@@ -116,8 +107,14 @@ async def main(session: SessionType, args: Namespace) -> None:
 	if not diff_str:
 		return logging.info(LANG["NODIFF"])
 
-	if args.local:
-		return
+	out: dict[str, Any] = {"_": f"{RUNTIME:%F %T}"}
+	out["stores"] = {i: j for i, j in {k.rid: {"name": k.name,
+		"dates": {d: t for d, t in v.items() if d >= f"{RUNTIME:%F}"}}
+		for k, v in results.items()}.items() if j.get("dates")}
+	file.rename(file.with_stem(f"{file.stem}-{RUNTIME:%y%m%d%H%M}"))
+	file_text = json.dumps(out, ensure_ascii = False, indent = 2)
+	file.write_text(file_text)
+	logging.info(LANG["WRITE"])
 
 	logging.info(LANG["PREPS"].format(LEN = len(targets)))
 	hfile = Path("www/hours/index.html")
@@ -129,14 +126,17 @@ async def main(session: SessionType, args: Namespace) -> None:
 		CALENDAR = json.dumps(cal, ensure_ascii = False, indent = 2, sort_keys = True))
 	hfile.write_text(DIFFHTML.format(DIFFTITLE = "Special Hours", DIFFCONTENT = content))
 	logging.info(LANG["DIFFGEN"])
+
+	if args.local:
+		return
 	await report(targets)
 
 if __name__ == "__main__":
 	parser = ArgumentParser()
 	parser.add_argument("include", metavar = "INCLUDE", type = str, nargs = "*", help = "包含的零售店列表")
 	parser.add_argument("--exclude", action = "append", default = [], help = "不包含的零售店列表")
-	parser.add_argument("--file", default = "Retail/storeHours.json", help = "工作文件目录")
-	parser.add_argument("--rule", default = "Retail/storeHoursRules.json", help = "规则文件目录")
+	parser.add_argument("--file", default = "Retail/storeHours.json", type = Path, help = "工作文件目录")
+	parser.add_argument("--rule", default = "Retail/storeHoursRules.json", type = Path, help = "规则文件目录")
 	parser.add_argument("-l", "--local", action = "store_true", help = "仅限本地运行")
 	args = parser.parse_args()
 	setLogger(logging.INFO, __file__, base_name = True)
