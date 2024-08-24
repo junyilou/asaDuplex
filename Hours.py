@@ -117,7 +117,7 @@ async def main(session: SessionType, args: Namespace) -> None:
 	logging.info(LANG["WRITE"])
 
 	logging.info(LANG["PREPS"].format(LEN = len(targets)))
-	hfile = Path("www/hours/index.html")
+	hfile = Path("ecs/hours/index.html")
 	if hfile.exists():
 		hfile.rename(hfile.with_stem(f"history-{datetime.fromtimestamp(hfile.stat().st_ctime):%Y%m%d-%H%M%S}"))
 	cal: dict[str, dict[str, str]] = {dt: {k.name: v for k, v in sorted(dct.items())} for dt, dct in calendar.items()}
