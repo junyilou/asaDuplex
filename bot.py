@@ -1,3 +1,3 @@
 from os import environ
 
-chat_ids = environ["BOTPOST_CHAT_ID"],
+chat_ids = int(environ["BOTPOST_CHAT_ID"]),
