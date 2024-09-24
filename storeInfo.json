@@ -1,5 +1,5 @@
 {
-  "_": "2024-08-02 21:32:57",
+  "_": "2024-09-22 23:00:11",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -1708,6 +1708,11 @@
         "md5": "8c3667e14299aa15c243c9d25fa93837",
         "modify": "2024-02-08 18:41:34"
       },
+      "events": [
+        {
+          "2024-09-20": "rebuild"
+        }
+      ],
       "flag": "🇯🇵",
       "keyword": [
         "Osaka",
@@ -3304,8 +3309,8 @@
     "R191": {
       "city": "Holyoke",
       "dieter": {
-        "md5": "61df8aaf0598473d5718fd27ececb321",
-        "modify": "2024-02-08 18:41:36"
+        "md5": "aeeae1746d37098d288cc6b8e3bcb6ee",
+        "modify": "2024-08-27 08:45:04"
       },
       "flag": "🇺🇸",
       "name": "Holyoke",
@@ -4179,9 +4184,14 @@
     "R259": {
       "city": "Buford",
       "dieter": {
-        "md5": "21bc4dca7ce97a1441925fa42541cca7",
-        "modify": "2024-02-08 18:41:37"
+        "md5": "ec8cd8576b845e27871c492113021bca",
+        "modify": "2024-09-17 16:35:55"
       },
+      "events": [
+        {
+          "2024-09-14": "move"
+        }
+      ],
       "flag": "🇺🇸",
       "name": "Mall of Georgia",
       "nso": "2007-09-22 10:00",
@@ -4249,9 +4259,14 @@
     "R266": {
       "city": "Huntsville",
       "dieter": {
-        "md5": "6f13a69d9f6efa399dd8e29d8964d717",
-        "modify": "2024-02-08 18:41:37"
+        "md5": "e7b04402fe8cd6a7d18ebacac0fd0486",
+        "modify": "2024-09-04 13:03:23"
       },
+      "events": [
+        {
+          "2024-08-31": "move"
+        }
+      ],
       "flag": "🇺🇸",
       "name": "Bridge Street",
       "nso": "2008-05-31 10:00",
@@ -4533,8 +4548,8 @@
     "R287": {
       "city": "Washington",
       "dieter": {
-        "md5": "b65562fbae29bb39bb92130b85e1310f",
-        "modify": "2024-02-08 18:41:38"
+        "md5": "df3467981401001fdde3edf5465c6af1",
+        "modify": "2024-08-21 09:44:57"
       },
       "flag": "🇺🇸",
       "name": "Georgetown",
@@ -5954,8 +5969,8 @@
     "R412": {
       "city": "Quebec City",
       "dieter": {
-        "md5": "c844f2bce4e46ea1399a1017aacdf4a5",
-        "modify": "2024-02-08 18:41:40"
+        "md5": "42feb6d3a72e99a82d6a4504ec3dc417",
+        "modify": "2024-08-23 10:03:45"
       },
       "flag": "🇨🇦",
       "name": "Place Ste-Foy",
@@ -8017,11 +8032,15 @@
     },
     "R626": {
       "city": "Solna",
+      "dieter": {
+        "md5": "29f67a396f721390df6b0a84327a6b08",
+        "modify": "2024-09-05 07:35:44"
+      },
       "flag": "🇸🇪",
       "name": "Mall of Scandinavia",
+      "nso": "2024-09-20 08:00",
       "slug": "mallofscandinavia",
-      "state": "Stockholm",
-      "status": "future",
+      "state": "Solna",
       "timezone": "Europe/Stockholm"
     },
     "R629": {
@@ -9059,11 +9078,15 @@
     },
     "R777": {
       "city": "Torrance",
+      "dieter": {
+        "md5": "b4aea8d6962493d13b76f80b4285b32f",
+        "modify": "2024-09-22 14:31:19"
+      },
       "flag": "🇺🇸",
       "name": "Del Amo",
+      "nso": "2024-09-20 08:00",
       "slug": "delamo",
       "state": "California",
-      "status": "future",
       "timezone": "America/Los_Angeles"
     },
     "R796": {
