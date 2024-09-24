@@ -1,0 +1,21 @@
+name: Update storeInfo
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v4
+      - name: download file
+        run: curl -o storeInfo.json "${{ secrets.STOREINFO_URL }}"
+      - name: commit files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'auto: Update storeInfo'
