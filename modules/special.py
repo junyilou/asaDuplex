@@ -4,8 +4,8 @@ from datetime import datetime, timedelta
 from random import randint
 from typing import Any, Literal, Optional
 
-from modules.util import (AsyncRetry, RetryExceeded, RetrySignal, SessionType,
-                          browser_agent, request)
+from modules.store import FulfillmentMessage, Product
+from modules.util import AsyncRetry, RetryExceeded, RetrySignal, SessionType
 from storeInfo import Store
 
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
@@ -43,24 +43,18 @@ async def base_comment(store: Store,
 		assert store.region.url_store is not None
 		assert store.region.part_sample
 		assert store.region.apu
+		prod = Product(store.region.part_sample, store.region)
 	except:
 		if force_return:
 			return {store.rid: {}}
 		return {}
-	base = f"https://www.apple.com{store.region.url_store}"
-	url = f"{base}/shop/fulfillment-messages"
-	referer = browser_agent | {"Referer": f"{base}/shop/product/{store.region.part_sample}"}
-	params = {"searchNearby": "true", "store": store.rid, "parts.0": store.region.part_sample}
-
-	stores: list[dict] = []
-	r = await request(url, session, headers = referer, timeout = timeout,
-		params = params, raise_for_status = True, mode = "json")
 	try:
-		stores = r["body"]["content"]["pickupMessage"]["stores"]
-	except KeyError:
+		await FulfillmentMessage(prod, store, search_nearby = True,
+			timeout = timeout, session = session, ensure = True)
+		assert prod.aos_data
+	except Exception:
 		return results_dict
-	for rstore in stores:
-		rid = rstore["storeNumber"]
+	for rid, rstore in prod.aos_data.items():
 		if force_return:
 			results_dict.setdefault(rid, {})
 		for holiday in rstore["retailStore"]["storeHolidays"]:
