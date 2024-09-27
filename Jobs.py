@@ -11,8 +11,7 @@ from random import choice
 from typing import Any, Optional, Protocol, Self, Sequence, TypedDict, cast
 from urllib.parse import unquote
 
-from bot import chat_ids
-from botpost import async_post
+from bot import async_post, chat_ids
 from modules.regions import Region, Regions
 from modules.util import (AsyncGather, AsyncRetry, RetryExceeded, RetrySignal,
                           SemaphoreType, SessionType, browser_agent,

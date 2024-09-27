@@ -58,8 +58,7 @@ async def entry(store: Store, saved: dict[str, dict[str, str]], rules: dict[str,
 	return specials, diff
 
 async def report(targets: list[Store]) -> None:
-	from bot import chat_ids
-	from botpost import async_post
+	from bot import async_post, chat_ids
 	replaced = nameReplace(targets, number = False, final = str)
 	text = f"{"、".join(replaced[:10])} 等 {len(targets)} 家零售店" if len(replaced) > 10 else "、".join(replaced)
 	push = {"image": choice(targets).dieter.split("?")[0],

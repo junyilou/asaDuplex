@@ -13,12 +13,11 @@ from storeInfo import storeReturn
 
 DEFAULT_FLAGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼", "🇯🇵"]
 
-async def post(text: str, image: str, keyboard: list[list[list[str]]]) -> Optional[dict]:
-	from bot import chat_ids
-	from botpost import async_post
+async def post(text: str, image: str, keyboard: list[list[list[str]]]) -> None:
+	from bot import async_post, chat_ids
 	push = {"mode": "photo-text", "text": text, "image": image,
 		"parse": "MARK", "chat_id": chat_ids[0], "keyboard": keyboard}
-	return await async_post(push)
+	await async_post(push)
 
 async def entry(saved: dict[str, Any], mode: str, flags: Sequence[str]) -> None:
 	append = False

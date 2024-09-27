@@ -16,8 +16,7 @@ from storeInfo import DEFAULTFILE, STORES, Store, sidify
 
 
 async def post(store: Store, dt: datetime, raw: bytes) -> None:
-	from bot import chat_ids
-	from botpost import async_post, photo_encode
+	from bot import async_post, chat_ids, photo_encode
 	texts = ["*零售店图片更新通知*", "", f"{store:telegram}", f"*远程标签* {dt:%F %T}"]
 	buttons = [[["启动消息推送向导", f"RTLPOST {store.sid} NEW"]]]
 	assert await async_post({"mode": "photo-text", "image": photo_encode(raw),

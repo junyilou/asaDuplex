@@ -3,11 +3,12 @@ import re
 from collections.abc import Callable
 from datetime import UTC, datetime
 from enum import Enum
-from modules.regions import Regions
-from modules.util import SessionType, browser_agent, request
 from pathlib import PurePath
 from typing import Any, Literal, Optional, Required, TypedDict
 from zoneinfo import ZoneInfo
+
+from modules.regions import Regions
+from modules.util import SessionType, browser_agent, request
 
 DEFAULTFILE = PurePath(__file__).with_suffix(".json")
 type StoreMapping = Callable[[Store], Any]
