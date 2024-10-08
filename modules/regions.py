@@ -1,17 +1,17 @@
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
 
-@dataclass(order = True, slots = True)
+@dataclass(order = True, slots = True, frozen = True)
 class Region:
 	abbr: str
 	apu: bool
 	flag: str
 	locale: str
 	name: str
-	name_alt: list[str]
+	name_alt: list[str] = field(hash = False)
 	name_eng: str
 	part_sample: Optional[str]
 	post_location: str
