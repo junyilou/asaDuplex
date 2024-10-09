@@ -1,5 +1,5 @@
 # asaDuplex
-![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
+![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)
 [![Jobs at Apple](https://github.com/junyilou/asaDuplex/actions/workflows/jobs-global.yml/badge.svg)](https://github.com/junyilou/asaDuplex/actions/workflows/jobs-global.yml)
 [![Today at Apple](https://github.com/junyilou/asaDuplex/actions/workflows/today-normal.yml/badge.svg)](https://github.com/junyilou/asaDuplex/actions/workflows/today-normal.yml)
 
@@ -24,7 +24,7 @@
 
 ### 代码依赖
 
-代码使用了最高至 Python 3.12 的语法和特性，**必须使用 Python 3.12 版本才可完整运行**
+代码使用了最高至 Python 3.13 的语法和特性，**必须使用 Python 3.13 版本才可完整运行**
 
 所有网络请求均使用异步网络 I/O: [aiohttp](https://github.com/aio-libs/aiohttp) 发送，可通过 pip 安装：
 

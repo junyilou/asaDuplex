@@ -1,7 +1,7 @@
 import asyncio
 import json
 import logging
-from collections.abc import AsyncIterator, Callable, Coroutine, Iterable
+from collections.abc import AsyncGenerator, Callable, Coroutine, Iterable
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
 from typing import Any, Concatenate, Literal, Mapping, Optional, overload
@@ -18,7 +18,7 @@ request_logger = logging.getLogger("util.request")
 
 async def _Container[T](*coros: CoroutineType[T] | Iterable[CoroutineType[T]],
 	limit: Optional[int] = None, return_exceptions: bool = False) -> list[asyncio.Task[T]]:
-	from typing_extensions import TypeIs  # Python 3.13
+	from typing import TypeIs
 	def iscoroutine(obj: Any) -> TypeIs[CoroutineType[Any]]:
 		return asyncio.iscoroutine(obj)
 	async def task(coro: CoroutineType[T],
@@ -130,7 +130,7 @@ def disMarkdown(text: str, wrap: str = "", extra: str = "") -> str:
 @asynccontextmanager
 async def get_session(
 	session: Optional[SessionType] = None,
-	**kwargs) -> AsyncIterator[SessionType]:
+	**kwargs) -> AsyncGenerator[SessionType]:
 	y = session or aiohttp.ClientSession(**kwargs)
 	i = y is not session
 	if i:
@@ -230,7 +230,7 @@ def tz_text(dtime: datetime) -> str:
 	return f"GMT{time_h:+.0f}{f":{60 * time_min:0>2.0f}" if time_min else ""}"
 
 @asynccontextmanager
-async def with_semaphore(semaphore: Optional[SemaphoreType] = None) -> AsyncIterator[None]:
+async def with_semaphore(semaphore: Optional[SemaphoreType] = None) -> AsyncGenerator[None]:
 	try:
 		if semaphore:
 			await semaphore.acquire()

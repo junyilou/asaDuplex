@@ -1,5 +1,5 @@
 from asyncio import sleep
-from collections.abc import Iterable, Iterator, Mapping
+from collections.abc import Generator, Iterable, Mapping
 from datetime import datetime, timedelta
 from random import randint
 from typing import Any, Literal, Optional
@@ -10,21 +10,19 @@ from storeInfo import Store
 
 dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
-def convert(dct: Mapping[str, Any], userLang: bool = True) -> str:
+def convert(dct: Mapping[str, Any], lang: bool = True) -> str:
 	match dct:
 		case {"closed": True}:
-			return "不营业" if userLang else "Closed"
+			return "不营业" if lang else "Closed"
 		case {"openTime": "00:00", "closeTime": "23:59"}:
-			return "24 小时营业" if userLang else "Always Open"
+			return "24 小时营业" if lang else "Always Open"
 		case {"openTime": opt, "closeTime": clt}:
 			return f"{opt} - {clt}"
 		case _:
-			return "未知时间" if userLang else "Unknown Hours"
+			return "未知时间" if lang else "Unknown Hours"
 
-def ignored(
-	data: list[dict[str, Any]],
-	rules: dict[str, str],
-	userLang: bool = True) -> Iterator[tuple[str, str]]:
+def ignored(data: list[dict[str, Any]], rules: dict[str, str],
+	userLang: bool = True) -> Generator[tuple[str, str]]:
 	for item in sorted(data, key = lambda k: k["date"]):
 		converted = convert(item, userLang)
 		try:
@@ -96,7 +94,7 @@ async def comment(store: Store,
 async def special(store: Store, *,
 	threshold: Optional[datetime] = None,
 	ask_comment: bool = True,
-	userLang: bool = True,
+	ignore_same: bool = False,
 	detail: dict[str, list[dict[str, Any]]] = {},
 	rules: dict[str, str] = {},
 	session: Optional[SessionType] = None) -> Optional[dict[str, dict[str, str]]]:
@@ -111,12 +109,14 @@ async def special(store: Store, *,
 			return
 
 	comments, results, asked = {}, {}, []
-	regular = {dayOfWeek.index(regular["name"]): convert(regular, userLang = userLang) for regular in detail["regular"]}
-	for date, converted in ignored(detail["special"], rules = rules, userLang = userLang):
+	regular = {dayOfWeek.index(regular["name"]): convert(regular) for regular in detail["regular"]}
+	for date, converted in ignored(detail["special"], rules = rules):
 		d = datetime.strptime(date, "%Y-%m-%d")
 		if date < f"{threshold:%F}":
 			continue
 		reg = regular[d.weekday()]
+		if ignore_same and reg == converted:
+			continue
 		try:
 			assert ask_comment
 			assert store.rid not in comments

@@ -13,21 +13,20 @@ BASE_RULE = r"[BDFGHMNPS][0-9A-Z]{3}[0-9]"
 RICH_RULE = r"[0-9A-Z]{5}[A-Z]{1,2}/[A-Z]"
 COMP_RULE = r"([BDFGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?)"
 
-@dataclass(order = True, eq = True, slots = True)
+@dataclass(order = True, eq = True, slots = True, unsafe_hash = True)
 class Product:
 	partno: str
 	region: Region
 	title: Optional[str] = field(default = None, compare = False)
 	html: Optional[str] = field(default = None, compare = False, repr = False)
-	aos_data: dict[str, dict[str, Any]] = field(default_factory = dict, compare = False, repr = False)
+	aos_data: dict[str, dict[str, Any]] = field(default_factory = dict,
+		compare = False, repr = False, hash = False)
 	status: int = field(default = 404, compare = False, init = False, repr = False)
-	rich: bool = field(default = False, compare = False, init = False)
 
 	DEFAULT_TITLE = "Apple 产品"
 
 	def __post_init__(self) -> None:
 		self.partno = re.findall(COMP_RULE, self.partno)[0][0]
-		self.rich = bool(re.match(RICH_RULE, self.partno))
 
 	def __repr__(self) -> str:
 		return f"<Product {self.region.flag} {self.partno}: {self.title or self.DEFAULT_TITLE}>"
@@ -47,6 +46,10 @@ class Product:
 	def base_partno(self) -> str:
 		return self.partno[:5]
 
+	@property
+	def rich(self) -> bool:
+		return bool(re.match(RICH_RULE, self.partno))
+
 	def telename(self, use_base: bool = False) -> str:
 		return f"{disMarkdown(self.base_partno if use_base else self.partno, wrap = "*")} "\
 			f"{disMarkdown(self.title or "Apple 产品", extra = "*")} [↗]({self.url})"
@@ -55,9 +58,9 @@ class Product:
 		session: Optional[SessionType] = None,
 		semaphore: Optional[SemaphoreType] = None) -> Optional[str]:
 		try:
-			assert not self.rich
 			async with with_semaphore(semaphore):
-				r = await request(self.url, session, "HEAD", headers = browser_agent,
+				url = self.url.replace(self.partno, self.base_partno)
+				r = await request(url, session, "HEAD", headers = browser_agent,
 					mode = ["status", "head"], allow_redirects = False)
 			self.status = r["status"]
 			assert self.status > 200 and self.status < 400
@@ -166,7 +169,7 @@ async def FulfillmentMessage(
 		headers = browser_agent, retry = 3, timeout = timeout)
 	body = r["body"]["content"]["pickupMessage"]
 	for p in products:
-		p.aos_data.update({s["storeNumber"]: s for s in body["stores"]})
+		p.aos_data.update({s["storeNumber"]: s for s in body.get("stores", [])})
 	return products
 
 async def GenerateImage(urls: list[str], alpha: bool = False,

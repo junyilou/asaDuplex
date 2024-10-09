@@ -1,2 +1,1 @@
 aiohttp
-typing_extensions>=4.10.0
