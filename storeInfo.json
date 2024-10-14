@@ -1,5 +1,5 @@
 {
-  "_": "2024-10-04 20:09:03",
+  "_": "2024-10-09 21:04:52",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -4869,10 +4869,18 @@
         "md5": "45ace5b111f5828c0c95c11559471b8b",
         "modify": "2024-10-04 07:28:43"
       },
+      "events": [
+        {
+          "2024-10-18": "rename"
+        }
+      ],
       "flag": "🇬🇧",
-      "name": "Victoria Square",
+      "name": "Belfast",
+      "name_alt": [
+        "Victoria Square"
+      ],
       "nso": "2008-09-20 09:00",
-      "slug": "victoriasquare",
+      "slug": "belfast",
       "state": "Antrim",
       "timezone": "Europe/London"
     },
@@ -8033,8 +8041,8 @@
     "R626": {
       "city": "Solna",
       "dieter": {
-        "md5": "29f67a396f721390df6b0a84327a6b08",
-        "modify": "2024-09-05 07:35:44"
+        "md5": "97eafae66cabe3f5d25fa515a909946f",
+        "modify": "2024-10-07 06:08:56"
       },
       "flag": "🇸🇪",
       "name": "Mall of Scandinavia",
@@ -8919,7 +8927,8 @@
     "R752": {
       "city": "Miami",
       "flag": "🇺🇸",
-      "name": "Store in Miami",
+      "name": "Miami World Center",
+      "slug": "miamiworldcenter",
       "state": "Florida",
       "status": "future",
       "timezone": "America/New_York"
