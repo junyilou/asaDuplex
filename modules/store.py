@@ -64,12 +64,21 @@ class Product:
 					mode = ["status", "head"], allow_redirects = False)
 			self.status = r["status"]
 			assert self.status > 200 and self.status < 400
-			p = re.findall(RICH_RULE, r["head"]["Location"])[0]
-		except:
+			self.partno = re.findall(RICH_RULE, r["head"]["Location"])[0]
+			self.__post_init__()
 			return self.partno
-		self.partno = p
-		self.__post_init__()
-		return p
+		except Exception:
+			pass
+		try:
+			self.html = self.html or await self.get_html(session)
+			assert self.html
+			r = re.search(fr"{self.base_partno}[A-Z]{{1,2}}/[A-Z]", self.html)
+			if r:
+				self.partno = r.group()
+				self.__post_init__()
+				return self.partno
+		except Exception:
+			pass
 
 	async def get_image_url(self, session: Optional[SessionType] = None) -> Optional[list[str]]:
 		from bs4 import BeautifulSoup
