@@ -55,6 +55,7 @@ class Product:
 			f"{disMarkdown(self.title or "Apple 产品", extra = "*")} [↗]({self.url})"
 
 	async def get_rich_partno(self,
+		utilize_html: bool = True,
 		session: Optional[SessionType] = None,
 		semaphore: Optional[SemaphoreType] = None) -> Optional[str]:
 		try:
@@ -70,6 +71,7 @@ class Product:
 		except Exception:
 			pass
 		try:
+			assert utilize_html
 			self.html = self.html or await self.get_html(session)
 			assert self.html
 			r = re.search(fr"{self.base_partno}[A-Z]{{1,2}}/[A-Z]", self.html)
@@ -167,7 +169,7 @@ async def FulfillmentMessage(
 	url = f"https://www.apple.com{store.region.url_store}/shop/fulfillment-messages"
 	params = {"searchNearby": str(search_nearby).lower(), "store": store.rid}
 	for p in products:
-		await p.get_rich_partno(session)
+		await p.get_rich_partno(session = session)
 	for ind, prod in enumerate(p for p in products if p.rich):
 		params[f"parts.{ind}"] = prod.partno
 	if len(params) == 2:
