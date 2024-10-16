@@ -19,6 +19,10 @@ from modules.util import (AsyncGather, AsyncRetry, RetryExceeded, RetrySignal,
                           with_semaphore)
 
 
+RETAIL_FILTER  = {"teams":[{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSS"},
+	{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSCS"},
+	{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSLD"}]}
+
 class SRC(Protocol):
 	def __lt__(self, other, /) -> bool: ...
 
@@ -102,13 +106,10 @@ class Locale:
 		return Position(*choice(list(self.positions["managed"].items())), self.region)
 
 	async def get_positions_base(self, page: int = 1,
+		filters: dict[str, Any] = {},
 		session: Optional[SessionType] = None,
 		semaphore: Optional[SemaphoreType] = None) -> tuple[list["RichPosition"], int]:
-		data = {"filters": {
-			"postingpostLocation": [f"postLocation-{self.region.post_location}"],
-			"teams":[{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSS"},
-				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSCS"},
-				{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSLD"}]},
+		data = {"filters": {"postingpostLocation": [f"postLocation-{self.region.post_location}"]} | filters,
 			"page": page, "locale": self.region.locale.replace("_", "-").lower(), "sort": "newest", "query": ""}
 		await API.get_csrf(session, semaphore)
 		log_name = f"获取职位 {self} (第 {page} 页)"
@@ -137,11 +138,13 @@ class Locale:
 		max_page: int = 3,
 		managed: Optional[bool] = None,
 		later_than: str = "",
+		filters: dict[str, Any] = RETAIL_FILTER,
 		session: Optional[SessionType] = None,
 		semaphore: Optional[SemaphoreType] = None) -> list["RichPosition"]:
-		results, total, page = [], 1, 1
-		while len(results) < total and page <= max_page:
-			positions, total = await self.get_positions_base(page, session, semaphore)
+		results: list[RichPosition] = []
+		total = page = 1
+		while len(results) < total and (not max_page or page <= max_page):
+			positions, total = await self.get_positions_base(page, filters, session, semaphore)
 			results.extend(positions)
 			page += 1
 		l = (i for i in results if managed is not False or i.update >= later_than)
