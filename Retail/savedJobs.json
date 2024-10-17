@@ -1,5 +1,5 @@
 {
-  "update": "2024-09-20 00:53:43",
+  "update": "2024-10-17 00:55:11",
   "🇦🇪": {
     "locations": {
       "state1049": {
@@ -895,13 +895,22 @@
       "state1067": {
         "name": "Delhi",
         "stores": {
-          "R756": "Saket"
+          "R756": "Saket",
+          "R787": "Delhi-IN"
         }
       },
       "state1159": {
         "name": "Maharashtra",
         "stores": {
-          "R744": "BKC"
+          "R744": "BKC",
+          "R757": "Mumbai-IN",
+          "R788": "Pune-IN"
+        }
+      },
+      "state1205": {
+        "name": "Karnataka",
+        "stores": {
+          "R790": "Bangalore-IN"
         }
       }
     },
