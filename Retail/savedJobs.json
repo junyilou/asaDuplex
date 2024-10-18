@@ -1,5 +1,5 @@
 {
-  "update": "2024-10-17 00:55:11",
+  "update": "2024-10-18 00:55:40",
   "🇦🇪": {
     "locations": {
       "state1049": {
@@ -703,7 +703,7 @@
       "state1056": {
         "name": "Northern Ireland",
         "stores": {
-          "R313": "Victoria Square"
+          "R313": "Belfast"
         }
       },
       "state1057": {
