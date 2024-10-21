@@ -1,5 +1,5 @@
 {
-  "_": "2024-10-09 21:04:52",
+  "_": "2024-10-17 12:32:44",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -8972,6 +8972,14 @@
       "state": "Delhi",
       "timezone": "Asia/Kolkata"
     },
+    "R757": {
+      "city": "Mumbai",
+      "flag": "🇮🇳",
+      "name": "Store in Mumbai",
+      "state": "Maharashtra",
+      "status": "future",
+      "timezone": "Asia/Kolkata"
+    },
     "R760": {
       "city": "서울",
       "flag": "🇰🇷",
@@ -9039,11 +9047,8 @@
         "Anhui",
         "Hefei"
       ],
-      "name": "Store in Hefei",
-      "name_alt": [
-        "合肥万象城",
-        "MixC Hefei"
-      ],
+      "name": "合肥万象城",
+      "name_eng": "MixC Hefei",
       "slug": "mixchefei",
       "state": "安徽",
       "status": "future",
@@ -9097,6 +9102,30 @@
       "slug": "delamo",
       "state": "California",
       "timezone": "America/Los_Angeles"
+    },
+    "R787": {
+      "city": "Delhi",
+      "flag": "🇮🇳",
+      "name": "Store in Delhi",
+      "state": "Delhi",
+      "status": "future",
+      "timezone": "Asia/Kolkata"
+    },
+    "R788": {
+      "city": "Pune",
+      "flag": "🇮🇳",
+      "name": "Store in Pune",
+      "state": "Maharashtra",
+      "status": "future",
+      "timezone": "Asia/Kolkata"
+    },
+    "R790": {
+      "city": "Bangalore",
+      "flag": "🇮🇳",
+      "name": "Store in Bangalore",
+      "state": "Karnataka",
+      "status": "future",
+      "timezone": "Asia/Kolkata"
     },
     "R796": {
       "city": "Huntersville",
