@@ -39,11 +39,10 @@ pip install -r requirements.txt
 许多代码设计为将结果输出推送通知，这些代码通常导入了以下模块：
 
 ```python
-from bot import chat_ids
-from botpost import async_post
+from bot import async_post, chat_ids
 ```
 
-库中给出了一个示例 [bot.py](bot.py) 和 [botpost.py](botpost.py)，将读取环境变量 `BOTPOST_CHAT_ID` 中的用户 ID 和 `BOTPOST_API` 中的 Webhooks API 地址进行推送，你可以修改为其他你自己的结果推送方式。
+库中给出了一个示例 [bot.py](bot.py)，将读取环境变量 `BOTPOST_CHAT_ID` 中的用户 ID 和 `BOTPOST_API` 中的 Webhooks API 地址进行推送，你可以修改为其他你自己的结果推送方式。
 
 
 
