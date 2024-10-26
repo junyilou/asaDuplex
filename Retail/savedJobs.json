@@ -5,7 +5,6 @@
       "state1049": {
         "name": "Abu Dhabi",
         "stores": {
-          "ABUA": "Al Maryah Island",
           "R595": "Yas Mall",
           "R706": "Al Maryah Island",
           "R785": "Al Ain-UAE"
@@ -1617,7 +1616,6 @@
           "R083": "Southpark",
           "R116": "Crabtree Valley Mall",
           "R293": "Friendly Center",
-          "R463": "Northlake Mall",
           "R796": "Birkdale Village"
         }
       },
