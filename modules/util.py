@@ -203,7 +203,7 @@ def sortOD[K, V](od: Mapping[K, V],
 				res[k] = v
 	return res
 
-def timeDelta(*,
+def time_delta(*,
 	seconds: float = 0,
 	dt1: datetime = datetime.min,
 	dt2: datetime = datetime.min,
