@@ -176,12 +176,6 @@ class Store:
 				raise
 			return {}
 
-	def events_string(self, userLang: bool = True) -> str:
-		events = ([(self.nso, "nso")] if self.nso else []) + self.events
-		lang = {True: {"nso": "盛大开幕", "rebuild": "焕新开幕", "move": "搬迁地点", "closure": "永久关闭", "rename": "门店更名", "_": "%Y 年 %-m 月 %-d 日"},
-		  False: {"nso": "Opened", "rebuild": "Rebuild", "move": "Moved", "closure": "Closed", "rename": "Renamed", "_": "%b %-d, %Y"}}
-		return "\n".join(f"{lang[userLang][v]} {datetime.strptime(k[:10], "%Y-%m-%d"):{lang[userLang]["_"]}}" for k, v in sorted(events))
-
 def StoreID(sid: int | str, fuzzy: Any = False, regular: Any = False) -> list[Store]:
 	if sid == "ALL":
 		return list(STORES.values())
