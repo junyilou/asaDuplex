@@ -18,7 +18,6 @@ from modules.util import (AsyncGather, AsyncRetry, RetryExceeded, RetrySignal,
                           disMarkdown, get_session, session_func,
                           with_semaphore)
 
-
 RETAIL_FILTER  = {"teams":[{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSS"},
 	{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSCS"},
 	{"teams.teamID":"teamsAndSubTeams-APPST","teams.subTeamID":"subTeam-ARSLD"}]}
@@ -221,7 +220,7 @@ class State:
 		except RetryExceeded as exp:
 			logger.error(f"[请求失败] {log_name}: {exp.message}")
 			return []
-		stores = [Store(code = c["code"], name = c["name"], state = self, city = c["city"]) for c in r]
+		stores = [Store(code = c["code"], name = c["name"], state = self, city = c["city"] or "") for c in r]
 		for store in stores:
 			logger.log(18, f"[门店] {store}")
 		return stores
