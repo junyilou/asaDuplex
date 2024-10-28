@@ -1,5 +1,5 @@
 {
-  "_": "2024-10-17 12:32:44",
+  "_": "2024-10-26 08:10:34",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -713,7 +713,7 @@
       "name": "RomaEst",
       "nso": "2007-03-31 09:00",
       "slug": "romaest",
-      "state": "Roma",
+      "state": "Lazio",
       "status": "closed",
       "timezone": "Europe/Rome"
     },
@@ -2899,7 +2899,7 @@
       "timezone": "America/Los_Angeles"
     },
     "R159": {
-      "city": "Zürich",
+      "city": "Zurich",
       "dieter": {
         "md5": "11bd37c049c9b4ba9ab1d2ee80212f32",
         "modify": "2024-02-08 18:41:35"
@@ -2914,7 +2914,7 @@
       ],
       "flag": "🇨🇭",
       "keyword": [
-        "Zurich"
+        "Zürich"
       ],
       "name": "Rennweg",
       "name_alt": [
@@ -2922,7 +2922,7 @@
       ],
       "nso": "2009-05-22 10:00",
       "slug": "rennweg",
-      "state": "Zürich",
+      "state": "Zurich",
       "timezone": "Europe/Zurich"
     },
     "R161": {
@@ -3664,8 +3664,8 @@
     "R221": {
       "city": "Fairfax",
       "dieter": {
-        "md5": "74cadb519cd8f9ea67df65841860e4cb",
-        "modify": "2024-02-08 18:41:36"
+        "md5": "2c89a13b4b212d3b1ed44d99a84e9ff2",
+        "modify": "2024-10-25 23:58:07"
       },
       "flag": "🇺🇸",
       "name": "Fair Oaks",
@@ -3911,8 +3911,8 @@
     "R237": {
       "city": "Orland Park",
       "dieter": {
-        "md5": "64e7c3dba566e6e0ef5972b8f6e6c017",
-        "modify": "2024-02-08 18:41:37"
+        "md5": "a7530935cbd6b70c3549acf697f4a57e",
+        "modify": "2024-10-22 06:53:43"
       },
       "events": [
         {
@@ -4419,7 +4419,7 @@
       "timezone": "Europe/Paris"
     },
     "R278": {
-      "city": "Grugliasco Turin",
+      "city": "Grugliasco",
       "dieter": {
         "md5": "099cc541039bf3f42f1ac7152e371030",
         "modify": "2024-02-08 18:41:38"
@@ -4783,8 +4783,8 @@
     "R305": {
       "city": "Monterey",
       "dieter": {
-        "md5": "e71666d33d084e4feb471a129f715207",
-        "modify": "2024-02-08 18:41:38"
+        "md5": "5e1a757165e87fd7783190b43f01e31d",
+        "modify": "2024-10-24 17:03:09"
       },
       "flag": "🇺🇸",
       "name": "Del Monte",
@@ -4837,12 +4837,12 @@
       ],
       "flag": "🇨🇭",
       "keyword": [
-        "Zurich"
+        "Zürich"
       ],
       "name": "Glattzentrum",
       "nso": "2008-09-26 10:00",
       "slug": "glattzentrum",
-      "state": "Zürich",
+      "state": "Zurich",
       "timezone": "Europe/Zurich"
     },
     "R312": {
@@ -4881,7 +4881,7 @@
       ],
       "nso": "2008-09-20 09:00",
       "slug": "belfast",
-      "state": "Antrim",
+      "state": "Northern Ireland",
       "timezone": "Europe/London"
     },
     "R315": {
@@ -5287,7 +5287,7 @@
       "timezone": "Canada/Eastern"
     },
     "R351": {
-      "city": "Robina Town Centre",
+      "city": "Robina",
       "dieter": {
         "md5": "d5b74397bafa4ee738af2d83af8130e4",
         "modify": "2024-02-08 18:41:39"
@@ -5305,7 +5305,7 @@
       "timezone": "Australia/Brisbane"
     },
     "R352": {
-      "city": "Frankfurt Grobe Strabe",
+      "city": "Frankfurt",
       "dieter": {
         "md5": "94c96b787df428595b53363778732805",
         "modify": "2024-02-08 18:41:39"
@@ -6186,7 +6186,7 @@
       "timezone": "Canada/Eastern"
     },
     "R430": {
-      "city": "Dresden Saxony",
+      "city": "Dresden",
       "dieter": {
         "md5": "33e2285c4b21d09b0f2563ac1cf7be71",
         "modify": "2024-02-08 18:41:41"
@@ -6199,7 +6199,7 @@
       "timezone": "Europe/Berlin"
     },
     "R431": {
-      "city": "Augsburg Bavaria",
+      "city": "Augsburg",
       "dieter": {
         "md5": "3ace72b1d837802573de96f8178ddeca",
         "modify": "2024-02-08 18:41:41"
@@ -6286,7 +6286,7 @@
       "timezone": "Europe/Paris"
     },
     "R439": {
-      "city": "Basel",
+      "city": "Bâle",
       "dieter": {
         "md5": "9e4dc86a3c90ebac08f5034f9866802b",
         "modify": "2024-02-08 18:41:41"
@@ -6295,7 +6295,7 @@
       "name": "Freie Strasse",
       "nso": "2014-07-12 10:00",
       "slug": "freiestrasse",
-      "state": "Basel-Stadt",
+      "state": "Bâle-Ville",
       "timezone": "Europe/Zurich"
     },
     "R440": {
@@ -6403,7 +6403,7 @@
       "timezone": "Asia/Shanghai"
     },
     "R449": {
-      "city": "Campi Bisenzio Florence",
+      "city": "Campi Bisenzio",
       "dieter": {
         "md5": "876acbacb14d400f8794b75570f4721c",
         "modify": "2024-02-08 18:41:41"
@@ -6473,7 +6473,7 @@
       "timezone": "Europe/Rome"
     },
     "R455": {
-      "city": "Hannover Lower Saxony",
+      "city": "Hannover",
       "dieter": {
         "md5": "dc233879664c5a45e7c63984f4ed2c73",
         "modify": "2024-02-08 18:41:41"
@@ -6990,7 +6990,7 @@
       "timezone": "Europe/Stockholm"
     },
     "R507": {
-      "city": "Murcia Churra",
+      "city": "Murcia",
       "dieter": {
         "md5": "e1c3d5766b77e2753f9eba95801469e3",
         "modify": "2024-02-08 18:41:42"
@@ -7458,7 +7458,7 @@
       "timezone": "Europe/Paris"
     },
     "R567": {
-      "city": "Rio de Janeiro Barra da Tijuca",
+      "city": "Rio de Janeiro",
       "dieter": {
         "md5": "d16329d2ad1edcbbf53645173bcc53fc",
         "modify": "2024-02-08 18:41:43"
@@ -7832,7 +7832,7 @@
       "timezone": "Canada/Pacific"
     },
     "R602": {
-      "city": "Firenze Florence",
+      "city": "Firenze",
       "dieter": {
         "md5": "e59ab128283daf402cc452117e8a9aaf",
         "modify": "2024-02-08 18:41:44"
@@ -8026,7 +8026,7 @@
       "timezone": "Europe/Madrid"
     },
     "R625": {
-      "city": "Mestre Venice",
+      "city": "Mestre",
       "dieter": {
         "md5": "0bfa8fb99cbe6ede23aafca53f6f51a0",
         "modify": "2024-02-08 18:41:44"
@@ -8310,7 +8310,7 @@
       "timezone": "Europe/London"
     },
     "R667": {
-      "city": "Milano Lombardy",
+      "city": "Milano",
       "dieter": {
         "md5": "05ba2ff727d8bde70c9980416d4445ff",
         "modify": "2024-02-08 18:41:44"
@@ -9072,6 +9072,18 @@
       "state": "浙江",
       "timezone": "Asia/Shanghai"
     },
+    "R768": {
+      "city": "大阪市",
+      "flag": "🇯🇵",
+      "keyword": [
+        "Osaka",
+        "大阪"
+      ],
+      "name": "Store in Osaka",
+      "state": "大阪府",
+      "status": "future",
+      "timezone": "Asia/Tokyo"
+    },
     "R770": {
       "city": "경기",
       "dieter": {
@@ -9102,6 +9114,14 @@
       "slug": "delamo",
       "state": "California",
       "timezone": "America/Los_Angeles"
+    },
+    "R785": {
+      "city": "Al Ain",
+      "flag": "🇦🇪",
+      "name": "Store in Al Ain",
+      "state": "Abu Dhabi",
+      "status": "future",
+      "timezone": "Asia/Dubai"
     },
     "R787": {
       "city": "Delhi",
