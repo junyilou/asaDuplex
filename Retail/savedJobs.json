@@ -1,5 +1,5 @@
 {
-  "update": "2024-10-26 00:54:03",
+  "update": "2024-10-30 16:38:48",
   "🇦🇪": {
     "locations": {
       "state1049": {
@@ -393,7 +393,8 @@
           "R484": "Holiday Plaza Shenzhen",
           "R577": "Parc Central",
           "R639": "Zhujiang New Town",
-          "R761": "MixC Shenzhen"
+          "R761": "MixC Shenzhen",
+          "R793": "Shenzhen-CN"
         }
       },
       "state176": {
