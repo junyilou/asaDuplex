@@ -1,5 +1,5 @@
 {
-  "_": "2024-10-26 08:10:34",
+  "_": "2024-11-02 09:40:09",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -1669,8 +1669,8 @@
     "R089": {
       "city": "Skokie",
       "dieter": {
-        "md5": "6d1e7075cd0d0039a5ad1567e9231f14",
-        "modify": "2024-02-08 18:41:34"
+        "md5": "a76ec1099610274e01988b429b0bce7d",
+        "modify": "2024-11-01 02:44:11"
       },
       "events": [
         {
@@ -3664,8 +3664,8 @@
     "R221": {
       "city": "Fairfax",
       "dieter": {
-        "md5": "2c89a13b4b212d3b1ed44d99a84e9ff2",
-        "modify": "2024-10-25 23:58:07"
+        "md5": "55e49914e28cf0a34ee0ad317cf23dab",
+        "modify": "2024-11-02 00:39:56"
       },
       "flag": "🇺🇸",
       "name": "Fair Oaks",
@@ -4720,8 +4720,8 @@
     "R301": {
       "city": "Calgary",
       "dieter": {
-        "md5": "8fab79f046cecf98b756577429a0d9ba",
-        "modify": "2024-02-08 18:41:38"
+        "md5": "84bc6d2673ff19859314575bf4a4e6e2",
+        "modify": "2024-10-31 19:55:18"
       },
       "events": [
         {
@@ -4866,8 +4866,8 @@
     "R313": {
       "city": "Belfast",
       "dieter": {
-        "md5": "45ace5b111f5828c0c95c11559471b8b",
-        "modify": "2024-10-04 07:28:43"
+        "md5": "03533a14d0958f0da6aa3fc4e2577490",
+        "modify": "2024-10-31 16:12:50"
       },
       "events": [
         {
@@ -4914,8 +4914,8 @@
     "R317": {
       "city": "Santa Barbara",
       "dieter": {
-        "md5": "43b204981fccef8e37c99df64f6b4550",
-        "modify": "2024-02-08 18:41:39"
+        "md5": "568f665e7db9fc17fc72791680c1c1f7",
+        "modify": "2024-10-28 23:27:14"
       },
       "flag": "🇺🇸",
       "name": "State Street",
@@ -9146,6 +9146,18 @@
       "state": "Karnataka",
       "status": "future",
       "timezone": "Asia/Kolkata"
+    },
+    "R793": {
+      "city": "深圳",
+      "flag": "🇨🇳",
+      "keyword": [
+        "Guangdong",
+        "Shenzhen"
+      ],
+      "name": "Store in Shenzhen",
+      "state": "广东",
+      "status": "future",
+      "timezone": "Asia/Shanghai"
     },
     "R796": {
       "city": "Huntersville",
