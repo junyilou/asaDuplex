@@ -1,5 +1,5 @@
 {
-  "_": "2024-11-02 09:40:09",
+  "_": "2024-11-04 23:21:16",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -9202,6 +9202,13 @@
       "state": "California",
       "status": "internal",
       "timezone": "America/Los_Angeles"
+    },
+    "R848": {
+      "city": "London",
+      "flag": "🇬🇧",
+      "name": "Retail Tech Lab Battersea",
+      "state": "",
+      "status": "internal"
     },
     "R849": {
       "city": "Mesa",
