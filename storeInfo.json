@@ -1,5 +1,5 @@
 {
-  "_": "2024-11-04 23:21:16",
+  "_": "2024-11-10 08:10:34",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -559,8 +559,8 @@
     "R030": {
       "city": "Littleton",
       "dieter": {
-        "md5": "3ec28d5cba04c39a244aaf5a1299f00e",
-        "modify": "2024-02-08 18:41:32"
+        "md5": "6f5c452824e75bdef460f231cfdf92ff",
+        "modify": "2024-11-05 01:16:11"
       },
       "events": [
         {
@@ -3667,10 +3667,18 @@
         "md5": "55e49914e28cf0a34ee0ad317cf23dab",
         "modify": "2024-11-02 00:39:56"
       },
+      "events": [
+        {
+          "2024-11-09": "move"
+        }
+      ],
       "flag": "🇺🇸",
-      "name": "Fair Oaks",
+      "name": "Fairfax Corner",
+      "name_alt": [
+        "Fair Oaks"
+      ],
       "nso": "2008-04-26 10:00",
-      "slug": "fairoaks",
+      "slug": "fairfaxcorner",
       "state": "Virginia",
       "timezone": "America/New_York"
     },
@@ -3757,8 +3765,8 @@
     "R228": {
       "city": "Lone Tree",
       "dieter": {
-        "md5": "b257e900fcfe6ddd610b98c319ce87ee",
-        "modify": "2024-02-08 18:41:37"
+        "md5": "4b27677dc21b918078c95e763dcda8fc",
+        "modify": "2024-11-07 12:10:26"
       },
       "events": [
         {
@@ -7301,8 +7309,8 @@
     "R539": {
       "city": "Haarlem",
       "dieter": {
-        "md5": "c0a45add90c7febf6028215e5a91359d",
-        "modify": "2024-06-26 15:30:27"
+        "md5": "d215b814e168ce43adbbf7a9da0fcc33",
+        "modify": "2024-11-09 00:36:42"
       },
       "flag": "🇳🇱",
       "name": "Haarlem",
