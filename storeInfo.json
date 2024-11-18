@@ -1,5 +1,5 @@
 {
-  "_": "2024-11-10 08:10:34",
+  "_": "2024-11-16 08:10:44",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -2011,8 +2011,8 @@
     "R108": {
       "city": "Los Angeles",
       "dieter": {
-        "md5": "0b78bac2bb0d6b6577989a42b63bf494",
-        "modify": "2024-02-08 18:41:34"
+        "md5": "4d2efa70cce1f04e51f63d38fbc29be8",
+        "modify": "2024-11-12 22:16:34"
       },
       "events": [
         {
@@ -3512,8 +3512,8 @@
     "R209": {
       "city": "Calgary",
       "dieter": {
-        "md5": "cd184b8b6ee423e2b95f1939699c6311",
-        "modify": "2024-02-08 18:41:36"
+        "md5": "04b5b8f6118ce4e5e410c8e7c4dcbc7c",
+        "modify": "2024-11-12 22:22:26"
       },
       "flag": "🇨🇦",
       "name": "Chinook Centre",
@@ -3664,8 +3664,8 @@
     "R221": {
       "city": "Fairfax",
       "dieter": {
-        "md5": "55e49914e28cf0a34ee0ad317cf23dab",
-        "modify": "2024-11-02 00:39:56"
+        "md5": "607bf477edc8e945d44c8c45f82c6637",
+        "modify": "2024-11-12 15:23:50"
       },
       "events": [
         {
@@ -5972,8 +5972,8 @@
     "R411": {
       "city": "Edmonton",
       "dieter": {
-        "md5": "4c6cbac8ccac2da6d32dd86c5f330e32",
-        "modify": "2024-02-08 18:41:40"
+        "md5": "7c26f0184bffb2952254ab80f67befbe",
+        "modify": "2024-11-13 23:23:27"
       },
       "flag": "🇨🇦",
       "name": "Southgate Centre",
@@ -6080,8 +6080,8 @@
     "R420": {
       "city": "Spokane",
       "dieter": {
-        "md5": "f82709d3254238a138429addabbb439d",
-        "modify": "2024-02-08 18:41:41"
+        "md5": "b83d3aa25cf6d10bd3ad2158e519eeac",
+        "modify": "2024-11-14 22:03:52"
       },
       "flag": "🇺🇸",
       "name": "River Park Square",
@@ -7829,8 +7829,8 @@
     "R601": {
       "city": "Surrey",
       "dieter": {
-        "md5": "41f9e0db96f160136b711352c6431c79",
-        "modify": "2024-02-08 18:41:44"
+        "md5": "36d126c8d1211353bfa96c68137e8bb7",
+        "modify": "2024-11-12 22:38:28"
       },
       "flag": "🇨🇦",
       "name": "Guildford Town Centre",
@@ -8027,10 +8027,15 @@
     },
     "R624": {
       "city": "Madrid",
+      "dieter": {
+        "md5": "d8ad2dafbcd7307a823b535f6b530dee",
+        "modify": "2024-11-13 03:11:47"
+      },
       "flag": "🇪🇸",
-      "name": "Store in Madrid",
+      "name": "La Vaguada",
+      "nso": "2024-11-28 17:00",
+      "slug": "lavaguada",
       "state": "Madrid",
-      "status": "future",
       "timezone": "Europe/Madrid"
     },
     "R625": {
