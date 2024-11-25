@@ -1,5 +1,5 @@
 {
-  "_": "2024-11-16 08:10:44",
+  "_": "2024-11-21 08:10:58",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -6509,8 +6509,8 @@
     "R460": {
       "city": "Burnaby",
       "dieter": {
-        "md5": "7df3dcc4aa527e617688da5ee5bbb4ef",
-        "modify": "2024-02-08 18:41:41"
+        "md5": "ac4b8075579370c6060b0a36f79e548a",
+        "modify": "2024-11-19 13:32:16"
       },
       "flag": "🇨🇦",
       "name": "Metrotown",
@@ -8940,7 +8940,7 @@
     "R752": {
       "city": "Miami",
       "flag": "🇺🇸",
-      "name": "Miami World Center",
+      "name": "Miami Worldcenter",
       "slug": "miamiworldcenter",
       "state": "Florida",
       "status": "future",
