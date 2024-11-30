@@ -10,8 +10,8 @@ from typing import Optional
 
 import aiohttp
 
-from modules.util import (SemaphoreType, SessionType, disMarkdown, get_session,
-                          session_func, setLogger, with_semaphore)
+from modules.util import (SemaphoreType, SessionType, browser_agent,
+                          disMarkdown, request, session_func, setLogger)
 from storeInfo import DEFAULTFILE, STORES, Store, sidify
 
 
@@ -23,11 +23,8 @@ async def post(store: Store, dt: datetime, raw: bytes) -> None:
 		"text": disMarkdown("\n".join(texts)), "chat_id": chat_ids[0],
 		"keyboard": buttons, "parse": "MARK"})
 
-async def task(store: Store,
-	special_list: list[str],
-	local_mode: bool,
-	session: Optional[SessionType] = None,
-	semaphore: Optional[SemaphoreType] = None) -> Optional[Store]:
+async def task(store: Store, special_list: list[str], local_mode: bool,
+	session: SessionType, semaphore: SemaphoreType) -> Optional[Store]:
 	special = store.sid in special_list
 
 	def judge(head: Mapping[str, str]) -> Optional[datetime]:
@@ -44,23 +41,25 @@ async def task(store: Store,
 		logging.info(f"[{store.rid}] 记录到新时间 {dt:%F %T}")
 		return dt
 
-	async with with_semaphore(semaphore):
-		async with get_session(session) as ses:
-			try:
-				async with ses.get(store.dieter, ssl = False, raise_for_status = True) as request:
-					head = request.headers
-					if not (dt := judge(head)):
-						return
-					raw = await request.read()
-					assert isinstance(raw, bytes) and raw
-			except aiohttp.ClientResponseError as cre:
-				if cre.status == 404:
-					return
-				logging.error(f"[{store.rid}] 网络请求失败: {cre!r}")
-				return
-			except Exception as exp:
-				logging.error(f"[{store.rid}] 运行时异常: {exp!r}")
-				return
+	try:
+		async with semaphore:
+			head = await request(store.dieter, session,
+				headers = browser_agent | {"Range": "bytes=0-0"},
+				ssl = False, raise_for_status = True, mode = "head")
+		if not (dt := judge(head)):
+			return
+		async with semaphore:
+			raw = await request(store.dieter, session, headers = browser_agent,
+				ssl = False, raise_for_status = True, mode = "raw")
+		assert isinstance(raw, bytes) and raw
+	except aiohttp.ClientResponseError as cre:
+		if cre.status == 404:
+			return
+		logging.error(f"[{store.rid}] 网络请求失败: {cre!r}")
+		return
+	except Exception as exp:
+		logging.error(f"[{store.rid}] 运行时异常: {exp!r}")
+		return
 
 	digest = md5(raw).hexdigest()
 	store.modify = dt.strftime("%F %T")
