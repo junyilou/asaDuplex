@@ -436,6 +436,26 @@
     "url_taa": "/nl"
   },
   {
+    "abbr": "SA",
+    "apu": false,
+    "flag": "🇸🇦",
+    "locale": "en_SA",
+    "name": "沙特阿拉伯",
+    "name_alt": [
+      "沙特",
+      "沙乌地",
+      "沙地",
+      "沙特阿拉伯王国"
+    ],
+    "name_eng": "Saudi Arabia",
+    "part_sample": null,
+    "post_location": "SAU",
+    "url_app": null,
+    "url_retail": "/sa",
+    "url_store": null,
+    "url_taa": null
+  },
+  {
     "abbr": "SE",
     "apu": true,
     "flag": "🇸🇪",

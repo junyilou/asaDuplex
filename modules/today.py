@@ -17,7 +17,7 @@ ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
 PARAM = {"method": "GET", "timeout": 25, "retry": 5}
 SEMAPHORE_LIMIT = 20
 VALIDDATES = r"(-([0-9]{4,8}))$"
-todayNation = {v.url_taa: k for k, v in Regions.items()}
+todayNation = {v.url_taa: k for k, v in Regions.items() if v.url_taa is not None}
 
 class APIClass:
 	args = {
@@ -154,7 +154,8 @@ class Store(TodayObject):
 			self.raw_store: Raw_Store = raw_store
 			self.timezone: str = raw["timezone"]["name"]
 			self.slug: str = raw["slug"]
-			self.rootPath: str = rootPath or self.raw_store.region.url_taa
+			assert (rp := rootPath or self.raw_store.region.url_taa) is not None, "rootPath 无效"
+			self.rootPath: str = rp
 			self.flag: str = todayNation[self.rootPath]
 			self.url: str = f"https://www.apple.com{".cn" if self.rootPath == "/cn" else ""}{raw["path"]}"
 			self.coord: Optional[list[float]] = [raw["lat"], raw["long"]]
@@ -166,7 +167,8 @@ class Store(TodayObject):
 			self.name: str = self.raw_store.name
 			assert self.raw_store.slug and self.raw_store.url, "本地数据库信息不正确"
 			self.slug: str = self.raw_store.slug
-			self.rootPath: str = rootPath or self.raw_store.region.url_taa
+			assert (rp := rootPath or self.raw_store.region.url_taa) is not None, "rootPath 无效"
+			self.rootPath: str = rp
 			assert self.raw_store.timezone, "本地数据库时区不正确"
 			self.timezone: str = self.raw_store.timezone.key
 			self.flag: str = todayNation[self.rootPath]
