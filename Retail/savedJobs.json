@@ -1,5 +1,5 @@
 {
-  "update": "2024-10-30 16:38:48",
+  "update": "2024-12-09 09:36:34",
   "🇦🇪": {
     "locations": {
       "state1049": {
@@ -430,15 +430,7 @@
         "114438255": "cn-senior-manager",
         "200125389": "cn-business-pro"
       },
-      "standalone": {
-        "200548872": "cn-specialist-full-time-and-part-time",
-        "200560572": "cn-senior-manager",
-        "200560577": "cn-经理",
-        "200560579": "cn-经理",
-        "200560582": "cn-经理",
-        "200560583": "cn-经理",
-        "200560584": "cn-经理"
-      }
+      "standalone": {}
     }
   },
   "🇩🇪": {
@@ -887,9 +879,7 @@
         "114438208": "hk-technical-specialist",
         "200125406": "hk-business-pro"
       },
-      "standalone": {
-        "200537813": "senior-manager"
-      }
+      "standalone": {}
     }
   },
   "🇮🇳": {
@@ -1051,11 +1041,11 @@
     },
     "positions": {
       "managed": {
-        "114438107": "jp-specialist-full-time-or-part-time-permanent-or-temporary"
+        "114438102": "jp-operations-expert",
+        "114438107": "jp-specialist-full-time-or-part-time-permanent-or-temporary",
+        "114438210": "jp-technical-specialist"
       },
-      "standalone": {
-        "200537677": "jp-store-leader"
-      }
+      "standalone": {}
     }
   },
   "🇰🇷": {
@@ -1109,10 +1099,7 @@
         "114438282": "mo-specialist-full-time-or-part-time-permanent-or-temporary",
         "200125420": "mo-business-pro"
       },
-      "standalone": {
-        "200536922": "macao-manager",
-        "200543839": "manager-macao"
-      }
+      "standalone": {}
     }
   },
   "🇲🇽": {
