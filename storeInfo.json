@@ -1,5 +1,5 @@
 {
-  "_": "2024-12-01 08:10:30",
+  "_": "2024-12-07 22:53:06",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -5674,8 +5674,8 @@
     "R385": {
       "city": "Charlestown",
       "dieter": {
-        "md5": "c3b60acb455a39511db3fc1fe8a0497f",
-        "modify": "2024-02-08 18:41:40"
+        "md5": "9d96a3ef7ac9dd02949ff799450610b9",
+        "modify": "2024-12-04 10:08:13"
       },
       "flag": "🇦🇺",
       "name": "Charlestown",
@@ -9131,7 +9131,8 @@
     "R785": {
       "city": "Al Ain",
       "flag": "🇦🇪",
-      "name": "Store in Al Ain",
+      "name": "Al Ain",
+      "slug": "alain",
       "state": "Abu Dhabi",
       "status": "future",
       "timezone": "Asia/Dubai"
