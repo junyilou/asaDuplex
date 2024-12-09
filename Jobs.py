@@ -109,7 +109,7 @@ class Locale:
 		session: Optional[SessionType] = None,
 		semaphore: Optional[SemaphoreType] = None) -> tuple[list["RichPosition"], int]:
 		data = {"filters": {"postingpostLocation": [f"postLocation-{self.region.post_location}"]} | filters,
-			"page": page, "locale": self.region.locale.replace("_", "-").lower(), "sort": "newest", "query": ""}
+			"page": page, "locale": "en-us", "sort": "newest", "query": ""}
 		await API.get_csrf(session, semaphore)
 		log_name = f"获取职位 {self} (第 {page} 页)"
 		try:
@@ -151,7 +151,16 @@ class Locale:
 
 	async def get_stores(self, session: Optional[SessionType] = None,
 		semaphore: Optional[SemaphoreType] = None) -> list["Store"]:
-		states = await self.get_position().get_states(session, semaphore)
+		try:
+			pos = self.get_position()
+		except IndexError:
+			try:
+				await self.get_positions(managed = True, filters = RETAIL_FILTER,
+					session = session, semaphore = semaphore)
+				pos = self.get_position()
+			except Exception:
+				return []
+		states = await pos.get_states(session, semaphore)
 		stores = await AsyncGather(state.get_stores(session, semaphore) for state in states)
 		return [i for j in stores for i in j]
 
