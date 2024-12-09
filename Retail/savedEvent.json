@@ -1,5 +1,5 @@
 {
-  "update": "2024-12-06 02:25:26",
+  "update": "2024-12-09 07:10:39",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -464,7 +464,14 @@
       "slug": "spotlight-betty-ng-121124"
     }
   },
-  "sitemap": {},
+  "sitemap": {
+    "7270634592452117248": {
+      "names": {
+        "🇯🇵": "ワークショップ：Swift Student Challenge 2025に向けて準備しよう"
+      },
+      "slug": "workshop-swift-010925"
+    }
+  },
   "collection": {
     "made-for-business-cn": {
       "🇨🇳": "为商务打造"
