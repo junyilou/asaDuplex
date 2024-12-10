@@ -1,5 +1,5 @@
 {
-  "update": "2024-12-09 09:36:34",
+  "update": "2024-12-10 13:03:52",
   "🇦🇪": {
     "locations": {
       "state1049": {
@@ -1171,13 +1171,6 @@
         "114438211": "nl-technical-specialist",
         "200125427": "nl-business-pro"
       },
-      "standalone": {}
-    }
-  },
-  "🇸🇦": {
-    "locations": {},
-    "positions": {
-      "managed": {},
       "standalone": {}
     }
   },

@@ -153,7 +153,7 @@ class Locale:
 		semaphore: Optional[SemaphoreType] = None) -> list["Store"]:
 		try:
 			pos = self.get_position()
-		except IndexError:
+		except (IndexError, KeyError):
 			try:
 				await self.get_positions(managed = True, filters = RETAIL_FILTER,
 					session = session, semaphore = semaphore)
@@ -274,7 +274,8 @@ async def entry(flags: list[str], session: SessionType) -> None:
 	cancel = False
 	results: list[Store] = []
 	semaphore = asyncio.Semaphore(10)
-	locales = (Locale(Regions[flag], p[flag]["positions"]) for flag in flags if flag in Regions and not flag.isascii())
+	locales = (Locale(Regions[flag], p.get(flag, {}).get("positions", {}))
+		for flag in flags if flag in Regions and not flag.isascii())
 	tasks = [asyncio.create_task(locale.get_stores(session, semaphore)) for locale in locales]
 	for coro in asyncio.as_completed(tasks):
 		try:
@@ -316,10 +317,9 @@ async def entry(flags: list[str], session: SessionType) -> None:
 	logging.info(f"[更新文件] {len(saved)} 家零售店")
 	write: dict[str, Any] = {flag: {"locations": {state_code:
 		{"name": state_name, "stores": {store.code: store.name for store in stores}}
-		for (state_code, state_name), stores in groupby(state_stores, lambda i: i.state.args)}}
-		for flag, state_stores in groupby(saved.values(), lambda i: i.state.position.region.flag)}
-	for flag, region in p.items():
-		write[flag]["positions"] = region["positions"]
+		for (state_code, state_name), stores in groupby(state_stores, lambda i: i.state.args)},
+		"positions": p[flag]["positions"]} for flag, state_stores in groupby(
+		saved.values(), lambda i: i.state.position.region.flag)}
 	write["update"] = f"{datetime.now():%F %T}"
 	with open("Retail/savedJobs.json", "w") as w:
 		json.dump(write, w, indent = 2, ensure_ascii = False, sort_keys = True)
@@ -337,7 +337,10 @@ async def position(flags: list[str], managed: bool, session: SessionType) -> Non
 		added.clear()
 		stopped = 0
 		key = "managed" if managed else "standalone"
-		local = p[flag]["positions"][key]
+		try:
+			local = p[flag]["positions"][key]
+		except KeyError:
+			local = {}
 		later_than = f"{datetime.now().year}-01-01"
 		locale = Locale(Regions[flag])
 		try:
@@ -354,7 +357,8 @@ async def position(flags: list[str], managed: bool, session: SessionType) -> Non
 			for pid, slug in ((i, v) for i, v in local.items() if i not in remote):
 				stopped += 1
 				logger.info(f"[停止招聘] {pid}: {slug}")
-		p[flag]["positions"][key] = {k: v.slug for k, v in remote.items()}
+		if (a := {k: v.slug for k, v in remote.items()}):
+			p.setdefault(flag, {"locations": {}, "positions": {}})["positions"][key] = a
 
 		if added and not managed and not args.local:
 			logger.info(f"[推送通知] {len(added)} 个新职位")
