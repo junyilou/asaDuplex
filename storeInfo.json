@@ -1,5 +1,5 @@
 {
-  "_": "2024-12-12 03:40:10",
+  "_": "2024-12-21 08:10:36",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -3570,8 +3570,8 @@
     "R214": {
       "city": "Fort Lauderdale",
       "dieter": {
-        "md5": "a2085245953e9ab0fbdcff02913c55d7",
-        "modify": "2024-02-08 18:41:36"
+        "md5": "d255a6ef53e6b1ffcc9138a54a939ab1",
+        "modify": "2024-12-19 19:32:32"
       },
       "flag": "🇺🇸",
       "name": "The Galleria",
