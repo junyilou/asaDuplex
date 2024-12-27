@@ -1,5 +1,5 @@
 {
-  "_": "2024-12-21 08:10:36",
+  "_": "2024-12-27 08:31:00",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -9045,6 +9045,10 @@
     },
     "R765": {
       "city": "合肥",
+      "dieter": {
+        "md5": "ed763f0b6d1756e52be8bd0542757f2d",
+        "modify": "2024-12-27 00:08:02"
+      },
       "flag": "🇨🇳",
       "keyword": [
         "Anhui",
@@ -9052,9 +9056,9 @@
       ],
       "name": "合肥万象城",
       "name_eng": "MixC Hefei",
+      "nso": "2025-01-18 10:00",
       "slug": "mixchefei",
       "state": "安徽",
-      "status": "future",
       "timezone": "Asia/Shanghai"
     },
     "R766": {
