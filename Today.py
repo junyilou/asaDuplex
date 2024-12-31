@@ -4,11 +4,13 @@ import logging
 from argparse import ArgumentParser, Namespace
 from collections.abc import Sequence
 from datetime import datetime
+from pathlib import Path
 from typing import Any, Optional
 
 from modules.today import (Collection, Course, Schedule, Sitemap, Store,
                            teleinfo)
-from modules.util import AsyncGather, get_session, setLogger, sortOD
+from modules.util import (AsyncGather, SessionType, session_func, setLogger,
+                          sortOD)
 from storeInfo import storeReturn
 
 DEFAULT_FLAGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼", "🇯🇵"]
@@ -19,22 +21,22 @@ async def post(text: str, image: str, keyboard: list[list[list[str]]]) -> None:
 		"parse": "MARK", "chat_id": chat_ids[0], "keyboard": keyboard}
 	await async_post(push)
 
-async def entry(saved: dict[str, Any], mode: str, flags: Sequence[str]) -> None:
+async def entry(saved: dict[str, Any], mode: str,
+	flags: Sequence[str], session: SessionType) -> Optional[dict[str, Any]]:
 	append = False
 	courses: dict[Course, set[Schedule]] = {}
 	results: list[Collection | Course | Schedule] = []
 
-	async with get_session() as session:
-		match mode:
-			case "today":
-				stores = storeReturn(flags, opening = True)
-				tasks = [Store(store = store).getSchedules(session = session) for store in stores]
-			case "sitemap":
-				tasks = [Sitemap(flag = flag).getObjects(session = session) for flag in flags]
-			case _:
-				return
-		runners = await AsyncGather(tasks, return_exceptions = True)
-	runners, exp = [[i for i in runners if b ^ isinstance(i, Exception)] for b in (True, False)]
+	match mode:
+		case "today":
+			stores = storeReturn(flags, opening = True)
+			tasks = [Store(store = store).getSchedules(session = session) for store in stores]
+		case "sitemap":
+			tasks = [Sitemap(flag = flag).getObjects(session = session) for flag in flags]
+		case _:
+			return
+	gathered = await AsyncGather(tasks, return_exceptions = True)
+	runners, exp = [[i for i in gathered if b ^ isinstance(i, Exception)] for b in (True, False)]
 	for e in exp:
 		assert isinstance(e, Exception)
 		logging.error(repr(e))
@@ -91,17 +93,19 @@ async def entry(saved: dict[str, Any], mode: str, flags: Sequence[str]) -> None:
 			await post(text, image, keyboard)
 
 	if append:
-		logging.info("正在更新 savedEvent 文件")
 		saved["update"] = f"{datetime.now():%F %T}"
-		with open("Retail/savedEvent.json", "w") as w:
-			json.dump(sortOD(saved, reverse = [True, False]), w, ensure_ascii = False, indent = 2)
+		return saved
 
-async def main(args: Namespace) -> None:
-	setLogger(logging.INFO, __file__, base_name = True, force_print = args.debug)
+@session_func
+async def main(session: SessionType, args: Namespace) -> None:
+	fp = Path("Retail/savedEvent.json")
 	logging.info("程序启动")
-	with open("Retail/savedEvent.json") as r:
-		saved = json.load(r)
-	await entry(saved, "sitemap" if args.sitemap else "today", args.flags)
+	saved = json.loads(fp.read_text())
+	mode = "sitemap" if args.sitemap else "today"
+	results = await entry(saved, mode, args.flags, session)
+	if results:
+		logging.info(f"正在更新 {fp} 文件")
+		fp.write_text(json.dumps(sortOD(saved, reverse = [True, False]), ensure_ascii = False, indent = 2))
 	logging.info("程序结束")
 
 if __name__ == "__main__":
@@ -111,4 +115,5 @@ if __name__ == "__main__":
 	parser.add_argument("-l", "--local", action = "store_true", help = "仅限本地运行")
 	parser.add_argument("-s", "--sitemap", action = "store_true", help = "网站地图模式")
 	args = parser.parse_args()
+	setLogger(logging.INFO, __file__, base_name = True, force_print = args.debug)
 	asyncio.run(main(args))
