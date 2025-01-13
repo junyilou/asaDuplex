@@ -1,5 +1,5 @@
 {
-  "_": "2024-12-27 08:31:00",
+  "_": "2025-01-12 08:10:33",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -5012,8 +5012,8 @@
     "R325": {
       "city": "Wayne",
       "dieter": {
-        "md5": "4d765adaca15ffea46d583e7324deece",
-        "modify": "2024-02-08 18:41:39"
+        "md5": "d8e13fd90a1d65fb6e060e66d7d5b4bf",
+        "modify": "2025-01-10 21:02:42"
       },
       "flag": "🇺🇸",
       "name": "Willowbrook",
@@ -8929,11 +8929,15 @@
     },
     "R752": {
       "city": "Miami",
+      "dieter": {
+        "md5": "2ab517c336bb05d38f5aa96bd98f5467",
+        "modify": "2025-01-10 20:08:14"
+      },
       "flag": "🇺🇸",
       "name": "Miami Worldcenter",
+      "nso": "2025-01-24 10:00",
       "slug": "miamiworldcenter",
       "state": "Florida",
-      "status": "future",
       "timezone": "America/New_York"
     },
     "R753": {
