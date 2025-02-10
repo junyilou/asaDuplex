@@ -1,5 +1,5 @@
 {
-  "_": "2025-02-02 10:40:06",
+  "_": "2025-02-08 08:10:37",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -1705,8 +1705,8 @@
     "R091": {
       "city": "大阪市",
       "dieter": {
-        "md5": "8c3667e14299aa15c243c9d25fa93837",
-        "modify": "2024-02-08 18:41:34"
+        "md5": "b52916bcf81dad1ac034ab1ba48ec838",
+        "modify": "2025-02-03 08:33:46"
       },
       "events": [
         {
@@ -3570,8 +3570,8 @@
     "R214": {
       "city": "Fort Lauderdale",
       "dieter": {
-        "md5": "d255a6ef53e6b1ffcc9138a54a939ab1",
-        "modify": "2024-12-19 19:32:32"
+        "md5": "57d638dc7422230cfac0b18a1990559b",
+        "modify": "2025-01-31 16:12:41"
       },
       "flag": "🇺🇸",
       "name": "The Galleria",
@@ -5012,8 +5012,8 @@
     "R325": {
       "city": "Wayne",
       "dieter": {
-        "md5": "4d765adaca15ffea46d583e7324deece",
-        "modify": "2024-02-08 18:41:39"
+        "md5": "d8e13fd90a1d65fb6e060e66d7d5b4bf",
+        "modify": "2025-01-10 21:02:42"
       },
       "flag": "🇺🇸",
       "name": "Willowbrook",
@@ -8930,8 +8930,8 @@
     "R752": {
       "city": "Miami",
       "dieter": {
-        "md5": "2ab517c336bb05d38f5aa96bd98f5467",
-        "modify": "2025-01-10 20:08:14"
+        "md5": "902ff9b04ad965e789269f671978f288",
+        "modify": "2025-02-07 14:36:57"
       },
       "flag": "🇺🇸",
       "name": "Miami Worldcenter",
@@ -9050,8 +9050,8 @@
     "R765": {
       "city": "合肥",
       "dieter": {
-        "md5": "ed763f0b6d1756e52be8bd0542757f2d",
-        "modify": "2024-12-27 00:08:02"
+        "md5": "d0d7ba299eea37e476aae0787d6a93e9",
+        "modify": "2025-01-20 06:08:23"
       },
       "flag": "🇨🇳",
       "keyword": [
