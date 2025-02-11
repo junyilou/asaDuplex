@@ -2,7 +2,7 @@ import asyncio
 import logging
 import re
 from dataclasses import dataclass, field
-from typing import Any, Literal, Optional, Self
+from typing import Any, Literal, Optional, Self, cast
 
 from modules.regions import Region, RegionList
 from modules.util import (SemaphoreType, SessionType, browser_agent,
@@ -83,7 +83,8 @@ class Product:
 			pass
 
 	async def get_image_url(self, session: Optional[SessionType] = None) -> Optional[list[str]]:
-		from bs4 import BeautifulSoup
+		from bs4 import BeautifulSoup, Tag
+
 		try:
 			self.html = self.html or await self.get_html(session)
 			assert self.html
@@ -91,8 +92,8 @@ class Product:
 		except:
 			return
 		try:
-			div = bs.find_all("div", "rf-pdp-inline-gallery-thumbnav-item")
-			return [d.a.get("href").split("?")[0] for d in div]
+			div = bs.find_all("div", class_ = "rf-pdp-inline-gallery-thumbnav-item")
+			return [cast(str, cast(Tag, cast(Tag, d).a).get("href")).split("?")[0] for d in div]
 		except:
 			pass
 		try:
