@@ -1,5 +1,5 @@
 {
-  "_": "2025-02-08 08:10:37",
+  "_": "2025-02-15 12:19:38",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -7082,8 +7082,8 @@
     "R515": {
       "city": "Markham",
       "dieter": {
-        "md5": "4885a60498c2f6b155a81151a432f596",
-        "modify": "2024-02-08 18:41:42"
+        "md5": "daf08c89f1da25accb84eca87e9f8852",
+        "modify": "2025-02-10 11:17:31"
       },
       "flag": "🇨🇦",
       "name": "Markville Shopping Centre",
@@ -9028,6 +9028,19 @@
       "slug": "battersea",
       "state": "Greater London",
       "timezone": "Europe/London"
+    },
+    "R763": {
+      "city": "Detroit",
+      "dieter": {
+        "md5": "a41276c7187d1f2371b0dcc2a2bc5aa7",
+        "modify": "2025-02-11 02:22:27"
+      },
+      "flag": "🇺🇸",
+      "name": "Downtown Detroit",
+      "slug": "downtowndetroit",
+      "state": "Michigan",
+      "status": "future",
+      "timezone": "America/New_York"
     },
     "R764": {
       "city": "서울",
