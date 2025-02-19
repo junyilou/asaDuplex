@@ -7,7 +7,7 @@
 
 一个以异步和面向对象思想编写的 Apple Store 零售店 Python 库。
 
-**asaDuplex 提供了全球超过 500 家零售店的详细信息**，并对他们进行 Python 包装。你可以：
+**asaDuplex 提供了全球超过 600 家零售店的详细信息**，并对他们进行 Python 包装。你可以：
 
 * 模糊、精确按城市、国家、名称、编号搜索全球已开业、关闭、内部 Apple Store 零售店
 * 以极高效的方式查询 Apple Store 零售店的详细信息、查询 Today at Apple 课程和排课信息等
