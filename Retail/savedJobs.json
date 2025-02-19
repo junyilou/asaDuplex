@@ -1,5 +1,5 @@
 {
-  "update": "2025-02-15 00:55:10",
+  "update": "2025-02-19 15:00:03",
   "🇦🇪": {
     "locations": {
       "state1049": {
@@ -297,7 +297,8 @@
           "R388": "Xidan Joy City",
           "R448": "Wangfujing",
           "R479": "China Central Mall",
-          "R645": "Chaoyang Joy City"
+          "R645": "Chaoyang Joy City",
+          "R792": "Beijing-CN R792"
         }
       },
       "state157": {
