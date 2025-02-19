@@ -1,5 +1,5 @@
 {
-  "_": "2025-02-15 12:19:38",
+  "_": "2025-02-19 23:12:53",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -9171,6 +9171,17 @@
       "state": "Karnataka",
       "status": "future",
       "timezone": "Asia/Kolkata"
+    },
+    "R792": {
+      "city": "北京",
+      "flag": "🇨🇳",
+      "keyword": [
+        "Beijing"
+      ],
+      "name": "Store in Beijing",
+      "state": "北京",
+      "status": "future",
+      "timezone": "Asia/Shanghai"
     },
     "R793": {
       "city": "深圳",
