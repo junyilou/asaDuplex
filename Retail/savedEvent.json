@@ -1,5 +1,5 @@
 {
-  "update": "2025-02-19 23:24:16",
+  "update": "2025-02-20 07:09:15",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -451,7 +451,18 @@
       "slug": "discover-apple-music-nobuyuki-tsujii-021225"
     }
   },
-  "sitemap": {},
+  "sitemap": {
+    "7275337478256296192": {
+      "names": {
+        "🇨🇳": "工作坊：在 iPad 上用 Apple Pencil 绘画",
+        "🇭🇰": "工作坊：在 iPad 上用 Apple Pencil 繪畫",
+        "🇯🇵": "ワークショップ：iPadとApple Pencilで絵を描こう",
+        "🇲🇴": "工作坊：在 iPad 上用 Apple Pencil 繪畫",
+        "🇹🇼": "工作坊：在 iPad 上用 Apple Pencil 畫畫"
+      },
+      "slug": "workshop-drawing-with-apple-pencil-on-ipad-new"
+    }
+  },
   "collection": {
     "college-ready": {
       "🇯🇵": "大学。準備は万全。"
