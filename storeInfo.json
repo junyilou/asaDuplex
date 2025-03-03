@@ -1,5 +1,5 @@
 {
-  "_": "2025-02-19 23:12:53",
+  "_": "2025-03-02 08:10:38",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -6196,8 +6196,8 @@
     "R430": {
       "city": "Dresden",
       "dieter": {
-        "md5": "33e2285c4b21d09b0f2563ac1cf7be71",
-        "modify": "2024-02-08 18:41:41"
+        "md5": "f6d363ebd401028f6f2cf41df9666b53",
+        "modify": "2025-02-26 11:38:39"
       },
       "flag": "🇩🇪",
       "name": "Altmarkt-Galerie",
@@ -8930,8 +8930,8 @@
     "R752": {
       "city": "Miami",
       "dieter": {
-        "md5": "902ff9b04ad965e789269f671978f288",
-        "modify": "2025-02-07 14:36:57"
+        "md5": "8d87e17adec1b2ffafe2087edaa3a3ff",
+        "modify": "2025-02-28 17:39:23"
       },
       "flag": "🇺🇸",
       "name": "Miami Worldcenter",
