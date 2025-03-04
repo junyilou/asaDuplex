@@ -1,0 +1,29 @@
+name: Today at Apple [Clear]
+
+on:
+  schedule:
+    - cron: '0 0 2 * *'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v4
+      - name: setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: install python packages
+        run: pip install -r requirements.txt
+      - name: execute py script 1
+        run: python3 TodayClear.py --assured
+      - name: execute py script 2
+        run: python3 TodayClear.py --saved
+      - name: commit files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'auto: Today at Apple [Clear]'
