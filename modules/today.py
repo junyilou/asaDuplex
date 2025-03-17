@@ -401,7 +401,6 @@ class Course(TodayObject):
 		date: Optional[datetime] = None,
 		session: Optional[SessionType] = None,
 		semaphore: Optional[SemaphoreType] = None) -> list["Schedule"]:
-		print("正请求", self, store)
 		try:
 			async with with_semaphore(semaphore):
 				r = await request(session = session, headers = browser_agent,
