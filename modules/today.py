@@ -17,6 +17,10 @@ ACCEPT = ["jpg", "png", "mp4", "mov", "pages", "key", "pdf"]
 PARAM = {"method": "GET", "timeout": 25, "retry": 5}
 SEMAPHORE_LIMIT = 20
 VALIDDATES = r"(-([0-9]{4,8}))$"
+
+GRAPH: dict[str, list[str]] = {}
+LEADERBOARD: dict[str, int] = {}
+
 todayNation = {v.url_taa: k for k, v in Regions.items() if v.url_taa is not None}
 
 class APIClass:
@@ -41,69 +45,106 @@ class APIClass:
 
 API = APIClass("https://www.apple.com/today-bff".split("/"))
 
-class utils:
-	@staticmethod
-	def get_fas_stores(rootPath: str, fast: bool) -> list[Raw_Store]:
-		try:
-			assert fast
-			with open("Retail/findasession-stores.json") as r:
-				fas = json.load(r)
-			return [s for s in (getRaw_Store(i) for i in fas[todayNation[rootPath]]) if s]
-		except:
-			return storeReturn(todayNation[rootPath], opening = True)
+def GenerateLeaderboard(db_filename: str) -> dict[int, list[str]]:
+	import math
 
-	@staticmethod
-	def known_slugs() -> list[str]:
-		try:
-			with open("Retail/assured-events.json") as r:
-				assure = json.load(r)
-			return list(assure.values())
-		except FileNotFoundError:
-			return []
+	from modules.michael import Store, loads
 
-	@staticmethod
-	def resolution(vids: list[str], direction: Optional[Literal["l", "p"]] = None) -> list[str]:
-		res = {}
-		for v in vids:
-			f = re.findall(r"([0-9]+)x([0-9]+)\.[a-zA-Z0-9]+", v)
-			if not f:
-				return vids
-			res[v] = [int(f[0][0]), int(f[0][1])]
-		vids.sort(key = lambda k: res[k][0] * res[k][1], reverse = True)
+	def calculate_bonus(store: Store) -> int:
+		bonus = 0
+		if store.forum:
+			bonus += 10
+		if store.type == "Vintage D":
+			bonus += 5
+		for key in ("outdoor", "trees", "boardroom"):
+			if getattr(store, key):
+				bonus += 3
+		for event in store.events:
+			if getattr(event, "art", None):
+				bonus += 2
+			if val := getattr(event, "gallery", None):
+				bonus += math.ceil(math.log2(val))
+			if val := getattr(event, "pr", None):
+				bonus += 2 * len(val.split(","))
+		return bonus
 
-		if direction not in ["p", "l"]:
+	db = loads(db_filename)
+	for rid, store in db.items():
+		LEADERBOARD[f"R{rid}"] = calculate_bonus(store)
+	return {point: sorted(k for k, v in LEADERBOARD.items() if v == point)
+		for point in sorted(set(LEADERBOARD.values()))}
+
+def KnownSlugs() -> list[str]:
+	try:
+		with open("Retail/assured-events.json") as r:
+			assure = json.load(r)
+		return list(assure.values())
+	except FileNotFoundError:
+		return []
+
+def ParseResolution(vids: list[str], direction: Optional[Literal["l", "p"]] = None) -> list[str]:
+	res = {}
+	for v in vids:
+		f = re.findall(r"([0-9]+)x([0-9]+)\.[a-zA-Z0-9]+", v)
+		if not f:
 			return vids
-		return [i for i in vids if direction == "p" and res[i][0] < res[i][1] \
-			or direction == "l" and res[i][0] > res[i][1]]
+		res[v] = [int(f[0][0]), int(f[0][1])]
+	vids.sort(key = lambda k: res[k][0] * res[k][1], reverse = True)
 
-	@staticmethod
-	def separate(text: str) -> str:
-		rep = {0xa0: 0x20, 0x200b: None, 0x200c: None, 0x2060: None}
-		return text.translate(rep)
+	if direction not in ["p", "l"]:
+		return vids
+	return [i for i in vids if direction == "p" and res[i][0] < res[i][1]
+		or direction == "l" and res[i][0] > res[i][1]]
 
-	@staticmethod
-	def valid_dates(ex: str, runtime: datetime) -> list[datetime]:
-		v = []
-		match len(ex):
-			case 4:
-				ex += str(runtime.year)
-				possible = ["%m%d%Y", "%d%m%Y"]
-			case 6:
-				possible = ["%y%m%d", "%d%m%y", "%m%d%y"]
-			case 8:
-				possible = ["%Y%m%d", "%d%m%Y", "%m%d%Y"]
-			case _:
-				return []
-		for pattern in possible:
-			try:
-				date = datetime.strptime(ex, pattern).date()
-			except ValueError:
-				pass
-			else:
-				delta = (date - runtime.date()).days
-				if date not in v and delta > -7 and delta < 70:
-					v.append(date)
-		return v
+def Peers(stores: list[Raw_Store], fast: bool = False) -> list[Raw_Store]:
+	if not fast:
+		return stores
+	try:
+		from modules.dominating import get_dominating_set
+		if not GRAPH:
+			with open("Retail/taa-graph.json") as r:
+				GRAPH.update(json.load(r))
+	except Exception:
+		return stores
+	try:
+		if not LEADERBOARD:
+			GenerateLeaderboard("Retail/facades.json")
+	except Exception:
+		pass
+	results: dict[str, list[str]] = {}
+	mapping = {s.rid: s for s in stores}
+	subgraph = {s: GRAPH.get(s, []) for s in mapping}
+	sets = [get_dominating_set(subgraph, store) for store in mapping]
+	sets.sort(key = lambda s: (len(s), -sum(LEADERBOARD.get(store, 0) for store in s)))
+	results.update({a: GRAPH.get(a, []) for a in sorted(sets[0])})
+	return [i for i in [getRaw_Store(s) for s in results] if i]
+
+def Space(text: str) -> str:
+	rep = {0xa0: 0x20, 0x200b: None, 0x200c: None, 0x2060: None}
+	return text.translate(rep)
+
+def ValidDates(ex: str, runtime: datetime) -> list[datetime]:
+	v = []
+	match len(ex):
+		case 4:
+			ex += str(runtime.year)
+			possible = ["%m%d%Y", "%d%m%Y"]
+		case 6:
+			possible = ["%y%m%d", "%d%m%y", "%m%d%y"]
+		case 8:
+			possible = ["%Y%m%d", "%d%m%Y", "%m%d%Y"]
+		case _:
+			return []
+	for pattern in possible:
+		try:
+			date = datetime.strptime(ex, pattern).date()
+		except ValueError:
+			pass
+		else:
+			delta = (date - runtime.date()).days
+			if date not in v and delta > -7 and delta < 70:
+				v.append(date)
+	return v
 
 class TodayObject:
 	hashattr: list[str] = []
@@ -188,7 +229,7 @@ class Store(TodayObject):
 			r = await request(session = session, headers = browser_agent,
 				url = (API["landing"]["store" if ensure else "nearby"]).format(
 				STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
-			remote = json.loads(utils.separate(r))
+			remote = json.loads(Space(r))
 			assert "courses" in remote
 		except:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
@@ -198,13 +239,14 @@ class Store(TodayObject):
 
 	async def getSchedules(self, ensure: bool = True,
 		date: Optional[datetime] = None,
+		covered_store_list: Optional[list[str]] = None,
 		session: Optional[SessionType] = None) -> list["Schedule"]:
 		try:
 			nearby = {"nearby": "true"} if not ensure else {}
 			r = await request(session = session, headers = browser_agent,
 				url = (API["landing"]["store" if ensure else "nearby"]).format(
 				STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
-			remote = json.loads(utils.separate(r))
+			remote = json.loads(Space(r))
 			assert "schedules" in remote
 		except:
 			raise ValueError(f"获取 {self.sid} 数据失败") from None
@@ -221,6 +263,9 @@ class Store(TodayObject):
 		results = await AsyncGather(tasks)
 		if date:
 			results = [i for i in results if i.rawStart.date() == date.date()]
+		if covered_store_list is not None:
+			covered_store_list.clear()
+			covered_store_list.extend(remote["stores"])
 		return results
 
 	async def getCoord(self, session: Optional[SessionType] = None) -> list[float]:
@@ -228,6 +273,13 @@ class Store(TodayObject):
 		assert isinstance(d, dict)
 		self.coord = [i[1] for i in sorted(d["geolocation"].items())]
 		return self.coord
+
+	async def getCovering(self, graph: dict[str, list[str]] = {}) -> list[str]:
+		results: list[str] = []
+		_ = await self.getSchedules(ensure = False, covered_store_list = results)
+		results = sorted(r for r in results if (s := getRaw_Store(r)) and s.isOpen)
+		graph[self.sid] = results
+		return results
 
 class Talent(TodayObject):
 	hashattr: list[str] = ["name"]
@@ -262,7 +314,7 @@ class Course(TodayObject):
 				r = await request(session = session, headers = browser_agent,
 					url = API["session"]["course"].format(
 					COURSESLUG = slug, ROOTPATH = rootPath), **PARAM)
-				remote = json.loads(utils.separate(r))
+				remote = json.loads(Space(r))
 				assert isinstance(remote, dict) and "courses" in remote
 			except:
 				raise ValueError(f"获取课程 {rootPath}/{slug} 数据失败") from None
@@ -311,7 +363,7 @@ class Course(TodayObject):
 		if "modalVideo" in raw:
 			self.intro = {
 				"poster": raw["modalVideo"]["poster"]["source"],
-				"video": utils.resolution(raw["modalVideo"]["sources"])}
+				"video": ParseResolution(raw["modalVideo"]["sources"])}
 
 		media = raw["backgroundMedia"]
 		self.images: dict[str, str] = {
@@ -322,10 +374,10 @@ class Course(TodayObject):
 			self.videos = {
 				"portrait": {
 					"poster": media["ambientVideo"]["poster"][0]["portrait"]["source"],
-					"videos": utils.resolution(media["ambientVideo"]["sources"], "p")},
+					"videos": ParseResolution(media["ambientVideo"]["sources"], "p")},
 				"landscape": {
 					"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
-					"videos": utils.resolution(media["ambientVideo"]["sources"], "l")}}
+					"videos": ParseResolution(media["ambientVideo"]["sources"], "l")}}
 
 		self.virtual: bool = "VIRTUAL" in raw["type"]
 		self.special: bool = "SPECIAL" in raw["type"] or "HIGH" in raw["talentType"]
@@ -349,12 +401,13 @@ class Course(TodayObject):
 		date: Optional[datetime] = None,
 		session: Optional[SessionType] = None,
 		semaphore: Optional[SemaphoreType] = None) -> list["Schedule"]:
+		print("正请求", self, store)
 		try:
 			async with with_semaphore(semaphore):
 				r = await request(session = session, headers = browser_agent,
 					url = (API["session"]["course"]["store" if ensure else "nearby"]).format(
 					STORESLUG = store.slug, COURSESLUG = self.slug, ROOTPATH = store.rootPath), **PARAM)
-			remote = json.loads(utils.separate(r))
+			remote = json.loads(Space(r))
 			assert "schedules" in remote
 		except:
 			raise ValueError(f"获取排课 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
@@ -372,17 +425,22 @@ class Course(TodayObject):
 			results = [i for i in results if i.rawStart.date() == date.date()]
 		return results
 
-	async def getRootSchedules(self, rootPath: Optional[str] = None,
-		date: Optional[datetime] = None, fast: bool = False,
+	async def getMultipleSchedules(self,
+		raw_stores: list[Raw_Store] = [],
+		stores: list[Store] = [],
+		date: Optional[datetime] = None, fast: bool = True,
 		session: Optional[SessionType] = None) -> list["Schedule"]:
-		rootPath = rootPath or self.rootPath
-		stores = utils.get_fas_stores(rootPath, fast)
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
+		if raw_stores:
+			stores = [Store(store = i) for i in raw_stores]
+		elif stores:
+			raw_stores = [i.raw_store for i in stores]
 		async with get_session(session) as session:
-			tasks = (self.getSchedules(Store(store = i, rootPath = rootPath),
-				ensure = not fast, date = date, session = session, semaphore = semaphore) for i in stores)
+			tasks = (self.getSchedules(Store(store = i), ensure = not fast,
+				date = date, session = session, semaphore = semaphore) for i in Peers(raw_stores, fast))
 			results = await AsyncGather(tasks, return_exceptions = True)
-		return sorted({i for j in (r for r in results if not isinstance(r, BaseException)) for i in j})
+		return sorted(k for k in {i for j in (r for r in results if not isinstance(r, BaseException))
+			for i in j} if k.raw_store in raw_stores)
 
 	async def getSingleSchedule(self, session: Optional[SessionType] = None) -> "Schedule":
 		return await Schedule.get(scheduleId = self.courseId, rootPath = self.rootPath, slug = self.slug, session = session)
@@ -404,7 +462,7 @@ class Schedule(TodayObject):
 				r = await request(session = session, headers = browser_agent,
 					url = API["session"]["schedule"].format(
 					COURSESLUG = slug, SCHEDULEID = scheduleId, ROOTPATH = rootPath), **PARAM)
-				remote = json.loads(utils.separate(r))
+				remote = json.loads(Space(r))
 				assert isinstance(remote, dict) and "schedules" in remote
 			except:
 				raise ValueError(f"获取排课 {rootPath}/{slug}/{scheduleId} 数据失败") from None
@@ -477,7 +535,7 @@ class Collection(TodayObject):
 				r = await request(session = session, headers = browser_agent,
 					url = API["collection"]["geo"].format(
 					COLLECTIONSLUG = slug, ROOTPATH = rootPath), **PARAM)
-				remote = json.loads(utils.separate(r))
+				remote = json.loads(Space(r))
 			except:
 				raise ValueError(f"获取系列 {rootPath}/{slug} 数据失败") from None
 
@@ -512,10 +570,10 @@ class Collection(TodayObject):
 			self.videos = {
 				"portrait": {
 					"poster": media["ambientVideo"]["poster"][0]["portrait"]["source"],
-					"videos": utils.resolution(media["ambientVideo"]["sources"], "p")},
+					"videos": ParseResolution(media["ambientVideo"]["sources"], "p")},
 				"landscape": {
 					"poster": media["ambientVideo"]["poster"][0]["landscape"]["source"],
-					"videos": utils.resolution(media["ambientVideo"]["sources"], "l")}}
+					"videos": ParseResolution(media["ambientVideo"]["sources"], "l")}}
 
 		self.talents: list[Talent]
 		if "inCollaborationWith" in raw:
@@ -543,7 +601,7 @@ class Collection(TodayObject):
 				r = await request(session = session, headers = browser_agent,
 					url = (API["collection"]["store" if ensure else "nearby"]).format(
 					STORESLUG = store.slug, COLLECTIONSLUG = self.slug, ROOTPATH = store.rootPath), **PARAM)
-			remote = json.loads(utils.separate(r))
+			remote = json.loads(Space(r))
 			assert "schedules" in remote
 		except:
 			raise ValueError(f"获取排课 {store.rootPath}/{self.slug}/{store.slug} 数据失败") from None
@@ -561,21 +619,19 @@ class Collection(TodayObject):
 			results = [i for i in results if i.rawStart.date() == date.date()]
 		return results
 
-	async def getRootSchedules(self, rootPath: Optional[str] = None,
-		date: Optional[datetime] = None, fast: bool = False,
+	async def getMultipleSchedules(self,
+		raw_stores: list[Raw_Store] = [],
+		stores: list[Store] = [],
+		date: Optional[datetime] = None, fast: bool = True,
 		session: Optional[SessionType] = None) -> list[Schedule]:
-		rootPath = rootPath or self.rootPath
-		stores = utils.get_fas_stores(rootPath, fast)
-		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
-		async with get_session(session) as session:
-			tasks = (self.getSchedules(Store(store = i, rootPath = rootPath),
-				ensure = not fast, date = date, session = session, semaphore = semaphore) for i in stores)
-			results = await AsyncGather(tasks, return_exceptions = True)
-		return sorted({i for j in (r for r in results if not isinstance(r, BaseException)) for i in j})
+		return await Course.getMultipleSchedules(self, # type: ignore
+			raw_stores = raw_stores, stores = stores,
+			date = date, fast = fast, session = session)
 
 	async def getCourses(self, rootPath: Optional[str] = None, fast: bool = False,
 		session: Optional[SessionType] = None) -> list[Course]:
-		schedules = await self.getRootSchedules(rootPath = rootPath, fast = fast, session = session)
+		stores = storeReturn(todayNation[rootPath or self.rootPath], opening = True)
+		schedules = await self.getMultipleSchedules(stores, fast = fast, session = session)
 		return sorted({schedule.course for schedule in schedules})
 
 class Sitemap(TodayObject):
@@ -583,14 +639,14 @@ class Sitemap(TodayObject):
 	sortkeys: list[str] = ["urlPath"]
 
 	def match_by_assure(self, slug: str) -> bool:
-		for s in utils.known_slugs():
+		for s in KnownSlugs():
 			if s == slug:
 				return False
 		return True
 
 	def match_by_valid(self, slug: str) -> bool:
 		matches = re.findall(VALIDDATES, slug)
-		return bool(matches and utils.valid_dates(matches[0][1], self.runtime) != [])
+		return bool(matches and ValidDates(matches[0][1], self.runtime) != [])
 
 	def __init__(self, rootPath: Optional[str] = None, flag: Optional[str] = None) -> None:
 		assert rootPath is not None or flag, "rootPath 和 flag 必须提供一个"
@@ -599,7 +655,7 @@ class Sitemap(TodayObject):
 				self.urlPath = Regions[fl].url_retail
 			case rp, _ if rp is not None:
 				self.urlPath = rp.replace("/cn", ".cn")
-		self.using = self.match_by_valid if not utils.known_slugs() else self.match_by_assure
+		self.using = self.match_by_valid if not KnownSlugs() else self.match_by_assure
 		self.runtime = datetime.now()
 		self.raw = {"urlPath": self.urlPath}
 
@@ -659,6 +715,19 @@ def parseURL(url: str) -> dict[str, str]:
 				"type": "collection", "rootPath": l[1].replace(".cn", "/cn"),
 				"slug": l[2], "url": f"https://www.apple.com{l[1]}/today/collection/{l[2]}"}
 	return {}
+
+async def generateGraph(stores: list[Store], graph: dict[str, list[str]] = {},
+	retry: int = 3, limit: int = 10) -> dict[str, list[str]]:
+	while retry and stores:
+		retry -= 1
+		await AsyncGather((store.getCovering(graph) for store in stores),
+			limit = limit, return_exceptions = True)
+		stores = [store for store in stores if store.sid not in graph]
+	for s in stores:
+		graph[s.sid] = []
+	with open("Retail/taa-graph.json", "w") as w:
+		json.dump(graph, w, ensure_ascii = False, indent = 2, sort_keys = True)
+	return graph
 
 async def getURL(url: str,
 	session: Optional[SessionType] = None,
@@ -806,7 +875,7 @@ def teleinfo(
 	else:
 		try:
 			date = re.findall(VALIDDATES, course.slug)[0][1]
-			vals = utils.valid_dates(date, runtime)
+			vals = ValidDates(date, runtime)
 			timing = f' {lang[userLang]["OR"]} '.join(i.strftime(lang[userLang]["FORMAT_DATE"]) for i in vals)
 		except IndexError:
 			timing = lang[userLang]["GENERAL_TIMING"]

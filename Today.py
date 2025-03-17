@@ -7,7 +7,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Optional
 
-from modules.today import (Collection, Course, Schedule, Sitemap, Store,
+from modules.today import (Collection, Course, Peers, Schedule, Sitemap, Store,
                            teleinfo)
 from modules.util import (AsyncGather, SessionType, session_func, setLogger,
                           sortOD)
@@ -29,8 +29,8 @@ async def entry(saved: dict[str, Any], mode: str,
 
 	match mode:
 		case "today":
-			stores = storeReturn(flags, opening = True)
-			tasks = [Store(store = store).getSchedules(session = session) for store in stores]
+			stores = Peers(storeReturn(flags, opening = True), fast = True)
+			tasks = [Store(store = store).getSchedules(ensure = False, session = session) for store in stores]
 		case "sitemap":
 			tasks = [Sitemap(flag = flag).getObjects(session = session) for flag in flags]
 		case _:
