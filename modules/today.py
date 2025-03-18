@@ -269,8 +269,7 @@ class Store(TodayObject):
 		return results
 
 	async def getCoord(self, session: Optional[SessionType] = None) -> list[float]:
-		d = await self.raw_store.detail(mode = "raw", session = session)
-		assert isinstance(d, dict)
+		d = await self.raw_store.detail(session = session)
 		self.coord = [i[1] for i in sorted(d["geolocation"].items())]
 		return self.coord
 

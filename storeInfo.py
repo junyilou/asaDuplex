@@ -4,11 +4,11 @@ from collections.abc import Callable
 from datetime import UTC, datetime
 from enum import Enum
 from pathlib import PurePath
-from typing import Any, Literal, Optional, Required, TypedDict
+from typing import Any, Optional, Required, TypedDict
 from zoneinfo import ZoneInfo
 
 from modules.regions import Regions
-from modules.util import SessionType, browser_agent, request
+from modules.util import SessionType
 
 DEFAULTFILE = PurePath(__file__).with_suffix(".json")
 type StoreMapping = Callable[[Store], Any]
@@ -82,8 +82,6 @@ class Store:
 		self.region = Regions[self.flag]
 		url = "https://www.apple.com{}/retail/{}"
 		self.url = url.format(self.region.url_retail, self.slug) if self.slug else None
-		detail_url = "https://www.apple.com/rsp-web/store-detail?storeSlug={}&locale={}&sc=false"
-		self.detail_url = detail_url.format(self.slug, self.region.locale) if self.slug else None
 		self.sortkey = (self.flag, self.state, self.city, self.sid)
 
 		statuses = {"Closed": "关闭", "Future": "招聘", "Internal": "内部", "": ""}
@@ -150,31 +148,16 @@ class Store:
 			d["timezone"] = self.timezone.key
 		return d
 
-	async def detail(self,
-		mode: Optional[Literal["dict", "hero", "hours", "raw"]] = None,
-		session: Optional[SessionType] = None,
-		raise_exception: bool = False) -> dict[str, Any]:
-		try:
-			assert self.detail_url, 'Key "slug" is required'
-			r = await request(self.detail_url, session,
-				headers = browser_agent,
-				retry = 3, timeout = 5, mode = "json")
-			if mode == "raw":
-				return r
-			if mode == "hero":
-				return {"hero": r["hero"], "heroImage": r["heroImage"]}
-			hours = {"isnso": r["hours"]["isNSO"], "regular": r["hours"]["hoursData"], "special": r["hours"]["specialHoursData"]}
-			if mode == "hours":
-				return hours
-			add = r["address"]
-			address = ", ".join(a.strip() for a in [add["address1"], add["address2"]] if a)
-			province = ", ".join(a.strip() for a in [add["city"], add["stateName"], add["postal"]] if a)
-			info = {"timezone": r["timezone"], "telephone": r["telephone"], "address": address, "province": province}
-			return r["geolocation"] | info | hours
-		except:
-			if raise_exception:
-				raise
-			return {}
+	async def detail(self, session: Optional[SessionType] = None) -> dict[str, Any]:
+		assert self.slug, "slug must be provided"
+
+		from graphql import APOLLO_HEADERS, ENDPOINT, cleanup, generate_params
+		from modules.util import browser_agent, request
+
+		params = generate_params("StoreDetails", {"localeId": self.region.locale, "slug": self.slug})
+		r = await request(ENDPOINT + params, session, mode = "json",
+			headers = APOLLO_HEADERS | browser_agent | {"referer": self.url})
+		return cleanup(r["data"]["localeFields"]["storeBySlug"])
 
 def StoreID(sid: int | str, fuzzy: Any = False, regular: Any = False) -> list[Store]:
 	if sid == "ALL":

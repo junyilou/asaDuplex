@@ -8,29 +8,26 @@ from modules.store import FulfillmentMessage, Product
 from modules.util import AsyncRetry, RetryExceeded, RetrySignal, SessionType
 from storeInfo import Store
 
-dayOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+dayOfWeek = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 
 def convert(dct: Mapping[str, Any], lang: bool = True) -> str:
 	match dct:
-		case {"closed": True}:
-			return "不营业" if lang else "Closed"
-		case {"openTime": "00:00", "closeTime": "23:59"}:
+		case {"openTime": "00:00:00", "closeTime": "23:59:00"}:
 			return "24 小时营业" if lang else "Always Open"
 		case {"openTime": opt, "closeTime": clt}:
-			return f"{opt} - {clt}"
+			return f"{opt[:5]} - {clt[:5]}"
+		case {"formattedTime": _}:
+			return "不营业" if lang else "Closed"
 		case _:
 			return "未知时间" if lang else "Unknown Hours"
 
-def ignored(data: list[dict[str, Any]], rules: dict[str, str],
-	userLang: bool = True) -> Generator[tuple[str, str]]:
-	for item in sorted(data, key = lambda k: k["date"]):
-		converted = convert(item, userLang)
-		try:
-			for key in ("date", "name"):
-				assert converted != rules.get(item[key])
-		except:
+def ignored(converted: dict[str, str], rules: dict[str, str]) -> Generator[tuple[str, str]]:
+	for date, data in converted.items():
+		if rules.get(date) == data:
 			continue
-		yield item["date"], converted
+		if rules.get(dayOfWeek[datetime.strptime(date, "%Y-%m-%d").weekday()]) == data:
+			continue
+		yield date, data
 
 async def base_comment(store: Store,
 	accepted_dates: Iterable[str],
@@ -100,17 +97,14 @@ async def special(store: Store, *,
 	session: Optional[SessionType] = None) -> Optional[dict[str, dict[str, str]]]:
 	threshold = threshold or datetime.now()
 	if not detail:
-		try:
-			detail = await store.detail(session = session, mode = "hours")
-			assert isinstance(detail, dict)
-			for key in ("regular", "special"):
-				assert key in detail
-		except:
-			return
+		detail = await store.detail(session = session)
+	for key in ("hoursData", "specialHours"):
+		assert key in detail
 
 	comments, results, asked = {}, {}, []
-	regular = {dayOfWeek.index(regular["name"]): convert(regular) for regular in detail["regular"]}
-	for date, converted in ignored(detail["special"], rules = rules):
+	regular = {dayOfWeek.index(h["dayOfWeek"]): convert(h["time"]) for h in detail["hoursData"]}
+	converted = {d["date"]: convert(d["time"], lang = False) for d in detail["specialHours"]}
+	for date, converted in ignored(converted, rules = rules):
 		d = datetime.strptime(date, "%Y-%m-%d")
 		if date < f"{threshold:%F}":
 			continue
