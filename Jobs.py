@@ -260,7 +260,7 @@ class Locale:
 			"positions": {p.id: p.slug for p in self.positions}}
 
 def load_db() -> FileDict:
-	with open("Retail/savedJobs1.json") as r:
+	with open("Retail/savedJobs.json") as r:
 		db = json.load(r)
 	return db
 
@@ -270,7 +270,7 @@ def save_db(db: FileDict, locales: list[Locale]) -> None:
 	logging.info(f"[更新文件] {len(locales)} 个地区")
 	db["update"] = datetime.now().strftime("%F %T")
 	db["regions"].update({locale.region.flag: locale.dumps() for locale in locales if locale.updated})
-	with open("Retail/savedJobs1.json", "w") as w:
+	with open("Retail/savedJobs.json", "w") as w:
 		json.dump(db, w, indent = 2, ensure_ascii = False, sort_keys = True)
 
 def set_logger(args: Namespace) -> None:
