@@ -1,5 +1,5 @@
 {
-  "_": "2025-04-03 08:10:41",
+  "_": "2025-04-11 11:44:45",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -2628,7 +2628,8 @@
       },
       "events": [
         {
-          "2017-09-09": "move"
+          "2017-09-09": "move",
+          "2025-04-26": "closure"
         }
       ],
       "flag": "🇺🇸",
@@ -9197,6 +9198,14 @@
       "state": "广东",
       "status": "future",
       "timezone": "Asia/Shanghai"
+    },
+    "R794": {
+      "city": "Riyadh",
+      "flag": "🇸🇦",
+      "name": "Store in Riyadh",
+      "state": "Riyadh",
+      "status": "future",
+      "timezone": "Asia/Riyadh"
     },
     "R796": {
       "city": "Huntersville",
