@@ -2,7 +2,7 @@ name: Today at Apple [Clear]
 
 on:
   schedule:
-    - cron: '0 0 2 * *'
+    - cron: '0 0 2,16 * *'
   workflow_dispatch:
 
 jobs:

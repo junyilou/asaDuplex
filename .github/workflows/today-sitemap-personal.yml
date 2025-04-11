@@ -1,8 +1,8 @@
-name: Today at Apple [Sitemap]
+name: Today at Apple [Sitemap Personal]
 
 on:
   schedule:
-    - cron: '0 8 * * *'
+    - cron: '0 7 * * *'
   workflow_dispatch:
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         env:
           BOTPOST_API: ${{ secrets.BOTPOST_API }}
           BOTPOST_CHAT_ID: ${{ secrets.BOTPOST_CHAT_ID }}
-        run: python3 Today.py -d -s
+        run: python3 Today.py -d -s 🇯🇵
       - name: commit files
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
