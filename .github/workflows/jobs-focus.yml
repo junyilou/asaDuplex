@@ -1,8 +1,8 @@
-name: Jobs at Apple [Global]
+name: Jobs at Apple [Focus]
 
 on:
   schedule:
-    - cron: '0 18 * * 2,4'
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -23,7 +23,7 @@ jobs:
         env:
           BOTPOST_API: ${{ secrets.BOTPOST_API }}
           BOTPOST_CHAT_ID: ${{ secrets.BOTPOST_CHAT_ID }}
-        run: python3 Jobs.py -d
+        run: python3 Jobs.py -d 🇺🇸 🇩🇪 🇮🇳 🇨🇳 🇯🇵
       - name: commit files
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
