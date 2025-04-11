@@ -488,24 +488,21 @@ class Schedule(TodayObject):
 		_ = [setattr(self, key, getattr(course, key)) for key in vars(course)]
 		self.slug = course.slug
 		self.course: Course = course
-		self.scheduleId: str = scheduleId
-		self.rootPath: str = rootPath
-		self.flag: str = todayNation[self.rootPath]
-		self.serial: dict[str, str] = {"slug": self.slug, "scheduleId": scheduleId, "rootPath": self.rootPath}
+		self.scheduleId = scheduleId
+		self.rootPath = rootPath
+		self.flag = todayNation[self.rootPath]
+		self.serial = {"slug": self.slug, "scheduleId": scheduleId, "rootPath": self.rootPath}
 
-		self.store: Store = store
-		self.raw_store: Raw_Store = self.store.raw_store
-		self.timezone: str = store.timezone
-		try:
-			self.tzinfo: Optional[ZoneInfo] = ZoneInfo(self.timezone)
-			self.timeStart: Optional[datetime] = datetime.fromtimestamp(raw["startTime"] / 1000, self.tzinfo)
-			self.timeEnd: Optional[datetime] = datetime.fromtimestamp(raw["endTime"] / 1000, self.tzinfo)
-		except:
-			self.tzinfo = self.timeStart = self.timeEnd = None
-		self.rawStart: datetime = datetime.fromtimestamp(raw["startTime"] / 1000)
-		self.rawEnd: datetime = datetime.fromtimestamp(raw["endTime"] / 1000)
+		self.store = store
+		self.raw_store = self.store.raw_store
+		self.timezone = store.timezone
+		self.tzinfo = ZoneInfo(self.timezone)
+		self.rawStart = datetime.fromtimestamp(raw["startTime"] / 1000)
+		self.rawEnd = datetime.fromtimestamp(raw["endTime"] / 1000)
+		self.timeStart = self.rawStart.replace(tzinfo = self.tzinfo)
+		self.timeEnd = self.rawEnd.replace(tzinfo = self.tzinfo)
 		self.status: bool = raw["status"] == "RSVP"
-		self.url: str = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}/{scheduleId}/?sn={self.store.sid}"
+		self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}/{scheduleId}/?sn={self.store.sid}"
 		self.raw: dict[str, Any] = raw | {"serial": self.serial}
 
 	def datetimeStart(self, form: str = "%-m 月 %-d 日 %-H:%M") -> str:
@@ -739,179 +736,3 @@ async def getURL(url: str,
 			case {"type": "collection", "rootPath": r, "slug": g}:
 				return await Collection.get(rootPath = r, slug = g, session = session)
 	raise ValueError(f"无法解析并生成自: {url}")
-
-lang = {
-	True: {
-		"OR": "或",
-		"NEW": "新",
-		"JOINT": "、",
-		"COURSE": "课程",
-		"COLLECTION": "系列",
-		"STORES": "家",
-		"VIRTUAL": "线上活动",
-		"COLLAB_WITH": "*合作机构*",
-		"DOWNLOAD_IMAGE": "下载图片",
-		"LEARN_COLLECTION": "了解系列",
-		"LEARN_COURSE": "了解课程",
-		"INTRO_COLLECTION": "*系列简介*",
-		"INTRO_COURSE": "*课程简介*",
-		"SIGN_UP": "预约课程",
-		"GENERAL_STORE": "Apple Store 零售店",
-		"IN_COLLECTION": "{NAME} 系列课程\n",
-		"START_FROM": "{START} – {END}{TZTEXT}",
-		"START_FROM_ALL": "{START} – {END}{TZTEXT} 起",
-		"GENERAL_TIMING": "尚无可确定的课程时间",
-		"SIGN_UP_ALL": "所有场次均可预约",
-		"SIGN_UP_NONE": "所有场次均不可预约",
-		"SIGN_UP_SOME": "✅ {AALL} 场中的 {AOK} 场可预约",
-		"SIGN_UP_SINGLE": "✅ 本场活动可预约",
-		"SIGN_UP_NOT": "❌ 本场活动不可预约",
-		"SIGN_UP_STATUS": "*可预约状态*",
-		"FORMAT_START": "%-m 月 %-d 日 %-H:%M",
-		"FORMAT_END": "%-H:%M",
-		"FORMAT_DATE": "%Y 年 %-m 月 %-d 日",
-		"MAIN1": "#TodayatApple {NEW}{TYPE}\n\n*{NAME}*\n\n{INTROTITLE}\n{INTRO}",
-		"MAIN2": "#TodayatApple {NEW}{TYPE}\n\n{PREFIX}*{NAME}*\n\n🗺️ {LOCATION}\n🕘 {TIME}\n\n{INTROTITLE}\n{INTRO}\n\n{SIGNPREFIX}\n{SIGN}"},
-	False: {
-		"OR": "/",
-		"NEW": "",
-		"JOINT": ", ",
-		"COURSE": "Course",
-		"COLLECTION": "Collection",
-		"STORES": "Store{PLURAL}",
-		"VIRTUAL": "Virtual Event",
-		"COLLAB_WITH": "*In collaboration with*",
-		"LEARN_COLLECTION": "Learn More",
-		"DOWNLOAD_IMAGE": "Poster",
-		"LEARN_COURSE": "Learn More",
-		"INTRO_COLLECTION": "*Description*",
-		"INTRO_COURSE": "*Description*",
-		"SIGN_UP": "Sign Up",
-		"GENERAL_STORE": "Apple Retail Store",
-		"IN_COLLECTION": "In Collection {NAME}\n",
-		"START_FROM": "{START} – {END}{TZTEXT}",
-		"START_FROM_ALL": "Starting {START} – {END}{TZTEXT}",
-		"GENERAL_TIMING": "Indeterminable Time",
-		"SIGN_UP_ALL": "All available for sign up",
-		"SIGN_UP_NONE": "Not available for sign up",
-		"SIGN_UP_SOME": "✅ {AOK} of {AALL} available for sign up",
-		"SIGN_UP_SINGLE": "✅ Available for sign up",
-		"SIGN_UP_NOT": "❌ Not available for sign up",
-		"SIGN_UP_STATUS": "*Sign Up status*",
-		"FORMAT_START": "%b %-d, %-H:%M",
-		"FORMAT_END": "%-H:%M",
-		"FORMAT_DATE": "%Y/%-m/%-d",
-		"MAIN1": "#TodayatApple {NEW}{TYPE}\n\n*{NAME}*\n\n{INTROTITLE}\n{INTRO}",
-		"MAIN2": "#TodayatApple {NEW}{TYPE}\n\n{PREFIX}*{NAME}*\n\n🗺️ {LOCATION}\n🕘 {TIME}\n\n{INTROTITLE}\n{INTRO}\n\n{SIGNPREFIX}\n{SIGN}"}}
-
-def teleinfo(
-	course: Optional[Course] = None,
-	schedules: list[Schedule] = [],
-	collection: Optional[Collection] = None,
-	mode: str = "new",
-	userLang: bool = True,
-	prior: Sequence[str] = []) -> tuple[str, str, list[list[list[str]]]]:
-
-	runtime = datetime.now()
-	offset = (runtime.astimezone().utcoffset() or timedelta()).total_seconds() / 3600
-	priorlist = (*prior, *Regions)
-
-	if collection is not None:
-		text = disMarkdown(lang[userLang]["MAIN1"].format(
-			NEW = lang[userLang]["NEW"] if mode == "new" else '',
-			TYPE = lang[userLang]["COLLECTION"],
-			NAME = collection.name,
-			INTROTITLE = lang[userLang]["INTRO_COLLECTION"],
-			INTRO = collection.description['long']))
-		if collection.talents != []:
-			collab = []
-			for c in collection.talents:
-				name = disMarkdown(c.name)
-				collab.append(f"[{name}]({c.links['URL']})" if "URL" in c.links else name)
-			text += f"\n\n{lang[userLang]['COLLAB_WITH']}\n{lang[userLang]['JOINT'].join(collab)}"
-
-		image = collection.images["landscape"] + "?output-format=jpg&output-quality=80&resize=1280:*"
-		keyboard = [[[lang[userLang]["LEARN_COLLECTION"], collection.url], [lang[userLang]["DOWNLOAD_IMAGE"], collection.images["landscape"]]]]
-
-		return text, image, keyboard
-
-	assert course is not None
-	schedules = sorted(set(schedules))
-
-	if course.virtual:
-		courseStore = lang[userLang]["VIRTUAL"]
-	elif schedules == []:
-		courseStore = lang[userLang]["GENERAL_STORE"]
-	elif len(schedules) == 1:
-		courseStore = str(schedules[0].raw_store)
-	else:
-		storeCounts = {r: len([s for s in {i.raw_store for i in schedules} if s.flag == r]) for r in priorlist}
-		textStore = [f"{k} ({v} {lang[userLang]['STORES'].format(PLURAL = 's' if v > 1 else '')})"
-			for k, v in storeCounts.items() if v]
-		courseStore = lang[userLang]["JOINT"].join(textStore)
-
-	if course.collection is None:
-		specialPrefix = ""
-	elif isinstance(course.collection, Collection):
-		specialPrefix = lang[userLang]["IN_COLLECTION"].format(NAME = course.collection.name)
-	else:
-		specialPrefix = lang[userLang]["IN_COLLECTION"].format(NAME = course.collection)
-
-	if schedules != []:
-		priorSchedule = schedules[0] if prior == [] else sorted(
-			schedules, key = lambda k: priorlist.index(k.flag))[0]
-
-		tzText = ""
-		if isinstance(priorSchedule.timeStart, datetime):
-			if (priorSchedule.timeStart.utcoffset() or timedelta()).total_seconds() / 3600 != offset:
-				tzText = " " + tz_text(priorSchedule.timeStart)
-
-		timing = lang[userLang]["START_FROM" if len(schedules) == 1 else "START_FROM_ALL"].format(
-			START = priorSchedule.datetimeStart(form = lang[userLang]["FORMAT_START"]),
-			END = priorSchedule.datetimeEnd(form = lang[userLang]["FORMAT_END"]), TZTEXT = tzText)
-		keyboard = [[[lang[userLang]["SIGN_UP"], priorSchedule.url]]]
-	else:
-		try:
-			date = re.findall(VALIDDATES, course.slug)[0][1]
-			vals = ValidDates(date, runtime)
-			timing = f' {lang[userLang]["OR"]} '.join(i.strftime(lang[userLang]["FORMAT_DATE"]) for i in vals)
-		except IndexError:
-			timing = lang[userLang]["GENERAL_TIMING"]
-		keyboard = [[[lang[userLang]["LEARN_COURSE"], course.url]]]
-
-	keyboard[0].append([lang[userLang]["DOWNLOAD_IMAGE"], course.images["landscape"]])
-
-	if mode == "new" or schedules == []:
-		signing = signingPrefix = ""
-	else:
-		upCount = len([s for s in schedules if s.status])
-		seCount = len(schedules)
-		if seCount > 1:
-			if upCount:
-				if upCount == seCount:
-					signing = lang[userLang]["SIGN_UP_ALL"]
-				else:
-					signing = lang[userLang]["SIGN_UP_SOME"].format(AOK = upCount, AALL = seCount)
-			else:
-				signing = lang[userLang]["SIGN_UP_NONE"]
-		elif upCount:
-			signing = lang[userLang]["SIGN_UP_SINGLE"]
-		else:
-			signing = lang[userLang]["SIGN_UP_NOT"]
-		signingPrefix = lang[userLang]["SIGN_UP_STATUS"]
-
-	text = disMarkdown(lang[userLang]["MAIN2"].format(
-		NEW = lang[userLang]["NEW"] if mode == "new" else '',
-		TYPE = lang[userLang]["COURSE"],
-		PREFIX = specialPrefix,
-		NAME = course.name,
-		LOCATION = courseStore,
-		TIME = timing,
-		INTROTITLE = lang[userLang]["INTRO_COURSE"],
-		INTRO = course.description["long"],
-		SIGNPREFIX = signingPrefix,
-		SIGN = signing)).strip("\n")
-
-	image = course.images["landscape"] + "?output-format=jpg&output-quality=80&resize=1280:*"
-
-	return text, image, keyboard
