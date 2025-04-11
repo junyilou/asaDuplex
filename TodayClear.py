@@ -143,7 +143,7 @@ async def main(session: SessionType, args: Namespace) -> None:
 		file = SavedEventFile()
 	else:
 		return
-	await file.main()
+	await file.main(session)
 
 if __name__ == "__main__":
 	parser = ArgumentParser()
