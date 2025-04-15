@@ -45,7 +45,7 @@ class APIClass:
 		method: str = "GET", mode: str = "json", log_name: str = "",
 		extra_headers: dict[str, str] = {}, **kwargs) -> Any:
 		default_headers = browser_agent | self.csrf
-		kwargs |= {"headers": default_headers | extra_headers, "timeout": 30,
+		kwargs |= {"headers": default_headers | extra_headers, "timeout": 10,
 			"allow_redirects": False, "ssl": False, "cookies": self.cookies}
 		kwargs["headers"]["x-b3-traceid"] = str(uuid4())
 		async with get_session(session) as ses:
