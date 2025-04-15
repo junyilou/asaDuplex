@@ -147,8 +147,8 @@ async def entry(saved: dict[str, Any], mode: str,
 
 		if do_send:
 			logging.info(str(course))
-			all_schedules = [scedule for course, schedules in courses.items()
-				if course.courseId == course.courseId for scedule in schedules]
+			all_schedules = [s for c, schedules in courses.items()
+				if c.courseId == course.courseId for s in schedules]
 			text, image, keyboard = generate_course(course = course, schedules = all_schedules, prior = flags)
 			await post(text, image, keyboard)
 
