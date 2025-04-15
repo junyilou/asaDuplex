@@ -437,7 +437,7 @@ class Course(TodayObject):
 			tasks = (self.getSchedules(Store(store = i), ensure = not fast,
 				date = date, session = session, semaphore = semaphore) for i in Peers(raw_stores, fast))
 			results = await AsyncGather(tasks, return_exceptions = True)
-		return sorted(k for k in {i for j in (r for r in results if not isinstance(r, BaseException))
+		return sorted(k for k in {i for j in (r for r in results if not isinstance(r, Exception))
 			for i in j} if k.raw_store in raw_stores)
 
 	async def getSingleSchedule(self, session: Optional[SessionType] = None) -> "Schedule":
@@ -683,12 +683,27 @@ class Sitemap(TodayObject):
 			objects.append(parsing)
 		return objects
 
-	async def getObjects(self, session: Optional[SessionType] = None) -> list[Collection | Course | Schedule]:
+	async def getObjects(self, extend_schedule: bool = False,
+		session: Optional[SessionType] = None) -> list[Collection | Course | Schedule]:
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		async with get_session(session) as session:
 			results = await AsyncGather((getURL(u, session = session, semaphore = semaphore)
 				for u in await self.getURLs()), return_exceptions = True)
-		return [i for i in results if not isinstance(i, BaseException)]
+			results = [i for i in results if not isinstance(i, Exception)]
+			if extend_schedule:
+				extend = []
+				avail = [i.scheduleId for i in results if isinstance(i, Schedule)]
+				for inst in results:
+					try:
+						assert isinstance(inst, Course)
+						assert inst.special
+						assert inst.courseId not in avail
+						schedule = await inst.getSingleSchedule(session = session)
+						extend.append(schedule)
+					except Exception:
+						pass
+				results.extend(extend)
+		return results
 
 def parseURL(url: str) -> dict[str, str]:
 	cp = r"([\S]*apple\.com([\/\.a-zA-Z]*)/today/event/([a-z0-9\-]*))"

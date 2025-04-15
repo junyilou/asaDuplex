@@ -91,7 +91,7 @@ async def entry(saved: dict[str, Any], mode: str,
 			stores = Peers(storeReturn(flags, opening = True), fast = True)
 			tasks = [Store(store = store).getSchedules(ensure = False, session = session) for store in stores]
 		case "sitemap":
-			tasks = [Sitemap(flag = flag).getObjects(session = session) for flag in flags]
+			tasks = [Sitemap(flag = flag).getObjects(extend_schedule = True, session = session) for flag in flags]
 		case _:
 			return
 	gathered = await AsyncGather(tasks, return_exceptions = True)
