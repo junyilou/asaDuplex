@@ -497,10 +497,10 @@ class Schedule(TodayObject):
 		self.raw_store = self.store.raw_store
 		self.timezone = store.timezone
 		self.tzinfo = ZoneInfo(self.timezone)
-		self.rawStart = datetime.fromtimestamp(raw["startTime"] / 1000)
-		self.rawEnd = datetime.fromtimestamp(raw["endTime"] / 1000)
-		self.timeStart = self.rawStart.replace(tzinfo = self.tzinfo)
-		self.timeEnd = self.rawEnd.replace(tzinfo = self.tzinfo)
+		self.timeStart = datetime.fromtimestamp(raw["startTime"] / 1000, tz = self.tzinfo)
+		self.timeEnd = datetime.fromtimestamp(raw["endTime"] / 1000, tz = self.tzinfo)
+		self.rawStart = self.timeStart.replace(tzinfo = None)
+		self.rawEnd = self.timeEnd.replace(tzinfo = None)
 		self.status: bool = raw["status"] == "RSVP"
 		self.url = f"https://www.apple.com{self.rootPath.replace('/cn', '.cn')}/today/event/{self.slug}/{scheduleId}/?sn={self.store.sid}"
 		self.raw: dict[str, Any] = raw | {"serial": self.serial}

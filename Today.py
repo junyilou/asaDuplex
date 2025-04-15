@@ -18,9 +18,8 @@ DEFAULT_FLAGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼"]
 def generate_collection(collection: Collection) -> tuple[str, str, list[list[list[str]]]]:
 	body = [disMarkdown(t) for t in ("#TodayatApple 新系列", f"*{collection.name}*",
 		f"*系列简介*\n{collection.description["long"]}")]
-	collab = [f"[{disMarkdown(c.name)}]({u})" if (u := c.links.get("URL"))
-		else disMarkdown(c.name) for c in collection.talents]
-	if collab:
+	if (collab := [f"[{disMarkdown(c.name)}]({u})" if (u := c.links.get("URL"))
+		else disMarkdown(c.name) for c in collection.talents]):
 		body.append(f"*合作机构*\n{"、".join(collab)}")
 	image = collection.images["landscape"] + "?output-format=jpg&output-quality=80&resize=1280:*"
 	keyboard = [[["了解系列", collection.url], ["下载图片", collection.images["landscape"]]]]
