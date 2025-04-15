@@ -169,12 +169,15 @@ class Locale:
 	data: RegionDict = field(repr = False)
 	updated: bool = False
 	states: list[State] = field(default_factory = list, repr = False)
+	state_codes: list[str] = field(default_factory = list, repr = False)
+	new_stores: list[Store] = field(default_factory = list, repr = False)
 	positions: Sequence[Position] = field(init = False, repr = False)
 	position: Optional[Position] = field(init = False, repr = False)
-	new_stores: list[Store] = field(default_factory = list, repr = False)
 
 	def __post_init__(self) -> None:
 		for code, state in self.data["locations"].items():
+			if code not in self.state_codes:
+				continue
 			inst = State(code, state["name"], self.region)
 			inst.stores = {code: Store(code, name, inst) for code, name in state["stores"].items()}
 			self.states.append(inst)
@@ -229,7 +232,6 @@ class Locale:
 		return sorted(i for i in l if managed is None or i.managed == managed)
 
 	async def main(self, session: Optional[SessionType] = None) -> list[Store]:
-
 		async def entry(position: Position, state: State) -> list[Store]:
 			new_stores: list[Store] = []
 			remote = await state.get_stores(position, session)
@@ -244,6 +246,8 @@ class Locale:
 			state.stores = remote
 			return new_stores
 
+		if not self.states:
+			return []
 		await self.choose_position(session)
 		if not self.position:
 			return []
@@ -284,9 +288,10 @@ def set_logger(args: Namespace) -> None:
 		logging.addLevelName(i, "INFO")
 	logger = logging.getLogger("Jobs")
 
-async def entry(flags: list[str], session: SessionType) -> None:
+async def entry(flags: list[str], states: list[str], session: SessionType) -> None:
 	db = load_db()
-	locales = [Locale(Regions[i], db["regions"][i]) for i in flags if i in Regions]
+	states.extend(s for flag in flags if flag in db["regions"] for s in db["regions"][flag]["locations"])
+	locales = [Locale(Regions[i], db["regions"][i], state_codes = states) for i in Regions if not i.isascii()]
 	await AsyncGather((locale.main(session) for locale in locales), limit = 3)
 	arrival = sorted(((store, locale.position) for locale in locales
 		for store in locale.new_stores if locale.position), key = lambda t: t[1])
@@ -325,18 +330,19 @@ async def position(flags: list[str], managed: bool, session: SessionType) -> Non
 async def main(session: SessionType, args: Namespace) -> None:
 	set_logger(args)
 	logger.info("程序启动")
-	args.flags = args.flags or [i for i in Regions if not i.isascii()]
+	states = [i for i in args.args if i.startswith("state")]
+	flags = [i for i in args.args if i not in states] or [i for i in Regions if not i.isascii()]
 	if args.position:
-		await position(args.flags, True, session)
+		await position(flags, managed = True, session = session)
 	elif args.standalone:
-		await position(args.flags, False, session)
+		await position(flags, managed = True, session = session)
 	else:
-		await entry(args.flags, session)
+		await entry(flags, states, session)
 	logger.info("程序结束")
 
 if __name__ == "__main__":
 	parser = ArgumentParser()
-	parser.add_argument("flags", metavar = "FLAG", type = str, nargs = "*", help = "指定国家或地区旗帜")
+	parser.add_argument("args", type = str, nargs = "*", help = "指定地区或行政区")
 	parser.add_argument("-d", "--debug", action = "store_true", help = "打印调试信息")
 	parser.add_argument("-l", "--local", action = "store_true", help = "仅限本地运行")
 	parser.add_argument("-p", "--position", action = "store_true", help = "寻找普通职位模式")
