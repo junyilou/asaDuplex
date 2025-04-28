@@ -68,7 +68,8 @@ def GenerateLeaderboard(db_filename: str) -> dict[int, list[str]]:
 				bonus += 2 * len(val.split(","))
 		return bonus
 
-	db = loads(db_filename)
+	with open(db_filename) as r:
+		db = loads(json.load(r))
 	for rid, store in db.items():
 		LEADERBOARD[f"R{rid}"] = calculate_bonus(store)
 	return {point: sorted(k for k, v in LEADERBOARD.items() if v == point)
