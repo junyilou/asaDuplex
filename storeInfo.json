@@ -1,5 +1,5 @@
 {
-  "_": "2025-04-17 08:10:37",
+  "_": "2025-04-27 10:01:37",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -2637,6 +2637,7 @@
       "nso": "2005-07-16 10:00",
       "slug": "northbrook",
       "state": "Illinois",
+      "status": "closed",
       "timezone": "America/Chicago"
     },
     "R142": {
@@ -4164,8 +4165,8 @@
     "R257": {
       "city": "Glendale",
       "dieter": {
-        "md5": "8e26e141675667b124de6bca9fe981f8",
-        "modify": "2024-02-08 18:41:37"
+        "md5": "21a0cce3842cfff5f3c0bf42922cc8f8",
+        "modify": "2025-04-25 16:54:21"
       },
       "flag": "🇺🇸",
       "name": "Bayshore",
