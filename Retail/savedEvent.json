@@ -1,5 +1,5 @@
 {
-  "update": "2025-05-02 01:41:38",
+  "update": "2025-05-02 07:11:41",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -351,7 +351,14 @@
       "slug": "spotlight-huangyi-jiafeng-051825"
     }
   },
-  "sitemap": {},
+  "sitemap": {
+    "7318430248139063552": {
+      "names": {
+        "🇯🇵": "はじめよう：耳が不自由な方のためのアクセシビリティ機能"
+      },
+      "slug": "get-started-deaf-hard-of-hearing-accessibility"
+    }
+  },
   "collection": {
     "recycle-renew-reimagine-cn": {
       "🇨🇳": "循环永续，创想无尽"
