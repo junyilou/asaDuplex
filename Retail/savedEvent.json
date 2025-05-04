@@ -1,5 +1,5 @@
 {
-  "update": "2025-05-02 08:28:33",
+  "update": "2025-05-04 07:10:39",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -361,6 +361,36 @@
         "🇹🇼": "輕鬆上手：聾人或聽覺障礙人士適用的輔助使用功能"
       },
       "slug": "get-started-deaf-hard-of-hearing-accessibility"
+    },
+    "7318432184972182016": {
+      "names": {
+        "🇯🇵": "はじめよう：視覚に障がいがある方のためのアクセシビリティ機能"
+      },
+      "slug": "get-started-accessibility-features-vision-loss"
+    },
+    "7318433761401340160": {
+      "names": {
+        "🇯🇵": "はじめよう：認知に関するアクセシビリティ機能"
+      },
+      "slug": "get-started-cognitive-accessibility-features"
+    },
+    "7322519581993304064": {
+      "names": {
+        "🇯🇵": "はじめよう：身体機能に障がいがある方のためのアクセシビリティ機能"
+      },
+      "slug": "get-started-accessibility-features-reduced-mobility"
+    },
+    "7322865211546632192": {
+      "names": {
+        "🇯🇵": "はじめよう：iPhoneとiPadのVoiceOver"
+      },
+      "slug": "get-started-voiceover-on-iphone-ipad"
+    },
+    "7322871958420160512": {
+      "names": {
+        "🇯🇵": "はじめよう：MacのVoiceOver"
+      },
+      "slug": "get-started-voiceover-on-mac"
     }
   },
   "collection": {
