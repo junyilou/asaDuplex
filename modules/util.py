@@ -12,15 +12,16 @@ type SemaphoreType = asyncio.Semaphore
 type SessionType = aiohttp.ClientSession
 type CoroutineType[T] = Coroutine[None, None, T]
 
-browser_agent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) \
-AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15"}
+browser_agent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+	"AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Safari/605.1.15"}
 request_logger = logging.getLogger("util.request")
 
 async def _Container[T](*coros: CoroutineType[T] | Iterable[CoroutineType[T]],
 	limit: Optional[int] = None, return_exceptions: bool = False) -> list[asyncio.Task[T]]:
 	from typing import TypeIs
 	def iscoroutine(obj: Any) -> TypeIs[CoroutineType[Any]]:
-		return asyncio.iscoroutine(obj)
+		from inspect import iscoroutinefunction
+		return iscoroutinefunction(obj)
 	async def task(coro: CoroutineType[T],
 		semaphore: Optional[SemaphoreType] = None) -> T:
 		async with with_semaphore(semaphore):
@@ -60,7 +61,9 @@ async def AsyncGather[T](*coros: CoroutineType[T] | Iterable[CoroutineType[T]],
 			if return_exceptions:
 				results.append(ce.args[0])
 			else:
-				raise ce.args[0] from None
+				if ce.args:
+					raise ce.args[0] from None
+				raise ce from None
 		except Exception as exp:
 			if not return_exceptions:
 				raise exp from None
@@ -122,9 +125,9 @@ def bitsize(integer: int | float, width: int = 8, precision: int = 2, ks: float 
 		unit += 1
 	return f"{integer:{width}.{precision}f} {order[unit]:<2}"
 
-def disMarkdown(text: str, wrap: str = "", extra: str = "") -> str:
-	signs = "\\|_{}[]()#@+-.!=<>~" + extra
-	text = text.translate({ord(s): f"\\{s}" for s in signs})
+def disMarkdown(text: str, *, wrap: str = "", extra: str = "", remove: str = "") -> str:
+	signs = "\\|_{}[]()#@+-.!=<>~`" + extra
+	text = text.translate({ord(s): f"\\{s}" for s in signs if s not in remove})
 	return wrap + text + wrap[::-1]
 
 @asynccontextmanager
