@@ -1,5 +1,5 @@
 {
-  "_": "2025-04-27 10:01:37",
+  "_": "2025-05-17 08:10:38",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -3824,8 +3824,8 @@
     "R231": {
       "city": "San Mateo",
       "dieter": {
-        "md5": "a85d51209a3966be743ae07ccfe79b36",
-        "modify": "2024-02-08 18:41:37"
+        "md5": "ba1189f29862fd0d4079f2efb20ae58e",
+        "modify": "2025-05-12 22:54:09"
       },
       "events": [
         {
@@ -6123,8 +6123,8 @@
     "R424": {
       "city": "Bordeaux",
       "dieter": {
-        "md5": "c0da650252375bfd374a1d3533c6e0d3",
-        "modify": "2024-02-08 18:41:41"
+        "md5": "a7cb27ac283a28cbbfb9913f0e34bd21",
+        "modify": "2025-05-15 02:23:40"
       },
       "flag": "🇫🇷",
       "name": "Sainte-Catherine (FR)",
