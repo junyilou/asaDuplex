@@ -434,8 +434,9 @@ class Course(TodayObject):
 			stores = [Store(store = i) for i in raw_stores]
 		elif stores:
 			raw_stores = [i.raw_store for i in stores]
+		rp_mapping: dict[Raw_Store, str] = {r.raw_store: r.rootPath for r in stores}
 		async with get_session(session) as session:
-			tasks = (self.getSchedules(Store(store = i), ensure = not fast,
+			tasks = (self.getSchedules(Store(store = i, rootPath = rp_mapping[i]), ensure = not fast,
 				date = date, session = session, semaphore = semaphore) for i in Peers(raw_stores, fast))
 			results = await AsyncGather(tasks, return_exceptions = True)
 		return sorted(k for k in {i for j in (r for r in results if not isinstance(r, Exception))
@@ -615,7 +616,7 @@ class Collection(TodayObject):
 			results = [i for i in results if i.rawStart.date() == date.date()]
 		return results
 
-	async def getMultipleSchedules(self,
+	async def getMultipleSchedules(self, *,
 		raw_stores: list[Raw_Store] = [],
 		stores: list[Store] = [],
 		date: Optional[datetime] = None, fast: bool = True,
@@ -626,8 +627,10 @@ class Collection(TodayObject):
 
 	async def getCourses(self, rootPath: Optional[str] = None, fast: bool = False,
 		session: Optional[SessionType] = None) -> list[Course]:
-		stores = storeReturn(todayNation[rootPath or self.rootPath], opening = True)
-		schedules = await self.getMultipleSchedules(stores, fast = fast, session = session)
+		rp = self.rootPath if rootPath is None else rootPath
+		raw_stores = storeReturn(todayNation[rp], opening = True)
+		stores = [Store(store = s, rootPath = rp) for s in raw_stores]
+		schedules = await self.getMultipleSchedules(stores = stores, fast = fast, session = session)
 		return sorted({schedule.course for schedule in schedules})
 
 class Sitemap(TodayObject):
