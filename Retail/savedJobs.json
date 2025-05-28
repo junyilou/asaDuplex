@@ -105,10 +105,8 @@
         }
       },
       "positions": {
-        "114437985": "au-operations-expert",
         "114437988": "au-manager",
         "114437991": "au-specialist-full-time-or-part-time-permanent-or-temporary",
-        "114438198": "au-technical-specialist",
         "114438252": "au-senior-manager"
       }
     },
@@ -148,7 +146,6 @@
       },
       "positions": {
         "114438175": "br-business-expert",
-        "114438176": "br-specialist",
         "114438177": "br-expert",
         "114438178": "br-genius",
         "114438179": "br-creative",
@@ -218,8 +215,6 @@
         }
       },
       "positions": {
-        "114437994": "ca-business-expert",
-        "114437995": "ca-creative",
         "114437996": "ca-expert",
         "114437997": "ca-genius",
         "114437998": "ca-operations-expert",
@@ -430,8 +425,6 @@
       "positions": {
         "114438021": "cn-creative",
         "114438022": "cn-expert",
-        "114438023": "cn-genius",
-        "114438024": "cn-operations-expert",
         "114438027": "cn-manager",
         "114438029": "cn-store-leader",
         "114438030": "cn-specialist-full-time-and-part-time",
@@ -841,10 +834,8 @@
       "positions": {
         "114438135": "uk-business-expert",
         "114438136": "uk-creative",
-        "114438137": "uk-expert",
         "114438138": "uk-genius",
         "114438145": "uk-specialist-full-time-part-time-and-part-time-temporary",
-        "114438202": "uk-technical-specialist",
         "200125450": "uk-business-pro"
       }
     },
@@ -1135,14 +1126,13 @@
         }
       },
       "positions": {
-        "200449996": "my-creative",
         "200450000": "my-genius",
         "200450003": "my-specialist-full-time-or-part-time-permanent-or-temporary",
         "200450004": "my-expert",
         "200450008": "my-technical-specialist",
         "200450011": "my-business-expert",
-        "200450016": "my-business-pro",
-        "200450018": "my-operations-expert"
+        "200450018": "my-operations-expert",
+        "200450020": "my-ops-specialist"
       }
     },
     "🇳🇱": {
@@ -1801,12 +1791,10 @@
         "114438149": "us-creative",
         "114438150": "us-expert",
         "114438151": "us-genius",
-        "114438152": "us-operations-expert",
         "114438158": "us-specialist-full-time-part-time-and-part-time-temporary",
-        "114438201": "us-technical-specialist",
         "200125453": "us-business-pro"
       }
     }
   },
-  "update": "2025-04-11 10:11:50"
+  "update": "2025-05-28 15:03:15"
 }

@@ -168,19 +168,20 @@ class Locale:
 	region: Region
 	data: RegionDict = field(repr = False)
 	updated: bool = False
-	states: list[State] = field(default_factory = list, repr = False)
-	state_codes: list[str] = field(default_factory = list, repr = False)
+	states_to_run: list[str] = field(default_factory = list, repr = False)
 	new_stores: list[Store] = field(default_factory = list, repr = False)
+	states: list[State] = field(init = False, repr = False)
 	positions: Sequence[Position] = field(init = False, repr = False)
 	position: Optional[Position] = field(init = False, repr = False)
 
 	def __post_init__(self) -> None:
+		states: list[State] = []
 		for code, state in self.data["locations"].items():
-			if code not in self.state_codes:
-				continue
 			inst = State(code, state["name"], self.region)
 			inst.stores = {code: Store(code, name, inst) for code, name in state["stores"].items()}
-			self.states.append(inst)
+			states.append(inst)
+		self.states = states
+		self.states_to_run = [state.code for state in states]
 		self.positions = [Position(id, slug, self.region) for id, slug in self.data["positions"].items()]
 
 	async def choose_position(self, session: Optional[SessionType] = None) -> Optional[Position]:
@@ -243,18 +244,20 @@ class Locale:
 				elif (store.name != state.stores[code].name):
 					self.updated = True
 					logger.info(f"[更新名称] {code}: {state.stores[code].name} -> {store.name}")
+			if removal := [i for i in state.stores if i not in remote]:
+				logger.log(18, f"[不存在门店] {", ".join(remote[r].code for r in removal)}")
 			state.stores = remote
 			return new_stores
 
-		if not self.states:
+		if not self.states or not self.states_to_run:
 			return []
 		await self.choose_position(session)
 		if not self.position:
 			return []
 		log_name = f"获取 {self.position}"
 		logger.log(20, f"[开始] {log_name}")
-		results = await AsyncGather((entry(self.position, state) for state in self.states),
-			limit = 10, return_exceptions = True)
+		results = await AsyncGather((entry(self.position, state) for state in self.states
+			if state.code in self.states_to_run), limit = 10, return_exceptions = True)
 		self.new_stores = [store for i in results if not isinstance(i, Exception) for store in i]
 		logger.log(17, f"[完成] {log_name}")
 		return self.new_stores
@@ -277,12 +280,12 @@ def save_db(db: FileDict, locales: list[Locale]) -> None:
 	with open("Retail/savedJobs.json", "w") as w:
 		json.dump(db, w, indent = 2, ensure_ascii = False, sort_keys = True)
 
-def set_logger(args: Namespace) -> None:
+def set_logger(verbosity: int, debug: bool) -> None:
 	from os.path import basename
 	global logger
-	level, datefmt = logging.INFO - args.verbose, "%F %T"
+	level, datefmt = logging.INFO - verbosity, "%F %T"
 	format = "[%(asctime)s %(levelname)s] %(message)s"
-	file_args: dict[str, Any] = {"filename": f"logs/{basename(__file__)}.log", "filemode": "a"} if not args.debug else {}
+	file_args: dict[str, Any] = {"filename": f"logs/{basename(__file__)}.log", "filemode": "a"} if not debug else {}
 	logging.basicConfig(format = format, level = level, datefmt = datefmt, **file_args)
 	for i in range(17, 20):
 		logging.addLevelName(i, "INFO")
@@ -290,8 +293,11 @@ def set_logger(args: Namespace) -> None:
 
 async def entry(flags: list[str], states: list[str], session: SessionType) -> None:
 	db = load_db()
-	states.extend(s for flag in flags if flag in db["regions"] for s in db["regions"][flag]["locations"])
-	locales = [Locale(Regions[i], db["regions"][i], state_codes = states) for i in Regions if not i.isascii()]
+	locales = [Locale(Regions[i], db["regions"][i]) for i in Regions if not i.isascii()]
+	for l in locales:
+		if l.region.flag in flags:
+			continue
+		l.states_to_run = [i for i in states if i in l.states_to_run]
 	await AsyncGather((locale.main(session) for locale in locales), limit = 3)
 	arrival = sorted(((store, locale.position) for locale in locales
 		for store in locale.new_stores if locale.position), key = lambda t: t[1])
@@ -305,10 +311,9 @@ async def entry(flags: list[str], states: list[str], session: SessionType) -> No
 		await async_post(push)
 	save_db(db, locales)
 
-async def position(flags: list[str], managed: bool, session: SessionType) -> None:
+async def position(flags: list[str], managed: Optional[bool], session: SessionType) -> None:
 	db = load_db()
 	locales = [Locale(Regions[i], db["regions"][i]) for i in flags if i in Regions]
-
 	for locale in locales:
 		saved = [p.id for p in locale.positions]
 		later_than = (n := datetime.now()).replace(year = n.year - 1).strftime("%F")
@@ -319,23 +324,25 @@ async def position(flags: list[str], managed: bool, session: SessionType) -> Non
 			continue
 		for pos in positions:
 			if pos.id in saved:
+				logging.log(18, f"[已知职位] {pos.id}: {pos.title}, {pos.location}, {pos.update}")
 				continue
 			logging.info(f"[职位] {pos.id}: {pos.title}, {pos.location}, {pos.update}")
-		if managed != False:
+		if managed is not False:
 			locale.updated = True
 			locale.positions = [p for p in positions if p.managed]
 	save_db(db, locales)
 
 @session_func
 async def main(session: SessionType, args: Namespace) -> None:
-	set_logger(args)
+	set_logger(args.verbose, args.debug)
 	logger.info("程序启动")
-	states = [i for i in args.args if i.startswith("state")]
-	flags = [i for i in args.args if i not in states] or [i for i in Regions if not i.isascii()]
-	if args.position:
-		await position(flags, managed = True, session = session)
-	elif args.standalone:
-		await position(flags, managed = True, session = session)
+	if not args.args:
+		flags, states = [i for i in Regions if not i.isascii()], []
+	else:
+		states = [i for i in args.args if i.startswith("state")]
+		flags = [i for i in args.args if i in Regions]
+	if any((args.position, args.retail, args.standalone)):
+		await position(flags, managed = None if args.retail else args.position, session = session)
 	else:
 		await entry(flags, states, session)
 	logger.info("程序结束")
@@ -343,10 +350,12 @@ async def main(session: SessionType, args: Namespace) -> None:
 if __name__ == "__main__":
 	parser = ArgumentParser()
 	parser.add_argument("args", type = str, nargs = "*", help = "指定地区或行政区")
+	mode_group = parser.add_mutually_exclusive_group()
+	mode_group.add_argument("-p", "--position", action = "store_true", help = "寻找普通职位模式")
+	mode_group.add_argument("-r", "--retail", action = "store_true", help = "寻找所有职位模式")
+	mode_group.add_argument("-s", "--standalone", action = "store_true", help = "寻找独立职位模式")
 	parser.add_argument("-d", "--debug", action = "store_true", help = "打印调试信息")
 	parser.add_argument("-l", "--local", action = "store_true", help = "仅限本地运行")
-	parser.add_argument("-p", "--position", action = "store_true", help = "寻找普通职位模式")
-	parser.add_argument("-s", "--standalone", action = "store_true", help = "寻找独立职位模式")
 	parser.add_argument("-v", "--verbose", action = "count", default = 0, help = "记录调试信息")
 	args = parser.parse_args()
 	asyncio.run(main(args))
