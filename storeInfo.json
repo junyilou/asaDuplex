@@ -1,5 +1,5 @@
 {
-  "_": "2025-05-17 08:10:38",
+  "_": "2025-05-29 10:53:08",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -9108,7 +9108,8 @@
         "Osaka",
         "大阪"
       ],
-      "name": "Store in Osaka",
+      "name": "Umeda",
+      "slug": "umeda",
       "state": "大阪府",
       "status": "future",
       "timezone": "Asia/Tokyo"
