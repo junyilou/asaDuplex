@@ -37,7 +37,7 @@ async def entry(mini: MiniProgram, store: Store, session: SessionType) -> list[A
 		for feature in r["featuredSessionResponse"]["featured"]
 		if feature.get("entityType") == "FEATURED_VIDEO"
 		for assets in feature["assets"] for asset in assets["assets"]
-		if store.region.abbr in asset["locale"]]
+		if store.region.abbr in asset["locale"] and "title" in asset]
 	return assets
 
 async def report(arrivals: list[Asset], master: dict[str, dict[str, str]]) -> None:
