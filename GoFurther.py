@@ -1,88 +1,175 @@
 import asyncio
 import json
 import logging
-from dataclasses import dataclass
+from collections.abc import Mapping, MutableMapping
+from dataclasses import dataclass, field
 from itertools import groupby
+from typing import Any, Literal, Optional, TypedDict, TypeGuard
 
 from modules.miniprogram import Mini, MiniProgram
-from modules.regions import Region
+from modules.regions import Region, RegionList, Regions
 from modules.util import (AsyncGather, SessionType, disMarkdown, session_func,
                           setLogger)
 from storeInfo import Store, storeReturn
 
+type MasterType = MutableMapping[str, MutableMapping[str, Asset]]
+
+class ContentMeta(TypedDict):
+	poster: list[dict[str, str]]
+	transcript: list[dict[str, str]]
+	type: Literal["trailer"]
+
+class ContentDict(TypedDict):
+	id: str
+	locale: str
+	metadata: ContentMeta
+	name: str
+	sortOrder: int
+	sources: list[str]
+	title: str
+
+class AmbientMeta(TypedDict):
+	poster: list[dict[str, str]]
+	type: Literal["ambient"]
+
+class AmbientDict(TypedDict):
+	id: str
+	locale: str
+	metadata: AmbientMeta
+	name: str
+	sortOrder: int
+	sources: list[str]
+
+class ExtraDict(TypedDict, total = False):
+	ambient: str
+	poster: str
+	share: str
+	transcript: str
+
+def guard[T](dct: Mapping[str, Any], key: str, _: type[T]) -> TypeGuard[T]:
+	try:
+		return dct["metadata"]["type"] == key
+	except KeyError:
+		return False
 
 @dataclass(order = True)
 class Asset:
-	region: Region
-	id: str
-	locale: str
-	title: str
-	url: str
-	poster: str
+	collId: str
+	title: str = ""
+	source: str = field(default = "", repr = False)
+	extra: ExtraDict = field(init = False, repr = False)
+	region: Region = field(init = False)
 
+	def __post_init__(self) -> None:
+		self.extra = {}
+
+	@property
+	def index(self) -> tuple[str, str]:
+		a, b = self.collId.rsplit("-", 1)
+		return a, b
+
+	@property
 	def teleinfo(self) -> str:
-		title = disMarkdown(self.title, wrap = "*", extra = "*")
-		items = [("视频文件", self.url), ("封面图片", self.poster)]
-		links = " ".join(f"{k} [↗]({v})" for k, v in items if v)
-		body = f"{self.region.flag} *{self.region.name}* {links}"
-		return "\n".join((title, body))
+		body = [f"{self.region.flag} *{self.region.name}*"]
+		items: list[tuple[str, Optional[str]]] = [("播放", self.source),
+			("封面", self.extra.get("poster")), ("封面视频", self.extra.get("ambient"))]
+		for k, v in items:
+			if v:
+				body.append(f"{k} [↗]({v})")
+		return " ".join(body)
 
-async def entry(mini: MiniProgram, store: Store, session: SessionType) -> list[Asset]:
-	logging.info(f"正请求 {store.region} ({store.rid})")
-	r = await mini.request("miniprogram/todayatapple/p/wechat/featured", session,
-		assert_keyword = "featuredSessionResponse", params = {"store": store.rid})
-	assets = [Asset(region = store.region, id = asset["id"], locale = asset["locale"],
-		title = asset["title"], url = asset["sources"][0], poster = next(
-		(s for p in asset["metadata"]["poster"] if (s := p.get("source"))), ""))
-		for feature in r["featuredSessionResponse"]["featured"]
-		if feature.get("entityType") == "FEATURED_VIDEO"
-		for assets in feature["assets"] for asset in assets["assets"]
-		if store.region.abbr in asset["locale"] and "title" in asset]
-	return assets
+async def entry(store: Store, mini: MiniProgram, session: SessionType) -> list[Asset]:
+	try:
+		logging.info(f"正请求 {store.region}")
+		r = await mini.request("miniprogram/todayatapple/p/wechat/featured", session,
+			assert_keyword = "featuredSessionResponse", params = {"store": store.rid})
+	except AssertionError:
+		logging.debug(f"请求 {store.region} 不成功")
+		return []
+	results: list[Asset] = []
+	j = r["featuredSessionResponse"]["featured"]
+	for item in j:
+		if item.get("entityType") != "FEATURED_VIDEO":
+			continue
+		data = item["assets"][0]
+		inst = Asset(collId = data["collateralId"])
+		inst.region = store.region
+		assets: list[ContentDict | AmbientDict] = data["assets"]
+		for asset in assets:
+			if guard(asset, "trailer", ContentDict):
+				inst.title = asset.get("title", inst.collId).translate({0xa0: " "})
+				inst.source = asset["sources"][0]
+				for key in ("poster", "transcript"):
+					if key in asset["metadata"]:
+						inst.extra[key] = asset["metadata"][key][0]["source"]
+			if guard(asset, "ambient", AmbientDict):
+				inst.extra["ambient"] = asset["sources"][0]
+		try:
+			inst.extra["share"] = data["shareUrls"]["asa"]
+		except KeyError:
+			pass
+		try:
+			assert inst.title, "标题为空"
+			assert inst.source, "资源链接为空"
+		except AssertionError as e:
+			logging.error(f"资源信息不完整 {inst.collId} @ {store.region}: {e}")
+		else:
+			results.append(inst)
+	return results
 
-async def report(arrivals: list[Asset], master: dict[str, dict[str, str]]) -> None:
+async def report(arrivals: list[Asset]) -> None:
 	from bot import async_post, chat_ids
 
-	body = [f"*Apple Store \\#深入探索*\n找到 {len(arrivals)} 个新资源"]
-	for a in arrivals:
-		master.setdefault(a.region.flag, {})[a.id] = a.url
-		body.append(a.teleinfo())
-	poster = next((a.poster for a in arrivals if a.poster), None)
-	push = {"mode": "text", "text": "\n\n".join(body), "chat_id": chat_ids[0], "parse": "MARK"}
-	if poster:
-		push["mode"], push["image"] = "photo", poster
-	await async_post(push)
+	preferred_regions = [Regions["🇨🇳"], Regions["🇺🇸"], *RegionList]
+	for _, combined in groupby(arrivals, key = lambda k: k.index[0]):
+		sorted_assets = sorted(combined, key = lambda k: preferred_regions.index(k.region))
+		title = sorted_assets[0].title
+		lines = "\n".join(a.teleinfo for a in sorted_assets)
+		text = f"*Apple Store \\#深入探索*\n\n{disMarkdown(title, extra = "*", wrap = "*")}\n{lines}"
+		poster = next((i for i in (a.extra.get("poster") for a in sorted_assets) if i), None)
+		push = {"mode": "text", "text": text, "chat_id": chat_ids[0], "parse": "MARK"}
+		if poster:
+			push["mode"], push["image"] = "photo", poster
+		await async_post(push)
 
 @session_func
 async def main(session: SessionType) -> None:
-	with open("gofurther.json") as r:
-		j: dict[str, dict[str, str]] = json.load(r)
-
-	mini = await Mini(session)
-	if not mini.prefix:
-		logging.error("加载小程序前缀失败")
-		return
-
+	with open("Retail/gofurther.json") as r:
+		db: dict[str, dict[str, str]] = json.load(r)
+	mini = await Mini()
 	lst = [next(r) for _, r in groupby(storeReturn(opening = 1), key = lambda k: k.flag)]
-	results = await AsyncGather((entry(mini, s, session) for s in lst),
-		limit = 10, return_exceptions = True)
+	results = await AsyncGather((entry(store, mini, session) for store in lst),
+		limit = 3, return_exceptions = False)
+	assets = sorted((i for j in results for i in j), key = lambda x: x.index)
 
 	arrivals: list[Asset] = []
-	for s, r in zip(lst, results):
-		region, result = s.region, [] if isinstance(r, Exception) else r
-		arrivals.extend(r for r in result if r.id not in j.get(region.flag, {}))
-	arrivals.sort()
+	for asset in assets:
+		local = None
+		slug, _ = asset.index
+		rp = asset.region.abbr.lower()
+		try:
+			local = db[slug][rp]
+			assert local == asset.source
+			continue
+		except AssertionError:
+			exists = True
+		except KeyError:
+			exists = False
+		if exists:
+			logging.info(f"变更资源 {slug},{rp} {local} -> {asset.source}")
+		else:
+			logging.info(f"新资源 {asset!r}")
+		arrivals.append(asset)
+		db.setdefault(slug, {})[rp] = asset.source
 
-	if not arrivals:
-		logging.info("没有找到新资源")
-		return
-	logging.info(f"找到 {len(arrivals)} 个新资源")
-	await report(arrivals, j)
-	logging.info("写入文件")
-	with open("gofurther.json", "w") as w:
-		json.dump(j, w, indent = 2, ensure_ascii = False, sort_keys = True)
+	if arrivals:
+		await report(arrivals)
 
-setLogger(logging.INFO, __file__, base_name = True)
-logging.info("程序启动")
-asyncio.run(main())
-logging.info("程序结束")
+	with open("Retail/gofurther.json", "w") as w:
+		json.dump(db, w, indent = 2, ensure_ascii = False, sort_keys = True)
+
+if __name__ == "__main__":
+	setLogger(logging.INFO, __file__, base_name = True)
+	logging.info("程序启动")
+	asyncio.run(main())
+	logging.info("程序结束")
