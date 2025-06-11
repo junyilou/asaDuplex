@@ -1,7 +1,7 @@
 import asyncio
 import json
 import logging
-from collections.abc import Mapping, MutableMapping
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from itertools import groupby
 from typing import Any, Literal, Optional, TypedDict, TypeGuard
@@ -11,8 +11,6 @@ from modules.regions import Region, RegionList, Regions
 from modules.util import (AsyncGather, SessionType, disMarkdown, session_func,
                           setLogger)
 from storeInfo import Store, storeReturn
-
-type MasterType = MutableMapping[str, MutableMapping[str, Asset]]
 
 class ContentMeta(TypedDict):
 	poster: list[dict[str, str]]
