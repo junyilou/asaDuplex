@@ -7,8 +7,19 @@
     "sg": "https://digitalassets-taa.cdn-apple.com/en/sg/accessibility-2025-sg$en_SG$video$trailer$accessibility-2025-sg-tpl-cc-sg-2025/EN4Accessibility-TAA-ww-2025_9x16_SG_360x640h.m3u8",
     "us": "https://digitalassets-taa.cdn-apple.com/en/us/accessibility-2025-us$en_US$video$trailer$accessibility-2025-us-tpl-cc-us-2025/EN4Accessibility-TAA-us-2025_9x16_360x640h.m3u8"
   },
+  "accessibility-2025-v1": {
+    "ae": "https://digitalassets-taa.cdn-apple.com/en/ae/accessibility-2025-v1-ae$en_AE$video$trailer$accessibility-2025-v1-ae-tpl-cc-ae-2025/EN4Accessibility-TAA-ww-2025_9x16_AE_540x960.m3u8",
+    "au": "https://digitalassets-taa.cdn-apple.com/en/au/accessibility-2025-v1-au$en_AU$video$trailer$accessibility-2025-v1-au-tpl-cc-au-2025/EN4Accessibility-TAA-ww-2025_9x16_AU_720x1280h.m3u8",
+    "gb": "https://digitalassets-taa.cdn-apple.com/en/gb/accessibility-2025-v1-uk$en_GB$video$trailer$accessibility-2025-v1-uk-tpl-cc-gb-2025/EN4Accessibility-TAA-ww-2025_9x16_UK_540x960.m3u8",
+    "my": "https://digitalassets-taa.cdn-apple.com/en/my/accessibility-2025-v1-my$en_MY$video$trailer$accessibility-2025-v1-my-tpl-cc-my-2025/EN4Accessibility-TAA-ww-2025_9x16_MY_360x640h.m3u8",
+    "sg": "https://digitalassets-taa.cdn-apple.com/en/sg/accessibility-2025-v1-sg$en_SG$video$trailer$accessibility-2025-v1-sg-tpl-cc-sg-2025/EN4Accessibility-TAA-ww-2025_9x16_SG_360x640h.m3u8",
+    "us": "https://digitalassets-taa.cdn-apple.com/en/us/accessibility-2025-v1-us$en_US$video$trailer$accessibility-2025-v1-us-tpl-cc-us-2025/EN4Accessibility-TAA-us-2025_9x16_360x640h.m3u8"
+  },
   "accessibility-2025-v2": {
     "in": "https://digitalassets-taa.cdn-apple.com/en/in/accessibility-2025-v2-in$en_IN$video$trailer$accessibility-2025-v2-in-tpl-cc-in-2025/EN4Accessibility-TAA-ww-2025_9x16_IN_9x16.m3u8"
+  },
+  "accessibility-2025-v3": {
+    "in": "https://digitalassets-taa.cdn-apple.com/en/in/accessibility-2025-v3-in$en_IN$video$trailer$accessibility-2025-v3-in-tpl-cc-in-2025/EN4Accessibility-TAA-ww-2025_9x16_IN_9x16.m3u8"
   },
   "asa-accessibility-fy2025": {
     "cn": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-accessibility-fy2025-cn-tpl-cc-cn-25.mp4"
@@ -54,6 +65,17 @@
     "my": "https://digitalassets-taa.cdn-apple.com/en/my/asa-drawing-tips-2025-my$en_MY$video$trailer$asa-drawing-tips-2025-my-tpl-cc-my-2025/EN2iPadv2-TAA-IN-2025_9x16_360x640h.m3u8",
     "sg": "https://digitalassets-taa.cdn-apple.com/en/sg/asa-drawing-tips-2025-sg$en_SG$video$trailer$asa-drawing-tips-2025-sg-tpl-cc-sg-2025/EN2iPadv2-TAA-SG-2025_9x16_360x640h.m3u8",
     "us": "https://digitalassets-taa.cdn-apple.com/en/us/asa-drawing-tips-2025-us$en_US$video$trailer$asa-drawing-tips-2025-us-tpl-cc-us-2025/EN2iPadv2-TAA-US-2025_9x16_480x848h.m3u8"
+  },
+  "asa-drawing-tips-2025-v1": {
+    "ae": "https://digitalassets-taa.cdn-apple.com/en/ae/asa-drawing-tips-2025-v1-ae$en_AE$video$trailer$asa-drawing-tips-2025-v1-ae-tpl-cc-ae-2025/EN2iPadv2-TAA-AE-2025_9x16_360x640h.m3u8",
+    "au": "https://digitalassets-taa.cdn-apple.com/en/au/asa-drawing-tips-2025-v1-au$en_AU$video$trailer$asa-drawing-tips-2025-v1-au-tpl-cc-au-2025/EN2iPadv2-TAA-AU-2025_9x16_9x16.m3u8",
+    "in": "https://digitalassets-taa.cdn-apple.com/en/in/asa-drawing-tips-2025-v1-in$en_IN$video$trailer$asa-drawing-tips-2025-v1-in-tpl-cc-in-2025/EN2iPadv2-TAA-IN-2025_9x16_360x640h.m3u8",
+    "my": "https://digitalassets-taa.cdn-apple.com/en/my/asa-drawing-tips-2025-v1-my$en_MY$video$trailer$asa-drawing-tips-2025-v1-my-tpl-cc-my-2025/EN2iPadv2-TAA-IN-2025_9x16_360x640h.m3u8",
+    "sg": "https://digitalassets-taa.cdn-apple.com/en/sg/asa-drawing-tips-2025-v1-sg$en_SG$video$trailer$asa-drawing-tips-2025-v1-sg-tpl-cc-sg-2025/EN2iPadv2-TAA-SG-2025_9x16_360x640h.m3u8",
+    "us": "https://digitalassets-taa.cdn-apple.com/en/us/asa-drawing-tips-2025-v1-us$en_US$video$trailer$asa-drawing-tips-2025-v1-us-tpl-cc-us-2025/EN2iPadv2-TAA-US-2025_9x16_480x848h.m3u8"
+  },
+  "asa-drawing-tips-2025-v2": {
+    "gb": "https://digitalassets-taa.cdn-apple.com/en/gb/asa-drawing-tips-2025-v2-uk$en_GB$video$trailer$asa-drawing-tips-2025-v2-uk-tpl-cc-gb-2025/EN2iPadv2-TAA-UK-2025_9x16_540x960.m3u8"
   },
   "asa-fy25-accessibility": {
     "ae": "https://digitalassets-taa.cdn-apple.com/en/ae/asa-fy25-accessibility-ae-tpl-cc-ae-25.mp4",
