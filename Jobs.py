@@ -108,7 +108,7 @@ class Position:
 		locale = self.region.locale.replace("_", "-").lower()
 		return f"https://jobs.apple.com/{locale}/details/{self.id}/{self.slug}"
 
-@dataclass(order = True)
+@dataclass
 class RichPosition(Position):
 	update: str
 	title: str
@@ -204,7 +204,7 @@ class Locale:
 			await API.get_csrf(session)
 			log_name = f"获取职位 {self} (第 {page} 页)"
 			try:
-				logger.log(20, f"[开始] {log_name}")
+				logger.log(19, f"[开始] {log_name}")
 				r = await (API / "search").request(session,
 					method = "POST", log_name = log_name, json = data)
 				logger.log(17, f"[完成] {log_name}")
@@ -230,7 +230,8 @@ class Locale:
 			results.extend(positions)
 			page += 1
 		l = (i for i in results if managed is not False or i.update >= later_than)
-		return sorted(i for i in l if managed is None or i.managed == managed)
+		return sorted((i for i in l if managed is None or i.managed == managed),
+			key = lambda r: (r.update, r.id))
 
 	async def main(self, session: Optional[SessionType] = None) -> list[Store]:
 		async def entry(position: Position, state: State) -> list[Store]:
@@ -255,7 +256,7 @@ class Locale:
 		if not self.position:
 			return []
 		log_name = f"获取 {self.position}"
-		logger.log(20, f"[开始] {log_name}")
+		logger.log(19, f"[开始] {log_name}")
 		results = await AsyncGather((entry(self.position, state) for state in self.states
 			if state.code in self.states_to_run), limit = 10, return_exceptions = True)
 		self.new_stores = [store for i in results if not isinstance(i, Exception) for store in i]
