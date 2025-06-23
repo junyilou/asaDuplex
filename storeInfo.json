@@ -1,5 +1,5 @@
 {
-  "_": "2025-06-07 08:10:39",
+  "_": "2025-06-20 11:54:45",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -1624,9 +1624,14 @@
     "R086": {
       "city": "Tucson",
       "dieter": {
-        "md5": "d857846d1f158a97c50793f9a46322b7",
-        "modify": "2025-06-06 15:02:33"
+        "md5": "dd8895acfeb1e0c199bf24f7f8fcb958",
+        "modify": "2025-06-16 14:22:50"
       },
+      "events": [
+        {
+          "2025-06-14": "rebuild"
+        }
+      ],
       "flag": "🇺🇸",
       "name": "La Encantada",
       "nso": "2004-01-24 10:00",
@@ -3328,6 +3333,11 @@
         "md5": "4b6fc44997e21e1079dfcf56e44edfca",
         "modify": "2025-03-25 18:18:54"
       },
+      "events": [
+        {
+          "2025-03-22": "move"
+        }
+      ],
       "flag": "🇺🇸",
       "name": "Crocker Park",
       "nso": "2008-09-13 10:00",
@@ -5692,9 +5702,14 @@
     "R386": {
       "city": "Perth",
       "dieter": {
-        "md5": "9528504be960d5290a30426ea6993866",
-        "modify": "2024-02-08 18:41:40"
+        "md5": "c8247ff1f07b65e753e3701585f527a3",
+        "modify": "2025-06-20 00:06:13"
       },
+      "events": [
+        {
+          "2025-06-27": "move"
+        }
+      ],
       "flag": "🇦🇺",
       "name": "Perth City",
       "nso": "2010-06-26 09:00",
@@ -9155,10 +9170,10 @@
       "timezone": "Asia/Dubai"
     },
     "R787": {
-      "city": "Delhi",
+      "city": "Noida",
       "flag": "🇮🇳",
       "name": "Store in Delhi",
-      "state": "Delhi",
+      "state": "Uttar Pradesh",
       "status": "future",
       "timezone": "Asia/Kolkata"
     },
@@ -9171,7 +9186,7 @@
       "timezone": "Asia/Kolkata"
     },
     "R790": {
-      "city": "Bangalore",
+      "city": "Bengaluru",
       "flag": "🇮🇳",
       "name": "Store in Bangalore",
       "state": "Karnataka",
