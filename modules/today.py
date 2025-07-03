@@ -1,6 +1,7 @@
 import asyncio
 import json
 import re
+from collections.abc import MutableMapping
 from datetime import datetime
 from typing import Any, Literal, Optional, Self, Sequence
 from zoneinfo import ZoneInfo
@@ -224,12 +225,15 @@ class Store(TodayObject):
 	def __repr__(self) -> str:
 		return f'<Store "{self.name}" ({self.sid}), "{self.slug}", "{self.rootPath}">'
 
-	async def getCourses(self, ensure: bool = True, session: Optional[SessionType] = None) -> list["Course"]:
+	async def getCourses(self, ensure: bool = True,
+		session: Optional[SessionType] = None,
+		semaphore: Optional[SemaphoreType] = None) -> list["Course"]:
 		try:
 			nearby = {"nearby": "true"} if not ensure else {}
-			r = await request(session = session, headers = browser_agent,
-				url = (API["landing"]["store" if ensure else "nearby"]).format(
-				STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
+			async with with_semaphore(semaphore):
+				r = await request(session = session, headers = browser_agent,
+					url = (API["landing"]["store" if ensure else "nearby"]).format(
+					STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
 			remote = json.loads(Space(r))
 			assert "courses" in remote
 		except:
@@ -241,12 +245,14 @@ class Store(TodayObject):
 	async def getSchedules(self, ensure: bool = True,
 		date: Optional[datetime] = None,
 		covered_store_list: Optional[list[str]] = None,
-		session: Optional[SessionType] = None) -> list["Schedule"]:
+		session: Optional[SessionType] = None,
+		semaphore: Optional[SemaphoreType] = None) -> list["Schedule"]:
 		try:
 			nearby = {"nearby": "true"} if not ensure else {}
-			r = await request(session = session, headers = browser_agent,
-				url = (API["landing"]["store" if ensure else "nearby"]).format(
-				STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
+			async with with_semaphore(semaphore):
+				r = await request(session = session, headers = browser_agent,
+					url = (API["landing"]["store" if ensure else "nearby"]).format(
+					STORESLUG = self.slug, ROOTPATH = self.rootPath, **nearby), **PARAM)
 			remote = json.loads(Space(r))
 			assert "schedules" in remote
 		except:
@@ -274,9 +280,11 @@ class Store(TodayObject):
 		self.coord = [i[1] for i in sorted(d["geolocation"].items())]
 		return self.coord
 
-	async def getCovering(self, graph: dict[str, list[str]] = {}) -> list[str]:
+	async def getCovering(self, graph: MutableMapping[str, list[str]] = {},
+		session: Optional[SessionType] = None, semaphore: Optional[SemaphoreType] = None) -> list[str]:
 		results: list[str] = []
-		_ = await self.getSchedules(ensure = False, covered_store_list = results)
+		_ = await self.getSchedules(ensure = False, covered_store_list = results,
+			session = session, semaphore = semaphore)
 		results = sorted(r for r in results if (s := getRaw_Store(r)) and s.isOpen)
 		graph[self.sid] = results
 		return results
