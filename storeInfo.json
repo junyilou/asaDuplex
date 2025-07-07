@@ -1,5 +1,5 @@
 {
-  "_": "2025-06-27 21:40:10",
+  "_": "2025-07-03 07:40:08",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -9118,15 +9118,20 @@
     },
     "R768": {
       "city": "大阪市",
+      "dieter": {
+        "md5": "4e7e50b9e2bfc3923e00d8dcf4a00b28",
+        "modify": "2025-07-02 23:00:09"
+      },
       "flag": "🇯🇵",
       "keyword": [
         "Osaka",
         "大阪"
       ],
-      "name": "Umeda",
+      "name": "梅田",
+      "name_eng": "Umeda",
+      "nso": "2025-07-26 10:00",
       "slug": "umeda",
       "state": "大阪府",
-      "status": "future",
       "timezone": "Asia/Tokyo"
     },
     "R770": {
