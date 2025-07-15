@@ -19,6 +19,7 @@ class StoreDict(TypedDict, total = False):
 	events: list[dict[str, str]]
 	flag: Required[str]
 	keyword: list[str]
+	kiosk: int
 	name: Required[str]
 	name_alt: list[str]
 	name_eng: str
@@ -61,6 +62,7 @@ class Store:
 		self.events = [(dt, typ) for event in events for dt, typ in event.items()]
 		self.flag = dct["flag"]
 		self.keyword = dct.get("keyword", [])
+		self.kiosk = dct.get("kiosk")
 		self.name = dct["name"]
 		self.name_alt = dct.get("name_alt", [])
 		self.name_eng = dct.get("name_eng", self.name)

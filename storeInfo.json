@@ -1,5 +1,5 @@
 {
-  "_": "2025-07-03 07:40:08",
+  "_": "2025-07-15 20:15:03",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -13,6 +13,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 33909,
       "name": "Glendale Galleria",
       "name_alt": [
         "Glendale"
@@ -35,6 +36,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 43803,
       "name": "Palo Alto",
       "nso": "2001-10-10 10:00",
       "slug": "paloalto",
@@ -53,6 +55,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 98764,
       "name": "Bellevue Square",
       "nso": "2003-05-10 09:30",
       "slug": "bellevuesquare",
@@ -71,6 +74,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 59579,
       "name": "South Coast Plaza",
       "nso": "2001-12-01 10:00",
       "slug": "southcoastplaza",
@@ -89,6 +93,7 @@
         "名古屋",
         "爱知"
       ],
+      "kiosk": 29375,
       "name": "名古屋栄",
       "name_eng": "Nagoya Sakae",
       "nso": "2005-01-22 10:00",
@@ -109,6 +114,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 67229,
       "name": "Lenox Square",
       "nso": "2002-05-11 10:00",
       "slug": "lenoxsquare",
@@ -127,6 +133,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 41899,
       "name": "Mall of America",
       "nso": "2001-08-11 09:00",
       "slug": "mallofamerica",
@@ -146,6 +153,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 36646,
       "name": "Willow Bend",
       "nso": "2001-08-03 10:00",
       "slug": "willowbend",
@@ -165,6 +173,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 43820,
       "name": "Easton Town Center",
       "name_alt": [
         "Easton"
@@ -186,6 +195,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 34096,
       "name": "Tysons Corner",
       "name_alt": [
         "Tysons"
@@ -210,6 +220,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 43786,
       "name": "MarketStreet",
       "name_alt": [
         "Northshore"
@@ -231,6 +242,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 59426,
       "name": "The Falls",
       "nso": "2001-11-23 08:00",
       "slug": "thefalls",
@@ -249,6 +261,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 58100,
       "name": "Tice's Corner",
       "name_alt": [
         "Tice's"
@@ -273,6 +286,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 104646,
       "name": "Broadway Plaza",
       "name_alt": [
         "Walnut Creek"
@@ -294,6 +308,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 53017,
       "name": "Fashion Island",
       "nso": "2001-11-10 10:00",
       "slug": "fashionisland",
@@ -312,6 +327,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 53000,
       "name": "Walden Galleria",
       "name_alt": [
         "Walden"
@@ -333,6 +349,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 52983,
       "name": "Crossgates",
       "nso": "2001-10-13 10:00",
       "slug": "crossgates",
@@ -351,6 +368,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 43769,
       "name": "Woodfield",
       "nso": "2001-08-23 10:00",
       "slug": "woodfield",
@@ -369,6 +387,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 52949,
       "name": "International Plaza",
       "name_alt": [
         "Plaza"
@@ -390,6 +409,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 52966,
       "name": "Saddle Creek",
       "nso": "2001-10-13 10:00",
       "slug": "saddlecreek",
@@ -408,6 +428,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 60599,
       "name": "CambridgeSide",
       "nso": "2001-12-15 09:00",
       "slug": "cambridgeside",
@@ -426,6 +447,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 147656,
       "name": "Rosedale Center",
       "nso": "2004-07-24 10:00",
       "slug": "rosedalecenter",
@@ -444,6 +466,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 53034,
       "name": "Northridge",
       "nso": "2001-10-20 10:00",
       "slug": "northridge",
@@ -457,6 +480,7 @@
         "modify": "2025-03-20 20:23:32"
       },
       "flag": "🇺🇸",
+      "kiosk": 71479,
       "name": "Wellington Green",
       "nso": "2002-08-17 10:00",
       "slug": "wellingtongreen",
@@ -475,6 +499,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 53068,
       "name": "Westfarms",
       "nso": "2001-10-27 10:00",
       "slug": "westfarms",
@@ -493,6 +518,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 53051,
       "name": "Chandler Fashion Center",
       "name_alt": [
         "Chandler"
@@ -514,6 +540,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 59596,
       "name": "Rockingham Park",
       "nso": "2001-12-08 09:00",
       "slug": "rockinghampark",
@@ -532,6 +559,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 58083,
       "name": "Kenwood Towne Centre",
       "nso": "2001-11-03 10:00",
       "slug": "kenwoodtownecentre",
@@ -550,6 +578,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 102929,
       "name": "Burlingame",
       "nso": "2003-07-26 10:00",
       "slug": "burlingame",
@@ -568,6 +597,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 58066,
       "name": "Aspen Grove",
       "nso": "2001-11-10 10:00",
       "slug": "aspengrove",
@@ -590,6 +620,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 62316,
       "name": "Scottsdale Fashion Square",
       "name_alt": [
         "Biltmore"
@@ -611,6 +642,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 68419,
       "name": "SoHo",
       "nso": "2002-07-18 08:00",
       "slug": "soho",
@@ -629,6 +661,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 153148,
       "name": "Stonestown",
       "nso": "2004-09-25 10:00",
       "slug": "stonestown",
@@ -647,6 +680,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 76919,
       "name": "Pasadena",
       "nso": "2003-01-07 18:00",
       "slug": "pasadena",
@@ -668,6 +702,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 103099,
       "name": "Michigan Avenue",
       "name_alt": [
         "North Michigan Avenue"
@@ -689,6 +724,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 58049,
       "name": "Clarendon",
       "nso": "2001-12-01 10:00",
       "slug": "clarendon",
@@ -710,6 +746,7 @@
       "keyword": [
         "Rome"
       ],
+      "kiosk": 88916,
       "name": "RomaEst",
       "nso": "2007-03-31 09:00",
       "slug": "romaest",
@@ -730,6 +767,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 59239,
       "name": "Valley Fair",
       "nso": "2001-11-23 08:00",
       "slug": "valleyfair",
@@ -748,6 +786,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 59409,
       "name": "Fashion Valley",
       "nso": "2001-11-23 10:00",
       "slug": "fashionvalley",
@@ -766,6 +805,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 71649,
       "name": "Twelve Oaks",
       "nso": "2002-08-31 10:00",
       "slug": "twelveoaks",
@@ -784,6 +824,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 77208,
       "name": "Knox Street",
       "nso": "2003-01-25 10:00",
       "slug": "knoxstreet",
@@ -802,6 +843,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 67246,
       "name": "Short Hills",
       "nso": "2002-06-22 10:00",
       "slug": "shorthills",
@@ -820,6 +862,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 148863,
       "name": "Santa Rosa Plaza",
       "nso": "2004-10-16 10:00",
       "slug": "santarosaplaza",
@@ -838,6 +881,7 @@
         "Munchen",
         "Munich"
       ],
+      "kiosk": 88879,
       "name": "Rosenstraße",
       "name_eng": "Rosenstrasse",
       "nso": "2008-12-06 10:00",
@@ -860,6 +904,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 59749,
       "name": "Nanuet",
       "name_alt": [
         "Palisades"
@@ -881,6 +926,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 77191,
       "name": "Cherry Creek",
       "nso": "2002-11-23 10:00",
       "slug": "cherrycreek",
@@ -906,6 +952,7 @@
         "福冈",
         "福冈天神"
       ],
+      "kiosk": 59550,
       "name": "福岡",
       "name_alt": [
         "福岡天神",
@@ -929,6 +976,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 62299,
       "name": "Southpoint",
       "nso": "2002-03-09 10:00",
       "slug": "southpoint",
@@ -947,6 +995,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 70646,
       "name": "The Grove",
       "nso": "2002-07-26 18:00",
       "slug": "thegrove",
@@ -966,6 +1015,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 104663,
       "name": "Third Street Promenade",
       "nso": "2003-07-11 18:00",
       "slug": "thirdstreetpromenade",
@@ -984,6 +1034,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 802374,
       "name": "Infinite Loop",
       "nso": "2015-09-19 10:00",
       "slug": "infiniteloop",
@@ -1004,6 +1055,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 76256,
       "name": "Millenia",
       "nso": "2002-10-19 10:00",
       "slug": "millenia",
@@ -1022,6 +1074,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 77089,
       "name": "Southdale",
       "nso": "2002-11-02 10:00",
       "slug": "southdale",
@@ -1041,6 +1094,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 76239,
       "name": "Somerset",
       "nso": "2002-10-12 10:00",
       "slug": "somerset",
@@ -1059,6 +1113,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 76273,
       "name": "Oakbrook",
       "nso": "2002-11-29 18:00",
       "slug": "oakbrook",
@@ -1078,6 +1133,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 77140,
       "name": "Bay Street",
       "nso": "2002-11-23 10:00",
       "slug": "baystreet",
@@ -1097,6 +1153,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 72006,
       "name": "Houston Galleria",
       "nso": "2002-09-21 10:00",
       "slug": "houstongalleria",
@@ -1115,6 +1172,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 71666,
       "name": "Mayfair",
       "nso": "2002-08-31 10:00",
       "slug": "mayfair",
@@ -1133,6 +1191,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 70629,
       "name": "Roosevelt Field",
       "nso": "2002-07-20 10:00",
       "slug": "rooseveltfield",
@@ -1152,6 +1211,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 71819,
       "name": "The Westchester",
       "nso": "2002-09-07 10:00",
       "slug": "thewestchester",
@@ -1170,6 +1230,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 72023,
       "name": "West County",
       "nso": "2002-09-21 10:00",
       "slug": "westcounty",
@@ -1188,6 +1249,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 71989,
       "name": "Towson Town Center",
       "name_alt": [
         "Towson"
@@ -1209,6 +1271,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 77106,
       "name": "Fashion Show",
       "nso": "2002-11-02 10:00",
       "slug": "fashionshow",
@@ -1227,6 +1290,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 77174,
       "name": "King of Prussia",
       "nso": "2002-11-09 10:00",
       "slug": "kingofprussia",
@@ -1245,6 +1309,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 77123,
       "name": "The Fashion Mall at Keystone",
       "name_alt": [
         "Keystone"
@@ -1266,6 +1331,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 77157,
       "name": "Menlo Park",
       "nso": "2002-11-09 10:00",
       "slug": "menlopark",
@@ -1284,6 +1350,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 98747,
       "name": "Walt Whitman",
       "nso": "2003-05-10 10:00",
       "slug": "waltwhitman",
@@ -1302,6 +1369,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 126746,
       "name": "Mission Viejo",
       "nso": "2004-02-13 18:00",
       "slug": "missionviejo",
@@ -1320,6 +1388,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 98798,
       "name": "Arden Fair",
       "nso": "2003-05-17 10:00",
       "slug": "ardenfair",
@@ -1338,6 +1407,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 118586,
       "name": "Corte Madera",
       "nso": "2003-11-01 10:00",
       "slug": "cortemadera",
@@ -1357,6 +1427,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 113826,
       "name": "University Village",
       "nso": "2003-09-26 18:00",
       "slug": "universityvillage",
@@ -1375,6 +1446,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 98781,
       "name": "Ala Moana",
       "nso": "2003-05-17 09:30",
       "slug": "alamoana",
@@ -1393,6 +1465,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 104629,
       "name": "Boca Raton",
       "nso": "2003-07-03 18:00",
       "slug": "bocaraton",
@@ -1414,6 +1487,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 127086,
       "name": "Union Square (US)",
       "name_alt": [
         "Union Square",
@@ -1436,6 +1510,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 98815,
       "name": "Chestnut Hill",
       "nso": "2003-06-14 10:00",
       "slug": "chestnuthill",
@@ -1455,6 +1530,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 202057,
       "name": "Pioneer Place",
       "nso": "2005-07-16 09:30",
       "slug": "pioneerplace",
@@ -1473,6 +1549,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 113809,
       "name": "Short Pump Town Center",
       "nso": "2003-09-04 10:00",
       "slug": "shortpumptowncenter",
@@ -1493,6 +1570,7 @@
         "東京",
         "银座"
       ],
+      "kiosk": 10997,
       "name": "銀座",
       "name_eng": "Ginza",
       "nso": "2003-11-30 10:00",
@@ -1515,6 +1593,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 119946,
       "name": "Avalon",
       "name_alt": [
         "North Point"
@@ -1539,6 +1618,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 113843,
       "name": "Eton",
       "name_alt": [
         "Legacy Village"
@@ -1560,6 +1640,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 113860,
       "name": "UTC",
       "nso": "2003-10-24 20:00",
       "slug": "utc",
@@ -1579,6 +1660,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 133869,
       "name": "SouthPark",
       "nso": "2004-03-12 10:00",
       "slug": "southpark",
@@ -1597,6 +1679,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 137099,
       "name": "Montgomery Mall",
       "nso": "2004-05-08 10:00",
       "slug": "montgomerymall",
@@ -1615,6 +1698,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 143559,
       "name": "Barton Creek",
       "nso": "2004-06-12 10:00",
       "slug": "bartoncreek",
@@ -1633,6 +1717,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 118603,
       "name": "La Encantada",
       "nso": "2004-01-24 10:00",
       "slug": "laencantada",
@@ -1652,6 +1737,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 126729,
       "name": "Aventura",
       "nso": "2004-01-31 10:00",
       "slug": "aventura",
@@ -1665,6 +1751,7 @@
         "modify": "2024-05-20 08:32:29"
       },
       "flag": "🇺🇸",
+      "kiosk": 118569,
       "name": "Sagemore",
       "nso": "2003-11-01 10:00",
       "slug": "sagemore",
@@ -1683,6 +1770,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 118620,
       "name": "Old Orchard",
       "nso": "2003-11-07 18:00",
       "slug": "oldorchard",
@@ -1701,6 +1789,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 118637,
       "name": "Washington Square",
       "nso": "2003-11-15 10:00",
       "slug": "washingtonsquare",
@@ -1724,6 +1813,7 @@
         "大阪",
         "心斋桥"
       ],
+      "kiosk": 22252,
       "name": "心斎橋",
       "name_eng": "Shinsaibashi",
       "nso": "2004-08-28 10:00",
@@ -1743,6 +1833,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 63053,
       "name": "Regent Street",
       "nso": "2004-11-20 10:00",
       "slug": "regentstreet",
@@ -1761,6 +1852,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 156140,
       "name": "Danbury Fair Mall",
       "nso": "2004-10-30 10:00",
       "slug": "danburyfairmall",
@@ -1779,6 +1871,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 157500,
       "name": "Victoria Gardens",
       "nso": "2004-10-28 10:00",
       "slug": "victoriagardens",
@@ -1797,6 +1890,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 255437,
       "name": "Fifth Avenue",
       "nso": "2006-05-19 18:00",
       "slug": "fifthavenue",
@@ -1810,6 +1904,7 @@
         "modify": "2024-02-08 18:41:34"
       },
       "flag": "🇺🇸",
+      "kiosk": 149509,
       "name": "Shadyside",
       "nso": "2004-09-04 10:00",
       "slug": "shadyside",
@@ -1828,6 +1923,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 153114,
       "name": "Country Club Plaza",
       "nso": "2004-09-25 10:00",
       "slug": "countryclubplaza",
@@ -1846,6 +1942,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 147639,
       "name": "Stanford Shopping Center",
       "name_alt": [
         "Stanford"
@@ -1870,6 +1967,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 158180,
       "name": "Alderwood",
       "name_alt": [
         "Alderwood Mall"
@@ -1891,6 +1989,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 150903,
       "name": "Stoneridge Mall",
       "nso": "2004-09-18 10:00",
       "slug": "stoneridgemall",
@@ -1910,6 +2009,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 155460,
       "name": "Christiana Mall",
       "nso": "2004-10-16 10:00",
       "slug": "christianamall",
@@ -1928,6 +2028,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 150869,
       "name": "Rockaway",
       "nso": "2004-10-16 10:00",
       "slug": "rockaway",
@@ -1947,6 +2048,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 148829,
       "name": "Bridgewater",
       "nso": "2004-10-16 10:00",
       "slug": "bridgewater",
@@ -1965,6 +2067,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 153165,
       "name": "Oakridge",
       "nso": "2004-10-16 10:00",
       "slug": "oakridge",
@@ -1983,6 +2086,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 150886,
       "name": "Southcenter",
       "nso": "2004-10-16 10:00",
       "slug": "southcenter",
@@ -2004,6 +2108,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5005383,
       "name": "Syracuse",
       "name_alt": [
         "Carousel"
@@ -2025,6 +2130,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 189477,
       "name": "Century City",
       "nso": "2005-06-04 10:00",
       "slug": "centurycity",
@@ -2043,6 +2149,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 158860,
       "name": "Jordan Creek",
       "nso": "2004-11-06 10:00",
       "slug": "jordancreek",
@@ -2061,6 +2168,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 204437,
       "name": "South Shore",
       "nso": "2005-08-06 10:00",
       "slug": "southshore",
@@ -2079,6 +2187,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 177628,
       "name": "St. Johns Town Center",
       "name_alt": [
         "St Johns Town Center"
@@ -2100,6 +2209,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 161240,
       "name": "Bethesda Row",
       "nso": "2004-12-11 10:00",
       "slug": "bethesdarow",
@@ -2118,6 +2228,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 82848,
       "name": "Bluewater",
       "nso": "2005-07-09 09:00",
       "slug": "bluewater",
@@ -2136,6 +2247,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 164997,
       "name": "Saint Louis Galleria",
       "nso": "2004-12-18 08:00",
       "slug": "saintlouisgalleria",
@@ -2154,6 +2266,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 262271,
       "name": "Lincoln Road",
       "nso": "2006-07-21 18:00",
       "slug": "lincolnroad",
@@ -2172,6 +2285,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 262254,
       "name": "Crabtree Valley Mall",
       "nso": "2006-06-24 10:00",
       "slug": "crabtreevalleymall",
@@ -2190,6 +2304,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 235054,
       "name": "Garden State Plaza",
       "nso": "2006-02-04 10:00",
       "slug": "gardenstateplaza",
@@ -2211,6 +2326,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 80517,
       "name": "Birmingham",
       "name_alt": [
         "Bullring"
@@ -2238,6 +2354,7 @@
         "東京",
         "涩谷"
       ],
+      "kiosk": 46630,
       "name": "渋谷",
       "name_eng": "Shibuya",
       "nso": "2005-08-06 10:00",
@@ -2257,6 +2374,7 @@
         }
       ],
       "flag": "🇨🇦",
+      "kiosk": 147299,
       "name": "Yorkdale",
       "nso": "2005-05-21 09:30",
       "slug": "yorkdale",
@@ -2276,6 +2394,7 @@
         }
       ],
       "flag": "🇨🇦",
+      "kiosk": 259619,
       "name": "Eaton Centre",
       "nso": "2006-05-06 09:30",
       "slug": "eatoncentre",
@@ -2294,6 +2413,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 204488,
       "name": "Manhattan Village",
       "nso": "2005-07-30 10:00",
       "slug": "manhattanvillage",
@@ -2312,6 +2432,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 193914,
       "name": "Green Hills",
       "nso": "2005-06-04 10:00",
       "slug": "greenhills",
@@ -2330,6 +2451,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 224888,
       "name": "Beverly Center",
       "nso": "2005-11-19 10:00",
       "slug": "beverlycenter",
@@ -2351,6 +2473,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 227200,
       "name": "City Creek Center",
       "name_alt": [
         "The Gateway"
@@ -2372,6 +2495,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 204471,
       "name": "The Woodlands",
       "nso": "2005-07-30 10:00",
       "slug": "thewoodlands",
@@ -2390,6 +2514,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 184037,
       "name": "The Gardens Mall",
       "nso": "2005-04-23 10:00",
       "slug": "thegardensmall",
@@ -2408,6 +2533,7 @@
         "东京",
         "東京"
       ],
+      "kiosk": 804802,
       "name": "新宿",
       "name_eng": "Shinjuku",
       "nso": "2018-04-07 10:00",
@@ -2427,6 +2553,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 204454,
       "name": "Pentagon City",
       "nso": "2005-08-06 10:00",
       "slug": "pentagoncity",
@@ -2445,6 +2572,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 219414,
       "name": "Penn Square",
       "nso": "2005-09-24 10:00",
       "slug": "pennsquare",
@@ -2458,6 +2586,7 @@
         "modify": "2024-02-08 18:41:35"
       },
       "flag": "🇺🇸",
+      "kiosk": 219040,
       "name": "La Cantera",
       "nso": "2005-09-16 10:00",
       "slug": "lacantera",
@@ -2476,6 +2605,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 199320,
       "name": "Woodland",
       "nso": "2005-06-25 10:00",
       "slug": "woodland",
@@ -2489,6 +2619,7 @@
         "modify": "2024-02-20 08:52:20"
       },
       "flag": "🇺🇸",
+      "kiosk": 806409,
       "name": "Downtown Nashville",
       "nso": "2021-03-29 10:00",
       "slug": "downtownnashville",
@@ -2507,6 +2638,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 193897,
       "name": "Bridgeport Village",
       "nso": "2005-06-04 10:00",
       "slug": "bridgeportvillage",
@@ -2525,6 +2657,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 132391,
       "name": "Glasgow",
       "name_alt": [
         "Buchanan Street"
@@ -2547,6 +2680,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 90248,
       "name": "Trafford Centre",
       "nso": "2005-11-19 10:00",
       "slug": "traffordcentre",
@@ -2565,6 +2699,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 235071,
       "name": "Derby Street",
       "nso": "2006-02-18 10:00",
       "slug": "derbystreet",
@@ -2583,6 +2718,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 255488,
       "name": "Freehold Raceway Mall",
       "nso": "2006-05-27 10:00",
       "slug": "freeholdracewaymall",
@@ -2601,6 +2737,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 286020,
       "name": "Smith Haven",
       "nso": "2006-09-09 10:00",
       "slug": "smithhaven",
@@ -2619,6 +2756,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 202720,
       "name": "Eastview",
       "nso": "2005-07-23 10:00",
       "slug": "eastview",
@@ -2638,6 +2776,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 202074,
       "name": "Northbrook",
       "nso": "2005-07-16 10:00",
       "slug": "northbrook",
@@ -2657,6 +2796,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 213617,
       "name": "Annapolis",
       "nso": "2005-08-27 10:00",
       "slug": "annapolis",
@@ -2675,6 +2815,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 219380,
       "name": "Florida Mall",
       "nso": "2005-09-24 10:00",
       "slug": "floridamall",
@@ -2693,6 +2834,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 235020,
       "name": "NorthPark Center",
       "nso": "2006-03-04 10:00",
       "slug": "northparkcenter",
@@ -2718,6 +2860,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 235037,
       "name": "Irvine Spectrum Center",
       "name_alt": [
         "Irvine Spectrum"
@@ -2739,6 +2882,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 219397,
       "name": "South Hills Village",
       "nso": "2005-09-24 10:00",
       "slug": "southhillsvillage",
@@ -2757,6 +2901,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 226520,
       "name": "Sherman Oaks",
       "nso": "2005-11-19 10:00",
       "slug": "shermanoaks",
@@ -2770,6 +2915,7 @@
         "modify": "2024-02-08 18:41:35"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000012,
       "name": "Boylston Street",
       "nso": "2008-05-15 18:00",
       "slug": "boylstonstreet",
@@ -2795,6 +2941,7 @@
         "宫城",
         "宮城"
       ],
+      "kiosk": 59567,
       "name": "仙台一番町",
       "name_eng": "Sendai Ichibancho",
       "nso": "2005-12-10 10:00",
@@ -2815,6 +2962,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 244897,
       "name": "Southlake Town Square",
       "nso": "2006-04-08 10:00",
       "slug": "southlaketownsquare",
@@ -2828,6 +2976,7 @@
         "modify": "2024-02-08 18:41:35"
       },
       "flag": "🇺🇸",
+      "kiosk": 223120,
       "name": "Staten Island",
       "nso": "2005-10-15 10:00",
       "slug": "statenisland",
@@ -2846,6 +2995,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 91802,
       "name": "Meadowhall",
       "nso": "2005-12-10 09:00",
       "slug": "meadowhall",
@@ -2864,6 +3014,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 224871,
       "name": "The Oaks",
       "nso": "2005-10-29 10:00",
       "slug": "theoaks",
@@ -2882,6 +3033,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 224905,
       "name": "Burlington",
       "nso": "2005-11-05 10:00",
       "slug": "burlington",
@@ -2900,6 +3052,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 226537,
       "name": "Brea Mall",
       "nso": "2005-11-12 10:00",
       "slug": "breamall",
@@ -2924,6 +3077,7 @@
       "keyword": [
         "Zürich"
       ],
+      "kiosk": 5001062,
       "name": "Rennweg",
       "name_alt": [
         "Bahnhofstrasse"
@@ -2940,6 +3094,7 @@
         "modify": "2024-02-08 18:41:35"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000113,
       "name": "The Forum Shops",
       "nso": "2008-08-30 10:00",
       "slug": "theforumshops",
@@ -2953,6 +3108,7 @@
         "modify": "2024-02-08 18:41:35"
       },
       "flag": "🇺🇸",
+      "kiosk": 5003227,
       "name": "Walnut Street",
       "nso": "2010-07-30 17:00",
       "slug": "walnutstreet",
@@ -2971,6 +3127,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 91839,
       "name": "Brent Cross",
       "nso": "2006-01-28 09:00",
       "slug": "brentcross",
@@ -2989,6 +3146,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 260197,
       "name": "Memorial City",
       "nso": "2006-06-17 10:00",
       "slug": "memorialcity",
@@ -3002,6 +3160,7 @@
         "modify": "2024-02-08 18:41:35"
       },
       "flag": "🇺🇸",
+      "kiosk": 255471,
       "name": "Suburban Square",
       "nso": "2006-05-13 10:00",
       "slug": "suburbansquare",
@@ -3020,6 +3179,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 287737,
       "name": "Providence Place",
       "nso": "2006-09-23 10:00",
       "slug": "providenceplace",
@@ -3038,6 +3198,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 287720,
       "name": "Columbia",
       "nso": "2006-09-23 10:00",
       "slug": "columbia",
@@ -3056,6 +3217,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 297954,
       "name": "Waterside Shops",
       "nso": "2007-03-10 10:00",
       "slug": "watersideshops",
@@ -3074,6 +3236,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 255454,
       "name": "Simi Valley",
       "nso": "2006-05-13 09:00",
       "slug": "simivalley",
@@ -3088,6 +3251,7 @@
         "modify": "2024-02-08 18:41:36"
       },
       "flag": "🇺🇸",
+      "kiosk": 294180,
       "name": "Twenty Ninth Street",
       "nso": "2006-10-13 10:00",
       "slug": "twentyninthstreet",
@@ -3106,6 +3270,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 269360,
       "name": "The Pier",
       "nso": "2006-08-19 11:00",
       "slug": "thepier",
@@ -3128,6 +3293,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 114631,
       "name": "Southampton",
       "name_alt": [
         "WestQuay"
@@ -3144,6 +3310,7 @@
         "modify": "2024-02-08 18:41:36"
       },
       "flag": "🇬🇧",
+      "kiosk": 5004397,
       "name": "The Oracle",
       "nso": "2011-06-25 09:30",
       "slug": "theoracle",
@@ -3157,6 +3324,7 @@
         "modify": "2024-02-08 18:41:36"
       },
       "flag": "🇺🇸",
+      "kiosk": 297920,
       "name": "ABQ Uptown",
       "nso": "2006-11-01 10:00",
       "slug": "abquptown",
@@ -3170,6 +3338,7 @@
         "modify": "2024-02-08 18:41:36"
       },
       "flag": "🇫🇷",
+      "kiosk": 5005056,
       "name": "Les Quatre Temps",
       "nso": "2012-05-25 09:00",
       "slug": "lesquatretemps",
@@ -3188,6 +3357,7 @@
         }
       ],
       "flag": "🇦🇺",
+      "kiosk": 5000023,
       "name": "Chadstone",
       "nso": "2008-09-13 10:00",
       "slug": "chadstone",
@@ -3201,6 +3371,7 @@
         "modify": "2024-02-08 18:41:36"
       },
       "flag": "🇺🇸",
+      "kiosk": 255777,
       "name": "FlatIron Crossing",
       "nso": "2006-05-06 10:00",
       "slug": "flatironcrossing",
@@ -3219,6 +3390,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 257800,
       "name": "Ridgedale",
       "nso": "2006-06-10 10:00",
       "slug": "ridgedale",
@@ -3237,6 +3409,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 255760,
       "name": "Perimeter",
       "nso": "2006-06-03 10:00",
       "slug": "perimeter",
@@ -3250,6 +3423,7 @@
         "modify": "2024-02-08 18:41:36"
       },
       "flag": "🇺🇸",
+      "kiosk": 337394,
       "name": "Coconut Point",
       "nso": "2007-02-24 10:00",
       "slug": "coconutpoint",
@@ -3269,6 +3443,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 242160,
       "name": "Shayden Summit",
       "name_alt": [
         "Summit Sierra"
@@ -3290,6 +3465,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 293534,
       "name": "Topanga",
       "nso": "2006-10-06 10:00",
       "slug": "topanga",
@@ -3308,6 +3484,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 287754,
       "name": "Village Pointe",
       "nso": "2006-09-23 10:00",
       "slug": "villagepointe",
@@ -3321,6 +3498,7 @@
         "modify": "2024-08-27 08:45:04"
       },
       "flag": "🇺🇸",
+      "kiosk": 384365,
       "name": "Holyoke",
       "nso": "2007-07-21 10:00",
       "slug": "holyoke",
@@ -3339,6 +3517,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5000127,
       "name": "Crocker Park",
       "nso": "2008-09-13 10:00",
       "slug": "crockerpark",
@@ -3360,6 +3539,7 @@
       "keyword": [
         "Hokkaido"
       ],
+      "kiosk": 76567,
       "name": "札幌",
       "name_eng": "Sapporo",
       "nso": "2006-06-24 10:00",
@@ -3380,6 +3560,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5000015,
       "name": "Royal Hawaiian",
       "nso": "2008-09-27 10:00",
       "slug": "royalhawaiian",
@@ -3394,6 +3575,7 @@
         "modify": "2024-02-08 18:41:36"
       },
       "flag": "🇺🇸",
+      "kiosk": 367280,
       "name": "Higuera Street",
       "nso": "2007-06-09 10:00",
       "slug": "higuerastreet",
@@ -3415,6 +3597,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 262220,
       "name": "SoNo Collection",
       "name_alt": [
         "Stamford"
@@ -3436,6 +3619,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 262237,
       "name": "West Town Mall",
       "nso": "2006-07-01 10:00",
       "slug": "westtownmall",
@@ -3449,6 +3633,7 @@
         "modify": "2024-02-08 18:41:36"
       },
       "flag": "🇺🇸",
+      "kiosk": 357488,
       "name": "Baybrook",
       "nso": "2007-05-12 10:00",
       "slug": "baybrook",
@@ -3462,6 +3647,7 @@
         "modify": "2024-02-08 18:41:36"
       },
       "flag": "🇺🇸",
+      "kiosk": 297937,
       "name": "First Colony Mall",
       "nso": "2006-11-11 10:00",
       "slug": "firstcolonymall",
@@ -3480,6 +3666,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 478477,
       "name": "Cherry Hill",
       "nso": "2008-03-29 10:00",
       "slug": "cherryhill",
@@ -3498,6 +3685,7 @@
         }
       ],
       "flag": "🇨🇦",
+      "kiosk": 428514,
       "name": "Carrefour Laval",
       "nso": "2006-09-09 09:00",
       "slug": "carrefourlaval",
@@ -3516,6 +3704,7 @@
         }
       ],
       "flag": "🇨🇦",
+      "kiosk": 262934,
       "name": "Sherway Gardens",
       "nso": "2006-09-02 09:30",
       "slug": "sherwaygardens",
@@ -3529,6 +3718,7 @@
         "modify": "2024-11-12 22:22:26"
       },
       "flag": "🇨🇦",
+      "kiosk": 5003588,
       "name": "Chinook Centre",
       "nso": "2010-09-29 08:00",
       "slug": "chinookcentre",
@@ -3542,6 +3732,7 @@
         "modify": "2024-02-08 18:41:36"
       },
       "flag": "🇺🇸",
+      "kiosk": 297971,
       "name": "Kahala",
       "nso": "2007-02-10 10:00",
       "slug": "kahala",
@@ -3560,6 +3751,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 282960,
       "name": "MacArthur Center",
       "nso": "2006-09-09 10:00",
       "slug": "macarthurcenter",
@@ -3574,6 +3766,7 @@
         "modify": "2024-02-08 18:41:36"
       },
       "flag": "🇺🇸",
+      "kiosk": 295880,
       "name": "Otay Ranch",
       "nso": "2006-10-27 10:00",
       "slug": "otayranch",
@@ -3587,6 +3780,7 @@
         "modify": "2025-01-31 16:12:41"
       },
       "flag": "🇺🇸",
+      "kiosk": 354717,
       "name": "The Galleria",
       "nso": "2007-04-21 10:00",
       "slug": "thegalleria",
@@ -3605,6 +3799,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 108008,
       "name": "Manchester Arndale",
       "nso": "2006-09-30 09:00",
       "slug": "manchesterarndale",
@@ -3626,6 +3821,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 337411,
       "name": "Domain NORTHSIDE",
       "name_alt": [
         "The Domain"
@@ -3642,6 +3838,7 @@
         "modify": "2024-02-08 18:41:36"
       },
       "flag": "🇺🇸",
+      "kiosk": 423720,
       "name": "Chestnut Street",
       "nso": "2007-11-23 09:00",
       "slug": "chestnutstreet",
@@ -3655,6 +3852,7 @@
         "modify": "2024-05-01 10:57:47"
       },
       "flag": "🇺🇸",
+      "kiosk": 419300,
       "name": "Partridge Creek",
       "nso": "2007-10-18 10:00",
       "slug": "partridgecreek",
@@ -3668,6 +3866,7 @@
         "modify": "2024-02-08 18:41:36"
       },
       "flag": "🇺🇸",
+      "kiosk": 431880,
       "name": "Town Square",
       "nso": "2007-11-14 10:00",
       "slug": "townsquare",
@@ -3687,6 +3886,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5000014,
       "name": "Fairfax Corner",
       "name_alt": [
         "Fair Oaks"
@@ -3715,6 +3915,7 @@
         "東京",
         "涩谷"
       ],
+      "kiosk": 801027,
       "name": "表参道",
       "name_eng": "Omotesando",
       "nso": "2014-06-13 10:00",
@@ -3734,6 +3935,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 354700,
       "name": "The Summit",
       "nso": "2007-04-14 10:00",
       "slug": "thesummit",
@@ -3752,6 +3954,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 5000344,
       "name": "White City",
       "nso": "2008-10-30 09:00",
       "slug": "whitecity",
@@ -3770,6 +3973,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 109229,
       "name": "Bentall Centre",
       "nso": "2007-02-17 09:00",
       "slug": "bentallcentre",
@@ -3788,6 +3992,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 354734,
       "name": "Park Meadows",
       "nso": "2007-04-21 09:30",
       "slug": "parkmeadows",
@@ -3809,6 +4014,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 375780,
       "name": "Hilldale",
       "name_alt": [
         "West Towne"
@@ -3825,6 +4031,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇺🇸",
+      "kiosk": 384348,
       "name": "Briarwood",
       "nso": "2007-07-21 10:00",
       "slug": "briarwood",
@@ -3843,6 +4050,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5000129,
       "name": "Hillsdale",
       "nso": "2008-09-20 10:00",
       "slug": "hillsdale",
@@ -3864,6 +4072,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 390077,
       "name": "Natick",
       "name_alt": [
         "Natick Collection"
@@ -3880,6 +4089,7 @@
         "modify": "2024-05-07 20:32:35"
       },
       "flag": "🇺🇸",
+      "kiosk": 374539,
       "name": "Woodland Hills",
       "nso": "2007-06-29 18:00",
       "slug": "woodlandhills",
@@ -3893,6 +4103,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇺🇸",
+      "kiosk": 5005479,
       "name": "Willow Grove Park",
       "nso": "2012-11-17 10:00",
       "slug": "willowgrovepark",
@@ -3911,6 +4122,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5000176,
       "name": "Lakeside Shopping Center",
       "nso": "2008-09-27 10:00",
       "slug": "lakesideshoppingcenter",
@@ -3924,6 +4136,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇺🇸",
+      "kiosk": 367297,
       "name": "Fashion Fair",
       "nso": "2007-06-09 10:00",
       "slug": "fashionfair",
@@ -3942,6 +4155,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 384314,
       "name": "Orland Square Mall",
       "nso": "2007-07-21 10:00",
       "slug": "orlandsquaremall",
@@ -3960,6 +4174,7 @@
         }
       ],
       "flag": "🇦🇺",
+      "kiosk": 5000004,
       "name": "Sydney",
       "nso": "2008-06-19 17:00",
       "slug": "sydney",
@@ -3981,6 +4196,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 3431594,
       "name": "Liverpool",
       "name_alt": [
         "Liverpool ONE"
@@ -3997,6 +4213,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇺🇸",
+      "kiosk": 384382,
       "name": "Los Gatos",
       "nso": "2007-09-06 18:00",
       "slug": "losgatos",
@@ -4010,6 +4227,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇬🇧",
+      "kiosk": 132465,
       "name": "Lakeside",
       "nso": "2007-10-20 09:00",
       "slug": "lakeside",
@@ -4023,6 +4241,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇬🇧",
+      "kiosk": 5001272,
       "name": "Churchill Square",
       "nso": "2009-07-25 10:00",
       "slug": "churchillsquare",
@@ -4041,6 +4260,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 5003284,
       "name": "Covent Garden",
       "nso": "2010-08-07 10:00",
       "slug": "coventgarden",
@@ -4059,6 +4279,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5000065,
       "name": "Arrowhead",
       "nso": "2008-07-26 10:00",
       "slug": "arrowhead",
@@ -4072,6 +4293,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇨🇦",
+      "kiosk": 5000107,
       "name": "Sainte-Catherine (CA)",
       "name_alt": [
         "Sainte-Catherine"
@@ -4088,6 +4310,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇺🇸",
+      "kiosk": 441757,
       "name": "West 14th Street",
       "nso": "2007-12-07 18:00",
       "slug": "west14thstreet",
@@ -4101,6 +4324,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇺🇸",
+      "kiosk": 5001417,
       "name": "Upper West Side",
       "nso": "2009-11-14 10:00",
       "slug": "upperwestside",
@@ -4114,6 +4338,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇬🇧",
+      "kiosk": 5000194,
       "name": "Bristol",
       "name_alt": [
         "Cabot Circus"
@@ -4135,6 +4360,7 @@
         }
       ],
       "flag": "🇦🇺",
+      "kiosk": 5000010,
       "name": "Chatswood Chase",
       "nso": "2008-08-09 09:00",
       "slug": "chatswoodchase",
@@ -4153,6 +4379,7 @@
         }
       ],
       "flag": "🇦🇺",
+      "kiosk": 5003209,
       "name": "Bondi",
       "nso": "2010-05-28 08:00",
       "slug": "bondi",
@@ -4166,6 +4393,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇬🇧",
+      "kiosk": 132428,
       "name": "Touchwood Centre",
       "nso": "2007-09-22 09:00",
       "slug": "touchwoodcentre",
@@ -4179,6 +4407,7 @@
         "modify": "2025-04-25 16:54:21"
       },
       "flag": "🇺🇸",
+      "kiosk": 374556,
       "name": "Bayshore",
       "nso": "2007-06-29 18:00",
       "slug": "bayshore",
@@ -4197,6 +4426,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 401314,
       "name": "Deer Park",
       "nso": "2007-09-15 10:00",
       "slug": "deerpark",
@@ -4215,6 +4445,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 404017,
       "name": "Mall of Georgia",
       "nso": "2007-09-22 10:00",
       "slug": "mallofgeorgia",
@@ -4228,6 +4459,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇺🇸",
+      "kiosk": 5005212,
       "name": "Ridge Hill",
       "nso": "2012-06-30 10:00",
       "slug": "ridgehill",
@@ -4241,6 +4473,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇺🇸",
+      "kiosk": 5004445,
       "name": "Anchorage 5th Avenue Mall",
       "nso": "2011-08-13 10:00",
       "slug": "anchorage5thavenuemall",
@@ -4254,6 +4487,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇺🇸",
+      "kiosk": 475417,
       "name": "Mall of Louisiana",
       "nso": "2008-03-06 10:00",
       "slug": "malloflouisiana",
@@ -4272,6 +4506,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 390060,
       "name": "Oxmoor",
       "nso": "2007-09-06 18:00",
       "slug": "oxmoor",
@@ -4290,6 +4525,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5000019,
       "name": "Bridge Street",
       "nso": "2008-05-31 10:00",
       "slug": "bridgestreet",
@@ -4303,6 +4539,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇺🇸",
+      "kiosk": 419317,
       "name": "SanTan Village",
       "nso": "2007-10-26 18:00",
       "slug": "santanvillage",
@@ -4321,6 +4558,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 136165,
       "name": "Milton Keynes",
       "nso": "2008-03-01 09:30",
       "slug": "miltonkeynes",
@@ -4334,6 +4572,7 @@
         "modify": "2024-02-08 18:41:37"
       },
       "flag": "🇬🇧",
+      "kiosk": 3431593,
       "name": "Grand Arcade",
       "nso": "2008-03-27 10:00",
       "slug": "grandarcade",
@@ -4352,6 +4591,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5001292,
       "name": "Reston",
       "nso": "2009-08-15 10:00",
       "slug": "reston",
@@ -4370,6 +4610,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 802096,
       "name": "Uptown",
       "nso": "2010-06-19 10:00",
       "slug": "uptown",
@@ -4384,6 +4625,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇨🇦",
+      "kiosk": 378959,
       "name": "West Edmonton",
       "nso": "2008-07-05 10:00",
       "slug": "westedmonton",
@@ -4401,6 +4643,7 @@
         "Geneva",
         "Geneve"
       ],
+      "kiosk": 80964,
       "name": "Rue de Rive",
       "nso": "2008-09-25 17:00",
       "slug": "ruederive",
@@ -4419,6 +4662,7 @@
         }
       ],
       "flag": "🇫🇷",
+      "kiosk": 88842,
       "name": "Carrousel du Louvre",
       "nso": "2009-11-07 10:00",
       "slug": "carrouseldulouvre",
@@ -4433,6 +4677,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇫🇷",
+      "kiosk": 5003195,
       "name": "Opéra",
       "name_eng": "Opera",
       "nso": "2010-07-03 10:00",
@@ -4447,6 +4692,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇮🇹",
+      "kiosk": 5003647,
       "name": "Le Gru",
       "nso": "2010-09-18 09:00",
       "slug": "legru",
@@ -4460,6 +4706,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇬🇧",
+      "kiosk": 136128,
       "name": "Princesshay",
       "nso": "2007-11-24 09:00",
       "slug": "princesshay",
@@ -4478,6 +4725,7 @@
         }
       ],
       "flag": "🇨🇦",
+      "kiosk": 378976,
       "name": "Pacific Centre",
       "nso": "2008-05-24 10:00",
       "slug": "pacificcentre",
@@ -4496,6 +4744,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 406720,
       "name": "Lehigh Valley",
       "nso": "2007-09-29 10:00",
       "slug": "lehighvalley",
@@ -4509,6 +4758,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇺🇸",
+      "kiosk": 5001454,
       "name": "Greenwich Avenue",
       "nso": "2009-11-21 10:00",
       "slug": "greenwichavenue",
@@ -4522,6 +4772,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000028,
       "name": "Leawood",
       "nso": "2008-07-11 08:00",
       "slug": "leawood",
@@ -4535,6 +4786,7 @@
         "modify": "2024-05-01 15:51:51"
       },
       "flag": "🇺🇸",
+      "kiosk": 5003210,
       "name": "Lincoln Park",
       "nso": "2010-10-23 10:00",
       "slug": "lincolnpark",
@@ -4548,6 +4800,7 @@
         "modify": "2024-06-19 17:26:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000177,
       "name": "North County",
       "nso": "2008-09-20 10:00",
       "slug": "northcounty",
@@ -4561,6 +4814,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇺🇸",
+      "kiosk": 5004595,
       "name": "The Promenade at Chenal",
       "nso": "2011-08-27 10:00",
       "slug": "thepromenadeatchenal",
@@ -4574,6 +4828,7 @@
         "modify": "2024-08-21 09:44:57"
       },
       "flag": "🇺🇸",
+      "kiosk": 5002903,
       "name": "Georgetown",
       "nso": "2010-06-18 17:00",
       "slug": "georgetown",
@@ -4595,6 +4850,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5003228,
       "name": "Fritz Farm",
       "name_alt": [
         "Fayette Mall"
@@ -4611,6 +4867,7 @@
         "modify": "2024-02-22 06:58:58"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000013,
       "name": "Brandon",
       "nso": "2008-05-24 10:00",
       "slug": "brandon",
@@ -4624,6 +4881,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000030,
       "name": "North Star",
       "nso": "2008-06-28 10:00",
       "slug": "northstar",
@@ -4642,6 +4900,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5000077,
       "name": "Altamonte",
       "nso": "2008-08-16 10:00",
       "slug": "altamonte",
@@ -4655,6 +4914,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇺🇸",
+      "kiosk": 5001184,
       "name": "Scottsdale Quarter",
       "nso": "2009-06-12 18:00",
       "slug": "scottsdalequarter",
@@ -4668,6 +4928,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000599,
       "name": "Friendly Center",
       "nso": "2009-02-21 10:00",
       "slug": "friendlycenter",
@@ -4681,6 +4942,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000116,
       "name": "Carlsbad",
       "nso": "2008-08-16 10:00",
       "slug": "carlsbad",
@@ -4694,6 +4956,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇺🇸",
+      "kiosk": 5003463,
       "name": "El Paseo Village",
       "nso": "2010-09-04 10:00",
       "slug": "elpaseovillage",
@@ -4707,6 +4970,7 @@
         "modify": "2024-05-30 17:18:39"
       },
       "flag": "🇺🇸",
+      "kiosk": 5001185,
       "name": "Roseville",
       "nso": "2009-06-06 10:00",
       "slug": "roseville",
@@ -4720,6 +4984,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇺🇸",
+      "kiosk": 801369,
       "name": "Franklin Park Mall",
       "nso": "2014-12-06 09:00",
       "slug": "franklinparkmall",
@@ -4733,6 +4998,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇺🇸",
+      "kiosk": 5002947,
       "name": "Los Cerritos",
       "nso": "2010-06-24 07:00",
       "slug": "loscerritos",
@@ -4751,6 +5017,7 @@
         }
       ],
       "flag": "🇨🇦",
+      "kiosk": 5000181,
       "name": "Market Mall",
       "nso": "2008-09-27 09:30",
       "slug": "marketmall",
@@ -4769,6 +5036,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5001294,
       "name": "Stonebriar",
       "nso": "2009-08-29 10:00",
       "slug": "stonebriar",
@@ -4783,6 +5051,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇺🇸",
+      "kiosk": 5003485,
       "name": "Boise Towne Square",
       "nso": "2010-09-11 10:00",
       "slug": "boisetownesquare",
@@ -4796,6 +5065,7 @@
         "modify": "2024-05-13 07:26:50"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000178,
       "name": "Park City",
       "nso": "2008-09-20 09:00",
       "slug": "parkcity",
@@ -4809,6 +5079,7 @@
         "modify": "2024-10-24 17:03:09"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000076,
       "name": "Del Monte",
       "nso": "2008-08-09 10:00",
       "slug": "delmonte",
@@ -4827,6 +5098,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5000128,
       "name": "Maine Mall",
       "nso": "2008-09-13 10:00",
       "slug": "mainemall",
@@ -4840,6 +5112,7 @@
         "modify": "2025-03-13 14:36:59"
       },
       "flag": "🇬🇧",
+      "kiosk": 5000192,
       "name": "Highcross",
       "nso": "2008-09-04 10:00",
       "slug": "highcross",
@@ -4861,6 +5134,7 @@
       "keyword": [
         "Zürich"
       ],
+      "kiosk": 89027,
       "name": "Glattzentrum",
       "nso": "2008-09-26 10:00",
       "slug": "glattzentrum",
@@ -4879,6 +5153,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5000233,
       "name": "Dadeland",
       "nso": "2008-11-08 10:00",
       "slug": "dadeland",
@@ -4898,6 +5173,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 5000193,
       "name": "Belfast",
       "name_alt": [
         "Victoria Square"
@@ -4914,6 +5190,7 @@
         "modify": "2024-02-08 18:41:38"
       },
       "flag": "🇫🇷",
+      "kiosk": 5003646,
       "name": "Vélizy 2",
       "name_eng": "Velizy 2",
       "nso": "2010-09-25 10:00",
@@ -4928,6 +5205,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000115,
       "name": "University Park Village",
       "nso": "2008-08-23 10:00",
       "slug": "universityparkvillage",
@@ -4941,6 +5219,7 @@
         "modify": "2024-10-28 23:27:14"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000952,
       "name": "State Street",
       "nso": "2009-05-16 10:00",
       "slug": "statestreet",
@@ -4954,6 +5233,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000066,
       "name": "Charleston",
       "name_alt": [
         "King Street"
@@ -4978,6 +5258,7 @@
       "keyword": [
         "Beijing"
       ],
+      "kiosk": 5003909,
       "name": "三里屯",
       "name_eng": "Sanlitun",
       "nso": "2008-07-19 10:00",
@@ -4992,6 +5273,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000020,
       "name": "Willowbrook Mall",
       "nso": "2008-06-07 10:00",
       "slug": "willowbrookmall",
@@ -5005,6 +5287,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000330,
       "name": "Vintage Faire",
       "nso": "2008-11-14 18:00",
       "slug": "vintagefaire",
@@ -5018,6 +5301,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000114,
       "name": "Renaissance at Colony Park",
       "nso": "2008-08-30 10:00",
       "slug": "renaissanceatcolonypark",
@@ -5031,6 +5315,7 @@
         "modify": "2025-01-10 21:02:42"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000126,
       "name": "Willowbrook",
       "nso": "2008-09-13 10:00",
       "slug": "willowbrook",
@@ -5044,6 +5329,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇺🇸",
+      "kiosk": 5001369,
       "name": "Manhasset",
       "nso": "2009-10-17 10:00",
       "slug": "manhasset",
@@ -5057,6 +5343,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇬🇧",
+      "kiosk": 801015,
       "name": "Edinburgh",
       "name_alt": [
         "Princes Street"
@@ -5073,6 +5360,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇬🇧",
+      "kiosk": 806925,
       "name": "Brompton Road",
       "nso": "2022-07-28 16:00",
       "slug": "bromptonroad",
@@ -5086,6 +5374,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇩🇪",
+      "kiosk": 800533,
       "name": "Düsseldorf",
       "name_alt": [
         "Dusseldorf"
@@ -5103,6 +5392,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇨🇦",
+      "kiosk": 802143,
       "name": "Rideau",
       "nso": "2009-07-18 09:30",
       "slug": "rideau",
@@ -5121,6 +5411,7 @@
         }
       ],
       "flag": "🇨🇦",
+      "kiosk": 5000180,
       "name": "Fairview",
       "nso": "2008-09-27 09:30",
       "slug": "fairview",
@@ -5134,6 +5425,7 @@
         "modify": "2024-06-10 11:21:22"
       },
       "flag": "🇬🇧",
+      "kiosk": 5002540,
       "name": "Cardiff",
       "name_alt": [
         "St David's 2"
@@ -5150,6 +5442,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇬🇧",
+      "kiosk": 5002816,
       "name": "SouthGate",
       "nso": "2010-03-27 10:00",
       "slug": "southgate",
@@ -5163,6 +5456,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇺🇸",
+      "kiosk": 5000179,
       "name": "The Promenade Shops at Briargate",
       "nso": "2008-09-20 10:00",
       "slug": "thepromenadeshopsatbriargate",
@@ -5176,6 +5470,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇺🇸",
+      "kiosk": 5002902,
       "name": "Tacoma Mall",
       "nso": "2010-05-29 10:00",
       "slug": "tacomamall",
@@ -5189,6 +5484,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇬🇧",
+      "kiosk": 5004611,
       "name": "Braehead",
       "nso": "2011-09-17 09:00",
       "slug": "braehead",
@@ -5202,6 +5498,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇬🇧",
+      "kiosk": 5002791,
       "name": "Eldon Square",
       "nso": "2010-02-16 10:30",
       "slug": "eldonsquare",
@@ -5215,6 +5512,7 @@
         "modify": "2024-03-18 07:59:56"
       },
       "flag": "🇦🇺",
+      "kiosk": 5001121,
       "name": "Doncaster",
       "nso": "2009-05-23 09:00",
       "slug": "doncaster",
@@ -5228,6 +5526,7 @@
         "modify": "2024-03-18 08:01:52"
       },
       "flag": "🇦🇺",
+      "kiosk": 5004672,
       "name": "Southland",
       "nso": "2011-08-13 10:00",
       "slug": "southland",
@@ -5241,6 +5540,7 @@
         "modify": "2024-11-29 08:48:08"
       },
       "flag": "🇦🇺",
+      "kiosk": 5003590,
       "name": "Castle Towers",
       "nso": "2010-08-19 17:00",
       "slug": "castletowers",
@@ -5254,6 +5554,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇺🇸",
+      "kiosk": 5001368,
       "name": "Promenade Temecula",
       "nso": "2009-09-26 10:00",
       "slug": "promenadetemecula",
@@ -5272,6 +5573,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5001293,
       "name": "Legacy Place",
       "nso": "2009-08-29 10:00",
       "slug": "legacyplace",
@@ -5285,6 +5587,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇺🇸",
+      "kiosk": 5001392,
       "name": "Main Place",
       "nso": "2009-08-15 10:00",
       "slug": "mainplace",
@@ -5303,6 +5606,7 @@
         }
       ],
       "flag": "🇨🇦",
+      "kiosk": 5001296,
       "name": "Square One",
       "nso": "2009-08-15 09:30",
       "slug": "squareone",
@@ -5321,6 +5625,7 @@
         }
       ],
       "flag": "🇦🇺",
+      "kiosk": 5001099,
       "name": "Robina",
       "nso": "2009-05-09 09:00",
       "slug": "robina",
@@ -5334,6 +5639,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇩🇪",
+      "kiosk": 5002545,
       "name": "Große Bockenheimer Straße",
       "name_eng": "Grosse Bockenheimer Strasse",
       "nso": "2010-01-23 11:00",
@@ -5348,6 +5654,7 @@
         "modify": "2024-05-02 12:34:06"
       },
       "flag": "🇺🇸",
+      "kiosk": 5003767,
       "name": "Summit Mall",
       "nso": "2010-11-13 10:00",
       "slug": "summitmall",
@@ -5361,6 +5668,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇺🇸",
+      "kiosk": 5001418,
       "name": "Pheasant Lane",
       "nso": "2009-11-21 10:00",
       "slug": "pheasantlane",
@@ -5374,6 +5682,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇺🇸",
+      "kiosk": 5003211,
       "name": "Haywood Mall",
       "nso": "2010-07-10 10:00",
       "slug": "haywoodmall",
@@ -5387,6 +5696,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇫🇷",
+      "kiosk": 802910,
       "name": "Marseille",
       "nso": "2016-05-14 10:00",
       "slug": "marseille",
@@ -5400,6 +5710,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇩🇪",
+      "kiosk": 5005441,
       "name": "Kurfürstendamm",
       "name_alt": [
         "Kurfurstendamm"
@@ -5426,6 +5737,7 @@
         "Shanghai",
         "江浙沪"
       ],
+      "kiosk": 5005010,
       "name": "南京东路",
       "name_eng": "Nanjing East",
       "nso": "2011-09-23 09:00",
@@ -5440,6 +5752,7 @@
         "modify": "2024-05-02 14:02:16"
       },
       "flag": "🇺🇸",
+      "kiosk": 5003765,
       "name": "University Park Mall",
       "nso": "2010-11-13 10:00",
       "slug": "universityparkmall",
@@ -5458,6 +5771,7 @@
         }
       ],
       "flag": "🇨🇦",
+      "kiosk": 5001358,
       "name": "Oakridge Centre",
       "nso": "2009-09-26 09:30",
       "slug": "oakridgecentre",
@@ -5472,6 +5786,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇬🇧",
+      "kiosk": 5002541,
       "name": "Union Square (UK)",
       "name_alt": [
         "Union Square"
@@ -5488,6 +5803,7 @@
         "modify": "2024-05-21 01:12:02"
       },
       "flag": "🇺🇸",
+      "kiosk": 5001295,
       "name": "Augusta",
       "nso": "2009-09-19 10:00",
       "slug": "augusta",
@@ -5501,6 +5817,7 @@
         "modify": "2024-02-08 18:41:39"
       },
       "flag": "🇮🇹",
+      "kiosk": 5001391,
       "name": "Carosello",
       "nso": "2009-09-05 10:00",
       "slug": "carosello",
@@ -5514,6 +5831,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇩🇪",
+      "kiosk": 5001390,
       "name": "Alstertal",
       "nso": "2009-08-29 10:00",
       "slug": "alstertal",
@@ -5530,6 +5848,7 @@
       "keyword": [
         "Herault"
       ],
+      "kiosk": 5002542,
       "name": "Odysseum",
       "nso": "2009-11-14 10:00",
       "slug": "odysseum",
@@ -5548,6 +5867,7 @@
         }
       ],
       "flag": "🇪🇸",
+      "kiosk": 5005112,
       "name": "Passeig de Gràcia",
       "name_eng": "Passeig de Gracia",
       "nso": "2012-07-28 10:00",
@@ -5562,6 +5882,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇨🇦",
+      "kiosk": 5001442,
       "name": "Polo Park",
       "nso": "2009-09-19 09:30",
       "slug": "polopark",
@@ -5575,6 +5896,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇬🇧",
+      "kiosk": 5005635,
       "name": "Trinity Leeds",
       "nso": "2013-03-21 10:00",
       "slug": "trinityleeds",
@@ -5591,6 +5913,7 @@
       "keyword": [
         "Rhone"
       ],
+      "kiosk": 5003650,
       "name": "Part-Dieu",
       "nso": "2011-06-04 09:30",
       "slug": "part-dieu",
@@ -5609,6 +5932,7 @@
         }
       ],
       "flag": "🇫🇷",
+      "kiosk": 5004630,
       "name": "Parly 2",
       "nso": "2011-09-24 10:00",
       "slug": "parly2",
@@ -5622,6 +5946,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇫🇷",
+      "kiosk": 801170,
       "name": "Lille",
       "nso": "2014-11-15 10:00",
       "slug": "lille",
@@ -5635,6 +5960,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇪🇸",
+      "kiosk": 5005390,
       "name": "Puerto Venecia",
       "nso": "2012-10-04 10:00",
       "slug": "puertovenecia",
@@ -5651,6 +5977,7 @@
       "keyword": [
         "Rome"
       ],
+      "kiosk": 5004983,
       "name": "Porta di Roma",
       "nso": "2012-04-21 10:00",
       "slug": "portadiroma",
@@ -5667,6 +5994,7 @@
       "keyword": [
         "Rome"
       ],
+      "kiosk": 806408,
       "name": "Via del Corso",
       "nso": "2021-05-27 10:00",
       "slug": "viadelcorso",
@@ -5680,6 +6008,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇦🇺",
+      "kiosk": 5002591,
       "name": "Chermside",
       "nso": "2009-11-14 09:00",
       "slug": "chermside",
@@ -5693,6 +6022,7 @@
         "modify": "2024-12-04 10:08:13"
       },
       "flag": "🇦🇺",
+      "kiosk": 5003743,
       "name": "Charlestown",
       "nso": "2010-10-21 17:00",
       "slug": "charlestown",
@@ -5711,6 +6041,7 @@
         }
       ],
       "flag": "🇦🇺",
+      "kiosk": 5003386,
       "name": "Perth City",
       "nso": "2010-06-26 09:00",
       "slug": "perthcity",
@@ -5727,6 +6058,7 @@
       "keyword": [
         "Beijing"
       ],
+      "kiosk": 5003910,
       "name": "西单大悦城",
       "name_eng": "Xidan Joy City",
       "nso": "2010-09-25 08:00",
@@ -5750,6 +6082,7 @@
         "Shanghai",
         "江浙沪"
       ],
+      "kiosk": 5003906,
       "name": "浦东",
       "name_eng": "Pudong",
       "nso": "2010-07-10 10:00",
@@ -5768,6 +6101,7 @@
         "Shanghai",
         "江浙沪"
       ],
+      "kiosk": 5003907,
       "name": "香港广场",
       "name_eng": "Hong Kong Plaza",
       "nso": "2010-09-25 08:00",
@@ -5782,6 +6116,7 @@
         "modify": "2024-02-09 22:29:16"
       },
       "flag": "🇬🇧",
+      "kiosk": 5001383,
       "name": "Norwich",
       "name_alt": [
         "Chapelfield"
@@ -5798,6 +6133,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇨🇦",
+      "kiosk": 800039,
       "name": "Fairview Pointe-Claire",
       "nso": "2009-09-26 09:00",
       "slug": "fairviewpointeclaire",
@@ -5811,6 +6147,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇬🇧",
+      "kiosk": 5002568,
       "name": "Cribbs Causeway",
       "nso": "2009-12-12 10:00",
       "slug": "cribbscauseway",
@@ -5824,6 +6161,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇫🇷",
+      "kiosk": 5003651,
       "name": "Strasbourg",
       "nso": "2012-09-15 10:00",
       "slug": "strasbourg",
@@ -5837,6 +6175,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇫🇷",
+      "kiosk": 5003406,
       "name": "CAP 3000",
       "nso": "2010-08-28 10:00",
       "slug": "cap3000",
@@ -5850,6 +6189,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇩🇪",
+      "kiosk": 5004545,
       "name": "Jungfernstieg",
       "nso": "2011-09-17 10:00",
       "slug": "jungfernstieg",
@@ -5863,6 +6203,7 @@
         "modify": "2025-04-15 03:18:21"
       },
       "flag": "🇪🇸",
+      "kiosk": 5003426,
       "name": "Xanadú",
       "name_eng": "Xanadu",
       "nso": "2010-09-11 10:00",
@@ -5886,6 +6227,7 @@
         "Shanghai",
         "江浙沪"
       ],
+      "kiosk": 800773,
       "name": "上海环贸 iapm",
       "name_alt": [
         "上海环贸iapm"
@@ -5903,6 +6245,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇩🇪",
+      "kiosk": 5003649,
       "name": "CentrO",
       "nso": "2010-09-25 10:00",
       "slug": "centro",
@@ -5916,6 +6259,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇦🇺",
+      "kiosk": 800046,
       "name": "Rundle Place",
       "nso": "2013-05-25 10:00",
       "slug": "rundleplace",
@@ -5929,6 +6273,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇪🇸",
+      "kiosk": 5003425,
       "name": "La Maquinista",
       "nso": "2010-09-04 10:00",
       "slug": "lamaquinista",
@@ -5947,6 +6292,7 @@
         }
       ],
       "flag": "🇳🇱",
+      "kiosk": 5004710,
       "name": "Amsterdam",
       "nso": "2012-03-03 10:00",
       "slug": "amsterdam",
@@ -5969,6 +6315,7 @@
         "銅鑼灣",
         "铜锣湾"
       ],
+      "kiosk": 5005545,
       "name": "Causeway Bay",
       "nso": "2012-12-15 09:00",
       "slug": "causewaybay",
@@ -5982,6 +6329,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇬🇧",
+      "kiosk": 5004610,
       "name": "Stratford City",
       "nso": "2011-09-13 10:00",
       "slug": "stratfordcity",
@@ -5995,6 +6343,7 @@
         "modify": "2024-11-13 23:23:27"
       },
       "flag": "🇨🇦",
+      "kiosk": 5002904,
       "name": "Southgate Centre",
       "nso": "2010-05-28 08:00",
       "slug": "southgatecentre",
@@ -6008,6 +6357,7 @@
         "modify": "2024-08-23 10:03:45"
       },
       "flag": "🇨🇦",
+      "kiosk": 800041,
       "name": "Place Ste-Foy",
       "nso": "2010-11-13 09:30",
       "slug": "placestefoy",
@@ -6021,6 +6371,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇺🇸",
+      "kiosk": 5003326,
       "name": "Ross Park",
       "nso": "2010-08-28 10:00",
       "slug": "rosspark",
@@ -6034,6 +6385,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇺🇸",
+      "kiosk": 5004444,
       "name": "4th Street",
       "nso": "2011-08-20 10:00",
       "slug": "4thstreet",
@@ -6047,6 +6399,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇺🇸",
+      "kiosk": 5004762,
       "name": "Grand Central",
       "nso": "2011-12-09 10:00",
       "slug": "grandcentral",
@@ -6060,6 +6413,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇺🇸",
+      "kiosk": 5003212,
       "name": "Polaris Fashion Place",
       "nso": "2010-07-24 10:00",
       "slug": "polarisfashionplace",
@@ -6073,6 +6427,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇮🇹",
+      "kiosk": 5003648,
       "name": "Oriocenter",
       "nso": "2010-09-25 10:00",
       "slug": "oriocenter",
@@ -6086,6 +6441,7 @@
         "modify": "2024-02-08 18:41:40"
       },
       "flag": "🇪🇸",
+      "kiosk": 5004743,
       "name": "Valencia",
       "name_alt": [
         "Calle Colón",
@@ -6103,6 +6459,7 @@
         "modify": "2024-11-14 22:03:52"
       },
       "flag": "🇺🇸",
+      "kiosk": 5003589,
       "name": "River Park Square",
       "nso": "2010-09-25 10:00",
       "slug": "riverparksquare",
@@ -6116,6 +6473,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇨🇦",
+      "kiosk": 5003863,
       "name": "Richmond Centre",
       "nso": "2010-09-11 09:30",
       "slug": "richmondcentre",
@@ -6129,6 +6487,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇬🇧",
+      "kiosk": 5003645,
       "name": "Metrocentre",
       "nso": "2010-09-25 10:00",
       "slug": "metrocentre",
@@ -6142,6 +6501,7 @@
         "modify": "2025-05-15 02:23:40"
       },
       "flag": "🇫🇷",
+      "kiosk": 5004273,
       "name": "Sainte-Catherine (FR)",
       "name_alt": [
         "Sainte-Catherine"
@@ -6158,6 +6518,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇫🇷",
+      "kiosk": 5005391,
       "name": "Val d’Europe",
       "name_alt": [
         "Val d'Europe"
@@ -6174,6 +6535,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇮🇹",
+      "kiosk": 5004621,
       "name": "Via Rizzoli",
       "nso": "2011-09-17 09:00",
       "slug": "viarizzoli",
@@ -6194,6 +6556,7 @@
         "中环",
         "中環"
       ],
+      "kiosk": 5004447,
       "name": "ifc mall",
       "nso": "2011-09-24 09:00",
       "slug": "ifcmall",
@@ -6207,6 +6570,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇨🇦",
+      "kiosk": 5003484,
       "name": "Upper Canada Mall",
       "nso": "2010-09-11 09:00",
       "slug": "uppercanadamall",
@@ -6220,6 +6584,7 @@
         "modify": "2025-02-26 11:38:39"
       },
       "flag": "🇩🇪",
+      "kiosk": 5004179,
       "name": "Altmarkt-Galerie",
       "nso": "2011-03-31 08:00",
       "slug": "altmarkt-galerie",
@@ -6233,6 +6598,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇩🇪",
+      "kiosk": 5004622,
       "name": "City-Galerie",
       "nso": "2011-09-03 09:30",
       "slug": "city-galerie",
@@ -6246,6 +6612,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇩🇪",
+      "kiosk": 5004709,
       "name": "MTZ",
       "nso": "2011-11-17 09:30",
       "slug": "mtz",
@@ -6259,6 +6626,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇪🇸",
+      "kiosk": 5004984,
       "name": "Gran Plaza 2",
       "nso": "2012-04-27 10:00",
       "slug": "granplaza2",
@@ -6275,6 +6643,7 @@
       "keyword": [
         "Leganes"
       ],
+      "kiosk": 5004619,
       "name": "Parquesur",
       "nso": "2011-08-20 10:00",
       "slug": "parquesur",
@@ -6293,6 +6662,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5004761,
       "name": "Highland Village",
       "nso": "2012-03-16 08:00",
       "slug": "highlandvillage",
@@ -6306,6 +6676,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇫🇷",
+      "kiosk": 5004546,
       "name": "Carré Sénart",
       "name_eng": "Carre Senart",
       "nso": "2011-08-27 10:00",
@@ -6320,6 +6691,7 @@
         "modify": "2025-04-01 12:47:21"
       },
       "flag": "🇨🇭",
+      "kiosk": 801016,
       "name": "Freie Strasse",
       "nso": "2014-07-12 10:00",
       "slug": "freiestrasse",
@@ -6333,6 +6705,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇦🇺",
+      "kiosk": 5004624,
       "name": "Penrith",
       "nso": "2011-07-23 09:00",
       "slug": "penrith",
@@ -6346,6 +6719,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇮🇹",
+      "kiosk": 5004431,
       "name": "Fiordaliso",
       "nso": "2011-07-02 10:00",
       "slug": "fiordaliso",
@@ -6362,6 +6736,7 @@
       "keyword": [
         "Rome"
       ],
+      "kiosk": 5005163,
       "name": "Via Roma",
       "nso": "2012-10-13 10:00",
       "slug": "viaroma",
@@ -6375,6 +6750,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇩🇪",
+      "kiosk": 806717,
       "name": "Rosenthaler Straße",
       "name_eng": "Rosenthaler Strasse",
       "nso": "2021-12-02 10:00",
@@ -6389,6 +6765,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇺🇸",
+      "kiosk": 5004655,
       "name": "New Haven",
       "nso": "2011-09-24 10:00",
       "slug": "newhaven",
@@ -6402,6 +6779,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇨🇦",
+      "kiosk": 5004653,
       "name": "Mapleview Centre",
       "nso": "2011-09-03 09:30",
       "slug": "mapleviewcentre",
@@ -6423,6 +6801,7 @@
       "keyword": [
         "Beijing"
       ],
+      "kiosk": 800775,
       "name": "王府井",
       "name_eng": "Wangfujing",
       "nso": "2012-10-20 09:00",
@@ -6437,6 +6816,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇮🇹",
+      "kiosk": 5004514,
       "name": "I Gigli",
       "nso": "2011-08-13 09:00",
       "slug": "igigli",
@@ -6455,6 +6835,7 @@
         }
       ],
       "flag": "🇪🇸",
+      "kiosk": 801012,
       "name": "Puerta del Sol",
       "nso": "2014-06-21 09:30",
       "slug": "puertadelsol",
@@ -6468,6 +6849,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇺🇸",
+      "kiosk": 5004443,
       "name": "The Americana at Brand",
       "nso": "2011-07-30 10:00",
       "slug": "theamericanaatbrand",
@@ -6481,6 +6863,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇮🇹",
+      "kiosk": 5004560,
       "name": "Campania",
       "nso": "2011-09-03 10:00",
       "slug": "campania",
@@ -6494,6 +6877,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇮🇹",
+      "kiosk": 5004605,
       "name": "Centro Sicilia",
       "nso": "2011-09-24 10:00",
       "slug": "centrosicilia",
@@ -6507,6 +6891,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇩🇪",
+      "kiosk": 800597,
       "name": "Hannover",
       "nso": "2014-09-27 10:00",
       "slug": "hannover",
@@ -6520,6 +6905,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇦🇺",
+      "kiosk": 5004708,
       "name": "Hornsby",
       "nso": "2011-09-24 10:00",
       "slug": "hornsby",
@@ -6533,6 +6919,7 @@
         "modify": "2024-11-19 13:32:16"
       },
       "flag": "🇨🇦",
+      "kiosk": 5004652,
       "name": "Metrotown",
       "nso": "2011-09-24 10:00",
       "slug": "metrotown",
@@ -6546,6 +6933,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇺🇸",
+      "kiosk": 5004594,
       "name": "Fashion Place",
       "nso": "2011-08-13 10:00",
       "slug": "fashionplace",
@@ -6559,6 +6947,7 @@
         "modify": "2024-02-08 18:41:41"
       },
       "flag": "🇺🇸",
+      "kiosk": 5004442,
       "name": "Valencia Town Center",
       "nso": "2011-07-16 10:00",
       "slug": "valenciatowncenter",
@@ -6577,6 +6966,7 @@
         }
       ],
       "flag": "🇺🇸",
+      "kiosk": 5004654,
       "name": "Northlake Mall",
       "nso": "2011-08-27 10:00",
       "slug": "northlakemall",
@@ -6591,6 +6981,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇨🇦",
+      "kiosk": 5004593,
       "name": "Conestoga",
       "nso": "2011-08-13 09:30",
       "slug": "conestoga",
@@ -6604,6 +6995,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇦🇺",
+      "kiosk": 800588,
       "name": "Brisbane",
       "nso": "2014-01-17 10:00",
       "slug": "brisbane",
@@ -6620,6 +7012,7 @@
       "keyword": [
         "Malaga"
       ],
+      "kiosk": 5004620,
       "name": "La Cañada",
       "name_eng": "La Canada",
       "nso": "2011-11-25 10:00",
@@ -6637,6 +7030,7 @@
       "keyword": [
         "Rhone"
       ],
+      "kiosk": 5004931,
       "name": "Confluence",
       "nso": "2012-04-04 19:00",
       "slug": "confluence",
@@ -6650,6 +7044,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇫🇷",
+      "kiosk": 5005439,
       "name": "Atlantis",
       "nso": "2012-11-15 09:30",
       "slug": "atlantis",
@@ -6668,6 +7063,7 @@
         "Zhejiang",
         "江浙沪"
       ],
+      "kiosk": 801409,
       "name": "西湖",
       "name_eng": "West Lake",
       "nso": "2015-01-24 09:00",
@@ -6685,6 +7081,7 @@
       "keyword": [
         "Chongqing"
       ],
+      "kiosk": 801040,
       "name": "重庆北城天街",
       "name_eng": "Paradise Walk Chongqing",
       "nso": "2014-07-26 10:00",
@@ -6702,6 +7099,7 @@
       "keyword": [
         "Rhone"
       ],
+      "kiosk": 801011,
       "name": "Aix-en-Provence",
       "nso": "2014-06-14 10:00",
       "slug": "aix-en-provence",
@@ -6719,6 +7117,7 @@
         "Dalian",
         "Liaoning"
       ],
+      "kiosk": 802377,
       "name": "百年城",
       "name_eng": "Parkland",
       "nso": "2015-10-24 09:30",
@@ -6736,6 +7135,7 @@
       "keyword": [
         "Beijing"
       ],
+      "kiosk": 800777,
       "name": "华贸购物中心",
       "name_eng": "China Central Mall",
       "nso": "2014-01-10 10:00",
@@ -6753,6 +7153,7 @@
       "keyword": [
         "Chongqing"
       ],
+      "kiosk": 801410,
       "name": "解放碑",
       "name_eng": "Jiefangbei",
       "nso": "2015-01-31 10:00",
@@ -6767,6 +7168,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇬🇧",
+      "kiosk": 5004609,
       "name": "Festival Place",
       "nso": "2011-08-20 09:00",
       "slug": "festivalplace",
@@ -6780,6 +7182,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇦🇺",
+      "kiosk": 5005331,
       "name": "Canberra",
       "nso": "2012-09-08 10:00",
       "slug": "canberra",
@@ -6797,6 +7200,7 @@
         "Guangdong",
         "Shenzhen"
       ],
+      "kiosk": 800779,
       "name": "深圳益田假日广场",
       "name_eng": "Holiday Plaza Shenzhen",
       "nso": "2012-11-03 09:00",
@@ -6816,6 +7220,7 @@
         "Kowloon Tong",
         "九龍塘"
       ],
+      "kiosk": 5005433,
       "name": "Festival Walk",
       "nso": "2012-09-29 10:00",
       "slug": "festivalwalk",
@@ -6832,6 +7237,7 @@
       "keyword": [
         "Brussel"
       ],
+      "kiosk": 802395,
       "name": "Brussels",
       "nso": "2015-09-19 10:00",
       "slug": "brussels",
@@ -6845,6 +7251,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇨🇦",
+      "kiosk": 5005258,
       "name": "Coquitlam Centre",
       "nso": "2012-08-18 09:30",
       "slug": "coquitlamcentre",
@@ -6858,6 +7265,7 @@
         "modify": "2024-05-23 09:11:58"
       },
       "flag": "🇨🇦",
+      "kiosk": 5005204,
       "name": "Masonville",
       "nso": "2012-06-23 10:00",
       "slug": "masonville",
@@ -6871,6 +7279,7 @@
         "modify": "2024-04-30 20:25:25"
       },
       "flag": "🇨🇦",
+      "kiosk": 5005260,
       "name": "Bayshore Shopping Centre",
       "nso": "2012-09-08 09:00",
       "slug": "bayshoreshoppingcentre",
@@ -6884,6 +7293,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇺🇸",
+      "kiosk": 5004656,
       "name": "Cielo Vista Mall",
       "nso": "2011-09-17 10:00",
       "slug": "cielovistamall",
@@ -6902,6 +7312,7 @@
         "Nanjing",
         "江浙沪"
       ],
+      "kiosk": 802623,
       "name": "新街口",
       "name_alt": [
         "南京艾尚天地",
@@ -6920,6 +7331,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇬🇧",
+      "kiosk": 5005178,
       "name": "Bromley",
       "name_alt": [
         "The Glades"
@@ -6947,6 +7359,7 @@
         "Tsim Sha Tsui",
         "尖沙咀"
       ],
+      "kiosk": 802145,
       "name": "Canton Road",
       "nso": "2015-07-30 09:00",
       "slug": "cantonroad",
@@ -6964,6 +7377,7 @@
         "Chengdu",
         "Sichuan"
       ],
+      "kiosk": 800781,
       "name": "成都万象城",
       "name_eng": "MixC Chengdu",
       "nso": "2012-12-15 08:00",
@@ -6982,6 +7396,7 @@
         "Malmo",
         "Skane"
       ],
+      "kiosk": 5005419,
       "name": "Emporia",
       "nso": "2012-12-15 10:00",
       "slug": "emporia",
@@ -6995,6 +7410,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇦🇺",
+      "kiosk": 5005679,
       "name": "Highpoint",
       "nso": "2013-04-27 10:00",
       "slug": "highpoint",
@@ -7011,6 +7427,7 @@
       "keyword": [
         "Taby"
       ],
+      "kiosk": 5005384,
       "name": "Täby Centrum",
       "name_eng": "Taby Centrum",
       "nso": "2012-09-15 10:00",
@@ -7025,6 +7442,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇪🇸",
+      "kiosk": 5005059,
       "name": "Nueva Condomina",
       "nso": "2012-05-12 10:00",
       "slug": "nuevacondomina",
@@ -7038,6 +7456,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇦🇺",
+      "kiosk": 5005444,
       "name": "Booragoon",
       "name_alt": [
         "Garden City Perth"
@@ -7054,6 +7473,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇦🇺",
+      "kiosk": 5005228,
       "name": "Carindale",
       "nso": "2012-08-25 10:00",
       "slug": "carindale",
@@ -7067,6 +7487,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇨🇦",
+      "kiosk": 800104,
       "name": "DIX30",
       "nso": "2013-04-27 10:00",
       "slug": "dix30",
@@ -7080,6 +7501,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇺🇸",
+      "kiosk": 5005213,
       "name": "CoolSprings Galleria",
       "nso": "2012-06-30 10:00",
       "slug": "coolspringsgalleria",
@@ -7093,6 +7515,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇨🇦",
+      "kiosk": 5005259,
       "name": "Halifax Shopping Centre",
       "nso": "2012-08-18 09:30",
       "slug": "halifaxshoppingcentre",
@@ -7106,6 +7529,7 @@
         "modify": "2025-02-10 11:17:31"
       },
       "flag": "🇨🇦",
+      "kiosk": 800262,
       "name": "Markville Shopping Centre",
       "nso": "2013-07-27 09:30",
       "slug": "markvilleshoppingcentre",
@@ -7119,6 +7543,7 @@
         "modify": "2024-02-08 18:41:42"
       },
       "flag": "🇺🇸",
+      "kiosk": 805780,
       "name": "Carnegie Library",
       "nso": "2019-05-11 10:00",
       "slug": "carnegielibrary",
@@ -7132,6 +7557,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇺🇸",
+      "kiosk": 801111,
       "name": "The Greene",
       "nso": "2014-07-19 10:00",
       "slug": "thegreene",
@@ -7145,6 +7571,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇩🇪",
+      "kiosk": 5005167,
       "name": "Sindelfingen",
       "nso": "2012-09-21 08:00",
       "slug": "sindelfingen",
@@ -7162,6 +7589,7 @@
         "Cologne",
         "Koln"
       ],
+      "kiosk": 5005162,
       "name": "Rhein Center",
       "nso": "2012-09-01 10:00",
       "slug": "rheincenter",
@@ -7180,6 +7608,7 @@
         "Munchen",
         "Munich"
       ],
+      "kiosk": 800469,
       "name": "OEZ",
       "nso": "2013-09-28 09:30",
       "slug": "oez",
@@ -7193,6 +7622,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇫🇷",
+      "kiosk": 5005166,
       "name": "La Toison d’Or",
       "name_alt": [
         "La Toison d'Or"
@@ -7209,6 +7639,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇦🇺",
+      "kiosk": 5005103,
       "name": "Broadway",
       "nso": "2012-06-30 10:00",
       "slug": "broadway",
@@ -7222,6 +7653,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇬🇧",
+      "kiosk": 5005164,
       "name": "Watford",
       "name_alt": [
         "The Harlequin"
@@ -7238,6 +7670,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇦🇺",
+      "kiosk": 5005544,
       "name": "Fountain Gate",
       "nso": "2012-12-15 12:00",
       "slug": "fountaingate",
@@ -7256,6 +7689,7 @@
         "Zhejiang",
         "江浙沪"
       ],
+      "kiosk": 804375,
       "name": "天一广场",
       "name_eng": "Tianyi Square",
       "nso": "2017-09-16 10:00",
@@ -7275,6 +7709,7 @@
         "Zhejiang",
         "江浙沪"
       ],
+      "kiosk": 801907,
       "name": "杭州万象城",
       "name_eng": "MixC Hangzhou",
       "nso": "2015-04-24 09:00",
@@ -7293,6 +7728,7 @@
         "Liaoning",
         "Shenyang"
       ],
+      "kiosk": 801411,
       "name": "中街大悦城",
       "name_eng": "Zhongjie Joy City",
       "nso": "2015-02-28 10:00",
@@ -7307,6 +7743,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇫🇷",
+      "kiosk": 800155,
       "name": "Rosny 2",
       "nso": "2013-07-06 10:00",
       "slug": "rosny2",
@@ -7320,6 +7757,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇪🇸",
+      "kiosk": 5005165,
       "name": "Río Shopping",
       "name_eng": "Rio Shopping",
       "nso": "2012-09-20 10:00",
@@ -7334,6 +7772,7 @@
         "modify": "2024-11-09 00:36:42"
       },
       "flag": "🇳🇱",
+      "kiosk": 800598,
       "name": "Haarlem",
       "nso": "2013-12-07 09:00",
       "slug": "haarlem",
@@ -7347,6 +7786,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇳🇱",
+      "kiosk": 801013,
       "name": "Den Haag",
       "nso": "2014-08-09 10:00",
       "slug": "denhaag",
@@ -7360,6 +7800,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇬🇧",
+      "kiosk": 5005636,
       "name": "Plymouth",
       "name_alt": [
         "Drake Circus"
@@ -7376,6 +7817,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇮🇹",
+      "kiosk": 5005177,
       "name": "il Leone",
       "nso": "2012-09-22 09:00",
       "slug": "illeone",
@@ -7389,6 +7831,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇺🇸",
+      "kiosk": 800191,
       "name": "Quaker Bridge",
       "nso": "2013-06-29 10:00",
       "slug": "quakerbridge",
@@ -7402,6 +7845,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇺🇸",
+      "kiosk": 5005412,
       "name": "Valley Plaza",
       "nso": "2012-09-21 08:00",
       "slug": "valleyplaza",
@@ -7419,6 +7863,7 @@
         "Qingdao",
         "Shandong"
       ],
+      "kiosk": 802645,
       "name": "青岛万象城",
       "name_eng": "MixC Qingdao",
       "nso": "2016-01-30 10:00",
@@ -7437,6 +7882,7 @@
         "Cologne",
         "Koln"
       ],
+      "kiosk": 803885,
       "name": "Schildergasse",
       "nso": "2017-03-25 10:00",
       "slug": "schildergasse",
@@ -7453,6 +7899,7 @@
       "keyword": [
         "Rome"
       ],
+      "kiosk": 800276,
       "name": "Euroma2",
       "nso": "2013-08-31 10:00",
       "slug": "euroma2",
@@ -7466,6 +7913,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇮🇹",
+      "kiosk": 800156,
       "name": "Le Befane",
       "nso": "2013-08-03 09:00",
       "slug": "lebefane",
@@ -7479,6 +7927,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇫🇷",
+      "kiosk": 803478,
       "name": "Marché Saint-Germain",
       "name_eng": "Marche Saint-Germain",
       "nso": "2016-12-03 10:00",
@@ -7511,6 +7960,7 @@
         "Nanning",
         "广西"
       ],
+      "kiosk": 802404,
       "name": "南宁万象城",
       "name_eng": "MixC Nanning",
       "nso": "2015-12-12 14:00",
@@ -7529,6 +7979,7 @@
         "Henan",
         "Zhengzhou"
       ],
+      "kiosk": 801408,
       "name": "郑州万象城",
       "name_eng": "MixC Zhengzhou",
       "nso": "2015-01-10 10:00",
@@ -7546,6 +7997,7 @@
       "keyword": [
         "Chongqing"
       ],
+      "kiosk": 801428,
       "name": "重庆万象城",
       "name_eng": "MixC Chongqing",
       "nso": "2015-03-07 10:00",
@@ -7565,6 +8017,7 @@
         "Wuxi",
         "江浙沪"
       ],
+      "kiosk": 801067,
       "name": "无锡恒隆广场",
       "name_eng": "Center 66 Wuxi",
       "nso": "2014-08-02 10:00",
@@ -7582,6 +8035,7 @@
       "keyword": [
         "Hubei"
       ],
+      "kiosk": 806846,
       "name": "武汉",
       "name_eng": "Wuhan",
       "nso": "2022-05-21 09:30",
@@ -7600,6 +8054,7 @@
         "Liaoning",
         "Shenyang"
       ],
+      "kiosk": 802558,
       "name": "沈阳万象城",
       "name_eng": "MixC Shenyang",
       "nso": "2016-01-09 10:00",
@@ -7623,6 +8078,7 @@
         "Guangdong",
         "Guangzhou"
       ],
+      "kiosk": 802663,
       "name": "天环广场",
       "name_eng": "Parc Central",
       "nso": "2016-01-28 10:00",
@@ -7640,6 +8096,7 @@
       "keyword": [
         "Tianjin"
       ],
+      "kiosk": 802814,
       "name": "天津恒隆广场",
       "name_eng": "Riverside 66 Tianjin",
       "nso": "2016-03-26 10:00",
@@ -7658,6 +8115,7 @@
         "Chengdu",
         "Sichuan"
       ],
+      "kiosk": 802405,
       "name": "成都太古里",
       "name_eng": "Taikoo Li Chengdu",
       "nso": "2015-11-21 09:00",
@@ -7676,6 +8134,7 @@
         "Shanghai",
         "江浙沪"
       ],
+      "kiosk": 802971,
       "name": "五角场",
       "name_eng": "Wujiaochang",
       "nso": "2016-06-18 10:00",
@@ -7690,6 +8149,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇺🇸",
+      "kiosk": 802127,
       "name": "Upper East Side",
       "nso": "2015-06-13 09:00",
       "slug": "uppereastside",
@@ -7706,6 +8166,7 @@
       "keyword": [
         "Istanbul"
       ],
+      "kiosk": 800892,
       "name": "Zorlu Center",
       "nso": "2014-04-05 10:00",
       "slug": "zorlucenter",
@@ -7722,6 +8183,7 @@
       "keyword": [
         "Istanbul"
       ],
+      "kiosk": 801076,
       "name": "Akasya",
       "nso": "2014-10-25 10:00",
       "slug": "akasya",
@@ -7735,6 +8197,7 @@
         "modify": "2024-02-08 18:41:43"
       },
       "flag": "🇺🇸",
+      "kiosk": 801092,
       "name": "Cumberland Mall",
       "nso": "2014-09-06 10:00",
       "slug": "cumberlandmall",
@@ -7756,6 +8219,7 @@
       "keyword": [
         "Skane"
       ],
+      "kiosk": 800534,
       "name": "Väla Centrum",
       "name_eng": "Vala Centrum",
       "nso": "2013-11-09 10:00",
@@ -7771,6 +8235,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 803124,
       "name": "Williamsburg",
       "nso": "2016-07-30 10:00",
       "slug": "williamsburg",
@@ -7789,6 +8254,7 @@
         }
       ],
       "flag": "🇦🇪",
+      "kiosk": 802393,
       "name": "Yas Mall",
       "nso": "2015-10-29 19:00",
       "slug": "yasmall",
@@ -7802,6 +8268,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇦🇪",
+      "kiosk": 802391,
       "name": "Mall of the Emirates",
       "nso": "2015-10-29 16:00",
       "slug": "malloftheemirates",
@@ -7815,6 +8282,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇦🇪",
+      "kiosk": 803950,
       "name": "Dubai Mall",
       "nso": "2017-04-27 16:00",
       "slug": "dubaimall",
@@ -7828,6 +8296,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 800472,
       "name": "Potomac Town Center",
       "nso": "2013-09-28 10:00",
       "slug": "potomactowncenter",
@@ -7841,6 +8310,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 800471,
       "name": "Station Park",
       "nso": "2013-09-20 08:00",
       "slug": "stationpark",
@@ -7854,6 +8324,7 @@
         "modify": "2024-11-12 22:38:28"
       },
       "flag": "🇨🇦",
+      "kiosk": 800470,
       "name": "Guildford Town Centre",
       "nso": "2013-09-28 10:00",
       "slug": "guildfordtowncentre",
@@ -7867,6 +8338,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇮🇹",
+      "kiosk": 802302,
       "name": "Firenze",
       "nso": "2015-09-26 10:00",
       "slug": "firenze",
@@ -7880,6 +8352,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇦🇺",
+      "kiosk": 802160,
       "name": "Miranda",
       "nso": "2015-07-25 10:00",
       "slug": "miranda",
@@ -7913,6 +8386,7 @@
         "Dalian",
         "Liaoning"
       ],
+      "kiosk": 802815,
       "name": "大连恒隆广场",
       "name_eng": "Olympia 66 Dalian",
       "nso": "2016-03-19 10:00",
@@ -7932,6 +8406,7 @@
         "Sha Tin",
         "沙田"
       ],
+      "kiosk": 803014,
       "name": "New Town Plaza",
       "nso": "2016-06-30 10:00",
       "slug": "newtownplaza",
@@ -7945,6 +8420,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 802129,
       "name": "Queens Center",
       "nso": "2015-07-11 10:00",
       "slug": "queenscenter",
@@ -7958,6 +8434,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 801073,
       "name": "Evergreen Walk",
       "nso": "2014-08-23 10:00",
       "slug": "evergreenwalk",
@@ -7971,6 +8448,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 801243,
       "name": "Lynnhaven Mall",
       "nso": "2014-09-19 08:00",
       "slug": "lynnhavenmall",
@@ -7984,6 +8462,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 801338,
       "name": "University Town Center",
       "nso": "2014-10-16 10:00",
       "slug": "universitytowncenter",
@@ -7997,6 +8476,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 801110,
       "name": "Eastwood Towne Center",
       "nso": "2014-08-09 10:00",
       "slug": "eastwoodtownecenter",
@@ -8013,6 +8493,7 @@
       "keyword": [
         "Hunan"
       ],
+      "kiosk": 806643,
       "name": "长沙",
       "name_eng": "Changsha",
       "nso": "2021-09-04 10:00",
@@ -8027,6 +8508,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 801135,
       "name": "Solomon Pond Mall",
       "nso": "2014-10-11 10:00",
       "slug": "solomonpondmall",
@@ -8040,6 +8522,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 803940,
       "name": "Brickell City Centre",
       "nso": "2017-03-25 10:00",
       "slug": "brickellcitycentre",
@@ -8053,6 +8536,7 @@
         "modify": "2024-12-11 17:02:54"
       },
       "flag": "🇪🇸",
+      "kiosk": 807089,
       "name": "La Vaguada",
       "nso": "2024-11-28 17:00",
       "slug": "lavaguada",
@@ -8066,6 +8550,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇮🇹",
+      "kiosk": 801183,
       "name": "Nave de Vero",
       "nso": "2014-10-11 10:00",
       "slug": "navedevero",
@@ -8079,6 +8564,7 @@
         "modify": "2024-10-07 06:08:56"
       },
       "flag": "🇸🇪",
+      "kiosk": 807086,
       "name": "Mall of Scandinavia",
       "nso": "2024-09-20 08:00",
       "slug": "mallofscandinavia",
@@ -8092,6 +8578,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 801137,
       "name": "Trumbull",
       "nso": "2014-10-11 10:00",
       "slug": "trumbull",
@@ -8105,6 +8592,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 801142,
       "name": "The Mall of New Hampshire",
       "nso": "2014-10-18 10:00",
       "slug": "themallofnewhampshire",
@@ -8118,6 +8606,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇸🇬",
+      "kiosk": 806196,
       "name": "Marina Bay Sands",
       "nso": "2020-09-10 10:00",
       "slug": "marinabaysands",
@@ -8134,6 +8623,7 @@
       "keyword": [
         "Tianjin"
       ],
+      "kiosk": 801412,
       "name": "天津大悦城",
       "name_eng": "Tianjin Joy City",
       "nso": "2015-02-07 10:00",
@@ -8151,6 +8641,7 @@
       "keyword": [
         "Tianjin"
       ],
+      "kiosk": 802994,
       "name": "天津万象城",
       "name_alt": [
         "银河国际购物中心",
@@ -8173,6 +8664,7 @@
         "Guangdong",
         "Guangzhou"
       ],
+      "kiosk": 803477,
       "name": "珠江新城",
       "name_eng": "Zhujiang New Town",
       "nso": "2016-12-01 10:00",
@@ -8192,6 +8684,7 @@
         "Nanjing",
         "江浙沪"
       ],
+      "kiosk": 802353,
       "name": "虹悦城",
       "name_eng": "Wonder City",
       "nso": "2015-09-19 10:00",
@@ -8210,6 +8703,7 @@
         "Fujian",
         "Xiamen"
       ],
+      "kiosk": 802646,
       "name": "厦门新生活广场",
       "name_eng": "Xiamen Lifestyle Center",
       "nso": "2016-01-14 10:00",
@@ -8227,6 +8721,7 @@
       "keyword": [
         "Beijing"
       ],
+      "kiosk": 802403,
       "name": "朝阳大悦城",
       "name_eng": "Chaoyang Joy City",
       "nso": "2015-11-28 10:00",
@@ -8245,6 +8740,7 @@
         "Fujian",
         "Fuzhou"
       ],
+      "kiosk": 802828,
       "name": "泰禾广场",
       "name_alt": [
         "Thaihot Plaza"
@@ -8266,6 +8762,7 @@
         "Jinan",
         "Shandong"
       ],
+      "kiosk": 802909,
       "name": "济南恒隆广场",
       "name_eng": "Parc 66 Jinan",
       "nso": "2016-05-21 10:00",
@@ -8280,6 +8777,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 801335,
       "name": "Summerlin",
       "nso": "2014-11-22 10:00",
       "slug": "summerlin",
@@ -8293,6 +8791,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇺🇸",
+      "kiosk": 803134,
       "name": "World Trade Center",
       "nso": "2016-08-16 12:00",
       "slug": "worldtradecenter",
@@ -8311,6 +8810,7 @@
         }
       ],
       "flag": "🇫🇷",
+      "kiosk": 802048,
       "name": "Watch at Galeries Lafayette",
       "name_alt": [
         "Apple Watch at Galeries Lafayette"
@@ -8333,6 +8833,7 @@
         }
       ],
       "flag": "🇬🇧",
+      "kiosk": 802047,
       "name": "Watch at Selfridges",
       "name_alt": [
         "Apple Watch at Selfridges"
@@ -8350,6 +8851,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇮🇹",
+      "kiosk": 804969,
       "name": "Piazza Liberty",
       "nso": "2018-07-26 17:00",
       "slug": "piazzaliberty",
@@ -8363,6 +8865,7 @@
         "modify": "2024-02-08 18:41:44"
       },
       "flag": "🇸🇬",
+      "kiosk": 803638,
       "name": "Orchard Road",
       "nso": "2017-05-27 10:00",
       "slug": "orchardroad",
@@ -8379,6 +8882,7 @@
       "keyword": [
         "Yunnan"
       ],
+      "kiosk": 803523,
       "name": "昆明",
       "name_eng": "Kunming",
       "nso": "2017-01-21 10:00",
@@ -8415,6 +8919,7 @@
         "觀塘",
         "观塘"
       ],
+      "kiosk": 803295,
       "name": "apm Hong Kong",
       "nso": "2016-09-22 11:00",
       "slug": "apmhongkong",
@@ -8431,6 +8936,7 @@
       "keyword": [
         "Champs Elysees"
       ],
+      "kiosk": 805243,
       "name": "Champs-Élysées",
       "name_eng": "Champs-Elysees",
       "nso": "2018-11-18 12:00",
@@ -8449,6 +8955,7 @@
         "Shanghai",
         "江浙沪"
       ],
+      "kiosk": 807039,
       "name": "静安",
       "name_eng": "Jing'an",
       "nso": "2024-03-21 19:00",
@@ -8467,6 +8974,7 @@
         "Shanghai",
         "江浙沪"
       ],
+      "kiosk": 802908,
       "name": "环球港",
       "name_eng": "Global Harbor",
       "nso": "2016-05-28 09:30",
@@ -8484,6 +8992,7 @@
       "keyword": [
         "Karntner Strabe"
       ],
+      "kiosk": 804260,
       "name": "Kärntner Straße",
       "name_alt": [
         "Karntner Straße"
@@ -8505,6 +9014,7 @@
         "Jiangsu",
         "江浙沪"
       ],
+      "kiosk": 805202,
       "name": "苏州",
       "name_eng": "Suzhou",
       "nso": "2018-09-21 10:00",
@@ -8523,6 +9033,7 @@
         "Seoul",
         "首尔"
       ],
+      "kiosk": 806993,
       "name": "강남",
       "name_eng": "Gangnam",
       "nso": "2023-03-31 17:00",
@@ -8541,6 +9052,7 @@
         "Seoul",
         "首尔"
       ],
+      "kiosk": 804262,
       "name": "가로수길",
       "name_eng": "Garosugil",
       "nso": "2018-01-27 10:00",
@@ -8559,6 +9071,7 @@
         "Taipei",
         "台北"
       ],
+      "kiosk": 805788,
       "name": "信義 A13",
       "name_alt": [
         "信义 A13"
@@ -8599,6 +9112,7 @@
         "Nanjing",
         "江浙沪"
       ],
+      "kiosk": 803931,
       "name": "玄武湖",
       "name_alt": [
         "南京金茂汇",
@@ -8621,6 +9135,7 @@
         "Shanghai",
         "江浙沪"
       ],
+      "kiosk": 803491,
       "name": "七宝",
       "name_eng": "Qibao",
       "nso": "2016-12-10 10:00",
@@ -8638,6 +9153,7 @@
       "keyword": [
         "ABUA"
       ],
+      "kiosk": 806838,
       "name": "Al Maryah Island",
       "nso": "2022-02-25 17:00",
       "slug": "almaryahisland",
@@ -8651,6 +9167,7 @@
         "modify": "2024-02-08 18:41:45"
       },
       "flag": "🇲🇽",
+      "kiosk": 803220,
       "name": "Vía Santa Fe",
       "name_eng": "Via Santa Fe",
       "nso": "2016-09-24 11:00",
@@ -8669,6 +9186,7 @@
         "Kanagawa",
         "神奈川"
       ],
+      "kiosk": 806036,
       "name": "川崎",
       "name_eng": "Kawasaki",
       "nso": "2019-12-14 10:00",
@@ -8683,6 +9201,7 @@
         "modify": "2024-02-08 18:41:45"
       },
       "flag": "🇯🇵",
+      "kiosk": 805170,
       "name": "京都",
       "name_eng": "Kyoto",
       "nso": "2018-08-25 10:00",
@@ -8701,6 +9220,7 @@
         "Taipei",
         "台北"
       ],
+      "kiosk": 803896,
       "name": "台北 101",
       "name_eng": "Taipei 101",
       "nso": "2017-07-01 11:00",
@@ -8715,6 +9235,7 @@
         "modify": "2024-02-08 18:41:45"
       },
       "flag": "🇺🇸",
+      "kiosk": 804516,
       "name": "Downtown Brooklyn",
       "nso": "2017-12-02 10:00",
       "slug": "downtownbrooklyn",
@@ -8735,6 +9256,7 @@
         "千代田",
         "東京"
       ],
+      "kiosk": 805931,
       "name": "丸の内",
       "name_eng": "Marunouchi",
       "nso": "2019-09-07 10:00",
@@ -8749,6 +9271,7 @@
         "modify": "2024-02-08 18:41:45"
       },
       "flag": "🇺🇸",
+      "kiosk": 806521,
       "name": "Tower Theatre",
       "nso": "2021-06-24 10:00",
       "slug": "towertheatre",
@@ -8765,6 +9288,7 @@
       "keyword": [
         "Istanbul"
       ],
+      "kiosk": 806674,
       "name": "Bağdat Caddesi",
       "name_eng": "Bagdat Caddesi",
       "nso": "2021-10-22 10:00",
@@ -8782,6 +9306,7 @@
       "keyword": [
         "Bangkok"
       ],
+      "kiosk": 804887,
       "name": "Iconsiam",
       "nso": "2018-11-10 10:00",
       "slug": "iconsiam",
@@ -8798,6 +9323,7 @@
       "keyword": [
         "Bangkok"
       ],
+      "kiosk": 806779,
       "name": "Central World",
       "nso": "2020-07-31 10:00",
       "slug": "centralworld",
@@ -8811,6 +9337,7 @@
         "modify": "2024-02-08 18:41:45"
       },
       "flag": "🇸🇬",
+      "kiosk": 805844,
       "name": "Jewel Changi Airport",
       "nso": "2019-07-13 10:00",
       "slug": "jewelchangiairport",
@@ -8828,6 +9355,7 @@
         "Seoul",
         "首尔"
       ],
+      "kiosk": 806841,
       "name": "명동",
       "name_eng": "Myeongdong",
       "nso": "2022-04-09 10:00",
@@ -8842,6 +9370,7 @@
         "modify": "2024-02-08 18:41:45"
       },
       "flag": "🇲🇽",
+      "kiosk": 805930,
       "name": "Antara",
       "nso": "2019-09-27 17:00",
       "slug": "antara",
@@ -8855,6 +9384,7 @@
         "modify": "2024-06-22 04:34:53"
       },
       "flag": "🇲🇾",
+      "kiosk": 807070,
       "name": "The Exchange TRX",
       "name_alt": [
         "Exchange TRX"
@@ -8871,6 +9401,7 @@
         "modify": "2024-02-08 18:41:45"
       },
       "flag": "🇮🇳",
+      "kiosk": 806972,
       "name": "BKC",
       "nso": "2023-04-18 11:00",
       "slug": "bkc",
@@ -8884,6 +9415,7 @@
         "modify": "2024-02-08 18:41:45"
       },
       "flag": "🇺🇸",
+      "kiosk": 805716,
       "name": "Galleria Dallas",
       "nso": "2019-04-13 10:00",
       "slug": "galleriadallas",
@@ -8901,6 +9433,7 @@
         "Seoul",
         "首尔"
       ],
+      "kiosk": 806410,
       "name": "여의도",
       "name_eng": "Yeouido",
       "nso": "2021-02-26 10:00",
@@ -8940,6 +9473,7 @@
         "Seoul",
         "首尔"
       ],
+      "kiosk": 806939,
       "name": "잠실",
       "name_eng": "Jamsil",
       "nso": "2022-09-24 10:30",
@@ -8954,6 +9488,7 @@
         "modify": "2025-02-28 17:39:23"
       },
       "flag": "🇺🇸",
+      "kiosk": 807098,
       "name": "Miami Worldcenter",
       "nso": "2025-01-24 10:00",
       "slug": "miamiworldcenter",
@@ -8967,6 +9502,7 @@
         "modify": "2024-02-08 18:41:45"
       },
       "flag": "🇺🇸",
+      "kiosk": 806658,
       "name": "The Mall at Bay Plaza",
       "nso": "2021-09-24 08:00",
       "slug": "themallatbayplaza",
@@ -8980,6 +9516,7 @@
         "modify": "2024-02-08 18:41:45"
       },
       "flag": "🇺🇸",
+      "kiosk": 806966,
       "name": "American Dream",
       "nso": "2022-12-03 11:00",
       "slug": "americandream",
@@ -8993,6 +9530,7 @@
         "modify": "2024-02-08 18:41:45"
       },
       "flag": "🇮🇳",
+      "kiosk": 806973,
       "name": "Saket",
       "nso": "2023-04-20 10:00",
       "slug": "saket",
@@ -9029,6 +9567,7 @@
         "Guangdong",
         "Shenzhen"
       ],
+      "kiosk": 806994,
       "name": "深圳万象城",
       "name_eng": "MixC Shenzhen",
       "nso": "2023-04-28 10:00",
@@ -9043,6 +9582,7 @@
         "modify": "2024-02-08 18:41:45"
       },
       "flag": "🇬🇧",
+      "kiosk": 807001,
       "name": "Battersea",
       "nso": "2023-06-15 16:00",
       "slug": "battersea",
@@ -9073,6 +9613,7 @@
         "Seoul",
         "首尔"
       ],
+      "kiosk": 807036,
       "name": "홍대",
       "name_eng": "Hongdae",
       "nso": "2024-01-20 10:00",
@@ -9091,6 +9632,7 @@
         "Anhui",
         "Hefei"
       ],
+      "kiosk": 807101,
       "name": "合肥万象城",
       "name_eng": "MixC Hefei",
       "nso": "2025-01-18 10:00",
@@ -9109,6 +9651,7 @@
         "Wenzhou",
         "Zhejiang"
       ],
+      "kiosk": 807022,
       "name": "温州万象城",
       "name_eng": "MixC Wenzhou",
       "nso": "2023-11-04 10:00",
@@ -9127,6 +9670,7 @@
         "Osaka",
         "大阪"
       ],
+      "kiosk": 807111,
       "name": "梅田",
       "name_eng": "Umeda",
       "nso": "2025-07-26 10:00",
@@ -9145,6 +9689,7 @@
         "Gyeonggi",
         "京畿道"
       ],
+      "kiosk": 807024,
       "name": "하남",
       "name_eng": "Hanam",
       "nso": "2023-12-09 10:00",
@@ -9159,6 +9704,7 @@
         "modify": "2024-09-22 14:31:19"
       },
       "flag": "🇺🇸",
+      "kiosk": 807087,
       "name": "Del Amo",
       "nso": "2024-09-20 08:00",
       "slug": "delamo",
@@ -9168,8 +9714,9 @@
     "R785": {
       "city": "Al Ain",
       "flag": "🇦🇪",
-      "name": "Al Ain",
-      "slug": "alain",
+      "kiosk": 807119,
+      "name": "Al Jimi Mall",
+      "slug": "aljimimall",
       "state": "Abu Dhabi",
       "status": "future",
       "timezone": "Asia/Dubai"
@@ -9185,7 +9732,9 @@
     "R788": {
       "city": "Pune",
       "flag": "🇮🇳",
-      "name": "Store in Pune",
+      "kiosk": 807118,
+      "name": "Koregaon Park",
+      "slug": "koregaonpark",
       "state": "Maharashtra",
       "status": "future",
       "timezone": "Asia/Kolkata"
@@ -9193,7 +9742,9 @@
     "R790": {
       "city": "Bengaluru",
       "flag": "🇮🇳",
-      "name": "Store in Bangalore",
+      "kiosk": 807120,
+      "name": "Hebbal",
+      "slug": "hebbal",
       "state": "Karnataka",
       "status": "future",
       "timezone": "Asia/Kolkata"
@@ -9216,7 +9767,10 @@
         "Guangdong",
         "Shenzhen"
       ],
-      "name": "Store in Shenzhen",
+      "kiosk": 807117,
+      "name": "前海壹方城",
+      "name_eng": "Uniwalk Qianhai",
+      "slug": "uniwalkqianhai",
       "state": "广东",
       "status": "future",
       "timezone": "Asia/Shanghai"
@@ -9236,6 +9790,7 @@
         "modify": "2024-02-08 18:41:46"
       },
       "flag": "🇺🇸",
+      "kiosk": 807029,
       "name": "Birkdale Village",
       "nso": "2023-12-14 10:00",
       "slug": "birkdalevillage",
@@ -9249,6 +9804,7 @@
         "modify": "2024-02-08 18:41:46"
       },
       "flag": "🇺🇸",
+      "kiosk": 804316,
       "name": "Park Visitor Center",
       "name_alt": [
         "Apple Park Visitor Center"
