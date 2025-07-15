@@ -55,7 +55,10 @@ class File:
 
 	async def main(self, session: Optional[SessionType] = None) -> None:
 		if results := await self.run(session):
-			logging.info(f"[删除] {len(results)=} {results=}")
+			results.sort(key = lambda x: x.split("-")[-1])
+			logging.info(f"[删除] {len(results)=}")
+			for result in results:
+				logging.info(f"[删除] {result}")
 			logging.info(f"[写入文件] {self.path}")
 			self.pre_write()
 			self.path.write_text(json.dumps(self.fp, indent = 2, ensure_ascii = False))
@@ -69,8 +72,7 @@ class AssuredFile(File):
 	async def entry(self, key: str, session: SessionType) -> Optional[str]:
 		async with self.semaphore:
 			if not await test(Course, self.fp[key], session = session):
-				del self.fp[key]
-				return key
+				return self.fp.pop(key)
 
 	async def run(self, session: Optional[SessionType] = None) -> list[str]:
 		async with get_session(session) as ses:
@@ -93,7 +95,7 @@ class SavedEventFile(File):
 				slug, flags = key,list(fp[key])
 			if not await test(func, slug, flags, session):
 				del fp[key]
-				return key
+				return slug
 
 	async def run(self, session: Optional[SessionType] = None) -> list[str]:
 		async with get_session(session) as ses:
@@ -124,7 +126,7 @@ class FindASessionFile(File):
 			flags = fp[key]["flags"]
 			if not await test(func, slug, flags, session):
 				del fp[key]
-				return key
+				return slug
 
 	async def run(self, session: Optional[SessionType] = None) -> list[str]:
 		async with get_session(session) as ses:
