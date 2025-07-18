@@ -2,8 +2,11 @@
   "accessibility-2025": {
     "ae": "https://digitalassets-taa.cdn-apple.com/en/ae/accessibility-2025-ae$en_AE$video$trailer$accessibility-2025-ae-tpl-cc-ae-2025/EN4Accessibility-TAA-ww-2025_9x16_AE_540x960.m3u8",
     "au": "https://digitalassets-taa.cdn-apple.com/en/au/accessibility-2025-au$en_AU$video$trailer$accessibility-2025-au-tpl-cc-au-2025/EN4Accessibility-TAA-ww-2025_9x16_AU_720x1280h.m3u8",
+    "be": "https://digitalassets-taa.cdn-apple.com/zh/cn/accessibility-2025-cn$zh_CN$video$trailer$accessibility-2025-cn-tpl-cc-cn-2025/CN5Accessibility-TAA-cn-2025_9x16_043025_9x16.m3u8",
     "cn": "https://digitalassets-taa.cdn-apple.com/zh/cn/accessibility-2025-cn$zh_CN$video$trailer$accessibility-2025-cn-tpl-cc-cn-2025/CN5Accessibility-TAA-cn-2025_9x16_043025_9x16.m3u8",
     "gb": "https://digitalassets-taa.cdn-apple.com/en/gb/accessibility-2025-uk$en_GB$video$trailer$accessibility-2025-uk-tpl-cc-gb-2025/EN4Accessibility-TAA-ww-2025_9x16_UK_540x960.m3u8",
+    "in": "https://digitalassets-taa.cdn-apple.com/zh/cn/accessibility-2025-cn$zh_CN$video$trailer$accessibility-2025-cn-tpl-cc-cn-2025/CN5Accessibility-TAA-cn-2025_9x16_043025_9x16.m3u8",
+    "it": "https://digitalassets-taa.cdn-apple.com/zh/cn/accessibility-2025-cn$zh_CN$video$trailer$accessibility-2025-cn-tpl-cc-cn-2025/CN5Accessibility-TAA-cn-2025_9x16_043025_9x16.m3u8",
     "my": "https://digitalassets-taa.cdn-apple.com/en/my/accessibility-2025-my$en_MY$video$trailer$accessibility-2025-my-tpl-cc-my-2025/EN4Accessibility-TAA-ww-2025_9x16_MY_360x640h.m3u8",
     "sg": "https://digitalassets-taa.cdn-apple.com/en/sg/accessibility-2025-sg$en_SG$video$trailer$accessibility-2025-sg-tpl-cc-sg-2025/EN4Accessibility-TAA-ww-2025_9x16_SG_360x640h.m3u8",
     "us": "https://digitalassets-taa.cdn-apple.com/en/us/accessibility-2025-us$en_US$video$trailer$accessibility-2025-us-tpl-cc-us-2025/EN4Accessibility-TAA-us-2025_9x16_360x640h.m3u8"
@@ -100,13 +103,19 @@
     "cn": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-lockhide-apps-2025-cn$zh_CN$video$trailer$asa-lockhide-apps-2025-cn-tpl-cc-cn-2025/Web/CN/CN6_PrivacyLockApp-TAA-cn-2025_9x16_480x848h.m3u8"
   },
   "asa-multitasking-2025": {
-    "cn": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-multitasking-2025-cn$zh_CN$video$trailer$asa-multitasking-2025-cn-tpl-cc-cn-2025/CN/CN8_Multitaskingv2-TAA-cn-2025_9x16_360x640h.m3u8"
+    "be": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-multitasking-2025-cn$zh_CN$video$trailer$asa-multitasking-2025-cn-tpl-cc-cn-2025/CN/CN8_Multitaskingv2-TAA-cn-2025_9x16_360x640h.m3u8",
+    "cn": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-multitasking-2025-cn$zh_CN$video$trailer$asa-multitasking-2025-cn-tpl-cc-cn-2025/CN/CN8_Multitaskingv2-TAA-cn-2025_9x16_360x640h.m3u8",
+    "in": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-multitasking-2025-cn$zh_CN$video$trailer$asa-multitasking-2025-cn-tpl-cc-cn-2025/CN/CN8_Multitaskingv2-TAA-cn-2025_9x16_360x640h.m3u8",
+    "it": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-multitasking-2025-cn$zh_CN$video$trailer$asa-multitasking-2025-cn-tpl-cc-cn-2025/CN/CN8_Multitaskingv2-TAA-cn-2025_9x16_360x640h.m3u8"
   },
   "asa-password-app-2025": {
     "cn": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-password-app-2025-cn$zh_CN$video$trailer$asa-password-app-2025-cn-tpl-cc-cn-2025/Web/CN/CN6_PrivacyPasswordApp-TAA-cn-2025_9x16_480x848h.m3u8"
   },
   "asa-personalize-iphone-ios18-2025": {
-    "cn": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-personalize-iphone-ios18-2025-cn$zh_CN$video$trailer$asa-personalize-iphone-ios18-2025-cn-tpl-cc-cn-2025/240081v_taad_oct_cn_fy25_v028_pillarbox_480x848h.m3u8"
+    "be": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-personalize-iphone-ios18-2025-cn$zh_CN$video$trailer$asa-personalize-iphone-ios18-2025-cn-tpl-cc-cn-2025/240081v_taad_oct_cn_fy25_v028_pillarbox_480x848h.m3u8",
+    "cn": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-personalize-iphone-ios18-2025-cn$zh_CN$video$trailer$asa-personalize-iphone-ios18-2025-cn-tpl-cc-cn-2025/240081v_taad_oct_cn_fy25_v028_pillarbox_480x848h.m3u8",
+    "in": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-personalize-iphone-ios18-2025-cn$zh_CN$video$trailer$asa-personalize-iphone-ios18-2025-cn-tpl-cc-cn-2025/240081v_taad_oct_cn_fy25_v028_pillarbox_480x848h.m3u8",
+    "it": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-personalize-iphone-ios18-2025-cn$zh_CN$video$trailer$asa-personalize-iphone-ios18-2025-cn-tpl-cc-cn-2025/240081v_taad_oct_cn_fy25_v028_pillarbox_480x848h.m3u8"
   },
   "asa-photography-2025": {
     "cn": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-photography-2025-cn$zh_CN$video$trailer$asa-photography-2025-cn-tpl-cc-cn-2025/240085V_TAAD_iPhone_Photo_CN_Q1FY25_ASA_pillarbox_540x960.m3u8"
@@ -164,7 +173,10 @@
     "us": "https://digitalassets-taa.cdn-apple.com/en/us/make-stickers-on-iphone16pro-2025-us$en_US$video$trailer$make-stickers-on-iphone16pro-2025-us-tpl-cc-us-2025/EN1StickersJohnson-TAA-US-2025_9x16_9x16.m3u8"
   },
   "mindfulness-2025": {
-    "cn": "https://digitalassets-taa.cdn-apple.com/zh/cn/mindfulness-2025-cn$zh_CN$video$trailer$mindfulness-2025-cn-tpl-cc-cn-2025/CN4Watch-TAA-cn-2025_9x16_9x16.m3u8"
+    "be": "https://digitalassets-taa.cdn-apple.com/zh/cn/mindfulness-2025-cn$zh_CN$video$trailer$mindfulness-2025-cn-tpl-cc-cn-2025/CN4Watch-TAA-cn-2025_9x16_9x16.m3u8",
+    "cn": "https://digitalassets-taa.cdn-apple.com/zh/cn/mindfulness-2025-cn$zh_CN$video$trailer$mindfulness-2025-cn-tpl-cc-cn-2025/CN4Watch-TAA-cn-2025_9x16_9x16.m3u8",
+    "in": "https://digitalassets-taa.cdn-apple.com/zh/cn/mindfulness-2025-cn$zh_CN$video$trailer$mindfulness-2025-cn-tpl-cc-cn-2025/CN4Watch-TAA-cn-2025_9x16_9x16.m3u8",
+    "it": "https://digitalassets-taa.cdn-apple.com/zh/cn/mindfulness-2025-cn$zh_CN$video$trailer$mindfulness-2025-cn-tpl-cc-cn-2025/CN4Watch-TAA-cn-2025_9x16_9x16.m3u8"
   },
   "photography-2025": {
     "ae": "https://digitalassets-taa.cdn-apple.com/en/ae/photography-2025-ae$en_AE$video$trailer$photography-2025-ae-tpl-cc-ae-2025/240084v_taad_iphone_photo_en_cr_20241024_058_ae_pillarbox_720x1280h.m3u8",
