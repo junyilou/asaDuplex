@@ -1022,7 +1022,7 @@
           "name": "Osaka-fu",
           "stores": {
             "R091": "Shinsaibashi",
-            "R768": "Osaka-JP"
+            "R768": "Umeda"
           }
         },
         "state686": {
@@ -1796,5 +1796,5 @@
       }
     }
   },
-  "update": "2025-05-28 15:03:15"
+  "update": "2025-07-24 18:20:27"
 }
