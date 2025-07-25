@@ -61,6 +61,16 @@
   "asa-cny-ye-je-fy25": {
     "cn": "https://digitalassets-taa.cdn-apple.com/zh/cn/asa-cny-ye-je-fy25-cn-tpl-cc-zh_cn-250117.mp4"
   },
+  "asa-continuity1-2025": {
+    "ae": "https://digitalassets-taa.cdn-apple.com/en/ae/asa-continuity1-2025-ae$en_AE$video$trailer$asa-continuity1-2025-ae-tpl-cc-ae-2025/en6btscontinuity-taa-ae-2025_v7_9x16_540x960.m3u8",
+    "in": "https://digitalassets-taa.cdn-apple.com/en/in/asa-continuity1-2025-in$en_IN$video$trailer$asa-continuity1-2025-in-tpl-cc-in-2025/en6btscontinuity-taa-in-2025_v7_9x16_480x848h.m3u8",
+    "my": "https://digitalassets-taa.cdn-apple.com/en/my/asa-continuity1-2025-my$en_MY$video$trailer$asa-continuity1-2025-my-tpl-cc-my-2025/en6btscontinuity-taa-my-2025_v7_9x16_360x640h.m3u8",
+    "sg": "https://digitalassets-taa.cdn-apple.com/en/sg/asa-continuity1-2025-sg$en_SG$video$trailer$asa-continuity1-2025-sg-tpl-cc-sg-2025/en6btscontinuity-taa-sg-2025_v7_9x16_360x640h.m3u8"
+  },
+  "asa-continuity2-2025": {
+    "au": "https://digitalassets-taa.cdn-apple.com/en/au/asa-continuity2-2025-au$en_AU$video$trailer$asa-continuity2-2025-au-tpl-cc-au-2025/en6btscontinuity-taa-au-2025_v7_9x16_9x16.m3u8",
+    "us": "https://digitalassets-taa.cdn-apple.com/en/us/asa-continuity2-2025-us$en_US$video$trailer$asa-continuity2-2025-us-tpl-cc-us-2025/en6btscontinuity-taa-us-2025_v7_9x16_480x848h.m3u8"
+  },
   "asa-drawing-tips-2025": {
     "ae": "https://digitalassets-taa.cdn-apple.com/en/ae/asa-drawing-tips-2025-ae$en_AE$video$trailer$asa-drawing-tips-2025-ae-tpl-cc-ae-2025/EN2iPadv2-TAA-AE-2025_9x16_360x640h.m3u8",
     "au": "https://digitalassets-taa.cdn-apple.com/en/au/asa-drawing-tips-2025-au$en_AU$video$trailer$asa-drawing-tips-2025-au-tpl-cc-au-2025/EN2iPadv2-TAA-AU-2025_9x16_9x16.m3u8",
