@@ -131,7 +131,7 @@ class Store:
 		return hash(self.sortkey)
 
 	def dumps(self) -> dict[str, Any]:
-		kept_attrs = "city", "flag", "keyword", "name", "name_alt", "nso", "slug", "state"
+		kept_attrs = "city", "flag", "keyword", "kiosk", "name", "name_alt", "nso", "slug", "state"
 		d = {k: v for k in kept_attrs if (v := getattr(self, k)) or k in self.REQUIRED_KEYS}
 		if self.md5 and self.modify:
 			d["dieter"] = {"md5": self.md5, "modify": self.modify}

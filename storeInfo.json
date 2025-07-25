@@ -1,5 +1,5 @@
 {
-  "_": "2025-07-15 20:15:03",
+  "_": "2025-07-25 08:40:07",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -4337,6 +4337,11 @@
         "md5": "d936d0a0bce96f07b16ec2c89fd33a62",
         "modify": "2024-02-08 18:41:37"
       },
+      "events": [
+        {
+          "2025-08-09": "closure"
+        }
+      ],
       "flag": "🇬🇧",
       "kiosk": 5000194,
       "name": "Bristol",
@@ -4346,6 +4351,7 @@
       "nso": "2008-09-25 12:30",
       "slug": "bristol",
       "state": "Bristol",
+      "status": "closed",
       "timezone": "Europe/London"
     },
     "R253": {
@@ -9762,6 +9768,10 @@
     },
     "R793": {
       "city": "深圳",
+      "dieter": {
+        "md5": "9f28e28e51165d16d1becb90170a469a",
+        "modify": "2025-07-25 00:08:30"
+      },
       "flag": "🇨🇳",
       "keyword": [
         "Guangdong",
@@ -9770,9 +9780,9 @@
       "kiosk": 807117,
       "name": "前海壹方城",
       "name_eng": "Uniwalk Qianhai",
+      "nso": "2025-08-16 10:00",
       "slug": "uniwalkqianhai",
       "state": "广东",
-      "status": "future",
       "timezone": "Asia/Shanghai"
     },
     "R794": {
