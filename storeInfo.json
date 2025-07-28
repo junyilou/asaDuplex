@@ -1,5 +1,5 @@
 {
-  "_": "2025-07-25 08:40:07",
+  "_": "2025-07-26 08:10:48",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -1900,8 +1900,8 @@
     "R096": {
       "city": "Pittsburgh",
       "dieter": {
-        "md5": "b108a8e565a96569584ea4031e13a979",
-        "modify": "2024-02-08 18:41:34"
+        "md5": "2c89a13b4b212d3b1ed44d99a84e9ff2",
+        "modify": "2025-07-25 23:35:03"
       },
       "flag": "🇺🇸",
       "kiosk": 149509,
@@ -4351,7 +4351,6 @@
       "nso": "2008-09-25 12:30",
       "slug": "bristol",
       "state": "Bristol",
-      "status": "closed",
       "timezone": "Europe/London"
     },
     "R253": {
@@ -4395,8 +4394,8 @@
     "R255": {
       "city": "Solihull",
       "dieter": {
-        "md5": "db5539fda7f614ce1cf5016be07bfece",
-        "modify": "2024-02-08 18:41:37"
+        "md5": "45ace5b111f5828c0c95c11559471b8b",
+        "modify": "2025-07-24 17:45:12"
       },
       "flag": "🇬🇧",
       "kiosk": 132428,
