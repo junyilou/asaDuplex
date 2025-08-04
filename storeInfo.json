@@ -1,5 +1,5 @@
 {
-  "_": "2025-07-26 08:10:48",
+  "_": "2025-07-31 22:36:54",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -1900,9 +1900,14 @@
     "R096": {
       "city": "Pittsburgh",
       "dieter": {
-        "md5": "2c89a13b4b212d3b1ed44d99a84e9ff2",
-        "modify": "2025-07-25 23:35:03"
+        "md5": "25564edd90643f68e938084c7f45f256",
+        "modify": "2025-07-28 19:52:49"
       },
+      "events": [
+        {
+          "2025-08-09": "move"
+        }
+      ],
       "flag": "🇺🇸",
       "kiosk": 149509,
       "name": "Shadyside",
@@ -3851,6 +3856,11 @@
         "md5": "789be1f55194450d4d40e71d7010f07e",
         "modify": "2024-05-01 10:57:47"
       },
+      "events": [
+        {
+          "2025-08-16": "closure"
+        }
+      ],
       "flag": "🇺🇸",
       "kiosk": 419300,
       "name": "Partridge Creek",
@@ -4394,9 +4404,14 @@
     "R255": {
       "city": "Solihull",
       "dieter": {
-        "md5": "45ace5b111f5828c0c95c11559471b8b",
-        "modify": "2025-07-24 17:45:12"
+        "md5": "ece2e1615bdcc3c1c0ef300560edabfd",
+        "modify": "2025-07-29 15:34:46"
       },
+      "events": [
+        {
+          "2025-07-26": "move"
+        }
+      ],
       "flag": "🇬🇧",
       "kiosk": 132428,
       "name": "Touchwood Centre",
@@ -7117,6 +7132,11 @@
         "md5": "fe192010ca0eb8793039adfdb11785fa",
         "modify": "2024-05-07 07:24:35"
       },
+      "events": [
+        {
+          "2025-08-09": "closure"
+        }
+      ],
       "flag": "🇨🇳",
       "keyword": [
         "Dalian",
@@ -9667,8 +9687,8 @@
     "R768": {
       "city": "大阪市",
       "dieter": {
-        "md5": "4e7e50b9e2bfc3923e00d8dcf4a00b28",
-        "modify": "2025-07-02 23:00:09"
+        "md5": "9f3aecccb15b40d1c88dec7ed6f847d9",
+        "modify": "2025-07-26 01:16:01"
       },
       "flag": "🇯🇵",
       "keyword": [
