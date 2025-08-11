@@ -1,5 +1,5 @@
 {
-  "_": "2025-07-31 22:36:54",
+  "_": "2025-08-10 08:40:06",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -1900,8 +1900,8 @@
     "R096": {
       "city": "Pittsburgh",
       "dieter": {
-        "md5": "25564edd90643f68e938084c7f45f256",
-        "modify": "2025-07-28 19:52:49"
+        "md5": "b5b68f4430ffdda02b882c9d3c136d56",
+        "modify": "2025-08-09 20:33:30"
       },
       "events": [
         {
@@ -4361,6 +4361,7 @@
       "nso": "2008-09-25 12:30",
       "slug": "bristol",
       "state": "Bristol",
+      "status": "closed",
       "timezone": "Europe/London"
     },
     "R253": {
@@ -6586,8 +6587,8 @@
     "R429": {
       "city": "Newmarket",
       "dieter": {
-        "md5": "7e6aa8bd800f09e4c483db793b7c1f0c",
-        "modify": "2024-02-08 18:41:41"
+        "md5": "a2f6d0cbf395a3b784c8b05abf5a63d7",
+        "modify": "2025-08-04 04:01:31"
       },
       "flag": "🇨🇦",
       "kiosk": 5003484,
@@ -7148,6 +7149,7 @@
       "nso": "2015-10-24 09:30",
       "slug": "parkland",
       "state": "辽宁",
+      "status": "closed",
       "timezone": "Asia/Shanghai"
     },
     "R479": {
