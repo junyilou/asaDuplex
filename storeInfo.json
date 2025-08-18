@@ -1,5 +1,5 @@
 {
-  "_": "2025-08-10 08:40:06",
+  "_": "2025-08-16 18:40:08",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -1900,8 +1900,8 @@
     "R096": {
       "city": "Pittsburgh",
       "dieter": {
-        "md5": "b5b68f4430ffdda02b882c9d3c136d56",
-        "modify": "2025-08-09 20:33:30"
+        "md5": "f7b535bee1dc6a0f5981abecba33a232",
+        "modify": "2025-08-13 18:57:24"
       },
       "events": [
         {
@@ -2848,6 +2848,10 @@
     },
     "R145": {
       "city": "Sunnyvale",
+      "dieter": {
+        "md5": "64a730c931d8dd7e089b6e5e4e2b0ce1",
+        "modify": "2025-08-15 20:55:32"
+      },
       "flag": "🇺🇸",
       "name": "TestAmerica Store",
       "state": "California",
@@ -3867,6 +3871,7 @@
       "nso": "2007-10-18 10:00",
       "slug": "partridgecreek",
       "state": "Michigan",
+      "status": "closed",
       "timezone": "America/New_York"
     },
     "R219": {
@@ -4697,6 +4702,11 @@
         "md5": "0edd975e9f4bf5d8093977d8c93eab28",
         "modify": "2024-02-08 18:41:38"
       },
+      "events": [
+        {
+          "2025-08-04": "rebuild"
+        }
+      ],
       "flag": "🇫🇷",
       "kiosk": 5003195,
       "name": "Opéra",
@@ -9790,8 +9800,8 @@
     "R793": {
       "city": "深圳",
       "dieter": {
-        "md5": "9f28e28e51165d16d1becb90170a469a",
-        "modify": "2025-07-25 00:08:30"
+        "md5": "53f47c419ff7e33e75ddc7328efd803f",
+        "modify": "2025-08-16 05:52:42"
       },
       "flag": "🇨🇳",
       "keyword": [
