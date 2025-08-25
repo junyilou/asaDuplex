@@ -1,5 +1,5 @@
 {
-  "_": "2025-08-16 18:40:08",
+  "_": "2025-08-22 23:10:21",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -1900,8 +1900,8 @@
     "R096": {
       "city": "Pittsburgh",
       "dieter": {
-        "md5": "f7b535bee1dc6a0f5981abecba33a232",
-        "modify": "2025-08-13 18:57:24"
+        "md5": "7d0e798ba548d210934ed31a43beada8",
+        "modify": "2025-08-18 15:27:22"
       },
       "events": [
         {
@@ -9483,21 +9483,24 @@
       "flag": "🇺🇸",
       "name": "Dallas Market",
       "state": "Texas",
-      "status": "internal"
+      "status": "internal",
+      "kiosk": 806296
     },
     "R749": {
       "city": "Inglewood",
       "flag": "🇺🇸",
       "name": "Los Angeles Market",
       "state": "California",
-      "status": "internal"
+      "status": "internal",
+      "kiosk": 806294
     },
     "R750": {
       "city": "Burlingame",
       "flag": "🇺🇸",
       "name": "Bay Area Market",
       "state": "California",
-      "status": "internal"
+      "status": "internal",
+      "kiosk": 806295
     },
     "R751": {
       "city": "서울",
@@ -9633,6 +9636,7 @@
         "modify": "2025-02-11 02:22:27"
       },
       "flag": "🇺🇸",
+      "kiosk": 807123,
       "name": "Downtown Detroit",
       "slug": "downtowndetroit",
       "state": "Michigan",
@@ -9778,12 +9782,16 @@
     },
     "R790": {
       "city": "Bengaluru",
+      "dieter": {
+        "md5": "7bfed59b7823dc7fac5a3b9467fe62c3",
+        "modify": "2025-08-21 07:14:31"
+      },
       "flag": "🇮🇳",
       "kiosk": 807120,
       "name": "Hebbal",
+      "nso": "2025-09-02 13:00",
       "slug": "hebbal",
       "state": "Karnataka",
-      "status": "future",
       "timezone": "Asia/Kolkata"
     },
     "R792": {
@@ -9801,7 +9809,7 @@
       "city": "深圳",
       "dieter": {
         "md5": "53f47c419ff7e33e75ddc7328efd803f",
-        "modify": "2025-08-16 05:52:42"
+        "modify": "2025-08-18 03:59:08"
       },
       "flag": "🇨🇳",
       "keyword": [
@@ -9896,70 +9904,80 @@
       "flag": "🇺🇸",
       "name": "NYC",
       "state": "New York",
-      "status": "internal"
+      "status": "internal",
+      "kiosk": 806618
     },
     "R852": {
       "city": "Boca Raton",
       "flag": "🇺🇸",
       "name": "Miami",
       "state": "Florida",
-      "status": "internal"
+      "status": "internal",
+      "kiosk": 806617
     },
     "R853": {
       "city": "Lorton",
       "flag": "🇺🇸",
       "name": "Washington DC",
       "state": "District of Columbia",
-      "status": "internal"
+      "status": "internal",
+      "kiosk": 806616
     },
     "R854": {
       "city": "Chicago",
       "flag": "🇺🇸",
       "name": "Chicago",
       "state": "Illinois",
-      "status": "internal"
+      "status": "internal",
+      "kiosk": 806615
     },
     "R855": {
       "city": "Tucker",
       "flag": "🇺🇸",
       "name": "Atlanta",
       "state": "Georgia",
-      "status": "internal"
+      "status": "internal",
+      "kiosk": 806614
     },
     "R856": {
       "city": "Boston",
       "flag": "🇺🇸",
       "name": "Boston Market",
       "state": "Massachusetts",
-      "status": "internal"
+      "status": "internal",
+      "kiosk": 806650
     },
     "R857": {
       "city": "Norristown",
       "flag": "🇺🇸",
       "name": "Philly Market",
       "state": "Pennsylvania",
-      "status": "internal"
+      "status": "internal",
+      "kiosk": 806649
     },
     "R858": {
       "city": "Houston",
       "flag": "🇺🇸",
       "name": "Houston Market",
       "state": "Texas",
-      "status": "internal"
+      "status": "internal",
+      "kiosk": 806648
     },
     "R859": {
       "city": "Seatac",
       "flag": "🇺🇸",
       "name": "Seattle Market",
       "state": "Washington",
-      "status": "internal"
+      "status": "internal",
+      "kiosk": 806647
     },
     "R860": {
       "city": "Wilsonville",
       "flag": "🇺🇸",
       "name": "Portland",
       "state": "Oregon",
-      "status": "internal"
+      "status": "internal",
+      "kiosk": 806645
     },
     "R900": {
       "city": "Cupertino",
