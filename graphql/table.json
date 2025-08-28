@@ -1,10 +1,11 @@
 {
-  "Landing": "3e9100bcc8305d0d895e612a004c40b776a5a7260ce1ca295eec5e7275b26c04",
-  "StoreDetails": "d1ed07d14f3b755743be238f2cbd7ec30e7368247ea09f38c1ddf56d5d967c97",
-  "StoreGeolocation": "34cfe729fb1804d9a84c0902b9b125fded74ee9133fcc4c33f9e2cd16e03132c",
-  "StoreList": "7f5e95aa2e20580be87d95e2cea3aad66af4631b0d7ea8fa7b3eff2599a71ac5",
-  "StoreListGlobal": "c947d15c24a91a869d40d49f2dd0f62920dc786ec18ae96b19524cc24d1ee65e",
-  "StoreSearchByArea": "665484c1d39264fbee0ece38c1d342bea2fd15e16c9ef76aa7c3ef4aaae6c1da",
-  "StoreSearchByLocale": "583cc1aee20817457057215b15c78aaee76be04b7d4878d0cecf6a09b713e752",
-  "StoreSearchByLocation": "b32e2495f9b963ab990eb5bc7c1c59cbfc87febfc99dcf739f058c9a38abd77b"
+  "GeniusBar": "502be0fda3a0dba72e434e485989b733b5bfa80bbc272aef5f206e2eccc2948a",
+  "Landing": "4906bbc0c72e222c1f6cc51fa4dfbc8dd779c9055976a84902cc76f37d309950",
+  "StoreDetails": "6839c2a1669bd38bc46fc5b239d1e0dfbdf276089d59fdecf91af469d8b20dfb",
+  "StoreGeolocation": "5f058634fcda4ed2b8b7c3ed79f83bced6e654422e87f6c8a80f794fb99d4d72",
+  "StoreList": "30bb0365c96a11009cabcccda03b231260977195b08450ca21282b3f5ebeb671",
+  "StoreListGlobal": "08d2023dd88abe2b5b68d7be374aec89ec8f82fbeb59f52f62b825547fc2c9dd",
+  "StoreSearchByArea": "31236cc453e8f5702b33fc773437cf71b822afa20564ea3ca5fe0672f629e046",
+  "StoreSearchByLocale": "d95caa379372fe166f35bb89fe8e018e21781c66ee815ee3f68105f36ff4b1d8",
+  "StoreSearchByLocation": "95310df81b3cd55c84fda50c49580bff1761ce5ff9acfdb9763b97915d18f7d9"
 }
