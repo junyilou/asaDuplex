@@ -1,5 +1,5 @@
 {
-  "_": "2025-08-22 23:10:21",
+  "_": "2025-08-30 08:10:40",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -4699,8 +4699,8 @@
     "R277": {
       "city": "Paris",
       "dieter": {
-        "md5": "0edd975e9f4bf5d8093977d8c93eab28",
-        "modify": "2024-02-08 18:41:38"
+        "md5": "b834b1a8a35ccdfc091fd82844b8f841",
+        "modify": "2025-08-28 08:02:19"
       },
       "events": [
         {
@@ -8332,9 +8332,17 @@
         "md5": "a68097572eb034078afc24567ae16c62",
         "modify": "2024-02-08 18:41:44"
       },
+      "events": [
+        {
+          "2025-08-28": "rename"
+        }
+      ],
       "flag": "🇺🇸",
       "kiosk": 800472,
-      "name": "Potomac Town Center",
+      "name": "Stonebridge Potomac Town Center",
+      "name_alt": [
+        "Potomac Town Center"
+      ],
       "nso": "2013-09-28 10:00",
       "slug": "potomactowncenter",
       "state": "Virginia",
@@ -8674,6 +8682,11 @@
         "md5": "2b37bc6aff1aabfcb6beb1314b2ff3a7",
         "modify": "2024-02-08 18:41:44"
       },
+      "events": [
+        {
+          "2019-04-13": "rename"
+        }
+      ],
       "flag": "🇨🇳",
       "keyword": [
         "Tianjin"
@@ -8772,6 +8785,11 @@
         "md5": "419783d62c915986b190e6c025205337",
         "modify": "2024-02-08 18:41:44"
       },
+      "events": [
+        {
+          "2019-12-21": "rename"
+        }
+      ],
       "flag": "🇨🇳",
       "keyword": [
         "Fujian",
@@ -9481,26 +9499,26 @@
     "R748": {
       "city": "Plano",
       "flag": "🇺🇸",
+      "kiosk": 806296,
       "name": "Dallas Market",
       "state": "Texas",
-      "status": "internal",
-      "kiosk": 806296
+      "status": "internal"
     },
     "R749": {
       "city": "Inglewood",
       "flag": "🇺🇸",
+      "kiosk": 806294,
       "name": "Los Angeles Market",
       "state": "California",
-      "status": "internal",
-      "kiosk": 806294
+      "status": "internal"
     },
     "R750": {
       "city": "Burlingame",
       "flag": "🇺🇸",
+      "kiosk": 806295,
       "name": "Bay Area Market",
       "state": "California",
-      "status": "internal",
-      "kiosk": 806295
+      "status": "internal"
     },
     "R751": {
       "city": "서울",
@@ -9772,12 +9790,16 @@
     },
     "R788": {
       "city": "Pune",
+      "dieter": {
+        "md5": "ec912b2a9549ba34e2c25f7209d26c57",
+        "modify": "2025-08-26 02:40:31"
+      },
       "flag": "🇮🇳",
       "kiosk": 807118,
       "name": "Koregaon Park",
+      "nso": "2025-09-04 13:00",
       "slug": "koregaonpark",
       "state": "Maharashtra",
-      "status": "future",
       "timezone": "Asia/Kolkata"
     },
     "R790": {
@@ -9902,82 +9924,82 @@
     "R851": {
       "city": "Jamaica",
       "flag": "🇺🇸",
+      "kiosk": 806618,
       "name": "NYC",
       "state": "New York",
-      "status": "internal",
-      "kiosk": 806618
+      "status": "internal"
     },
     "R852": {
       "city": "Boca Raton",
       "flag": "🇺🇸",
+      "kiosk": 806617,
       "name": "Miami",
       "state": "Florida",
-      "status": "internal",
-      "kiosk": 806617
+      "status": "internal"
     },
     "R853": {
       "city": "Lorton",
       "flag": "🇺🇸",
+      "kiosk": 806616,
       "name": "Washington DC",
       "state": "District of Columbia",
-      "status": "internal",
-      "kiosk": 806616
+      "status": "internal"
     },
     "R854": {
       "city": "Chicago",
       "flag": "🇺🇸",
+      "kiosk": 806615,
       "name": "Chicago",
       "state": "Illinois",
-      "status": "internal",
-      "kiosk": 806615
+      "status": "internal"
     },
     "R855": {
       "city": "Tucker",
       "flag": "🇺🇸",
+      "kiosk": 806614,
       "name": "Atlanta",
       "state": "Georgia",
-      "status": "internal",
-      "kiosk": 806614
+      "status": "internal"
     },
     "R856": {
       "city": "Boston",
       "flag": "🇺🇸",
+      "kiosk": 806650,
       "name": "Boston Market",
       "state": "Massachusetts",
-      "status": "internal",
-      "kiosk": 806650
+      "status": "internal"
     },
     "R857": {
       "city": "Norristown",
       "flag": "🇺🇸",
+      "kiosk": 806649,
       "name": "Philly Market",
       "state": "Pennsylvania",
-      "status": "internal",
-      "kiosk": 806649
+      "status": "internal"
     },
     "R858": {
       "city": "Houston",
       "flag": "🇺🇸",
+      "kiosk": 806648,
       "name": "Houston Market",
       "state": "Texas",
-      "status": "internal",
-      "kiosk": 806648
+      "status": "internal"
     },
     "R859": {
       "city": "Seatac",
       "flag": "🇺🇸",
+      "kiosk": 806647,
       "name": "Seattle Market",
       "state": "Washington",
-      "status": "internal",
-      "kiosk": 806647
+      "status": "internal"
     },
     "R860": {
       "city": "Wilsonville",
       "flag": "🇺🇸",
+      "kiosk": 806645,
       "name": "Portland",
       "state": "Oregon",
-      "status": "internal",
-      "kiosk": 806645
+      "status": "internal"
     },
     "R900": {
       "city": "Cupertino",
