@@ -6,6 +6,7 @@ from collections.abc import Mapping
 from datetime import datetime
 from hashlib import md5
 from pathlib import Path
+from random import random
 from typing import Optional
 
 import aiohttp
@@ -41,19 +42,20 @@ async def task(store: Store, special_list: list[str], local_mode: bool,
 		logging.info(f"[{store.rid}] 记录到新时间 {dt:%F %T}")
 		return dt
 
+	url = f"{store.dieter[:-1]}{random()}"
 	try:
 		async with semaphore:
-			head = await request(store.dieter, session,
+			head = await request(url, session,
 				headers = browser_agent | {"Range": "bytes=0-0"},
 				ssl = False, raise_for_status = True, mode = "head")
 		if not (dt := judge(head)):
 			return
 		async with semaphore:
-			raw = await request(store.dieter, session, headers = browser_agent,
+			raw = await request(url, session, headers = browser_agent,
 				ssl = False, raise_for_status = True, mode = "raw")
 		assert isinstance(raw, bytes) and raw
 	except aiohttp.ClientResponseError as cre:
-		if cre.status == 404:
+		if cre.status in (404, 503):
 			return
 		logging.error(f"[{store.rid}] 网络请求失败: {cre!r}")
 		return
