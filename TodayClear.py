@@ -12,6 +12,18 @@ from modules.util import SessionType, get_session, session_func, setLogger
 
 FLAGS = [flag for flag, region in Regions.items() if region.url_taa is not None]
 
+IGNORE_SLUGS: tuple[str, ...] = (
+	"photo-tour-framing-architecture-sanlitun",
+	"photo-tour-capturing-vancouvers-cityscapes",
+	"photo-tour-battersea-power-station-uk",
+	"art-tour-battersea-power-station-uk",
+	"photo-tour-compose-shots-xiqu-center",
+	"photo-tour-capture-a-skyway-view-of-central",
+	"photo-tour-capture-marina-bay-after-dark-mbs-store",
+	"photo-tour-explore-magic-jewel-changi-airport-store",
+	"photo-tour-uncover-story-emerald-hill-orchard-road-store",
+	"photo-tour-capture-architecture-nature-miami-r752")
+
 async def test(func: type[Course] | type[Collection],
 	slug: str, flags: list[str] = FLAGS,
 	session: Optional[SessionType] = None) -> bool:
@@ -25,6 +37,9 @@ async def test(func: type[Course] | type[Collection],
 		except Exception:
 			return
 
+	if slug in IGNORE_SLUGS:
+		logging.info(f"[跳过] {slug=}")
+		return True
 	logging.info(f"[开始] {slug=} {len(flags)=}")
 	async with get_session(session) as ses:
 		tasks = [asyncio.create_task(entry(Regions[flag].url_taa or "", ses)) for flag in flags]
