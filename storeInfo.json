@@ -1,5 +1,5 @@
 {
-  "_": "2025-08-30 08:10:40",
+  "_": "2025-09-07 08:11:21",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -8344,7 +8344,7 @@
         "Potomac Town Center"
       ],
       "nso": "2013-09-28 10:00",
-      "slug": "potomactowncenter",
+      "slug": "stonebridgepotomactowncenter",
       "state": "Virginia",
       "timezone": "America/New_York"
     },
@@ -9791,8 +9791,8 @@
     "R788": {
       "city": "Pune",
       "dieter": {
-        "md5": "ec912b2a9549ba34e2c25f7209d26c57",
-        "modify": "2025-08-26 02:40:31"
+        "md5": "e6e59ab7d26cbfcbf0858c8643ad575c",
+        "modify": "2025-09-04 01:43:44"
       },
       "flag": "🇮🇳",
       "kiosk": 807118,
@@ -9805,8 +9805,8 @@
     "R790": {
       "city": "Bengaluru",
       "dieter": {
-        "md5": "7bfed59b7823dc7fac5a3b9467fe62c3",
-        "modify": "2025-08-21 07:14:31"
+        "md5": "c89b0c8231aba1f31eb9ac2bcdaf8e24",
+        "modify": "2025-09-05 09:29:06"
       },
       "flag": "🇮🇳",
       "kiosk": 807120,
