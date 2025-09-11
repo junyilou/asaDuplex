@@ -215,12 +215,7 @@
         }
       },
       "positions": {
-        "114437996": "ca-expert",
-        "114437997": "ca-genius",
-        "114437998": "ca-operations-expert",
-        "114438004": "ca-specialist-full-time-part-time-and-part-time-temporary",
-        "114438200": "ca-technical-specialist",
-        "200125332": "ca-business-pro"
+        "114438004": "ca-specialist-full-time-part-time-and-part-time-temporary"
       }
     },
     "🇨🇭": {
@@ -423,14 +418,10 @@
         }
       },
       "positions": {
-        "114438021": "cn-creative",
-        "114438022": "cn-expert",
         "114438027": "cn-manager",
         "114438029": "cn-store-leader",
         "114438030": "cn-specialist-full-time-and-part-time",
-        "114438189": "cn-technical-specialist",
-        "114438255": "cn-senior-manager",
-        "200125389": "cn-business-pro"
+        "114438255": "cn-senior-manager"
       }
     },
     "🇩🇪": {
@@ -832,11 +823,7 @@
         }
       },
       "positions": {
-        "114438135": "uk-business-expert",
-        "114438136": "uk-creative",
-        "114438138": "uk-genius",
-        "114438145": "uk-specialist-full-time-part-time-and-part-time-temporary",
-        "200125450": "uk-business-pro"
+        "114438145": "uk-specialist-full-time-part-time-and-part-time-temporary"
       }
     },
     "🇭🇰": {
@@ -1126,13 +1113,7 @@
         }
       },
       "positions": {
-        "200450000": "my-genius",
-        "200450003": "my-specialist-full-time-or-part-time-permanent-or-temporary",
-        "200450004": "my-expert",
-        "200450008": "my-technical-specialist",
-        "200450011": "my-business-expert",
-        "200450018": "my-operations-expert",
-        "200450020": "my-ops-specialist"
+        "200450003": "my-specialist-full-time-or-part-time-permanent-or-temporary"
       }
     },
     "🇳🇱": {
@@ -1171,17 +1152,17 @@
         }
       },
       "positions": {
-        "200598704": "sa-pro",
-        "200598708": "sa-specialist",
-        "200598709": "sa-business-pro",
-        "200598710": "sa-technical-specialist",
-        "200598711": "sa-genius-admin",
-        "200598713": "sa-creative-pro",
-        "200598714": "sa-genius",
-        "200598715": "sa-business-expert",
-        "200598717": "sa-operations-expert",
-        "200598718": "sa-technical-expert",
-        "200598720": "sa-expert"
+        "200598704": "sa-pro-saudi-and-gcc-nationals",
+        "200598708": "sa-specialist-saudi-and-gcc-nationals",
+        "200598709": "sa-business-pro-saudi-and-gcc-nationals",
+        "200598710": "sa-technical-specialist-saudi-and-gcc-nationals",
+        "200598711": "sa-genius-admin-saudi-and-gcc-nationals",
+        "200598713": "sa-creative-pro-saudi-and-gcc-nationals",
+        "200598714": "sa-genius-saudi-and-gcc-nationals",
+        "200598715": "sa-business-expert-saudi-and-gcc-nationals",
+        "200598717": "sa-operations-expert-saudi-and-gcc-nationals",
+        "200598718": "sa-technical-expert-saudi-and-gcc-nationals",
+        "200598720": "sa-expert-saudi-and-gcc-nationals"
       }
     },
     "🇸🇪": {
@@ -1788,13 +1769,9 @@
         }
       },
       "positions": {
-        "114438149": "us-creative",
-        "114438150": "us-expert",
-        "114438151": "us-genius",
-        "114438158": "us-specialist-full-time-part-time-and-part-time-temporary",
-        "200125453": "us-business-pro"
+        "114438158": "us-specialist-full-time-part-time-and-part-time-temporary"
       }
     }
   },
-  "update": "2025-07-24 18:20:27"
+  "update": "2025-09-12 00:27:48"
 }
