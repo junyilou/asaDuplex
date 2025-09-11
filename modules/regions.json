@@ -65,7 +65,7 @@
   },
   {
     "abbr": "AE",
-    "apu": false,
+    "apu": true,
     "flag": "🇦🇪",
     "locale": "en_AE",
     "name": "阿联酋",
@@ -117,7 +117,7 @@
   },
   {
     "abbr": "BE",
-    "apu": false,
+    "apu": true,
     "flag": "🇧🇪",
     "locale": "fr_BE",
     "name": "比利时",
@@ -165,7 +165,7 @@
   },
   {
     "abbr": "CH",
-    "apu": false,
+    "apu": true,
     "flag": "🇨🇭",
     "locale": "fr_CH",
     "name": "瑞士",
@@ -386,7 +386,7 @@
   },
   {
     "abbr": "MX",
-    "apu": false,
+    "apu": true,
     "flag": "🇲🇽",
     "locale": "es_MX",
     "name": "墨西哥",
@@ -506,7 +506,7 @@
   },
   {
     "abbr": "TR",
-    "apu": false,
+    "apu": true,
     "flag": "🇹🇷",
     "locale": "tr_TR",
     "name": "土耳其",
