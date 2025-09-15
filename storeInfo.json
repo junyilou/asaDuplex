@@ -1,5 +1,5 @@
 {
-  "_": "2025-09-07 08:11:21",
+  "_": "2025-09-13 19:40:07",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -65,8 +65,8 @@
     "R004": {
       "city": "Costa Mesa",
       "dieter": {
-        "md5": "93d4039535174cd17818de65f653f990",
-        "modify": "2024-02-08 18:41:30"
+        "md5": "202071b37dc6d5af7604758305fa35f9",
+        "modify": "2025-09-12 23:13:55"
       },
       "events": [
         {
@@ -4238,8 +4238,8 @@
     "R242": {
       "city": "Grays",
       "dieter": {
-        "md5": "2c8b499e3817711f09b178cf738c281b",
-        "modify": "2024-02-08 18:41:37"
+        "md5": "0dec4314f1d02184d765f75bf4a01980",
+        "modify": "2025-09-12 15:08:01"
       },
       "flag": "🇬🇧",
       "kiosk": 132465,
@@ -6935,6 +6935,11 @@
         "md5": "1a3fa1480f9737f7728a377a3f461e2e",
         "modify": "2024-02-08 18:41:41"
       },
+      "events": [
+        {
+          "2025-10-04": "closure"
+        }
+      ],
       "flag": "🇦🇺",
       "kiosk": 5004708,
       "name": "Hornsby",
@@ -9650,15 +9655,15 @@
     "R763": {
       "city": "Detroit",
       "dieter": {
-        "md5": "a41276c7187d1f2371b0dcc2a2bc5aa7",
-        "modify": "2025-02-11 02:22:27"
+        "md5": "17a5a049ec384c9da4808b76e5c06a76",
+        "modify": "2025-09-12 14:08:22"
       },
       "flag": "🇺🇸",
       "kiosk": 807123,
       "name": "Downtown Detroit",
+      "nso": "2025-09-19 17:00",
       "slug": "downtowndetroit",
       "state": "Michigan",
-      "status": "future",
       "timezone": "America/New_York"
     },
     "R764": {
