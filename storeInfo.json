@@ -1,5 +1,5 @@
 {
-  "_": "2025-09-13 19:40:07",
+  "_": "2025-09-21 06:40:09",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -4572,6 +4572,13 @@
       "state": "Arizona",
       "timezone": "US/Arizona"
     },
+    "R268": {
+      "city": "Sunnyvale",
+      "flag": "🇺🇸",
+      "name": "Cupertino REMM Lab",
+      "state": "California",
+      "status": "internal"
+    },
     "R269": {
       "city": "Milton Keynes",
       "dieter": {
@@ -6342,12 +6349,12 @@
         }
       ],
       "flag": "🇭🇰",
-      "keyword": [
+      "kiosk": 5005545,
+      "name": "Causeway Bay",
+      "name_alt": [
         "銅鑼灣",
         "铜锣湾"
       ],
-      "kiosk": 5005545,
-      "name": "Causeway Bay",
       "nso": "2012-12-15 09:00",
       "slug": "causewaybay",
       "state": "香港",
@@ -6581,14 +6588,16 @@
       },
       "flag": "🇭🇰",
       "keyword": [
-        "國際金融中心商場",
-        "国际金融中心商场",
         "Central",
         "中环",
         "中環"
       ],
       "kiosk": 5004447,
       "name": "ifc mall",
+      "name_alt": [
+        "國際金融中心商場",
+        "国际金融中心商场"
+      ],
       "nso": "2011-09-24 09:00",
       "slug": "ifcmall",
       "state": "香港",
@@ -7258,12 +7267,14 @@
       },
       "flag": "🇭🇰",
       "keyword": [
-        "又一城",
         "Kowloon Tong",
         "九龍塘"
       ],
       "kiosk": 5005433,
       "name": "Festival Walk",
+      "name_alt": [
+        "又一城"
+      ],
       "nso": "2012-09-29 10:00",
       "slug": "festivalwalk",
       "state": "香港",
@@ -7396,13 +7407,15 @@
       ],
       "flag": "🇭🇰",
       "keyword": [
-        "廣東道",
-        "广东道",
         "Tsim Sha Tsui",
         "尖沙咀"
       ],
       "kiosk": 802145,
       "name": "Canton Road",
+      "name_alt": [
+        "廣東道",
+        "广东道"
+      ],
       "nso": "2015-07-30 09:00",
       "slug": "cantonroad",
       "state": "香港",
@@ -8452,12 +8465,14 @@
       },
       "flag": "🇭🇰",
       "keyword": [
-        "新城市广场",
         "Sha Tin",
         "沙田"
       ],
       "kiosk": 803014,
       "name": "New Town Plaza",
+      "name_alt": [
+        "新城市广场"
+      ],
       "nso": "2016-06-30 10:00",
       "slug": "newtownplaza",
       "state": "香港",
@@ -9655,8 +9670,8 @@
     "R763": {
       "city": "Detroit",
       "dieter": {
-        "md5": "17a5a049ec384c9da4808b76e5c06a76",
-        "modify": "2025-09-12 14:08:22"
+        "md5": "dfb7ec0df77cfbf5391ab339cefc962c",
+        "modify": "2025-09-20 05:11:22"
       },
       "flag": "🇺🇸",
       "kiosk": 807123,
@@ -9872,6 +9887,14 @@
       "slug": "birkdalevillage",
       "state": "North Carolina",
       "timezone": "America/New_York"
+    },
+    "R808": {
+      "city": "Xi'an",
+      "flag": "🇨🇳",
+      "name": "Store in Xi'an",
+      "state": "Shaanxi",
+      "status": "future",
+      "timezone": "Asia/Shanghai"
     },
     "R824": {
       "city": "Cupertino",
