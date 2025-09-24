@@ -1,5 +1,5 @@
 {
-  "update": "2025-09-16 01:26:37",
+  "update": "2025-09-24 07:12:08",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -381,6 +381,12 @@
       },
       "slug": "get-started-voiceover-on-mac"
     },
+    "7366666644565622784": {
+      "names": {
+        "🇯🇵": "スポットライト：Number_iの空間体験の中に飛び込もう"
+      },
+      "slug": "spotlight-spatial-experience-apac"
+    },
     "7366948317962272768": {
       "names": {
         "🇨🇳": "TBD",
@@ -388,6 +394,12 @@
         "🇲🇴": "TBD"
       },
       "slug": "kids-draw-with-sneaky-sasquatch"
+    },
+    "7376220474353483776": {
+      "names": {
+        "🇯🇵": "スポットライト：Number_iの空間体験の中に飛び込もう"
+      },
+      "slug": "spotlight-spatial-experience-apac-v2"
     }
   },
   "collection": {}
