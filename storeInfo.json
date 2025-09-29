@@ -1,5 +1,5 @@
 {
-  "_": "2025-09-21 06:40:09",
+  "_": "2025-09-28 19:37:09",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -1559,9 +1559,14 @@
     "R079": {
       "city": "中央区",
       "dieter": {
-        "md5": "bd297eefe41daafb44f358fe4bf71be8",
-        "modify": "2024-02-08 18:41:33"
+        "md5": "39d81ef291159b9c7578a4a024b8338c",
+        "modify": "2025-09-25 11:35:55"
       },
+      "events": [
+        {
+          "2025-09-26": "rebuild"
+        }
+      ],
       "flag": "🇯🇵",
       "keyword": [
         "Chuo",
@@ -9670,8 +9675,8 @@
     "R763": {
       "city": "Detroit",
       "dieter": {
-        "md5": "dfb7ec0df77cfbf5391ab339cefc962c",
-        "modify": "2025-09-20 05:11:22"
+        "md5": "c4834eac470bb7599ee5014ba29e2c8f",
+        "modify": "2025-09-23 01:47:55"
       },
       "flag": "🇺🇸",
       "kiosk": 807123,
@@ -9792,18 +9797,24 @@
     },
     "R785": {
       "city": "Al Ain",
+      "dieter": {
+        "md5": "30875cbc2c283cd84434f5252467d92f",
+        "modify": "2025-09-25 10:55:46"
+      },
       "flag": "🇦🇪",
       "kiosk": 807119,
       "name": "Al Jimi Mall",
+      "nso": "2025-09-25 10:00",
       "slug": "aljimimall",
       "state": "Abu Dhabi",
-      "status": "future",
       "timezone": "Asia/Dubai"
     },
     "R787": {
       "city": "Noida",
       "flag": "🇮🇳",
-      "name": "Store in Delhi",
+      "kiosk": 807124,
+      "name": "Noida",
+      "slug": "noida",
       "state": "Uttar Pradesh",
       "status": "future",
       "timezone": "Asia/Kolkata"
