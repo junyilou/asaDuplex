@@ -4,7 +4,7 @@ import logging
 from collections.abc import AsyncGenerator, Callable, Coroutine, Iterable
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
-from typing import Any, Concatenate, Literal, Mapping, Optional, overload
+from typing import Any, Concatenate, Literal, Mapping, Optional, cast, overload
 
 import aiohttp
 
@@ -99,6 +99,7 @@ def AsyncRetry[R, **P](limit: int, sleep: float = 0) -> Callable[
 async def _base_request(session: SessionType, url: str, method: str, modes: set[str], **kwargs) -> Any:
 	results = {}
 	async with session.request(url = url, method = method, **kwargs) as resp:
+		resp = cast(aiohttp.ClientResponse, resp)
 		for m in modes:
 			d = ("head" if method == "HEAD" else "text") if m == "default" else m
 			if d == "text":
