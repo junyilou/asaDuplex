@@ -12,10 +12,10 @@ jobs:
       contents: write
     steps:
       - name: checkout repo content
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: download file
         run: curl --fail -o storeInfo.tmp "${{ secrets.STOREINFO_URL }}" && mv storeInfo.tmp storeInfo.json
       - name: commit files
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: 'auto: Update storeInfo'

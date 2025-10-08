@@ -12,11 +12,11 @@ jobs:
       contents: write
     steps:
       - name: checkout repo content
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: setup python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.13'
+          python-version: '3.14'
       - name: install python packages
         run: pip install -r requirements.txt
       - name: execute py script
@@ -25,6 +25,6 @@ jobs:
           BOTPOST_CHAT_ID: ${{ secrets.BOTPOST_CHAT_ID }}
         run: python3 Today.py -d
       - name: commit files
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: 'auto: Today at Apple'
