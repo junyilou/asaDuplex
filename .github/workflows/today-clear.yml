@@ -16,7 +16,8 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v6
         with:
-          python-version: '3.14'
+          python-version: '3.13'
+          cache: 'pip'
       - name: install python packages
         run: pip install -r requirements.txt
       - name: execute py script 1
