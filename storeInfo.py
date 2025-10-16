@@ -3,14 +3,14 @@ import re
 from collections.abc import Callable
 from datetime import UTC, datetime
 from enum import Enum
-from pathlib import PurePath
+from pathlib import Path
 from typing import Any, Optional, Required, TypedDict
 from zoneinfo import ZoneInfo
 
 from modules.regions import Regions
 from modules.util import SessionType
 
-DEFAULTFILE = PurePath(__file__).with_suffix(".json")
+DEFAULTFILE = Path(__file__).with_suffix(".json")
 type StoreMapping = Callable[[Store], Any]
 
 class StoreDict(TypedDict, total = False):
@@ -193,7 +193,13 @@ def StoreMatch(keyword: str, fuzzy: Any = False, regular: Any = False) -> list[S
 	return [i for i in STORES.values() if keyword.lower() in (k.lower() for k in i.keys)]
 
 def getStore(sid: int | str) -> Optional[Store]:
-	return STORES.get(sidify(sid))
+	try:
+		return STORES[sidify(sid)]
+	except KeyError:
+		try:
+			return storeReturn(sid)[0]
+		except IndexError:
+			pass
 
 def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 	levels: list[str] = ["flag", "state", "city"],
@@ -219,12 +225,12 @@ def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 	results.extend(final(s) for s in sorted(stores))
 	return results
 
-def reloadJSON(filename: str | PurePath = DEFAULTFILE) -> str:
+def reloadJSON(filename: str | Path = DEFAULTFILE) -> str:
 	with open(filename) as r:
 		infoJSON: FileDict = json.load(r)
-	for rid, dct in infoJSON["stores"].items():
-		inst = Store(rid = rid, dct = dct)
-		STORES[inst.sid] = inst
+	STORES.clear()
+	STORES.update({(inst := Store(rid = k, dct = v)).sid: inst
+		for k, v in infoJSON["stores"].items()})
 	return infoJSON["_"]
 
 def sidify(sid: int | str, *, R: bool = False, fill: bool = True) -> str:
