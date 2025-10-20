@@ -1,5 +1,5 @@
 {
-  "_": "2025-10-11 08:10:41",
+  "_": "2025-10-18 08:10:39",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -3643,8 +3643,8 @@
     "R204": {
       "city": "Friendswood",
       "dieter": {
-        "md5": "88a8aa64c9d8b1e37c621c9e0aecfecb",
-        "modify": "2024-02-08 18:41:36"
+        "md5": "c0a45add90c7febf6028215e5a91359d",
+        "modify": "2025-10-16 16:12:55"
       },
       "flag": "🇺🇸",
       "kiosk": 357488,
@@ -5244,9 +5244,14 @@
     "R316": {
       "city": "Fort Worth",
       "dieter": {
-        "md5": "2c89a13b4b212d3b1ed44d99a84e9ff2",
-        "modify": "2025-09-29 22:33:38"
+        "md5": "d84307545fc2c830b699749918e32661",
+        "modify": "2025-10-15 19:52:41"
       },
+      "events": [
+        {
+          "2025-10-11": "move"
+        }
+      ],
       "flag": "🇺🇸",
       "kiosk": 5000115,
       "name": "University Park Village",
@@ -9900,11 +9905,11 @@
       "timezone": "America/New_York"
     },
     "R808": {
-      "city": "Xi'an",
+      "city": "Sample Town",
       "flag": "🇨🇳",
-      "name": "Store in Xi'an",
-      "state": "Shaanxi",
-      "status": "future",
+      "name": "R808",
+      "state": "",
+      "status": "internal",
       "timezone": "Asia/Shanghai"
     },
     "R824": {
