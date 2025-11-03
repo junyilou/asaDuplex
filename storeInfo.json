@@ -1,5 +1,5 @@
 {
-  "_": "2025-10-25 08:10:39",
+  "_": "2025-11-01 08:10:37",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -4377,12 +4377,13 @@
     "R253": {
       "city": "Chatswood",
       "dieter": {
-        "md5": "c31f52e034d474f59722a82313800fec",
-        "modify": "2025-10-09 03:30:27"
+        "md5": "05726ee7ad61c5b3104686a35fb25fac",
+        "modify": "2025-10-31 04:39:56"
       },
       "events": [
         {
-          "2013-02-23": "rebuild"
+          "2013-02-23": "rebuild",
+          "2025-10-30": "rebuild"
         }
       ],
       "flag": "🇦🇺",
@@ -9858,7 +9859,10 @@
       "keyword": [
         "Beijing"
       ],
-      "name": "Store in Beijing",
+      "kiosk": 807125,
+      "name": "北京荟聚",
+      "name_eng": "Livat Beijing",
+      "slug": "livatbeijing",
       "state": "北京",
       "status": "future",
       "timezone": "Asia/Shanghai"
