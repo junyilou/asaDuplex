@@ -883,7 +883,7 @@
         "200314010": "in-expert",
         "200314015": "in-genius",
         "200314033": "in-operations-expert",
-        "200314117": "in-specialist",
+        "200314117": "in-specialist-full-time-part-time-and-part-time-temporary",
         "200314122": "in-technical-specialist"
       }
     },
@@ -1055,10 +1055,7 @@
         }
       },
       "positions": {
-        "114438322": "kr-manager",
-        "114438324": "kr-store-leader",
-        "114438326": "kr-specialist-full-time-or-part-time-seasonal-role-also-available",
-        "114438327": "kr-senior-manager"
+        "114438326": "kr-specialist-full-time-or-part-time-seasonal-role-also-available"
       }
     },
     "🇲🇴": {
@@ -1773,5 +1770,5 @@
       }
     }
   },
-  "update": "2025-09-12 00:27:48"
+  "update": "2025-11-07 00:24:19"
 }
