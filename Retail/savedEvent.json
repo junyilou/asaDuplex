@@ -1,5 +1,5 @@
 {
-  "update": "2025-10-24 02:22:17",
+  "update": "2025-11-10 02:47:42",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -248,7 +248,10 @@
     },
     "7301439666669846784": {
       "names": {
-        "🇯🇵": "スポットライト：Apple Intelligence"
+        "🇭🇰": "聚焦：Apple Intelligence",
+        "🇯🇵": "スポットライト：Apple Intelligence",
+        "🇲🇴": "聚焦：Apple Intelligence",
+        "🇹🇼": "聚焦：Apple Intelligence"
       },
       "slug": "spotlight-apple-intelligence"
     },
