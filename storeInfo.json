@@ -1,5 +1,5 @@
 {
-  "_": "2025-11-08 08:10:41",
+  "_": "2025-11-17 08:40:10",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -9630,7 +9630,9 @@
     "R757": {
       "city": "Mumbai",
       "flag": "🇮🇳",
-      "name": "Store in Mumbai",
+      "kiosk": 807128,
+      "name": "Borivali",
+      "slug": "borivali",
       "state": "Maharashtra",
       "status": "future",
       "timezone": "Asia/Kolkata"
@@ -9856,6 +9858,10 @@
     },
     "R792": {
       "city": "北京",
+      "dieter": {
+        "md5": "b577885f6f4528cf951237b73334c6f5",
+        "modify": "2025-11-17 00:16:06"
+      },
       "flag": "🇨🇳",
       "keyword": [
         "Beijing"
@@ -9863,9 +9869,9 @@
       "kiosk": 807125,
       "name": "北京荟聚",
       "name_eng": "Livat Beijing",
+      "nso": "2025-12-06 10:00",
       "slug": "livatbeijing",
       "state": "北京",
-      "status": "future",
       "timezone": "Asia/Shanghai"
     },
     "R793": {
