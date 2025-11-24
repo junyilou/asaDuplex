@@ -1,5 +1,5 @@
 {
-  "_": "2025-11-17 08:40:10",
+  "_": "2025-11-22 08:10:39",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -1182,8 +1182,8 @@
     "R060": {
       "city": "Garden City",
       "dieter": {
-        "md5": "10a781538ab7ea84bdb181141adc2994",
-        "modify": "2025-11-06 13:08:10"
+        "md5": "b5b68f4430ffdda02b882c9d3c136d56",
+        "modify": "2025-11-20 14:57:11"
       },
       "events": [
         {
@@ -8581,9 +8581,14 @@
     "R622": {
       "city": "Marlborough",
       "dieter": {
-        "md5": "d09981f5d8e7c4354b86d2acf9d7ee08",
-        "modify": "2024-02-08 18:41:44"
+        "md5": "dbafcf55991b24b20f152481c1c1991f",
+        "modify": "2025-11-20 14:58:35"
       },
+      "events": [
+        {
+          "2025-12-12": "move"
+        }
+      ],
       "flag": "🇺🇸",
       "kiosk": 801135,
       "name": "Solomon Pond Mall",
