@@ -1,5 +1,5 @@
 {
-  "_": "2025-11-22 08:10:39",
+  "_": "2025-11-28 12:10:47",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -1182,8 +1182,8 @@
     "R060": {
       "city": "Garden City",
       "dieter": {
-        "md5": "b5b68f4430ffdda02b882c9d3c136d56",
-        "modify": "2025-11-20 14:57:11"
+        "md5": "993d5b310b24a93799f550f590a91c5b",
+        "modify": "2025-11-25 15:48:47"
       },
       "events": [
         {
@@ -3171,8 +3171,8 @@
     "R166": {
       "city": "Ardmore",
       "dieter": {
-        "md5": "9d7795ecff97d59004cb51b3d7e58f50",
-        "modify": "2024-02-08 18:41:35"
+        "md5": "4f02b41464523d0344eaa0a5774337ed",
+        "modify": "2025-11-26 09:05:42"
       },
       "flag": "🇺🇸",
       "kiosk": 255471,
@@ -4799,8 +4799,8 @@
     "R282": {
       "city": "Greenwich",
       "dieter": {
-        "md5": "aab2a1d3f22f2dc3bd36cf64e7898cb1",
-        "modify": "2024-02-08 18:41:38"
+        "md5": "648b767cb3e7e0683a88eee6fca93d24",
+        "modify": "2025-11-26 09:03:32"
       },
       "flag": "🇺🇸",
       "kiosk": 5001454,
@@ -9828,9 +9828,9 @@
       "flag": "🇮🇳",
       "kiosk": 807124,
       "name": "Noida",
+      "nso": "2025-12-11 13:00",
       "slug": "noida",
       "state": "Uttar Pradesh",
-      "status": "future",
       "timezone": "Asia/Kolkata"
     },
     "R788": {
