@@ -49,9 +49,10 @@ API = APIClass("https://www.apple.com/today-bff".split("/"))
 def GenerateLeaderboard(db_filename: str) -> dict[int, list[str]]:
 	import math
 
-	from modules.michael import Store, loads
+	from modules.michael import Store as MSStore
+	from modules.michael import loads
 
-	def calculate_bonus(store: Store) -> int:
+	def calculate_bonus(store: MSStore) -> int:
 		bonus = 0
 		if store.forum:
 			bonus += 10
