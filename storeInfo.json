@@ -1,5 +1,5 @@
 {
-  "_": "2025-12-06 12:13:45",
+  "_": "2025-12-14 08:10:48",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -633,8 +633,8 @@
     "R032": {
       "city": "New York",
       "dieter": {
-        "md5": "d7215aec02282c245a0ad019520635c6",
-        "modify": "2025-12-01 19:49:53"
+        "md5": "05fdb28f1dc18ff49d4be67a94228ea4",
+        "modify": "2025-12-13 21:31:12"
       },
       "events": [
         {
@@ -986,8 +986,8 @@
     "R050": {
       "city": "Los Angeles",
       "dieter": {
-        "md5": "ca64963be3afaa646a25ab7f1be82f15",
-        "modify": "2025-12-01 19:44:39"
+        "md5": "7267e96d48d58e6064278a28fc6710c6",
+        "modify": "2025-12-13 21:28:36"
       },
       "events": [
         {
@@ -1476,8 +1476,8 @@
     "R075": {
       "city": "San Francisco",
       "dieter": {
-        "md5": "fac7dc13f2005a0098160e6ea895eae8",
-        "modify": "2025-12-01 19:40:21"
+        "md5": "1288733222b07b22211bc965fa0052b5",
+        "modify": "2025-12-13 21:13:14"
       },
       "events": [
         {
@@ -1733,8 +1733,8 @@
     "R087": {
       "city": "Aventura",
       "dieter": {
-        "md5": "483142c973e550c52c2d79e4d38e258e",
-        "modify": "2025-12-01 19:41:56"
+        "md5": "9e27f34b1606db6767657010eefc4f2e",
+        "modify": "2025-12-13 21:29:46"
       },
       "events": [
         {
@@ -1887,8 +1887,8 @@
     "R095": {
       "city": "New York",
       "dieter": {
-        "md5": "7939664a3bf89de4a07ae4f2d90611e1",
-        "modify": "2025-12-01 19:47:34"
+        "md5": "d52de7f5979bee8076473348503dae79",
+        "modify": "2025-12-13 21:32:27"
       },
       "events": [
         {
@@ -6798,8 +6798,8 @@
     "R443": {
       "city": "Berlin",
       "dieter": {
-        "md5": "38a44aa20df63fdfa6c422e3f27f22db",
-        "modify": "2025-12-01 19:56:52"
+        "md5": "9568cb521fbbc7305dc1d2722cdc959f",
+        "modify": "2025-12-13 21:34:43"
       },
       "flag": "🇩🇪",
       "kiosk": 806717,
@@ -8579,21 +8579,25 @@
       "timezone": "Asia/Shanghai"
     },
     "R622": {
-      "city": "Marlborough",
+      "city": "Millbury",
       "dieter": {
-        "md5": "dbafcf55991b24b20f152481c1c1991f",
-        "modify": "2025-11-20 14:58:35"
+        "md5": "0882cd22d5b9068b5c78ea65677d233a",
+        "modify": "2025-12-11 14:55:46"
       },
       "events": [
         {
+          "2025-12-11": "rename",
           "2025-12-12": "move"
         }
       ],
       "flag": "🇺🇸",
       "kiosk": 801135,
-      "name": "Solomon Pond Mall",
+      "name": "The Shops at Blackstone Valley",
+      "name_alt": [
+        "Solomon Pond Mall"
+      ],
       "nso": "2014-10-11 10:00",
-      "slug": "solomonpondmall",
+      "slug": "theshopsatblackstonevalley",
       "state": "Massachusetts",
       "timezone": "America/New_York"
     },
@@ -8939,8 +8943,8 @@
     "R667": {
       "city": "Milano",
       "dieter": {
-        "md5": "5b5ec28198a8ac4d0b578cd0911c1b09",
-        "modify": "2025-12-01 19:55:12"
+        "md5": "79b47d62798a361d2cb4302e15990fdd",
+        "modify": "2025-12-13 21:36:03"
       },
       "flag": "🇮🇹",
       "kiosk": 804969,
@@ -9826,8 +9830,8 @@
     "R787": {
       "city": "Noida",
       "dieter": {
-        "md5": "f58167f3f141c32ef67389b17f490a39",
-        "modify": "2025-12-03 18:03:27"
+        "md5": "82ba6861bf0cbb870e5b86aae3069a81",
+        "modify": "2025-12-10 05:51:56"
       },
       "flag": "🇮🇳",
       "kiosk": 807124,
@@ -9840,8 +9844,8 @@
     "R788": {
       "city": "Pune",
       "dieter": {
-        "md5": "e6e59ab7d26cbfcbf0858c8643ad575c",
-        "modify": "2025-09-04 01:43:44"
+        "md5": "60886d201ab2a19a59fbae53cc3761b5",
+        "modify": "2025-12-11 09:50:29"
       },
       "flag": "🇮🇳",
       "kiosk": 807118,
@@ -9854,8 +9858,8 @@
     "R790": {
       "city": "Bengaluru",
       "dieter": {
-        "md5": "c89b0c8231aba1f31eb9ac2bcdaf8e24",
-        "modify": "2025-09-05 09:29:06"
+        "md5": "7fbef0cc9660d1342416b5d6625a1bf2",
+        "modify": "2025-12-11 10:01:06"
       },
       "flag": "🇮🇳",
       "kiosk": 807120,
