@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from typing import Any, Concatenate, Literal, Mapping, Optional, cast, overload
 
 import aiohttp
+from tenacity import AsyncRetrying, stop_after_attempt, wait_fixed
 
 type SemaphoreType = asyncio.Semaphore
 type SessionType = aiohttp.ClientSession
@@ -69,33 +70,6 @@ async def AsyncGather[T](*coros: CoroutineType[T] | Iterable[CoroutineType[T]],
 				raise exp from None
 	return results
 
-class RetrySignal(Exception):
-	def __init__(self, exp: BaseException) -> None:
-		self.exp = exp
-
-class RetryExceeded(RetrySignal):
-	@property
-	def message(self) -> str:
-		return f"{self.exp.__class__.__name__}({self.exp})"
-
-def AsyncRetry[R, **P](limit: int, sleep: float = 0) -> Callable[
-	[Callable[P, CoroutineType[R]]], Callable[P, CoroutineType[R]]]:
-	def retry_wrapper(func: Callable[P, CoroutineType[R]]) -> Callable[P, CoroutineType[R]]:
-		from functools import wraps
-		@wraps(func)
-		async def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
-			exp = None
-			for _ in range(max(limit, 1)):
-				try:
-					return await func(*args, **kwargs)
-				except RetrySignal as e:
-					exp = e.exp
-					if sleep:
-						await asyncio.sleep(sleep)
-			raise RetryExceeded(exp or AssertionError())
-		return wrapper
-	return retry_wrapper
-
 async def _base_request(session: SessionType, url: str, method: str, modes: set[str], **kwargs) -> Any:
 	results = {}
 	async with session.request(url = url, method = method, **kwargs) as resp:
@@ -150,21 +124,24 @@ async def request(url: str, session: Optional[SessionType] = None, method: str =
 	mode: Optional[str | list[str]] = None, retry: int = 1, sleep: int = 0,
 	return_exception: bool = False, **kwargs) -> Any:
 	modes = {str(i) for i in (mode if isinstance(mode, list) else [mode or "default"])}
-	@AsyncRetry(retry, sleep)
-	async def decorate(ses: SessionType) -> Any:
-		try:
-			return await _base_request(ses, url, method.upper(), modes, **kwargs)
-		except Exception as exp:
+
+	async def _request_impl(ses: SessionType) -> Any:
+		return await _base_request(ses, url, method.upper(), modes, **kwargs)
+
+	def log_retry(retry_state) -> None:
+		if retry_state.outcome and retry_state.outcome.failed:
 			request_logger.debug(f"等待重试: [方法={method}] [模式={mode}] [URL={url}]")
-			raise RetrySignal(exp)
+
 	try:
 		async with get_session(session) as ses:
-			return await decorate(ses)
-	except RetryExceeded as re:
+			retryer = AsyncRetrying(stop = stop_after_attempt(retry),
+				wait = wait_fixed(sleep), after = log_retry, reraise = True)
+			return await retryer(_request_impl, ses)
+	except Exception as exp:
 		request_logger.debug(f"异常丢弃: [方法={method}] [模式={mode}] [URL={url}]")
 		if return_exception:
-			return re.exp
-		raise re.exp from None
+			return exp
+		raise
 
 def session_func[R, **P](func: Callable[Concatenate[SessionType, P],
 	CoroutineType[R]]) -> Callable[P, CoroutineType[R]]:

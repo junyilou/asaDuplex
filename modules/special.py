@@ -1,11 +1,11 @@
-from asyncio import sleep
 from collections.abc import Generator, Iterable, Mapping
 from datetime import datetime, timedelta
-from random import randint
 from typing import Any, Literal, Optional
 
+from tenacity import AsyncRetrying, stop_after_attempt, wait_random
+
 from modules.store import FulfillmentMessage, Product
-from modules.util import AsyncRetry, RetryExceeded, RetrySignal, SessionType
+from modules.util import SessionType
 from storeInfo import Store
 
 dayOfWeek = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
@@ -74,19 +74,18 @@ async def comment(store: Store,
 	max_retry: int = 3, timeout: int = 5,
 	min_interval: int = 2, max_interval: int = 8,
 	shout: bool = False) -> dict[str, dict[str, str]]:
-	@AsyncRetry(max_retry)
-	async def decorate() -> dict[str, dict[str, str]]:
-		try:
-			return await base_comment(store, accepted_dates, force_return, results_dict, timeout, session)
-		except Exception as exp:
-			await sleep(randint(min_interval, max_interval))
-			raise RetrySignal(exp)
+
+	async def _request_impl() -> dict[str, dict[str, str]]:
+		return await base_comment(store, accepted_dates, force_return, results_dict, timeout, session)
+
 	try:
-		return await decorate()
-	except RetryExceeded as re:
+		retryer = AsyncRetrying(stop = stop_after_attempt(max_retry),
+			wait = wait_random(min_interval, max_interval), reraise = True)
+		return await retryer(_request_impl)
+	except Exception:
 		if not shout:
 			return results_dict
-		raise re.exp from None
+		raise
 
 async def special(store: Store, *,
 	threshold: Optional[datetime] = None,

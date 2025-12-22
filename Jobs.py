@@ -11,11 +11,14 @@ from typing import Any, Optional, Self, TypedDict
 from urllib.parse import unquote
 from uuid import uuid4
 
+from tenacity import (AsyncRetrying, RetryCallState,
+                      retry_if_not_exception_type, stop_after_attempt,
+                      wait_fixed)
+
 from bot import async_post, chat_ids
 from modules.regions import Region, Regions
-from modules.util import (AsyncGather, AsyncRetry, RetryExceeded, RetrySignal,
-                          SessionType, browser_agent, disMarkdown, get_session,
-                          session_func)
+from modules.util import (AsyncGather, SessionType, browser_agent, disMarkdown,
+                          get_session, session_func)
 
 RETAIL_FILTER  = {"teams":[{"team":"teamsAndSubTeams-APPST","subTeam":"subTeam-ARSS"},
 	{"team":"teamsAndSubTeams-APPST","subTeam":"subTeam-ARSCS"},
@@ -39,17 +42,18 @@ class APIClass:
 	def __str__(self) -> str:
 		return "/".join(self.parts)
 
-	@AsyncRetry(3, sleep = 1)
 	async def request(self,
 		session: Optional[SessionType] = None,
 		method: str = "GET", mode: str = "json", log_name: str = "",
 		extra_headers: dict[str, str] = {}, **kwargs) -> Any:
-		default_headers = browser_agent | self.csrf
-		kwargs |= {"headers": default_headers | extra_headers, "timeout": 10,
-			"allow_redirects": False, "ssl": False, "cookies": self.cookies}
-		kwargs["headers"]["x-b3-traceid"] = str(uuid4())
-		async with get_session(session) as ses:
-			try:
+
+		async def _request_impl() -> Any:
+			nonlocal kwargs
+			default_headers = browser_agent | self.csrf
+			kwargs |= {"headers": default_headers | extra_headers, "timeout": 10,
+				"allow_redirects": False, "ssl": False, "cookies": self.cookies}
+			kwargs["headers"]["x-b3-traceid"] = str(uuid4())
+			async with get_session(session) as ses:
 				async with ses.request(method, "/".join(self.parts), **kwargs) as response:
 					if response.status > 300 and response.status < 400:
 						raise ServerMaintenance()
@@ -63,11 +67,16 @@ class APIClass:
 							raise ResponseError(j["error"])
 						response.raise_for_status()
 						raise ResponseError()
-			except (ResponseError, ServerMaintenance):
-				raise
-			except Exception as exp:
-				logger.log(17, f"[等待重试] {log_name or "请求任务"}: {exp.__class__.__name__}({exp})")
-				raise RetrySignal(exp)
+
+		def log_retry(retry_state: RetryCallState) -> None:
+			if retry_state.outcome and retry_state.outcome.failed:
+				exp = retry_state.outcome.exception()
+				logger.log(17, f"[等待重试] {log_name or "请求任务"}: {exp.__class__.__name__}({exp!r})")
+
+		retryer = AsyncRetrying(
+			stop = stop_after_attempt(3), wait = wait_fixed(1), reraise = True, after = log_retry,
+			retry = retry_if_not_exception_type((ResponseError, ServerMaintenance)))
+		return await retryer(_request_impl)
 
 	async def get_csrf(self, session: Optional[SessionType] = None) -> None:
 		try:
@@ -75,8 +84,8 @@ class APIClass:
 			headers, cookies = await (self / "CSRFToken").request(session, mode = "cookies", log_name = "CSRF")
 		except ServerMaintenance:
 			raise
-		except RetryExceeded as exp:
-			logger.error(f"[请求失败] CSRF: {exp.message}")
+		except Exception as exp:
+			logger.error(f"[请求失败] CSRF: {exp!r}")
 			return
 
 		self.csrf = {"X-Apple-CSRF-Token": headers["X-Apple-CSRF-Token"]}
@@ -144,13 +153,13 @@ class State:
 			r = await api.request(session, log_name = log_name, params = {
 				"jobId": f"PIPE-{position.id}", "fieldValue": f"postLocation-{self.code}"})
 			logger.log(17, f"[完成] {log_name}")
-		except ResponseError as exp:
-			logger.log(17, f"[请求错误] {log_name}: {exp}")
-			return self.stores
 		except ServerMaintenance:
 			raise
-		except RetryExceeded as exp:
-			logger.error(f"[请求失败] {log_name}: {exp.message}")
+		except ResponseError as exp:
+			logger.log(17, f"[请求错误] {log_name}: {exp!r}")
+			return self.stores
+		except Exception as exp:
+			logger.error(f"[请求失败] {log_name}: {exp!r}")
 			return self.stores
 		remote = {}
 		for c in r:
@@ -210,8 +219,8 @@ class Locale:
 				logger.log(17, f"[完成] {log_name}")
 			except ServerMaintenance:
 				raise
-			except RetryExceeded as exp:
-				logger.error(f"[请求失败] {log_name}: {exp.message}")
+			except Exception as exp:
+				logger.error(f"[请求失败] {log_name}: {exp!r}")
 				return [], 0
 
 			g = [RichPosition(id = i["positionId"],
