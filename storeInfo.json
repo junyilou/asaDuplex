@@ -1,5 +1,5 @@
 {
-  "_": "2025-12-14 08:10:48",
+  "_": "2025-12-19 16:12:32",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -6967,6 +6967,7 @@
       "nso": "2011-09-24 10:00",
       "slug": "hornsby",
       "state": "New South Wales",
+      "status": "closed",
       "timezone": "Australia/Sydney"
     },
     "R460": {
@@ -8581,8 +8582,8 @@
     "R622": {
       "city": "Millbury",
       "dieter": {
-        "md5": "0882cd22d5b9068b5c78ea65677d233a",
-        "modify": "2025-12-11 14:55:46"
+        "md5": "2181486b479bf449f1a88febf2fa4834",
+        "modify": "2025-12-18 19:12:37"
       },
       "events": [
         {
@@ -9025,8 +9026,8 @@
     "R675": {
       "city": "Paris",
       "dieter": {
-        "md5": "33a5210299b12295f097e066b0b6b689",
-        "modify": "2025-12-04 23:50:10"
+        "md5": "4d25f46db48515f9a62fe235159e473d",
+        "modify": "2025-12-18 16:53:16"
       },
       "flag": "🇫🇷",
       "keyword": [
@@ -9831,7 +9832,7 @@
       "city": "Noida",
       "dieter": {
         "md5": "82ba6861bf0cbb870e5b86aae3069a81",
-        "modify": "2025-12-10 05:51:56"
+        "modify": "2025-12-16 09:18:42"
       },
       "flag": "🇮🇳",
       "kiosk": 807124,
