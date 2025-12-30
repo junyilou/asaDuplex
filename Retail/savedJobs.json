@@ -7,7 +7,7 @@
           "stores": {
             "R595": "Yas Mall",
             "R706": "Al Maryah Island",
-            "R785": "Al Ain-UAE"
+            "R785": "Al Jimi Mall"
           }
         },
         "state1051": {
@@ -1517,7 +1517,7 @@
             "R191": "Holyoke",
             "R232": "Natick Collection",
             "R346": "Legacy Place",
-            "R622": "Solomon Pond Mall"
+            "R622": "The Shops at Blackstone Valley"
           }
         },
         "state970": {
@@ -1770,5 +1770,5 @@
       }
     }
   },
-  "update": "2025-12-18 18:22:00"
+  "update": "2025-12-30 18:22:08"
 }
