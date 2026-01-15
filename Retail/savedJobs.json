@@ -866,13 +866,13 @@
           "stores": {
             "R744": "BKC",
             "R757": "Mumbai-IN",
-            "R788": "Pune-IN"
+            "R788": "Koregaon Park"
           }
         },
         "state1205": {
           "name": "Karnataka",
           "stores": {
-            "R790": "Bangalore-IN"
+            "R790": "Hebbal"
           }
         }
       },
@@ -1545,7 +1545,7 @@
             "R218": "Partridge Creek",
             "R230": "Briarwood",
             "R616": "Eastwood Towne Center",
-            "R763": "Downtown Detroit-MI"
+            "R763": "Downtown Detroit"
           }
         },
         "state973": {
@@ -1770,5 +1770,5 @@
       }
     }
   },
-  "update": "2026-01-14 02:19:16"
+  "update": "2026-01-15 18:29:09"
 }
