@@ -176,7 +176,7 @@ class State:
 class Locale:
 	region: Region
 	data: RegionDict = field(repr = False)
-	updated: bool = False
+	updated: bool = field(repr = False, default = False)
 	states_to_run: list[str] = field(default_factory = list, repr = False)
 	new_stores: list[Store] = field(default_factory = list, repr = False)
 	states: list[State] = field(init = False, repr = False)
@@ -331,7 +331,6 @@ async def position(flags: list[str], managed: Optional[bool], session: SessionTy
 			filters = RETAIL_FILTER, later_than = later_than, session = session)
 		if not positions:
 			logger.log(19, f"[没有职位] {locale.region.name}")
-			continue
 		for pos in positions:
 			if pos.id in saved:
 				logging.log(18, f"[已知职位] {pos.id}: {pos.title}, {pos.location}, {pos.update}")
