@@ -1,5 +1,5 @@
 {
-  "_": "2026-01-17 08:10:37",
+  "_": "2026-01-23 15:20:21",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -858,14 +858,19 @@
       },
       "events": [
         {
-          "2012-09-21": "move"
+          "2012-09-21": "move",
+          "2026-01-22": "rename",
+          "2026-01-23": "move"
         }
       ],
       "flag": "🇺🇸",
       "kiosk": 148863,
-      "name": "Santa Rosa Plaza",
+      "name": "Montgomery Village",
+      "name_alt": [
+        "Santa Rosa Plaza"
+      ],
       "nso": "2004-10-16 10:00",
-      "slug": "santarosaplaza",
+      "slug": "montgomeryvillage",
       "state": "California",
       "timezone": "America/Los_Angeles"
     },
@@ -3644,9 +3649,14 @@
     "R204": {
       "city": "Friendswood",
       "dieter": {
-        "md5": "b5b68f4430ffdda02b882c9d3c136d56",
-        "modify": "2026-01-16 03:38:06"
+        "md5": "732841579826507d940059bd98d88702",
+        "modify": "2026-01-20 08:27:55"
       },
+      "events": [
+        {
+          "2026-01-16": "rebuild"
+        }
+      ],
       "flag": "🇺🇸",
       "kiosk": 357488,
       "name": "Baybrook",
