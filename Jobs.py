@@ -30,6 +30,8 @@ class ServerMaintenance(Exception):
 class ResponseError(Exception):
 	pass
 
+DB: FileDict | None = None
+
 @dataclass
 class APIClass:
 	parts: Sequence[str]
@@ -174,24 +176,28 @@ class State:
 
 @dataclass
 class Locale:
-	region: Region
-	data: RegionDict = field(repr = False)
-	updated: bool = field(repr = False, default = False)
-	states_to_run: list[str] = field(default_factory = list, repr = False)
-	new_stores: list[Store] = field(default_factory = list, repr = False)
+	flag: str = field(repr = False)
+	region: Region = field(init = False)
+	updated: bool = False
+	states_to_run: list[str] = field(default_factory = list, repr = False, init = False)
+	new_stores: list[Store] = field(default_factory = list, repr = False, init = False)
 	states: list[State] = field(init = False, repr = False)
 	positions: Sequence[Position] = field(init = False, repr = False)
 	position: Optional[Position] = field(init = False, repr = False)
 
 	def __post_init__(self) -> None:
+		assert DB is not None
+		self.region = Regions[self.flag]
+		data = DB["regions"][self.flag]
+
 		states: list[State] = []
-		for code, state in self.data["locations"].items():
+		for code, state in data["locations"].items():
 			inst = State(code, state["name"], self.region)
 			inst.stores = {code: Store(code, name, inst) for code, name in state["stores"].items()}
 			states.append(inst)
 		self.states = states
 		self.states_to_run = [state.code for state in states]
-		self.positions = [Position(id, slug, self.region) for id, slug in self.data["positions"].items()]
+		self.positions = [Position(id, slug, self.region) for id, slug in data["positions"].items()]
 
 	async def choose_position(self, session: Optional[SessionType] = None) -> Optional[Position]:
 		if not self.positions:
@@ -255,7 +261,7 @@ class Locale:
 					self.updated = True
 					logger.info(f"[更新名称] {code}: {state.stores[code].name} -> {store.name}")
 			if removal := [i for i in state.stores if i not in remote]:
-				logger.log(18, f"[不存在门店] {", ".join(remote[r].code for r in removal)}")
+				logger.log(18, f"[不存在门店] {", ".join(state.stores[r].code for r in removal)}")
 			state.stores = remote
 			return new_stores
 
@@ -266,8 +272,8 @@ class Locale:
 			return []
 		log_name = f"获取 {self.position}"
 		logger.log(19, f"[开始] {log_name}")
-		results = await AsyncGather((entry(self.position, state) for state in self.states
-			if state.code in self.states_to_run), limit = 10, return_exceptions = True)
+		results = await AsyncGather((entry(self.position, state)
+			for state in self.states if state.code in self.states_to_run), limit = 10)
 		self.new_stores = [store for i in results if not isinstance(i, Exception) for store in i]
 		logger.log(17, f"[完成] {log_name}")
 		return self.new_stores
@@ -276,19 +282,21 @@ class Locale:
 		return {"locations": {state.code: state.dumps() for state in self.states},
 			"positions": {p.id: p.slug for p in self.positions}}
 
-def load_db() -> FileDict:
+def load_db() -> None:
+	global DB
 	with open("Retail/savedJobs.json") as r:
-		db = json.load(r)
-	return db
+		DB = json.load(r)
 
-def save_db(db: FileDict, locales: list[Locale]) -> None:
+def save_db(locales: list[Locale]) -> None:
+	global DB
+	assert DB is not None
 	if not any(locale.updated for locale in locales):
 		return
 	logging.info(f"[更新文件] {len(locales)} 个地区")
-	db["update"] = datetime.now().strftime("%F %T")
-	db["regions"].update({locale.region.flag: locale.dumps() for locale in locales if locale.updated})
+	DB["update"] = datetime.now().strftime("%F %T")
+	DB["regions"].update({locale.region.flag: locale.dumps() for locale in locales if locale.updated})
 	with open("Retail/savedJobs.json", "w") as w:
-		json.dump(db, w, indent = 2, ensure_ascii = False, sort_keys = True)
+		json.dump(DB, w, indent = 2, ensure_ascii = False, sort_keys = True)
 
 def set_logger(verbosity: int, debug: bool) -> None:
 	from os.path import basename
@@ -302,8 +310,7 @@ def set_logger(verbosity: int, debug: bool) -> None:
 	logger = logging.getLogger("Jobs")
 
 async def entry(flags: list[str], states: list[str], session: SessionType) -> None:
-	db = load_db()
-	locales = [Locale(Regions[i], db["regions"][i]) for i in Regions if not i.isascii()]
+	locales = [Locale(i) for i in Regions if not i.isascii()]
 	for l in locales:
 		if l.region.flag in flags:
 			continue
@@ -319,11 +326,10 @@ async def entry(flags: list[str], states: list[str], session: SessionType) -> No
 		push = {"mode": "photo-text", "text": "\n".join(title + body),
 			"chat_id": chat_ids[0], "parse": "MARK", "image": image}
 		await async_post(push)
-	save_db(db, locales)
+	save_db(locales)
 
 async def position(flags: list[str], managed: Optional[bool], session: SessionType) -> None:
-	db = load_db()
-	locales = [Locale(Regions[i], db["regions"][i]) for i in flags if i in Regions]
+	locales = [Locale(i) for i in flags if i in Regions]
 	for locale in locales:
 		saved = [p.id for p in locale.positions]
 		later_than = (n := datetime.now()).replace(year = n.year - 1).strftime("%F")
@@ -331,6 +337,7 @@ async def position(flags: list[str], managed: Optional[bool], session: SessionTy
 			filters = RETAIL_FILTER, later_than = later_than, session = session)
 		if not positions:
 			logger.log(19, f"[没有职位] {locale.region.name}")
+			continue
 		for pos in positions:
 			if pos.id in saved:
 				logging.log(18, f"[已知职位] {pos.id}: {pos.title}, {pos.location}, {pos.update}")
@@ -339,7 +346,7 @@ async def position(flags: list[str], managed: Optional[bool], session: SessionTy
 		if managed is not False:
 			locale.updated = True
 			locale.positions = [p for p in positions if p.managed]
-	save_db(db, locales)
+	save_db(locales)
 
 @session_func
 async def main(session: SessionType, args: Namespace) -> None:
@@ -350,6 +357,7 @@ async def main(session: SessionType, args: Namespace) -> None:
 	else:
 		states = [i for i in args.args if i.startswith("state")]
 		flags = [i for i in args.args if i in Regions]
+	load_db()
 	if any((args.position, args.retail, args.standalone)):
 		await position(flags, managed = None if args.retail else args.position, session = session)
 	else:
