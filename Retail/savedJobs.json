@@ -1324,10 +1324,9 @@
             "R034": "Pasadena",
             "R039": "Valley Fair",
             "R040": "Fashion Valley",
-            "R044": "Santa Rosa Plaza",
+            "R044": "Montgomery Village",
             "R050": "The Grove",
             "R051": "Third Street Promenade",
-            "R052": "Infinite Loop",
             "R057": "Bay Street",
             "R069": "Mission Viejo",
             "R070": "Arden Fair",
@@ -1445,7 +1444,6 @@
           "name": "Hawaii",
           "stores": {
             "R073": "Ala Moana",
-            "R198": "Royal Hawaiian",
             "R210": "Kahala"
           }
         },
@@ -1468,7 +1466,6 @@
             "R035": "Michigan Avenue",
             "R056": "Oakbrook",
             "R089": "Old Orchard",
-            "R141": "Northbrook",
             "R237": "Orland Square Mall",
             "R258": "Deer Park",
             "R284": "Lincoln Park",
@@ -1768,5 +1765,5 @@
       }
     }
   },
-  "update": "2026-01-29 18:35:12"
+  "update": "2026-01-30 06:53:47"
 }
