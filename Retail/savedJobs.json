@@ -857,11 +857,15 @@
         "state1067": {
           "name": "Delhi",
           "stores": {
-            "R756": "Saket",
-            "R787": "Noida-IN"
+            "R756": "Saket"
           }
         },
-        "state1158": {"name": "Telangana", "stores": {}},
+        "state1158": {
+          "name": "Telangana",
+          "stores": {
+            "R791": "Hyderabad-IN"
+          }
+        },
         "state1159": {
           "name": "Maharashtra",
           "stores": {
@@ -1766,5 +1770,5 @@
       }
     }
   },
-  "update": "2026-01-30 06:53:47"
+  "update": "2026-02-07 02:00:07"
 }
