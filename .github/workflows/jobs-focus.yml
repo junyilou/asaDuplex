@@ -25,7 +25,7 @@ jobs:
           BOTPOST_API: ${{ secrets.BOTPOST_API }}
           BOTPOST_CHAT_ID: ${{ secrets.BOTPOST_CHAT_ID }}
         run: python3 Jobs.py -dv 🇸🇦 state157 state160 state174
-          state175 state214 state671 state672 state966
+          state214 state671 state672 state966
       - name: commit files
         uses: stefanzweifel/git-auto-commit-action@v6
         with:
