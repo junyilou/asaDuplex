@@ -1,5 +1,5 @@
 {
-  "_": "2026-02-07 10:38:55",
+  "_": "2026-02-14 03:40:10",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -9654,12 +9654,16 @@
     },
     "R757": {
       "city": "Mumbai",
+      "dieter": {
+        "md5": "d2dd20558bc9064596ca657f603ff6c4",
+        "modify": "2026-02-13 19:03:48"
+      },
       "flag": "🇮🇳",
       "kiosk": 807128,
       "name": "Borivali",
+      "nso": "2026-02-26 13:00",
       "slug": "borivali",
       "state": "Maharashtra",
-      "status": "future",
       "timezone": "Asia/Kolkata"
     },
     "R760": {
