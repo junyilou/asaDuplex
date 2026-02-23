@@ -1,5 +1,5 @@
 {
-  "update": "2026-02-20 03:32:00",
+  "update": "2026-02-23 07:47:41",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -411,6 +411,12 @@
         "🇹🇼": "輕鬆上手：聾人或聽覺障礙人士適用的輔助使用功能"
       },
       "slug": "get-started-deaf-hard-of-hearing-accessibility"
+    },
+    "7430135957154070528": {
+      "names": {
+        "🇯🇵": "ワークショップ：大学生活で活かす、キドウ流テスト対策をMacとiPhoneで"
+      },
+      "slug": "workshop-kidou-031226"
     }
   },
   "collection": {
