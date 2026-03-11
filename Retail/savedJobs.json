@@ -23,7 +23,6 @@
         "114438217": "uae-creative",
         "114438218": "uae-expert",
         "114438219": "uae-genius",
-        "114438220": "uae-operations-expert",
         "114438224": "uae-technical-specialist",
         "114438225": "uae-specialist",
         "200125467": "ae-business-pro"
@@ -39,14 +38,8 @@
         }
       },
       "positions": {
-        "114438331": "at-business-expert-m-f-d",
-        "114438332": "at-creative-m-f-d",
-        "114438333": "at-expert-m-f-d",
-        "114438334": "at-genius-m-f-d",
-        "114438335": "at-operations-expert-m-f-d",
         "114438339": "at-technical-specialist-m-f-d",
-        "114438340": "at-specialist-m-f-d",
-        "200125465": "at-business-pro-m-f-d"
+        "114438340": "at-specialist-m-f-d"
       }
     },
     "🇦🇺": {
@@ -120,13 +113,10 @@
         }
       },
       "positions": {
-        "114438242": "be-business-expert",
-        "114438243": "be-creative",
         "114438244": "be-expert",
-        "114438245": "be-genius",
+        "114438246": "be-operations-expert",
         "114438250": "be-technical-specialist",
-        "114438251": "be-specialist-full-time-part-time-and-part-time-temporary",
-        "200125384": "be-business-pro"
+        "114438251": "be-specialist-full-time-part-time-and-part-time-temporary"
       }
     },
     "🇧🇷": {
@@ -241,14 +231,9 @@
         }
       },
       "positions": {
-        "114438007": "ch-business-expert-m-f-d",
-        "114438008": "ch-creative-m-f-d",
-        "114438009": "ch-expert-m-f-d",
-        "114438010": "ch-genius-m-f-d",
         "114438011": "ch-operations-expert-m-f-d",
         "114438017": "ch-specialist-m-f-d",
-        "114438204": "ch-technical-specialist-m-f-d",
-        "200125441": "ch-business-pro-m-f-d"
+        "114438204": "ch-technical-specialist-m-f-d"
       }
     },
     "🇨🇳": {
@@ -485,13 +470,9 @@
       },
       "positions": {
         "114438033": "de-business-expert-m-f-d",
-        "114438034": "de-creative-m-f-d",
-        "114438035": "de-expert-m-f-d",
-        "114438036": "de-genius-m-f-d",
         "114438037": "de-operations-expert-m-f-d",
         "114438043": "de-specialist-m-f-d",
-        "114438207": "de-technical-specialist-m-f-d",
-        "200125393": "de-business-pro-m-f-d"
+        "114438207": "de-technical-specialist-m-f-d"
       }
     },
     "🇪🇸": {
@@ -545,14 +526,10 @@
         }
       },
       "positions": {
-        "114438046": "es-business-expert",
-        "114438047": "es-creative",
         "114438048": "es-expert",
         "114438049": "es-genius",
-        "114438050": "es-operations-expert",
         "114438056": "es-specialist-full-time-part-time-and-part-time-temporary",
-        "114438212": "es-technical-specialist-full-time-part-time-and-part-time-temporary",
-        "200125431": "es-business-pro"
+        "114438212": "es-technical-specialist-full-time-part-time-and-part-time-temporary"
       }
     },
     "🇫🇷": {
@@ -649,14 +626,10 @@
         }
       },
       "positions": {
-        "114438059": "fr-business-expert",
-        "114438060": "fr-creative",
         "114438061": "fr-expert",
-        "114438062": "fr-genius",
         "114438063": "fr-operations-expert",
         "114438069": "fr-specialist",
-        "114438206": "fr-technical-specialist",
-        "200125391": "fr-business-pro"
+        "114438206": "fr-technical-specialist"
       }
     },
     "🇬🇧": {
@@ -823,6 +796,7 @@
         }
       },
       "positions": {
+        "114438139": "uk-operations-expert",
         "114438145": "uk-specialist-full-time-part-time-and-part-time-temporary"
       }
     },
@@ -841,15 +815,9 @@
         }
       },
       "positions": {
-        "114438072": "hk-business-expert",
-        "114438073": "hk-creative",
-        "114438074": "hk-expert",
-        "114438075": "hk-genius",
         "114438076": "hk-operations-expert",
-        "114438079": "hk-manager",
         "114438082": "hk-specialist-full-time-and-part-time",
-        "114438208": "hk-technical-specialist",
-        "200125406": "hk-business-pro"
+        "114438208": "hk-technical-specialist"
       }
     },
     "🇮🇳": {
@@ -954,10 +922,7 @@
         }
       },
       "positions": {
-        "114438085": "it-business-expert",
-        "114438086": "it-creative",
         "114438087": "it-expert",
-        "114438088": "it-genius",
         "114438089": "it-operations-expert",
         "114438095": "it-specialist",
         "114438209": "it-technical-specialist",
@@ -1033,7 +998,6 @@
         }
       },
       "positions": {
-        "114438100": "jp-expert",
         "114438102": "jp-operations-expert",
         "114438107": "jp-specialist-full-time-or-part-time-permanent-or-temporary",
         "114438210": "jp-technical-specialist"
@@ -1059,7 +1023,9 @@
           }
         }
       },
-      "positions": {}
+      "positions": {
+        "114438326": "kr-specialist-full-time-or-part-time-seasonal-role-also-available"
+      }
     },
     "🇲🇴": {
       "locations": {
@@ -1072,14 +1038,8 @@
         }
       },
       "positions": {
-        "114438273": "mo-business-expert",
-        "114438274": "mo-creative",
-        "114438275": "mo-expert",
-        "114438276": "mo-genius",
-        "114438277": "mo-operations-expert",
         "114438281": "mo-technical-specialist",
-        "114438282": "mo-specialist-full-time-or-part-time-permanent-or-temporary",
-        "200125420": "mo-business-pro"
+        "114438282": "mo-specialist-full-time-or-part-time-permanent-or-temporary"
       }
     },
     "🇲🇽": {
@@ -1093,14 +1053,8 @@
         }
       },
       "positions": {
-        "114438285": "mx-operations-expert",
         "114438287": "mx-technical-specialist",
-        "114438290": "mx-expert",
-        "114438291": "mx-genius",
-        "114438292": "mx-business-expert",
-        "114438295": "mx-creative",
-        "114438297": "mx-specialist-full-time-part-time-and-part-time-temporary",
-        "200125422": "mx-business-pro"
+        "114438297": "mx-specialist-full-time-part-time-and-part-time-temporary"
       }
     },
     "🇲🇾": {
@@ -1128,14 +1082,11 @@
         }
       },
       "positions": {
-        "114438109": "nl-business-expert",
-        "114438110": "nl-creative",
         "114438111": "nl-expert",
         "114438112": "nl-genius",
         "114438113": "nl-operations-expert",
         "114438119": "nl-specialist-full-time-part-time-and-part-time-temporary",
-        "114438211": "nl-technical-specialist",
-        "200125427": "nl-business-pro"
+        "114438211": "nl-technical-specialist"
       }
     },
     "🇸🇦": {
@@ -1183,14 +1134,10 @@
         }
       },
       "positions": {
-        "114438122": "se-business-expert",
-        "114438123": "se-creative",
         "114438124": "se-expert",
         "114438125": "se-genius",
-        "114438126": "se-operations-expert",
         "114438132": "se-specialist",
-        "114438205": "se-technical-specialist",
-        "200125435": "se-business-pro"
+        "114438205": "se-technical-specialist"
       }
     },
     "🇸🇬": {
@@ -1237,9 +1184,6 @@
         "114438163": "tr-business-expert",
         "114438164": "tr-specialist",
         "114438165": "tr-expert",
-        "114438166": "tr-genius",
-        "114438167": "tr-creative",
-        "114438168": "tr-operations-expert",
         "114438203": "tr-technical-specialist"
       }
     },
@@ -1254,14 +1198,9 @@
         }
       },
       "positions": {
-        "114438303": "tw-business-expert",
-        "114438305": "tw-expert",
-        "114438306": "tw-genius",
         "114438307": "tw-operations-expert",
         "114438311": "tw-specialist-full-time-and-part-time",
-        "114438313": "tw-technical-specialist",
-        "114438314": "tw-creative",
-        "200125447": "tw-business-pro"
+        "114438313": "tw-technical-specialist"
       }
     },
     "🇺🇸": {
@@ -1770,5 +1709,5 @@
       }
     }
   },
-  "update": "2026-03-03 18:38:22"
+  "update": "2026-03-11 23:21:45"
 }
