@@ -1,5 +1,5 @@
 {
-  "update": "2026-03-16 09:01:59",
+  "update": "2026-03-20 03:30:02",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -290,7 +290,8 @@
     },
     "7322865211546632192": {
       "names": {
-        "🇨🇳": "轻松入门：iPhone 和 iPad 的旁白功能"
+        "🇨🇳": "轻松入门：iPhone 和 iPad 的旁白功能",
+        "🇲🇴": "輕鬆上手：iPhone 和 iPad 的旁白功能"
       },
       "slug": "get-started-voiceover-on-iphone-ipad"
     },
