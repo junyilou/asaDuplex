@@ -62,9 +62,10 @@ def generate_course(course: Course, schedules: list[Schedule] = [],
 		try:
 			date = findall(VALIDDATES, course.slug)[0][1]
 			vals = ValidDates(date, datetime.now())
+			assert vals
 			timing = f" 或 ".join(i.strftime("%Y 年 %-m 月 %-d 日") for i in vals)
 		except IndexError:
-			timing = "尚无可确定的课程时间"
+			timing = "无法确定课程时间"
 		keyboard = [[["了解课程", course.url]]]
 	keyboard[0].append(["下载图片", course.images["landscape"]])
 
@@ -99,6 +100,7 @@ async def entry(saved: dict[str, Any], mode: str,
 		assert isinstance(e, Exception)
 		logging.error(repr(e))
 	r = {i for j in runners if isinstance(j, list) for i in j}
+	# r = {*i for i in runners if isinstance(i, list)}
 	course_collection, schedule = [[i for i in r if b ^ isinstance(i, Schedule)] for b in (True, False)]
 	results = sorted(course_collection, key = lambda v: flags.index(v.flag)) + sorted(schedule)
 
