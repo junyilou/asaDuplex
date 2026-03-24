@@ -64,7 +64,7 @@ def generate_course(course: Course, schedules: list[Schedule] = [],
 			vals = ValidDates(date, datetime.now())
 			assert vals
 			timing = f" 或 ".join(i.strftime("%Y 年 %-m 月 %-d 日") for i in vals)
-		except IndexError:
+		except Exception:
 			timing = "无法确定课程时间"
 		keyboard = [[["了解课程", course.url]]]
 	keyboard[0].append(["下载图片", course.images["landscape"]])
