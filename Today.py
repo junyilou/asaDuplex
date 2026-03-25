@@ -61,8 +61,7 @@ def generate_course(course: Course, schedules: list[Schedule] = [],
 		from re import findall
 		try:
 			date = findall(VALIDDATES, course.slug)[0][1]
-			vals = ValidDates(date, datetime.now())
-			assert vals
+			assert (vals := ValidDates(date, datetime.now()))
 			timing = f" 或 ".join(i.strftime("%Y 年 %-m 月 %-d 日") for i in vals)
 		except Exception:
 			timing = "无法确定课程时间"

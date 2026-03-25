@@ -145,7 +145,7 @@ def ValidDates(ex: str, runtime: datetime) -> list[datetime]:
 			pass
 		else:
 			delta = (date - runtime.date()).days
-			if date not in v and delta > -7 and delta < 70:
+			if date not in v and delta > -21 and delta < 70:
 				v.append(date)
 	return v
 
@@ -450,6 +450,7 @@ class Course(TodayObject):
 			results = await AsyncGather(tasks, return_exceptions = True)
 		return sorted(k for k in {i for j in (r for r in results if not isinstance(r, Exception))
 			for i in j} if k.raw_store in raw_stores)
+		# return sorted(l for l in (*r for r in results if not isinstance(r, Exception)) if l.raw_store in raw_stores)
 
 	async def getSingleSchedule(self, session: Optional[SessionType] = None) -> "Schedule":
 		return await Schedule.get(scheduleId = self.courseId, rootPath = self.rootPath, slug = self.slug, session = session)
