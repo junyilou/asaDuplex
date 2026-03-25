@@ -27,7 +27,7 @@ def generate_collection(collection: Collection) -> tuple[str, str, list[list[lis
 
 def generate_course(course: Course, schedules: list[Schedule] = [],
 	prior: list[str] = []) -> tuple[str, str, list[list[list[str]]]]:
-
+	prior = prior or [s.flag for s in schedules]
 	schedules = sorted(s for s in set(schedules) if s.flag in prior)
 	store_counter = Counter(s.raw_store for s in schedules)
 	flag_counter = Counter(r.flag for r in store_counter)
