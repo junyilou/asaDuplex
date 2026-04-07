@@ -1,5 +1,5 @@
 {
-  "update": "2026-04-03 03:44:44",
+  "update": "2026-04-07 09:08:18",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -381,6 +381,12 @@
         "🇹🇼": "輕鬆上手：聾人或聽覺障礙人士適用的輔助使用功能"
       },
       "slug": "get-started-deaf-hard-of-hearing-accessibility"
+    },
+    "7444992887752130560": {
+      "names": {
+        "🇨🇳": "谈话：跟着阿文就是Aya用 Apple Watch 成就更好的自己"
+      },
+      "slug": "talk-awen-is-aya-042626"
     }
   },
   "collection": {}
