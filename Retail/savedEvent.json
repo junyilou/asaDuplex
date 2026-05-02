@@ -1,5 +1,5 @@
 {
-  "update": "2026-04-24 04:17:21",
+  "update": "2026-05-02 02:52:59",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -278,15 +278,6 @@
       },
       "slug": "get-started-cognitive-accessibility-features"
     },
-    "7321252710513999872": {
-      "names": {
-        "🇨🇳": "Apple 夏令营：用 iPad 执导一部关于友情的短片",
-        "🇭🇰": "Apple Camp：用 iPad 拍攝友情主題影片",
-        "🇲🇴": "Apple Camp：用 iPad 拍攝友情主題影片",
-        "🇹🇼": "Apple 夏令營：用 iPad 拍出關於友情的獨創影片"
-      },
-      "slug": "apple-camp-fy25"
-    },
     "7322519581993304064": {
       "names": {
         "🇨🇳": "轻松入门：适用于行动不便人士的辅助功能",
@@ -324,35 +315,11 @@
       },
       "slug": "experience-bts-in-spatial-audio"
     },
-    "7432602144601440256": {
-      "names": {
-        "🇭🇰": "聚焦：跟沈靖韜同樂古典樂"
-      },
-      "slug": "spotlight-aristo-sham-032926"
-    },
-    "7434048533999026176": {
-      "names": {
-        "🇭🇰": "聚焦：跟 Chucky 夥拍 Apple Fitness+ 活出自信"
-      },
-      "slug": "spotlight-chucky-032226"
-    },
     "7436687949603176448": {
       "names": {
         "🇯🇵": "ワークショップ：フリーボードで、KEIと広げる無限の世界"
       },
       "slug": "workshop-kei-040226"
-    },
-    "7440300122371948544": {
-      "names": {
-        "🇨🇳": "焦点：王逢陈和她的时尚创想"
-      },
-      "slug": "spotlight-feng-chen-wang-032826"
-    },
-    "7440647747784835072": {
-      "names": {
-        "🇯🇵": "パフォーマンス：Mori Calliope - 創造性とテクノロジーの祝典"
-      },
-      "slug": "performance-mori-calliope-032726"
     },
     "7444992887752130560": {
       "names": {
