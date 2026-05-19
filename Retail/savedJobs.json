@@ -845,6 +845,7 @@
         "state1205": {
           "name": "Karnataka",
           "stores": {
+            "R789": "East Bengalaru-IN",
             "R790": "Hebbal"
           }
         }
@@ -1709,5 +1710,5 @@
       }
     }
   },
-  "update": "2026-03-11 23:21:45"
+  "update": "2026-05-19 19:44:36"
 }
