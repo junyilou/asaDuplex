@@ -1,5 +1,5 @@
 {
-  "_": "2026-04-30 08:10:50",
+  "_": "2026-05-20 13:19:05",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -9873,6 +9873,14 @@
       "nso": "2025-09-04 13:00",
       "slug": "koregaonpark",
       "state": "Maharashtra",
+      "timezone": "Asia/Kolkata"
+    },
+    "R789": {
+      "city": "Bengaluru",
+      "flag": "🇮🇳",
+      "name": "Store in East Bengalaru",
+      "state": "Karnataka",
+      "status": "future",
       "timezone": "Asia/Kolkata"
     },
     "R790": {
