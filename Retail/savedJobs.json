@@ -961,7 +961,8 @@
         "state672": {
           "name": "Kanagawa-ken",
           "stores": {
-            "R710": "Kawasaki"
+            "R710": "Kawasaki",
+            "R771": "Yokohama-JP"
           }
         },
         "state681": {
@@ -1710,5 +1711,5 @@
       }
     }
   },
-  "update": "2026-05-21 19:45:03"
+  "update": "2026-06-02 20:37:07"
 }
