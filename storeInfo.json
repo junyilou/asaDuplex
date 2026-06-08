@@ -1,5 +1,5 @@
 {
-  "_": "2026-05-20 13:19:05",
+  "_": "2026-06-03 07:52:52",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -9818,6 +9818,18 @@
       "slug": "hanam",
       "state": "경기",
       "timezone": "Asia/Seoul"
+    },
+    "R771": {
+      "city": "横浜市",
+      "flag": "🇯🇵",
+      "keyword": [
+        "神奈川",
+        "横滨"
+      ],
+      "name": "Store in Yokohama",
+      "state": "神奈川県",
+      "status": "future",
+      "timezone": "Asia/Tokyo"
     },
     "R777": {
       "city": "Torrance",
