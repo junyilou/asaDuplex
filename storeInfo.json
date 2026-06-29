@@ -1,5 +1,5 @@
 {
-  "_": "2026-06-03 07:52:52",
+  "_": "2026-06-23 20:17:50",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -1251,7 +1251,8 @@
       },
       "events": [
         {
-          "2012-09-29": "move"
+          "2012-09-29": "move",
+          "2026-06-20": "closure"
         }
       ],
       "flag": "🇺🇸",
@@ -1263,6 +1264,7 @@
       "nso": "2002-10-05 10:00",
       "slug": "towsontowncenter",
       "state": "Maryland",
+      "status": "closed",
       "timezone": "America/New_York"
     },
     "R064": {
@@ -4859,12 +4861,18 @@
         "md5": "45b5b00b6787f40fcff77ca8485d6a60",
         "modify": "2024-06-19 17:26:44"
       },
+      "events": [
+        {
+          "2026-06-20": "closure"
+        }
+      ],
       "flag": "🇺🇸",
       "kiosk": 5000177,
       "name": "North County",
       "nso": "2008-09-20 10:00",
       "slug": "northcounty",
       "state": "California",
+      "status": "closed",
       "timezone": "America/Los_Angeles"
     },
     "R286": {
@@ -5923,12 +5931,13 @@
     "R368": {
       "city": "Barcelona",
       "dieter": {
-        "md5": "c4aa7ea5f32db20ac4462d5365707c9f",
-        "modify": "2026-02-16 08:04:23"
+        "md5": "cade32274a27699f441cd28109e1ca4b",
+        "modify": "2026-06-16 13:03:49"
       },
       "events": [
         {
-          "2019-06-20": "rebuild"
+          "2019-06-20": "rebuild",
+          "2026-05-26": "rebuild"
         }
       ],
       "flag": "🇪🇸",
@@ -8679,12 +8688,18 @@
         "md5": "31c60322af1822edd050b1930f6218e8",
         "modify": "2024-02-08 18:41:44"
       },
+      "events": [
+        {
+          "2026-06-20": "closure"
+        }
+      ],
       "flag": "🇺🇸",
       "kiosk": 801137,
       "name": "Trumbull",
       "nso": "2014-10-11 10:00",
       "slug": "trumbull",
       "state": "Connecticut",
+      "status": "closed",
       "timezone": "America/New_York"
     },
     "R631": {
