@@ -225,7 +225,7 @@
         "state151": {
           "name": "Zurich",
           "stores": {
-            "R159": "Bahnhofstrasse",
+            "R159": "Rennweg",
             "R309": "Glattzentrum"
           }
         }
@@ -1712,5 +1712,5 @@
       }
     }
   },
-  "update": "2026-07-09 19:26:45"
+  "update": "2026-07-14 19:06:59"
 }
