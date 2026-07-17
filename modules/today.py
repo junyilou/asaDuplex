@@ -436,7 +436,8 @@ class Course(TodayObject):
 	async def getMultipleSchedules(self,
 		raw_stores: list[Raw_Store] = [],
 		stores: list[Store] = [],
-		date: Optional[datetime] = None, fast: bool = True,
+		date: Optional[datetime] = None,
+		fast: bool = True, ensure: bool = True,
 		session: Optional[SessionType] = None) -> list["Schedule"]:
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		if raw_stores:
@@ -445,12 +446,13 @@ class Course(TodayObject):
 			raw_stores = [i.raw_store for i in stores]
 		rp_mapping: dict[Raw_Store, str] = {r.raw_store: r.rootPath for r in stores}
 		async with get_session(session) as session:
-			tasks = (self.getSchedules(Store(store = i, rootPath = rp_mapping[i]), ensure = not fast,
+			tasks = (self.getSchedules(Store(store = i, rootPath = rp_mapping[i]), ensure = False,
 				date = date, session = session, semaphore = semaphore) for i in Peers(raw_stores, fast))
 			results = await AsyncGather(tasks, return_exceptions = True)
 		return sorted(k for k in {i for j in (r for r in results if not isinstance(r, Exception))
-			for i in j} if k.raw_store in raw_stores)
-		# return sorted(l for l in (*r for r in results if not isinstance(r, Exception)) if l.raw_store in raw_stores)
+			for i in j} if not ensure or k.raw_store in raw_stores)
+		# return sorted(l for l in (*r for r in results if not isinstance(r, Exception))
+		# 	if not ensure or l.raw_store in raw_stores)
 
 	async def getSingleSchedule(self, session: Optional[SessionType] = None) -> "Schedule":
 		return await Schedule.get(scheduleId = self.courseId, rootPath = self.rootPath, slug = self.slug, session = session)
