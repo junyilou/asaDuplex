@@ -1,5 +1,5 @@
 {
-  "_": "2026-06-23 20:17:50",
+  "_": "2026-07-18 08:10:47",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -4060,8 +4060,8 @@
     "R230": {
       "city": "Ann Arbor",
       "dieter": {
-        "md5": "0c7d83211da8492c71d7090eba3f30d5",
-        "modify": "2024-02-08 18:41:37"
+        "md5": "2b8593eb884f5ef4799413d4a79c5599",
+        "modify": "2026-07-16 15:50:48"
       },
       "flag": "🇺🇸",
       "kiosk": 384348,
@@ -4266,6 +4266,13 @@
       "slug": "lakeside",
       "state": "Essex",
       "timezone": "Europe/London"
+    },
+    "R243": {
+      "city": "London",
+      "flag": "🇬🇧",
+      "name": "IS RN Battersea Lab",
+      "state": "",
+      "status": "internal"
     },
     "R244": {
       "city": "Brighton",
@@ -5370,8 +5377,8 @@
     "R324": {
       "city": "Ridgeland",
       "dieter": {
-        "md5": "7645ec8170b496789c8abfd649a53683",
-        "modify": "2024-02-08 18:41:39"
+        "md5": "2b8593eb884f5ef4799413d4a79c5599",
+        "modify": "2026-07-09 16:52:09"
       },
       "flag": "🇺🇸",
       "kiosk": 5000114,
@@ -5525,8 +5532,8 @@
     "R338": {
       "city": "Colorado Springs",
       "dieter": {
-        "md5": "f623067210e7787e007caaafc4053276",
-        "modify": "2024-02-08 18:41:39"
+        "md5": "2b8593eb884f5ef4799413d4a79c5599",
+        "modify": "2026-07-16 15:55:29"
       },
       "flag": "🇺🇸",
       "kiosk": 5000179,
@@ -8518,8 +8525,8 @@
     "R612": {
       "city": "Elmhurst",
       "dieter": {
-        "md5": "5832b8097f895b66c0290fe3cb0527d5",
-        "modify": "2024-02-08 18:41:44"
+        "md5": "2dc5f4148338167e66a2cb608982ccf6",
+        "modify": "2026-07-17 04:55:38"
       },
       "flag": "🇺🇸",
       "kiosk": 802129,
@@ -9996,8 +10003,7 @@
       "flag": "🇨🇳",
       "name": "R808",
       "state": "",
-      "status": "internal",
-      "timezone": "Asia/Shanghai"
+      "status": "internal"
     },
     "R824": {
       "city": "Cupertino",
