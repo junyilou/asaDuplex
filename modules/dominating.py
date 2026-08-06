@@ -1,5 +1,7 @@
+from heapq import nsmallest
 from itertools import groupby
 from math import asin, cos, radians, sin, sqrt
+from operator import itemgetter
 from random import choice
 
 from storeInfo import Store
@@ -39,7 +41,7 @@ def calculate(stores: list[Store], geo_table: dict[str, tuple[longitude, latitud
 		for flag, grouped in groupby(sorted(stores), key = lambda i: i.flag)}
 	for country in geo.values():
 		dst = {sid1: {sid2: haversine(*country[sid1], *country[sid2]) for sid2 in country} for sid1 in country}
-		graph = {s: [j for j, d in sorted(dst[s].items(), key = lambda d: d[1])[:coverage]
+		graph = {s: [j for j, d in nsmallest(coverage, dst[s].items(), key = itemgetter(1))
 			if j != s and d <= max_distance] for s in country}
 		sets = [get_dominating_set(graph, store) for store in graph]
 		answer = choice([s for s in sets if len(s) == min(len(s) for s in sets)])

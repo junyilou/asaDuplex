@@ -51,7 +51,7 @@ def generate_course(course: Course, schedules: list[Schedule] = [],
 
 	if schedules:
 		earliest_schedule = schedules[0]
-		link_schedule = sorted(schedules, key = lambda s: prior.index(s.flag))[0]
+		link_schedule = min(schedules, key = lambda s: prior.index(s.flag))
 		timing = "{START} – {END} {TZTEXT}".format(
 			START = earliest_schedule.datetimeStart(form = "%-m 月 %-d 日 %-H:%M"),
 			END = earliest_schedule.datetimeEnd(form = "%-H:%M"),
