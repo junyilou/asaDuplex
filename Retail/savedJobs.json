@@ -1062,14 +1062,16 @@
     },
     "🇲🇾": {
       "locations": {
-        "state796": {
-          "name": "Selangor",
-          "stores": {}
-        },
         "state1105": {
           "name": "Kuala Lumpur",
           "stores": {
             "R742": "The Exchange TRX"
+          }
+        },
+        "state796": {
+          "name": "Selangor",
+          "stores": {
+            "R801": "Klang Valley-MY"
           }
         }
       },
@@ -1716,5 +1718,5 @@
       }
     }
   },
-  "update": "2026-07-14 19:06:59"
+  "update": "2026-08-07 07:32:50"
 }
