@@ -1062,6 +1062,10 @@
     },
     "🇲🇾": {
       "locations": {
+        "state796": {
+          "name": "Selangor",
+          "stores": {}
+        },
         "state1105": {
           "name": "Kuala Lumpur",
           "stores": {
