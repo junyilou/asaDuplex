@@ -1,5 +1,5 @@
 {
-  "_": "2026-08-01 08:10:39",
+  "_": "2026-08-08 00:12:10",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -4060,9 +4060,14 @@
     "R230": {
       "city": "Ann Arbor",
       "dieter": {
-        "md5": "2dc5f4148338167e66a2cb608982ccf6",
-        "modify": "2026-07-30 14:01:02"
+        "md5": "5a248cf7d28e48311c15d80652a84e75",
+        "modify": "2026-08-03 08:32:49"
       },
+      "events": [
+        {
+          "2026-07-31": "move"
+        }
+      ],
       "flag": "🇺🇸",
       "kiosk": 384348,
       "name": "Briarwood",
@@ -5380,6 +5385,11 @@
         "md5": "0dea88d4637b8c6f7b1c13290453edd4",
         "modify": "2026-07-27 19:07:40"
       },
+      "events": [
+        {
+          "2026-07-24": "move"
+        }
+      ],
       "flag": "🇺🇸",
       "kiosk": 5000114,
       "name": "Renaissance at Colony Park",
@@ -5532,9 +5542,14 @@
     "R338": {
       "city": "Colorado Springs",
       "dieter": {
-        "md5": "2dc5f4148338167e66a2cb608982ccf6",
-        "modify": "2026-07-30 16:00:02"
+        "md5": "0c04a6287e78e2138d9e03c8fd588831",
+        "modify": "2026-08-03 08:35:18"
       },
+      "events": [
+        {
+          "2026-07-31": "move"
+        }
+      ],
       "flag": "🇺🇸",
       "kiosk": 5000179,
       "name": "The Promenade Shops at Briargate",
@@ -9997,6 +10012,23 @@
       "slug": "birkdalevillage",
       "state": "North Carolina",
       "timezone": "America/New_York"
+    },
+    "R801": {
+      "city": "Putrajaya",
+      "flag": "🇲🇾",
+      "name": "Store in Klang Valley",
+      "state": "Selangor",
+      "status": "future",
+      "timezone": "Asia/Kuala_Lumpur"
+    },
+    "R802": {
+      "city": "",
+      "flag": "🇨🇳",
+      "keyword": [],
+      "name": "Store in China mainland",
+      "state": "",
+      "status": "future",
+      "timezone": "Asia/Shanghai"
     },
     "R808": {
       "city": "Sample Town",
