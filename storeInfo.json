@@ -1,5 +1,5 @@
 {
-  "_": "2026-08-08 00:12:10",
+  "_": "2026-08-15 08:10:39",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -5528,8 +5528,8 @@
     "R335": {
       "city": "Bath",
       "dieter": {
-        "md5": "6b3c6c19ca63c352af1de931b293e8bf",
-        "modify": "2024-02-08 18:41:39"
+        "md5": "45ace5b111f5828c0c95c11559471b8b",
+        "modify": "2026-08-14 02:51:07"
       },
       "flag": "🇬🇧",
       "kiosk": 5002816,
@@ -10024,7 +10024,6 @@
     "R802": {
       "city": "",
       "flag": "🇨🇳",
-      "keyword": [],
       "name": "Store in China mainland",
       "state": "",
       "status": "future",
