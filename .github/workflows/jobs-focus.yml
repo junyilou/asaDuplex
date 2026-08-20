@@ -1,8 +1,6 @@
 name: Jobs at Apple [Focus]
 
 on:
-  schedule:
-    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
@@ -25,7 +23,7 @@ jobs:
           BOTPOST_API: ${{ secrets.BOTPOST_API }}
           BOTPOST_CHAT_ID: ${{ secrets.BOTPOST_CHAT_ID }}
         run: python3 Jobs.py -dv 🇸🇦 🇮🇳 state157
-          state160 state174 state214 state671 state966
+          state174 state214 state671 state966
       - name: commit files
         uses: stefanzweifel/git-auto-commit-action@v7
         with:
