@@ -24,7 +24,7 @@
         "114438218": "uae-expert",
         "114438219": "uae-genius",
         "114438224": "uae-technical-specialist",
-        "114438225": "uae-specialist",
+        "114438225": "uae-specialist-seasonal-part-time",
         "200125467": "ae-business-pro"
       }
     },
@@ -99,7 +99,7 @@
       },
       "positions": {
         "114437988": "au-manager",
-        "114437991": "au-specialist-full-time-or-part-time-permanent-or-temporary",
+        "114437991": "au-specialist-seasonal-contract-full-time-or-part-time",
         "114438252": "au-senior-manager"
       }
     },
@@ -205,7 +205,7 @@
         }
       },
       "positions": {
-        "114438004": "ca-specialist-full-time-part-time-and-part-time-temporary"
+        "114438004": "ca-specialist-seasonal-part-time"
       }
     },
     "🇨🇭": {
@@ -280,7 +280,9 @@
         },
         "state160": {
           "name": "Shaanxi",
-          "stores": {}
+          "stores": {
+            "R802": "Xi’an-CN"
+          }
         },
         "state162": {
           "name": "Liaoning",
@@ -405,7 +407,7 @@
       "positions": {
         "114438027": "cn-manager",
         "114438029": "cn-store-leader",
-        "114438030": "cn-specialist-full-time-and-part-time",
+        "114438030": "cn-specialist-seasonal-full-time-or-part-time-or-intern",
         "114438255": "cn-senior-manager"
       }
     },
@@ -471,7 +473,7 @@
       "positions": {
         "114438033": "de-business-expert-m-f-d",
         "114438037": "de-operations-expert-m-f-d",
-        "114438043": "de-specialist-m-f-d",
+        "114438043": "de-specialist-seasonal-full-time-and-part-time",
         "114438207": "de-technical-specialist-m-f-d"
       }
     },
@@ -528,7 +530,7 @@
       "positions": {
         "114438048": "es-expert",
         "114438049": "es-genius",
-        "114438056": "es-specialist-full-time-part-time-and-part-time-temporary",
+        "114438056": "es-specialist-seasonal-part-time",
         "114438212": "es-technical-specialist-full-time-part-time-and-part-time-temporary"
       }
     },
@@ -628,8 +630,7 @@
       },
       "positions": {
         "114438061": "fr-expert",
-        "114438063": "fr-operations-expert",
-        "114438069": "fr-specialist",
+        "114438069": "fr-specialist-fixed-term-contracts-full-time-and-part-time",
         "114438206": "fr-technical-specialist"
       }
     },
@@ -798,7 +799,7 @@
       },
       "positions": {
         "114438139": "uk-operations-expert",
-        "114438145": "uk-specialist-full-time-part-time-and-part-time-temporary"
+        "114438145": "uk-specialist-seasonal-part-time"
       }
     },
     "🇭🇰": {
@@ -816,9 +817,7 @@
         }
       },
       "positions": {
-        "114438076": "hk-operations-expert",
-        "114438082": "hk-specialist-full-time-and-part-time",
-        "114438208": "hk-technical-specialist"
+        "114438082": "hk-specialist-part-time-temporary"
       }
     },
     "🇮🇳": {
@@ -858,7 +857,7 @@
         "200314010": "in-expert",
         "200314015": "in-genius",
         "200314033": "in-operations-expert",
-        "200314117": "in-specialist-full-time-part-time-and-part-time-temporary",
+        "200314117": "in-specialist-full-time-and-part-time",
         "200314122": "in-technical-specialist"
       }
     },
@@ -925,10 +924,8 @@
       },
       "positions": {
         "114438087": "it-expert",
-        "114438089": "it-operations-expert",
-        "114438095": "it-specialist",
-        "114438209": "it-technical-specialist",
-        "200125410": "it-business-pro"
+        "114438095": "it-specialist-sales",
+        "114438209": "it-technical-specialist"
       }
     },
     "🇯🇵": {
@@ -1002,7 +999,7 @@
       },
       "positions": {
         "114438102": "jp-operations-expert",
-        "114438107": "jp-specialist-full-time-or-part-time-permanent-or-temporary",
+        "114438107": "jp-specialist-full-time-or-part-time-temporary",
         "114438210": "jp-technical-specialist"
       }
     },
@@ -1027,7 +1024,7 @@
         }
       },
       "positions": {
-        "114438326": "kr-specialist-full-time-or-part-time-seasonal-role-also-available"
+        "114438326": "kr-specialist-seasonal-part-time"
       }
     },
     "🇲🇴": {
@@ -1041,8 +1038,7 @@
         }
       },
       "positions": {
-        "114438281": "mo-technical-specialist",
-        "114438282": "mo-specialist-full-time-or-part-time-permanent-or-temporary"
+        "114438282": "mo-specialist-full-time-temporary"
       }
     },
     "🇲🇽": {
@@ -1056,8 +1052,7 @@
         }
       },
       "positions": {
-        "114438287": "mx-technical-specialist",
-        "114438297": "mx-specialist-full-time-part-time-and-part-time-temporary"
+        "114438297": "mx-specialist-seasonal-part-time"
       }
     },
     "🇲🇾": {
@@ -1076,7 +1071,7 @@
         }
       },
       "positions": {
-        "200450003": "my-specialist-full-time-or-part-time-permanent-or-temporary"
+        "200450003": "my-specialist-full-time-or-part-time-permanent-or-seasonal"
       }
     },
     "🇳🇱": {
@@ -1092,9 +1087,7 @@
       },
       "positions": {
         "114438111": "nl-expert",
-        "114438112": "nl-genius",
-        "114438113": "nl-operations-expert",
-        "114438119": "nl-specialist-full-time-part-time-and-part-time-temporary",
+        "114438119": "nl-specialist-seasonal-part-time",
         "114438211": "nl-technical-specialist"
       }
     },
@@ -1144,8 +1137,7 @@
       },
       "positions": {
         "114438124": "se-expert",
-        "114438125": "se-genius",
-        "114438132": "se-specialist",
+        "114438132": "se-specialist-seasonal-part-time",
         "114438205": "se-technical-specialist"
       }
     },
@@ -1161,7 +1153,7 @@
         }
       },
       "positions": {
-        "114438238": "sg-specialist-full-time-or-part-time-permanent-or-temporary"
+        "114438238": "sg-specialist-part-time-seasonal"
       }
     },
     "🇹🇭": {
@@ -1175,7 +1167,7 @@
         }
       },
       "positions": {
-        "114438346": "th-specialist-full-time-or-part-time-permanent-or-temporary"
+        "114438346": "th-specialist-part-time-seasonal"
       }
     },
     "🇹🇷": {
@@ -1190,8 +1182,7 @@
         }
       },
       "positions": {
-        "114438163": "tr-business-expert",
-        "114438164": "tr-specialist",
+        "114438164": "tr-specialist-seasonal-part-time",
         "114438165": "tr-expert",
         "114438203": "tr-technical-specialist"
       }
@@ -1208,8 +1199,7 @@
       },
       "positions": {
         "114438307": "tw-operations-expert",
-        "114438311": "tw-specialist-full-time-and-part-time",
-        "114438313": "tw-technical-specialist"
+        "114438311": "tw-specialist-full-time-and-part-time"
       }
     },
     "🇺🇸": {
@@ -1714,9 +1704,9 @@
         }
       },
       "positions": {
-        "114438158": "us-specialist-full-time-part-time-and-part-time-temporary"
+        "114438158": "us-specialist-seasonal-part-time"
       }
     }
   },
-  "update": "2026-08-07 07:32:50"
+  "update": "2026-08-20 22:47:47"
 }

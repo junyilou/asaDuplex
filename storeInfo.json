@@ -1,5 +1,5 @@
 {
-  "_": "2026-08-15 08:10:39",
+  "_": "2026-08-20 08:10:46",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -897,8 +897,8 @@
     "R046": {
       "city": "Nanuet",
       "dieter": {
-        "md5": "ec146c63987d34f269d002e7bddffdc0",
-        "modify": "2024-02-08 18:41:32"
+        "md5": "0bf6211932e01ca119c73fc570ea3811",
+        "modify": "2026-08-18 09:51:01"
       },
       "events": [
         {
@@ -10022,10 +10022,18 @@
       "timezone": "Asia/Kuala_Lumpur"
     },
     "R802": {
-      "city": "",
+      "city": "西安",
       "flag": "🇨🇳",
-      "name": "Store in China mainland",
-      "state": "",
+      "keyword": [
+        "Shaanxi",
+        "Shanxi",
+        "Xi'an",
+        "Xian",
+        "MixC Xi'an",
+        "西安万象城"
+      ],
+      "name": "Store in Xi'an",
+      "state": "陕西",
       "status": "future",
       "timezone": "Asia/Shanghai"
     },
