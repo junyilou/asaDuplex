@@ -33,8 +33,8 @@ class Product:
 
 	@staticmethod
 	def from_url(url: str) -> "Product":
-		URL_RULE = fr"apple.com([\./][^/]*?)/shop/product/{COMP_RULE}"
-		host, part, _ = re.findall(URL_RULE, url)[0]
+		rule = fr"apple.com([\./][^/]*?)/shop/product/{COMP_RULE}"
+		host, part, _ = re.findall(rule, url)[0]
 		region = next(i for i in RegionList if i.url_store == host)
 		return Product(part, region)
 
@@ -64,7 +64,7 @@ class Product:
 				r = await request(url, session, "HEAD", headers = browser_agent,
 					mode = ["status", "head"], allow_redirects = False)
 			self.status = r["status"]
-			assert self.status > 200 and self.status < 400
+			assert 200 < self.status < 400
 			self.partno = re.findall(RICH_RULE, r["head"]["Location"])[0]
 			self.__post_init__()
 			return self.partno
@@ -146,7 +146,7 @@ class Product:
 		except:
 			pass
 		if title:
-			return re.sub(r" *\- Apple ?([(（]\S+[)）])?$", "", title).translate({0xa0: 0x20})
+			return re.sub(r" *- Apple ?([(（]\S+[)）])?$", "", title).translate({0xa0: 0x20})
 
 	async def get_aos_title(self, ensure: bool = True, session: Optional[SessionType] = None) -> Self:
 		if not self.aos_data:

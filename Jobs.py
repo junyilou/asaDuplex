@@ -57,7 +57,7 @@ class APIClass:
 			kwargs["headers"]["x-b3-traceid"] = str(uuid4())
 			async with get_session(session) as ses:
 				async with ses.request(method, "/".join(self.parts), **kwargs) as response:
-					if response.status > 300 and response.status < 400:
+					if 300 < response.status < 400:
 						raise ServerMaintenance()
 					elif mode == "cookies":
 						return response.headers, response.cookies
@@ -257,7 +257,7 @@ class Locale:
 					self.updated = True
 					logger.info(f"[找到新店] {code}: {store.name}")
 					new_stores.append(store)
-				elif (store.name != state.stores[code].name):
+				elif store.name != state.stores[code].name:
 					self.updated = True
 					logger.info(f"[更新名称] {code}: {state.stores[code].name} -> {store.name}")
 			if removal := [i for i in state.stores if i not in remote]:

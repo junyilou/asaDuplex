@@ -83,7 +83,6 @@ async def entry(saved: dict[str, Any], mode: str,
 	flags: list[str], session: SessionType) -> Optional[dict[str, Any]]:
 	append = False
 	courses: dict[Course, set[Schedule]] = {}
-	results: list[Collection | Course | Schedule] = []
 
 	match mode:
 		case "today":

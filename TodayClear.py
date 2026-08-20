@@ -82,7 +82,7 @@ class File:
 
 class AssuredFile(File):
 	def __init__(self) -> None:
-		return super().__init__("Retail/assured-events.json")
+		super().__init__("Retail/assured-events.json")
 
 	async def entry(self, key: str, session: SessionType) -> Optional[str]:
 		async with self.semaphore:
@@ -96,7 +96,7 @@ class AssuredFile(File):
 
 class SavedEventFile(File):
 	def __init__(self) -> None:
-		return super().__init__("Retail/savedEvent.json")
+		super().__init__("Retail/savedEvent.json")
 
 	def pre_write(self) -> None:
 		self.fp["update"] = datetime.now().strftime("%F %T")
@@ -124,7 +124,7 @@ class SavedEventFile(File):
 
 class FindASessionFile(File):
 	def __init__(self) -> None:
-		return super().__init__("Retail/findasession.json")
+		super().__init__("Retail/findasession.json")
 
 	def pre_write(self) -> None:
 		self.fp["update"] = datetime.now(UTC).strftime("%F %T GMT")

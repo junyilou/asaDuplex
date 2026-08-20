@@ -395,7 +395,7 @@ class Course(TodayObject):
 		self.raw: dict = raw | {"serial": self.serial}
 
 	def __repr__(self) -> str:
-		col = (f', Collection <{self.collection.name}>' if isinstance(self.collection, Collection) \
+		col = (f', Collection <{self.collection.name}>' if isinstance(self.collection, Collection)
 			else f', Collection "{self.collection}"') if self.collection is not None else ""
 		return f'<Course {self.courseId} "{self.name}", "{self.slug}"{col}>'
 
