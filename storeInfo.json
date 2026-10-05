@@ -9957,9 +9957,11 @@
     "R791": {
       "city": "Hyderabad",
       "flag": "🇮🇳",
-      "name": "Store in Hyderabad",
+      "kiosk": 807137,
+      "name": "Kukatpally",
       "state": "Telangana",
       "status": "future",
+      "slug": "kukatpally",
       "timezone": "Asia/Kolkata"
     },
     "R792": {
