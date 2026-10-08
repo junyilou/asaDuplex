@@ -1,5 +1,5 @@
 {
-  "update": "2026-10-05 06:35:10",
+  "update": "2026-10-08 14:12:47",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -315,6 +315,13 @@
       "slug": "kids-direct-your-friendship-film-on-ipad"
     }
   },
-  "sitemap": {},
+  "sitemap": {
+    "7450676490436182016": {
+      "names": {
+        "🇯🇵": "Appleサマーキャンプ：iPadを使って、頼れるスーパーヒーローのキャラクターをつくろう"
+      },
+      "slug": "apple-camp-fy26"
+    }
+  },
   "collection": {}
 }
