@@ -4,7 +4,7 @@ from collections.abc import Callable
 from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
-from typing import Any, Optional, Required, TypedDict
+from typing import Any, Required, TypedDict
 from zoneinfo import ZoneInfo
 
 from modules.regions import Regions
@@ -39,7 +39,7 @@ class SortKey(Enum):
 	index = "index"
 	latest = "latest"
 
-STORES: dict[str, "Store"] = {}
+STORES: dict[str, Store] = {}
 
 class Store:
 	REQUIRED_KEYS = "city", "flag", "name", "state"
@@ -150,7 +150,7 @@ class Store:
 			d["timezone"] = self.timezone.key
 		return d
 
-	async def detail(self, session: Optional[SessionType] = None) -> dict[str, Any]:
+	async def detail(self, session: SessionType | None = None) -> dict[str, Any]:
 		assert self.slug, "slug must be provided"
 
 		from graphql import APOLLO_HEADERS, ENDPOINT, cleanup, generate_params
@@ -192,7 +192,7 @@ def StoreMatch(keyword: str, fuzzy: Any = False, regular: Any = False) -> list[S
 		return [i for i in STORES.values() if any(keyword.lower() in k.lower() for k in i.keys)]
 	return [i for i in STORES.values() if keyword.lower() in (k.lower() for k in i.keys)]
 
-def getStore(sid: int | str) -> Optional[Store]:
+def getStore(sid: int | str) -> Store | None:
 	try:
 		return STORES[sidify(sid)]
 	except KeyError:
@@ -204,7 +204,7 @@ def getStore(sid: int | str) -> Optional[Store]:
 def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
 	levels: list[str] = ["flag", "state", "city"],
 	final: Callable[[Store], str] = str,
-	userLang: Optional[bool] | list[Optional[bool]] = [None]) -> list[str]:
+	userLang: bool | None | list[bool | None] = [None]) -> list[str]:
 	stores, results = set(rstores), []
 	boldmark = "*" if bold else ""
 	userLang = [userLang] if not isinstance(userLang, list) else userLang
@@ -245,16 +245,16 @@ def storeReturn(args: Any = None, *,
 	regular: Any = False,
 	split: Any = False,
 	sort: SortKey = SortKey.default,
-	filter: Optional[StoreMapping] = None,
+	filter: StoreMapping | None = None,
 	allow_empty: bool = True) -> list[Store]:
 	if not args and allow_empty:
 		args = "ALL"
 	if not isinstance(args, list):
 		args = re.split(r"\s*[,，]\s*", str(args)) if split else [args]
 	args = [str(a) for a in args]
-	gen = {g for s in args for m in (StoreID(s, fuzzy = fuzzy, regular = regular),
-		StoreMatch(s, fuzzy = fuzzy, regular = regular)) for g in m}
-	filters: list[Optional[StoreMapping]] = [
+	gen = {*m for s in args for m in (StoreID(s, fuzzy = fuzzy, regular = regular),
+		StoreMatch(s, fuzzy = fuzzy, regular = regular))}
+	filters: list[StoreMapping | None] = [
 		lambda i: not opening or i.isOpen,
 		lambda i: not remove_closed or not i.isClosed,
 		lambda i: not remove_future or not i.isFuture,

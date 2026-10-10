@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from http.cookies import SimpleCookie
 from random import choice
-from typing import Any, Optional, Self, TypedDict
+from typing import Any, Self, TypedDict
 from urllib.parse import unquote
 from uuid import uuid4
 
@@ -36,7 +36,7 @@ DB: FileDict | None = None
 class APIClass:
 	parts: Sequence[str]
 	csrf: dict[str, str] = field(default_factory = dict)
-	cookies: Optional[SimpleCookie] = None
+	cookies: SimpleCookie | None = None
 
 	def __truediv__(self, other: str) -> Self:
 		return type(self)((*self.parts, other), self.csrf, self.cookies)
@@ -45,7 +45,7 @@ class APIClass:
 		return "/".join(self.parts)
 
 	async def request(self,
-		session: Optional[SessionType] = None,
+		session: SessionType | None = None,
 		method: str = "GET", mode: str = "json", log_name: str = "",
 		extra_headers: dict[str, str] = {}, **kwargs) -> Any:
 
@@ -80,7 +80,7 @@ class APIClass:
 			retry = retry_if_not_exception_type((ResponseError, ServerMaintenance)))
 		return await retryer(_request_impl)
 
-	async def get_csrf(self, session: Optional[SessionType] = None) -> None:
+	async def get_csrf(self, session: SessionType | None = None) -> None:
 		try:
 			logger.log(17, "[开始] CSRF")
 			headers, cookies = await (self / "CSRFToken").request(session, mode = "cookies", log_name = "CSRF")
@@ -130,7 +130,7 @@ class RichPosition(Position):
 class Store:
 	code: str
 	name: str
-	state: "State" = field(repr = False)
+	state: State = field(repr = False)
 	city: str = field(default = "")
 
 	@property
@@ -147,7 +147,7 @@ class State:
 	stores: dict[str, Store] = field(default_factory = dict, repr = False)
 
 	async def get_stores(self, position: Position,
-		session: Optional[SessionType] = None) -> dict[str, Store]:
+		session: SessionType | None = None) -> dict[str, Store]:
 		api = API / "storeLocations"
 		log_name = f"获取招聘地点 {self}"
 		try:
@@ -183,7 +183,7 @@ class Locale:
 	new_stores: list[Store] = field(default_factory = list, repr = False, init = False)
 	states: list[State] = field(init = False, repr = False)
 	positions: Sequence[Position] = field(init = False, repr = False)
-	position: Optional[Position] = field(init = False, repr = False)
+	position: Position | None = field(init = False, repr = False)
 
 	def __post_init__(self) -> None:
 		assert DB is not None
@@ -199,7 +199,7 @@ class Locale:
 		self.states_to_run = [state.code for state in states]
 		self.positions = [Position(id, slug, self.region) for id, slug in data["positions"].items()]
 
-	async def choose_position(self, session: Optional[SessionType] = None) -> Optional[Position]:
+	async def choose_position(self, session: SessionType | None = None) -> Position | None:
 		if not self.positions:
 			self.positions = await self.fetch_positions(managed = True,
 				filters = RETAIL_FILTER, session = session)
@@ -207,10 +207,10 @@ class Locale:
 
 	async def fetch_positions(self,
 		max_page: int = 3,
-		managed: Optional[bool] = None,
+		managed: bool | None = None,
 		later_than: str = "",
 		filters: dict[str, Any] = RETAIL_FILTER,
-		session: Optional[SessionType] = None) -> list[RichPosition]:
+		session: SessionType | None = None) -> list[RichPosition]:
 
 		async def get_positions_base(page: int = 1) -> tuple[list[RichPosition], int]:
 			data = {"filters": {"locations": [f"postLocation-{self.region.post_location}"]} | filters,
@@ -248,7 +248,7 @@ class Locale:
 		return sorted((i for i in l if managed is None or i.managed == managed),
 			key = lambda r: (r.update, r.id))
 
-	async def main(self, session: Optional[SessionType] = None) -> list[Store]:
+	async def main(self, session: SessionType | None = None) -> list[Store]:
 		async def entry(position: Position, state: State) -> list[Store]:
 			new_stores: list[Store] = []
 			remote = await state.get_stores(position, session)
@@ -274,7 +274,7 @@ class Locale:
 		logger.log(19, f"[开始] {log_name}")
 		results = await AsyncGather((entry(self.position, state)
 			for state in self.states if state.code in self.states_to_run), limit = 10)
-		self.new_stores = [store for i in results if not isinstance(i, Exception) for store in i]
+		self.new_stores = [*i for i in results if not isinstance(i, Exception)]
 		logger.log(17, f"[完成] {log_name}")
 		return self.new_stores
 
@@ -328,7 +328,7 @@ async def entry(flags: list[str], states: list[str], session: SessionType) -> No
 		await async_post(push)
 	save_db(locales)
 
-async def position(flags: list[str], managed: Optional[bool], session: SessionType) -> None:
+async def position(flags: list[str], managed: bool | None, session: SessionType) -> None:
 	locales = [Locale(i) for i in flags if i in Regions]
 	for locale in locales:
 		saved = [p.id for p in locale.positions]

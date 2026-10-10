@@ -5,7 +5,7 @@ from argparse import ArgumentParser, Namespace
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from modules.today import (VALIDDATES, Collection, Course, Peers, Schedule,
                            Sitemap, Store, ValidDates)
@@ -80,7 +80,7 @@ async def post(text: str, image: str, keyboard: list[list[list[str]]]) -> None:
 	await async_post(push)
 
 async def entry(saved: dict[str, Any], mode: str,
-	flags: list[str], session: SessionType) -> Optional[dict[str, Any]]:
+	flags: list[str], session: SessionType) -> dict[str, Any] | None:
 	append = False
 	courses: dict[Course, set[Schedule]] = {}
 
@@ -93,13 +93,12 @@ async def entry(saved: dict[str, Any], mode: str,
 		case _:
 			return
 	gathered = await AsyncGather(tasks, return_exceptions = True)
-	runners, exp = [[i for i in gathered if b ^ isinstance(i, Exception)] for b in (True, False)]
+	runners, exp = ([i for i in gathered if b ^ isinstance(i, Exception)] for b in (True, False))
 	for e in exp:
 		assert isinstance(e, Exception)
 		logging.error(repr(e))
-	r = {i for j in runners if isinstance(j, list) for i in j}
-	# r = {*i for i in runners if isinstance(i, list)}
-	course_collection, schedule = [[i for i in r if b ^ isinstance(i, Schedule)] for b in (True, False)]
+	r = {*j for j in runners if isinstance(j, list)}
+	course_collection, schedule = ([i for i in r if b ^ isinstance(i, Schedule)] for b in (True, False))
 	results = sorted(course_collection, key = lambda v: flags.index(v.flag)) + sorted(schedule)
 
 	for j in results:
@@ -146,8 +145,8 @@ async def entry(saved: dict[str, Any], mode: str,
 
 		if do_send:
 			logging.info(str(course))
-			all_schedules = [s for c, schedules in courses.items()
-				if c.courseId == course.courseId for s in schedules]
+			all_schedules = [*schedules for c, schedules in courses.items()
+				if c.courseId == course.courseId]
 			text, image, keyboard = generate_course(course = course, schedules = all_schedules, prior = flags)
 			await post(text, image, keyboard)
 

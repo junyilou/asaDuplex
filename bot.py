@@ -1,13 +1,13 @@
 import logging
 from os import environ
-from typing import Any, Optional
+from typing import Any
 
 from modules.util import SessionType
 
 chat_ids = int(environ["BOTPOST_CHAT_ID"]),
 
-async def async_post(json: dict[str, Any], session: Optional[SessionType] = None
-	) -> Optional[list[dict[str, Any]]]:
+async def async_post(json: dict[str, Any], session: SessionType | None = None
+	) -> list[dict[str, Any]] | None:
 
 	from modules.util import request
 	try:

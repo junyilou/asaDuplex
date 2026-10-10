@@ -4,7 +4,6 @@ import logging
 from argparse import ArgumentParser, Namespace
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Optional
 
 from modules.regions import Regions
 from modules.today import Collection, Course
@@ -26,10 +25,10 @@ IGNORE_SLUGS: tuple[str, ...] = (
 
 async def test(func: type[Course] | type[Collection],
 	slug: str, flags: list[str] = FLAGS,
-	session: Optional[SessionType] = None) -> bool:
+	session: SessionType | None = None) -> bool:
 	semaphore = asyncio.Semaphore(3)
 
-	async def entry(rootPath: str, ses: SessionType) -> Optional[Collection | Course]:
+	async def entry(rootPath: str, ses: SessionType) -> Collection | Course | None:
 		try:
 			async with semaphore:
 				logging.debug(f"[测试] {slug=} {rootPath=}")
@@ -65,10 +64,10 @@ class File:
 	def pre_write(self) -> None:
 		...
 
-	async def run(self, session: Optional[SessionType] = None) -> list[str]:
+	async def run(self, session: SessionType | None = None) -> list[str]:
 		...
 
-	async def main(self, session: Optional[SessionType] = None) -> None:
+	async def main(self, session: SessionType | None = None) -> None:
 		if results := await self.run(session):
 			results.sort(key = lambda x: x.split("-")[-1])
 			logging.info(f"[删除] {len(results)=}")
@@ -84,12 +83,12 @@ class AssuredFile(File):
 	def __init__(self) -> None:
 		super().__init__("Retail/assured-events.json")
 
-	async def entry(self, key: str, session: SessionType) -> Optional[str]:
+	async def entry(self, key: str, session: SessionType) -> str | None:
 		async with self.semaphore:
 			if not await test(Course, self.fp[key], session = session):
 				return self.fp.pop(key)
 
-	async def run(self, session: Optional[SessionType] = None) -> list[str]:
+	async def run(self, session: SessionType | None = None) -> list[str]:
 		async with get_session(session) as ses:
 			results = await asyncio.gather(*[self.entry(key, ses) for key in self.fp])
 		return [i for i in results if i]
@@ -102,7 +101,7 @@ class SavedEventFile(File):
 		self.fp["update"] = datetime.now().strftime("%F %T")
 
 	async def entry(self, func: type[Course] | type[Collection],
-		fp: dict, key: str, session: SessionType) -> Optional[str]:
+		fp: dict, key: str, session: SessionType) -> str | None:
 		async with self.semaphore:
 			if func is Course:
 				slug, flags = fp[key]["slug"], list(fp[key]["names"])
@@ -112,7 +111,7 @@ class SavedEventFile(File):
 				del fp[key]
 				return slug
 
-	async def run(self, session: Optional[SessionType] = None) -> list[str]:
+	async def run(self, session: SessionType | None = None) -> list[str]:
 		async with get_session(session) as ses:
 			coros = []
 			for k in ("today", "sitemap", "collection"):
@@ -130,7 +129,7 @@ class FindASessionFile(File):
 		self.fp["update"] = datetime.now(UTC).strftime("%F %T GMT")
 
 	async def entry(self, func: type[Course] | type[Collection],
-		key: str, session: SessionType) -> Optional[str]:
+		key: str, session: SessionType) -> str | None:
 		async with self.semaphore:
 			if func is Course:
 				fp = self.fp["course"]
@@ -143,7 +142,7 @@ class FindASessionFile(File):
 				del fp[key]
 				return slug
 
-	async def run(self, session: Optional[SessionType] = None) -> list[str]:
+	async def run(self, session: SessionType | None = None) -> list[str]:
 		async with get_session(session) as ses:
 			coros = [self.entry(Course, key, ses) for key in self.fp["course"]]
 			coros.extend([self.entry(Collection, key, ses) for key in self.fp["collection"]])

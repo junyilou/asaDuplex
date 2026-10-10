@@ -10,11 +10,11 @@ jobs:
       contents: write
     steps:
       - name: checkout repo content
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: setup python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
-          python-version: '3.14'
+          python-version: '3.15-dev'
           cache: 'pip'
       - name: install python packages
         run: pip install -r requirements.txt

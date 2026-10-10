@@ -7,7 +7,6 @@ from datetime import datetime
 from hashlib import md5
 from pathlib import Path
 from random import random
-from typing import Optional
 
 import aiohttp
 
@@ -25,10 +24,10 @@ async def post(store: Store, dt: datetime, raw: bytes) -> None:
 		"keyboard": buttons, "parse": "MARK"})
 
 async def task(store: Store, special_list: list[str], local_mode: bool,
-	session: SessionType, semaphore: SemaphoreType) -> Optional[Store]:
+	session: SessionType, semaphore: SemaphoreType) -> Store | None:
 	special = store.sid in special_list
 
-	def judge(head: Mapping[str, str]) -> Optional[datetime]:
+	def judge(head: Mapping[str, str]) -> datetime | None:
 		dt = datetime.strptime(head["Last-Modified"], "%a, %d %b %Y %H:%M:%S GMT")
 		local = getattr(store, "modify", None)
 		if local and local > dt.strftime("%F %T"):

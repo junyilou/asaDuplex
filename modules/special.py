@@ -1,6 +1,6 @@
 from collections.abc import Generator, Iterable, Mapping
 from datetime import datetime, timedelta
-from typing import Any, Literal, Optional
+from typing import Any, Literal
 
 from tenacity import AsyncRetrying, stop_after_attempt, wait_random
 
@@ -33,7 +33,7 @@ async def base_comment(store: Store,
 	accepted_dates: Iterable[str],
 	force_return: bool,
 	results_dict: dict[str, dict[str, str]],
-	timeout: int, session: Optional[SessionType]) -> dict[str, dict[str, str]]:
+	timeout: int, session: SessionType | None) -> dict[str, dict[str, str]]:
 	try:
 		assert store.region.url_store is not None
 		assert store.region.part_sample
@@ -70,7 +70,7 @@ async def comment(store: Store,
 	accepted_dates: Iterable[str] = [],
 	force_return: bool = False,
 	results_dict: dict[str, dict[str, str]] = {},
-	session: Optional[SessionType] = None,
+	session: SessionType | None = None,
 	max_retry: int = 3, timeout: int = 5,
 	min_interval: int = 2, max_interval: int = 8,
 	shout: bool = False) -> dict[str, dict[str, str]]:
@@ -88,12 +88,12 @@ async def comment(store: Store,
 		raise
 
 async def special(store: Store, *,
-	threshold: Optional[datetime] = None,
+	threshold: datetime | None = None,
 	ask_comment: bool = True,
 	ignore_same: bool = False,
 	detail: dict[str, list[dict[str, Any]]] = {},
 	rules: dict[str, str] = {},
-	session: Optional[SessionType] = None) -> Optional[dict[str, dict[str, str]]]:
+	session: SessionType | None = None) -> dict[str, dict[str, str]] | None:
 	threshold = threshold or datetime.now()
 	if not detail:
 		detail = await store.detail(session = session)

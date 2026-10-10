@@ -4,7 +4,8 @@ import logging
 from collections.abc import AsyncGenerator, Callable, Coroutine, Iterable
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
-from typing import Any, Concatenate, Literal, Mapping, Optional, cast, overload
+from typing import Any, Concatenate, Literal, cast, overload
+from collections.abc import Mapping
 
 import aiohttp
 from tenacity import AsyncRetrying, stop_after_attempt, wait_fixed
@@ -18,13 +19,13 @@ browser_agent = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) 
 request_logger = logging.getLogger("util.request")
 
 async def _Container[T](*coros: CoroutineType[T] | Iterable[CoroutineType[T]],
-	limit: Optional[int] = None, return_exceptions: bool = False) -> list[asyncio.Task[T]]:
+	limit: int | None = None, return_exceptions: bool = False) -> list[asyncio.Task[T]]:
 	from typing import TypeIs
 	def iscoroutine(obj: Any) -> TypeIs[CoroutineType[Any]]:
 		from inspect import iscoroutinefunction
 		return iscoroutinefunction(obj)
 	async def task(coro: CoroutineType[T],
-		semaphore: Optional[SemaphoreType] = None) -> T:
+		semaphore: SemaphoreType | None = None) -> T:
 		async with with_semaphore(semaphore):
 			try:
 				return await coro
@@ -47,12 +48,12 @@ async def _Container[T](*coros: CoroutineType[T] | Iterable[CoroutineType[T]],
 
 @overload
 async def AsyncGather[T](*coros: CoroutineType[T] | Iterable[CoroutineType[T]],
-	limit: Optional[int] = None, return_exceptions: Literal[False] = False) -> list[T]: ...
+	limit: int | None = None, return_exceptions: Literal[False] = False) -> list[T]: ...
 @overload
 async def AsyncGather[T](*coros: CoroutineType[T] | Iterable[CoroutineType[T]],
-	limit: Optional[int] = None, return_exceptions: Literal[True] = True) -> list[T | Exception]: ...
+	limit: int | None = None, return_exceptions: Literal[True] = True) -> list[T | Exception]: ...
 async def AsyncGather[T](*coros: CoroutineType[T] | Iterable[CoroutineType[T]],
-	limit: Optional[int] = None, return_exceptions: bool = False) -> list[T] | list[T | Exception]:
+	limit: int | None = None, return_exceptions: bool = False) -> list[T] | list[T | Exception]:
 	results: list[Any] = []
 	tasks = await _Container(*coros, limit = limit, return_exceptions = return_exceptions)
 	for task in tasks:
@@ -107,7 +108,7 @@ def disMarkdown(text: str, *, wrap: str = "", extra: str = "", remove: str = "")
 
 @asynccontextmanager
 async def get_session(
-	session: Optional[SessionType] = None,
+	session: SessionType | None = None,
 	**kwargs) -> AsyncGenerator[SessionType]:
 	y = session or aiohttp.ClientSession(**kwargs)
 	i = y is not session
@@ -120,8 +121,8 @@ async def get_session(
 			await y.close()
 			request_logger.debug("已关闭临时 aiohttp 线程")
 
-async def request(url: str, session: Optional[SessionType] = None, method: str = "GET", *,
-	mode: Optional[str | list[str]] = None, retry: int = 1, sleep: int = 0,
+async def request(url: str, session: SessionType | None = None, method: str = "GET", *,
+	mode: str | list[str] | None = None, retry: int = 1, sleep: int = 0,
 	return_exception: bool = False, **kwargs) -> Any:
 	modes = {str(i) for i in (mode if isinstance(mode, list) else [mode or "default"])}
 
@@ -171,7 +172,7 @@ def setLogger(
 
 def sortOD[K, V](od: Mapping[K, V],
 	reverse: list[bool] = [False],
-	key: Optional[Callable[..., Any]] = None,
+	key: Callable[..., Any] | None = None,
 	level: int = 0) -> dict[K, V]:
 	res = {}
 	for k, v in sorted(od.items(), reverse = reverse[min(level, len(reverse) - 1)], key = key):
@@ -188,7 +189,7 @@ def time_delta(*,
 	seconds: float = 0,
 	dt1: datetime = datetime.min,
 	dt2: datetime = datetime.min,
-	items: Optional[int] = None,
+	items: int | None = None,
 	empty: str = "") -> str:
 	ans, base = [], 1
 	comp = ((60, "秒"), (60, "分钟"), (24, "小时"), (7, "天"), (0, "周"))
@@ -211,7 +212,7 @@ def tz_text(dtime: datetime) -> str:
 	return f"GMT{time_h:+.0f}{f":{60 * time_min:0>2.0f}" if time_min else ""}"
 
 @asynccontextmanager
-async def with_semaphore(semaphore: Optional[SemaphoreType] = None) -> AsyncGenerator[None]:
+async def with_semaphore(semaphore: SemaphoreType | None = None) -> AsyncGenerator[None]:
 	try:
 		if semaphore:
 			await semaphore.acquire()

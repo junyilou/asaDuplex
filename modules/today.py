@@ -3,7 +3,8 @@ import json
 import re
 from collections.abc import MutableMapping
 from datetime import datetime
-from typing import Any, Literal, Optional, Self, Sequence
+from typing import Any, Literal, Self
+from collections.abc import Sequence
 from zoneinfo import ZoneInfo
 
 from modules.regions import Regions
@@ -85,7 +86,7 @@ def KnownSlugs() -> list[str]:
 	except FileNotFoundError:
 		return []
 
-def ParseResolution(vids: list[str], direction: Optional[Literal["l", "p"]] = None) -> list[str]:
+def ParseResolution(vids: list[str], direction: Literal["l", "p"] | None = None) -> list[str]:
 	res = {}
 	for v in vids:
 		f = re.findall(r"([0-9]+)x([0-9]+)\.[a-zA-Z0-9]+", v)
@@ -184,10 +185,10 @@ class Store(TodayObject):
 	sortkeys: list[str] = ["raw_store"]
 
 	def __init__(self,
-		raw: Optional[dict[str, Any]] = None,
-		rootPath: Optional[str] = None,
-		sid: Optional[int | str] = None,
-		store: Optional[Raw_Store] = None) -> None:
+		raw: dict[str, Any] | None = None,
+		rootPath: str | None = None,
+		sid: int | str | None = None,
+		store: Raw_Store | None = None) -> None:
 
 		assert raw or sid or store, "raw, sid, store 至少提供一个"
 		if raw:
@@ -202,7 +203,7 @@ class Store(TodayObject):
 			self.rootPath: str = rp
 			self.flag: str = todayNation[self.rootPath]
 			self.url: str = f"https://www.apple.com{".cn" if self.rootPath == "/cn" else ""}{raw["path"]}"
-			self.coord: Optional[list[float]] = [raw["lat"], raw["long"]]
+			self.coord: list[float] | None = [raw["lat"], raw["long"]]
 		else:
 			temp = store or (getRaw_Store(sid) if sid else None)
 			assert temp is not None, f"本地数据库中无法匹配关键字 {sid!r}"
@@ -217,7 +218,7 @@ class Store(TodayObject):
 			self.timezone: str = self.raw_store.timezone.key
 			self.flag: str = todayNation[self.rootPath]
 			self.url: str = self.raw_store.url
-			self.coord: Optional[list[float]] = None
+			self.coord: list[float] | None = None
 		self.today: str = self.url.replace("/retail/", "/today/")
 		self.calendar: str = self.url.replace("/retail/", "/today/calendar/")
 		self.serial: dict[str, str] = {"sid": self.sid}
@@ -227,8 +228,8 @@ class Store(TodayObject):
 		return f'<Store "{self.name}" ({self.sid}), "{self.slug}", "{self.rootPath}">'
 
 	async def getCourses(self, ensure: bool = True,
-		session: Optional[SessionType] = None,
-		semaphore: Optional[SemaphoreType] = None) -> list["Course"]:
+		session: SessionType | None = None,
+		semaphore: SemaphoreType | None = None) -> list[Course]:
 		try:
 			nearby = {"nearby": "true"} if not ensure else {}
 			async with with_semaphore(semaphore):
@@ -244,10 +245,10 @@ class Store(TodayObject):
 			for c in remote["courses"].values())
 
 	async def getSchedules(self, ensure: bool = True,
-		date: Optional[datetime] = None,
-		covered_store_list: Optional[list[str]] = None,
-		session: Optional[SessionType] = None,
-		semaphore: Optional[SemaphoreType] = None) -> list["Schedule"]:
+		date: datetime | None = None,
+		covered_store_list: list[str] | None = None,
+		session: SessionType | None = None,
+		semaphore: SemaphoreType | None = None) -> list[Schedule]:
 		try:
 			nearby = {"nearby": "true"} if not ensure else {}
 			async with with_semaphore(semaphore):
@@ -276,13 +277,13 @@ class Store(TodayObject):
 			covered_store_list.extend(remote["stores"])
 		return results
 
-	async def getCoord(self, session: Optional[SessionType] = None) -> list[float]:
+	async def getCoord(self, session: SessionType | None = None) -> list[float]:
 		d = await self.raw_store.detail(session = session)
 		self.coord = [i[1] for i in sorted(d["geolocation"].items())]
 		return self.coord
 
 	async def getCovering(self, graph: MutableMapping[str, list[str]] = {},
-		session: Optional[SessionType] = None, semaphore: Optional[SemaphoreType] = None) -> list[str]:
+		session: SessionType | None = None, semaphore: SemaphoreType | None = None) -> list[str]:
 		results: list[str] = []
 		_ = await self.getSchedules(ensure = False, covered_store_list = results,
 			session = session, semaphore = semaphore)
@@ -297,9 +298,9 @@ class Talent(TodayObject):
 	def __init__(self, raw: dict[str, Any]) -> None:
 		self.raw: dict[str, Any] = raw
 		self.name: str = raw["name"].strip()
-		self.title: Optional[str] = raw["title"].strip() if "title" in raw else None
-		self.description: Optional[str] = re.sub(r"\s*\n\s*", " ", raw["description"].strip()) if "description" in raw else None
-		self.image: Optional[str] = raw.get("backgroundImage") or raw.get("logo")
+		self.title: str | None = raw["title"].strip() if "title" in raw else None
+		self.description: str | None = re.sub(r"\s*\n\s*", " ", raw["description"].strip()) if "description" in raw else None
+		self.image: str | None = raw.get("backgroundImage") or raw.get("logo")
 		self.links: dict[str, str] = (
 			({"website": raw["websiteUrl"]} if "websiteUrl" in raw else {}) |
 			({"url": raw["url"]} if "url" in raw else {}) |
@@ -316,8 +317,8 @@ class Course(TodayObject):
 	async def get(cls,
 		rootPath: str,
 		slug: str,
-		remote: Optional[dict[str, Any]] = None,
-		session: Optional[SessionType] = None) -> Self:
+		remote: dict[str, Any] | None = None,
+		session: SessionType | None = None) -> Self:
 		if remote is None:
 			try:
 				r = await request(session = session, headers = browser_agent,
@@ -349,7 +350,7 @@ class Course(TodayObject):
 		courseId: str,
 		raw: dict[str, Any],
 		rootPath: str,
-		collection: Optional["str | Collection"] = None,
+		collection: str | Collection | None = None,
 		talents: list[dict[str, Any]] = []) -> None:
 
 		self.rootPath: str = rootPath
@@ -359,7 +360,7 @@ class Course(TodayObject):
 		self.title: str = raw["title"]
 		self.slug: str = raw["urlTitle"]
 		self.serial: dict[str, str] = {"slug": self.slug, "rootPath": self.rootPath}
-		self.collection: Optional[str | Collection] = collection
+		self.collection: str | Collection | None = collection
 
 		self.description: dict[str, str] = {
 			"long": raw["longDescription"].strip(),
@@ -399,7 +400,7 @@ class Course(TodayObject):
 			else f', Collection "{self.collection}"') if self.collection is not None else ""
 		return f'<Course {self.courseId} "{self.name}", "{self.slug}"{col}>'
 
-	def elements(self, accept: Optional[list[str]] = None) -> list[str]:
+	def elements(self, accept: list[str] | None = None) -> list[str]:
 		accept = accept or ACCEPT
 		result, pattern = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + pattern +
@@ -407,9 +408,9 @@ class Course(TodayObject):
 		return result
 
 	async def getSchedules(self, store: Store, ensure: bool = True,
-		date: Optional[datetime] = None,
-		session: Optional[SessionType] = None,
-		semaphore: Optional[SemaphoreType] = None) -> list["Schedule"]:
+		date: datetime | None = None,
+		session: SessionType | None = None,
+		semaphore: SemaphoreType | None = None) -> list[Schedule]:
 		try:
 			async with with_semaphore(semaphore):
 				r = await request(session = session, headers = browser_agent,
@@ -436,9 +437,9 @@ class Course(TodayObject):
 	async def getMultipleSchedules(self,
 		raw_stores: list[Raw_Store] = [],
 		stores: list[Store] = [],
-		date: Optional[datetime] = None,
+		date: datetime | None = None,
 		fast: bool = True, ensure: bool = True,
-		session: Optional[SessionType] = None) -> list["Schedule"]:
+		session: SessionType | None = None) -> list[Schedule]:
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		if raw_stores:
 			stores = [Store(store = i) for i in raw_stores]
@@ -449,12 +450,10 @@ class Course(TodayObject):
 			tasks = (self.getSchedules(Store(store = i, rootPath = rp_mapping[i]), ensure = False,
 				date = date, session = session, semaphore = semaphore) for i in Peers(raw_stores, fast))
 			results = await AsyncGather(tasks, return_exceptions = True)
-		return sorted(k for k in {i for j in (r for r in results if not isinstance(r, Exception))
-			for i in j} if not ensure or k.raw_store in raw_stores)
-		# return sorted(l for l in (*r for r in results if not isinstance(r, Exception))
-		# 	if not ensure or l.raw_store in raw_stores)
+		return sorted(k for k in {*j for j in (r for r in results if not isinstance(r, Exception))
+			} if not ensure or k.raw_store in raw_stores)
 
-	async def getSingleSchedule(self, session: Optional[SessionType] = None) -> "Schedule":
+	async def getSingleSchedule(self, session: SessionType | None = None) -> Schedule:
 		return await Schedule.get(scheduleId = self.courseId, rootPath = self.rootPath, slug = self.slug, session = session)
 
 class Schedule(TodayObject):
@@ -466,8 +465,8 @@ class Schedule(TodayObject):
 		rootPath: str,
 		scheduleId: str,
 		slug: str,
-		remote: Optional[dict[str, Any]] = None,
-		session: Optional[SessionType] = None) -> Self:
+		remote: dict[str, Any] | None = None,
+		session: SessionType | None = None) -> Self:
 		if remote is None:
 			scheduleId = str(scheduleId)
 			try:
@@ -537,8 +536,8 @@ class Collection(TodayObject):
 	async def get(cls,
 		rootPath: str,
 		slug: str,
-		remote: Optional[dict[str, Any]] = None,
-		session: Optional[SessionType] = None) -> Self:
+		remote: dict[str, Any] | None = None,
+		session: SessionType | None = None) -> Self:
 		if remote is None:
 			try:
 				r = await request(session = session, headers = browser_agent,
@@ -594,7 +593,7 @@ class Collection(TodayObject):
 	def __repr__(self) -> str:
 		return f'<Collection "{self.name}", "{self.slug}", "{self.rootPath}">'
 
-	def elements(self, accept: Optional[list[str]] = None) -> list[str]:
+	def elements(self, accept: list[str] | None = None) -> list[str]:
 		accept = accept or ACCEPT
 		result, pattern = [], "|".join(accept)
 		_ = [result.append(i[0]) for i in re.findall(r"[\'\"](http[^\"\']*\.(" + pattern +
@@ -602,9 +601,9 @@ class Collection(TodayObject):
 		return result
 
 	async def getSchedules(self, store: Store, ensure: bool = True,
-		date: Optional[datetime] = None,
-		session: Optional[SessionType] = None,
-		semaphore: Optional[SemaphoreType] = None) -> list[Schedule]:
+		date: datetime | None = None,
+		session: SessionType | None = None,
+		semaphore: SemaphoreType | None = None) -> list[Schedule]:
 		try:
 			async with with_semaphore(semaphore):
 				r = await request(session = session, headers = browser_agent,
@@ -631,14 +630,14 @@ class Collection(TodayObject):
 	async def getMultipleSchedules(self, *,
 		raw_stores: list[Raw_Store] = [],
 		stores: list[Store] = [],
-		date: Optional[datetime] = None, fast: bool = True,
-		session: Optional[SessionType] = None) -> list[Schedule]:
+		date: datetime | None = None, fast: bool = True,
+		session: SessionType | None = None) -> list[Schedule]:
 		return await Course.getMultipleSchedules(self, # type: ignore
 			raw_stores = raw_stores, stores = stores,
 			date = date, fast = fast, session = session)
 
-	async def getCourses(self, rootPath: Optional[str] = None, fast: bool = False,
-		session: Optional[SessionType] = None) -> list[Course]:
+	async def getCourses(self, rootPath: str | None = None, fast: bool = False,
+		session: SessionType | None = None) -> list[Course]:
 		rp = self.rootPath if rootPath is None else rootPath
 		raw_stores = storeReturn(todayNation[rp], opening = True)
 		stores = [Store(store = s, rootPath = rp) for s in raw_stores]
@@ -659,7 +658,7 @@ class Sitemap(TodayObject):
 		matches = re.findall(VALIDDATES, slug)
 		return bool(matches and ValidDates(matches[0][1], self.runtime) != [])
 
-	def __init__(self, rootPath: Optional[str] = None, flag: Optional[str] = None) -> None:
+	def __init__(self, rootPath: str | None = None, flag: str | None = None) -> None:
 		assert rootPath is not None or flag, "rootPath 和 flag 必须提供一个"
 		match rootPath, flag:
 			case _, fl if fl is not None:
@@ -673,7 +672,7 @@ class Sitemap(TodayObject):
 	def __repr__(self) -> str:
 		return f'<Sitemap "{self.urlPath}">'
 
-	async def getURLs(self, session: Optional[SessionType] = None) -> list[str]:
+	async def getURLs(self, session: SessionType | None = None) -> list[str]:
 		try:
 			r = await request(f"https://www.apple.com{self.urlPath}/today/sitemap.xml",
 				session = session, headers = browser_agent, **PARAM)
@@ -700,7 +699,7 @@ class Sitemap(TodayObject):
 		return objects
 
 	async def getObjects(self, extend_schedule: bool = False,
-		session: Optional[SessionType] = None) -> list[Collection | Course | Schedule]:
+		session: SessionType | None = None) -> list[Collection | Course | Schedule]:
 		semaphore = asyncio.Semaphore(SEMAPHORE_LIMIT)
 		async with get_session(session) as session:
 			results = await AsyncGather((getURL(u, session = session, semaphore = semaphore)
@@ -756,8 +755,8 @@ async def generateGraph(stores: list[Store], graph: dict[str, list[str]] = {},
 	return graph
 
 async def getURL(url: str,
-	session: Optional[SessionType] = None,
-	semaphore: Optional[SemaphoreType] = None) -> Collection | Course | Schedule:
+	session: SessionType | None = None,
+	semaphore: SemaphoreType | None = None) -> Collection | Course | Schedule:
 	async with with_semaphore(semaphore):
 		match parseURL(url):
 			case {"type": "schedule", "rootPath": r, "slug": g, "scheduleId": s}:
