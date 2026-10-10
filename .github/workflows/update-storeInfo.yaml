@@ -12,7 +12,7 @@ jobs:
       contents: write
     steps:
       - name: checkout repo content
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: download file
         run: curl --fail -o storeInfo.tmp "${{ secrets.STOREINFO_URL }}" && mv storeInfo.tmp storeInfo.json
       - name: commit files
