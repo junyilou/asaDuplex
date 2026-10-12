@@ -1,5 +1,5 @@
 {
-  "_": "2026-09-25 15:39:46",
+  "_": "2026-10-09 19:56:47",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -2976,8 +2976,8 @@
     "R151": {
       "city": "Southlake",
       "dieter": {
-        "md5": "d6b5d794afba6a6f26873db99c43412f",
-        "modify": "2024-02-08 18:41:35"
+        "md5": "0d1875efacd998bb58e35d027bd0cbf7",
+        "modify": "2026-10-08 20:07:05"
       },
       "events": [
         {
@@ -9959,9 +9959,9 @@
       "flag": "🇮🇳",
       "kiosk": 807137,
       "name": "Kukatpally",
+      "slug": "kukatpally",
       "state": "Telangana",
       "status": "future",
-      "slug": "kukatpally",
       "timezone": "Asia/Kolkata"
     },
     "R792": {
