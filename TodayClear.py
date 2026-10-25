@@ -28,11 +28,11 @@ async def test(func: type[Course] | type[Collection],
 	session: SessionType | None = None) -> bool:
 	semaphore = asyncio.Semaphore(3)
 
-	async def entry(rootPath: str, ses: SessionType) -> Collection | Course | None:
+	async def entry(root_path: str, ses: SessionType) -> Collection | Course | None:
 		try:
 			async with semaphore:
-				logging.debug(f"[测试] {slug=} {rootPath=}")
-				return await func.get(rootPath, slug, session = ses)
+				logging.debug(f"[测试] {slug=} {root_path=}")
+				return await func.get(root_path, slug, session = ses)
 		except Exception:
 			return
 
@@ -65,7 +65,7 @@ class File:
 		...
 
 	async def run(self, session: SessionType | None = None) -> list[str]:
-		...
+		raise NotImplementedError()
 
 	async def main(self, session: SessionType | None = None) -> None:
 		if results := await self.run(session):

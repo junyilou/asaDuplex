@@ -7,10 +7,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from modules.today import (VALIDDATES, Collection, Course, Peers, Schedule,
-                           Sitemap, Store, ValidDates)
-from modules.util import (AsyncGather, SessionType, disMarkdown, session_func,
-                          setLogger, sortOD, tz_text)
+from modules.today import (DATE_FRAGMENT_PATTERN, Collection, Course, peer_stores,
+                           Schedule, Sitemap, Store, date_candidates)
+from modules.util import (AsyncGather, SessionType, disMarkdown,
+                          session_func, setLogger, sortOD, tz_text)
 from storeInfo import storeReturn
 
 DEFAULT_FLAGS = ["🇨🇳", "🇭🇰", "🇲🇴", "🇹🇼"]
@@ -32,9 +32,7 @@ def generate_course(course: Course, schedules: list[Schedule] = [],
 	store_counter = Counter(s.raw_store for s in schedules)
 	flag_counter = Counter(r.flag for r in store_counter)
 	flag_result = sorted(flag_counter.items(), key = lambda x: prior.index(x[0]))
-	if course.virtual:
-		stores_text = "线上活动"
-	elif not schedules:
+	if not schedules:
 		stores_text = "Apple Store 零售店"
 	elif len(store_counter) == 1:
 		stores_text = str(schedules[0].raw_store)
@@ -53,15 +51,15 @@ def generate_course(course: Course, schedules: list[Schedule] = [],
 		earliest_schedule = schedules[0]
 		link_schedule = min(schedules, key = lambda s: prior.index(s.flag))
 		timing = "{START} – {END} {TZTEXT}".format(
-			START = earliest_schedule.datetimeStart(form = "%-m 月 %-d 日 %-H:%M"),
-			END = earliest_schedule.datetimeEnd(form = "%-H:%M"),
-			TZTEXT = tz_text(earliest_schedule.timeStart))
+			START = earliest_schedule.format_start(form = "%-m 月 %-d 日 %-H:%M"),
+			END = earliest_schedule.format_end(form = "%-H:%M"),
+			TZTEXT = tz_text(earliest_schedule.start_time))
 		keyboard = [[["预约课程", link_schedule.url]]]
 	else:
 		from re import findall
 		try:
-			date = findall(VALIDDATES, course.slug)[0][1]
-			assert (vals := ValidDates(date, datetime.now()))
+			date = findall(DATE_FRAGMENT_PATTERN, course.slug)[0][1]
+			assert (vals := date_candidates(date, datetime.now()))
 			timing = f" 或 ".join(i.strftime("%Y 年 %-m 月 %-d 日") for i in vals)
 		except Exception:
 			timing = "无法确定课程时间"
@@ -86,10 +84,10 @@ async def entry(saved: dict[str, Any], mode: str,
 
 	match mode:
 		case "today":
-			stores = Peers(storeReturn(flags, opening = True), fast = True)
-			tasks = [Store(store = store).getSchedules(ensure = False, session = session) for store in stores]
+			stores = peer_stores(storeReturn(flags, opening = True), fast = True)
+			tasks = [Store(store = store).get_schedules(ensure = False, session = session) for store in stores]
 		case "sitemap":
-			tasks = [Sitemap(flag = flag).getObjects(extend_schedule = True, session = session) for flag in flags]
+			tasks = [Sitemap(flag = flag).get_objects(extend_schedule = True, session = session) for flag in flags]
 		case _:
 			return
 	gathered = await AsyncGather(tasks, return_exceptions = True)
