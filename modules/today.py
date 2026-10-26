@@ -6,13 +6,15 @@ from collections.abc import Iterable, Mapping, MutableMapping, Sequence
 from datetime import date, datetime
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, ClassVar, Final, Literal, Required, Self, TypedDict, cast
+from typing import (Any, ClassVar, Final, Literal,
+                    Required, Self, TypedDict, cast)
 from urllib.parse import parse_qs, urlparse
 from zoneinfo import ZoneInfo
 
 from modules.regions import Regions
-from modules.util import (AsyncGather, CoroutineType, SemaphoreType, SessionType,
-	browser_agent, get_session, request, with_semaphore)
+from modules.util import (AsyncGather, CoroutineType, SemaphoreType,
+                          SessionType, browser_agent, get_session,
+                          request, with_semaphore)
 from storeInfo import Store as RawStore
 from storeInfo import getStore as get_raw_store
 from storeInfo import storeReturn

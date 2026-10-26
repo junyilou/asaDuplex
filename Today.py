@@ -7,8 +7,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from modules.today import (DATE_FRAGMENT_PATTERN, Collection, Course, peer_stores,
-                           Schedule, Sitemap, Store, date_candidates)
+from modules.today import (DATE_FRAGMENT_PATTERN, Collection, Course, Schedule,
+                           Sitemap, Store, date_candidates, peer_stores)
 from modules.util import (AsyncGather, SessionType, disMarkdown,
                           session_func, setLogger, sortOD, tz_text)
 from storeInfo import storeReturn
