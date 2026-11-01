@@ -1,6 +1,6 @@
 import json
 import re
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
@@ -8,7 +8,8 @@ from typing import Any, Required, TypedDict
 from zoneinfo import ZoneInfo
 
 from modules.regions import Regions
-from modules.util import SessionType
+lazy from graphql import APOLLO_HEADERS, ENDPOINT, cleanup, generate_params
+lazy from modules.util import SessionType, browser_agent, request
 
 DEFAULTFILE = Path(__file__).with_suffix(".json")
 type StoreMapping = Callable[[Store], Any]
@@ -104,7 +105,7 @@ class Store:
 	def __str__(self) -> str:
 		return format(self)
 
-	def __format__(self, __format_spec: str) -> str:
+	def __format__(self, /, __format_spec: str) -> str:
 		presets = {"": "Apple %name",
 			"plain": "Apple %name (%rid)",
 			"full": "%flag Apple %name (%rid)",
@@ -153,9 +154,6 @@ class Store:
 	async def detail(self, session: SessionType | None = None) -> dict[str, Any]:
 		assert self.slug, "slug must be provided"
 
-		from graphql import APOLLO_HEADERS, ENDPOINT, cleanup, generate_params
-		from modules.util import browser_agent, request
-
 		params = generate_params("StoreDetails", {"localeId": self.region.locale, "slug": self.slug})
 		r = await request(ENDPOINT + params, session, mode = "json",
 			headers = APOLLO_HEADERS | browser_agent | {"referer": self.url})
@@ -202,12 +200,12 @@ def getStore(sid: int | str) -> Store | None:
 			pass
 
 def nameReplace(rstores: list[Store], bold: bool = False, number: bool = True,
-	levels: list[str] = ["flag", "state", "city"],
+	levels: Sequence[str] = ("flag", "state", "city"),
 	final: Callable[[Store], str] = str,
-	userLang: bool | None | list[bool | None] = [None]) -> list[str]:
+	userLang: bool | None | Sequence[bool | None] = [None]) -> list[str]:
 	stores, results = set(rstores), []
 	boldmark = "*" if bold else ""
-	userLang = [userLang] if not isinstance(userLang, list) else userLang
+	userLang = [userLang] if not isinstance(userLang, Sequence) else userLang
 
 	for store in stores:
 		for level in levels:
