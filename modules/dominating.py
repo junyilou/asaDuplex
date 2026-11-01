@@ -4,7 +4,7 @@ from math import asin, cos, radians, sin, sqrt
 from operator import itemgetter
 from random import choice
 
-from storeInfo import Store
+lazy from storeInfo import Store
 
 
 def haversine(lon1: float, lat1: float, lon2: float, lat2: float) -> float:
@@ -31,10 +31,10 @@ def get_dominating_set[T](G: dict[T, list[T]], start_with: T) -> set[T]:
 		remaining_nodes -= undominated_nbrs
 	return dominating_set
 
-type longitude = float
-type latitude = float
+type Longitude = float
+type Latitude = float
 
-def calculate(stores: list[Store], geo_table: dict[str, tuple[longitude, latitude]],
+def calculate(stores: list[Store], geo_table: dict[str, tuple[Longitude, Latitude]],
 	coverage: int = 12, max_distance: float = 1000) -> dict[str, list[str]]:
 	results = {}
 	geo = {flag: {i.rid: geo_table[i.rid] for i in grouped}

@@ -8,6 +8,7 @@ from pathlib import Path
 from modules.regions import Regions
 from modules.today import Collection, Course
 from modules.util import SessionType, get_session, session_func, setLogger
+lazy from FindASession import state_lock, write_json_atomic
 
 FLAGS = [flag for flag, region in Regions.items() if region.url_taa is not None]
 
@@ -64,6 +65,9 @@ class File:
 	def pre_write(self) -> None:
 		...
 
+	def write(self) -> None:
+		self.path.write_text(json.dumps(self.fp, indent = 2, ensure_ascii = False))
+
 	async def run(self, session: SessionType | None = None) -> list[str]:
 		raise NotImplementedError()
 
@@ -75,7 +79,7 @@ class File:
 				logging.info(f"[删除] {result}")
 			logging.info(f"[写入文件] {self.path}")
 			self.pre_write()
-			self.path.write_text(json.dumps(self.fp, indent = 2, ensure_ascii = False))
+			self.write()
 			return
 		logging.info("[无删除]")
 
@@ -127,6 +131,14 @@ class FindASessionFile(File):
 
 	def pre_write(self) -> None:
 		self.fp["update"] = datetime.now(UTC).strftime("%F %T GMT")
+
+	def write(self) -> None:
+		write_json_atomic(self.path, self.fp)
+
+	async def main(self, session: SessionType | None = None) -> None:
+		with state_lock(blocking = True):
+			self.fp = json.loads(self.path.read_text())
+			await super().main(session)
 
 	async def entry(self, func: type[Course] | type[Collection],
 		key: str, session: SessionType) -> str | None:

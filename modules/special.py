@@ -1,12 +1,12 @@
-from collections.abc import Generator, Iterable, Mapping
+from collections.abc import Generator, Mapping, Sequence
 from datetime import datetime, timedelta
 from typing import Any, Literal
 
 from tenacity import AsyncRetrying, stop_after_attempt, wait_random
 
 from modules.store import FulfillmentMessage, Product
-from modules.util import SessionType
 from storeInfo import Store
+lazy from modules.util import SessionType
 
 dayOfWeek = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 
@@ -30,7 +30,7 @@ def ignored(converted: dict[str, str], rules: dict[str, str]) -> Generator[tuple
 		yield date, data
 
 async def base_comment(store: Store,
-	accepted_dates: Iterable[str],
+	accepted_dates: Sequence[str],
 	force_return: bool,
 	results_dict: dict[str, dict[str, str]],
 	timeout: int, session: SessionType | None) -> dict[str, dict[str, str]]:
@@ -57,7 +57,7 @@ async def base_comment(store: Store,
 			try:
 				raw = raw.replace(year = datetime.now().year)
 				assert raw > datetime.now() - timedelta(weeks = 1)
-			except:
+			except Exception:
 				raw = raw.replace(year = raw.year + 1)
 			date_str = raw.strftime("%F")
 			if accepted_dates and date_str not in accepted_dates:
@@ -67,7 +67,7 @@ async def base_comment(store: Store,
 	return results_dict
 
 async def comment(store: Store,
-	accepted_dates: Iterable[str] = [],
+	accepted_dates: Sequence[str] = [],
 	force_return: bool = False,
 	results_dict: dict[str, dict[str, str]] = {},
 	session: SessionType | None = None,
@@ -103,19 +103,19 @@ async def special(store: Store, *,
 	comments, results, asked = {}, {}, []
 	regular = {dayOfWeek.index(h["dayOfWeek"]): convert(h["time"]) for h in detail["hoursData"]}
 	converted = {d["date"]: convert(d["time"], lang = False) for d in detail["specialHours"]}
-	for date, converted in ignored(converted, rules = rules):
+	for date, cvt in ignored(converted, rules = rules):
 		d = datetime.strptime(date, "%Y-%m-%d")
 		if date < f"{threshold:%F}":
 			continue
 		reg = regular[d.weekday()]
-		if ignore_same and reg == converted:
+		if ignore_same and reg == cvt:
 			continue
 		try:
 			assert ask_comment
 			assert store.rid not in comments
 			assert store.rid not in asked
 			comments = await comment(store, results_dict = comments, session = session)
-		except:
+		except Exception:
 			pass
 		finally:
 			asked.append(store.rid)

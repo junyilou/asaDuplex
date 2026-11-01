@@ -1,7 +1,6 @@
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
 
 
 @dataclass(order = True, slots = True, frozen = True)
@@ -13,12 +12,12 @@ class Region:
 	name: str
 	name_alt: list[str] = field(hash = False)
 	name_eng: str
-	part_sample: Optional[str]
+	part_sample: str | None
 	post_location: str
-	url_app: Optional[str]
+	url_app: str | None
 	url_retail: str
-	url_store: Optional[str]
-	url_taa: Optional[str]
+	url_store: str | None
+	url_taa: str | None
 
 	def __repr__(self) -> str:
 		return f"<{self.__class__.__name__} {self.abbr}: {self.name}>"

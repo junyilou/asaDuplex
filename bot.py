@@ -2,7 +2,7 @@ import logging
 from os import environ
 from typing import Any
 
-from modules.util import SessionType
+lazy from modules.util import SessionType
 
 chat_ids = int(environ["BOTPOST_CHAT_ID"]),
 

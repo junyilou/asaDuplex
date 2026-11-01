@@ -17,8 +17,8 @@ from tenacity import (AsyncRetrying, RetryCallState,
 
 from bot import async_post, chat_ids
 from modules.regions import Region, Regions
-from modules.util import (AsyncGather, SessionType, browser_agent, disMarkdown,
-                          get_session, session_func)
+from modules.util import (AsyncGather, SessionType, browser_agent,
+                          disMarkdown, get_session, session_func)
 
 RETAIL_FILTER  = {"teams":[{"team":"teamsAndSubTeams-APPST","subTeam":"subTeam-ARSS"},
 	{"team":"teamsAndSubTeams-APPST","subTeam":"subTeam-ARSCS"},
@@ -119,7 +119,7 @@ class Position:
 		locale = self.region.locale.replace("_", "-").lower()
 		return f"https://jobs.apple.com/{locale}/details/{self.id}/{self.slug}"
 
-@dataclass
+@dataclass(order = True)
 class RichPosition(Position):
 	update: str
 	title: str
