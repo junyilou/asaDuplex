@@ -71,4 +71,4 @@ from bot import async_post, chat_ids
 
 2024 年 6 月：使用 GitHub Actions 自动化 Jobs at Apple 和 Today at Apple。[[commit1]](https://github.com/junyilou/asaDuplex/commit/18f9bb670f4de4809f927fb105b6f2b462f7391a) [[commit2]](https://github.com/junyilou/asaDuplex/commit/515eb0540610ccc509b9a422e863013befd5af80)
 
-2026 年 10 月：uv 管理、ty 和 ruff 检查，并适配了 Python 3.15 的部分特性.
+2026 年 10 月：uv 管理、ty 和 ruff 检查，并适配了 Python 3.15 的部分特性。[[commit1]](https://github.com/junyilou/asaDuplex/commit/1e4b5db21120c60e0b7e130a18988f5562db8c03) [[commit2]](https://github.com/junyilou/asaDuplex/commit/b83f78e98a956e30799560ccc9c515b379895392)
