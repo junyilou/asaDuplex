@@ -1,0 +1,22 @@
+[project]
+name = "asaDuplex"
+version = "2026.11"
+description = "All things Apple Retail Store"
+authors = [
+    { name = "Junyi Lou", email = "15688661+junyilou@users.noreply.github.com" }
+]
+requires-python = ">=3.15"
+dependencies = [
+    "aiohttp>=3.14.5",
+    "tenacity>=9.2.1",
+    "tqdm>=4.70.1",
+]
+
+[tool.isort]
+balanced_wrapping = true
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["F401"]

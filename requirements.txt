@@ -1,5 +1,0 @@
-aiohttp
-tenacity
-tqdm
-Pillow
-beautifulsoup4
