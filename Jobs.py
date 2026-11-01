@@ -108,7 +108,7 @@ class FileDict(TypedDict):
 	update: str
 	regions: dict[str, RegionDict]
 
-@dataclass(order = True)
+@dataclass
 class Position:
 	id: str
 	slug: str = field(repr = False)
@@ -119,7 +119,7 @@ class Position:
 		locale = self.region.locale.replace("_", "-").lower()
 		return f"https://jobs.apple.com/{locale}/details/{self.id}/{self.slug}"
 
-@dataclass(order = True)
+@dataclass
 class RichPosition(Position):
 	update: str
 	title: str
@@ -317,7 +317,7 @@ async def entry(flags: list[str], states: list[str], session: SessionType) -> No
 		l.states_to_run = [i for i in states if i in l.states_to_run]
 	await AsyncGather((locale.main(session) for locale in locales), limit = 3)
 	arrival = sorted(((store, locale.position) for locale in locales
-		for store in locale.new_stores if locale.position), key = lambda t: t[1])
+		for store in locale.new_stores if locale.position), key = lambda t: (t[1].id, t[1].slug))
 	if arrival and not args.local:
 		logger.info(f"[推送通知] {len(arrival)} 家新零售店")
 		title = ["\\#新店新机遇", "已开始招聘", ""]
