@@ -2,12 +2,13 @@ import asyncio
 import logging
 import re
 from dataclasses import dataclass, field
-from typing import Any, Literal, Optional, Self, cast
+from typing import Any, Literal, Self, cast
 
 from modules.regions import Region, RegionList
 from modules.util import (SemaphoreType, SessionType, browser_agent,
                           disMarkdown, request, with_semaphore)
 from storeInfo import Store, storeReturn
+lazy from modules.shld import ShldState, work
 
 BASE_RULE = r"[BDFGHMNPS][0-9A-Z]{3}[0-9]"
 RICH_RULE = r"[0-9A-Z]{5}[A-Z]{1,2}/[A-Z]"
@@ -17,8 +18,8 @@ COMP_RULE = r"([BDFGHMNPS][0-9A-Z]{3}[0-9]([A-Z]{1,2}/[A-Z])?)"
 class Product:
 	partno: str
 	region: Region
-	title: Optional[str] = field(default = None, compare = False)
-	html: Optional[str] = field(default = None, compare = False, repr = False)
+	title: str | None = field(default = None, compare = False)
+	html: str | None = field(default = None, compare = False, repr = False)
 	aos_data: dict[str, dict[str, Any]] = field(default_factory = dict,
 		compare = False, repr = False, hash = False)
 	status: int = field(default = 404, compare = False, init = False, repr = False)
@@ -32,15 +33,15 @@ class Product:
 		return f"<Product {self.region.flag} {self.partno}: {self.title or self.DEFAULT_TITLE}>"
 
 	@staticmethod
-	def from_url(url: str) -> "Product":
-		rule = fr"apple.com([\./][^/]*?)/shop/product/{COMP_RULE}"
-		host, part, _ = re.findall(rule, url)[0]
+	def from_url(url: str) -> Product:
+		URL_RULE = fr"apple.com([\./][^/]*?)/shop/product/{COMP_RULE}"
+		host, part, _ = re.findall(URL_RULE, url)[0]
 		region = next(i for i in RegionList if i.url_store == host)
 		return Product(part, region)
 
 	@property
 	def url(self) -> str:
-		return f"https://www.apple.com{self.region.url_store}/shop/product/{self.partno}"
+		return f"https://www.apple.com{self.region.url_store or ''}/shop/product/{self.partno}"
 
 	@property
 	def base_partno(self) -> str:
@@ -56,15 +57,15 @@ class Product:
 
 	async def get_rich_partno(self,
 		utilize_html: bool = True,
-		session: Optional[SessionType] = None,
-		semaphore: Optional[SemaphoreType] = None) -> Optional[str]:
+		session: SessionType | None = None,
+		semaphore: SemaphoreType | None = None) -> str | None:
 		try:
 			async with with_semaphore(semaphore):
 				url = self.url.replace(self.partno, self.base_partno)
 				r = await request(url, session, "HEAD", headers = browser_agent,
 					mode = ["status", "head"], allow_redirects = False)
 			self.status = r["status"]
-			assert 200 < self.status < 400
+			assert self.status > 200 and self.status < 400
 			self.partno = re.findall(RICH_RULE, r["head"]["Location"])[0]
 			self.__post_init__()
 			return self.partno
@@ -82,73 +83,80 @@ class Product:
 		except Exception:
 			pass
 
-	async def get_image_url(self, session: Optional[SessionType] = None) -> Optional[list[str]]:
+	async def get_image_url(self, session: SessionType | None = None) -> list[str] | None:
 		from bs4 import BeautifulSoup, Tag
 
 		try:
 			self.html = self.html or await self.get_html(session)
 			assert self.html
 			bs = BeautifulSoup(self.html, features = "lxml")
-		except:
+		except Exception:
 			return
 		try:
 			div = bs.find_all("div", class_ = "rf-pdp-inline-gallery-thumbnav-item")
-			return [cast(str, cast(Tag, cast(Tag, d).a).get("href")).split("?")[0] for d in div]
-		except:
+			return [cast(str, cast(Tag, d.a).get("href")).split("?")[0] for d in div]
+		except Exception:
 			pass
 		try:
 			meta: Any = bs.find("meta", property = "og:image")
 			content = meta.get("content").split("?")[0]
 			return [content]
-		except:
+		except Exception:
 			pass
 
-	async def get_title(self, session: Optional[SessionType] = None) -> Optional[tuple[str, Literal["aos", "og"]]]:
+	async def get_title(self, session: SessionType | None = None,
+		set_if_og_only: bool = True) -> tuple[str, Literal["aos", "og"]] | None:
 		try:
 			await self.get_aos_title(ensure = False, session = session)
 			assert isinstance(self.title, str)
 			return self.title, "aos"
-		except:
+		except Exception:
 			pass
 		try:
 			title = await self.get_og_title(session)
 			assert isinstance(title, str)
+			if set_if_og_only:
+				self.title = title
 			return title, "og"
-		except:
+		except Exception:
 			pass
 
-	async def get_html(self, session: Optional[SessionType] = None) -> Optional[str]:
+	async def get_html(self, session: SessionType | None = None) -> str | None:
 		try:
 			self.html = await request(self.url, session, headers = browser_agent, raise_for_status = True)
-		except:
+		except Exception:
 			pass
 		return self.html
 
-	async def get_og_title(self, session: Optional[SessionType] = None) -> Optional[str]:
+	async def get_og_title(self, session: SessionType | None = None) -> str | None:
 		from bs4 import BeautifulSoup
 		try:
 			self.html = self.html or await self.get_html(session)
 			assert self.html
 			bs = BeautifulSoup(self.html, features = "lxml")
-		except:
+		except Exception:
 			return
 		title = None
 		try:
-			meta: Any = bs.find("meta", property = "og:title")
-			if t := meta.get("content"):
+			input: Any = bs.find("input", class_ = "form-textbox-input")
+			if t := input.get("value"):
 				title = t
-		except:
-			pass
-		try:
-			tag: Any = bs.title
-			if t := tag.text:
-				title = t
-		except:
-			pass
+		except Exception:
+			try:
+				meta: Any = bs.find("meta", property = "og:title")
+				if t := meta.get("content"):
+					title = t
+			except Exception:
+				try:
+					tag: Any = bs.title
+					if t := tag.text:
+						title = t
+				except Exception:
+					pass
 		if title:
-			return re.sub(r" *- Apple ?([(（]\S+[)）])?$", "", title).translate({0xa0: 0x20})
+			return re.sub(r" *\- Apple ?([(（]\S+[)）])?$", "", title).translate({0xa0: 0x20})
 
-	async def get_aos_title(self, ensure: bool = True, session: Optional[SessionType] = None) -> Self:
+	async def get_aos_title(self, ensure: bool = True, session: SessionType | None = None) -> Self:
 		if not self.aos_data:
 			await FulfillmentMessage(self, store = None, search_nearby = False, session = session, ensure = ensure)
 		if self.aos_data:
@@ -159,33 +167,49 @@ class Product:
 			self.title = t.translate({0xa0: 0x20})
 		return self
 
+
 async def FulfillmentMessage(
 	products: Product | list[Product],
-	store: Optional[Store] = None,
+	store: Store | None = None,
 	search_nearby: bool = False, timeout: int = 5,
-	session: Optional[SessionType] = None, ensure: bool = True) -> list[Product]:
+	session: SessionType | None = None, ensure: bool = True) -> list[Product]:
 	products = [products] if isinstance(products, Product) else products
 	if store is None:
 		store = storeReturn(products[0].region.flag, opening = 1)[0]
-	url = f"https://www.apple.com{store.region.url_store}/shop/fulfillment-messages"
 	params = {"searchNearby": str(search_nearby).lower(), "store": store.rid}
 	for p in products:
 		await p.get_rich_partno(session = session)
-	for ind, prod in enumerate(p for p in products if p.rich):
-		params[f"parts.{ind}"] = prod.partno
+	params |= {f"parts.{ind}": p.partno for ind, p in
+		enumerate(p for p in products if p.rich)}
 	if len(params) == 2:
 		if not ensure:
 			raise ValueError("产品部件号码均不完整")
 		return products
-	r = await request(url, session, params = params, mode = "json",
-		headers = browser_agent, retry = 3, timeout = timeout)
+
+	url = f"https://www.apple.com{store.region.url_store or ''}/shop/fulfillment-messages"
+
+	async def query(state: ShldState) -> dict[str, Any]:
+		headers = {k.lower(): v for k, v in (browser_agent | state.headers).items()}
+		headers["referer"] = products[0].url
+		return await request(url, session, mode = "json", headers = headers,
+			timeout = timeout, cookies = state.cookies, params = params,
+			raise_for_status = True)
+
+	state = await work(force = False)
+	try:
+		r = await query(state)
+	except Exception as exp:
+		if getattr(exp, "status", None) != 541:
+			raise
+		r = await query(await work(force = True))
+
 	body = r["body"]["content"]["pickupMessage"]
 	for p in products:
 		p.aos_data.update({s["storeNumber"]: s for s in body.get("stores", [])})
 	return products
 
 async def GenerateImage(urls: list[str], alpha: bool = False,
-	session: Optional[SessionType] = None) -> Optional[bytes]:
+	session: SessionType | None = None) -> bytes | None:
 	from io import BytesIO
 
 	from PIL import Image
