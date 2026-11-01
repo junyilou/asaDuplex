@@ -28,6 +28,7 @@ GRAPH: dict[str, list[str]] = {}
 LEADERBOARD: dict[str, int] = {}
 
 ROOT_TO_FLAG: dict[str, str] = {v.url_taa: k for k, v in Regions.items() if v.url_taa is not None}
+RETAIL = Path(__file__).resolve().parents[1] / "Retail"
 
 type JSONDict = dict[str, Any]
 type VideoMap = dict[str, dict[str, Any]]
@@ -194,11 +195,11 @@ class APIClass:
 
 API = APIClass(["https:", "", "www.apple.com", "today-bff"])
 
-def generate_leaderboard(db_filename: str) -> dict[int, list[str]]:
+def generate_leaderboard(db_filename: Path) -> dict[int, list[str]]:
 	import math
 
 	from modules.michael import Store as MSStore
-	from modules.michael import loads
+	from modules.michael import parse_stores
 
 	def calculate_bonus(store: MSStore) -> int:
 		bonus = 0
@@ -218,8 +219,8 @@ def generate_leaderboard(db_filename: str) -> dict[int, list[str]]:
 				bonus += 2 * len(val.split(","))
 		return bonus
 
-	with open(db_filename) as r:
-		db = loads(json.load(r))
+	with db_filename.open() as r:
+		db = parse_stores(json.load(r))
 	for rid, store in db.items():
 		LEADERBOARD[f"R{rid}"] = calculate_bonus(store)
 	return {point: sorted(k for k, v in LEADERBOARD.items() if v == point)
@@ -228,7 +229,7 @@ def generate_leaderboard(db_filename: str) -> dict[int, list[str]]:
 @lru_cache(maxsize = 1)
 def known_slugs() -> frozenset[str]:
 	try:
-		with open("Retail/assured-events.json") as r:
+		with (RETAIL / "assured-events.json").open() as r:
 			assure = json.load(r)
 		return frozenset(assure.values())
 	except FileNotFoundError:
@@ -251,7 +252,7 @@ def parse_resolution(vids: Sequence[str], direction: Literal["l", "p"] | None = 
 def load_graph() -> dict[str, list[str]]:
 	if not GRAPH:
 		try:
-			with open("Retail/taa-graph.json") as r:
+			with (RETAIL / "taa-graph.json").open() as r:
 				GRAPH.update(json.load(r))
 		except Exception:
 			pass
@@ -260,7 +261,7 @@ def load_graph() -> dict[str, list[str]]:
 def load_leaderboard() -> None:
 	if not LEADERBOARD:
 		try:
-			generate_leaderboard("Retail/facades.json")
+			generate_leaderboard(RETAIL / "facades.json")
 		except Exception:
 			pass
 
@@ -1179,7 +1180,7 @@ async def generate_graph(stores: list[Store], graph: dict[str, list[str]] | None
 	for store in stores:
 		graph[store.sid] = []
 	payload = json.dumps(graph, ensure_ascii = False, indent = 2, sort_keys = True)
-	await asyncio.to_thread(Path("Retail/taa-graph.json").write_text, payload)
+	await asyncio.to_thread((RETAIL / "taa-graph.json").write_text, payload)
 	return graph
 
 async def get_url(url: str,
