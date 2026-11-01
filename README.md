@@ -26,12 +26,11 @@
 
 代码使用了最高至 Python 3.15 的语法和特性，**必须使用 Python 3.15 版本才可完整运行**
 
-所有网络请求均使用异步网络 I/O: [aiohttp](https://github.com/aio-libs/aiohttp) 发送，可通过 pip 安装：
+项目使用 `uv` 进行管理，参照 `uv` 官方提供的安装方法，并执行
 
+```bash
+uv sync
 ```
-pip install -r requirements.txt
-```
-
 
 
 ### Webhooks
@@ -71,3 +70,5 @@ from bot import async_post, chat_ids
 2023 年 11 月：重写了核心网络请求函数，并适配了 Python 3.12 的部分特性。[[commit1]](https://github.com/junyilou/asaDuplex/commit/3d256965e798e501563120b3133b40883745945d) [[commit2]](https://github.com/junyilou/asaDuplex/commit/26c479a1c2b61bea518893b0f20d82ba18158e3e)
 
 2024 年 6 月：使用 GitHub Actions 自动化 Jobs at Apple 和 Today at Apple。[[commit1]](https://github.com/junyilou/asaDuplex/commit/18f9bb670f4de4809f927fb105b6f2b462f7391a) [[commit2]](https://github.com/junyilou/asaDuplex/commit/515eb0540610ccc509b9a422e863013befd5af80)
+
+2026 年 10 月：uv 管理、ty 和 ruff 检查，并适配了 Python 3.15 的部分特性.

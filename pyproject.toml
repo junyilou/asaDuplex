@@ -14,6 +14,7 @@ dependencies = [
 
 [tool.isort]
 balanced_wrapping = true
+known_first_party = ["FindASession"]
 
 [tool.ruff]
 line-length = 120
