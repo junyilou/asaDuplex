@@ -1,11 +1,11 @@
 import asyncio
 import json
 import logging
-from collections.abc import AsyncGenerator, Callable, Coroutine, Iterable
+from collections.abc import (AsyncGenerator, Callable, Coroutine,
+                             Iterable, Mapping, Sequence)
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
-from typing import Any, Concatenate, Literal, cast, overload
-from collections.abc import Mapping
+from typing import Any, Concatenate, Literal, overload
 
 import aiohttp
 from tenacity import AsyncRetrying, stop_after_attempt, wait_fixed
@@ -74,7 +74,6 @@ async def AsyncGather[T](*coros: CoroutineType[T] | Iterable[CoroutineType[T]],
 async def _base_request(session: SessionType, url: str, method: str, modes: set[str], **kwargs) -> Any:
 	results = {}
 	async with session.request(url = url, method = method, **kwargs) as resp:
-		resp = cast(aiohttp.ClientResponse, resp)
 		for m in modes:
 			d = ("head" if method == "HEAD" else "text") if m == "default" else m
 			if d == "text":
@@ -93,13 +92,6 @@ async def _base_request(session: SessionType, url: str, method: str, modes: set[
 	if len(modes) == 1:
 		return results[modes.pop()]
 	return results
-
-def bitsize(integer: int | float, width: int = 8, precision: int = 2, ks: float = 1e3) -> str:
-	unit, order = 0, ("B", "KB", "MB", "GB", "TB")
-	while integer > ks and unit < len(order) - 1:
-		integer /= ks
-		unit += 1
-	return f"{integer:{width}.{precision}f} {order[unit]:<2}"
 
 def disMarkdown(text: str, *, wrap: str = "", extra: str = "", remove: str = "") -> str:
 	signs = "\\|_{}[]()#@+-.!=<>~`" + extra
@@ -170,41 +162,20 @@ def setLogger(
 		format = '[%(process)d %(asctime)s %(name)s %(levelname)s] %(message)s',
 		level = level, datefmt = '%T')
 
-def sortOD[K, V](od: Mapping[K, V],
-	reverse: list[bool] = [False],
-	key: Callable[..., Any] | None = None,
-	level: int = 0) -> dict[K, V]:
-	res = {}
-	for k, v in sorted(od.items(), reverse = reverse[min(level, len(reverse) - 1)], key = key):
+def sortOD[K, V](od: Mapping[K, V], reverse: Sequence[bool] = (False,),
+	key: Callable[[tuple[K, V]], Any] | None = None, level: int = 0) -> dict[K, V]:
+	res: dict[K, V] = {}
+	rev = reverse[min(level, len(reverse) - 1)]
+	sorted_items = sorted(od.items(), reverse=rev, key=key)
+	for k, v in sorted_items:
 		match v:
-			case dict():
-				res[k] = sortOD(v, reverse = reverse, key = key, level = level + 1)
+			case Mapping():
+				res[k] = sortOD(v, reverse=reverse, key=key, level=level + 1)  # type: ignore
 			case list():
-				res[k] = sorted(v)
+				res[k] = sorted(v)  # type: ignore
 			case _:
 				res[k] = v
 	return res
-
-def time_delta(*,
-	seconds: float = 0,
-	dt1: datetime = datetime.min,
-	dt2: datetime = datetime.min,
-	items: int | None = None,
-	empty: str = "") -> str:
-	ans, base = [], 1
-	comp = ((60, "秒"), (60, "分钟"), (24, "小时"), (7, "天"), (0, "周"))
-	s = int(abs(seconds or (dt2 - dt1).total_seconds()))
-	if not s:
-		return empty
-	items = items or len(comp)
-	for carry, desc in comp:
-		if c := s // base:
-			if (l := f"{c % carry if carry else c:.0f}") != "0":
-				ans.append(f"{l} {desc}")
-		base *= carry
-		if s < base:
-			break
-	return " ".join(ans[-1:-1-items:-1])
 
 def tz_text(dtime: datetime) -> str:
 	delta = (dtime.utcoffset() or timedelta()).total_seconds() / 3600
