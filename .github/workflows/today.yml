@@ -1,0 +1,60 @@
+name: Today at Apple
+
+on:
+  schedule:
+    - cron: '0 1 * * 1,5'   # Normal
+    - cron: '0 7 * * *'     # Sitemap Personal
+    - cron: '0 8 * * *'     # Sitemap
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 运行模式
+        type: choice
+        options: [normal, sitemap-personal, sitemap]
+        default: normal
+
+concurrency:
+  group: today-at-apple
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v7
+      - name: setup python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.15'
+      - name: setup uv
+        uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          enable-cache: true
+      - name: resolve mode
+        id: mode
+        run: |
+          case "${{ github.event.schedule }}" in
+            "0 1 * * 1,5") mode="normal" ;;
+            "0 7 * * *")   mode="sitemap-personal" ;;
+            "0 8 * * *")   mode="sitemap" ;;
+            *)             mode="${{ inputs.mode }}" ;;
+          esac
+          case "$mode" in
+            normal)           args=""       ; msg="auto: Today at Apple" ;;
+            sitemap-personal) args="-s 🇯🇵" ; msg="auto: Today at Apple [Sitemap Personal]" ;;
+            sitemap)          args="-s"     ; msg="auto: Today at Apple [Sitemap]" ;;
+          esac
+          [ -n "$mode" ] || { echo "cannot resolve mode"; exit 1; }
+          { echo "mode=$mode"; echo "args=$args"; echo "msg=$msg"; } >> "$GITHUB_OUTPUT"
+      - name: execute py script
+        env:
+          BOTPOST_API: ${{ secrets.BOTPOST_API }}
+          BOTPOST_CHAT_ID: ${{ secrets.BOTPOST_CHAT_ID }}
+        run: uv run --frozen python Today.py -d ${{ steps.mode.outputs.args }}
+      - name: commit files
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          commit_message: ${{ steps.mode.outputs.msg }}

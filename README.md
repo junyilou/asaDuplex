@@ -1,7 +1,7 @@
 # asaDuplex
 ![Python 3.15](https://img.shields.io/badge/python-3.15-blue.svg)
 [![Jobs at Apple](https://github.com/junyilou/asaDuplex/actions/workflows/jobs-global.yml/badge.svg)](https://github.com/junyilou/asaDuplex/actions/workflows/jobs-global.yml)
-[![Today at Apple](https://github.com/junyilou/asaDuplex/actions/workflows/today-normal.yml/badge.svg)](https://github.com/junyilou/asaDuplex/actions/workflows/today-normal.yml)
+[![Today at Apple](https://github.com/junyilou/asaDuplex/actions/workflows/today.yml/badge.svg)](https://github.com/junyilou/asaDuplex/actions/workflows/today.yml)
 
 ![bot](Retail/bot.jpg)
 
