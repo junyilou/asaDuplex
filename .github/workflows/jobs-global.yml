@@ -1,8 +1,6 @@
 name: Jobs at Apple [Global]
 
 on:
-  schedule:
-    - cron: '0 18 * * 2,4'
   workflow_dispatch:
 
 jobs:

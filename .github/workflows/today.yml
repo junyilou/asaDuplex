@@ -1,10 +1,6 @@
 name: Today at Apple
 
 on:
-  schedule:
-    - cron: '0 1 * * 1,5'   # Normal
-    - cron: '0 7 * * *'     # Sitemap Personal
-    - cron: '0 8 * * *'     # Sitemap
   workflow_dispatch:
     inputs:
       mode:
@@ -36,19 +32,13 @@ jobs:
       - name: resolve mode
         id: mode
         run: |
-          case "${{ github.event.schedule }}" in
-            "0 1 * * 1,5") mode="normal" ;;
-            "0 7 * * *")   mode="sitemap-personal" ;;
-            "0 8 * * *")   mode="sitemap" ;;
-            *)             mode="${{ inputs.mode }}" ;;
-          esac
-          case "$mode" in
+          case "${{ inputs.mode }}" in
             normal)           args=""       ; msg="auto: Today at Apple" ;;
             sitemap-personal) args="-s 🇯🇵" ; msg="auto: Today at Apple [Sitemap Personal]" ;;
             sitemap)          args="-s"     ; msg="auto: Today at Apple [Sitemap]" ;;
+            *)                echo "unknown mode: ${{ inputs.mode }}"; exit 1 ;;
           esac
-          [ -n "$mode" ] || { echo "cannot resolve mode"; exit 1; }
-          { echo "mode=$mode"; echo "args=$args"; echo "msg=$msg"; } >> "$GITHUB_OUTPUT"
+          { echo "args=$args"; echo "msg=$msg"; } >> "$GITHUB_OUTPUT"
       - name: execute py script
         env:
           BOTPOST_API: ${{ secrets.BOTPOST_API }}
