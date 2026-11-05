@@ -10,6 +10,7 @@ dependencies = [
     "aiohttp>=3.14.5",
     "tenacity>=9.2.1",
     "tqdm>=4.70.1",
+    "tzdata>=2026.6",
 ]
 
 [tool.isort]
