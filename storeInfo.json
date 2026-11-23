@@ -1,5 +1,5 @@
 {
-  "_": "2026-11-07 08:10:43",
+  "_": "2026-11-22 21:18:13",
   "stores": {
     "R001": {
       "city": "Glendale",
@@ -5024,9 +5024,14 @@
     "R294": {
       "city": "Carlsbad",
       "dieter": {
-        "md5": "2b8593eb884f5ef4799413d4a79c5599",
-        "modify": "2026-11-05 17:30:21"
+        "md5": "2dc5f4148338167e66a2cb608982ccf6",
+        "modify": "2026-11-19 19:41:07"
       },
+      "events": [
+        {
+          "2026-11-20": "rebuild"
+        }
+      ],
       "flag": "🇺🇸",
       "kiosk": 5000116,
       "name": "Carlsbad",
@@ -7283,12 +7288,18 @@
         "md5": "ec13ed4175def0904c5897109f5571d6",
         "modify": "2024-02-08 18:41:42"
       },
+      "events": [
+        {
+          "2026-11-21": "closure"
+        }
+      ],
       "flag": "🇬🇧",
       "kiosk": 5004609,
       "name": "Festival Place",
       "nso": "2011-08-20 09:00",
       "slug": "festivalplace",
       "state": "Hampshire",
+      "status": "closed",
       "timezone": "Europe/London"
     },
     "R483": {
