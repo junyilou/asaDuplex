@@ -1,5 +1,5 @@
 {
-  "update": "2026-11-21 08:00:21",
+  "update": "2026-11-23 01:00:25",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -304,6 +304,12 @@
       },
       "slug": "kids-direct-your-friendship-film-on-ipad"
     },
+    "7366948317962272768": {
+      "names": {
+        "🇹🇼": "孩童：和 Sneaky Sasquatch 一起畫畫"
+      },
+      "slug": "kids-draw-with-sneaky-sasquatch"
+    },
     "7520995782066339840": {
       "names": {
         "🇯🇵": "トーク：トップクリエイターとライブで体感するPodcastの世界"
@@ -312,16 +318,6 @@
     }
   },
   "sitemap": {
-    "7366948317962272768": {
-      "names": {
-        "🇨🇳": "TBD",
-        "🇭🇰": "TBD",
-        "🇯🇵": "キッズ：しのび足のサスカッチと絵を描こう",
-        "🇲🇴": "TBD",
-        "🇹🇼": "孩童：和 Sneaky Sasquatch 一起畫畫"
-      },
-      "slug": "kids-draw-with-sneaky-sasquatch"
-    },
     "7450676490436182016": {
       "names": {
         "🇨🇳": "Apple 夏令营：在 iPad 上创作超级英雄，执行救助任务",
