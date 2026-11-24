@@ -1,5 +1,5 @@
 {
-  "update": "2026-11-23 01:00:25",
+  "update": "2026-11-24 08:00:25",
   "today": {
     "6443623163745894793": {
       "names": {
@@ -327,6 +327,12 @@
         "🇹🇼": "Apple 夏令營：在 iPad 上打造助人超級英雄"
       },
       "slug": "apple-camp-fy26"
+    },
+    "7528724536020598784": {
+      "names": {
+        "🇭🇰": "聚焦：跟 Jazzie Sillona 捕捉電影感日常"
+      },
+      "slug": "spotlight-jazzie-sillona-121326"
     }
   },
   "collection": {}
